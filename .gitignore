@@ -1,0 +1,50 @@
+# Local environments and caches
+.venv/
+**/.venv/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.egg-info/
+**/*.egg-info/
+.pytest_cache/
+**/.pytest_cache/
+.coverage
+.mypy_cache/
+.ruff_cache/
+.idea/
+.vscode/
+.codex/
+.codex_review/
+
+# Sensorium data are obtained from the official source.
+data/*
+!data/.gitkeep
+
+# Recomputed artifacts are not versioned. Curated small tables live in results/.
+outputs/
+**/outputs/
+predictions/
+**/predictions/
+checkpoints/
+**/checkpoints/
+logs/
+**/logs/
+submissions/
+**/submissions/
+artifacts/
+**/artifacts/
+
+# Large intermediate formats
+*.zarr/
+*.parquet.brotli
+
+# Model parameters intentionally published under the top-level models/ folder.
+*.pt
+*.pth
+*.pkl
+*.npz
+!models/**/*.pt
+!models/**/*.pth
+!models/**/*.pkl
+!models/**/*.npz
+

@@ -1,0 +1,184 @@
+{
+  "session": "dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20",
+  "neurons": 7863,
+  "tier_counts": {
+    "final_test_bonus": 134,
+    "final_test_main": 57,
+    "live_test_bonus": 58,
+    "live_test_main": 56,
+    "oracle": 58,
+    "train": 348
+  },
+  "frame_start": 50,
+  "frame_stop": 300,
+  "trajectory_frames": 250,
+  "frame_rate_hz": 30.0,
+  "effective_observation_step": 4,
+  "effective_observations": 63,
+  "oracle_conditions": [
+    {
+      "condition_id": "movie_00",
+      "repeat_count": 10,
+      "dataset_indices": [
+        5,
+        50,
+        131,
+        175,
+        213,
+        271,
+        273,
+        378,
+        599,
+        665
+      ],
+      "trial_ids": [
+        "5",
+        "51",
+        "135",
+        "183",
+        "225",
+        "285",
+        "287",
+        "394",
+        "619",
+        "689"
+      ]
+    },
+    {
+      "condition_id": "movie_01",
+      "repeat_count": 10,
+      "dataset_indices": [
+        40,
+        107,
+        126,
+        127,
+        144,
+        168,
+        254,
+        276,
+        530,
+        648
+      ],
+      "trial_ids": [
+        "40",
+        "109",
+        "130",
+        "131",
+        "150",
+        "176",
+        "268",
+        "290",
+        "547",
+        "670"
+      ]
+    },
+    {
+      "condition_id": "movie_02",
+      "repeat_count": 9,
+      "dataset_indices": [
+        43,
+        100,
+        240,
+        344,
+        407,
+        524,
+        559,
+        575,
+        691
+      ],
+      "trial_ids": [
+        "43",
+        "102",
+        "254",
+        "359",
+        "424",
+        "541",
+        "579",
+        "595",
+        "720"
+      ]
+    },
+    {
+      "condition_id": "movie_03",
+      "repeat_count": 10,
+      "dataset_indices": [
+        76,
+        88,
+        228,
+        436,
+        451,
+        469,
+        545,
+        581,
+        591,
+        660
+      ],
+      "trial_ids": [
+        "77",
+        "89",
+        "242",
+        "453",
+        "468",
+        "486",
+        "565",
+        "601",
+        "611",
+        "684"
+      ]
+    },
+    {
+      "condition_id": "movie_04",
+      "repeat_count": 9,
+      "dataset_indices": [
+        99,
+        198,
+        216,
+        270,
+        327,
+        367,
+        619,
+        646,
+        704
+      ],
+      "trial_ids": [
+        "101",
+        "210",
+        "228",
+        "284",
+        "342",
+        "383",
+        "640",
+        "668",
+        "733"
+      ]
+    },
+    {
+      "condition_id": "movie_05",
+      "repeat_count": 10,
+      "dataset_indices": [
+        206,
+        249,
+        334,
+        349,
+        388,
+        477,
+        499,
+        516,
+        579,
+        634
+      ],
+      "trial_ids": [
+        "218",
+        "263",
+        "349",
+        "364",
+        "404",
+        "494",
+        "516",
+        "533",
+        "599",
+        "656"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "status": "locked",
+  "session": "dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20",
+  "total_session_train_trials": 348,
+  "selected_gpfa_train_trials": 174,
+  "gpfa_train_fraction": 0.5,
+  "fit_trials": 139,
+  "calibration_trials": 35,
+  "neurons": 512,
+  "oracle_trials": 58,
+  "oracle_conditions": 6,
+  "oracle_repeat_counts": [
+    10,
+    10,
+    9,
+    10,
+    9,
+    10
+  ],
+  "frame_interval": [
+    50,
+    299
+  ],
+  "leakage_rule": "GPFA fit/calibration and scaling use selected official train trials only; oracle is evaluation only",
+  "fingerprints": {
+    "neuron_ids": "fee85d1d95b815f3c8952254449ff49f9d1b0546d68bd138d6005c2a8d2092ce",
+    "selected_train_indices": "ddca67056826c05eb066591f29e07c57fac9305d5149ff5edc988d32a9b1c97f",
+    "oracle_indices_and_conditions": "fcea2c9181a76d1c563830f54c1a4b4afb4ea651b032ac5204e36560b3a15a29"
+  }
+}

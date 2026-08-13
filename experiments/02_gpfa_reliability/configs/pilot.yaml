@@ -1,0 +1,33 @@
+project:
+  seed: 42
+  output_dir: outputs/pilot
+
+data:
+  phase1_root: ../01_baselines
+  sensorium_root: ../../data/sensorium_all_2023
+  session: dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20
+  frame_start: 50
+  frame_stop: 300
+  frame_rate_hz: 30.0
+  effective_observation_step: 4
+  calibration_fraction: 0.20
+  oracle_stimulus_similarity: 0.999
+
+gpfa:
+  primary_neurons: 512
+  latent_dimensions: [4, 8, 12, 16]
+  max_em_iterations: 30
+  tolerance: 0.0001
+  initial_lengthscales_seconds: [0.125, 0.25, 0.5, 1.0]
+  lengthscale_bounds_seconds: [0.10, 3.0]
+
+reliability:
+  splits: 200
+  block_sizes_frames: [4, 8, 16, 32]
+
+saturation:
+  neurons: [128, 256, 512, 1024]
+  latent_dimensions: [4, 8, 12, 16]
+  train_fractions: [0.25, 0.50, 0.75, 1.0]
+  split_counts: [25, 50, 100, 200, 500]
+  seeds: [42, 314, 2718]

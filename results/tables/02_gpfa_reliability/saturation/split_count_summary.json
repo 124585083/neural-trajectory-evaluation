@@ -1,0 +1,12 @@
+{
+  "status": "split_count_saturation_complete",
+  "maximum_splits": 500,
+  "counts": [
+    25,
+    50,
+    100,
+    200,
+    500
+  ],
+  "output": "results/tables/02_gpfa_reliability/saturation/split_count_convergence.csv"
+}

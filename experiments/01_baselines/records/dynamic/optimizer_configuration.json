@@ -1,0 +1,13 @@
+{
+  "optimizer": "AdamW",
+  "initial_learning_rate": 0.005,
+  "betas": [
+    0.9,
+    0.999
+  ],
+  "eps": 1e-08,
+  "weight_decay": 0.01,
+  "amsgrad": false,
+  "optimizer_state_saved": false,
+  "reason": "The unmodified official trainer saves model state_dict checkpoints, not optimizer state."
+}

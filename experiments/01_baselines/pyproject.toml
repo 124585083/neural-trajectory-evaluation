@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trajectory-evaluation-official-baselines"
+version = "0.1.0"
+description = "Full official Dynamic and Static Sensorium baseline reproduction (Phase 1 only)."
+requires-python = ">=3.11,<3.12"
+dependencies = [
+  "numpy==1.26.4",
+  "pandas==2.0.0",
+  "pyarrow==12.0.0",
+  "PyYAML==6.0.2",
+  "torch==2.5.1",
+  "torchvision==0.20.1",
+  "neuralpredictors @ git+https://github.com/sinzlab/neuralpredictors.git@efdda679596517fad95d71f36d0385d7450dd207",
+  "sensorium_2023 @ git+https://github.com/ecker-lab/sensorium_2023.git@0e02656220e84a50f3be1b92d6f66c2f9ccd51ef",
+  "nnfabrik==0.2.1",
+  "datajoint==0.14.1",
+  "GitPython==3.1.31",
+  "setuptools==80.9.0",
+  "wandb==0.15.4",
+]
+
+[project.scripts]
+trajectory-phase1 = "trajectory_eval.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+pythonpath = ["src"]

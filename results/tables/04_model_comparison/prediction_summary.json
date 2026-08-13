@@ -1,0 +1,16 @@
+{
+  "status": "oracle_predictions_complete",
+  "session": "dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20",
+  "shape": [
+    58,
+    250,
+    512
+  ],
+  "trials": 58,
+  "conditions": 6,
+  "neurons": 512,
+  "frames": 250,
+  "static_checkpoint_validation": 0.16395580768585205,
+  "dynamic_checkpoint_validation": 0.18789274990558624,
+  "normalization": "official Sensorium NeuroNormalizer (all response standard deviation)"
+}

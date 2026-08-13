@@ -1,0 +1,31 @@
+{
+  "status": "frozen_gpfa_model_evaluation_complete",
+  "latent_dim": 4,
+  "models": {
+    "dynamic": {
+      "acceleration_direction_cosine": 0.4524882094076155,
+      "best_lag_correlation": 0.7369334725895335,
+      "normalized_position_rmse": 0.7048301456243083,
+      "path_length_similarity": 0.7035034628030709,
+      "position_correlation": 0.7262191334662801,
+      "position_cosine": 0.7230190323837339,
+      "speed_profile_correlation": 0.5375384808931616,
+      "velocity_direction_cosine": 0.49846192053802835,
+      "zero_lag_correlation": 0.7341794030183546
+    },
+    "static": {
+      "acceleration_direction_cosine": 0.18501191021819963,
+      "best_lag_correlation": 0.5496406684538244,
+      "normalized_position_rmse": 0.8704529395266865,
+      "path_length_similarity": 0.5600181085922523,
+      "position_correlation": 0.5202750821600726,
+      "position_cosine": 0.3824786206039892,
+      "speed_profile_correlation": 0.5270740963361309,
+      "velocity_direction_cosine": 0.3044816333499971,
+      "zero_lag_correlation": 0.5477818026768868
+    }
+  },
+  "null_permutations": 200,
+  "paired_condition_bootstrap_samples": 2000,
+  "alignment": "none; both predictions use the frozen brain-defined GPFA directly"
+}

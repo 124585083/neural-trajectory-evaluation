@@ -1,0 +1,27 @@
+{
+  "status": "traditional_evaluation_complete",
+  "models": [
+    "static",
+    "dynamic"
+  ],
+  "metric_count_per_model": 27,
+  "families": [
+    "CKA",
+    "RSA",
+    "population_vector",
+    "response",
+    "temporal"
+  ],
+  "primary_response": {
+    "static": 0.1534672091790142,
+    "dynamic": 0.18123209152831493
+  },
+  "primary_cka": {
+    "static": 0.44378315112595423,
+    "dynamic": 0.4952456097399788
+  },
+  "primary_rsa": {
+    "static": 0.47129563712905825,
+    "dynamic": 0.5203738270835601
+  }
+}

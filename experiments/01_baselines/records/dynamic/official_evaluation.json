@@ -1,0 +1,18 @@
+{
+  "status": "oracle_evaluated_hidden_final_pending",
+  "implementation": "sensorium.utility.scores.get_correlations",
+  "checkpoint": "models/official_dynamic/best.pt",
+  "checkpoint_training_validation_score": 0.19800327718257904,
+  "full_sequence_oracle_single_trial": 0.19667325913906097,
+  "full_sequence_oracle_by_session": {
+    "dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20": 0.1855064481496811,
+    "dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20": 0.20331592857837677,
+    "dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20": 0.19251273572444916,
+    "dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20": 0.20713205635547638,
+    "dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20": 0.19499468803405762
+  },
+  "official_seed_42_hidden_final_single_trial": 0.1887,
+  "official_minus_local": null,
+  "acceptance": "pending_hidden_final_server_evaluation",
+  "reason": "competition-mouse final-test response arrays are zero placeholders locally"
+}

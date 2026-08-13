@@ -1,0 +1,137 @@
+FramewiseStaticVideoEncoder(
+  (core): Stacked2dCore(
+    (_input_weights_regularizer): LaplaceL2norm(
+      (laplace): Laplace()
+    )
+    (features): Sequential(
+      (layer0): Sequential(
+        (conv): Conv2d(3, 64, kernel_size=(9, 9), stride=(1, 1), bias=False)
+        (norm): BatchNorm2d(64, eps=1e-05, momentum=0.9, affine=True, track_running_stats=True)
+        (nonlin): AdaptiveELU()
+      )
+      (layer1): Sequential(
+        (ds_conv): DepthSeparableConv2d(
+          (in_depth_conv): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+          (spatial_conv): Conv2d(64, 64, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=64)
+          (out_depth_conv): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+        )
+        (norm): BatchNorm2d(64, eps=1e-05, momentum=0.9, affine=True, track_running_stats=True)
+        (nonlin): AdaptiveELU()
+      )
+      (layer2): Sequential(
+        (ds_conv): DepthSeparableConv2d(
+          (in_depth_conv): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+          (spatial_conv): Conv2d(64, 64, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=64)
+          (out_depth_conv): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+        )
+        (norm): BatchNorm2d(64, eps=1e-05, momentum=0.9, affine=True, track_running_stats=True)
+        (nonlin): AdaptiveELU()
+      )
+      (layer3): Sequential(
+        (ds_conv): DepthSeparableConv2d(
+          (in_depth_conv): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+          (spatial_conv): Conv2d(64, 64, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=64)
+          (out_depth_conv): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+        )
+        (norm): BatchNorm2d(64, eps=1e-05, momentum=0.9, affine=True, track_running_stats=True)
+        (nonlin): AdaptiveELU()
+      )
+    )
+  ) [Stacked2dCore regularizers: gamma_hidden = 0.0|gamma_input = 6.3831|skip = 0]
+  
+  (readout): MultipleFullGaussian2d(
+    (dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20): full FullGaussian2d (64 x 28 x 56 -> 7863) with bias, with predicted grid  -> Sequential(
+      (0): Linear(in_features=2, out_features=30, bias=True)
+      (1): ELU(alpha=1.0)
+      (2): Linear(in_features=30, out_features=2, bias=True)
+      (3): Tanh()
+    )
+    
+    (dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20): full FullGaussian2d (64 x 28 x 56 -> 7908) with bias, with predicted grid  -> Sequential(
+      (0): Linear(in_features=2, out_features=30, bias=True)
+      (1): ELU(alpha=1.0)
+      (2): Linear(in_features=30, out_features=2, bias=True)
+      (3): Tanh()
+    )
+    
+    (dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20): full FullGaussian2d (64 x 28 x 56 -> 8202) with bias, with predicted grid  -> Sequential(
+      (0): Linear(in_features=2, out_features=30, bias=True)
+      (1): ELU(alpha=1.0)
+      (2): Linear(in_features=30, out_features=2, bias=True)
+      (3): Tanh()
+    )
+    
+    (dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20): full FullGaussian2d (64 x 28 x 56 -> 7939) with bias, with predicted grid  -> Sequential(
+      (0): Linear(in_features=2, out_features=30, bias=True)
+      (1): ELU(alpha=1.0)
+      (2): Linear(in_features=30, out_features=2, bias=True)
+      (3): Tanh()
+    )
+    
+    (dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20): full FullGaussian2d (64 x 28 x 56 -> 8122) with bias, with predicted grid  -> Sequential(
+      (0): Linear(in_features=2, out_features=30, bias=True)
+      (1): ELU(alpha=1.0)
+      (2): Linear(in_features=30, out_features=2, bias=True)
+      (3): Tanh()
+    )
+    
+  )
+  (shifter): MLPShifter(
+    (dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20): MLP(
+      (mlp): Sequential(
+        (0): Linear(in_features=2, out_features=5, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=5, out_features=5, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=5, out_features=2, bias=True)
+        (5): Tanh()
+      )
+    ) [MLP regularizers: ]
+    
+    (dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20): MLP(
+      (mlp): Sequential(
+        (0): Linear(in_features=2, out_features=5, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=5, out_features=5, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=5, out_features=2, bias=True)
+        (5): Tanh()
+      )
+    ) [MLP regularizers: ]
+    
+    (dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20): MLP(
+      (mlp): Sequential(
+        (0): Linear(in_features=2, out_features=5, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=5, out_features=5, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=5, out_features=2, bias=True)
+        (5): Tanh()
+      )
+    ) [MLP regularizers: ]
+    
+    (dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20): MLP(
+      (mlp): Sequential(
+        (0): Linear(in_features=2, out_features=5, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=5, out_features=5, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=5, out_features=2, bias=True)
+        (5): Tanh()
+      )
+    ) [MLP regularizers: ]
+    
+    (dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20): MLP(
+      (mlp): Sequential(
+        (0): Linear(in_features=2, out_features=5, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=5, out_features=5, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=5, out_features=2, bias=True)
+        (5): Tanh()
+      )
+    ) [MLP regularizers: ]
+    
+  )
+  (output_nonlinearity): ELU(alpha=1.0)
+)

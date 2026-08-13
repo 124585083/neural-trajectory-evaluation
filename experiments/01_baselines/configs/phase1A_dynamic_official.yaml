@@ -1,0 +1,117 @@
+project:
+  phase: 1A
+  run_name: dynamic_official_reproduction
+  seed: 42
+  device: cuda
+
+data:
+  root: ../../data/sensorium_all_2023
+  sessions:
+    - dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20
+    - dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20
+    - dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20
+    - dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20
+    - dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20
+  physical_batch_size_per_session: 8
+  effective_batch_size: 40
+  frames: 80
+  scale: 1.0
+  max_frame: null
+  offset: -1
+  include_behavior: true
+  include_pupil_centers: true
+  to_cut: true
+  use_file_cache: false
+
+model:
+  core_type: 3D_factorised
+  core:
+    input_channels: 3
+    hidden_channels: [32, 64, 128]
+    spatial_input_kernel: [11, 11]
+    temporal_input_kernel: 11
+    spatial_hidden_kernel: [5, 5]
+    temporal_hidden_kernel: 5
+    stride: 1
+    layers: 3
+    gamma_input_spatial: 10.0
+    gamma_input_temporal: 0.01
+    bias: true
+    hidden_nonlinearities: elu
+    x_shift: 0
+    y_shift: 0
+    batch_norm: true
+    laplace_padding: null
+    input_regularizer: LaplaceL2norm
+    padding: false
+    final_nonlin: true
+    momentum: 0.7
+  readout_type: gaussian
+  readout:
+    bias: true
+    init_mu_range: 0.2
+    init_sigma: 1.0
+    gamma_readout: 0.0
+    gauss_type: full
+    grid_mean_predictor:
+      type: cortex
+      input_dimensions: 2
+      hidden_layers: 1
+      hidden_features: 30
+      final_tanh: true
+    share_features: false
+    share_grid: false
+    shared_match_ids: null
+    gamma_grid_dispersion: 0.0
+  use_gru: false
+  use_shifter: true
+  shifter_type: MLP
+  shifter:
+    gamma_shifter: 0.0
+    shift_layers: 3
+    input_channels_shifter: 2
+    hidden_channels_shifter: 5
+  output_nonlinearity: elu_plus_one
+
+training:
+  trainer: sensorium.training.video_training_loop.standard_trainer
+  optimizer: AdamW
+  learning_rate: 0.005
+  optimizer_defaults:
+    betas: [0.9, 0.999]
+    eps: 1.0e-8
+    weight_decay: 0.01
+    amsgrad: false
+  max_epochs: 200
+  loss: PoissonLoss
+  average_loss: false
+  scale_loss: true
+  gradient_accumulation_sessions: 5
+  early_stopping_metric: get_correlations
+  patience: 5
+  interval: 1
+  tolerance: 1.0e-6
+  restore_best: true
+  scheduler: ReduceLROnPlateau
+  lr_decay_steps: 4
+  lr_decay_factor: 0.3
+  min_lr: 0.0001
+  mixed_precision: false
+  activation_checkpointing: false
+
+evaluation:
+  implementation: sensorium.utility.scores.get_correlations
+  published_checkpoint: ../../models/official_dynamic/best.pt
+  checkpoint_validation_score: 0.19800327718257904
+  checkpoint_best_epoch: 97
+  burn_in_frames: 50
+  primary_metric: single_trial_correlation
+  official_seed_42_final_test_main: 0.1887
+  official_single_seed_mean: 0.1828
+  official_single_seed_std: 0.0094
+  internal_acceptance_difference: 0.0094
+
+artifacts:
+  checkpoint_dir: checkpoints/dynamic_official_reproduction
+  log_dir: logs/dynamic_official_reproduction
+  prediction_dir: predictions/dynamic_official_reproduction

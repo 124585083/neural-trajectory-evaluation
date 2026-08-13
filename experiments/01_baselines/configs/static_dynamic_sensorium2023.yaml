@@ -1,0 +1,123 @@
+project:
+  phase: static_on_dynamic
+  run_name: static_dynamic_sensorium2023
+  seed: 42
+  device: cuda
+  scientific_label: full_static_sensorium_plus_architecture_retrained_on_dynamic_sensorium_2023
+
+data:
+  root: ../../data/sensorium_all_2023
+  sessions:
+    - dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20
+    - dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20
+    - dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20
+    - dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20
+    - dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20
+  physical_batch_size_per_session: 8
+  effective_batch_size: 40
+  frames: 80
+  scale: 1.0
+  max_frame: null
+  offset: -1
+  include_behavior: true
+  include_pupil_centers: true
+  to_cut: true
+  use_file_cache: false
+
+model:
+  source: SENSORIUM_2022_Sensorium_plus_CNN
+  core_type: 2D
+  core:
+    input_channels: 3
+    hidden_channels: 64
+    input_kern: 9
+    hidden_kern: 7
+    layers: 4
+    gamma_input: 6.3831
+    gamma_hidden: 0.0
+    skip: 0
+    final_nonlinearity: true
+    bias: true
+    momentum: 0.9
+    pad_input: false
+    batch_norm: true
+    hidden_dilation: 1
+    laplace_padding: null
+    input_regularizer: LaplaceL2norm
+    stack: -1
+    depth_separable: true
+    linear: false
+    attention_conv: false
+    hidden_padding: null
+    use_avg_reg: false
+  readout_type: gaussian
+  readout:
+    bias: true
+    init_mu_range: 0.3
+    init_sigma: 0.1
+    gamma_readout: 0.0076
+    gauss_type: full
+    grid_mean_predictor:
+      type: cortex
+      input_dimensions: 2
+      hidden_layers: 1
+      hidden_features: 30
+      final_tanh: true
+    share_features: false
+    share_grid: false
+    shared_match_ids: null
+    gamma_grid_dispersion: 0.0
+  use_gru: false
+  use_shifter: true
+  shifter_type: MLP
+  shifter:
+    gamma_shifter: 0.0
+    shift_layers: 3
+    input_channels_shifter: 2
+    hidden_channels_shifter: 5
+  output_nonlinearity: elu_plus_one
+  temporal_adapter:
+    type: framewise_reshape_and_crop
+    trainable_parameters: 0
+    crop_leading_frames: 18
+
+training:
+  protocol: Dynamic_Sensorium_2023_official
+  trainer: sensorium.training.video_training_loop.standard_trainer
+  optimizer: AdamW
+  learning_rate: 0.005
+  optimizer_defaults:
+    betas: [0.9, 0.999]
+    eps: 1.0e-8
+    weight_decay: 0.01
+    amsgrad: false
+  max_epochs: 200
+  loss: PoissonLoss
+  average_loss: false
+  scale_loss: true
+  gradient_accumulation_sessions: 5
+  early_stopping_metric: get_correlations
+  patience: 5
+  interval: 1
+  tolerance: 1.0e-6
+  restore_best: true
+  scheduler: ReduceLROnPlateau
+  lr_decay_steps: 4
+  lr_decay_factor: 0.3
+  min_lr: 0.0001
+  mixed_precision: false
+
+evaluation:
+  implementation: sensorium.utility.scores.get_correlations
+  published_checkpoint: ../../models/static_on_dynamic/best.pt
+  checkpoint_validation_score: 0.16395580768585205
+  burn_in_frames: 50
+  primary_metric: single_trial_correlation
+  comparison_checkpoint: ../../models/official_dynamic/best.pt
+  comparison_oracle_score: 0.1966732591
+
+artifacts:
+  checkpoint_dir: checkpoints/static_dynamic_sensorium2023
+  log_dir: logs/static_dynamic_sensorium2023
+  prediction_dir: predictions/static_dynamic_sensorium2023
+  benchmark: benchmarks/static_dynamic_sensorium2023.json

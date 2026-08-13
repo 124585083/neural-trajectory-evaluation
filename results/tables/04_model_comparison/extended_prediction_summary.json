@@ -1,0 +1,32 @@
+{
+  "status": "extended_predictions_complete",
+  "response_matched_checkpoint": {
+    "selection_split": "official validation across five sessions",
+    "static_validation": 0.16395580768585205,
+    "dynamic_epoch": 65,
+    "dynamic_validation": 0.16388525068759918,
+    "absolute_validation_gap": 7.055699825286865e-05,
+    "checkpoint": "models/parameter_matched_dynamic/epoch_65_response_matched.pth"
+  },
+  "temporal_ablation": {
+    "definition": "multiply every off-center temporal-convolution weight by retention; preserve center slice and biases",
+    "retentions": [
+      1.0,
+      0.75,
+      0.5,
+      0.25,
+      0.0
+    ],
+    "changed_weight_tensors": [
+      "core.features.layer0.conv_temporal.weight",
+      "core.features.layer1.conv_temporal_1.weight",
+      "core.features.layer2.conv_temporal_2.weight"
+    ],
+    "strongest_level": "retention=0 removes off-center temporal-kernel weights but preserves spatial core/readout/shifter"
+  },
+  "shape": [
+    58,
+    250,
+    512
+  ]
+}

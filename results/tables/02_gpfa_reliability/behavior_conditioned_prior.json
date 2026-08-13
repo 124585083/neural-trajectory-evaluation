@@ -1,0 +1,56 @@
+{
+  "session": "dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20",
+  "classification_source": "balanced tertiles of train-fit behavior-covariate PC1; neural responses excluded",
+  "classes": 3,
+  "fit_class_counts": {
+    "behavior_0": 93,
+    "behavior_1": 92,
+    "behavior_2": 93
+  },
+  "calibration_class_counts": {
+    "behavior_0": 22,
+    "behavior_1": 30,
+    "behavior_2": 18
+  },
+  "shared_nll_per_observation": 1.4031800295431798,
+  "conditional_nll_per_observation": 1.4031800334597113,
+  "paired_improvement": -3.916531737020128e-09,
+  "paired_standard_error": 2.8650795801983946e-07,
+  "conditional_score_standard_error": 0.03577205078410273,
+  "one_standard_error_threshold": 1.4389520842438142,
+  "paired_95_ci": [
+    -5.654721294559055e-07,
+    5.576390659818652e-07
+  ],
+  "conditioned_prior_supported": false,
+  "selected_prior": "shared_natural_video",
+  "shared_lengthscales": {
+    "all": [
+      0.2504809898657387,
+      0.2507967639305342,
+      0.25052531421641494,
+      0.25069027491073237
+    ]
+  },
+  "conditional_lengthscales": {
+    "behavior_0": [
+      0.25146371051863936,
+      0.251551336031957,
+      0.2510772534446988,
+      0.25111862634674814
+    ],
+    "behavior_1": [
+      0.25017707624810454,
+      0.2506556738039149,
+      0.25040696643826826,
+      0.25089877051649945
+    ],
+    "behavior_2": [
+      0.24982478774322991,
+      0.25019087142745383,
+      0.2500994042173697,
+      0.25006386375073825
+    ]
+  },
+  "coordinate_constraint": "C, d, and R shared across behavior classes within the conditional model"
+}

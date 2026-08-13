@@ -1,0 +1,66 @@
+project:
+  seed: 42
+  output_dir: outputs/pilot
+
+references:
+  phase1_root: ../01_baselines
+  phase2_root: ../02_gpfa_reliability
+  phase3_root: ../03_parameter_matching
+  static_config: ../01_baselines/records/static/training_config.yaml
+  static_checkpoint: ../../models/static_on_dynamic/best.pt
+  dynamic_config: ../03_parameter_matching/configs/dynamic_parameter_matched.yaml
+  dynamic_checkpoint: ../../models/parameter_matched_dynamic/best.pt
+  response_matched_checkpoint: ../../models/parameter_matched_dynamic/epoch_65_response_matched.pth
+
+checkpoint_metadata:
+  static_validation: 0.16395580768585205
+  dynamic_validation: 0.18789274990558624
+
+data:
+  sensorium_root: ../../data/sensorium_all_2023
+  session: dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20
+  frame_start: 50
+  frame_stop: 300
+  frame_rate_hz: 30.0
+  neurons: 512
+  neuron_seed: 42
+  gpfa_train_fraction: 0.50
+  gpfa_calibration_fraction: 0.20
+  oracle_stimulus_similarity: 0.999
+
+traditional:
+  cka_max_single_trial_samples: 2000
+  temporal_rsa_stride: 10
+  paired_bootstrap_samples: 2000
+
+gpfa:
+  latent_dim: 4
+  effective_observation_step: 4
+  initial_lengthscales_seconds: [0.125, 0.25, 0.5, 1.0]
+  selection_em_iterations: 12
+  final_em_iterations: 20
+  tolerance: 1.0e-6
+  lengthscale_bounds_seconds: [0.10, 3.0]
+
+reliability:
+  splits: 200
+  block_sizes_frames: [4, 8, 16, 32]
+
+sensitivity:
+  profile_splits: 100
+  neuron_counts: [128, 256, 512]
+  latent_dimensions: [4, 8, 12, 16]
+  selected_train_fractions: [0.25, 0.50, 0.75, 1.0]
+  seeds: [42, 314, 2718]
+  observation_steps: [4, 1]
+  split_counts: [25, 50, 100, 200]
+
+model_nulls:
+  permutations: 200
+  block_size_frames: 16
+
+response_matching:
+  selection_split: official validation across five sessions
+  static_validation: 0.16395580768585205
+  dynamic_epoch: 65
+  dynamic_validation: 0.16388525068759918

@@ -1,0 +1,33 @@
+{
+  "status": "primary_reliability_complete",
+  "session": "dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20",
+  "neuron_count": 512,
+  "fit_trials": 278,
+  "calibration_trials": 70,
+  "refit_trials": 348,
+  "oracle_conditions": 6,
+  "oracle_repeats": [
+    10,
+    10,
+    9,
+    10,
+    9,
+    10
+  ],
+  "source_frames": 250,
+  "effective_observations": 63,
+  "output_latent_frames": 250,
+  "selected_latent_dim": 4,
+  "selected_initial_lengthscale_seconds": 0.25,
+  "learned_lengthscales_seconds": {
+    "all": [
+      0.2504836801570471,
+      0.25086528505053535,
+      0.2504596845078242,
+      0.25062281240827317
+    ]
+  },
+  "gpfa_parameter_digest": "789771cab85943288c022a19a2f571a1704fe0e0af547465e9a06b6ef9051180",
+  "response_normalization": "train-only global per-neuron standard deviation",
+  "reliability_splits": 200
+}

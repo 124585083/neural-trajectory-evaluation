@@ -1,0 +1,172 @@
+{
+  "status": "pass",
+  "sensorium_commit": "0e02656220e84a50f3be1b92d6f66c2f9ccd51ef",
+  "neuralpredictors_commit": "efdda679596517fad95d71f36d0385d7450dd207",
+  "historical_neuralpredictors_pin": "43faededa2d2e76bb904f38a49b9d8b81d287a0a",
+  "sessions": [
+    "dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20",
+    "dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20",
+    "dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20",
+    "dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20",
+    "dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20"
+  ],
+  "neuron_counts": [
+    7863,
+    7908,
+    8202,
+    7939,
+    8122
+  ],
+  "train_loader_batches": {
+    "dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20": 44,
+    "dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20": 42,
+    "dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20": 45,
+    "dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20": 45,
+    "dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20": 45
+  },
+  "input_shape": [
+    3,
+    80,
+    36,
+    64
+  ],
+  "output_shape": [
+    62,
+    7863
+  ],
+  "convolutions": [
+    [
+      {
+        "name": "conv_spatial",
+        "in_channels": 3,
+        "out_channels": 32,
+        "kernel_size": [
+          1,
+          11,
+          11
+        ],
+        "stride": [
+          1,
+          1,
+          1
+        ],
+        "padding": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "conv_temporal",
+        "in_channels": 32,
+        "out_channels": 32,
+        "kernel_size": [
+          11,
+          1,
+          1
+        ],
+        "stride": [
+          1,
+          1,
+          1
+        ],
+        "padding": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    [
+      {
+        "name": "conv_spatial_1",
+        "in_channels": 32,
+        "out_channels": 64,
+        "kernel_size": [
+          1,
+          5,
+          5
+        ],
+        "stride": [
+          1,
+          1,
+          1
+        ],
+        "padding": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "conv_temporal_1",
+        "in_channels": 64,
+        "out_channels": 64,
+        "kernel_size": [
+          5,
+          1,
+          1
+        ],
+        "stride": [
+          1,
+          1,
+          1
+        ],
+        "padding": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    [
+      {
+        "name": "conv_spatial_2",
+        "in_channels": 64,
+        "out_channels": 128,
+        "kernel_size": [
+          1,
+          5,
+          5
+        ],
+        "stride": [
+          1,
+          1,
+          1
+        ],
+        "padding": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "conv_temporal_2",
+        "in_channels": 128,
+        "out_channels": 128,
+        "kernel_size": [
+          5,
+          1,
+          1
+        ],
+        "stride": [
+          1,
+          1,
+          1
+        ],
+        "padding": [
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  ],
+  "parameter_counts": {
+    "core": 382176,
+    "readout": 5325282,
+    "shifter": 285,
+    "total": 5707743
+  },
+  "model": "VideoFiringRateEncoder(\n  (core): Factorized3dCore(\n    (_input_weight_regularizer): LaplaceL2norm(\n      (laplace): Laplace()\n    )\n    (temporal_regularizer): DepthLaplaceL21d(\n      (laplace): Laplace1d()\n    )\n    (features): Sequential(\n      (layer0): Sequential(\n        (conv_spatial): Conv3d(3, 32, kernel_size=(1, 11, 11), stride=(1, 1, 1))\n        (conv_temporal): Conv3d(32, 32, kernel_size=(11, 1, 1), stride=(1, 1, 1))\n        (norm): BatchNorm3d(32, eps=1e-05, momentum=0.7, affine=True, track_running_stats=True)\n        (nonlin): ELU(alpha=1.0)\n      )\n      (layer1): Sequential(\n        (conv_spatial_1): Conv3d(32, 64, kernel_size=(1, 5, 5), stride=(1, 1, 1))\n        (conv_temporal_1): Conv3d(64, 64, kernel_size=(5, 1, 1), stride=(1, 1, 1))\n        (norm): BatchNorm3d(64, eps=1e-05, momentum=0.7, affine=True, track_running_stats=True)\n        (nonlin): ELU(alpha=1.0)\n      )\n      (layer2): Sequential(\n        (conv_spatial_2): Conv3d(64, 128, kernel_size=(1, 5, 5), stride=(1, 1, 1))\n        (conv_temporal_2): Conv3d(128, 128, kernel_size=(5, 1, 1), stride=(1, 1, 1))\n        (norm): BatchNorm3d(128, eps=1e-05, momentum=0.7, affine=True, track_running_stats=True)\n        (nonlin): ELU(alpha=1.0)\n      )\n    )\n  ) [Factorized3dCore regularizers: gamma_input_spatial = 10.0|gamma_input_temporal = 0.01]\n  \n  (readout): MultipleFullGaussian2d(\n    (dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20): full FullGaussian2d (128 x 18 x 46 -> 7863) with bias, with predicted grid  -> Sequential(\n      (0): Linear(in_features=2, out_features=30, bias=True)\n      (1): ELU(alpha=1.0)\n      (2): Linear(in_features=30, out_features=2, bias=True)\n      (3): Tanh()\n    )\n    \n    (dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20): full FullGaussian2d (128 x 18 x 46 -> 7908) with bias, with predicted grid  -> Sequential(\n      (0): Linear(in_features=2, out_features=30, bias=True)\n      (1): ELU(alpha=1.0)\n      (2): Linear(in_features=30, out_features=2, bias=True)\n      (3): Tanh()\n    )\n    \n    (dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20): full FullGaussian2d (128 x 18 x 46 -> 8202) with bias, with predicted grid  -> Sequential(\n      (0): Linear(in_features=2, out_features=30, bias=True)\n      (1): ELU(alpha=1.0)\n      (2): Linear(in_features=30, out_features=2, bias=True)\n      (3): Tanh()\n    )\n    \n    (dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20): full FullGaussian2d (128 x 18 x 46 -> 7939) with bias, with predicted grid  -> Sequential(\n      (0): Linear(in_features=2, out_features=30, bias=True)\n      (1): ELU(alpha=1.0)\n      (2): Linear(in_features=30, out_features=2, bias=True)\n      (3): Tanh()\n    )\n    \n    (dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20): full FullGaussian2d (128 x 18 x 46 -> 8122) with bias, with predicted grid  -> Sequential(\n      (0): Linear(in_features=2, out_features=30, bias=True)\n      (1): ELU(alpha=1.0)\n      (2): Linear(in_features=30, out_features=2, bias=True)\n      (3): Tanh()\n    )\n    \n  )\n  (shifter): MLPShifter(\n    (dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20): MLP(\n      (mlp): Sequential(\n        (0): Linear(in_features=2, out_features=5, bias=True)\n        (1): Tanh()\n        (2): Linear(in_features=5, out_features=5, bias=True)\n        (3): Tanh()\n        (4): Linear(in_features=5, out_features=2, bias=True)\n        (5): Tanh()\n      )\n    ) [MLP regularizers: ]\n    \n    (dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20): MLP(\n      (mlp): Sequential(\n        (0): Linear(in_features=2, out_features=5, bias=True)\n        (1): Tanh()\n        (2): Linear(in_features=5, out_features=5, bias=True)\n        (3): Tanh()\n        (4): Linear(in_features=5, out_features=2, bias=True)\n        (5): Tanh()\n      )\n    ) [MLP regularizers: ]\n    \n    (dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20): MLP(\n      (mlp): Sequential(\n        (0): Linear(in_features=2, out_features=5, bias=True)\n        (1): Tanh()\n        (2): Linear(in_features=5, out_features=5, bias=True)\n        (3): Tanh()\n        (4): Linear(in_features=5, out_features=2, bias=True)\n        (5): Tanh()\n      )\n    ) [MLP regularizers: ]\n    \n    (dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20): MLP(\n      (mlp): Sequential(\n        (0): Linear(in_features=2, out_features=5, bias=True)\n        (1): Tanh()\n        (2): Linear(in_features=5, out_features=5, bias=True)\n        (3): Tanh()\n        (4): Linear(in_features=5, out_features=2, bias=True)\n        (5): Tanh()\n      )\n    ) [MLP regularizers: ]\n    \n    (dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20): MLP(\n      (mlp): Sequential(\n        (0): Linear(in_features=2, out_features=5, bias=True)\n        (1): Tanh()\n        (2): Linear(in_features=5, out_features=5, bias=True)\n        (3): Tanh()\n        (4): Linear(in_features=5, out_features=2, bias=True)\n        (5): Tanh()\n      )\n    ) [MLP regularizers: ]\n    \n  )\n  (nonlinearity_fn): ELU(alpha=1.0)\n)"
+}

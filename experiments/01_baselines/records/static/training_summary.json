@@ -1,0 +1,10 @@
+{
+  "status": "training_complete",
+  "seed": 42,
+  "validation_score": 0.16395580768585205,
+  "last_epoch": 63,
+  "elapsed_seconds": 26013.439940929413,
+  "best_checkpoint": "models/static_on_dynamic/best.pt",
+  "last_checkpoint": "not published",
+  "validation_events": 138
+}

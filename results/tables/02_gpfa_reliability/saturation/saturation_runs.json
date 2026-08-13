@@ -1,0 +1,404 @@
+[
+  {
+    "axis": "split_count",
+    "value": 500,
+    "neurons": 512,
+    "latent_dim": 4,
+    "train_trials": 348,
+    "seed": 42,
+    "observation_step": 4,
+    "effective_observations": 63,
+    "splits": 500,
+    "em_iterations": 2,
+    "lengthscales": {
+      "all": [
+        0.2504836801570471,
+        0.25086528505053535,
+        0.2504596845078242,
+        0.25062281240827317
+      ]
+    },
+    "parameter_digest": "789771cab85943288c022a19a2f571a1704fe0e0af547465e9a06b6ef9051180"
+  },
+  {
+    "axis": "neuron_count",
+    "value": 128,
+    "neurons": 128,
+    "latent_dim": 4,
+    "train_trials": 348,
+    "seed": 42,
+    "observation_step": 4,
+    "effective_observations": 63,
+    "splits": 100,
+    "em_iterations": 3,
+    "lengthscales": {
+      "all": [
+        0.25062660822481386,
+        0.25080277857093686,
+        0.2506817492546931,
+        0.2506545211791964
+      ]
+    },
+    "parameter_digest": "dcefb8a6373a47a62b5b113a66e7fc2dd993c6f6f4381a41b8c28f9c9bd75dad"
+  },
+  {
+    "axis": "neuron_count",
+    "value": 256,
+    "neurons": 256,
+    "latent_dim": 4,
+    "train_trials": 348,
+    "seed": 42,
+    "observation_step": 4,
+    "effective_observations": 63,
+    "splits": 100,
+    "em_iterations": 2,
+    "lengthscales": {
+      "all": [
+        0.25057266656015786,
+        0.2506905604336614,
+        0.2505679321711992,
+        0.25065758656927184
+      ]
+    },
+    "parameter_digest": "e79dffef4d9d3a54640ba679a7b91f244eba7e88ccdfa39f66271ae12028e317"
+  },
+  {
+    "axis": "neuron_count",
+    "value": 512,
+    "neurons": 512,
+    "latent_dim": 4,
+    "train_trials": 348,
+    "seed": 42,
+    "observation_step": 4,
+    "effective_observations": 63,
+    "splits": 100,
+    "em_iterations": 2,
+    "lengthscales": {
+      "all": [
+        0.2504836801570471,
+        0.25086528505053535,
+        0.2504596845078242,
+        0.25062281240827317
+      ]
+    },
+    "parameter_digest": "789771cab85943288c022a19a2f571a1704fe0e0af547465e9a06b6ef9051180"
+  },
+  {
+    "axis": "neuron_count",
+    "value": 1024,
+    "neurons": 1024,
+    "latent_dim": 4,
+    "train_trials": 348,
+    "seed": 42,
+    "observation_step": 4,
+    "effective_observations": 63,
+    "splits": 100,
+    "em_iterations": 2,
+    "lengthscales": {
+      "all": [
+        0.250140639297574,
+        0.25080802589856926,
+        0.2504591305844529,
+        0.2504386532642099
+      ]
+    },
+    "parameter_digest": "7f52e527c144fad1517c8771d22c230b1265c4f528292b6a2669fe4ac5595934"
+  },
+  {
+    "axis": "latent_dim",
+    "value": 4,
+    "neurons": 512,
+    "latent_dim": 4,
+    "train_trials": 348,
+    "seed": 42,
+    "observation_step": 4,
+    "effective_observations": 63,
+    "splits": 100,
+    "em_iterations": 2,
+    "lengthscales": {
+      "all": [
+        0.2504836801570471,
+        0.25086528505053535,
+        0.2504596845078242,
+        0.25062281240827317
+      ]
+    },
+    "parameter_digest": "789771cab85943288c022a19a2f571a1704fe0e0af547465e9a06b6ef9051180"
+  },
+  {
+    "axis": "latent_dim",
+    "value": 8,
+    "neurons": 512,
+    "latent_dim": 8,
+    "train_trials": 348,
+    "seed": 42,
+    "observation_step": 4,
+    "effective_observations": 63,
+    "splits": 100,
+    "em_iterations": 2,
+    "lengthscales": {
+      "all": [
+        0.2504436698391377,
+        0.2508298286050066,
+        0.250453562105258,
+        0.25061489565654094,
+        0.2509944568656868,
+        0.25086294501248885,
+        0.2506853389176725,
+        0.2505492978137781
+      ]
+    },
+    "parameter_digest": "7d078b94b524b770d425d238a91eb7b4ac0c43c98854b8474c7fe6b16481e001"
+  },
+  {
+    "axis": "latent_dim",
+    "value": 12,
+    "neurons": 512,
+    "latent_dim": 12,
+    "train_trials": 348,
+    "seed": 42,
+    "observation_step": 4,
+    "effective_observations": 63,
+    "splits": 100,
+    "em_iterations": 3,
+    "lengthscales": {
+      "all": [
+        0.25057739488036673,
+        0.2512058649968781,
+        0.25065930080116144,
+        0.2508153042410097,
+        0.25151824084834623,
+        0.2511467892064884,
+        0.25109662699699264,
+        0.2508741323170908,
+        0.25092582419862564,
+        0.25036798507432767,
+        0.25014140538195323,
+        0.25043886518342323
+      ]
+    },
+    "parameter_digest": "638bc95af1aa8f7ae3e05ebf03319e3daa2f266eed5e1093c9fdd566a4f7abe5"
+  },
+  {
+    "axis": "latent_dim",
+    "value": 16,
+    "neurons": 512,
+    "latent_dim": 16,
+    "train_trials": 348,
+    "seed": 42,
+    "observation_step": 4,
+    "effective_observations": 63,
+    "splits": 100,
+    "em_iterations": 3,
+    "lengthscales": {
+      "all": [
+        0.25051976951456956,
+        0.25112825188117033,
+        0.2506009212591133,
+        0.25080464665027646,
+        0.2514684982615458,
+        0.2511676407311796,
+        0.2508850801025656,
+        0.25091485133038344,
+        0.2508798324731697,
+        0.2502357876271302,
+        0.25031903096338626,
+        0.2504833932709111,
+        0.25038550615949756,
+        0.25046067250039167,
+        0.25050662841766835,
+        0.2502402599795832
+      ]
+    },
+    "parameter_digest": "dedab7e241a481177152ed50fe3941b36ab69853687713c00ab6ab101baaee98"
+  },
+  {
+    "axis": "train_fraction",
+    "value": 0.25,
+    "neurons": 512,
+    "latent_dim": 4,
+    "train_trials": 87,
+    "seed": 42,
+    "observation_step": 4,
+    "effective_observations": 63,
+    "splits": 100,
+    "em_iterations": 2,
+    "lengthscales": {
+      "all": [
+        0.25083544058475854,
+        0.25119870821300233,
+        0.250674351272963,
+        0.2507715151601413
+      ]
+    },
+    "parameter_digest": "a7a533caf4966ad11fa4ba01cf175b595785310fd6653bcdfda7787819e5b486"
+  },
+  {
+    "axis": "train_fraction",
+    "value": 0.5,
+    "neurons": 512,
+    "latent_dim": 4,
+    "train_trials": 174,
+    "seed": 42,
+    "observation_step": 4,
+    "effective_observations": 63,
+    "splits": 100,
+    "em_iterations": 2,
+    "lengthscales": {
+      "all": [
+        0.2508994758294392,
+        0.25090371410807377,
+        0.2503955831399069,
+        0.25129829060195036
+      ]
+    },
+    "parameter_digest": "d7b6cd9721fe00a4d8c23de9680477e047358c460db60937458d991452b25e47"
+  },
+  {
+    "axis": "train_fraction",
+    "value": 0.75,
+    "neurons": 512,
+    "latent_dim": 4,
+    "train_trials": 261,
+    "seed": 42,
+    "observation_step": 4,
+    "effective_observations": 63,
+    "splits": 100,
+    "em_iterations": 2,
+    "lengthscales": {
+      "all": [
+        0.25057077585131454,
+        0.2509881908185932,
+        0.25045302406360226,
+        0.25069548173687817
+      ]
+    },
+    "parameter_digest": "f18246e783f4ba4f4bb41b9d9fbdfd25aa4d924623067f015479e0cf5c9379e3"
+  },
+  {
+    "axis": "train_fraction",
+    "value": 1.0,
+    "neurons": 512,
+    "latent_dim": 4,
+    "train_trials": 348,
+    "seed": 42,
+    "observation_step": 4,
+    "effective_observations": 63,
+    "splits": 100,
+    "em_iterations": 2,
+    "lengthscales": {
+      "all": [
+        0.2504836801570471,
+        0.25086528505053535,
+        0.2504596845078242,
+        0.25062281240827317
+      ]
+    },
+    "parameter_digest": "789771cab85943288c022a19a2f571a1704fe0e0af547465e9a06b6ef9051180"
+  },
+  {
+    "axis": "random_seed",
+    "value": 42,
+    "neurons": 512,
+    "latent_dim": 4,
+    "train_trials": 348,
+    "seed": 42,
+    "observation_step": 4,
+    "effective_observations": 63,
+    "splits": 100,
+    "em_iterations": 2,
+    "lengthscales": {
+      "all": [
+        0.2504836801570471,
+        0.25086528505053535,
+        0.2504596845078242,
+        0.25062281240827317
+      ]
+    },
+    "parameter_digest": "789771cab85943288c022a19a2f571a1704fe0e0af547465e9a06b6ef9051180"
+  },
+  {
+    "axis": "random_seed",
+    "value": 314,
+    "neurons": 512,
+    "latent_dim": 4,
+    "train_trials": 348,
+    "seed": 314,
+    "observation_step": 4,
+    "effective_observations": 63,
+    "splits": 100,
+    "em_iterations": 2,
+    "lengthscales": {
+      "all": [
+        0.250492247013613,
+        0.2508920541930783,
+        0.25053125055554115,
+        0.2506159130775077
+      ]
+    },
+    "parameter_digest": "426c72e538846a46ed8dfd46045291efd99c775e57faf7f7566017abdd1384f0"
+  },
+  {
+    "axis": "random_seed",
+    "value": 2718,
+    "neurons": 512,
+    "latent_dim": 4,
+    "train_trials": 348,
+    "seed": 2718,
+    "observation_step": 4,
+    "effective_observations": 63,
+    "splits": 100,
+    "em_iterations": 2,
+    "lengthscales": {
+      "all": [
+        0.25049217148837355,
+        0.2508863165558848,
+        0.2504859862598571,
+        0.25072370436261
+      ]
+    },
+    "parameter_digest": "243d62537bec2056cd27564a626c3e249c8070ff3aabd0ad6bb5fcf706702a7e"
+  },
+  {
+    "axis": "observation_step",
+    "value": 4,
+    "neurons": 512,
+    "latent_dim": 4,
+    "train_trials": 348,
+    "seed": 42,
+    "observation_step": 4,
+    "effective_observations": 63,
+    "splits": 100,
+    "em_iterations": 2,
+    "lengthscales": {
+      "all": [
+        0.2504836801570471,
+        0.25086528505053535,
+        0.2504596845078242,
+        0.25062281240827317
+      ]
+    },
+    "parameter_digest": "789771cab85943288c022a19a2f571a1704fe0e0af547465e9a06b6ef9051180"
+  },
+  {
+    "axis": "observation_step",
+    "value": 1,
+    "neurons": 512,
+    "latent_dim": 4,
+    "train_trials": 348,
+    "seed": 42,
+    "observation_step": 1,
+    "effective_observations": 250,
+    "splits": 100,
+    "em_iterations": 2,
+    "lengthscales": {
+      "all": [
+        0.24397619554123445,
+        0.24546966975644371,
+        0.24523151609102456,
+        0.24585338366957596
+      ]
+    },
+    "parameter_digest": "538200f1088866a8637febdd2517c7c7c8ceac95257e11df5c7d9bb1bc6d2b5e"
+  }
+]

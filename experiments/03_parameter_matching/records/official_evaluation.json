@@ -1,0 +1,20 @@
+{
+  "status": "full_sequence_oracle_evaluated",
+  "checkpoint": "models/parameter_matched_dynamic/best.pt",
+  "implementation": "sensorium.utility.scores.get_correlations",
+  "full_sequence_oracle_single_trial": 0.1875246912240982,
+  "full_sequence_oracle_by_session": {
+    "dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20": 0.18068109452724457,
+    "dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20": 0.19260737299919128,
+    "dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20": 0.18177302181720734,
+    "dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20": 0.19332578778266907,
+    "dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20": 0.18933923542499542
+  },
+  "burn_in_frames": 50,
+  "retained_source_frames": [
+    50,
+    299
+  ],
+  "static_oracle_reference": 0.16440777480602264,
+  "full_dynamic_oracle_reference": 0.19667325913906097
+}

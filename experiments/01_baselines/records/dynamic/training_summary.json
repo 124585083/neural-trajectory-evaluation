@@ -1,0 +1,15 @@
+{
+  "status": "training_stopped_by_user_best_recovered",
+  "single_seed": 42,
+  "best_epoch": 97,
+  "last_complete_epoch": 103,
+  "best_official_early_stopping_closure": 0.19800327718257904,
+  "best_post_epoch_validation_score": 0.1977536529302597,
+  "best_checkpoint": "models/official_dynamic/best.pt",
+  "last_checkpoint": "not published",
+  "raw_epoch_checkpoint_count": 103,
+  "raw_epoch_checkpoints_retained": true,
+  "validation_events": 213,
+  "full_official_early_stopping_completed": false,
+  "next_action": "independent best-checkpoint evaluation and prediction export"
+}

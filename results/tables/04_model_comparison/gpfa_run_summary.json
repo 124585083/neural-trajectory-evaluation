@@ -1,0 +1,29 @@
+{
+  "status": "gpfa_fit_and_full_reliability_complete",
+  "session": "dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20",
+  "neurons": 512,
+  "selected_train_trials": 174,
+  "fit_trials": 139,
+  "calibration_trials": 35,
+  "latent_dim": 4,
+  "effective_observations": 63,
+  "selected_initial_lengthscale_seconds": 0.25,
+  "learned_lengthscales_seconds": {
+    "all": [
+      0.2549859702975936,
+      0.25510917035512415,
+      0.25242742711567434,
+      0.25797169373454015
+    ]
+  },
+  "parameter_digest": "f4ee7dded5fdb8910be641fd414962129207c355d365283ad0b21ed58f3e4a35",
+  "reliability_splits": 200,
+  "oracle_repeats": [
+    10,
+    10,
+    9,
+    10,
+    9,
+    10
+  ]
+}

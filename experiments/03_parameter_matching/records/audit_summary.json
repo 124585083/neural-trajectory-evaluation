@@ -1,0 +1,75 @@
+{
+  "status": "pass",
+  "config": {
+    "status": "pass",
+    "channels": [
+      16,
+      32,
+      64
+    ],
+    "width_multiplier": 0.5,
+    "spatial_kernels": [
+      11,
+      5,
+      5
+    ],
+    "temporal_kernels": [
+      11,
+      5,
+      5
+    ],
+    "expected_parameter_counts": {
+      "core": 98672,
+      "readout": 2763106,
+      "shifter": 285,
+      "total": 2862063
+    },
+    "static_parameter_counts": {
+      "core": 50624,
+      "readout": 2763106,
+      "shifter": 285,
+      "total": 2814015
+    },
+    "absolute_total_difference": 48048,
+    "relative_total_difference": 0.01707453585002212,
+    "readout_parameter_difference": 0,
+    "preferred_tolerance": 0.05,
+    "maximum_tolerance": 0.1
+  },
+  "data": {
+    "same_physical_data_root": true,
+    "total_train_trials": 1744,
+    "total_oracle_trials": 293,
+    "total_neurons": 40034
+  },
+  "architecture": {
+    "channels": [
+      16,
+      32,
+      64
+    ],
+    "parameter_counts": {
+      "core": 98672,
+      "readout": 2763106,
+      "shifter": 285,
+      "total": 2862063
+    },
+    "relative_total_difference": 0.01707453585002212,
+    "input_shape": [
+      3,
+      80,
+      36,
+      64
+    ],
+    "core_output_shape": [
+      64,
+      62,
+      18,
+      46
+    ],
+    "response_output_shape": [
+      62,
+      7863
+    ]
+  }
+}

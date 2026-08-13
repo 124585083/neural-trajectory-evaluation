@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: >-
+  If you use this repository, please cite this software and the Dynamic
+  Sensorium dataset papers listed in the README and THIRD_PARTY_NOTICES.md.
+title: "Evaluating Dynamic Neural Encoding Beyond Response Correlation"
+type: software
+authors:
+  - family-names: Zhu
+    given-names: Xiaotian
+    email: xiaotian_zhu@outlook.com
+    orcid: "https://orcid.org/0009-0003-2956-8476"
+version: 0.1.0
+date-released: 2026-08-14
+license: MIT
+repository-code: "https://github.com/124585083/neural-trajectory-evaluation"
+url: "https://github.com/124585083/neural-trajectory-evaluation"
+abstract: >-
+  A controlled comparison of Static and parameter-matched Dynamic neural
+  encoding models using response accuracy, output-space RSA/CKA, and a frozen
+  brain-defined GPFA trajectory assay on Dynamic Sensorium 2023.
+keywords:
+  - neural encoding
+  - Dynamic Sensorium
+  - GPFA
+  - neural population trajectories
+  - representational similarity analysis
+  - centered kernel alignment
+preferred-citation:
+  type: software
+  authors:
+    - family-names: Zhu
+      given-names: Xiaotian
+      email: xiaotian_zhu@outlook.com
+      orcid: "https://orcid.org/0009-0003-2956-8476"
+  title: "Evaluating Dynamic Neural Encoding Beyond Response Correlation"
+  version: 0.1.0
+  year: 2026
+  url: "https://github.com/124585083/neural-trajectory-evaluation"
