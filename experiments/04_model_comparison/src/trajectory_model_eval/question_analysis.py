@@ -254,7 +254,7 @@ def _q3(config: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _response_match(
+def _response_score_matched_output_perturbation(
     neural: np.ndarray,
     static: np.ndarray,
     dynamic: np.ndarray,
@@ -291,13 +291,13 @@ def _response_match(
         )
     selected = int(np.argmin(np.abs(np.asarray(scores) - target)))
     sigma = float(sigma_grid[selected])
-    matched = np.clip(dynamic + sigma * neuron_scale * noise, 1e-5, None)
+    matched_output = np.clip(dynamic + sigma * neuron_scale * noise, 1e-5, None)
     selection_metrics = {}
     test_metrics = {}
     details: dict[str, tuple[dict[str, float], np.ndarray]] = {}
     for split_name, indices in (("selection", selection), ("test", test)):
         split_conditions = conditions[indices]
-        for model_name, prediction in (("static", static), ("response_matched_dynamic", matched)):
+        for model_name, prediction in (("static", static), ("response_score_matched_output", matched_output)):
             conventional, per_neuron, _ = evaluate_traditional(
                 neural[indices], prediction[indices], split_conditions, cka_max_samples=1000, temporal_rsa_stride=10, seed=42
             )
@@ -306,13 +306,13 @@ def _response_match(
             (selection_metrics if split_name == "selection" else test_metrics)[model_name] = record
             if split_name == "test":
                 details[model_name] = (conventional, per_neuron)
-    response_delta = details["response_matched_dynamic"][1] - details["static"][1]
+    response_delta = details["response_score_matched_output"][1] - details["static"][1]
     response_bootstrap = _bootstrap_mean(response_delta[np.isfinite(response_delta)], samples, rng)
     trajectory_bootstrap = _condition_bootstrap_trajectory(
-        trajectory, neural, static, matched, test, samples, rng
+        trajectory, neural, static, matched_output, test, samples, rng
     )
     return {
-        "answer": "yes_in_a_disjoint_repeat_response-matched_stress_test",
+        "answer": "yes_in_disjoint_repeat_response_score_matched_output_perturbation",
         "selection_trials": int(len(selection)),
         "test_trials": int(len(test)),
         "noise_sigma": sigma,
@@ -323,7 +323,7 @@ def _response_match(
         "test": test_metrics,
         "test_response_dynamic_minus_static_neuron_bootstrap": response_bootstrap,
         "test_gpfa_condition_bootstrap": trajectory_bootstrap.to_dict(orient="records"),
-        "interpretation": "the dynamic prediction was degraded only to match scalar response correlation; RSA/CKA were not forced to match",
+        "interpretation": "the response-score-matched output perturbation degrades the Dynamic prediction only to match scalar response correlation; RSA/CKA are not forced to match",
     }, trajectory_bootstrap
 
 
@@ -422,13 +422,13 @@ class CandidateSpec:
 def _candidate_specs(
     static: np.ndarray,
     dynamic: np.ndarray,
-    matched: np.ndarray,
+    validation_matched: np.ndarray,
     extended: dict[str, np.ndarray],
 ) -> list[CandidateSpec]:
     result = [
         CandidateSpec("dynamic", "reference", "reference", 0.0, lambda: dynamic),
         CandidateSpec("static", "model", "model", 1.0, lambda: static),
-        CandidateSpec("matched_epoch65", "model", "model", 0.5, lambda: matched),
+        CandidateSpec("validation_matched_epoch65", "model", "model", 0.5, lambda: validation_matched),
     ]
     for retention in (0.75, 0.5, 0.25, 0.0):
         result.append(
@@ -504,7 +504,7 @@ def _q6(
     extended: dict[str, np.ndarray],
 ) -> tuple[dict[str, Any], pd.DataFrame, pd.DataFrame]:
     selection, test = _balanced_repeat_split(conditions, 20260813)
-    specs = _candidate_specs(static, dynamic, extended["response_matched_dynamic"], extended)
+    specs = _candidate_specs(static, dynamic, extended["validation_matched_dynamic"], extended)
     rows = []
     for spec in specs:
         prediction = spec.make()
@@ -610,7 +610,7 @@ def _q6(
     return {
         "answer": "yes_for_standard_condition_RSA_CKA_and_supported_but_not_proven_for_the_enriched_battery",
         "strict_time_reversal_counterexample": counterexample,
-        "response_only_counterexample": "see Q4 disjoint-repeat response-matched test",
+        "response_only_counterexample": "see Q4 disjoint-repeat response-score-matched output perturbation",
         "conventional_matched_pair": matched_pair,
         "leave_perturbation_family_out_regression": regression_summary,
         "interpretation": "non-perfect out-of-family R2 and matched/counterexample results support incremental trajectory information; they do not establish mathematical independence from every possible RSA/CKA construction",
@@ -633,7 +633,7 @@ def run_question_analysis(config: dict[str, Any], bootstrap_samples: int = 2000)
     q1 = _q1(config, rng, bootstrap_samples)
     q2, q2_table = _q2(neural, static, dynamic, conditions, rng, bootstrap_samples)
     q3 = _q3(config)
-    q4, q4_table = _response_match(
+    q4, q4_table = _response_score_matched_output_perturbation(
         neural, static, dynamic, conditions, trajectory, rng, bootstrap_samples
     )
     q5, ablation_table, monotonic_table = _ablation(
@@ -643,7 +643,7 @@ def run_question_analysis(config: dict[str, Any], bootstrap_samples: int = 2000)
         neural, static, dynamic, conditions, trajectory, extended
     )
     q2_table.to_csv(out / "q2_condition_conventional_bootstrap.csv", index=False)
-    q4_table.to_csv(out / "q4_response_matched_gpfa_bootstrap.csv", index=False)
+    q4_table.to_csv(out / "q4_response_score_matched_output_gpfa_bootstrap.csv", index=False)
     ablation_table.to_csv(out / "q5_temporal_ablation_curve.csv", index=False)
     monotonic_table.to_csv(out / "q5_temporal_ablation_monotonicity.csv", index=False)
     candidate_table.to_csv(out / "q6_candidate_metrics.csv", index=False)

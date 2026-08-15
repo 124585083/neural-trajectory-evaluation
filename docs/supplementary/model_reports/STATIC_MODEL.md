@@ -4,7 +4,7 @@ Last updated: 2026-08-11
 
 ## One-page summary
 
-I trained the full Sensorium+ static CNN architecture on the five official Dynamic Sensorium 2023 competition sessions. This is neither a reduced model nor a parameter-matched variant. It preserves the official static baseline's four-layer 2D CNN core, Gaussian readout, cortical-coordinate grid predictor, pupil shifter, and behavioral inputs. To apply the static model to dynamic data, I added only a parameter-free framewise reshape/crop adapter so that its output time indices are exactly aligned with those of the Dynamic Factorized3D model.
+I trained the full Sensorium+ static CNN architecture on the five official Dynamic Sensorium 2023 competition sessions. This is neither a reduced model nor a total-parameter-matched variant. It preserves the official static baseline's four-layer 2D CNN core, Gaussian readout, cortical-coordinate grid predictor, pupil shifter, and behavioral inputs. To apply the static model to dynamic data, I added only a parameter-free framewise reshape/crop adapter so that its output time indices are exactly aligned with those of the Dynamic Factorized3D model.
 
 Using seed 42, training naturally terminated through the official Dynamic Sensorium 2023 early-stopping procedure at epoch 63. After reloading the frozen `best.pt`, I independently ran inference on complete 300-frame oracle trials and discarded the first 50 frames according to the official evaluation rule. The resulting single-trial correlation, aggregated across five sessions and 40,034 neurons, was:
 
@@ -19,7 +19,7 @@ This shows that the static model can be trained and evaluated stably on Dynamic 
 
 ## 1. Scientific question and interpretation of the result
 
-The goal is to construct a strict reference model with no explicit temporal modeling: at each time point, the model reads only the current video frame and current behavioral state, and independently predicts the neural response at that time point. It cannot access past or future frames. In this way, differences in subsequent Static–Dynamic trajectory comparisons can be linked to whether the model explicitly learns spatiotemporal filtering, rather than to mismatched data, neurons, readouts, or evaluation intervals.
+The goal is to construct a reference model with no explicit temporal modeling: at each time point, the model reads only the current video frame and current behavioral state, and independently predicts the neural response at that time point. It cannot access past or future frames. Matching data, neurons, readouts, and evaluation intervals removes those particular differences, but Static and Dynamic still use different core architectures, convolutional operations, channel structures, parameterizations, and inductive biases. Their complete-model comparison therefore cannot attribute every observed difference exclusively to temporal history.
 
 The model in this report should be described precisely as:
 
@@ -359,7 +359,7 @@ The official metric aggregates results as follows:
 | Static Sensorium+ framewise | 2,814,015 | 0.1644077748 |
 | Dynamic Factorized3D | 5,707,743 | 0.1966732591 |
 
-The Dynamic model exceeds the Static model by `0.0322654843`, corresponding to `19.63%` relative to the Static score. This is a descriptive difference measured on the same five sessions, with the same neuron-weighted metric and the same frames 50–299. It cannot by itself establish that the difference is caused by temporal computation because the models also differ in total parameter count and core capacity. Downstream trajectory evaluation must therefore retain response correlation as the performance gate while separately testing latent dynamics.
+The Dynamic model exceeds the Static model by `0.0322654843`, corresponding to `19.63%` relative to the Static score. This is a descriptive difference measured on the same five sessions, with the same neuron-weighted metric and the same frames 50–299. It cannot by itself establish that the difference is caused by temporal computation because the models also differ in core architecture, core parameterization, convolutional operations, inductive bias, effective computation, and total parameter count. Downstream trajectory evaluation must therefore retain response correlation as the performance gate while separately testing latent dynamics.
 
 ## 7. Reproducibility files
 

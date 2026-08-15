@@ -1,87 +1,101 @@
-# Phase 4 — Comparing Static and Dynamic models beyond response correlation
+# Phase 4 — Model comparison
 
-**Research question:** Does a parameter-matched Dynamic model reproduce neural population dynamics better than a Static model, and do trajectory metrics reveal temporal differences not fully summarized by response correlation or output-space RSA/CKA?
+This phase compares Static and Total-parameter-matched Dynamic predictions using response, output-space RSA/CKA, and frozen neural-data-defined trajectory metrics, together with predefined stress tests.
 
-## Why this phase exists
+## Purpose
 
-Phases 1-3 establish the two prerequisites for a controlled comparison: the encoding pipelines work, the trajectory assay is reliable on neural repeats, and Dynamic capacity is approximately matched to Static. Phase 4 brings these components together without allowing either encoding model to define the latent space.
+Phase 1 provides the frozen Static checkpoint, and Phase 3 provides the frozen Total-parameter-matched Dynamic checkpoint. Phase 4 reconstructs aligned oracle predictions from both models and evaluates them with one conventional and trajectory-analysis pipeline. The trajectory comparison uses a separately fitted GPFA defined only by locked neural training data. Response matching, temporal-weight attenuation, time reversal, and an enriched conventional-feature battery probe whether trajectory metrics merely restate the tested conventional summaries; scientific interpretation is delegated to the canonical result documents.
 
-The comparison has three levels, all applied to the same predicted neural-response outputs:
+## Inputs and frozen artifacts
 
-1. response accuracy, including neuron-wise, population-vector, temporal-difference, and lag diagnostics;
-2. output-space population-response geometry, measured by time-aware and condition-level RSA/CKA; and
-3. brain-defined GPFA trajectories, measured through position, normalized error, velocity direction, speed profile, and acceleration direction.
+- **Recorded data:** pilot session `dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20`; 58 oracle trials in six repeated-movie conditions; deterministic 512-neuron order; original frames 50–299.
+- **Static model:** [`../01_baselines/records/static/training_config.yaml`](../01_baselines/records/static/training_config.yaml) and [`../../models/static_on_dynamic/best.pt`](../../models/static_on_dynamic/best.pt).
+- **Total-parameter-matched Dynamic:** [`../03_parameter_matching/configs/dynamic_parameter_matched.yaml`](../03_parameter_matching/configs/dynamic_parameter_matched.yaml) and [`../../models/parameter_matched_dynamic/best.pt`](../../models/parameter_matched_dynamic/best.pt).
+- **Comparison protocol:** [`configs/pilot.yaml`](configs/pilot.yaml), with generated locks under `outputs/pilot/` and a compact released record at [`../../results/tables/04_model_comparison/protocol_lock.json`](../../results/tables/04_model_comparison/protocol_lock.json).
+- **Auxiliary checkpoint:** [`../../models/parameter_matched_dynamic/epoch_65_validation_matched.pth`](../../models/parameter_matched_dynamic/epoch_65_validation_matched.pth), used only for the separately named validation-matched checkpoint diagnostic.
+- **Comparison GPFA training data:** a deterministic 174-of-348 training-trial subset, divided into 139 fit and 35 calibration trials, then refitted on all 174 after initialization selection.
 
-RSA and CKA in this phase compare predicted neural population responses with recorded neural population responses. They are **output-space analyses**, not hidden-layer representational analyses.
+The resulting `q = 4` comparison-subset GPFA is the exact neural-data-defined GPFA used for model evaluation. Phase 2 establishes the assay design on the full train tier; Phase 4 separately fits and revalidates the locked 174-trial comparison GPFA used here. See [GPFA Validation](../../docs/GPFA_VALIDATION.md) for the relationship between the two fits.
 
-## Locked proof-of-concept scope
+## Locked analysis scope
 
-The deep comparison uses one Dynamic Sensorium session, 512 deterministic neurons, original frames 50-299, six repeated natural movies, and all 58 oracle trials. The model-comparison GPFA is fitted on a locked 174-of-348 subset of neural training trials, using 139 trials for fitting and 35 for calibration before the selected four-dimensional model is refitted on all 174 trials.
+| Element | Fixed scope |
+|---|---|
+| Oracle tensor | Neural, Static, and Dynamic arrays with shape `[58, 250, 512]` |
+| Trial/condition support | 58 trials; six repeated movies |
+| Neurons and time | Deterministic seed-42 neuron order; frames 50–299 |
+| Comparison GPFA | 174 train trials; 139/35 fit/calibration split; fixed `q = 4` |
+| GPFA temporal grids | Every fourth frame: 63 observations at approximately 7.5 Hz; posterior queried at all 250 timestamps at 30 Hz |
+| Evaluation families | Response, output-space RSA/CKA, frozen-GPFA trajectory metrics, model-prediction nulls, and paired summaries |
+| Stress-test seeds | Balanced repeat split `20260813`; response-perturbation noise seed `123` |
+| Temporal attenuation | Off-center temporal-weight retention `1.00`, `0.75`, `0.50`, `0.25`, and `0.00` |
 
-Oracle responses and encoding-model predictions do not enter GPFA preprocessing, dimensionality selection, initialization selection, or fitting. Once fitted, the observation model, temporal priors, neuron order, scaling, and latent axes are frozen. Static and Dynamic predictions are treated as new observations and transformed by the same GPFA posterior inference; no model-specific refit, rotation, scaling, or Procrustes alignment is allowed.
+Both model predictions enter the same frozen GPFA posterior inference without model-specific fitting, rotation, scaling, or latent alignment.
 
-The five-session response result remains separate from this one-session deep analysis.
+## Protocol-lock behavior
 
-## Current result
+The `lock` command deterministically regenerates and overwrites `protocol_lock.npz` and `protocol_lock.json` from the current data and config. Other commands call `load_protocol`: a missing NPZ lock is generated automatically, while an existing NPZ lock is reused without recomputing or comparing its fingerprints to the current config. Rerun `lock` explicitly after an intentional data/config change. Prediction generation requires identical Static/Dynamic sampler order and neural targets and rejects oracle trials absent from the lock; extended predictions must match the primary trial indices and neural tensor exactly. Missing checkpoints or stage-specific prediction/GPFA artifacts stop the dependent stage, but a missing protocol lock alone does not.
 
-| Question | Current answer | Main evidence |
-|---|---|---|
-| Does Dynamic have a response-level gain? | **Yes.** | Five-session oracle correlation improves by +0.0231, with a positive difference in every session. |
-| Do output-space RSA/CKA detect a difference? | **Yes.** | Time-aware population-response RSA and CKA favor Dynamic; purely condition-averaged differences are smaller. |
-| Does trajectory evaluation detect a difference? | **Yes.** | Dynamic improves GPFA position and direction-sensitive metrics; speed-profile evidence is weaker. |
-| Does a trajectory difference remain after response matching? | **Yes, in the current stress test.** | Held-out mean neuron response is matched within the predefined procedure, while position, velocity, and acceleration still favor Dynamic. |
-| Do trajectory metrics degrade under temporal ablation? | **Mostly monotonically.** | Position, velocity, speed, and acceleration decrease strictly across five history-retention levels; normalized RMSE has one small non-monotonic step. |
-| Is trajectory information fully explained by response/RSA/CKA? | **Current evidence suggests not fully.** | Time reversal, response matching, and held-out perturbation-family prediction leave residual temporal-order and local-direction information. |
+## Formal workflow
 
-For the intact models, GPFA position correlation improves from **0.5203** to **0.7262**, and velocity-direction cosine from **0.3045** to **0.4985**. Acceleration direction also improves strongly, while speed-profile uncertainty overlaps zero. These metrics are reported separately rather than collapsed into a composite score.
+Run from this directory in the order below. Checkpoint inference uses the encoding environment; GPFA and table analysis use the analysis environment described in [Data and Reproducibility](../../docs/DATA_AND_REPRODUCIBILITY.md).
 
-## Critical controls
-
-### Revalidated neural reliability
-
-Before ranking models, this phase repeats split-half reliability, null testing, and sensitivity analysis using the subset-trained comparison GPFA. This prevents the model result from relying only on the earlier full-training-tier assay.
-
-### Held-out response matching
-
-Oracle repeats are divided into disjoint selection and test halves. Fixed Gaussian noise, scaled separately by each neuron's predicted Dynamic range, is tuned only on the selection half to match Static's scalar mean-neuron response score. The held-out test then recomputes response, output-space RSA/CKA, and frozen-GPFA metrics. This is a metric-sufficiency stress test, not a new fair-training leaderboard and not a formal equivalence test.
-
-### Temporal-history ablation
-
-All off-center temporal-convolution weights are multiplied by retention values `1.00, 0.75, 0.50, 0.25, 0.00`, while center slices, spatial kernels, biases, readout, and shifter remain fixed. This produces a graded test of sensitivity to learned temporal history.
-
-A magnitude-matched non-temporal weight-damage control has not yet been run. Until it is added, the dose-response result supports temporal sensitivity but cannot completely exclude a contribution from generic progressive network damage.
-
-## Interpretation and limits
-
-The current evidence suggests that trajectory evaluation contributes information beyond scalar response correlation and the tested output-space RSA/CKA battery. It does not establish mathematical independence from every possible similarity metric, identify a biological mechanism, or support a multi-session trajectory conclusion.
-
-The primary inferential units are five sessions for the response benchmark and six movie conditions for the one-session geometry and trajectory analyses. Multi-session trajectory replication, multiple encoding-model seeds, hidden-layer analysis, and the non-temporal damage control remain future work.
-
-## Reproducible assets
-
-- Locked configuration: [`configs/pilot.yaml`](configs/pilot.yaml)
-- Static and reduced Dynamic checkpoints: [`../../models/static_on_dynamic/`](../../models/static_on_dynamic/) and [`../../models/parameter_matched_dynamic/`](../../models/parameter_matched_dynamic/)
-- Frozen comparison GPFA: [`../../models/gpfa_model_comparison/`](../../models/gpfa_model_comparison/)
-- Compact response, RSA/CKA, GPFA, matching, ablation, and Q1-Q6 outputs: [`../../results/tables/04_model_comparison/`](../../results/tables/04_model_comparison/)
-- Full evidence ledger: [Model Comparison Results](../../docs/results/MODEL_COMPARISON_RESULTS.md) and [Q1-Q6 Answers](../../docs/results/Q1_Q6_ANSWERS.md)
-- Complete method definitions: [Methods](../../docs/METHODS.md)
-
-## Minimal reproduction entry points
-
-Run the commands in order from this phase directory:
+### 1. Lock the protocol and export aligned predictions — encoding environment
 
 ```text
 python -m trajectory_model_eval.cli lock --config configs/pilot.yaml
 python -m trajectory_model_eval.cli predict --config configs/pilot.yaml
+```
+
+### 2. Run conventional metrics, fit/revalidate GPFA, and evaluate trajectories — analysis environment
+
+```text
 python -m trajectory_model_eval.cli traditional --config configs/pilot.yaml
 python -m trajectory_model_eval.cli gpfa --config configs/pilot.yaml
 python -m trajectory_model_eval.cli sensitivity --config configs/pilot.yaml
 python -m trajectory_model_eval.cli gpfa-evaluate --config configs/pilot.yaml
+```
+
+`gpfa` performs the 139/35 initialization selection, 174-trial refit, and oracle reliability/null gate. `gpfa-evaluate` applies the frozen result to recorded responses and both prediction tensors.
+
+### 3. Generate stress-test predictions — encoding environment
+
+```text
 python -m trajectory_model_eval.cli extended-predict --config configs/pilot.yaml
+```
+
+This exports the validation-matched checkpoint prediction and five off-center temporal-weight retention levels while preserving the center slices and the rest of the model.
+
+### 4. Produce the predefined Q1–Q6 analysis artifacts — analysis environment
+
+```text
 python -m trajectory_model_eval.cli questions --config configs/pilot.yaml
 ```
 
-Checkpoint inference commands require the official CUDA/Sensorium environment. GPFA analysis uses the Phase 2 scientific environment. The workflow fails closed when a required checkpoint, locked split, prediction tensor, or frozen GPFA artifact is missing. Generated working artifacts are written under `outputs/pilot/`; compact public results are preserved under the repository-level `results/tables/04_model_comparison/` directory.
+This stage implements the response-score-matched output perturbation, temporal attenuation summaries, time reversal, enriched conventional-feature comparisons, and leave-family-out diagnostics. Perturbation strength is chosen using the selection-half response target; test-half neural responses are not used to select that strength. The test half is then used for evaluation.
 
-**Previous phase:** [Phase 3](../03_parameter_matching/README.md) establishes the capacity-controlled Dynamic model.  
-**Project-level overview:** [main README](../../README.md) and [experiment matrix](../../docs/EXPERIMENT_MATRIX.md).
+The CLI also exposes `all`, which runs only `lock` through `gpfa-evaluate` in internal sequence. It does not run `extended-predict` or `questions`, and the split-environment sequence above is the canonical workflow.
+
+## Outputs
+
+- **Aligned predictions and protocol:** generated `outputs/pilot/protocol_lock.npz`, `protocol_lock.json`, and `oracle_predictions.npz`; compact summaries are released in [`../../results/tables/04_model_comparison/`](../../results/tables/04_model_comparison/).
+- **Frozen comparison GPFA:** [`../../models/gpfa_model_comparison/gpfa.pkl`](../../models/gpfa_model_comparison/gpfa.pkl), [`../../models/gpfa_model_comparison/preprocessing.npz`](../../models/gpfa_model_comparison/preprocessing.npz), and selection/reliability metadata in the Phase 4 result directory.
+- **Conventional metrics:** response and RSA/CKA tables and paired summaries are released in the Phase 4 result directory; detailed distributions are generated under `outputs/pilot/`.
+- **Trajectory comparison:** latent trajectory archives are generated under `outputs/pilot/`; model metrics, condition bootstrap summaries, and model-prediction null distributions are released in the Phase 4 result directory.
+- **Stress tests and Q1–Q6:** extended-prediction summary, response-score-matching output, temporal-attenuation tables, Q6 candidate/leave-family-out tables, and [`../../results/tables/04_model_comparison/q1_q6_answers.json`](../../results/tables/04_model_comparison/q1_q6_answers.json).
+- **Sensitivity and tests:** comparison-GPFA sensitivity outputs under [`../../results/tables/04_model_comparison/sensitivity/`](../../results/tables/04_model_comparison/sensitivity/) and focused contracts under [`tests/`](tests/).
+
+## What Phase 4 establishes operationally
+
+- Recorded responses and both model predictions are aligned on identical trials, neurons, conditions, and timestamps.
+- Both models are evaluated in the same separately frozen 174-trial neural-data-defined GPFA coordinate system.
+- Conventional, trajectory, sensitivity, and stress-test artifacts are produced under one comparison protocol.
+
+## Documentation
+
+- [Results](../../docs/RESULTS.md) — main scientific result chain
+- [Detailed Q1–Q6 evidence](../../docs/results/Q1_Q6_ANSWERS.md) — question-specific statistics, controls, and interpretation boundaries
+- [Methods](../../docs/METHODS.md) — response, RSA/CKA, GPFA, resampling, and stress-test procedures
+- [GPFA Validation](../../docs/GPFA_VALIDATION.md) — reliability and measurement limits of the comparison assay
+- [Design Rationale](../../docs/DESIGN_RATIONALE.md) — reasons for the controls and stress tests
+- [Data and Reproducibility](../../docs/DATA_AND_REPRODUCIBILITY.md) — environment, data, and artifact setup

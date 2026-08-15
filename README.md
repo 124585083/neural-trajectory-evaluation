@@ -1,144 +1,96 @@
 # Evaluating Dynamic Neural Encoding Beyond Response Correlation
 
-**Can trajectory-based neural evaluation reveal dynamic encoding gains that response correlation and output-space population-response metrics do not fully capture?**
+Can trajectory-based evaluation of neural population dynamics reveal meaningful differences between Static and Dynamic encoding models that are incompletely summarized by response correlation and population-response representation similarity?
 
-## At a glance
+This repository is a proof-of-concept study of evaluation methodology for dynamic neural encoding models using Dynamic Sensorium 2023.
 
-**Question:** Does trajectory evaluation capture Dynamic-model gains missed by response correlation and output-space RSA/CKA?  
-**Approach:** Dynamic Sensorium 2023, a capacity-controlled Static-Dynamic comparison, and a frozen brain-defined GPFA.  
-**Current result:** Response and time-aware output-space RSA/CKA detect part of the gain, while response-matched and temporal-ablation tests suggest that trajectory metrics provide additional sensitivity to temporal structure.
+## Why trajectory evaluation?
 
-Neural encoding models are usually judged by how accurately they predict each neuron's response. That criterion is essential, but it may under-characterize what makes a model *dynamic*: its ability to reproduce how a neural population state evolves over time. This project builds a controlled Static-Dynamic comparison on Dynamic Sensorium 2023 and tests response accuracy, output-space population-response geometry (RSA/CKA), and neural-trajectory agreement on the same predicted neural responses.
+Neural encoding models can be evaluated at three complementary levels:
 
-The central hypothesis is that, if temporal computation contributes more than a frame-wise response gain, a Dynamic model should remain distinguishable from a Static model after controlling model capacity and response quality, and trajectory scores should degrade systematically when learned temporal history is ablated.
+- **Response correlation** asks whether individual neural responses are predicted accurately.
+- **Output-space RSA / CKA** asks whether predicted and recorded population responses share similar representational structure.
+- **Trajectory evaluation** asks whether predicted population states evolve through time with the correct position, direction, speed, and local geometry.
 
-![Experimental workflow](results/figures/figure-1-experimental-workflow.png)
+RSA and CKA here compare predicted neural population responses with recorded responses; they are not hidden-layer analyses. Trajectory evaluation is intended to complement, not replace, response prediction and population-response similarity.
 
-## Experimental design
+## Experimental logic
 
-The main controlled comparison uses models trained on the same five sessions, inputs, behavioral covariates, neurons, splits, loss, readout family, and evaluation interval. The Static model has **2,814,015 parameters**. The reduced Dynamic model has **2,862,063 parameters**, a difference of only **1.71%**, while retaining learned temporal convolutions. The full official Dynamic baseline is also preserved as a benchmark.
+> Static and Dynamic encoding models → response correlation → output-space RSA / CKA → neural-data-defined GPFA trajectories → controlled stress tests
 
-For the detailed trajectory study, a deterministic 512-neuron subset from one session is used. GPFA is trained on 174 trials (50% of that session's official training tier) and is frozen before any model prediction or oracle response is transformed. Evaluation uses six repeated natural movies, 58 oracle trials, and 250 timestamps per trial.
+The trajectory coordinate system is fitted exclusively to recorded training neural responses. GPFA reliability is validated first; its preprocessing, latent axes, and temporal model are then frozen before Static or Dynamic predictions enter the analysis. Both models are therefore evaluated in the same neural-data-defined space rather than in separately fitted, model-specific latent spaces.
 
-## Baseline reproduction
+The primary control compares a four-layer frame-wise 2D Static architecture with a three-stage Factorized3D Dynamic architecture that explicitly incorporates temporal convolutions. Their total trainable parameter counts are approximately matched—2,814,015 for Static and 2,862,063 for Dynamic, a difference of 48,048 parameters or 1.707%—but their cores remain different architectures and are not parameter matched.
 
-| Model | Official reference | Local reproduction | Status |
-|---|---:|---:|---|
-| Factorized3D Dynamic | 0.1887 hidden `final_test_main` | 0.1967 local oracle | Protocol reproduced; exact hidden-test score is not locally verifiable. |
-| Static-on-Dynamic | No official reference for this transfer setting | 0.1644 local oracle | The official Static Sensorium architecture was retrained on Dynamic Sensorium 2023; this is not the native Sensorium 2022 static-image benchmark. |
+## Main findings
 
-Both local values are full-sequence, five-session single-trial correlations computed with the official Sensorium evaluator. Hidden test labels are unavailable locally, so exact server-side reproduction of the Dynamic score remains pending. See the [Dynamic](docs/models/DYNAMIC_MODEL.md) and [Static](docs/models/STATIC_MODEL.md) reports for the full protocol and audit trail.
+### 1. Dynamic models predict neural responses better
 
-## Why the latent space is brain-defined
+Across five Dynamic Sensorium sessions, mean oracle response correlation increases from approximately **0.1644** for Static to **0.1875** for the Total-parameter-matched Dynamic model, a difference of approximately **+0.0231**. Dynamic is higher in all five sessions.
 
-GPFA is fitted only to real neural responses from the training tier. Its preprocessing, observation model, temporal prior, and latent axes are then frozen. Static and Dynamic predictions are treated as new observations and passed through the same frozen GPFA posterior inference with fixed `C`, `d`, `R`, and temporal priors; no model-specific GPFA or post-hoc latent alignment is used.
+This is a complete-model comparison under approximately matched total trainable parameter counts. It does not isolate temporal history as the sole cause of the Dynamic advantage.
 
-This design prevents either encoding model from defining a favorable comparison space. It also preserves temporal direction: position, velocity, speed, and acceleration can all be compared in coordinates learned independently from the model predictions.
+### 2. The Dynamic advantage is especially visible in temporally structured population geometry
 
-## Preliminary findings
+In the detailed pilot session, time-aware output-space RSA and CKA detect Static–Dynamic differences. Evaluation with the frozen neural-data-defined GPFA further shows stronger Dynamic agreement with recorded neural trajectories in trajectory position, local velocity direction, and acceleration/curvature-related direction.
 
-![Static-Dynamic comparison across response, CKA, RSA, and GPFA trajectory evaluation](results/figures/figure-2-static-dynamic-comparison.png)
+The speed-profile difference is inconclusive, so the current evidence does not support a uniform Dynamic advantage across every trajectory metric.
 
-| Question | Current answer | Main evidence |
-|---|---|---|
-| **Q1. Response gain?** | **Yes.** | Parameter-matched Dynamic improves five-session oracle correlation by **0.0231**; all session differences are positive. |
-| **Q2. Output-space RSA/CKA difference?** | **Yes.** | Time-aware population-response RSA and CKA consistently favor Dynamic; purely condition-averaged differences are smaller. |
-| **Q3. Trajectory difference?** | **Yes.** | Dynamic substantially improves GPFA position and direction-sensitive trajectory metrics; speed-profile evidence is weaker. |
-| **Q4. Difference after response matching?** | **Yes, in the current stress test.** | Held-out response scores are nearly identical after predefined response matching, while GPFA position, velocity, and acceleration still favor Dynamic. |
-| **Q5. Monotonic temporal-ablation degradation?** | **Yes for trajectory similarity.** | Position, velocity, speed, and acceleration decrease strictly across five history-retention levels; normalized RMSE has one small non-monotonic step. |
-| **Q6. Fully explained by response/output-space RSA/CKA?** | **Current evidence suggests not fully.** | Time reversal and out-of-family perturbation tests leave residual temporal-order and local-direction information. |
+![Static–Dynamic comparison across response, CKA, RSA, and GPFA trajectory evaluation](results/figures/figure-2-static-dynamic-comparison.png)
 
-Detailed estimates, uncertainty intervals, and metric-specific qualifications are reported in [Model Comparison Results](docs/results/MODEL_COMPARISON_RESULTS.md) and [Q1-Q6 Answers](docs/results/Q1_Q6_ANSWERS.md).
+> **Figure 2.** Static–Dynamic differences in the one-session, six-condition pilot analysis. Values and uncertainty intervals should be interpreted within each metric family; absolute effect magnitudes are not directly comparable across response correlation, CKA, RSA, and GPFA trajectory metrics.
 
-![Temporal-history ablation degradation curves](results/figures/figure-3-temporal-ablation.png)
+### 3. Trajectory metrics provide additional sensitivity to temporal structure
 
-The trajectory method was validated before it was used to rank models. In 200 split-half comparisons of repeated neural responses, position correlation averaged **0.8566**, velocity-direction cosine **0.6627**, speed-profile correlation **0.7434**, and acceleration-direction cosine **0.6163**. These metrics rejected matched condition, time-order, timing, and population-synchrony nulls in every split tested. Path length is retained only as a descriptive control because it cannot reliably detect time reversal or circular shifts.
+Three stress tests probe whether the trajectory results merely restate the conventional scores:
 
-These results support a specific claim: trajectory evaluation captures temporal-order and local-direction information that scalar response correlation and the tested output-space RSA/CKA variants do not fully summarize. They do **not** show that these metrics are uninformative; time-aware population-response RSA and CKA detect clear Dynamic-Static differences. Nor do they show that trajectory metrics are independent of every possible output-space similarity metric.
+- **Response matching:** after a response-score-matched output perturbation makes held-out scalar response correlations nearly identical, differences in GPFA position, velocity, and acceleration remain detectable. This is an output-level stress test, not a separately trained response-matched model, and no formal equivalence test was performed.
+- **Time reversal:** reversing temporal order can leave standard condition-level RSA and CKA unchanged while strongly disrupting GPFA trajectory metrics. This shows that those condition-level metrics are insufficient to capture temporal order and direction; it does not establish mathematical or universal statistical independence from representational metrics.
+- **Graded temporal-weight attenuation:** progressively attenuating learned off-center temporal weights produces graded degradation in the major trajectory-similarity metrics. This is **consistent with a graded temporal-history effect, but temporal specificity remains to be controlled**; it is not a clean causal isolation of temporal computation.
 
-Here, RSA and CKA compare predicted neural population responses with recorded neural population responses. They do **not** compare hidden network layers. Hidden-layer RSA/CKA is outside the primary comparison so response, output geometry, and trajectory metrics all evaluate the same model outputs.
+Together, these observations suggest that trajectory evaluation captures temporal-order and local-direction information that is not fully summarized by the tested response, RSA, and CKA measures.
 
-## Why this matters
+## What the current proof of concept covers
 
-If this pattern generalizes across additional sessions, evaluating dynamic encoding models only through point-wise neural prediction may miss whether they reproduce the temporal organization of population activity. Trajectory evaluation would therefore complement, rather than replace, response correlation and output-space population-response similarity.
+- The response-level comparison covers five Dynamic Sensorium sessions.
+- Detailed output-space RSA/CKA and trajectory analyses use one pilot session.
+- The pilot trajectory analysis uses 512 neurons and 58 oracle trials grouped into six repeated natural-movie conditions over original frames 50–299.
+- Encoding-model training uses a single seed.
+- The parameter control approximately matches total trainable parameter count, not core architecture or core parameter count. Static and Dynamic therefore form a complete-model architectural comparison rather than an isolation of temporal history alone.
+- Temporal-weight attenuation demonstrates graded metric sensitivity to perturbing learned temporal weights, but it does not uniquely isolate a temporal causal effect.
 
-## Models and data
+Within this scope, the results support trajectory evaluation as an additional diagnostic for dynamic neural encoding models—not as a definitive representation of cortical computation or a replacement for conventional prediction metrics.
 
-The dataset is Dynamic Sensorium 2023: natural movies, synchronized behavioral variables, and mouse V1 population responses with continuous temporal structure. Dataset files are not redistributed here; place an authorized local copy at `data/sensorium_all_2023/`.
+## Documentation
 
-| Model artifact | Role | Parameters |
-|---|---|---:|
-| [`models/official_dynamic/best.pt`](models/official_dynamic/best.pt) | Full official Factorized3D Dynamic benchmark | 5,707,743 |
-| [`models/static_on_dynamic/best.pt`](models/static_on_dynamic/best.pt) | Static Sensorium CNN retrained frame-wise on Dynamic Sensorium | 2,814,015 |
-| [`models/parameter_matched_dynamic/best.pt`](models/parameter_matched_dynamic/best.pt) | Reduced Dynamic model used in the controlled comparison | 2,862,063 |
-| [`models/parameter_matched_dynamic/epoch_65_response_matched.pth`](models/parameter_matched_dynamic/epoch_65_response_matched.pth) | Training-history response-matched checkpoint | 2,862,063 |
-| [`models/gpfa_reliability/`](models/gpfa_reliability/) | Frozen GPFA and preprocessing from the reliability study | n/a |
-| [`models/gpfa_model_comparison/`](models/gpfa_model_comparison/) | Frozen subset-trained GPFA used for model comparison | n/a |
+- [Methods](docs/METHODS.md): data preparation, alignment, metrics, GPFA inference, reliability procedures, response matching, and temporal-weight attenuation.
+- [Design rationale](docs/DESIGN_RATIONALE.md): why the controls and neural-data-defined comparison space were chosen, including falsification logic.
+- [Results](docs/RESULTS.md): the canonical main scientific result chain.
+- [Detailed Q1–Q6 evidence](docs/results/Q1_Q6_ANSWERS.md): the canonical question-by-question evidence ledger.
+- [GPFA Validation](docs/GPFA_VALIDATION.md): reliability, sensitivity, negative findings, and interpretation limits for the trajectory measurement.
+- [Data and reproducibility guide](docs/DATA_AND_REPRODUCIBILITY.md): official data sources, installation, environments, tests, and checkpoint loading.
 
-Neural-network checkpoints contain public `state_dict` tensors rather than machine-specific trainer state. File sizes and SHA-256 hashes are listed in [`results/manifests/model_files.csv`](results/manifests/model_files.csv). Binary model artifacts are configured for Git LFS.
-
-## Repository guide
+## Repository orientation and reproduction
 
 ```text
-.
-|-- docs/
-|   |-- models/       # Static, full Dynamic, and parameter-matched Dynamic protocols
-|   |-- methods/      # Brain-defined GPFA design and result-blind locked protocol
-|   \-- results/      # Reliability, model comparison, and Q1-Q6 reports
-|-- experiments/
-|   |-- 01_baselines/           # Static and full Dynamic training/evaluation
-|   |-- 02_gpfa_reliability/    # GPFA selection, reliability, nulls, sensitivity
-|   |-- 03_parameter_matching/  # Reduced Dynamic audit, training, evaluation
-|   \-- 04_model_comparison/    # Response, RSA, CKA, GPFA, controls, Q1-Q6
-|-- models/          # Released trained weights and frozen GPFA objects
-\-- results/         # Compact result tables and artifact manifests
+docs/          scientific documentation and detailed reports
+experiments/   phase-specific code, configurations, commands, and outputs
+models/        released encoding-model weights and frozen GPFA objects
+results/       figures, compact result tables, and artifact manifests
 ```
 
-Phase-level introductions:
-
-1. [Phase 1: trustworthy Static and Dynamic baselines](experiments/01_baselines/README.md)
-2. [Phase 2: brain-defined GPFA reliability](experiments/02_gpfa_reliability/README.md)
-3. [Phase 3: Dynamic-Static parameter matching](experiments/03_parameter_matching/README.md)
-4. [Phase 4: model comparison beyond response correlation](experiments/04_model_comparison/README.md)
-
-Recommended reading order:
-
-1. Research logic: [design rationale](docs/DESIGN_RATIONALE.md).
-2. Current coverage: [experiment matrix](docs/EXPERIMENT_MATRIX.md).
-3. Complete implementation: [methods](docs/METHODS.md).
-4. Model protocols: [Static](docs/models/STATIC_MODEL.md), [full Dynamic](docs/models/DYNAMIC_MODEL.md), and [parameter-matched Dynamic](docs/models/PARAMETER_MATCHED_DYNAMIC.md).
-5. Method validation: [brain-defined GPFA](docs/methods/BRAIN_DEFINED_GPFA.md), [locked protocol](docs/methods/GPFA_PROTOCOL_LOCKED.md), and [reliability results](docs/results/GPFA_RELIABILITY_RESULTS.md).
-6. Main evidence: [model-comparison results](docs/results/MODEL_COMPARISON_RESULTS.md) and [direct Q1-Q6 answers](docs/results/Q1_Q6_ANSWERS.md).
-
-## Reproducing the analysis
-
-The repository preserves source code, phase-specific configurations, training records, compact output tables, trained model weights, and frozen GPFA objects. Large raw data and full prediction tensors are intentionally excluded.
-
-1. Install Git LFS before cloning or pulling model files.
-2. Obtain Dynamic Sensorium 2023 through its official distribution and place it under `data/sensorium_all_2023/`.
-3. Use Python 3.11 for the complete pipeline. Each experiment is an installable package with its own `pyproject.toml` and locked configuration.
-4. Run the phases in numerical order. The README inside each phase lists its commands and prerequisites; later phases fail closed if an expected checkpoint, prediction tensor, data split, or frozen GPFA artifact is missing.
-
-The public tree has passed **19 contract and analysis tests** across the four experiment packages. Existing compact results can be inspected without downloading the dataset, beginning with [`results/tables/04_model_comparison/q1_q6_answers.json`](results/tables/04_model_comparison/q1_q6_answers.json).
-
-The complete setup instructions, official download links, session IDs, expected data tree, hardware requirements, minimal audit commands, and checkpoint-loading example are provided in the [Data and Reproducibility Guide](docs/DATA_AND_REPRODUCIBILITY.md).
+Raw Sensorium data are not redistributed. Obtain the official Dynamic Sensorium 2023 data, install Git LFS for the released model artifacts, and follow the [Data and Reproducibility Guide](docs/DATA_AND_REPRODUCIBILITY.md). Each experimental phase also provides its own operational README.
 
 ## License, citation, and contact
 
-Original project code and documentation are released under the [MIT License](LICENSE). Raw Sensorium data are not included and remain subject to the official provider's terms. Sensorium and `neuralpredictors` attribution, pinned upstream revisions, and license boundaries are documented in [Third-Party Notices](THIRD_PARTY_NOTICES.md).
+Original project code and documentation are released under the [MIT License](LICENSE). Raw Sensorium data remain subject to the official provider's terms; upstream attribution and license boundaries are recorded in [Third-Party Notices](THIRD_PARTY_NOTICES.md).
 
-Use [`CITATION.cff`](CITATION.cff) to cite the repository, and cite the Dynamic Sensorium dataset papers separately. The primary author is [Xiaotian Zhu](AUTHORS.md), and reproducibility questions can be submitted through [GitHub Issues](https://github.com/124585083/neural-trajectory-evaluation/issues).
-
-## Scope
-
-This is a proof-of-concept evaluation study, not a claim that GPFA trajectories are the definitive representation of cortical computation or that the selected Dynamic architecture is a cortical mechanism. Q1 uses five sessions, but the deeper output-space RSA/CKA, GPFA, response-matching, and ablation analyses currently use one session, 512 neurons, and six repeated movie conditions. Multi-session trajectory evaluation and multi-seed encoding-model replication remain necessary before making a broad biological claim.
-
-The intended contribution is narrower: to test whether neural-trajectory evaluation provides useful information *in addition to* response accuracy and output-space population-response geometry when assessing temporally structured encoding models.
+Use [`CITATION.cff`](CITATION.cff) to cite this repository and cite the Dynamic Sensorium dataset separately. The primary author is [Xiaotian Zhu](AUTHORS.md); reproducibility questions may be submitted through [GitHub Issues](https://github.com/124585083/neural-trajectory-evaluation/issues).
 
 ## References
 
 1. Wang et al. (2024). [Retrospective for the Dynamic Sensorium Competition for predicting large-scale mouse primary visual cortex activity from videos](https://proceedings.neurips.cc/paper_files/paper/2024/hash/d758d7c0a88d741c8ca4637579c9df87-Abstract-Datasets_and_Benchmarks_Track.html). *NeurIPS 2024 Datasets and Benchmarks Track*.
 2. Willeke et al. (2023). [Retrospective on the SENSORIUM 2022 competition](https://proceedings.mlr.press/v220/willeke23a.html). *Proceedings of Machine Learning Research, 220*.
-3. Yu et al. (2009). [Gaussian-process factor analysis for low-dimensional single-trial analysis of neural population activity](https://doi.org/10.1152/jn.90941.2008). *Journal of Neurophysiology, 102*(1), 614-635.
-4. Kriegeskorte, Mur, and Bandettini (2008). [Representational similarity analysis - connecting the branches of systems neuroscience](https://doi.org/10.3389/neuro.06.004.2008). *Frontiers in Systems Neuroscience, 2*.
-5. Kornblith et al. (2019). [Similarity of Neural Network Representations Revisited](https://proceedings.mlr.press/v97/kornblith19a.html). *Proceedings of Machine Learning Research, 97*, 3519-3529.
+3. Yu et al. (2009). [Gaussian-process factor analysis for low-dimensional single-trial analysis of neural population activity](https://doi.org/10.1152/jn.90941.2008). *Journal of Neurophysiology, 102*(1), 614–635.
+4. Kriegeskorte, Mur, and Bandettini (2008). [Representational similarity analysis—connecting the branches of systems neuroscience](https://doi.org/10.3389/neuro.06.004.2008). *Frontiers in Systems Neuroscience, 2*.
+5. Kornblith et al. (2019). [Similarity of Neural Network Representations Revisited](https://proceedings.mlr.press/v97/kornblith19a.html). *Proceedings of Machine Learning Research, 97*, 3519–3529.

@@ -1,61 +1,86 @@
-# Phase 2 — Validating a brain-defined GPFA trajectory assay
+# Phase 2 — GPFA reliability
 
-**Research question:** Are GPFA trajectory metrics reliable and sensitive to genuine temporal organization in repeated neural population responses before they are used to compare encoding models?
+This phase develops and validates a neural-data-defined GPFA trajectory assay using recorded neural responses before the assay is used for Static–Dynamic model comparison.
 
-## Why this phase exists
+## Purpose
 
-A low-dimensional trajectory can look smooth and interpretable even when it is unstable, stimulus-insensitive, or unable to distinguish temporal order. Phase 2 therefore validates the measurement assay using recorded neural responses alone. Static and Dynamic model predictions are deliberately excluded so that neither model can influence the latent space, its dimensionality, or the choice of trajectory metrics.
+Phase 2 asks whether repeated presentations of the same natural movie yield reproducible neural-population trajectories in a GPFA space fitted only from training neural responses. Static and Dynamic predictions do not define or modify this coordinate system. Reliability is evaluated only after model selection, preprocessing, and fitting are frozen. Structured nulls test dependence on movie identity, temporal alignment and order, and coordinated population timing before the assay design is applied to model comparison.
 
-## Experimental design
+## Inputs and prerequisites
 
-The proof-of-concept assay uses one Dynamic Sensorium 2023 session, a deterministic 512-neuron subset, and the six repeated oracle movies. GPFA selection uses only the official neural training tier: 278 trials for fitting and 70 for calibration, followed by a final refit on all 348 training trials. Oracle responses are used only after the model is frozen.
+- Pilot session: `dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20`.
+- All 348 official train-tier neural-response trials for fitting, calibration, and final refitting.
+- The 58 official oracle trials, used only for post-freeze repeated-movie reliability.
+- The deterministic seed-42 neuron ordering and first 512 selected units.
+- Python and dependencies specified in [`pyproject.toml`](pyproject.toml), with operational choices in [`configs/pilot.yaml`](configs/pilot.yaml).
 
-Latent dimensions 4, 8, 12, and 16 are compared by held-out calibration marginal negative log likelihood. A one-standard-error rule selects the smallest eligible model, `q = 4`; oracle reliability and null performance do not enter this choice. The primary GPFA observes 63 samples per trial at 7.5 Hz-equivalent resolution and queries the continuous posterior at all 250 official 30 Hz timestamps.
+Run commands from this directory after `python -m pip install -e .`. See [Data and Reproducibility](../../docs/DATA_AND_REPRODUCIBILITY.md) for dataset installation and environment setup.
 
-Reliability is evaluated with 200 balanced, disjoint split halves of repeated neural responses. Matched nulls disrupt movie identity, absolute timing, temporal direction, local order, or coordinated population timing while preserving other aspects of the data where possible.
+## Analysis lock
 
-## Current result
+The executable workflow loads its fixed choices from [`configs/pilot.yaml`](configs/pilot.yaml). The result-blind specification is recorded in [`../../docs/supplementary/protocols/GPFA_PROTOCOL_LOCKED.md`](../../docs/supplementary/protocols/GPFA_PROTOCOL_LOCKED.md) and was **internally locked before reliability-result inspection**; it was not externally preregistered. The CLI does not generate or parse that Markdown record.
 
-The assay passes as a **one-session method-development validation**.
+## Formal workflow
 
-| Metric | Neural split-half mean | Interpretation |
-|---|---:|---|
-| Position correlation | 0.8566 | Reliable time-aligned population state |
-| Normalized position RMSE | 0.5428 | Reliable position error after scale normalization |
-| Velocity-direction cosine | 0.6627 | Reliable local direction |
-| Speed-profile correlation | 0.7434 | Reliable timing of fast and slow trajectory segments |
-| Acceleration-direction cosine | 0.6163 | Informative but higher-variance local curvature diagnostic |
+The installed entry point is `trajectory-reliability`; the equivalent module commands below show the formal order.
 
-Position, normalized error, velocity direction, speed profile, and acceleration direction outperform condition-shuffle, circular-shift, time-reversal, block-shuffle, and independent-neuron-shift nulls in every one of the 200 paired splits. Path length is reproducible but fails important circular-shift and time-reversal controls, so it is retained only as a descriptive quantity rather than a primary temporal-alignment metric.
-
-## Interpretation and limits
-
-This phase establishes that the selected metrics can recover repeatable, stimulus-locked temporal structure from real neural activity. It does not rank Static and Dynamic models and does not establish a five-session biological conclusion.
-
-The neural signal was acquired at approximately 8 Hz and represented on the official 30 Hz grid. Velocity and especially acceleration at 30 Hz describe derivatives of the continuous GPFA posterior, not independent 30 Hz neural measurements. These metrics are therefore interpreted conservatively and checked against observation-grid, neuron-count, latent-dimension, train-fraction, seed, and split-count sensitivity analyses.
-
-## Reproducible assets
-
-- Locked configuration: [`configs/pilot.yaml`](configs/pilot.yaml)
-- Frozen GPFA and preprocessing: [`../../models/gpfa_reliability/`](../../models/gpfa_reliability/)
-- Compact results and sensitivity tables: [`../../results/tables/02_gpfa_reliability/`](../../results/tables/02_gpfa_reliability/)
-- Full result report: [GPFA Reliability Results](../../docs/results/GPFA_RELIABILITY_RESULTS.md)
-- Method specification: [Methods](../../docs/METHODS.md) and [locked GPFA protocol](../../docs/methods/GPFA_PROTOCOL_LOCKED.md)
-
-## Minimal reproduction entry points
-
-Run from this phase directory:
+### Inspect and smoke-test
 
 ```text
 python -m trajectory_reliability.cli inspect --config configs/pilot.yaml
 python -m trajectory_reliability.cli smoke --config configs/pilot.yaml
+```
+
+Run the smoke test before the primary analysis because it writes reduced test artifacts to the configured output directory.
+
+### Fit, select, refit, and evaluate reliability
+
+```text
 python -m trajectory_reliability.cli run --config configs/pilot.yaml
+```
+
+This command applies the locked 278/70 fit/calibration split, selects GPFA hyperparameters from calibration likelihood, refits on all 348 training trials, freezes the assay, and then evaluates oracle split-half reliability and matched nulls.
+
+### Sensitivity and auxiliary diagnostics
+
+Run these after the primary command because the saturation workflows load its frozen GPFA and preprocessing artifacts:
+
+```text
 python -m trajectory_reliability.cli saturation --config configs/pilot.yaml
 python -m trajectory_reliability.cli split-saturation --config configs/pilot.yaml
 python -m trajectory_reliability.cli condition-prior --config configs/pilot.yaml
 ```
 
-The phase reads the authorized Sensorium dataset in place and does not modify the data or Phase 1 checkpoints.
+## What is frozen in Phase 2
 
-**Previous phase:** [Phase 1](../01_baselines/README.md) establishes the encoding baselines.  
-**Next phase:** [Phase 3](../03_parameter_matching/README.md) constructs a Dynamic model whose parameter count is matched to the Static model.
+| Element | Frozen choice |
+|---|---|
+| Session and neurons | Pilot session; deterministic seed-42 order; first 512 units |
+| Temporal support | Original frames 50–299 |
+| Selection/refit trials | 278 fit, 70 calibration; refit on all 348 train trials |
+| Latent dimensions | Candidates `4, 8, 12, 16`; released artifact uses calibration-selected `q = 4` |
+| Temporal grids | Every fourth frame: 63 observations at approximately 7.5 Hz; posterior queried at all 250 timestamps |
+| Selection rule | Smallest dimension within one standard error of the best calibration marginal NLL |
+| Reliability | Seed 42; 200 balanced split-half draws after freezing |
+| Null families | Movie-condition, circular-shift, frame/block-order, reversal, and independent-neuron timing nulls |
+
+## Outputs
+
+- **Frozen GPFA and preprocessing:** generated under `outputs/pilot/`; released as [`../../models/gpfa_reliability/gpfa.pkl`](../../models/gpfa_reliability/gpfa.pkl) and [`../../models/gpfa_reliability/preprocessing.npz`](../../models/gpfa_reliability/preprocessing.npz).
+- **Selection summary:** [`../../results/tables/02_gpfa_reliability/model_selection.csv`](../../results/tables/02_gpfa_reliability/model_selection.csv).
+- **Reliability and null outputs:** observed split halves, matched-null distributions, data/run audits, and the compact summary in [`../../results/tables/02_gpfa_reliability/`](../../results/tables/02_gpfa_reliability/).
+- **Sensitivity outputs:** saturation and split-count artifacts in [`../../results/tables/02_gpfa_reliability/saturation/`](../../results/tables/02_gpfa_reliability/saturation/), plus the train-tier prior diagnostic in [`../../results/tables/02_gpfa_reliability/behavior_conditioned_prior.json`](../../results/tables/02_gpfa_reliability/behavior_conditioned_prior.json).
+- **Tests:** focused data, GPFA, selection, and reliability contracts are in [`tests/`](tests/).
+
+## What Phase 2 establishes operationally
+
+- A neural-data-defined GPFA and its preprocessing can be fitted without encoding-model predictions.
+- Balanced repeat reliability and structured-null checks can be applied only after the assay is frozen.
+- Phase 4 applies the same validated assay design to a separately fitted and revalidated 174-trial comparison-subset GPFA; the Phase 2 `gpfa.pkl` is not the final model-comparison fit.
+
+## Documentation
+
+- [GPFA Validation](../../docs/GPFA_VALIDATION.md) — reliability evidence, sensitivity, negative findings, and the relationship between the two GPFA fits
+- [Methods](../../docs/METHODS.md) — fitting, inference, temporal sampling, metrics, and null procedures
+- [Design Rationale](../../docs/DESIGN_RATIONALE.md) — why measurement validation precedes model comparison
+- [Data and Reproducibility](../../docs/DATA_AND_REPRODUCIBILITY.md) — data and environment setup

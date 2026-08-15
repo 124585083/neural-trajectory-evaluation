@@ -354,7 +354,7 @@ Primary architectural differences:
 | Total parameters | 2,814,015 | 5,707,743 |
 | Oracle correlation | 0.1644077748 | 0.1966732591 |
 
-The two models can therefore be compared at both the response level and the brain-based trajectory level, but the difference cannot be attributed entirely to temporal modeling because model capacity also differs and must be reported as a limitation.
+The two models can therefore be compared at both the response level and the brain-based trajectory level, but their difference cannot be attributed entirely to temporal modeling. They also differ in core architecture, channel structure, convolutional operators, core parameterization, effective computation, optimization geometry, and inductive bias; the full Dynamic model additionally has a larger total parameter count.
 
 ## 8. Reproducibility files
 

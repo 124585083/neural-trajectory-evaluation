@@ -24,5 +24,5 @@
     "block_shuffle_16"
   ],
   "minimum_paired_superiority_across_profiles": 1.0,
-  "maximum_paired_p_value_across_profiles": 0.009900990099009901
+  "maximum_split_null_failure_rate_across_profiles": 0.0
 }

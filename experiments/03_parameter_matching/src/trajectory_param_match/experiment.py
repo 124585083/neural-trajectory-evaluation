@@ -374,7 +374,7 @@ def _limited_tiers(dataloaders: dict[str, dict[str, Any]]) -> dict[str, dict[str
 
 def smoke_test(config: dict[str, Any]) -> dict[str, Any]:
     if not torch.cuda.is_available():
-        raise RuntimeError("CUDA is required for the parameter-matched smoke test")
+        raise RuntimeError("CUDA is required for the total-parameter-matched smoke test")
     audit_all(config)
     set_random_seed(int(config["project"]["seed"]))
     dataloaders = make_official_loaders(config, cuda=True)
@@ -601,7 +601,9 @@ def evaluate_best(config: dict[str, Any]) -> dict[str, Any]:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Parameter-matched Dynamic Sensorium experiment")
+    parser = argparse.ArgumentParser(
+        description="Total-parameter-matched Dynamic Sensorium experiment"
+    )
     parser.add_argument("--config", default=str(DEFAULT_CONFIG))
     parser.add_argument("command", choices=("audit-config", "audit-data", "audit", "smoke", "train", "evaluate"))
     args = parser.parse_args()

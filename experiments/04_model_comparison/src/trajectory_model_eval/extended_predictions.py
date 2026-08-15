@@ -22,16 +22,16 @@ def _add_sources(config: dict[str, Any]) -> None:
 
 
 def _dynamic_validation_by_epoch(config: dict[str, Any]) -> dict[int, float]:
-    matching = config["response_matching"]
+    matching = config["validation_matching"]
     return {int(matching["dynamic_epoch"]): float(matching["dynamic_validation"])}
 
 
-def _select_response_matched_epoch(config: dict[str, Any]) -> dict[str, Any]:
-    matching = config["response_matching"]
+def _select_validation_matched_epoch(config: dict[str, Any]) -> dict[str, Any]:
+    matching = config["validation_matching"]
     target = float(matching["static_validation"])
     candidates = _dynamic_validation_by_epoch(config)
     epoch, score = min(candidates.items(), key=lambda item: (abs(item[1] - target), item[0]))
-    checkpoint = resolve(config, config["references"]["response_matched_checkpoint"])
+    checkpoint = resolve(config, config["references"]["validation_matched_checkpoint"])
     if not checkpoint.is_file():
         raise FileNotFoundError(checkpoint)
     return {
@@ -91,14 +91,14 @@ def generate_extended_predictions(config: dict[str, Any]) -> dict[str, Any]:
     loader = loaders["oracle"][session]
     model = build_official_model(dynamic_config, loaders)
 
-    selection = _select_response_matched_epoch(config)
-    matched_state = torch.load(selection["checkpoint"], map_location="cpu", weights_only=True)
-    model.load_state_dict(matched_state, strict=True)
-    matched, neural, indices = _predict_model(
+    selection = _select_validation_matched_epoch(config)
+    validation_matched_state = torch.load(selection["checkpoint"], map_location="cpu", weights_only=True)
+    model.load_state_dict(validation_matched_state, strict=True)
+    validation_matched, neural, indices = _predict_model(
         model, loader, session, neuron_indices, frame_start, frame_stop
     )
     if not np.array_equal(indices, base["dataset_indices"]) or not np.allclose(neural, base["neural"], rtol=0, atol=0):
-        raise AssertionError("response-matched checkpoint prediction is not aligned to the frozen oracle tensor")
+        raise AssertionError("validation-matched checkpoint prediction is not aligned to the frozen oracle tensor")
 
     best_payload = torch.load(
         resolve(config, config["references"]["dynamic_checkpoint"]),
@@ -127,19 +127,19 @@ def generate_extended_predictions(config: dict[str, Any]) -> dict[str, Any]:
 
     np.savez_compressed(
         out / "extended_predictions.npz",
-        response_matched_dynamic=matched.astype(np.float32),
+        validation_matched_dynamic=validation_matched.astype(np.float32),
         **ablations,
     )
     summary = {
         "status": "extended_predictions_complete",
-        "response_matched_checkpoint": selection,
+        "validation_matched_checkpoint": selection,
         "temporal_ablation": {
             "definition": "multiply every off-center temporal-convolution weight by retention; preserve center slice and biases",
             "retentions": list(retentions),
             "changed_weight_tensors": changed_names,
             "strongest_level": "retention=0 removes off-center temporal-kernel weights but preserves spatial core/readout/shifter",
         },
-        "shape": list(matched.shape),
+        "shape": list(validation_matched.shape),
     }
     json_dump(out / "extended_prediction_summary.json", summary)
     return summary

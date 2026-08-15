@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "trajectory-evaluation-official-baselines"
 version = "0.1.0"
-description = "Full official Dynamic and Static Sensorium baseline reproduction (Phase 1 only)."
+description = "Five-session official Dynamic and frame-wise Static-on-Dynamic baselines (Phase 1 only)."
 requires-python = ">=3.11,<3.12"
 dependencies = [
   "numpy==1.26.4",
@@ -24,7 +24,8 @@ dependencies = [
 ]
 
 [project.scripts]
-trajectory-phase1 = "trajectory_eval.cli:main"
+trajectory-official-dynamic = "trajectory_eval.official_dynamic:main"
+trajectory-static-dynamic = "trajectory_eval.static_dynamic:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -33,3 +34,6 @@ where = ["src"]
 testpaths = ["tests"]
 addopts = "-q"
 pythonpath = ["src"]
+markers = [
+  "data: requires the five authorized Dynamic Sensorium sessions",
+]

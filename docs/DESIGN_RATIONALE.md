@@ -1,202 +1,189 @@
 # Design Rationale
 
-## Central question
+The project is not designed merely to ask whether a Dynamic model predicts neural responses better. It asks whether different evaluation levels reveal different aspects of the Dynamic–Static difference, and whether trajectory-based evaluation provides interpretable temporal information beyond standard response and population-similarity summaries.
 
-This project asks whether trajectory-based neural evaluation reveals aspects of temporal encoding that are not fully summarized by point-wise response correlation or output-space population-response similarity.
+## 1. The inference problem: predictive gain is not the same as dynamic explanation
 
-The central hypothesis is:
+A gain in neuron-wise response correlation establishes better prediction under that metric, but it does not identify which aspect of the population response improved. In particular, response correlation alone does not show whether a model visits the correct population states at the correct times, reproduces local direction through state space, or preserves temporally organized population geometry.
 
-> If a Dynamic encoding model improves not only the accuracy of individual neural responses but also the temporal organization of population activity, then a reliable trajectory metric should distinguish Dynamic from Static models after controlling model capacity and response quality, and it should degrade systematically when learned temporal history is removed.
+The study therefore separates three evaluation levels:
 
-The purpose of the design is not to make GPFA replace response correlation, RSA, or CKA. It is to test whether a brain-defined trajectory analysis contributes additional, interpretable evidence about temporal computation. In this project, RSA and CKA operate on predicted neural population responses, not hidden network activations.
+1. **Response prediction:** whether individual recorded responses are predicted accurately.
+2. **Output-space population-response similarity:** whether predicted and recorded population patterns share representational structure.
+3. **Neural-population trajectory agreement:** whether population states occupy and move through a shared neural coordinate system in corresponding ways over time.
 
-## Why Dynamic Sensorium?
+Dynamic Sensorium is useful for this separation because continuous natural movies make temporal order meaningful, while repeated presentations provide an empirical basis for testing whether the proposed trajectory measurement is reproducible before it is applied to model predictions.
 
-### Continuous stimuli make temporal computation testable
+These levels address related but non-identical questions. A model can improve on more than one level, but agreement at one level should not be assumed to explain agreement at the others.
 
-Dynamic Sensorium 2023 contains natural movies rather than isolated static images. Each prediction therefore belongs to a continuous sequence with meaningful temporal order. This is necessary for asking whether a model reproduces the evolution of a neural population state, including its position, direction, and speed in a shared latent space.
+## 2. Why response correlation, RSA/CKA, and trajectory metrics are all retained
 
-A static-image benchmark can test spatial feature selectivity and response prediction, but it cannot cleanly distinguish a model that uses temporal context from one that evaluates each frame independently. Dynamic Sensorium makes that distinction explicit: the Static model sees each frame independently, whereas the Dynamic model learns spatiotemporal filters across neighboring frames.
+### Response correlation
 
-### It supports a controlled Static-Dynamic comparison
+Response correlation is the basic prediction-performance gate. A trajectory score should not substitute for showing that a model predicts recorded neural responses. If basic predictive agreement were absent, a favorable low-dimensional trajectory comparison would be difficult to interpret as successful neural encoding.
 
-Both models can be trained and evaluated on the same:
+### Output-space RSA and CKA
 
-- five recording sessions;
-- movie frames and behavioral covariates;
-- train and oracle trial identities;
-- neurons and neuron order;
-- response normalization;
-- Gaussian readout family and pupil shifter;
-- loss, optimizer, batch construction, and evaluation interval.
+RSA and CKA test whether population-response geometry already summarizes the model difference. They are applied to predicted and recorded neural population responses, not to hidden network features.
 
-This common data contract is more important than comparing scores reported on unrelated static and dynamic benchmarks. A native Sensorium 2022 Static score is not an appropriate numerical control because Sensorium 2022 uses static images and a different task. The project therefore retrains the official Static Sensorium architecture on Dynamic Sensorium 2023 and labels it explicitly as **Static-on-Dynamic**.
+This is deliberate: the project compares evaluation methods for neural-response predictions rather than attempting to map an arbitrarily selected internal network layer onto cortex. Output-space analysis holds the evaluated object fixed across response, RSA/CKA, and trajectory metrics and avoids introducing hidden-layer selection and correspondence choices.
 
-### Repeated movies allow the trajectory assay to be validated first
+### Trajectory evaluation
 
-The oracle tier contains repeated presentations of six natural movies in the primary method-development session. Independent repeat halves can be averaged and compared without fitting on the evaluation responses. This enables split-half reliability, matched temporal nulls, and sensitivity analyses before the trajectory metric is used to judge an encoding model.
+Trajectory metrics add explicitly time-resolved questions: where the population state is, how it moves, whether its local direction is correct, when it speeds up or slows down, and how its direction changes locally.
 
-That order matters. A metric should not be accepted merely because it favors the preferred model. It must first show that it recovers reproducible neural structure and rejects perturbations that destroy condition identity, temporal order, timing, or population synchrony.
+The intended contribution is complementarity. Trajectory evaluation is not assumed to be intrinsically superior to RSA/CKA or response correlation in every setting; the question is whether it supplies useful temporal diagnostics that those summaries do not fully provide in the present comparison.
 
-### Why this dataset is not sufficient by itself
+## 3. Why trajectory measurement is defined by neural data
 
-Dynamic Sensorium is a suitable proof-of-concept test bed, not universal evidence about cortical dynamics. The deeper GPFA comparison currently uses one session, a deterministic 512-neuron subset, and six repeated movies. Calcium activity was acquired at approximately 8 Hz and represented on a 30 Hz grid, which limits the temporal bandwidth that can be interpreted. The conclusions must therefore be extended across sessions, neuron subsets, model seeds, and potentially other dynamic datasets before becoming a broad biological claim.
+Static and Dynamic should not each receive a separately optimized latent space. Independent manifold fits could differ by arbitrary rotations, scales, axis choices, noise models, and temporal priors. Post-hoc alignment could then reward flexibility in the comparison rather than fidelity to the recorded neural population.
 
-## Why parameter matching?
-
-### The confound
-
-The full official Dynamic model has more trainable parameters than the Static-on-Dynamic model. If it performs better, the difference could reflect temporal computation, greater capacity, a wider feature representation, or some combination of these factors. A comparison between the full models is ecologically useful as a benchmark, but it is not a clean mechanistic control.
-
-### The controlled comparison
-
-The reduced Dynamic model applies one predeclared width multiplier to every Dynamic core layer while preserving the original architecture's depth, temporal kernels, spatial kernels, temporal receptive field, nonlinearities, normalization, regularization, readout, shifter, and output nonlinearity.
-
-| Model | Total parameters | Temporal computation |
-|---|---:|---|
-| Static-on-Dynamic | 2,814,015 | None in the core; frames are evaluated independently |
-| Parameter-matched Dynamic | 2,862,063 | Learned Factorized3D temporal convolutions |
-
-The total difference is 48,048 parameters, or 1.707%. The two models have exactly the same five-session readout parameter count. Parameter matching therefore reduces the plausibility of the simple explanation that Dynamic wins only because it has more parameters.
-
-### What parameter matching does and does not establish
-
-Parameter matching controls total parameter count; it does not make the architectures identical in every other measure of complexity. A 2D frame-wise core and a 3D spatiotemporal core can differ in optimization geometry, inductive bias, effective computation, and feature reuse even when their parameter counts are close.
-
-The appropriate interpretation is consequently:
-
-> A Dynamic advantage after parameter matching is evidence that the effect is not explained by total parameter count alone.
-
-It is not proof that every remaining difference is caused exclusively by one temporal kernel, one lag, or a uniquely biological mechanism. Graded temporal ablation is added to test the temporal component more directly.
-
-## Why output-space RSA and CKA?
-
-The present RSA and CKA analyses compare the model's predicted neural responses with recorded neural responses:
+The project instead uses one **neural-data-defined GPFA** and fixes the direction of reference:
 
 ```text
-predicted neural population response Y_hat(t)
-    versus
-recorded neural population response Y(t)
+recorded training neural responses
+    → define one shared coordinate system
+
+recorded oracle responses / Static predictions / Dynamic predictions
+    → enter that same frozen coordinate system
 ```
 
-They do not compare a hidden model representation `H(t)` with the brain. The more precise description is therefore **output-space RSA/CKA** or **population-response representation similarity**, rather than hidden-layer representational analysis.
+The coordinate system is therefore determined by the biological target. Neither encoding model can refit, rotate, scale, or select axes to improve its own trajectory agreement.
 
-This choice keeps the comparison target fixed. Response correlation, RSA/CKA, and GPFA trajectory metrics all receive the same predicted neural-response tensor and ask different questions about it:
+GPFA is used because it combines a shared low-dimensional observation model with an explicit smooth temporal prior, allowing position and local temporal derivatives to be evaluated in one probabilistic coordinate system. This is a pragmatic measurement choice, not a claim that GPFA identifies the complete or uniquely correct cortical state space. The fitting and posterior-inference procedure is defined in [Methods](METHODS.md).
 
-- response correlation tests neuron-wise predictive accuracy;
-- output-space RSA/CKA tests the geometry of predicted population-response patterns;
-- frozen-GPFA metrics test the temporal evolution of those population responses in a brain-defined latent space.
+## 4. Why GPFA reliability is established before model comparison
 
-This shared output space makes the incremental-information question cleaner because differences between metrics cannot be attributed to choosing different hidden layers or fitting a mapping from hidden units to neurons. Hidden-layer RSA/CKA remains a valid extension, but it would answer a different question about internal network computation and would introduce layer-selection and correspondence choices outside the primary controlled comparison.
+Introducing a trajectory assay only after observing a favorable model result would create a circularity: a reader could not distinguish a genuinely reliable neural measurement from an analysis chosen because it ranks one model highly.
 
-## Why is GPFA fitted only to brain data?
+The project therefore separates two questions:
 
-### The comparison space must be independent of the models being judged
+- **Measurement question:** do repeated presentations of the same movie produce reproducible neural trajectories under the proposed assay?
+- **Model question:** after that assay is fixed, which encoding prediction better reproduces those trajectories?
 
-If GPFA were fitted separately to Static predictions and Dynamic predictions, each model would receive its own latent axes, noise model, scale, and temporal prior. A subsequent alignment could make both trajectories look favorable while obscuring whether either model actually occupies the low-dimensional population structure found in the recorded neural data.
+The reliability gate precedes the Static–Dynamic trajectory comparison. Its protocol was internally locked before result inspection; it was not externally preregistered.
 
-This project instead uses a **brain-defined** coordinate system:
+High raw split-half similarity is not sufficient by itself. Smoothness, autocorrelation, or repeated marginal statistics could produce apparently stable trajectories without preserving the information of interest. Structured nulls therefore test whether the assay depends on stimulus identity, absolute timing, temporal direction, local order, and coordinated population structure.
 
-1. GPFA preprocessing and parameters are estimated only from real neural responses in the official training tier.
-2. Latent dimension is selected from neural training/calibration trials by marginal negative log likelihood and a one-standard-error rule; initialization is selected by calibration marginal negative log likelihood. Oracle reliability and encoding-model performance do not enter either selection.
-3. The selected GPFA is frozen before model evaluation.
-4. Brain responses, Static predictions, and Dynamic predictions use the same neuron order, train-only scaling, observation model, temporal prior, and latent axes.
-5. No model-specific rotation, scaling, Procrustes transform, or latent alignment is allowed.
+If the proposed measurement cannot separate recorded repeat halves from these nulls, it should not serve as a primary basis for model comparison. The validation evidence and measurement restrictions are reported in [GPFA Validation](GPFA_VALIDATION.md).
 
-The resulting score asks whether a prediction follows a trajectory in coordinates defined independently by recorded population activity. It does not ask how well the prediction can define and fit its own latent space.
+## 5. Why condition-average trajectories are primary
 
-### Why GPFA rather than frame-wise dimensionality reduction?
+Repeated-movie data allow trajectory reliability to be measured rather than assumed. Validation shows that trajectories formed after averaging independent repeat groups are substantially more reliable than single-repeat trajectories.
 
-GPFA combines a low-dimensional observation model with an explicit smooth temporal prior. This makes it possible to estimate continuous latent trajectories and compare position, local direction, speed, and acceleration. Static and Dynamic predictions are treated as new observations `y(t)` and their latent trajectories are obtained using the same frozen GPFA posterior inference with fixed `C`, `d`, `R`, and temporal priors. This is not a simple `C`-transpose or pseudoinverse projection. A frame-wise method such as PCA could summarize population variance, but it would not encode the same probabilistic temporal structure or distinguish measurement noise from a smooth latent process in the same way.
+The primary model comparison therefore asks whether an encoding model reproduces the **repeatable, stimulus-linked component** of population dynamics. It does not claim to reconstruct every trial-specific fluctuation.
 
-Velocity and especially acceleration on the 30 Hz query grid are derivatives of a continuous GPFA posterior inferred from 7.5 Hz-equivalent neural observations. They are not derivatives of independent 30 Hz neural measurements. High-order derivative results are therefore interpreted conservatively and checked against observation-grid sensitivity.
+Condition averaging narrows the interpretation appropriately: the trajectory result concerns reproducible condition-linked population organization. Single-trial response prediction remains a separate and necessary part of the evaluation. The empirical reliability distinction is documented in [GPFA Validation](GPFA_VALIDATION.md).
 
-The choice is nevertheless pragmatic rather than ontological. The selected GPFA is a conservative summary of a reproducible shared neural subspace. It is not assumed to recover the complete neural state, the true biological dimensionality, or the unique dynamics of V1. This is why GPFA reliability, null separation, dimensionality sensitivity, neuron-count sensitivity, fit-seed sensitivity, and temporal-grid sensitivity are evaluated before model comparison.
+## 6. Why total-parameter matching is used, and what it controls
 
-## Why response matching?
+The full Dynamic baseline has substantially more trainable parameters than Static. A direct full-model comparison therefore mixes temporal architecture with a conspicuous whole-model size difference.
 
-### Response accuracy is an obvious alternative explanation
+The reduced control approximately matches **total trainable parameter count**, making the primary comparison less reducible to “larger complete model versus smaller complete model.” This removes one simple explanation without redefining the models as otherwise identical.
 
-If Dynamic has higher response correlation and higher trajectory agreement, trajectory performance may simply be a consequence of generally better predictions. A trajectory advantage under those conditions is informative, but it does not establish that the trajectory metric adds information beyond response quality.
+The control does not make the cores equivalent. Static is a four-layer framewise 2D architecture; Total-parameter-matched Dynamic is a three-stage Factorized3D architecture with explicit temporal convolutions. Their core parameter counts, convolutional operations, feature transformations, optimization geometry, inductive biases, and temporal access remain different.
 
-Response matching creates a more demanding diagnostic:
+The appropriate inferential scope is therefore:
 
-> When Static and Dynamic have nearly identical scalar response scores, can a trajectory metric still detect a difference in temporal organization?
+> A Dynamic architecture with explicit temporal convolutions is compared with a framewise Static architecture under approximately matched total trainable parameter counts.
 
-### Separation of selection and test repeats
+This is a complete-model architectural comparison, not a same-backbone, core-parameter-matched, or single-variable causal experiment. Any observed difference cannot be attributed solely to temporal history.
 
-In the primary response-matched stress test, repeated oracle trials are divided into disjoint selection and test halves. The selection half is used to choose a train-independent amplitude-noise level that brings the Dynamic scalar response correlation close to the Static score. Noise is scaled by each neuron's predicted Dynamic standard deviation so the perturbation is proportional to its dynamic range rather than imposing one absolute scale across heterogeneous neurons. The held-out half is not used to select that noise level. Both predictions are then evaluated on the held-out repeats with the frozen GPFA.
+## 7. Why multiple trajectory metrics are reported separately
 
-This test is designed to avoid circularly choosing a perturbation that maximizes a held-out trajectory difference. It also avoids claiming formal statistical equivalence: the response scores are **nearly identical after predefined matching**, not proven equivalent under every response statistic.
+Trajectory properties are not interchangeable:
 
-### What response matching does and does not show
+- **Position** asks whether the model occupies the corresponding latent state.
+- **Normalized position error** measures the magnitude of state mismatch relative to the recorded trajectory scale.
+- **Velocity direction** asks whether local motion points in the corresponding direction.
+- **Speed profile** asks whether fast and slow movement occurs at corresponding times.
+- **Acceleration direction** measures local changes in direction and curvature-related motion.
+- **Path length** summarizes total distance traveled.
 
-If trajectory differences remain after response matching, scalar response correlation is not a sufficient summary of the detected temporal difference. This is evidence for incremental sensitivity.
+Collapsing these quantities into one composite would obscure metric-specific successes and failures and would introduce arbitrary weights. They are therefore reported as a battery rather than as a single trajectory score.
 
-The stress test is not a new fair-training leaderboard. Adding amplitude noise deliberately changes one model's predictions, and it does not force output-space RSA, CKA, response variance, or every neuron-wise property to match. Its role is to test metric sufficiency, not to declare a universally superior model under artificial degradation. The validation-history response-matched checkpoint provides a complementary, naturally trained comparison, but the disjoint-repeat stress test is the cleaner control of the selected scalar response score.
+Path length illustrates why reliability and diagnostic value are distinct. Total traveled distance can be reproducible while remaining nearly insensitive to temporal shifts or reversal. It can describe trajectory magnitude without establishing correct temporal alignment or direction.
 
-## Why temporal ablation?
+Position is generally the most stable quantity. Speed and higher derivatives are more sensitive to latent dimensionality, temporal sampling, fit seed, and noise, so their exact magnitudes require greater caution. These measurement-specific restrictions are established in [GPFA Validation](GPFA_VALIDATION.md).
 
-Parameter matching controls capacity and response matching controls one performance summary, but neither directly manipulates temporal computation. The temporal-history ablation scales the off-center weights of the learned temporal kernels while keeping the center slices, spatial core, readout, shifter, and biases fixed.
+## 8. Why the response-matching stress test is included
 
-The five retention levels form a dose-response test:
+When one model has both higher scalar response correlation and higher trajectory agreement, the trajectory difference may simply reflect generally better prediction. The response-matching stress test asks a narrower question:
 
-```text
-1.00 -> 0.75 -> 0.50 -> 0.25 -> 0.00 temporal-history retention
-```
+> Can trajectory metrics remain sensitive when a major scalar response-correlation summary is made nearly the same?
 
-If trajectory evaluation is sensitive to learned temporal structure, direction- and order-sensitive scores should degrade as temporal history is removed. A graded curve is stronger evidence than a single intact-versus-ablated comparison because it tests whether the metric follows the severity of the temporal intervention.
+The test deliberately degrades the Dynamic output using a perturbation strength selected on one repeat half, then evaluates the comparison using held-out neural responses. Selection and testing are separated so the perturbation is not chosen to maximize a test-side trajectory difference.
 
-This ablation still does not localize the effect to a particular layer or lag. All three temporal-convolution layers are scaled together. It also lacks a magnitude-matched non-temporal damage control. A planned control will perturb spatial or center-slice weights by a matched parameter-space magnitude without selectively removing temporal history, allowing temporal-ablation degradation to be compared with generic network damage. Until that control is run, the dose-response result supports temporal sensitivity but cannot completely exclude the possibility that progressive weight damage contributes to the decline. Layer-specific and lag-specific ablations would be required for finer causal attribution.
+This is a **metric-sensitivity stress test**, not a newly trained model comparison. It does not match every neuron, response variance, RSA, CKA, or other property of the outputs, and no formal equivalence test is implied. Its purpose is to test whether the chosen scalar response summary is sufficient to explain the trajectory distinction. The procedure is specified in [Methods](METHODS.md), with findings in [Results](RESULTS.md) and the detailed evidence ledger.
 
-## What would falsify the central hypothesis?
+## 9. Why time reversal is an important counterexample
 
-The hypothesis is deliberately falsifiable. The following outcomes would count against its main claims in the tested setting.
+Some condition-averaged representational summaries operate on state sets or time-averaged patterns that do not uniquely encode order. Complete time reversal can preserve the visited population states, condition-level averages, and some representational summaries while reversing local direction, sequence, and phase.
 
-### 1. No Dynamic advantage after controlling capacity
+Time reversal therefore provides a controlled sufficiency test. If a conventional summary remains unchanged after reversal while an order-sensitive trajectory metric changes, that conventional summary is not sufficient to encode the temporal property destroyed by reversal.
 
-If the Dynamic trajectory advantage observed with the full model disappeared consistently after parameter matching, while response and output-space geometry metrics showed no remaining temporal-model effect, the original difference would be better explained by model capacity than by temporal computation.
+The inference is deliberately limited to **sufficiency failure for the tested metric formulation**. It does not establish mathematical independence, universal statistical independence, or the inability of every possible time-aware RSA/CKA construction to represent temporal information.
 
-### 2. No residual trajectory difference after response matching
+## 10. Why graded temporal-weight attenuation is used
 
-If response-matched Static and Dynamic predictions also produced matching GPFA position and direction-sensitive trajectory scores, then trajectory evaluation would not provide evidence beyond the matched response statistic for those models and data.
+An intact-versus-fully-ablated comparison would provide only one perturbation endpoint. Progressively attenuating learned off-center temporal weights instead tests whether trajectory quality varies systematically with the retained strength of learned temporal-history weighting.
 
-### 3. No dose-response relationship under temporal ablation
+A graded intervention is more informative about dose response than a single endpoint, but it does not isolate a unique cause. Increasing attenuation also increases the magnitude of perturbation to a trained network. The observed pattern is therefore interpreted as:
 
-If progressively removing learned temporal history left trajectory scores unchanged, improved them, or produced changes no more systematic than non-temporal control perturbations, the claim that these metrics are specifically sensitive to temporal computation would be undermined.
+> **Consistent with a graded temporal-history effect, but temporal specificity remains to be controlled.**
 
-### 4. Conventional metrics fully account for the trajectory results
+Without an independently magnitude-matched non-temporal perturbation, loss of temporal-history information cannot be uniquely separated from generic degradation caused by progressively stronger weight disruption. The current experiment is not described as clean causal isolation or as proof that temporal history alone causes the complete-model difference.
 
-If response correlation, time-aware RSA, and CKA predicted trajectory scores essentially perfectly across held-out perturbation families, and no matched pair or temporal-order counterexample retained a trajectory difference, then trajectory evaluation would be redundant rather than incremental.
+## 11. Why the enriched conventional-metric battery is used
 
-### 5. The effect fails to generalize
+Incremental value should not be assessed only against one scalar response score, one simple RSA, or one CKA. The project therefore combines response summaries with time-aware RSA and CKA measures to create a stronger conventional baseline.
 
-If the trajectory advantage repeatedly reversed or vanished across additional sessions, neuron subsets, GPFA seeds, encoding-model seeds, latent dimensions, or temporal grids, the current one-session result would not support a general claim about Dynamic models. A stable pilot effect can motivate expansion, but it cannot substitute for cross-session replication.
+The leave-perturbation-family-out analysis asks how well this enriched battery predicts trajectory-metric variation for a transformation family that was excluded from regression fitting. Holding out entire perturbation families tests whether the relationship generalizes across kinds of transformation rather than merely memorizing one degradation curve.
 
-### Assay failure is different from hypothesis falsification
+If the conventional battery predicts substantial but incomplete trajectory variation, the appropriate interpretation is **partial predictability**, **incremental information**, and **failure of complete sufficiency**. It is not independence, orthogonality, or evidence for a wholly separate information source.
 
-Some outcomes would invalidate the current test without directly showing that the central scientific hypothesis is false. Examples include poor neural split-half reliability, failure to reject time-order nulls, strong dependence on arbitrary latent rotation, leakage from oracle responses into GPFA fitting, or model rankings that change unpredictably with reasonable GPFA settings.
+## 12. Falsification and decision logic
 
-In those cases, the correct conclusion would be that the GPFA assay is not capable of adjudicating the hypothesis. The project therefore places the reliability and null-test gate before Static-Dynamic model comparison.
+The design includes outcomes that would weaken its methodological interpretation:
 
-## Decision logic
+| Design question | Pattern supporting usefulness | Pattern weakening the interpretation | Consequence |
+|---|---|---|---|
+| Is the GPFA measurement trustworthy? | Repeated-movie trajectories are reproducible and exceed structured condition/time/population nulls | Recorded repeat halves are not more consistent than the structured nulls | The trajectory assay should not serve as a primary model-comparison measure |
+| Is there a response-level gain to explain? | Dynamic shows a reproducible response advantage | Little or no response advantage | Trajectory evaluation may still compare temporal structure, but it is no longer explaining an established predictive gain |
+| Do conventional population metrics detect relevant structure? | Time-aware RSA/CKA detect some model differences, while trajectory metrics expose additional order/direction sensitivity | RSA/CKA fully capture the same structure and trajectory behavior | Trajectory evaluation offers little incremental value; RSA/CKA detecting a difference alone is not a failure |
+| Does trajectory sensitivity remain after response matching? | Trajectory differences remain when the selected scalar response summary is nearly matched | Trajectory differences disappear with response-score matching | The trajectory result may largely restate scalar predictive quality |
+| Is the trajectory battery sensitive to temporal order? | Reversal changes direction/order-sensitive trajectory metrics | Trajectory metrics remain largely invariant to reversal | The battery is not adequately diagnostic of temporal order or direction |
+| Does the assay track graded temporal-weight perturbation? | Trajectory quality changes systematically with attenuation severity | No consistent relation between attenuation and trajectory quality | The proposed link to learned temporal-history weighting is weak; monotonicity alone would still not establish temporal specificity |
+| Does the enriched conventional battery fully explain trajectory variation? | Conventional features predict some but not all held-family trajectory variation | Held-family trajectory metrics are almost completely predictable | Trajectory evaluation has limited incremental diagnostic value for the tested perturbations |
 
-| Observation | Interpretation |
-|---|---|
-| Dynamic improves response, output-space RSA/CKA, and trajectory | Dynamic has a broad modeling advantage; trajectory is descriptive but not yet shown to be incremental. |
-| Dynamic retains a trajectory advantage after capacity and response controls | Supports incremental sensitivity to temporal population structure. |
-| Trajectory similarity degrades with temporal-ablation severity | Supports sensitivity to the model's learned temporal history. |
-| Trajectory differences vanish after response matching | Does not support added value beyond the matched response score. |
-| Conventional metrics fully predict held-out trajectory effects | Suggests trajectory evaluation is redundant for the tested perturbations. |
-| Neural trajectory metrics fail reliability or null tests | The assay fails; model-ranking claims should not be made. |
+Assay failure and hypothesis weakening are not identical. Poor neural reliability, leakage, or dependence on arbitrary model-specific alignment would mean that the measurement cannot adjudicate the question; they would not demonstrate that temporal population organization is scientifically irrelevant. This is why measurement validation is placed before model comparison.
 
-## Related project documents
+## 13. What the project can and cannot claim
 
-- [Static model protocol](models/STATIC_MODEL.md)
-- [Dynamic model protocol](models/DYNAMIC_MODEL.md)
-- [Parameter-matched Dynamic design](models/PARAMETER_MATCHED_DYNAMIC.md)
-- [Brain-defined GPFA method](methods/BRAIN_DEFINED_GPFA.md)
-- [Result-blind locked GPFA reliability protocol](methods/GPFA_PROTOCOL_LOCKED.md)
-- [GPFA reliability results](results/GPFA_RELIABILITY_RESULTS.md)
-- [Static-Dynamic model-comparison results](results/MODEL_COMPARISON_RESULTS.md)
-- [Direct answers to Q1-Q6](results/Q1_Q6_ANSWERS.md)
+Within its evidence scope, the design can support claims about:
+
+- response-level Dynamic–Static differences;
+- output-space population-response representational differences;
+- reproducible condition-average neural trajectories;
+- model differences in trajectory position and local direction;
+- temporal-order sensitivity of the tested trajectory metrics;
+- incremental diagnostic information relative to the tested conventional battery.
+
+The design does not by itself identify:
+
+- one unique cortical dynamical mechanism;
+- temporal history as the sole cause of the complete-model difference;
+- a unique biological GPFA dimensionality or timescale;
+- mathematical independence from all RSA/CKA formulations;
+- the complete neural-response state;
+- dataset-wide biological conclusions from the one-session trajectory pilot.
+
+Response prediction, population-response representational similarity, and trajectory evaluation answer different but complementary questions.
+
+## 14. Documentation pointers
+
+- [README](../README.md): concise scientific story.
+- [Methods](METHODS.md): complete procedures.
+- [Results](RESULTS.md): main scientific result chain.
+- [GPFA Validation](GPFA_VALIDATION.md): measurement reliability and limitations.
+- [Detailed Q1–Q6 evidence](results/Q1_Q6_ANSWERS.md): question-by-question statistics and qualifications.

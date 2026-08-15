@@ -176,7 +176,8 @@ def summarize_reliability(observed: pd.DataFrame, nulls: pd.DataFrame) -> pd.Dat
                     "null_ci_low": float(np.quantile(null_values, 0.025)),
                     "null_ci_high": float(np.quantile(null_values, 0.975)),
                     "paired_superiority": float(np.mean(oriented > 0)),
-                    "paired_p_value": float((1 + np.sum(oriented <= 0)) / (len(oriented) + 1)),
+                    "split_null_failures": int(np.sum(oriented <= 0)),
+                    "split_null_failure_rate": float(np.mean(oriented <= 0)),
                     "standardized_separation": float(np.mean(oriented) / max(pooled, 1e-12)),
                     "n_splits": int(len(oriented)),
                 }

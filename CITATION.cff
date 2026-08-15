@@ -15,9 +15,9 @@ license: MIT
 repository-code: "https://github.com/124585083/neural-trajectory-evaluation"
 url: "https://github.com/124585083/neural-trajectory-evaluation"
 abstract: >-
-  A controlled comparison of Static and parameter-matched Dynamic neural
+  A controlled comparison of Static and total-parameter-matched Dynamic neural
   encoding models using response accuracy, output-space RSA/CKA, and a frozen
-  brain-defined GPFA trajectory assay on Dynamic Sensorium 2023.
+  neural-data-defined GPFA trajectory assay on Dynamic Sensorium 2023.
 keywords:
   - neural encoding
   - Dynamic Sensorium

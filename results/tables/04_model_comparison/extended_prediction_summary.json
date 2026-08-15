@@ -1,12 +1,12 @@
 {
   "status": "extended_predictions_complete",
-  "response_matched_checkpoint": {
+  "validation_matched_checkpoint": {
     "selection_split": "official validation across five sessions",
     "static_validation": 0.16395580768585205,
     "dynamic_epoch": 65,
     "dynamic_validation": 0.16388525068759918,
     "absolute_validation_gap": 7.055699825286865e-05,
-    "checkpoint": "models/parameter_matched_dynamic/epoch_65_response_matched.pth"
+    "checkpoint": "models/parameter_matched_dynamic/epoch_65_validation_matched.pth"
   },
   "temporal_ablation": {
     "definition": "multiply every off-center temporal-convolution weight by retention; preserve center slice and biases",

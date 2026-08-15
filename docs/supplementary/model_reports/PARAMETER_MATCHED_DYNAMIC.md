@@ -1,4 +1,4 @@
-# Dynamic–Static parameter-matching design
+# Dynamic–Static Total-Parameter-Matching Design
 
 ## Selected model
 
@@ -13,7 +13,7 @@ Temporal reduction          18 frames, unchanged
 Temporal receptive field    19 frames, unchanged
 ```
 
-## Parameter match
+## Total-parameter match
 
 | Component | Static | Matched Dynamic | Difference |
 |---|---:|---:|---:|
@@ -30,15 +30,22 @@ to the Static model.
 
 ## Controlled variables
 
-The matched Dynamic model uses exactly the Static-on-Dynamic model's five
+The total-parameter-matched Dynamic model uses exactly the Static-on-Dynamic model's five
 sessions, train/oracle trial IDs, neuron IDs, 36x64 resolution, 80-frame random
 snippets, behavior and pupil inputs, normalization source, effective batch 40,
 Poisson objective, AdamW settings, scheduler, seed, and frames 50--299 evaluation.
 
 It retains the full Dynamic baseline's Factorized3D kernels, activations,
 normalization, regularizers, Gaussian-readout hyperparameters, shifter, and output
-nonlinearity. It is therefore a capacity-matched Dynamic control, not an official
-Sensorium baseline reproduction.
+nonlinearity. It is therefore a **total-parameter-matched Dynamic control**, not an
+official Sensorium baseline reproduction.
+
+The match applies to total trainable count, not to core structure. Static uses a
+four-layer 2D frame-wise core with 50,624 parameters; Dynamic uses a three-stage
+Factorized3D core with 98,672 parameters and learned temporal convolutions. The
+identical 2,763,106-parameter readout dominates both totals. The comparison therefore
+does not equate core parameterization, convolutional operations, inductive bias,
+effective computation, or temporal access.
 
 ## Acceptance thresholds
 
@@ -47,4 +54,3 @@ preferred total-parameter difference  <= 5%
 absolute maximum                       <= 10%
 selected difference                     1.707%
 ```
-

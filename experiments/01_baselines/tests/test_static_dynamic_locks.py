@@ -1,3 +1,5 @@
+import pytest
+
 from trajectory_eval.static_dynamic import (
     EXPECTED_CORE_OUTPUT,
     EXPECTED_CORE_PARAMETERS,
@@ -9,6 +11,7 @@ from trajectory_eval.static_dynamic import (
 )
 
 
+@pytest.mark.data
 def test_static_on_dynamic_configuration_is_locked() -> None:
     audit = audit_locked_config(load_config())
     assert audit["status"] == "pass"

@@ -10,7 +10,7 @@ references:
   static_checkpoint: ../../models/static_on_dynamic/best.pt
   dynamic_config: ../03_parameter_matching/configs/dynamic_parameter_matched.yaml
   dynamic_checkpoint: ../../models/parameter_matched_dynamic/best.pt
-  response_matched_checkpoint: ../../models/parameter_matched_dynamic/epoch_65_response_matched.pth
+  validation_matched_checkpoint: ../../models/parameter_matched_dynamic/epoch_65_validation_matched.pth
 
 checkpoint_metadata:
   static_validation: 0.16395580768585205
@@ -59,7 +59,7 @@ model_nulls:
   permutations: 200
   block_size_frames: 16
 
-response_matching:
+validation_matching:
   selection_split: official validation across five sessions
   static_validation: 0.16395580768585205
   dynamic_epoch: 65

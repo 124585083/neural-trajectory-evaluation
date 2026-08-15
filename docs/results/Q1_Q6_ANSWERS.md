@@ -1,4 +1,4 @@
-# Q1–Q6: Hierarchical Conclusions for Static vs. Parameter-Matched Dynamic
+# Q1–Q6: Hierarchical Conclusions for Static vs. Total-Parameter-Matched Dynamic
 
 Updated: 2026-08-13
 
@@ -9,8 +9,8 @@ Updated: 2026-08-13
 | Q1 Does Dynamic show a response-level gain? | Yes | Consistent across five sessions; clear effect, but session-level sample size remains small |
 | Q2 Do RSA / CKA detect a Dynamic–Static difference? | Yes; most clearly in time-aware variants | Single session, 6 conditions |
 | Q3 Does trajectory evaluation detect a difference? | Yes: position, velocity, acceleration; speed remains uncertain | Frozen GPFA + condition bootstrap |
-| Q4 Can temporal differences still be detected when response scores are similar? | Yes | Response-matched stress test with non-overlapping repeat halves |
-| Q5 Does temporal ablation produce monotonic degradation? | Strictly monotonic for four similarity metrics; RMSE is not fully strict | Five-level learned temporal-history ablation |
+| Q4 Can trajectory differences still be detected when response scores are similar? | Yes | Response-score-matched output perturbation with non-overlapping repeat halves |
+| Q5 Does temporal ablation produce monotonic degradation? | Monotonic for four similarity metrics; RMSE is not fully strict; temporal specificity is not isolated | Five-level learned temporal-history ablation |
 | Q6 Does trajectory information contain something not fully explained by response/RSA/CKA? | Evidence supports “not fully explained by the current conventional battery”; no claim of mathematical independence | Strict time-reversal counterexample + matched pair + leave-family-out regression |
 
 ## Q1: Does Dynamic Show a Response-Level Gain?
@@ -22,7 +22,7 @@ Official oracle single-trial correlations across five sessions:
 | Model | Score |
 |---|---:|
 | Static | 0.164408 |
-| Parameter-matched Dynamic | 0.187525 |
+| Total-parameter-matched Dynamic | 0.187525 |
 | Dynamic - Static | +0.023117 |
 
 The relative improvement is 14.06%. All five session-wise differences are positive: `+0.0270, +0.0265, +0.0209, +0.0086, +0.0325`. Using session as the resampling unit, the bootstrap 95% interval is `[+0.0147, +0.0291]`. With all five sessions positive, the one-sided exact sign p=`0.03125`; the two-sided p=`0.0625`.
@@ -49,7 +49,7 @@ The conclusion should be stated as: “RSA/CKA detect the difference, but the di
 
 **Answer: Yes, with particularly strong differences in trajectory-direction metrics.**
 
-Using the frozen q=4 brain-defined GPFA, with no latent alignment applied to either model:
+Using the frozen q=4 neural-data-defined GPFA, with no latent alignment applied to either model:
 
 | Metric | Static | Dynamic | Oriented Dynamic advantage 95% interval |
 |---|---:|---:|---:|
@@ -61,17 +61,17 @@ Using the frozen q=4 brain-defined GPFA, with no latent alignment applied to eit
 
 Trajectory evaluation therefore supports the conclusion that Dynamic more closely matches the brain trajectory in position, local direction, and curvature/acceleration. The speed-profile difference is small and its interval crosses zero, so no reliable model difference should be claimed for that metric.
 
-## Q4: When Response Scores Are Similar, Can Trajectory Evaluation Still Detect a Temporal Computation Difference?
+## Q4: When Response Scores Are Similar, Can Trajectory Evaluation Still Detect a Trajectory Difference?
 
-**Answer: Yes, in a prespecified response-matched stress test.**
+**Answer: Yes, in a prespecified response-score-matched output perturbation.**
 
 For each movie, repeats are divided into non-overlapping selection and test halves, with 28 trials in each. The selection half is used only to add train-independent amplitude noise to the best Dynamic predictions so that scalar response correlation matches Static; the test half is completely excluded from selection.
 
-Selection response: Static `0.15553`, matched Dynamic `0.15520`. Held-out test response: Static `0.15651`, matched Dynamic `0.15687`; the per-neuron paired-bootstrap difference is `+0.00036`, with 95% interval `[-0.00510, +0.00537]`. The held-out response scores are therefore nearly identical under the predefined matching procedure. Because no formal equivalence test was performed, this result is not described as statistical indistinguishability.
+Selection response: Static `0.15553`, response-score-matched Dynamic output `0.15520`. Held-out test response: Static `0.15651`, response-score-matched Dynamic output `0.15687`; the per-neuron paired-bootstrap difference is `+0.00036`, with 95% interval `[-0.00510, +0.00537]`. The held-out response scores are therefore nearly identical under the predefined perturbation. Because no formal equivalence test was performed, this result is not described as statistical indistinguishability.
 
 However, the test-half frozen-GPFA results are:
 
-| Metric | Static | Response-matched Dynamic | Advantage 95% interval |
+| Metric | Static | Response-score-matched Dynamic output | Advantage 95% interval |
 |---|---:|---:|---:|
 | Position correlation | 0.5130 | 0.6914 | +0.0522--+0.3872 |
 | Normalized position RMSE | 0.8742 | 0.7292 | +0.0524--+0.2815 |
@@ -79,13 +79,13 @@ However, the test-half frozen-GPFA results are:
 | Speed correlation | 0.5171 | 0.5378 | -0.0342--+0.0658 |
 | Acceleration cosine | 0.1450 | 0.3946 | +0.2125--+0.2807 |
 
-Thus, when scalar response correlation is matched, trajectory evaluation still detects differences in position, velocity, and acceleration. This is a controlled response-matching result; it does not mean the two models were also forced to match on RSA/CKA. Test CKA/RSA still favor Dynamic.
+Thus, when scalar response correlation is matched, trajectory evaluation still detects differences in position, velocity, and acceleration. This response-score-matched output perturbation does not force the two outputs to match on RSA/CKA; test CKA/RSA still favor Dynamic.
 
-In addition, the training history contains a validation-matched pair: Static validation=`0.1639558`, Dynamic epoch 65=`0.1638853`, differing by only `0.000071`. This pair also retains a trajectory advantage on oracle data, but its oracle responses are not as tightly matched as in the stress test above, so it is not treated as the strongest evidence for Q4.
+In addition, the training history contains a validation-matched pair: Static validation=`0.1639558`, Dynamic epoch 65=`0.1638853`, differing by only `0.000071`. This pair also retains a trajectory advantage on oracle data, but its oracle responses are not as tightly matched as in the response-score-matched output perturbation above, so it is not treated as the strongest evidence for Q4.
 
 ## Q5: Does Temporal Ablation Produce Monotonic Degradation?
 
-**Answer: Yes for the main trajectory-similarity metrics; normalized RMSE is not perfectly strict.**
+**Answer: The four main trajectory-similarity metrics degrade monotonically; normalized RMSE is not perfectly strict. This is consistent with a graded temporal-history effect, but temporal specificity remains to be controlled.**
 
 The ablation simultaneously multiplies the off-center weights of all three learned temporal-convolution kernels by a retention factor, while leaving the center temporal slices, biases, spatial core, readout, and shifter unchanged.
 
@@ -99,7 +99,7 @@ The ablation simultaneously multiplies the off-center weights of all three learn
 
 Position, velocity, speed, and acceleration decrease strictly monotonically as ablation severity increases, with severity–quality Spearman equal to `-1.0` for all four. Normalized RMSE improves slightly at the final step, from `1.0836` to `1.0738`, so it is not strictly monotonic; its overall Spearman is still `-0.9`.
 
-It is therefore appropriate to state that “trajectory similarity exhibits monotonic degradation under graded temporal-history ablation,” while also noting the slight non-monotonicity of normalized error under the strongest ablation.
+It is therefore appropriate to state that the major trajectory-similarity metrics exhibit monotonic degradation under graded temporal-history ablation, while normalized error shows a slight non-monotonicity at the strongest ablation. This is consistent with sensitivity to learned temporal-history weighting, but increasing attenuation also increasingly perturbs a trained network, so temporal specificity is not isolated by this experiment alone.
 
 ## Q6: Is Trajectory Information Not Fully Explained by Response Correlation, RSA, and CKA?
 
@@ -143,7 +143,7 @@ This is not proof that trajectory metrics are statistically independent of all c
 ## Scope Limitations
 
 - Q1 uses five sessions; the deeper Q2–Q6 analyses still use one session, a 512-neuron subset, and six repeated movies.
-- Q4 is an amplitude-noise response-matching stress test; it addresses metric sensitivity rather than providing a new fair ranking of separately trained models.
+- Q4 uses an amplitude-noise response-score-matched output perturbation; it addresses metric sensitivity rather than providing a new fair ranking of separately trained models.
 - Q5 scales temporal-history weights in all three layers simultaneously, revealing a dose response but not identifying which layer or temporal lag is most important.
 - The Q6 regression candidate set consists of controlled perturbations and does not represent the distribution of all possible models.
 

@@ -195,7 +195,8 @@ def evaluate_gpfa_models(config: dict[str, Any]) -> dict[str, Any]:
                 "null_mean": float(np.mean(null_values)),
                 "null_ci_low": float(np.quantile(null_values, 0.025)),
                 "null_ci_high": float(np.quantile(null_values, 0.975)),
-                "finite_sample_p": float((1 + np.sum(extreme)) / (permutations + 1)),
+                "null_exceedances": int(np.sum(extreme)),
+                "null_exceedance_rate": float(np.mean(extreme)),
             }
         )
     pd.DataFrame(summary_rows).to_csv(out / "gpfa_model_null_summary.csv", index=False)

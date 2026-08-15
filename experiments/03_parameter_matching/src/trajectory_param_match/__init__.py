@@ -1,1 +1,1 @@
-"""Parameter-matched Dynamic Sensorium experiment."""
+"""Total-parameter-matched Dynamic Sensorium experiment."""

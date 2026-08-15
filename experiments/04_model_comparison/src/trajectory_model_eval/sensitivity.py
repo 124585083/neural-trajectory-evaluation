@@ -214,8 +214,7 @@ def run_sensitivity(config: dict[str, Any]) -> dict[str, Any]:
         "primary_metrics": list(PRIMARY_METRICS),
         "nulls": list(SENSITIVITY_NULLS),
         "minimum_paired_superiority_across_profiles": float(gate.paired_superiority.min()),
-        "maximum_paired_p_value_across_profiles": float(gate.paired_p_value.max()),
+        "maximum_split_null_failure_rate_across_profiles": float(gate.split_null_failure_rate.max()),
     }
     json_dump(sensitivity_out / "sensitivity_summary.json", result)
     return result
-

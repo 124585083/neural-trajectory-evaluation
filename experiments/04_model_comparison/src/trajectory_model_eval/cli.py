@@ -11,7 +11,9 @@ from .sensitivity import run_sensitivity
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Static versus parameter-matched Dynamic evaluation")
+    parser = argparse.ArgumentParser(
+        description="Static versus total-parameter-matched Dynamic evaluation"
+    )
     parser.add_argument(
         "command",
         choices=(

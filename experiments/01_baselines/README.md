@@ -1,63 +1,90 @@
-# Phase 1 — Establishing trustworthy Static and Dynamic baselines
+# Phase 1 — Encoding-model baselines
 
-**Research question:** Can the official Dynamic Sensorium architecture and a strict frame-wise Static control be trained and evaluated reliably on the same dynamic neural dataset?
+This phase establishes the Static and full Dynamic encoding-model baselines on the five official Dynamic Sensorium sessions under a shared training and evaluation protocol.
 
-## Why this phase exists
+## Purpose
 
-The later trajectory experiments are meaningful only if the encoding models, data alignment, checkpoint loading, and response evaluator are already known to work. Phase 1 therefore establishes two five-session reference models before introducing GPFA or any trajectory metric:
+Phase 1 trains and evaluates two baseline encoding models. The Static baseline adapts a framewise 2D Sensorium-style model to Dynamic Sensorium, while the full Dynamic baseline uses the full-width Factorized3D architecture with temporal convolutions. Both use the same five-session dataset and the same aligned full-sequence evaluation interval. Their checkpoints provide the starting point for later total-parameter matching and trajectory comparisons.
 
-- the full-width Factorized3D Dynamic Sensorium baseline; and
-- the Sensorium static CNN architecture retrained frame by frame on Dynamic Sensorium 2023.
+## Inputs and prerequisites
 
-The Static model is a controlled transfer of the official static architecture, not a native Sensorium 2022 benchmark and not an official Static-on-Dynamic leaderboard entry.
+- The five official Dynamic Sensorium 2023 sessions.
+- Python 3.11 and the package versions pinned in [`pyproject.toml`](pyproject.toml), including the specified Sensorium and `neuralpredictors` revisions.
+- A CUDA-capable GPU for formal training and full-sequence evaluation.
+- The two versioned configs in [`configs/`](configs/).
 
-## Experimental design
-
-Both models use the same five Dynamic Sensorium 2023 competition sessions, comprising 1,744 training trials, 293 oracle trials, and 40,034 recorded neurons. They share the official movie preprocessing, behavioral covariates, pupil input, session-specific Gaussian readouts, shifters, training tiers, and response evaluator. Full-sequence oracle evaluation discards the first 50 burn-in frames and retains original frames 50-299.
-
-The critical difference is temporal context. The Dynamic model uses a three-layer Factorized3D core with learned temporal kernels. The Static model processes each movie frame independently through a four-layer 2D core; a parameter-free adapter preserves the official video tensor and timestamp contracts without giving the model access to neighboring frames.
-
-| Model | Parameters | Learned temporal context | Five-session local oracle correlation |
-|---|---:|---|---:|
-| Full Factorized3D Dynamic | 5,707,743 | Yes | 0.1967 |
-| Static-on-Dynamic | 2,814,015 | No | 0.1644 |
-
-## Current result
-
-The implementation, checkpoint-reload, temporal-alignment, and local oracle-evaluation pipeline works for both models. Static training completed through the official early-stopping procedure at epoch 63. Dynamic training was stopped after epoch 103, and the best checkpoint from epoch 97 was recovered from the complete epoch history; the full official early-stopping closure was therefore not allowed to finish. The recovered Dynamic checkpoint reaches a local five-session oracle correlation of **0.1967**, while the Static checkpoint reaches **0.1644** under the same evaluator.
-
-The official Dynamic reference reports **0.1887** on hidden `final_test_main`, but those labels are unavailable locally. The local oracle value and hidden server value are different evaluation splits and must not be compared numerically as a reproduction error. The precise status is: **the protocol and local evaluation pipeline are reproduced; exact hidden-test score reproduction is not locally verifiable**.
-
-## What this phase establishes
-
-Phase 1 shows that a frame-wise model can be trained and evaluated on the dynamic dataset without changing the response target or temporal alignment. It also confirms that the full Dynamic architecture has a clear response-level advantage. It does not yet determine whether that advantage comes from temporal computation or simply from the Dynamic model's larger core. Phase 3 addresses that capacity confound.
-
-No RSA, CKA, or GPFA trajectory claim is made in this phase. The later output-space analyses operate on predicted neural responses, not the optional hidden-layer hooks retained here for implementation inspection.
-
-## Reproducible assets
-
-- Published checkpoints: [`../../models/official_dynamic/best.pt`](../../models/official_dynamic/best.pt) and [`../../models/static_on_dynamic/best.pt`](../../models/static_on_dynamic/best.pt)
-- Compact oracle summaries: [`../../results/tables/01_baselines/`](../../results/tables/01_baselines/)
-- Dynamic configuration and audit records: [`configs/phase1A_dynamic_official.yaml`](configs/phase1A_dynamic_official.yaml) and [`records/dynamic/`](records/dynamic/)
-- Static configuration and audit records: [`configs/static_dynamic_sensorium2023.yaml`](configs/static_dynamic_sensorium2023.yaml) and [`records/static/`](records/static/)
-- Full model reports: [Dynamic model](../../docs/models/DYNAMIC_MODEL.md) and [Static model](../../docs/models/STATIC_MODEL.md)
-
-## Minimal reproduction entry points
-
-Run these commands from this phase directory after installing the package and obtaining the authorized Dynamic Sensorium data:
+Run commands from this directory after installing the Phase 1 package:
 
 ```text
-# Full Dynamic baseline
-python -m trajectory_eval.official_dynamic --config configs/phase1A_dynamic_official.yaml audit
-python -m trajectory_eval.official_dynamic --config configs/phase1A_dynamic_official.yaml smoke
-python -m trajectory_eval.official_dynamic --config configs/phase1A_dynamic_official.yaml evaluate
+python -m pip install -e .
+```
 
-# Static-on-Dynamic baseline
-python -m trajectory_eval.static_dynamic --config configs/static_dynamic_sensorium2023.yaml audit
-python -m trajectory_eval.static_dynamic --config configs/static_dynamic_sensorium2023.yaml smoke
+See [Data and Reproducibility](../../docs/DATA_AND_REPRODUCIBILITY.md) for data acquisition, directory layout, environment setup, and checkpoint loading.
+
+## Formal workflows
+
+### Static baseline
+
+Config: [`configs/static_dynamic_sensorium2023.yaml`](configs/static_dynamic_sensorium2023.yaml). Formal module: `trajectory_eval.static_dynamic`. Installed entry point: `trajectory-static-dynamic`.
+
+```text
+python -m trajectory_eval.static_dynamic --config configs/static_dynamic_sensorium2023.yaml train
 python -m trajectory_eval.static_dynamic --config configs/static_dynamic_sensorium2023.yaml evaluate
 ```
 
-The corresponding `train` command reproduces each training run. Audit and smoke checks should pass before formal training begins. Raw data are read in place and are never copied, moved, or modified by this phase.
+Training writes run products under `checkpoints/static_dynamic_sensorium2023/` and `logs/static_dynamic_sensorium2023/`. Independent evaluation loads the published checkpoint at [`../../models/static_on_dynamic/best.pt`](../../models/static_on_dynamic/best.pt).
 
-**Next phase:** [Phase 2](../02_gpfa_reliability/README.md) validates the brain-defined trajectory assay using neural repeat reliability before that assay is allowed to compare encoding models.
+### Full Dynamic baseline
+
+Config: [`configs/phase1A_dynamic_official.yaml`](configs/phase1A_dynamic_official.yaml). Formal module: `trajectory_eval.official_dynamic`. Installed entry point: `trajectory-official-dynamic`.
+
+```text
+python -m trajectory_eval.official_dynamic --config configs/phase1A_dynamic_official.yaml train
+python -m trajectory_eval.official_dynamic --config configs/phase1A_dynamic_official.yaml evaluate
+```
+
+Training writes run products under `checkpoints/dynamic_official_reproduction/` and `logs/dynamic_official_reproduction/`. Independent evaluation loads the published checkpoint at [`../../models/official_dynamic/best.pt`](../../models/official_dynamic/best.pt).
+
+The local full Dynamic run was stopped by project decision after epoch 103 validation. The published checkpoint retains the best complete epoch-97 state rather than representing natural completion of the official early-stopping procedure.
+
+## Outputs
+
+### Models
+
+- Static best checkpoint: [`../../models/static_on_dynamic/best.pt`](../../models/static_on_dynamic/best.pt)
+- Full Dynamic best checkpoint: [`../../models/official_dynamic/best.pt`](../../models/official_dynamic/best.pt)
+
+### Evaluation
+
+- Compact full-sequence oracle summaries: [`../../results/tables/01_baselines/`](../../results/tables/01_baselines/)
+- Model-specific evaluation records: [`records/static/official_evaluation.json`](records/static/official_evaluation.json) and [`records/dynamic/official_evaluation.json`](records/dynamic/official_evaluation.json)
+
+### Audits
+
+- Static architecture and retained training records: [`records/static/`](records/static/); formal training writes its environment snapshot under `logs/static_dynamic_sensorium2023/`.
+- Dynamic architecture, temporal-alignment, and retained training records: [`records/dynamic/`](records/dynamic/); formal training writes its environment snapshot under `logs/dynamic_official_reproduction/`.
+
+### Prediction exports
+
+Continuous full Dynamic oracle predictions for downstream analyses can be generated with:
+
+```text
+python -m trajectory_eval.official_dynamic --config configs/phase1A_dynamic_official.yaml export
+```
+
+The configured local output is `predictions/dynamic_official_reproduction/`; large prediction arrays are not duplicated in this README.
+
+## What Phase 1 establishes
+
+- Both baseline architectures can be trained and independently evaluated under the same five-session Dynamic Sensorium protocol.
+- Full-sequence predictions and neural targets are compared on original frames 50–299 after the shared burn-in.
+- The resulting checkpoints and alignment records feed later total-parameter matching and trajectory-evaluation phases.
+
+Numerical results and scientific interpretation are reported in [Results](../../docs/RESULTS.md).
+
+## Documentation
+
+- [Methods](../../docs/METHODS.md) — model architecture, temporal alignment, training, evaluation, and prediction export
+- [Results](../../docs/RESULTS.md) — response-level and downstream comparison results
+- [Data and Reproducibility](../../docs/DATA_AND_REPRODUCIBILITY.md) — data acquisition, environment setup, and artifact loading
+- [Design Rationale](../../docs/DESIGN_RATIONALE.md) — reasons for comparing Static, Dynamic, and later controls

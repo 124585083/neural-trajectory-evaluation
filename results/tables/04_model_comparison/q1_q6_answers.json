@@ -155,7 +155,7 @@
     "scope": "one session, six conditions, frozen q=4 brain-defined GPFA"
   },
   "Q4": {
-    "answer": "yes_in_a_disjoint_repeat_response-matched_stress_test",
+    "answer": "yes_in_disjoint_repeat_response_score_matched_output_perturbation",
     "selection_trials": 28,
     "test_trials": 28,
     "noise_sigma": 0.7054802310718645,
@@ -201,7 +201,7 @@
         "gpfa_zero_lag_correlation": 0.5358366348790213,
         "gpfa_best_lag_correlation": 0.5378304797429065
       },
-      "response_matched_dynamic": {
+      "response_score_matched_output": {
         "response_single_trial_neuron_mean_r": 0.15519884136099787,
         "response_single_trial_neuron_median_r": 0.13997851958661242,
         "response_condition_average_neuron_mean_r": 0.276387301063263,
@@ -279,7 +279,7 @@
         "gpfa_zero_lag_correlation": 0.5370648894658081,
         "gpfa_best_lag_correlation": 0.5388235684377467
       },
-      "response_matched_dynamic": {
+      "response_score_matched_output": {
         "response_single_trial_neuron_mean_r": 0.15686774277498244,
         "response_single_trial_neuron_median_r": 0.14397289075353095,
         "response_condition_average_neuron_mean_r": 0.28247098070920795,
@@ -407,7 +407,7 @@
         "probability_right_better": 1.0
       }
     ],
-    "interpretation": "the dynamic prediction was degraded only to match scalar response correlation; RSA/CKA were not forced to match"
+    "interpretation": "the response-score-matched output perturbation degrades the Dynamic prediction only to match scalar response correlation; RSA/CKA are not forced to match"
   },
   "Q5": {
     "answer": "yes_for_position_velocity_speed_and_acceleration; not_strict_for_normalized_rmse_at_the_strongest_step",
@@ -573,7 +573,7 @@
         "best_lag_correlation": 0.2799410588327373
       }
     },
-    "response_only_counterexample": "see Q4 disjoint-repeat response-matched test",
+    "response_only_counterexample": "see Q4 disjoint-repeat response-score-matched output perturbation",
     "conventional_matched_pair": {
       "selection_standardized_conventional_distance": 0.21506559856515345,
       "left": "shift_1",

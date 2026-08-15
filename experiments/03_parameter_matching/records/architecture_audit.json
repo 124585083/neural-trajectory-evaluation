@@ -1,6 +1,6 @@
 {
   "status": "pass",
-  "scientific_label": "half_width_factorized3d_parameter_matched_to_static",
+  "scientific_label": "half_width_factorized3d_total_parameter_matched_to_static",
   "sensorium_commit": "0e02656220e84a50f3be1b92d6f66c2f9ccd51ef",
   "neuralpredictors_commit": "efdda679596517fad95d71f36d0385d7450dd207",
   "sessions": [

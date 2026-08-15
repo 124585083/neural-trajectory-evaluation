@@ -79,8 +79,8 @@ function workflowFigure() {
     return out;
   };
   const arrow = (x1, y1, x2, y2) => `<path d="M ${x1} ${y1} L ${x2} ${y2}" stroke="${C.muted}" stroke-width="4" fill="none" marker-end="url(#arrow)"/>`;
-  let b = textLines(120, 105, ['Experimental design: testing temporal computation beyond response accuracy'], { size: 48, weight: 700 });
-  b += textLines(120, 157, ['All comparison models share data, neurons, splits, behavioral inputs, readout family, and evaluation interval.'], { size: 25, fill: C.muted });
+  let b = textLines(120, 105, ['Experimental design: comparing Static and Dynamic beyond response accuracy'], { size: 48, weight: 700 });
+  b += textLines(120, 157, ['Models share data and evaluation contracts and have close total counts, while their core architectures and temporal access remain different.'], { size: 25, fill: C.muted });
 
   b += card(110, 260, 420, 270, 'Dynamic Sensorium 2023', ['Natural movies', 'Mouse V1 population responses', 'Synchronized behavior'], C.response, 'DATA');
   b += card(680, 225, 455, 245, 'Static model', ['Frame-wise 2D core', '2,814,015 parameters', 'No learned temporal context'], C.static, 'MODEL A');
@@ -98,17 +98,17 @@ function workflowFigure() {
   b += arrow(1780, 500, 1885, 548);
   b += arrow(1780, 530, 1885, 800);
 
-  b += card(885, 995, 520, 255, 'Brain-defined GPFA', ['Fit only on neural training data', 'Frozen before model evaluation', 'No model-specific latent alignment'], C.green, 'LATENT SPACE');
+  b += card(885, 995, 520, 255, 'Neural-data-defined GPFA', ['Fit only on neural training data', 'Frozen before model evaluation', 'No model-specific latent alignment'], C.green, 'LATENT SPACE');
   b += arrow(530, 505, 885, 1080);
   b += arrow(1405, 1120, 1885, 850);
 
   b += `<rect x="120" y="1300" width="2150" height="92" rx="18" fill="${C.light}"/>`;
   b += textLines(150, 1338, ['Key controls'], { size: 23, weight: 700, fill: C.ink });
-  const controls = ['Parameter matching', 'Reliability + null tests', 'Response matching', 'Temporal-history ablation'];
+  const controls = ['Total-parameter matching', 'Reliability + null tests', 'Response-score-matched output perturbation', 'Temporal-history ablation'];
   controls.forEach((t, i) => {
     const x = 420 + i * 440;
     b += `<circle cx="${x}" cy="1345" r="9" fill="${[C.dynamic, C.green, C.response, C.red][i]}"/>`;
-    b += textLines(x + 20, 1353, [t], { size: 22, fill: C.ink });
+    b += textLines(x + 20, 1353, [t], { size: i === 2 ? 18 : 22, fill: C.ink });
   });
   return svgDoc(W, H, 'Experimental design for Static-Dynamic neural trajectory evaluation', b);
 }
@@ -125,7 +125,7 @@ function comparisonFigure() {
     { family: 'Trajectory', label: 'GPFA acceleration direction', value: 0.26793, lo: 0.18217, hi: 0.33953, color: C.trajectory },
   ];
   let b = textLines(110, 100, ['Where does the Dynamic model outperform the Static model?'], { size: 48, weight: 700 });
-  b += textLines(110, 154, ['Paired condition comparison for the parameter-matched models; points show Dynamic - Static and bars show 95% bootstrap intervals.'], { size: 25, fill: C.muted });
+  b += textLines(110, 154, ['Paired condition comparison for the total-parameter-matched models; points show Dynamic - Static and bars show 95% bootstrap intervals.'], { size: 25, fill: C.muted });
 
   const chartLeft = 800, chartRight = 2070, chartTop = 270, chartBottom = 1095;
   const xMin = -0.10, xMax = 0.50;
@@ -179,8 +179,8 @@ function ablationFigure() {
   const sx = v => x0 + (x1 - x0) * v / 100;
   const yMin = -0.55, yMax = 1.08;
   const sy = v => y1 - (y1 - y0) * (v - yMin) / (yMax - yMin);
-  let b = textLines(110, 100, ['Temporal-history ablation reveals graded degradation'], { size: 48, weight: 700 });
-  b += textLines(110, 154, ['Off-center temporal-kernel weights are scaled from fully retained to fully removed; trajectory similarity is normalized to the intact Dynamic value.'], { size: 25, fill: C.muted });
+  let b = textLines(110, 100, ['Graded trajectory degradation under temporal-weight ablation'], { size: 48, weight: 700 });
+  b += textLines(110, 154, ['Observed dose-response after scaling off-center temporal-kernel weights; no magnitude-matched non-temporal damage control is included.'], { size: 25, fill: C.muted });
   b += `<rect x="${x0}" y="${y0}" width="${x1-x0}" height="${y1-y0}" fill="${C.white}" stroke="${C.grid}" stroke-width="2"/>`;
   [-0.5, 0, 0.5, 1.0].forEach(v => {
     const y = sy(v);
@@ -197,7 +197,7 @@ function ablationFigure() {
     b += `<polyline points="${points}" fill="none" stroke="${colors[name]}" stroke-width="${name === 'Position' ? 7 : 5}" stroke-linecap="round" stroke-linejoin="round" ${dashes[name] ? `stroke-dasharray="${dashes[name]}"` : ''}/>`;
     vals.forEach((v, i) => b += `<circle cx="${sx(xVals[i])}" cy="${sy(v)}" r="${name === 'Position' ? 9 : 7}" fill="${C.white}" stroke="${colors[name]}" stroke-width="4"/>`);
   }
-  b += `<text x="${(x0+x1)/2}" y="${y1 + 105}" text-anchor="middle" font-size="26" font-weight="700" fill="${C.ink}">Temporal-history ablation severity</text>`;
+  b += `<text x="${(x0+x1)/2}" y="${y1 + 105}" text-anchor="middle" font-size="26" font-weight="700" fill="${C.ink}">Off-center temporal-weight ablation severity</text>`;
   b += `<text x="62" y="${(y0+y1)/2}" transform="rotate(-90 62 ${(y0+y1)/2})" text-anchor="middle" font-size="26" font-weight="700" fill="${C.ink}">Normalized trajectory similarity (intact Dynamic = 1)</text>`;
 
   const names = Object.keys(raw);
@@ -207,8 +207,8 @@ function ablationFigure() {
     b += `<text x="${x + 82}" y="${y + 8}" font-size="22" fill="${C.ink}">${name}</text>`;
   });
   b += `<rect x="1440" y="300" width="570" height="95" rx="16" fill="${C.light}"/>`;
-  b += textLines(1470, 340, ['Trajectory similarity metrics show strict', 'monotonic degradation (Spearman rho = -1).'], { size: 22, weight: 700, fill: C.ink, gap: 1.25 });
-  return svgDoc(W, H, 'Temporal ablation degradation curves', b);
+  b += textLines(1470, 340, ['Observed curves are monotonic, but', 'temporal specificity is not established.'], { size: 22, weight: 700, fill: C.ink, gap: 1.25 });
+  return svgDoc(W, H, 'Graded trajectory degradation under temporal-weight ablation', b);
 }
 
 (async () => {
