@@ -1,0 +1,15 @@
+{
+  "command": [
+    "source_pilot://.venv/Scripts/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "source_pilot://trajectory_project/closeout_v1/tests",
+    "-q",
+    "-p",
+    "no:cacheprovider"
+  ],
+  "exit_code": 0,
+  "utc": "2026-10-01T09:11:46.776043+00:00",
+  "output_log": "source_pilot://trajectory_project/closeout_v1/logs/tests.txt"
+}

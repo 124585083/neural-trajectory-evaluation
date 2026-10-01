@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "sensorium-trajectory-reliability"
 version = "0.1.0"
-description = "Leakage-free GPFA reliability validation on Dynamic Sensorium 2023"
+description = "Train-only GPFA fitting and offline trajectory reliability on Dynamic Sensorium 2023"
 requires-python = ">=3.10,<3.13"
 dependencies = [
   "numpy>=1.26,<3",

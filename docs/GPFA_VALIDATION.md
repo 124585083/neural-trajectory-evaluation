@@ -1,6 +1,6 @@
 # GPFA Validation
 
-Trajectory metrics are useful only if their coordinate system is reproducible and independent of the encoding models being evaluated. The GPFA measurement was therefore defined and validated using recorded neural activity before it was used for the Static–Dynamic trajectory comparison.
+This document validates the Study 1 Dynamic Sensorium measurement. Its coordinate system was fitted to recorded neural activity and tested for repeat reliability before the Static–Dynamic trajectory comparison. The separate [Mental-Pong study](MENTAL_PONG.md) uses different data, GPFA code, and validation records. The reliability values below do not provide a noise ceiling or validation result for Mental-Pong.
 
 ## 1. What “neural-data-defined GPFA” means
 
@@ -27,6 +27,10 @@ The trajectory comparison is consequently anchored to a coordinate system learne
 ### Train/oracle separation
 
 GPFA fitting, neural scaling, dimensionality selection, and timescale-initialization selection use neural responses from the official training tier. The 58 oracle trials are introduced only after the relevant GPFA has been frozen, first to evaluate neural split-half reliability and then to evaluate encoding-model predictions.
+
+### Offline inference
+
+The frozen GPFA conditions a latent state on the complete observation window. Later observations can therefore influence an earlier inferred state. Train/oracle separation protects the fitted representation from oracle selection; it does not remove future information from this offline posterior.
 
 ### Evaluation interval and response scaling
 
@@ -142,7 +146,7 @@ Across these profiles, the reliability ranges are:
 
 Each profile uses 100 splits and five matched null classes. Minimum paired superiority remains `100/100`, and the maximum split/null failure count remains `0/100`.
 
-The qualitative null-separation decision is therefore robust. Exact metric values are less invariant: position is the most stable, whereas speed and higher derivatives vary more with latent dimension, neuron count, observation grid, and fit seed. For example, the full-train 7.5 Hz and direct 30 Hz fits yield velocity cosines of `0.6634` and `0.6190`, respectively, even though the null-separation conclusion is unchanged.
+Null separation holds across all tested profiles. Exact metric values vary: position is the most stable, whereas speed and higher derivatives vary more with latent dimension, neuron count, observation grid, and fit seed. For example, the full-train 7.5 Hz and direct 30 Hz fits yield velocity cosines of `0.6634` and `0.6190`, respectively, even though the null-separation conclusion is unchanged.
 
 ## 9. Important negative findings and measurement limits
 
@@ -156,7 +160,7 @@ Path length can describe trajectory magnitude, but it cannot establish correct t
 
 The main reliability values average four or five repeats per condition within each split half. With one repeat per half, position correlation falls to `0.5545` (split interval approximately `0.4035–0.6613`), compared with approximately `0.8566` for the primary condition-average analysis. Velocity, speed, and acceleration also fall to `0.3417`, `0.3694`, and `0.3051`.
 
-Single-repeat trajectories are moderately, not highly, reliable. The primary model comparison therefore uses condition-average trajectories; the condition-average reliability value must not be generalized to single trials.
+Single-repeat trajectories have lower reliability across all listed metrics. The primary model comparison therefore uses condition-average trajectories. Their reliability values apply to repeat averages and cannot be assigned to single trials.
 
 ### 9.3 GPFA captures a limited fraction of total neural variance
 

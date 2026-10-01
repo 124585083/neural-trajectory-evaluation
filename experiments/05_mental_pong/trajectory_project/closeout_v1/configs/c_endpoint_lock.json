@@ -1,0 +1,20 @@
+{
+  "protocol": {
+    "path": "source_pilot://trajectory_project/closeout_v1/configs/c_endpoint_protocol.json",
+    "sha256": "f7fc9c42ecc3e0f52b8fd2db163c4f38a5e17bec592ccffaad51cb04c87a16d5",
+    "bytes": 2762,
+    "role": "source or output"
+  },
+  "geometry_audit": {
+    "path": "source_pilot://trajectory_project/closeout_v1/results/C/geometry_feasibility.json",
+    "sha256": "5de538cd500d49f62789c57493fe9825500c18d3cc6ac7d5fcb7d704c64258c8",
+    "bytes": 4855,
+    "role": "source or output"
+  },
+  "implementation": {
+    "path": "source_pilot://trajectory_project/closeout_v1/null_endpoint.py",
+    "sha256": "71c5b104156ade4f772f7c6fdef528669aebc92882767adf56f5ab5263d553a6",
+    "bytes": 26895,
+    "role": "source or output"
+  }
+}

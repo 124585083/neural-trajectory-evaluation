@@ -1,0 +1,72 @@
+{
+  "data_root": "source_data://",
+  "study_directory": "gpfa_study",
+  "subjects": [
+    "perle",
+    "mahler"
+  ],
+  "latent_dimensions": [
+    16,
+    32,
+    64,
+    100
+  ],
+  "replicated_dimensions": [
+    32,
+    64
+  ],
+  "replication_seeds": [
+    42,
+    137,
+    271
+  ],
+  "initial_seed": 42,
+  "max_parameters": 1000000,
+  "model_family": "exact shared-timescale unit-amplitude RBF GPFA; constrained standard GPFA",
+  "model_options": {
+    "initial_tau": 0.15,
+    "tau_bounds": [
+      0.025,
+      2.0
+    ],
+    "nugget": 0.001,
+    "min_noise": 0.0001,
+    "max_iterations": 400,
+    "tolerance": 1e-06,
+    "bin_size_seconds": 0.05
+  },
+  "initialization": "Existing verified half1-train-only FA100: first q loadings, discarded loading variance added to diagonal noise; then independent Gaussian loading jitter with per-column SD=1% of its SD, seed-specific. All GPFA parameters jointly refined by EM.",
+  "fit_scope": "47 physical training conditions, half1 only; no position, half2, validation, or test used in GPFA likelihood/parameter updates/stopping",
+  "split": {
+    "train": 47,
+    "validation": 16,
+    "test": 16
+  },
+  "primary_inference": "causal E[x_t|y_1:t], reset per condition, frozen train normalization and parameters",
+  "auxiliary_inference": [
+    "smooth full-sequence posterior (future using)",
+    "current-only posterior under identical GPFA parameters (q32/64 seed42)"
+  ],
+  "position_ridge_alphas": [
+    0.01,
+    0.1,
+    1.0,
+    10.0,
+    100.0,
+    1000.0
+  ],
+  "position_protocol": "Separate train-half1 OLS and Ridge per inference mode; Ridge alpha selected by validation xy MSE; test only scored; 2(q+1) coefficients",
+  "geometry_eigen_floor": 0.0001,
+  "delta_floor_percentile": 5,
+  "null_draws": 100,
+  "null_seed": 20260924,
+  "trajectory_scope": "Train-only ZCA/floor; held-out original half pair and matched-support within-partition deranged condition null; no repeated split reliability claim",
+  "cpu_threads": 4,
+  "data_sha256": {
+    "perle": "4cfe5347cad8d46bb35e4dc37b43b3e4cdfb6f47be07d95dbc30ad2339741b6a",
+    "mahler": "6ca27d80264f44c70ad22aa93dfb5b2671ee3f99a32cb94d219b070a9cc87621"
+  },
+  "comparison_scope": "Same dimension and upper parameter budget, actual parameter counts reported; not equal parameter counts/FLOPs. AE checkpoints already selected/evaluated; all follow-up held-out comparisons exploratory.",
+  "gpfa_model_selection": "Report pre-specified full dimension grid; any suggested dimension based on validation only, never held-out test; q32/64 primary replicated comparisons fixed before GPFA fitting",
+  "source_limitations": "Published imputed condition-average pseudo-population, not raw simultaneous trials. This only prevents additional future use by this inference pipeline."
+}

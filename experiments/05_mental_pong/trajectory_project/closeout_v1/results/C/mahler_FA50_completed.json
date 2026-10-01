@@ -1,0 +1,772 @@
+{
+  "animal": "mahler",
+  "representation": "FA50",
+  "completed": true,
+  "random_repeats": 1000,
+  "condition_splits": 100,
+  "OLS_calls": 100,
+  "independent_random_y_refits": 100000,
+  "random_xy_heads": 100000,
+  "batch_target_count": 1001,
+  "shared_x_used_for_every_q": true,
+  "OLS_equivalence": {
+    "animal": "mahler",
+    "representation": "FA50",
+    "status": "pass",
+    "independent_vs_multioutput_max_prediction_error": 1.509903313490213e-14,
+    "old_real_OLS_replay_error": 1.3766765505351941e-14,
+    "checked_random_q": [
+      0,
+      1,
+      2
+    ],
+    "identical_label_coefficients_max_abs_error": 0.0
+  },
+  "max_identical_x_prediction_error": 1.9095836023552692e-14,
+  "actual_test_support_count": [
+    1639,
+    1684,
+    1683,
+    1689,
+    1704,
+    1770,
+    1691,
+    1703,
+    1763,
+    1684,
+    1695,
+    1612,
+    1751,
+    1727,
+    1630,
+    1633,
+    1651,
+    1786,
+    1631,
+    1739,
+    1722,
+    1707,
+    1626,
+    1781,
+    1734,
+    1694,
+    1724,
+    1658,
+    1736,
+    1755,
+    1714,
+    1618,
+    1776,
+    1737,
+    1743,
+    1692,
+    1667,
+    1749,
+    1699,
+    1787,
+    1693,
+    1612,
+    1633,
+    1674,
+    1803,
+    1714,
+    1648,
+    1706,
+    1696,
+    1783,
+    1701,
+    1627,
+    1685,
+    1734,
+    1663,
+    1713,
+    1661,
+    1717,
+    1802,
+    1696,
+    1791,
+    1740,
+    1655,
+    1715,
+    1732,
+    1812,
+    1654,
+    1701,
+    1635,
+    1741,
+    1723,
+    1704,
+    1687,
+    1766,
+    1718,
+    1629,
+    1648,
+    1741,
+    1668,
+    1649,
+    1556,
+    1662,
+    1615,
+    1680,
+    1554,
+    1708,
+    1770,
+    1705,
+    1644,
+    1724,
+    1713,
+    1662,
+    1700,
+    1795,
+    1737,
+    1723,
+    1694,
+    1840,
+    1734,
+    1645
+  ],
+  "endpoint_assignments": {
+    "path": "source_pilot://trajectory_project/closeout_v1/artifacts/C/mahler_endpoint_assignments.npz",
+    "sha256": "10a07ad00f4216eab3c9027d0181f16abe83ad14a98da9933004b9aadc865704",
+    "bytes": 262706,
+    "role": "source or output"
+  },
+  "source_training_records": [
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_000/training.json",
+      "sha256": "250995402da35fe0b41af112a9faab2089fb32daee259208776ce887bd0adba9",
+      "bytes": 8020,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_001/training.json",
+      "sha256": "053cc00aa4067c205c0f71c1b2d08ca2b5bc03a903403350200740b4221db2bd",
+      "bytes": 8021,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_002/training.json",
+      "sha256": "1759dadac7e9a39cb84e907d474fd170ca68a9c0bf62c31a940fe28ab82a7320",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_003/training.json",
+      "sha256": "8d09c5b7db34ef3a6fec647890db34f348c2b24872efd851b609228b3a1eb3af",
+      "bytes": 8018,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_004/training.json",
+      "sha256": "2e5b887d25dedd6f5ed5714c660b3e6a7763e50acbceff43abefe154684a5d47",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_005/training.json",
+      "sha256": "02f3ed8047cb1011e7155e8142c6733eb9338d86d32506fa2252f0770b734c38",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_006/training.json",
+      "sha256": "7483814de85764103acbbf5cfbd729ae55cff0c53e7ad3b8d4abd36fc2dbefaf",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_007/training.json",
+      "sha256": "a8041aefebc35d44379c64b3b7fbf216c0a18d0c8f210e057cb17fcc85f5b865",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_008/training.json",
+      "sha256": "6c3717ac8bb8ac4ea13659fd2d364e11ebfd7ae69efcdcd29b6344a3e95682ba",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_009/training.json",
+      "sha256": "0efabc4f89609674a99c89e54293792260751eb167a160a45d0a00d69b21d61c",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_010/training.json",
+      "sha256": "b5b10fb12857da7a064cd78b9e554131eb49e107630e3c0b4ef342837a2540b3",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_011/training.json",
+      "sha256": "c1cd76076530da8e1632521e88cc1908b28754f62b0be95d3ca9dd585f25337b",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_012/training.json",
+      "sha256": "2cd3ac6cbe21825818e788c28b2005e684d9072a80191df7fe24bd2ba77d6c7a",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_013/training.json",
+      "sha256": "5466d86d56ca5cf5062233778b92918b29873d7ae690f9840c8c9a748dae7d2c",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_014/training.json",
+      "sha256": "1c1a66a712e8e2fc8537f8fb96b765fadce13f35c631f144764cd812b7df9ceb",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_015/training.json",
+      "sha256": "12bf0fab674808d89b5f682f2fd280a33acc6f04eb6ce2a2926802a44efa4b5e",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_016/training.json",
+      "sha256": "7a62a17077c22b06af6570603d33461efea53c6aec74f89a3e5733bc9850b9c0",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_017/training.json",
+      "sha256": "9d458591b2851c744974c869e701626c79a83080cf4baf1eba3fe7a7f13b9ef1",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_018/training.json",
+      "sha256": "70538d00269408f9767d7c5f216a55f64ee6ab52f0215f7fde2851b455d4700e",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_019/training.json",
+      "sha256": "2b5f0c8985e63cef738da7432cec20122620e604d20c4255c6e600fe930d70a4",
+      "bytes": 8021,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_020/training.json",
+      "sha256": "c2088b6e24aea608b58c646176f5204e7fc1cb05d21f5b525ab1d1b6f27c4765",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_021/training.json",
+      "sha256": "660fdf764f5960bea7bfe72347390ab530327e78de6a36a9f130ceb7085c41d3",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_022/training.json",
+      "sha256": "57b5cf3513c594229d54a727895807522b24d81a1c1947488f4c536c579bd854",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_023/training.json",
+      "sha256": "fd2312967a0a73e8aeb1b27882baed585db4e4505f359990c2d7aa8778c5674a",
+      "bytes": 8021,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_024/training.json",
+      "sha256": "73991286e0bf64f959d66bea5dbe4002a1715a70313e1bc3d89550d850aedfbd",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_025/training.json",
+      "sha256": "a58e839ffec2ec8e8a36a759e4d4159b857f832ea79f0fa97fe334df5abe2e67",
+      "bytes": 8021,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_026/training.json",
+      "sha256": "16b84babf5784a6c77d74d50bb07421e74339f8128d6349e5f5d5a0e100aea04",
+      "bytes": 8025,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_027/training.json",
+      "sha256": "b94ca81d95e0182febc4db72192b441c54bbf28020d8fb6ae4ab423894f9178b",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_028/training.json",
+      "sha256": "5c3048ad138bbacbc425dc7977846e6ebfea3162498b097b0185ef66948cbfad",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_029/training.json",
+      "sha256": "49f3db0cd7642a3584f5da7fdcc34e0e3a08afd3aac3c2de869b6876962e71d2",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_030/training.json",
+      "sha256": "0d43b17c9d71adbf44d59f14ffbde61242d4e5cf4faecd17bba7ff3c0f36880d",
+      "bytes": 8025,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_031/training.json",
+      "sha256": "1c872d3504ab3180b80d27afd121fdd6a2d2c43748bdcf1590c625591418d6aa",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_032/training.json",
+      "sha256": "93274276ad65100fa976dd4c3e86806432714d06f8a62c9decefb11cc252e21b",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_033/training.json",
+      "sha256": "d2f45a182ac9233e26453e3aacb84ad6323c830df20f924c0e531d1396f15a24",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_034/training.json",
+      "sha256": "3c11b924c60377918b173625817e4d2a0632d289c7009f12ee6bedf12d32cef6",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_035/training.json",
+      "sha256": "a87b8302cbbc58c6d06795d3d7e72b7cd35618ff81a01e764f46e98f3c4b00c0",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_036/training.json",
+      "sha256": "572838c6c646d4f6667876baf991c9a02c3cee715e9b1e7d8359fb3b82c20e73",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_037/training.json",
+      "sha256": "79a3f40570e5123a56dc597a2f6410493595027b0e13790fb1c123808428f9aa",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_038/training.json",
+      "sha256": "9605f95c072895e59ef6f38f5ce630a227b2bebf2bee3a533be844c142099351",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_039/training.json",
+      "sha256": "460d596eea50fb80de817c3aea1521863ea8144e9e866d106ca82b25ae9a82f5",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_040/training.json",
+      "sha256": "f7ed928f44ec5ce05dc0147245b31a0e02342332e72d513e6b3a120c647e4d42",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_041/training.json",
+      "sha256": "a52b9868e9c740403c3c12e04df79e0a52aeab5f6587b7e0b8ef63cea49d62e2",
+      "bytes": 8021,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_042/training.json",
+      "sha256": "bc80e5dba3f2fd0c39351341c09afb43b50b8662cb00f368a331ae57ee412450",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_043/training.json",
+      "sha256": "a8c65e686238b7bb0c4467ef2fc194bacf436c4cdf40f74e0dd1220724d430c2",
+      "bytes": 8025,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_044/training.json",
+      "sha256": "3a53a6fbe847a428d92f74231129e7c47f24b8c1e4faa512419b43da82fb1adc",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_045/training.json",
+      "sha256": "3f7b7200d66ffc1d332ee5ccbdbc07f35e82de34db858b9085380f6b7646ee5e",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_046/training.json",
+      "sha256": "fba5cc17ebd20e504faa8c3f82a57262b817d2c8fd3bc62b70d766d94b67e346",
+      "bytes": 8021,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_047/training.json",
+      "sha256": "560d6ab1099f9c14d8db5e2fce21fc400bff131bb6e6e2df73ce10f9f056cb8e",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_048/training.json",
+      "sha256": "56caca76c829aa9e4df01107a075c100af2c913ed7efa6a3ab2ef9ae3021c322",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_049/training.json",
+      "sha256": "97f01091ed4530613bf75e7d452d080440cf18cde43e2a2e21d17e3915476b11",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_050/training.json",
+      "sha256": "ee52f1c3c3d7219ab6e2480e86e7169f771791d181ec2a9c6ed3414417acefdb",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_051/training.json",
+      "sha256": "03ba2cba891a1d0434243734f851e5a6bdf40651b1b3f1cf9ab0142f31434ea1",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_052/training.json",
+      "sha256": "ff1b8f5b5a7c881dd0f47d363df01d6f8abcd1dba604973990003e59ce8b45c4",
+      "bytes": 8025,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_053/training.json",
+      "sha256": "d3e8f6cee8dabcd96ed4f7bacab5c8f3c4e2beed203267a8c37aa222cbd2efc7",
+      "bytes": 8025,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_054/training.json",
+      "sha256": "b323b8cbbbbdf7e959f59c028c6df8564c1b22be53abd264885a5f57c786dff5",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_055/training.json",
+      "sha256": "849ca7061695fe867b5e892e5b42a981dfe4d1e58a6b7d47403b272228e5be53",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_056/training.json",
+      "sha256": "25ae9771ed4a5af7d4175e2d027565ebb45b6431a9a0f52b554e409300ef6e08",
+      "bytes": 8021,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_057/training.json",
+      "sha256": "501d47d61b1ed7ba1e846027b8c780fe5ffb3f22350f48b3e34bc76d43e813f0",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_058/training.json",
+      "sha256": "16d493c53955c7d3b35ab54c6b2d093feb59ce2a47d4a77f586f852c7d6e9e42",
+      "bytes": 8025,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_059/training.json",
+      "sha256": "5ad2be304df7dc99f41544d98c53d6f7ad503e3fc13d9c8896981174bd2daf8e",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_060/training.json",
+      "sha256": "16ea9b5b73a7b86421985af5062c63159a2ce0017cd5dc7871890eefc6c0aed6",
+      "bytes": 8025,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_061/training.json",
+      "sha256": "d90a616b6558acdc074ef86a9083d39cc8fd460091abc538079c267eb3403e18",
+      "bytes": 8025,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_062/training.json",
+      "sha256": "a4cbf8c8ae1fecefff58f52f9ba81d015137d6b0571f0ef8057f48d699410337",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_063/training.json",
+      "sha256": "9acf0a8ce40d2f7d00cb4cff484a3eafc5b2ebf8db2c09c846bb6cf3a7361e2a",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_064/training.json",
+      "sha256": "9c3e4a6861f40fd74addfbac2f185f20071b95093c60a369fc493d14935c0576",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_065/training.json",
+      "sha256": "445b7c97be9b364cdf245874115fbd423c506b02a873367a184f3873d03b7450",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_066/training.json",
+      "sha256": "65a1f6a6c6fe5b5bc259c7b926bb41330c3dd6339247b9ca92f65b84a5806cba",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_067/training.json",
+      "sha256": "17882a511ae81b5c8969c90f0dec33da697afc8bac743933531b9ea9bd786c1a",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_068/training.json",
+      "sha256": "d85df29db2392992b31d3f3b782b2e4570b97297de981a00888f5c937e46268a",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_069/training.json",
+      "sha256": "5a90a2b79bb9e3fa62b5dcd4e23fb5345b52bc78916380e61acd36bf7c9e0ced",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_070/training.json",
+      "sha256": "aa5f09f584bcf22acdd3abbf5e25c5925cc4963e7f086b6d2e3f128e3dd1ccd1",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_071/training.json",
+      "sha256": "4be21651f0299510d009ee4843513fefec585a83c4e7e6be51e9398b798bdf6c",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_072/training.json",
+      "sha256": "3eebc219ea29c91ebee094c01507192c51099e2732541f343a06b64765639148",
+      "bytes": 8025,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_073/training.json",
+      "sha256": "bc2e4b3fb7af125fe6f8a878b588476914e3ca50bbac00b078a144995cc6b94f",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_074/training.json",
+      "sha256": "a19226a54f3bd97e9b1e0a8ce1860a24671b52bc57dec7cea8db89189c5af08e",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_075/training.json",
+      "sha256": "468d035546b2d34a224b1160146f7a8ea968eec0daab0cc72c1da2fc226a7c04",
+      "bytes": 8025,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_076/training.json",
+      "sha256": "42460ad1a41a3b2dc4f1a9f260b1b91ee826b570cb856f6320c11cf8f6a0adef",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_077/training.json",
+      "sha256": "cd23eb9003ba86e92f619e476a889250f496469e8f50e8e996de9906fd970299",
+      "bytes": 8025,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_078/training.json",
+      "sha256": "3161a5b23e3e5d4cb32624d6474ecf96c8af469eae5ec669d98acac2124185af",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_079/training.json",
+      "sha256": "5c9e4c3bb5aad8325c2093d79c3d351c88792acccef4617e5f9aa202645100f7",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_080/training.json",
+      "sha256": "e5a98dfb6e0aa780f443aa5d4c50b1e1ac1796fc365ba74dbd0ead071473f84e",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_081/training.json",
+      "sha256": "8026481e98bbe3162089427bd1f849982544914769f993b749cf01b57b65c757",
+      "bytes": 8020,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_082/training.json",
+      "sha256": "a6a6a5cc4bbb6b25b61db1794f87a05233699cc3d220eca7f99bfc4704cc6266",
+      "bytes": 8025,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_083/training.json",
+      "sha256": "176adbfaf1177b1661da09fe893e5dc370d8dcc04ea6eaa9e550224b3c65efe5",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_084/training.json",
+      "sha256": "cbb25216f3fbb95c1ce29eba3e8dd0e5578aa825ad2c729acf98b0b6537b4ddb",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_085/training.json",
+      "sha256": "4ae5b234bfcf376012e66bc97a2f4a591df4eb61052ade66a707e8c5bdc8abfa",
+      "bytes": 8020,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_086/training.json",
+      "sha256": "6374f42448d968ad88079f3ce3d045dba4267fecb043e936e02bcb42a3349880",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_087/training.json",
+      "sha256": "10af1a5333b55ad24f6e79a4c2011cbd319bbff64674ffc688a25db1c47475fc",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_088/training.json",
+      "sha256": "bba132e9b3aff57094be9a54f4e615a4f6aa8d5e5d3b96981c07144ca6bce81e",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_089/training.json",
+      "sha256": "2f503399077fac302e651d7495da0a25280fe8eddd44f5a30230aacf4ef5529b",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_090/training.json",
+      "sha256": "0f20b1f8bdd6bf46e3d8fef603536beda8618237e98778ad253cf473a5439c20",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_091/training.json",
+      "sha256": "c421856b89704d4e0c48ce01b877b7d419b5d1c979a1c6667776d2314e3b1d30",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_092/training.json",
+      "sha256": "ef7d3ddfc929ef75a3919b643743de9d4f0c3c4231fc78d59b185bdc3a8bea72",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_093/training.json",
+      "sha256": "30107c110c1d09a68c87589ec63515835e11d4aca3ac14d5e9f3da4b8bf206c5",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_094/training.json",
+      "sha256": "83cc44b3662fc60ad98124a0cc5dc0cc2aa2cac4a2a8a3e8936cdeb0daadf887",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_095/training.json",
+      "sha256": "e007fd77236ffe9c8195ca0320c686936b7d4a895fb7ad997bb1710c2a595a2f",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_096/training.json",
+      "sha256": "18d6b4532d42d2cb7bb96e3275f4c4405f44e63ce128941a5b56d8944db5d7db",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_097/training.json",
+      "sha256": "f61b1077d2b4bf10e05ed0db9448b007e906591de2b6f9db5370a3a2a6fdcd98",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_098/training.json",
+      "sha256": "1c045a0d3b120b0315b591ed12dc8a1eb5bb7878b660b70cd4d8d8976a591da6",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/mahler/round_099/training.json",
+      "sha256": "647fd195f3887aab331ef6e31c8f3ce61061ce282d1e9f38fc03aedc4dde6234",
+      "bytes": 8023,
+      "role": "source or output"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/artifacts/C/mahler_FA50_OLS_weights.npz",
+      "sha256": "19f2d9d974ed7ed448a29802da07b4c2b45ff95c1fe0d1c13c87f9e2a333a03d",
+      "bytes": 39861691,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/artifacts/C/mahler_FA50_fixed_examples.npz",
+      "sha256": "3296d28bcd7cf03944f456f4e1aa5c4528e01759e04ec40446a41ab53861e8e4",
+      "bytes": 4092990,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/results/C/mahler_FA50_all_scores.npz",
+      "sha256": "61fb8708982a2b6ec2bde6259db9ddf87db1da779abbdae9274532a8541ec929",
+      "bytes": 65521994,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/results/C/mahler_FA50_summary.csv",
+      "sha256": "d530cd93f992137bdac7892f5bde8c38850b40f78e73f8c1766891c87b287ff3",
+      "bytes": 27100,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/results/C/mahler_FA50_per_q_mean100.csv",
+      "sha256": "7a86363cc9c7b413f7ad1315951fbca797cb886573ba7d7479e6010dd0fabfe3",
+      "bytes": 2088308,
+      "role": "source or output"
+    }
+  ],
+  "elapsed_seconds": 51.52275380003266,
+  "raw_preprocessing": "fail",
+  "new_representation_fit": false,
+  "new_inference": false
+}

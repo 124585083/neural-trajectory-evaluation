@@ -1,0 +1,15 @@
+{
+  "study": "Mental-Pong",
+  "scientific_status": "CLOSED_EXPLORATORY_WITH_LIMITATIONS",
+  "raw_preprocessing": "fail",
+  "module": "experiments/05_mental_pong",
+  "source_versions": [
+    "condition_endpoint_fa_gpfa_v1",
+    "closeout_v1"
+  ],
+  "registry": "experiments/05_mental_pong/integration/artifact_registry.csv",
+  "migration_map": "experiments/05_mental_pong/integration/migration_map.csv",
+  "integration_verification": "experiments/05_mental_pong/integration/verification.json",
+  "full_scientific_run_repeated": false,
+  "large_artifacts": "External configured storage; availability is reported separately from scientific completion."
+}

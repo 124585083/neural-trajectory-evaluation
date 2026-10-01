@@ -37,10 +37,10 @@ Poisson objective, AdamW settings, scheduler, seed, and frames 50--299 evaluatio
 
 It retains the full Dynamic baseline's Factorized3D kernels, activations,
 normalization, regularizers, Gaussian-readout hyperparameters, shifter, and output
-nonlinearity. It is therefore a **total-parameter-matched Dynamic control**, not an
-official Sensorium baseline reproduction.
+nonlinearity. This defines the **total-parameter-matched Dynamic control** used
+in the project. The original full-width baseline is documented separately.
 
-The match applies to total trainable count, not to core structure. Static uses a
+The match applies to total trainable count. Core structure remains different: Static uses a
 four-layer 2D frame-wise core with 50,624 parameters; Dynamic uses a three-stage
 Factorized3D core with 98,672 parameters and learned temporal convolutions. The
 identical 2,763,106-parameter readout dominates both totals. The comparison therefore

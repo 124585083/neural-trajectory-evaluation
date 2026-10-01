@@ -1,0 +1,543 @@
+{
+  "python_ast_equal_except_declared_interpretation_string": true,
+  "q1_q6_json_equal_except_interpretation": true,
+  "phase2_package_equal_except_description": true,
+  "figure_generator_equal_except_declared_prose": true,
+  "existing_markdown_numeric_tables": [
+    {
+      "path": "docs/METHODS.md",
+      "numeric_table_tokens_identical": true
+    },
+    {
+      "path": "docs/GPFA_VALIDATION.md",
+      "numeric_table_tokens_identical": true
+    },
+    {
+      "path": "docs/DESIGN_RATIONALE.md",
+      "numeric_table_tokens_identical": true
+    },
+    {
+      "path": "docs/RESULTS.md",
+      "numeric_table_tokens_identical": true
+    },
+    {
+      "path": "docs/DATA_AND_REPRODUCIBILITY.md",
+      "numeric_table_tokens_identical": true
+    },
+    {
+      "path": "docs/results/Q1_Q6_ANSWERS.md",
+      "numeric_table_tokens_identical": true
+    },
+    {
+      "path": "docs/supplementary/model_reports/STATIC_MODEL.md",
+      "numeric_table_tokens_identical": true
+    },
+    {
+      "path": "docs/supplementary/model_reports/DYNAMIC_MODEL.md",
+      "numeric_table_tokens_identical": true
+    },
+    {
+      "path": "docs/supplementary/model_reports/PARAMETER_MATCHED_DYNAMIC.md",
+      "numeric_table_tokens_identical": true
+    },
+    {
+      "path": "docs/supplementary/implementation/EXPERIMENT_MATRIX.md",
+      "numeric_table_tokens_identical": true
+    },
+    {
+      "path": "experiments/01_baselines/README.md",
+      "numeric_table_tokens_identical": true
+    },
+    {
+      "path": "experiments/02_gpfa_reliability/README.md",
+      "numeric_table_tokens_identical": true
+    },
+    {
+      "path": "experiments/03_parameter_matching/README.md",
+      "numeric_table_tokens_identical": true
+    },
+    {
+      "path": "experiments/04_model_comparison/README.md",
+      "numeric_table_tokens_identical": true
+    }
+  ],
+  "old_scientific_artifact_hashes": [
+    {
+      "path": "experiments/01_baselines/configs/phase1A_dynamic_official.yaml",
+      "identical": true
+    },
+    {
+      "path": "experiments/01_baselines/configs/static_dynamic_sensorium2023.yaml",
+      "identical": true
+    },
+    {
+      "path": "experiments/01_baselines/records/dynamic/training_config.yaml",
+      "identical": true
+    },
+    {
+      "path": "experiments/01_baselines/records/dynamic/validation_events.jsonl",
+      "identical": true
+    },
+    {
+      "path": "experiments/01_baselines/records/static/training_config.yaml",
+      "identical": true
+    },
+    {
+      "path": "experiments/01_baselines/records/static/validation_events.jsonl",
+      "identical": true
+    },
+    {
+      "path": "experiments/02_gpfa_reliability/configs/pilot.yaml",
+      "identical": true
+    },
+    {
+      "path": "experiments/03_parameter_matching/configs/dynamic_parameter_matched.yaml",
+      "identical": true
+    },
+    {
+      "path": "experiments/03_parameter_matching/records/training_config.yaml",
+      "identical": true
+    },
+    {
+      "path": "experiments/03_parameter_matching/records/validation_events.jsonl",
+      "identical": true
+    },
+    {
+      "path": "experiments/04_model_comparison/configs/pilot.yaml",
+      "identical": true
+    },
+    {
+      "path": "models/gpfa_model_comparison/gpfa.pkl",
+      "identical": true
+    },
+    {
+      "path": "models/gpfa_model_comparison/preprocessing.npz",
+      "identical": true
+    },
+    {
+      "path": "models/gpfa_reliability/gpfa.pkl",
+      "identical": true
+    },
+    {
+      "path": "models/gpfa_reliability/preprocessing.npz",
+      "identical": true
+    },
+    {
+      "path": "models/official_dynamic/best.pt",
+      "identical": true
+    },
+    {
+      "path": "models/parameter_matched_dynamic/best.pt",
+      "identical": true
+    },
+    {
+      "path": "models/parameter_matched_dynamic/epoch_65_validation_matched.pth",
+      "identical": true
+    },
+    {
+      "path": "models/static_on_dynamic/best.pt",
+      "identical": true
+    },
+    {
+      "path": "results/manifests/model_files.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/model_selection.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/null_distributions.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/reliability_summary.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/split_half_observed.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_latent_dim_12.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_latent_dim_16.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_latent_dim_4.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_latent_dim_8.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_neuron_count_1024.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_neuron_count_128.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_neuron_count_256.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_neuron_count_512.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_observation_step_1.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_observation_step_4.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_random_seed_2718.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_random_seed_314.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_random_seed_42.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_split_count_500.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_train_fraction_0.25.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_train_fraction_0.5.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_train_fraction_0.75.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_train_fraction_1.0.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/saturation_metrics.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/split_count_convergence.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/split_count_nulls_500.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/split_count_observed_500.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/gpfa_model_metrics.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/gpfa_model_nulls.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/gpfa_model_null_summary.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/gpfa_model_paired_bootstrap.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/gpfa_model_paired_bootstrap_raw.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/gpfa_model_selection.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/gpfa_reliability_nulls.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/gpfa_reliability_observed.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/gpfa_reliability_summary.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/q2_condition_conventional_bootstrap.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/q4_response_score_matched_output_gpfa_bootstrap.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/q5_temporal_ablation_curve.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/q5_temporal_ablation_monotonicity.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/q6_candidate_metrics.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/q6_leave_family_out_errors.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/traditional_metrics.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/traditional_paired_bootstrap.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/sensitivity/sensitivity_metrics.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/sensitivity/sensitivity_null_summary.csv",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/sensitivity/split_count_convergence.csv",
+      "identical": true
+    }
+  ],
+  "all_scientific_files_identical": true,
+  "visual_inspection": [
+    {
+      "path": "results/figures/figure-1-experimental-workflow.png",
+      "result": "pass",
+      "checks": "English labels legible; no clipping/overlap introduced; original axes, layout, and numerical data retained."
+    },
+    {
+      "path": "results/figures/figure-2-static-dynamic-comparison.png",
+      "result": "pass",
+      "checks": "English labels legible; no clipping/overlap introduced; original axes, layout, and numerical data retained."
+    },
+    {
+      "path": "results/figures/figure-3-temporal-ablation.png",
+      "result": "pass",
+      "checks": "English labels legible; no clipping/overlap introduced; original axes, layout, and numerical data retained."
+    }
+  ],
+  "render_runtime": {
+    "node": "v24.19.0",
+    "source": "bundled codex-primary-runtime node and sharp",
+    "command": "node scripts/make_core_figures.js",
+    "scientific_analysis_run": false
+  },
+  "remaining_old_json_files": [
+    {
+      "path": "experiments/01_baselines/records/dynamic/architecture_audit.json",
+      "identical": true
+    },
+    {
+      "path": "experiments/01_baselines/records/dynamic/official_evaluation.json",
+      "identical": true
+    },
+    {
+      "path": "experiments/01_baselines/records/dynamic/optimizer_configuration.json",
+      "identical": true
+    },
+    {
+      "path": "experiments/01_baselines/records/dynamic/random_seed.json",
+      "identical": true
+    },
+    {
+      "path": "experiments/01_baselines/records/dynamic/scheduler_configuration.json",
+      "identical": true
+    },
+    {
+      "path": "experiments/01_baselines/records/dynamic/temporal_alignment.json",
+      "identical": true
+    },
+    {
+      "path": "experiments/01_baselines/records/dynamic/training_summary.json",
+      "identical": true
+    },
+    {
+      "path": "experiments/01_baselines/records/static/architecture_audit.json",
+      "identical": true
+    },
+    {
+      "path": "experiments/01_baselines/records/static/official_evaluation.json",
+      "identical": true
+    },
+    {
+      "path": "experiments/01_baselines/records/static/training_summary.json",
+      "identical": true
+    },
+    {
+      "path": "experiments/03_parameter_matching/records/architecture_audit.json",
+      "identical": true
+    },
+    {
+      "path": "experiments/03_parameter_matching/records/audit_summary.json",
+      "identical": true
+    },
+    {
+      "path": "experiments/03_parameter_matching/records/data_split_lock.json",
+      "identical": true
+    },
+    {
+      "path": "experiments/03_parameter_matching/records/official_evaluation.json",
+      "identical": true
+    },
+    {
+      "path": "experiments/03_parameter_matching/records/training_summary.json",
+      "identical": true
+    },
+    {
+      "path": "results/tables/01_baselines/official_dynamic_oracle.json",
+      "identical": true
+    },
+    {
+      "path": "results/tables/01_baselines/static_on_dynamic_oracle.json",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/behavior_conditioned_prior.json",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/data_audit.json",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/run_summary.json",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/saturation_runs.json",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/saturation_summary.json",
+      "identical": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/split_count_summary.json",
+      "identical": true
+    },
+    {
+      "path": "results/tables/03_parameter_matching/parameter_matched_dynamic_oracle.json",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/extended_prediction_summary.json",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/gpfa_model_summary.json",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/gpfa_run_summary.json",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/prediction_summary.json",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/protocol_lock.json",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/traditional_summary.json",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/sensitivity/sensitivity_runs.json",
+      "identical": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/sensitivity/sensitivity_summary.json",
+      "identical": true
+    }
+  ],
+  "remaining_old_json_identical": true,
+  "edited_document_links": {
+    "count": 171,
+    "missing": []
+  },
+  "chinese_character_scan": {
+    "scope": "All original tracked first-party text including Python, Markdown, JSON/JSONL, CSV, YAML, TOML, JS, and SVG",
+    "remaining_files": []
+  },
+  "tests": [
+    {
+      "phase": "02_gpfa_reliability",
+      "status": "pass",
+      "passed": 8,
+      "runtime": "Mental-Pong pilot Python 3.11 environment",
+      "command": "python -B -m pytest experiments/02_gpfa_reliability/tests -q -p no:cacheprovider --basetemp <external_temp>"
+    },
+    {
+      "phase": "04_model_comparison",
+      "status": "pass",
+      "passed": 5,
+      "seconds": 35.49,
+      "runtime": "Mental-Pong pilot Python 3.11 environment",
+      "command": "python -B -m pytest experiments/04_model_comparison/tests -q -p no:cacheprovider --basetemp <external_temp>"
+    },
+    {
+      "phase": "03_parameter_matching",
+      "status": "pass",
+      "attempts": [
+        {
+          "runtime": "Mental-Pong pilot",
+          "outcome": "collection blocked: missing neuralpredictors"
+        },
+        {
+          "runtime": "original encoding environment",
+          "outcome": "collection blocked: sensorium source not on runtime path"
+        },
+        {
+          "runtime": "original encoding environment plus original pinned sensorium source in command-local PYTHONPATH",
+          "sensorium_commit": "0e02656220e84a50f3be1b92d6f66c2f9ccd51ef",
+          "outcome": "pass: 1 test, 1 data test deselected; upstream deprecation warnings retained"
+        }
+      ],
+      "passed": 1,
+      "deselected": 1,
+      "warnings": 33,
+      "seconds": 116.53,
+      "command": "python -B -m pytest experiments/03_parameter_matching/tests -m \"not data\" -q -p no:cacheprovider --basetemp <external_temp>",
+      "runtime": "Original Sensorium encoding Python 3.11 environment with its pinned source checkout added only to this command PYTHONPATH"
+    },
+    {
+      "phase": "01_baselines",
+      "status": "not_run",
+      "reason": "Existing tests require raw Sensorium data and construct full baseline architectures; no raw-data-independent test is committed."
+    }
+  ],
+  "test_write_policy": "All tests invoked outside the repository with -B and cacheprovider disabled; synthetic temporary files were directed to the external integration work directory. No packages were installed or upgraded.",
+  "total_lightweight_tests_passed": 14,
+  "new_scientific_analyses": false
+}

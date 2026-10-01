@@ -1,0 +1,73 @@
+{
+  "version": "C_endpoint_refit_v1",
+  "B": 1000,
+  "seeds": {
+    "mahler": 271828,
+    "perle": 271829
+  },
+  "rng": "numpy.random.default_rng PCG64",
+  "examples": [
+    0,
+    1,
+    2
+  ],
+  "epochs": [
+    "full",
+    "visible",
+    "hidden",
+    "bounce",
+    "no_bounce",
+    "post_bounce",
+    "endpoint_influence"
+  ],
+  "metrics": [
+    "r",
+    "RMSE",
+    "bias",
+    "target_sd",
+    "prediction_sd",
+    "amplitude_ratio",
+    "target_min",
+    "target_max",
+    "SSE",
+    "baseline_SSE",
+    "skill",
+    "objective_distance_RMSE",
+    "baseline_r",
+    "baseline_RMSE"
+  ],
+  "OLS": {
+    "class_name": "sklearn.linear_model.LinearRegression",
+    "fit_intercept": true,
+    "positive": false,
+    "dtype": "float64",
+    "sample_weight": null,
+    "regularization": null
+  },
+  "batch": "1000 separate y outputs plus one identical shared x output; actual sklearn fit per split/representation",
+  "eligibility": "original 78 valid conditions only; all 79 retain split identities",
+  "geometry": "exact prior endpoint_candidates; original offset + alpha*endpoint; no clipping or rejections",
+  "feasibility": "all 78 x 78 assignment pairs audited before neural outcomes; alpha convexity tolerance 1e-10 only",
+  "baseline": "unweighted mean endpoint of valid training conditions, with each test condition own geometry",
+  "objective_baseline": "same candidate geometry with training-condition mean objective_end_y; original objective labels remain scoring target",
+  "endpoint_influence": "no bounce: common bins with x>x0 (alpha>0); bounce: unchanged original post_bounce mask",
+  "correlation": "Pearson; fewer than 3 rows or constant target/prediction -> NA",
+  "aggregation": "score each split first; q statistic = nanmean of its 100 split scores; std ddof=0",
+  "tail": "empirical proportion of q-mean random scores at least as good as observed, no exact p claim",
+  "numerical_equivalence_tolerance": 1e-08,
+  "raw_preprocessing": "fail",
+  "provided_input_filtering": "pass only relative to released inputs",
+  "fit_provenance": "pass only relative to released inputs",
+  "source_protocol": {
+    "path": "source_pilot://trajectory_project/closeout_v1/configs/closeout_protocol.json",
+    "sha256": "e1425e80677ab0210daf37f460d2636be7bde5862a9f53afa853bfcbb16c4873",
+    "bytes": 5527,
+    "role": "source or output"
+  },
+  "source_splits": {
+    "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/configs/condition_splits_100.json",
+    "sha256": "dbd9f694ec190d046b1d000b31c5196ca41661df8d539ea17fa6b5ecf7c196f0",
+    "bytes": 222295,
+    "role": "source or output"
+  }
+}

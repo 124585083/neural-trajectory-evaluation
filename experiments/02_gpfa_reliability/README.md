@@ -1,6 +1,6 @@
 # Phase 2 — GPFA reliability
 
-This phase develops and validates a neural-data-defined GPFA trajectory assay using recorded neural responses before the assay is used for Static–Dynamic model comparison.
+This Study 1 phase fits a neural-data-defined Gaussian-process factor analysis (GPFA) model and tests trajectory reliability before Static–Dynamic comparison. Its posterior uses the full observation window. The separate Mental-Pong GPFA has its own implementation and audit.
 
 ## Purpose
 

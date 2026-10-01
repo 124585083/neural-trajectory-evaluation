@@ -1,0 +1,215 @@
+{
+  "audit_status": "Completed source audit, verified released-FA50 readout recomputation for both animals and pooled data, plus reliability/FA50/readout refits from released neural response arrays for Perle and pooled data",
+  "sources": {
+    "repository": "https://github.com/jazlab/MentalPong",
+    "commit": "b976255be73140c759d8f8db0fd8ff551a4e2d73",
+    "paper": "https://www.nature.com/articles/s41467-024-54688-y",
+    "fulltext_retrieved_from": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11696028/fullTextXML",
+    "data": "https://zenodo.org/records/13952210",
+    "expected_archive_md5": "382e420c6f053d8ac2bdd4acd2fb02b2"
+  },
+  "data_contract_from_code_not_yet_data_verified": {
+    "responses": "neural_responses, neural_responses_sh1, neural_responses_sh2: category -> neuron x condition x time",
+    "categories": {
+      "occ": "occ_alpha == 1 & ignore == 0",
+      "vis": "occ_alpha != 1 & ignore == 0"
+    },
+    "category_warning": "vis/occ select different task trials; neither is merely a within-trial epoch",
+    "expected_conditions_time": [
+      79,
+      100
+    ],
+    "within_trial_masks": [
+      "start_end_pad0",
+      "start_occ_pad0",
+      "occ_end_pad0",
+      "occ_pad0",
+      "f_pad0",
+      "pretrial_pad0"
+    ],
+    "mask_values": "finite means included; NaN means absent; binning can retain partly covered boundary bins",
+    "metadata": "meta rows in PONG_BASIC_META_IDX order; py_meta_index identifies physical condition; neural_meta contains recording-session and unit fields",
+    "neuron_alignment": "neural_idx_global[category][response_field] maps each response field separately into neural_meta; intersect/reorder by these IDs before comparing halves",
+    "raw_units": "trial-mean count per 1ms bin, then mean of adjacent 50 bins; multiplying by 1000 gives Hz, not an integer spike count",
+    "bin_availability": "the time-bin value becomes available at its right edge; 50ms bin must not be labelled available at its left edge",
+    "population": "different recording sessions concatenated along neuron axis: condition-averaged pseudo-population, not simultaneous single-trial population",
+    "halves": "within each unit's eligible trial set and physical condition, train_test_split(test_size=0.5, random_state=0) generates one fixed disjoint split; no independent resplits in released arrays",
+    "trial_counts": "trial_meta and session-total ntr_vis/ntr_occ may be available; exact unit-condition stable trial counts and trial membership are not directly stored in aggregated fields",
+    "full_mean": "odd trial counts can make full mean differ from equal-weight half means; imputation may create additional differences",
+    "upstream_processing": [
+      "full-dataset condition-coverage selection removes neurons missing more than five conditions",
+      "missing whole-condition responses are filled with the neuron's mean across all conditions and times separately for each response field",
+      "unit stability uses a three-trial moving average of overall firing, an upstream selection not a test-time causal operation",
+      "paper and main builder specify independent 50ms bins without temporal smoothing; separate plotting utilities contain bilateral smoothing but main builder does not call it",
+      "reliability filtering in the official augmented fields uses both halves across all conditions, Pearson p < .01 and positive r",
+      "official FA factors are fitted using all conditions outside readout CV; each half's factors are fitted separately, so released FA half coordinates are not a shared reliability space"
+    ],
+    "upstream_boundary": "a causal encoder cannot reverse global-mean imputation or all-data selection already present in the release; report processed-input causality separately from raw-spike causality"
+  },
+  "reproduction_plan": {
+    "figures": {
+      "3D": "zero-lag all-condition pooled ball x/y readout",
+      "3E": "same fitted readout scored in visible and occluded within-trial masks",
+      "3F": "phase-start/end aligned 2D RMSE"
+    },
+    "input": "occ task category; reliable neural population represented by FA50",
+    "default": "rerun readout on released author-fitted FA50 and compare its predictions to author saved zero-roll results",
+    "optional_refit": "recompute reliability selection and FA50 from released full-mean responses, then repeat same readout protocol; no reimputation or smoothing",
+    "split": "GroupShuffleSplit n_splits=100, train_size=0.5, random_state=0, all time points of a physical condition grouped",
+    "readout": "single LinearRegression with intercept across all trial times; no temporal-history decoder; no additional scaling",
+    "row_filter": "finite full-trial neural representation and all behavioral variables requested by official decode script; not just the two ball-position columns",
+    "metrics": [
+      "Pearson x/y",
+      "Spearman x/y",
+      "MAE x/y",
+      "RMSE x/y",
+      "2D RMSE = sqrt(MSE_x + MSE_y)"
+    ],
+    "paper_reference": "Figure 3D pooled animals rounded r_x=0.97, r_y=0.83; single-animal outputs are not directly equal to pooled reference",
+    "claims_not_new": "ball position, velocity, direction and behavioral-variable decodability are established analyses in original work",
+    "uncertainty": "100 overlapping train/test splits describe split sensitivity; they do not make 100 independent animals or trial-half replicates",
+    "implementation_caveats": [
+      "official plotting helper uses standard deviation error bars while caption says SEM; report explicitly named SD across splits",
+      "helper computes mse_mu but omits it from an intermediate returned dictionary, leaving its stored epoch mse_mu NaN; recompute RMSE directly with explicit formula",
+      "helper's current Wilcoxon call tests occluded coefficients against zero, not visible-vs-occluded difference; this pilot will not inherit it as an epoch-equivalence test",
+      "original data_utils loader may overwrite pickles during augmentation; pilot uses read-only verified loader instead"
+    ]
+  },
+  "source_locations": {
+    "data_builder": "third_party/MentalPong/analyses/PhysDataset.py",
+    "half_means_and_stability": "third_party/MentalPong/analyses/PhysSession.py",
+    "imputation_and_factors": "third_party/MentalPong/analyses/phys_utils.py",
+    "all_data_reliability_and_factors": "third_party/MentalPong/analyses/dataset_augment_utils.py",
+    "official_readout": "third_party/MentalPong/analyses/decode_utils.py",
+    "decode_configuration": "third_party/MentalPong/analyses/population_decode/online/DecodeOverTime.py",
+    "figure_mapping": [
+      "third_party/MentalPong/code/figure3d.ipynb",
+      "third_party/MentalPong/code/figure3ef.ipynb"
+    ],
+    "plotting": "third_party/MentalPong/code/utils/decoding_summary.py"
+  },
+  "adapter_validation": {
+    "status": "passed synthetic equivalence",
+    "test": "Three grouped splits, original Decoder_3Ddata vs pilot adapter using identical synthetic inputs and complete official target row filter",
+    "prediction_absolute_tolerance": 1e-12,
+    "pearson_absolute_tolerance": 1e-12,
+    "numpy": "1.26.4",
+    "scipy": "1.14.1",
+    "scikit_learn": "1.5.2",
+    "real_data_loaded": false
+  },
+  "real_data_runs": {
+    "perle": {
+      "summary_file": "results/official_perle/official_summary.json",
+      "runtime_seconds": 24.217452400014736,
+      "n_splits": 100,
+      "valid_condition_time_rows": 3502,
+      "same_author_rows": true,
+      "same_author_missingness": true,
+      "author_prediction_max_abs_difference": 1.6475709685437323e-13,
+      "provenance": {
+        "dataset": "source_data://raw/extracted/MentalPong/data/perle_hand_dmfc_dataset_50ms.pkl",
+        "dataset_sha256": "6d8d86e6f2eeafaf40fafd0824314ebe51b3c75778a477703467169c791aad3f",
+        "official_archive_md5": "382e420c6f053d8ac2bdd4acd2fb02b2",
+        "manifest": "source_data://raw/download_manifest.json",
+        "author_result": "source_data://raw/extracted/MentalPong/data/decode_perle_hand_dmfc_occ_start_end_pad0_50ms_0.50_neural_responses_reliable_FactorAnalysis_50.pkl",
+        "author_result_sha256": "5ee696b80c5ccf360a01718aa1028ff0c9961d8fcab47ed4c60d48a8535dd2ee"
+      }
+    },
+    "mahler": {
+      "summary_file": "results/official_mahler/official_summary.json",
+      "runtime_seconds": 22.10547999999835,
+      "n_splits": 100,
+      "valid_condition_time_rows": 3502,
+      "same_author_rows": true,
+      "same_author_missingness": true,
+      "author_prediction_max_abs_difference": 1.9451107391432743e-13,
+      "provenance": {
+        "dataset": "source_data://raw/extracted/MentalPong/data/mahler_hand_dmfc_dataset_50ms.pkl",
+        "dataset_sha256": "58977dd09f8ec3bd1f582e01216a34fc63e2909817f51866ffefb6241bffbb10",
+        "official_archive_md5": "382e420c6f053d8ac2bdd4acd2fb02b2",
+        "manifest": "source_data://raw/download_manifest.json",
+        "author_result": "source_data://raw/extracted/MentalPong/data/decode_mahler_hand_dmfc_occ_start_end_pad0_50ms_0.50_neural_responses_reliable_FactorAnalysis_50.pkl",
+        "author_result_sha256": "05d9d2dc3655fbdac594e3248ea8b5d64ab677d0d43673fa3b1ad37c55dfd3d4"
+      }
+    },
+    "all": {
+      "summary_file": "results/official_all/official_summary.json",
+      "runtime_seconds": 22.923847099998966,
+      "n_splits": 100,
+      "valid_condition_time_rows": 3502,
+      "same_author_rows": true,
+      "same_author_missingness": true,
+      "author_prediction_max_abs_difference": 7.283063041541027e-14,
+      "provenance": {
+        "dataset": "source_data://raw/extracted/MentalPong/data/all_hand_dmfc_dataset_50ms.pkl",
+        "dataset_sha256": "baf3aba4eb2aadafb02f0a2c84783a620b21e242f51c908a1aed951dffe937e8",
+        "official_archive_md5": "382e420c6f053d8ac2bdd4acd2fb02b2",
+        "manifest": "source_data://raw/download_manifest.json",
+        "author_result": "source_data://raw/extracted/MentalPong/data/decode_all_hand_dmfc_occ_start_end_pad0_50ms_0.50_neural_responses_reliable_FactorAnalysis_50.pkl",
+        "author_result_sha256": "cdbc48e58aa4aaf5074701f170f2f3ba559ae0b315678a24da69c6efe7739107"
+      }
+    }
+  },
+  "published_paper_discrepancy": {
+    "paper_fig3d_caption_r_xy": [
+      0.97,
+      0.83
+    ],
+    "released_artifact_mean_split_r_xy": [
+      0.9663805333589104,
+      0.8210053641458882
+    ],
+    "pilot_recomputed_mean_split_r_xy": [
+      0.9663805333589103,
+      0.8210053641458882
+    ],
+    "status": "Released artifact and recomputation agree to floating-point precision. Caption y=.83 does not round from released mean y=.8210 (.82). Reason unresolved; do not change filtering to force agreement.",
+    "figure_code_check": "code/utils/decoding_summary.py plot_decode_performance_xy labels mean/sd of per-split r; its plotted scatter instead contains split-averaged predictions. These estimands should not be swapped."
+  },
+  "phase_result_boundary": "Both within-trial phases show position decodability; the pilot has not tested epoch equivalence or reconstructed the paper permutation p-values. Original finite phase masks overlap at the transition bin; strict AE route excludes that boundary.",
+  "fa_refit_runs": {
+    "perle": {
+      "summary_file": "results/official_perle_refit_fa50/official_summary.json",
+      "runtime_seconds": 24.25077899999451,
+      "reliable_units_recomputed": 1552,
+      "fa_iterations": 7,
+      "fa_loglike_last": 19580084.997871954,
+      "fa_fit_scope": "all conditions (official protocol; not strict held-out preprocessing)",
+      "n_splits": 100,
+      "same_author_rows": true,
+      "same_author_missingness": true,
+      "author_prediction_max_abs_difference": 5.431211036466266e-13,
+      "provenance": {
+        "dataset": "source_data://raw/extracted/MentalPong/data/perle_hand_dmfc_dataset_50ms.pkl",
+        "dataset_sha256": "6d8d86e6f2eeafaf40fafd0824314ebe51b3c75778a477703467169c791aad3f",
+        "official_archive_md5": "382e420c6f053d8ac2bdd4acd2fb02b2",
+        "manifest": "source_data://raw/download_manifest.json",
+        "author_result": "source_data://raw/extracted/MentalPong/data/decode_perle_hand_dmfc_occ_start_end_pad0_50ms_0.50_neural_responses_reliable_FactorAnalysis_50.pkl",
+        "author_result_sha256": "5ee696b80c5ccf360a01718aa1028ff0c9961d8fcab47ed4c60d48a8535dd2ee"
+      },
+      "distinction": "Fresh reliability filtering and FA fitting from published full-mean response arrays; follows original all-condition/transductive preprocessing, not pilot strict split"
+    },
+    "all": {
+      "summary_file": "results/official_all_refit_fa50/official_summary.json",
+      "runtime_seconds": 26.1707603999821,
+      "reliable_units_recomputed": 1889,
+      "fa_iterations": 6,
+      "fa_loglike_last": 23905515.65977442,
+      "fa_fit_scope": "all conditions (official protocol; not strict held-out preprocessing)",
+      "n_splits": 100,
+      "same_author_rows": true,
+      "same_author_missingness": true,
+      "author_prediction_max_abs_difference": 4.5297099404706387e-13,
+      "provenance": {
+        "dataset": "source_data://raw/extracted/MentalPong/data/all_hand_dmfc_dataset_50ms.pkl",
+        "dataset_sha256": "baf3aba4eb2aadafb02f0a2c84783a620b21e242f51c908a1aed951dffe937e8",
+        "official_archive_md5": "382e420c6f053d8ac2bdd4acd2fb02b2",
+        "manifest": "source_data://raw/download_manifest.json",
+        "author_result": "source_data://raw/extracted/MentalPong/data/decode_all_hand_dmfc_occ_start_end_pad0_50ms_0.50_neural_responses_reliable_FactorAnalysis_50.pkl",
+        "author_result_sha256": "cdbc48e58aa4aaf5074701f170f2f3ba559ae0b315678a24da69c6efe7739107"
+      },
+      "distinction": "Fresh reliability filtering and FA fitting from published full-mean response arrays; follows original all-condition/transductive preprocessing, not pilot strict split"
+    }
+  }
+}

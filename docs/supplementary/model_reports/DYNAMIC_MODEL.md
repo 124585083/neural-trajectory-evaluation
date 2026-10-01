@@ -1,6 +1,6 @@
 # Dynamic Encoding Model: Sensorium 2023 Factorized3D Reproduction Report
 
-Last updated: 2026-08-11
+Scientific record date: 2026-08-11. This English publication edition preserves the recorded architecture, training history, and numerical results.
 
 ## One-page summary
 
@@ -35,13 +35,7 @@ The historical `neuralpredictors` pin contains a channel-wiring issue for the va
 
 ### 2.1 Data location, scope, and integrity
 
-```text
-physical data root
-data/sensorium_all_2023
-
-project junction
-data/sensorium_all_2023
-```
+The published configurations use `data/sensorium_all_2023` relative to the repository. The original local run used a directory junction to external data. Reproduction can use a direct configured root or an optional junction; see [Data and Reproducibility](../../DATA_AND_REPRODUCIBILITY.md).
 
 All ten Dynamic Sensorium sessions and their verified archives are retained. The formal baseline uses only the five competition sessions specified by the official configuration; the other five OOD sessions were not deleted. The MD5 hashes of all five formal archives match the official values.
 
@@ -188,7 +182,7 @@ The official metric first discards response frames 0–49, leaving 30 frames, an
 
 ### 4.3 Full 300-frame evaluation
 
-Final evaluation does not repeatedly process 80-frame windows and concatenate the outputs. Instead, the complete trial is passed through the model in a single forward pass:
+Final evaluation passes each complete trial through the model in a single forward pass:
 
 ```text
 input                       [B,3,300,36,64]
@@ -354,7 +348,7 @@ Primary architectural differences:
 | Total parameters | 2,814,015 | 5,707,743 |
 | Oracle correlation | 0.1644077748 | 0.1966732591 |
 
-The two models can therefore be compared at both the response level and the brain-based trajectory level, but their difference cannot be attributed entirely to temporal modeling. They also differ in core architecture, channel structure, convolutional operators, core parameterization, effective computation, optimization geometry, and inductive bias; the full Dynamic model additionally has a larger total parameter count.
+The common data and alignment permit a response-level comparison. A separate frozen neural-data-defined space permits trajectory comparison. Core architecture, channel structure, convolutional operators, parameterization, optimization geometry, and inductive bias also differ; the full Dynamic model has more total parameters. These differences prevent attribution of the complete-model result solely to temporal modeling.
 
 ## 8. Reproducibility files
 
@@ -386,7 +380,7 @@ regenerated locally by the evaluation command; full tensors are excluded from Gi
 
 ## 9. Final assessment
 
-I consider the current Dynamic checkpoint to be a suitable full-width benchmark for the controlled model comparison: the full architecture, complete five-session data scope, oracle performance, independent reload evaluation, and temporal alignment have all been confirmed.
+The recorded checks confirm the full architecture, five-session data scope, oracle performance, checkpoint reloading, and temporal alignment. These checks support use of the checkpoint as the full-width benchmark within the stated evaluation scope.
 
 The rigorous status should still be stated as:
 

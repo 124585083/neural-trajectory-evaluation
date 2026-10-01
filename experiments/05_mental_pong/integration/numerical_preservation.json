@@ -1,0 +1,167 @@
+{
+  "changed_json_csv_scalar_checks": [
+    {
+      "destination": "experiments/05_mental_pong/gpfa_config.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/integration/official_protocol_audit.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/integration/official_source_audit.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/closeout_v1/configs/b_fixed_head_protocol.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/closeout_v1/configs/b_mapping_lock.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/closeout_v1/configs/c_endpoint_lock.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/closeout_v1/configs/c_endpoint_protocol.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/closeout_v1/configs/closeout_protocol.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/closeout_v1/manifest.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/B/B_outputs.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/completed.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/geometry_feasibility.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/mahler_FA50_completed.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/mahler_GPFA50_completed.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/perle_FA50_completed.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/perle_GPFA50_completed.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/descriptive/source_hashes.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/experiment_ledger.csv",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/figure_qa.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/test_execution.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/closeout_v1/sources/A_sources.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/closeout_v1/sources/frozen_source_records.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/closeout_v1/sources/user_request_record.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/configs/analysis_protocol.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/manifest.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/figure_structural_checks.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/figure_visual_qa.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/final_integrity_and_score_audit.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/interpretation_summary.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/ols_fit_audit.csv",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/reused_representation_audit.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/sources/label_sources.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/sources/prior_manifest_record.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/sources/source_trial_membership.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/trial_endpoint_fa_gpfa_v1/configs/analysis_protocol.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "experiments/05_mental_pong/trajectory_project/trial_endpoint_fa_gpfa_v1/configs/representation_config.json",
+      "numeric_scalar_and_shape_equivalence": true
+    },
+    {
+      "destination": "results/tables/04_model_comparison/q1_q6_answers.json",
+      "numeric_scalar_and_shape_equivalence": true
+    }
+  ],
+  "source_artifacts_verified": 7573,
+  "missing_original_request_attachments": 1,
+  "copied_label_NPZ_text_fields": 0,
+  "saved_tables": {
+    "status": "passed",
+    "self_target_rows": 48,
+    "cross_target_rows": 192,
+    "rounds_per_group": 100,
+    "fixed_splits_checked": 100,
+    "maximum_absolute_aggregation_difference": 3.3306690738754696e-15,
+    "english_summary_display_matches_full_precision_table": "passed",
+    "own_target_to_diagonal_identity": "passed",
+    "new_model_fitting": false
+  },
+  "note": "Immutable numerical artifacts retain source hashes; edited metadata retain scalar values, shapes and CSV columns. English source-location aliases have separate publication hashes."
+}

@@ -1,6 +1,6 @@
 # Q1–Q6: Hierarchical Conclusions for Static vs. Total-Parameter-Matched Dynamic
 
-Updated: 2026-08-13
+Scientific results recorded: 2026-08-13. This English publication edition clarifies interpretation without changing the recorded values.
 
 ## Summary
 
@@ -11,7 +11,7 @@ Updated: 2026-08-13
 | Q3 Does trajectory evaluation detect a difference? | Yes: position, velocity, acceleration; speed remains uncertain | Frozen GPFA + condition bootstrap |
 | Q4 Can trajectory differences still be detected when response scores are similar? | Yes | Response-score-matched output perturbation with non-overlapping repeat halves |
 | Q5 Does temporal ablation produce monotonic degradation? | Monotonic for four similarity metrics; RMSE is not fully strict; temporal specificity is not isolated | Five-level learned temporal-history ablation |
-| Q6 Does trajectory information contain something not fully explained by response/RSA/CKA? | Evidence supports “not fully explained by the current conventional battery”; no claim of mathematical independence | Strict time-reversal counterexample + matched pair + leave-family-out regression |
+| Q6 Does trajectory information contain something not fully explained by response/RSA/CKA? | Time-averaged patterns omit order; the fitted enriched-battery regression leaves residual error; no information-independence claim | Strict time-reversal counterexample + matched pair + leave-family-out regression |
 
 ## Q1: Does Dynamic Show a Response-Level Gain?
 
@@ -27,7 +27,7 @@ Official oracle single-trial correlations across five sessions:
 
 The relative improvement is 14.06%. All five session-wise differences are positive: `+0.0270, +0.0265, +0.0209, +0.0086, +0.0325`. Using session as the resampling unit, the bootstrap 95% interval is `[+0.0147, +0.0291]`. With all five sessions positive, the one-sided exact sign p=`0.03125`; the two-sided p=`0.0625`.
 
-It is therefore appropriate to state that “Dynamic shows a stable response-level gain,” but with only five independent sessions, the strength of the two-sided session-level significance should not be overstated.
+Dynamic has higher response correlation in all five sessions. The session-level sample is small, and the two-sided sign-test result does not support a conventional 0.05 significance claim.
 
 ## Q2: Do RSA / CKA Detect a Dynamic–Static Difference?
 
@@ -43,7 +43,7 @@ Treating the six repeated movies as independent conditions:
 
 Earlier pooled metrics show the same direction: condition-average time-aligned CKA increases from `0.4438 → 0.4952`, and condition×time state RSA increases from `0.4713 → 0.5204`.
 
-The conclusion should be stated as: “RSA/CKA detect the difference, but the difference is concentrated in time-aware variants; purely condition-averaged CKA shows only a small difference.” Because there are only six movie conditions, condition-level uncertainty still requires validation in additional sessions.
+RSA/CKA detect the difference most clearly in the time-aware variants; time-averaged condition-pattern CKA shows a smaller difference. The six-movie condition bootstrap describes this pilot and does not establish generalization across sessions.
 
 ## Q3: Does Trajectory Evaluation Detect a Dynamic–Static Difference?
 
@@ -59,7 +59,7 @@ Using the frozen q=4 neural-data-defined GPFA, with no latent alignment applied 
 | Speed-profile correlation | 0.5271 | 0.5375 | -0.0513--+0.0859 |
 | Acceleration-direction cosine | 0.1850 | 0.4525 | +0.1822--+0.3395 |
 
-Trajectory evaluation therefore supports the conclusion that Dynamic more closely matches the brain trajectory in position, local direction, and curvature/acceleration. The speed-profile difference is small and its interval crosses zero, so no reliable model difference should be claimed for that metric.
+Trajectory evaluation therefore supports the conclusion that Dynamic more closely matches the recorded neural trajectory in position, local direction, and curvature/acceleration. The speed-profile difference is small and its interval crosses zero, so no reliable model difference should be claimed for that metric.
 
 ## Q4: When Response Scores Are Similar, Can Trajectory Evaluation Still Detect a Trajectory Difference?
 
@@ -69,7 +69,7 @@ For each movie, repeats are divided into non-overlapping selection and test halv
 
 Selection response: Static `0.15553`, response-score-matched Dynamic output `0.15520`. Held-out test response: Static `0.15651`, response-score-matched Dynamic output `0.15687`; the per-neuron paired-bootstrap difference is `+0.00036`, with 95% interval `[-0.00510, +0.00537]`. The held-out response scores are therefore nearly identical under the predefined perturbation. Because no formal equivalence test was performed, this result is not described as statistical indistinguishability.
 
-However, the test-half frozen-GPFA results are:
+The test-half frozen-GPFA results are:
 
 | Metric | Static | Response-score-matched Dynamic output | Advantage 95% interval |
 |---|---:|---:|---:|
@@ -103,13 +103,13 @@ It is therefore appropriate to state that the major trajectory-similarity metric
 
 ## Q6: Is Trajectory Information Not Fully Explained by Response Correlation, RSA, and CKA?
 
-**Answer: Current evidence supports “not fully explained,” but does not establish mathematical independence from every possible definition of RSA/CKA.**
+**Answer: Reversal establishes a temporal-order limitation of time-averaged condition patterns. The enriched battery predicts part of the trajectory-score variation under the tested regression. These results do not establish information independence.**
 
 ### Strict Counterexample: Time Reversal
 
 After fully reversing the Dynamic prediction in time, the condition-average pattern remains unchanged. As a result, standard condition CKA is effectively identical: `0.84860060` vs `0.84860060`; condition RSA is exactly identical: `0.342857` vs `0.342857`.
 
-However, the frozen-GPFA metrics change substantially:
+The frozen-GPFA metrics change substantially:
 
 | Metric | Original Dynamic | Time reversed |
 |---|---:|---:|
@@ -118,7 +118,7 @@ However, the frozen-GPFA metrics change substantially:
 | Speed correlation | 0.5375 | 0.1068 |
 | Acceleration cosine | 0.4525 | 0.0440 |
 
-This strictly demonstrates that standard condition-averaged RSA/CKA are insufficient to represent temporal order/direction. Q4 further shows that trajectory differences remain after scalar response correlation is matched. Thus, each of these three conventional summaries is individually insufficient as a sufficient statistic.
+Time-averaged condition-pattern RSA/CKA cannot represent the temporal order removed by this reversal. Q4 separately shows trajectory differences when the selected scalar response correlations are nearly matched. That approximate match is a sensitivity result; it does not constitute a mathematical proof about response correlation as a sufficient statistic.
 
 ### Empirical Explanatory Power of an Expanded Conventional Battery
 
@@ -132,13 +132,13 @@ Across 40 temporal/non-temporal stress candidates, six conventional features—s
 | Acceleration | 0.420 |
 | RMSE quality | 0.733 |
 
-These values show that an enriched RSA/CKA/response battery explains a substantial fraction of trajectory variation, but clearly does not predict it completely, especially for acceleration/direction. A cross-family conventional-matched pair selected using only selection repeats still shows GPFA position and RMSE differences on held-out repeats, further supporting the existence of residual trajectory information.
+These values show substantial held-family predictability under the fitted ridge model, with larger remaining errors for acceleration/direction. Residuals can reflect finite samples, model capacity, and distribution changes. A cross-family pair selected for nearby conventional features on selection repeats retains GPFA position and RMSE differences on held-out repeats. This supports complementary diagnostic sensitivity within the tested candidates.
 
 The most accurate statement is:
 
-> Trajectory metrics contain temporal-order and local-direction information that is not fully captured by scalar response correlation or standard RSA/CKA, and remains only partially predictable from an enriched time-aware conventional metric battery.
+> Trajectory metrics detect order and direction changes omitted by time-averaged condition patterns. Trajectory differences also remain after approximate scalar response matching. The enriched time-aware conventional battery predicts substantial, incomplete variation under the tested ridge model.
 
-This is not proof that trajectory metrics are statistically independent of all conventional metrics; rather, it is evidence of sufficiency failure and incremental information.
+The reversal counterexample is specific to the tested pattern summaries. Incomplete regression prediction does not prove that all conventional formulations lack the relevant information.
 
 ## Scope Limitations
 

@@ -1,10 +1,10 @@
 # Phase 4 — Model comparison
 
-This phase compares Static and Total-parameter-matched Dynamic predictions using response, output-space RSA/CKA, and frozen neural-data-defined trajectory metrics, together with predefined stress tests.
+This Study 1 phase compares Static and Total-parameter-matched Dynamic predictions with response, output-space RSA/CKA, and frozen neural-data-defined trajectory metrics. Predefined stress tests examine the sensitivity of these measurements.
 
 ## Purpose
 
-Phase 1 provides the frozen Static checkpoint, and Phase 3 provides the frozen Total-parameter-matched Dynamic checkpoint. Phase 4 reconstructs aligned oracle predictions from both models and evaluates them with one conventional and trajectory-analysis pipeline. The trajectory comparison uses a separately fitted GPFA defined only by locked neural training data. Response matching, temporal-weight attenuation, time reversal, and an enriched conventional-feature battery probe whether trajectory metrics merely restate the tested conventional summaries; scientific interpretation is delegated to the canonical result documents.
+Phase 1 provides the frozen Static checkpoint, and Phase 3 provides the frozen Total-parameter-matched Dynamic checkpoint. Phase 4 reconstructs aligned oracle predictions from both models and evaluates them with one conventional and trajectory-analysis pipeline. The trajectory comparison uses a separately fitted GPFA defined only by locked neural training data. Response matching, temporal-weight attenuation, time reversal, and an enriched conventional-feature battery test which changes each metric detects. The [results](../../docs/RESULTS.md) distinguish exact reversal invariance from approximate matching and finite regression performance.
 
 ## Inputs and frozen artifacts
 

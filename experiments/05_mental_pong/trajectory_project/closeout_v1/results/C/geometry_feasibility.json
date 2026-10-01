@@ -1,0 +1,122 @@
+{
+  "before_random_neural_scoring": true,
+  "status": "pass",
+  "animals": [
+    {
+      "animal": "mahler",
+      "status": "pass",
+      "n_valid_conditions": 78,
+      "n_valid_rows": 3369,
+      "all_assignment_pairs_audited": 6084,
+      "own_label_replay_max_abs_error": 1.1546319456101628e-14,
+      "alpha_min": 0.0,
+      "alpha_max": 0.9995869620700075,
+      "random_path_all_assignments_range": [
+        -9.898370008566799,
+        9.842221875858137
+      ],
+      "original_path_range": [
+        -9.896325001533992,
+        9.840267415762336
+      ],
+      "endpoint_range": [
+        -7.220526315789472,
+        6.897142857142856
+      ],
+      "endpoint_SD": 4.936780246129535,
+      "original_support_preserved": true,
+      "objective_endpoint_SD": 5.309604232879368,
+      "objective_endpoint_range": [
+        -9.662947559517304,
+        9.073943894441879
+      ],
+      "own_objective_endpoint_through_candidate_F_vs_original_objective_max_abs_error": 0.00019892826646561446,
+      "own_objective_endpoint_through_candidate_F_vs_original_objective_RMSE": 2.19471982647386e-05,
+      "original_objective_not_replaced_by_F": true,
+      "geometric_conclusion": "finite convex segments between original anchors and previously accepted endpoints; no compatibility restriction, clipping, rejection, or extra reflection",
+      "changed_identity_fraction_mean": 0.9879743589743591,
+      "changed_value_fraction_mean": 0.9879743589743591,
+      "unique_endpoint_mappings": 1000,
+      "epoch_n_bins": {
+        "full": 3369,
+        "visible": 1931,
+        "hidden": 1360,
+        "bounce": 1207,
+        "no_bounce": 2162,
+        "post_bounce": 631,
+        "endpoint_influence": 2793
+      },
+      "assignments": {
+        "path": "source_pilot://trajectory_project/closeout_v1/artifacts/C/mahler_endpoint_assignments.npz",
+        "sha256": "10a07ad00f4216eab3c9027d0181f16abe83ad14a98da9933004b9aadc865704",
+        "bytes": 262706,
+        "role": "source or output"
+      },
+      "labels": {
+        "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/mahler_condition_labels.npz",
+        "sha256": "4b059a6a6c5b262c85dfa5a1fe4601925708b70dd932012528c428a59bdba853",
+        "bytes": 179175,
+        "role": "source or output"
+      },
+      "raw_preprocessing": "fail"
+    },
+    {
+      "animal": "perle",
+      "status": "pass",
+      "n_valid_conditions": 78,
+      "n_valid_rows": 3369,
+      "all_assignment_pairs_audited": 6084,
+      "own_label_replay_max_abs_error": 1.0658141036401503e-14,
+      "alpha_min": 0.0,
+      "alpha_max": 0.9995832634535731,
+      "random_path_all_assignments_range": [
+        -9.900302574210682,
+        9.849464239351084
+      ],
+      "original_path_range": [
+        -9.895615706071688,
+        9.842372424126943
+      ],
+      "endpoint_range": [
+        -7.771830863121183,
+        7.589433797909406
+      ],
+      "endpoint_SD": 5.039806471623375,
+      "original_support_preserved": true,
+      "objective_endpoint_SD": 5.309578472196999,
+      "objective_endpoint_range": [
+        -9.662954656764969,
+        9.070564606933456
+      ],
+      "own_objective_endpoint_through_candidate_F_vs_original_objective_max_abs_error": 0.00024670754032563025,
+      "own_objective_endpoint_through_candidate_F_vs_original_objective_RMSE": 3.4256989412838116e-05,
+      "original_objective_not_replaced_by_F": true,
+      "geometric_conclusion": "finite convex segments between original anchors and previously accepted endpoints; no compatibility restriction, clipping, rejection, or extra reflection",
+      "changed_identity_fraction_mean": 0.987448717948718,
+      "changed_value_fraction_mean": 0.987448717948718,
+      "unique_endpoint_mappings": 1000,
+      "epoch_n_bins": {
+        "full": 3369,
+        "visible": 1931,
+        "hidden": 1360,
+        "bounce": 1207,
+        "no_bounce": 2162,
+        "post_bounce": 631,
+        "endpoint_influence": 2793
+      },
+      "assignments": {
+        "path": "source_pilot://trajectory_project/closeout_v1/artifacts/C/perle_endpoint_assignments.npz",
+        "sha256": "49c7005d99012051a9657bc1b649682c5a2e9eaa91dedb178101466cd96aa414",
+        "bytes": 263135,
+        "role": "source or output"
+      },
+      "labels": {
+        "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/perle_condition_labels.npz",
+        "sha256": "5fa264d9936ce67bb693ae25ae799b1e612b717ef3225dbc2373065afbfaf3fc",
+        "bytes": 179202,
+        "role": "source or output"
+      },
+      "raw_preprocessing": "fail"
+    }
+  ]
+}

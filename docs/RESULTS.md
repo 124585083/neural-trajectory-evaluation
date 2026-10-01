@@ -1,6 +1,6 @@
 # Results
 
-The results proceed from response-level prediction across five Dynamic Sensorium sessions to output-space population-response similarity and, finally, to trajectory agreement in a frozen neural-data-defined GPFA space. The final stress tests examine whether the trajectory findings are fully summarized by scalar response correlation or the tested RSA/CKA measures.
+Sections 1–8 report Study 1, Dynamic Sensorium. They proceed from five-session response prediction to population-response similarity and trajectory agreement in a frozen neural-data-defined GPFA space. Stress tests examine which temporal properties the selected metrics capture. Section 9 summarizes the separate Mental-Pong study; scores and validation evidence are not pooled across datasets.
 
 ## 1. Evaluation scope and model comparison
 
@@ -11,7 +11,7 @@ The primary comparison approximately matches total trainable parameter count whi
 | Static | Four-layer framewise 2D core | 50,624 | 2,814,015 |
 | Total-parameter-matched Dynamic | Three-stage Factorized3D core with explicit temporal convolutions | 98,672 | 2,862,063 |
 
-The total-count difference is 48,048 parameters, or 1.707%. The readout dominates both totals, and the core parameter counts are not matched. This is therefore a complete-model architectural comparison under approximately matched total trainable parameter counts—not a same-backbone comparison, a core-parameter-matched comparison, or an isolation of temporal history as the only architectural difference.
+The total-count difference is 48,048 parameters, or 1.707%. The readout dominates both totals. Core counts and architectures remain different, so this approximately matched complete-model comparison cannot isolate temporal history as the cause of a performance difference.
 
 Two evidence scales are kept distinct:
 
@@ -44,7 +44,7 @@ RSA and CKA here compare predicted neural population responses with recorded pop
 | Temporal-difference CKA | 0.0991 | 0.2027 | +0.1036 | +0.0921–+0.1154 |
 | Within-condition temporal RSA | 0.5535 | 0.6427 | +0.0892 | +0.0308–+0.1930 |
 
-Other time-resolved and condition-by-time state measures show the same direction. The result is not that RSA or CKA fail to detect the model difference. Rather, they detect it most clearly when temporal structure is retained, providing a substantive conventional baseline against which to evaluate the added sensitivity of trajectory metrics.
+Other time-resolved and condition-by-time state measures show the same direction. RSA and CKA detect the model difference most clearly when temporal structure is retained. These tested variants provide the conventional baseline for assessing complementary trajectory sensitivity.
 
 ## 4. Frozen neural-data-defined GPFA trajectory comparison
 
@@ -60,7 +60,7 @@ The GPFA coordinate system is fitted only to neural training data and its reliab
 
 Dynamic shows substantially stronger agreement in trajectory position, normalized position error, local velocity direction, and acceleration/curvature-related direction. The speed-profile difference is inconclusive because its interval crosses zero; the evidence does not support a Dynamic advantage on every trajectory metric.
 
-Static predictions also exceed the sampled model-prediction nulls for the primary trajectory metrics. Static therefore captures nontrivial recorded dynamic structure; the comparative result is that Dynamic more closely matches several aspects of the neural trajectory, not that Static contains no trajectory structure.
+Static predictions also exceed the sampled model-prediction nulls for the primary trajectory metrics. Both models therefore capture recorded trajectory structure, with stronger Dynamic agreement on several measured properties.
 
 The reliability evidence and metric restrictions are documented in [GPFA Validation](GPFA_VALIDATION.md).
 
@@ -117,7 +117,7 @@ An enriched conventional battery was also used to predict GPFA metrics across he
 | Acceleration | 0.420 |
 | RMSE quality | 0.733 |
 
-The response/RSA/CKA battery explains a substantial fraction of trajectory variation, but not all of it, especially for acceleration and local directional information. This supports a sufficiency failure and incremental-information interpretation: trajectory metrics are partially predictable from conventional metrics while retaining temporal-order and local-direction sensitivity that the tested battery does not fully capture.
+The fitted ridge model predicts a substantial fraction of held-family trajectory variation, with lower predictive performance for acceleration than position. Its remaining errors establish the limits of this regression on the tested perturbations. They do not by themselves establish that the feature battery lacks the information: finite samples, model capacity, and distribution changes can also produce residuals. The time-reversal counterexample provides separate evidence that time-averaged condition patterns omit order and direction.
 
 ## 6. Integrated interpretation
 
@@ -130,7 +130,7 @@ The evidence forms a coherent sequence:
 5. Time reversal exposes a concrete temporal-order limitation of condition-averaged RSA/CKA.
 6. Graded temporal-weight attenuation produces a graded trajectory response consistent with sensitivity to learned temporal history, without uniquely isolating temporal causality.
 
-Taken together, the results suggest that trajectory metrics contain temporal-order and local-direction information that is not fully captured by scalar response correlation or the tested RSA/CKA battery. Trajectory evaluation is an additional diagnostic, not a replacement for response prediction or conventional population-response similarity.
+Together, the response-matching and reversal tests show temporal-order and local-direction sensitivity that the particular matched or reversal-invariant summaries do not capture. Time-aware conventional measures also detect model differences and predict substantial trajectory-score variation. Trajectory evaluation adds a diagnostic within this scope; response prediction and population-response similarity remain separate evaluation criteria.
 
 ## 7. Evidence scope and interpretation boundaries
 
@@ -151,3 +151,13 @@ These boundaries limit the breadth and causal interpretation of the result witho
 - [Methods](METHODS.md): data preparation, temporal alignment, response/RSA/CKA definitions, GPFA inference, reliability procedures, and stress-test implementation.
 - [GPFA Validation](GPFA_VALIDATION.md): reliability, null separation, sensitivity, negative findings, and metric restrictions.
 - [Design Rationale](DESIGN_RATIONALE.md): study design, comparison-space rationale, and falsification logic.
+
+## 9. Study 2: Mental-Pong
+
+The completed [Mental-Pong exploration](MENTAL_PONG.md) compares position reconstructed from condition-mean DMFC responses with an objective ball path and a behavior-constrained candidate path. FA50 and GPFA50 use matched ordinary least squares (OLS) readouts and the same condition splits. This task-coordinate comparison is separate from Sensorium's shared-space neural trajectory comparison.
+
+All four animal-by-representation full-epoch comparisons favor the objective target on own-target correlation and RMSE. No-collision segments have lower candidate RMSE and lower candidate correlation; post-collision segments favor the objective target on own-target RMSE. Cross-scoring distinguishes a change of target from a change of trained readout. The [versioned final report and tables](../experiments/05_mental_pong/trajectory_project/closeout_v1/FINAL_REPORT.md) retain these phase differences and the complete two-by-two comparisons.
+
+Fixed-head condition mismatch tests condition correspondence on paired support. Random-endpoint controls preserve condition geometry and fit new readouts to each randomized target. The actual candidate exceeds the random-endpoint reference in full, hidden, and endpoint-influence evaluations, with post-collision RMSE exceptions. Full-epoch neural results remain below the mean-endpoint geometry baseline, while some Perle phase-specific skills are slightly positive. These controls support recoverable task-position structure within the available data scope. They do not establish an overall candidate-path advantage or differences between opposite behavioral choices within the same condition.
+
+The scientific status remains `CLOSED_EXPLORATORY_WITH_LIMITATIONS` and `raw_preprocessing=fail`. Filtering and fit-source checks pass within the published inputs; unresolved upstream filling across conditions and times remains outside those checks. The unknown membership of the neural means also prevents a direct test of neural information lost through behavioral averaging. The [current future plan](FUTURE_DIRECTIONS.md) specifies the paired records needed for that question.

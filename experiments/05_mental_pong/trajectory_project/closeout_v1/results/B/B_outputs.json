@@ -1,0 +1,102 @@
+{
+  "outputs": [
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/artifacts/B/mahler_FA50_scores.npz",
+      "sha256": "a6f2b02baad41150895c2e2a2110b4783c979a55c5f71b310886a3ecdae50cb1",
+      "bytes": 232275233,
+      "role": "all 1000 x 100 paired-support matched/null scores"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/results/B/mahler_FA50_q_aggregate.csv.gz",
+      "sha256": "63a9136a5beea4b5368d77b0349152c34397120b7670dbbf62af22aab2ecf3a0",
+      "bytes": 3302847,
+      "role": "1000 randomization units, each aggregating original splits"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/artifacts/B/mahler_GPFA50_scores.npz",
+      "sha256": "69d3e3ddcd0e8f519e11902c38c5294656ae03ba293b9f0890d94ad738e8b194",
+      "bytes": 232366980,
+      "role": "all 1000 x 100 paired-support matched/null scores"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/results/B/mahler_GPFA50_q_aggregate.csv.gz",
+      "sha256": "596dc943c7f959525178635ceab68ff31e24afb50996af18ec7e705f26c9a38f",
+      "bytes": 3308274,
+      "role": "1000 randomization units, each aggregating original splits"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/artifacts/B/mahler_coverage.npz",
+      "sha256": "6bb143aa8b839aea385d8d803af0aa33b16fb2b200852d7011ba767a5d2f313b",
+      "bytes": 20740117,
+      "role": "every source condition shared-bin count for every q/split/phase"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/results/B/mahler_q_coverage.csv.gz",
+      "sha256": "bd4a780c329dfb8db3c01a9c5072f8e0ab1410a2b3a3d42a35ae12110b4cb2a5",
+      "bytes": 119662,
+      "role": "randomization-level coverage distributions"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/artifacts/B/perle_FA50_scores.npz",
+      "sha256": "8cae9dc9cb8d4331569a6c3e682d3ddb0b4c52b331db29eceda4ceea5535aae8",
+      "bytes": 232107153,
+      "role": "all 1000 x 100 paired-support matched/null scores"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/results/B/perle_FA50_q_aggregate.csv.gz",
+      "sha256": "19b1b152dc6890fe37b8fd1ec82dd6f619f39bfd2220f54b92c4b3950e52533e",
+      "bytes": 3289264,
+      "role": "1000 randomization units, each aggregating original splits"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/artifacts/B/perle_GPFA50_scores.npz",
+      "sha256": "3e36a527e86894da01384cf373952452950ab672fd2f5956845d90bac857d839",
+      "bytes": 232158005,
+      "role": "all 1000 x 100 paired-support matched/null scores"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/results/B/perle_GPFA50_q_aggregate.csv.gz",
+      "sha256": "964f728e11c9c87b0644f86749b4b005dbd2ade5f663b15298c921613e2e3d1b",
+      "bytes": 3290359,
+      "role": "1000 randomization units, each aggregating original splits"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/artifacts/B/perle_coverage.npz",
+      "sha256": "195a58230f20fbe76b814aee78e53ed4015b661560411e48d9c630431c721f3f",
+      "bytes": 20739078,
+      "role": "every source condition shared-bin count for every q/split/phase"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/results/B/perle_q_coverage.csv.gz",
+      "sha256": "f9152975e7f4dd96c8553b3afd06e33c469d91ad9a82e90c970aba686af3aa24",
+      "bytes": 119775,
+      "role": "randomization-level coverage distributions"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/results/B/B_summary.csv",
+      "sha256": "9affe3502f0186702959f1076f5510aeb2fce5159668f3305f1cea2e341b6016",
+      "bytes": 609836,
+      "role": "B result"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/results/B/B_observed_full_support.csv",
+      "sha256": "9df70a8338bf14d8b1a203ae6ed5f921b6fc5a17a9b43e9248ce4646b3235f72",
+      "bytes": 2468108,
+      "role": "B result"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/results/B/B_coverage_summary.csv",
+      "sha256": "4c03c5eddc9eafe9130d99432f36a3c2d1a614e9418a55928e99905720693246",
+      "bytes": 6332,
+      "role": "B result"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/results/B/B_validation.json",
+      "sha256": "3cd6c840ec5cfa944b576780c3af48e460c55cf901a8582741e8c13ee0a300f8",
+      "bytes": 53563,
+      "role": "B result"
+    }
+  ],
+  "B_status": "B_COMPLETE",
+  "overall_project_status_not_set_here": true
+}

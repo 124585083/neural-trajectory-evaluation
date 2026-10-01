@@ -1,0 +1,129 @@
+{
+  "new_inspection": true,
+  "sensorium": [
+    {
+      "path": "results/figures/figure-1-experimental-workflow.png",
+      "result": "pass",
+      "checks": "English labels legible; no clipping/overlap introduced; original axes, layout, and numerical data retained."
+    },
+    {
+      "path": "results/figures/figure-2-static-dynamic-comparison.png",
+      "result": "pass",
+      "checks": "English labels legible; no clipping/overlap introduced; original axes, layout, and numerical data retained."
+    },
+    {
+      "path": "results/figures/figure-3-temporal-ablation.png",
+      "result": "pass",
+      "checks": "English labels legible; no clipping/overlap introduced; original axes, layout, and numerical data retained."
+    }
+  ],
+  "mental_pong": {
+    "performed_at_utc": "2026-10-01T17:34:42.470802+00:00",
+    "count": 10,
+    "passed": true,
+    "figures": [
+      {
+        "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/figures/A_own_reconstruction.png",
+        "sha256": "b49369fc2a655764dba2a121cfacfb2529a539bf3cef3f0c062903dc5a4c3abe",
+        "review_method": "Direct view_image inspection in the integration task; original QA was not inherited.",
+        "english_labels": "pass",
+        "layout": "pass",
+        "scientific_caption_scope": "pass",
+        "findings": "Own-target curves, all four group titles, units and 100-split SD label readable. Objective and candidate targets remain separate.",
+        "presentation_rerender_from_saved_csv": true
+      },
+      {
+        "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/figures/A_paired_differences.png",
+        "sha256": "e760e3ddfabf01e65e02ec9206ffbe7c7ca8868fc91384231f5a9c6087a238a8",
+        "review_method": "Direct view_image inspection in the integration task; original QA was not inherited.",
+        "english_labels": "pass",
+        "layout": "pass",
+        "scientific_caption_scope": "pass",
+        "findings": "Positive delta convention and split-stability caveat readable; all group titles and both phases preserved.",
+        "presentation_rerender_from_saved_csv": true
+      },
+      {
+        "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/figures/B_paired_null_distributions.png",
+        "sha256": "37fe89a27c8d234a9d6385f631398fb39fa3e2c47a2a55dee53161167d597ff3",
+        "review_method": "Direct view_image inspection in the integration task; original QA was not inherited.",
+        "english_labels": "pass",
+        "layout": "pass",
+        "scientific_caption_scope": "pass",
+        "findings": "Fixed candidate-head correspondence null, identical paired support and 1000 randomizations explicit. Axes and group titles readable.",
+        "presentation_rerender_from_saved_csv": true
+      },
+      {
+        "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/figures/C_full_null_distributions.png",
+        "sha256": "892a3b7977ac07954581c5423f84a3a5e6e7b5087fd49c165e2c15cb7df7caa0",
+        "review_method": "Direct view_image inspection in the integration task; original QA was not inherited.",
+        "english_labels": "pass",
+        "layout": "pass",
+        "scientific_caption_scope": "pass",
+        "findings": "All 12 panels, group titles, actual/random references and negative full-period skills readable. Baseline label corrected to mean-endpoint geometry baseline; no cropping.",
+        "presentation_rerender_from_saved_csv": true
+      },
+      {
+        "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/figures/C_phase_null_scores.png",
+        "sha256": "84c024ed1b52742b5c8bbbf521a89abb8154069d2d99cff58d944043e6d1df06",
+        "review_method": "Direct view_image inspection in the integration task; original QA was not inherited.",
+        "english_labels": "pass",
+        "layout": "pass",
+        "scientific_caption_scope": "pass",
+        "findings": "All phase labels, uncertainties and positive Perle phase exceptions visible. Title uses mean-endpoint geometry baseline. No overlap or clipping.",
+        "presentation_rerender_from_saved_csv": true
+      },
+      {
+        "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/figures/descriptive/all79_condition_heterogeneity.png",
+        "sha256": "abb3f14d7018a87f2f453af986e6290c1aef9c21066aaa5f00dc6db976d15653",
+        "review_method": "Direct view_image inspection in the integration task; original QA was not inherited.",
+        "english_labels": "pass",
+        "layout": "pass",
+        "scientific_caption_scope": "pass",
+        "findings": "All 79 IDs retained with unknown condition 59920 marked. Dense condition axis remains legible at source resolution. Sign legends and per-split score interpretation readable.",
+        "presentation_rerender_from_saved_csv": false
+      },
+      {
+        "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/figures/descriptive/endpoint_mean_cancellation.png",
+        "sha256": "645a53ae1d7a5a95e06bd3c7bb6a737b51e1a8881bf83d9e0ad6e2e977ab0045",
+        "review_method": "Direct view_image inspection in the integration task; original QA was not inherited.",
+        "english_labels": "pass",
+        "layout": "pass",
+        "scientific_caption_scope": "pass",
+        "findings": "Cancellation distributions and identities readable; unknown neural membership and numerical-sign definition retained.",
+        "presentation_rerender_from_saved_csv": false
+      },
+      {
+        "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/figures/descriptive/mahler_fixed_posthoc_four_curves.png",
+        "sha256": "cbd2701812bbead131c5c241086784f6f869682ec4f164d5e98635a9b5e0f1b7",
+        "review_method": "Direct view_image inspection in the integration task; original QA was not inherited.",
+        "english_labels": "pass",
+        "layout": "pass",
+        "scientific_caption_scope": "pass",
+        "findings": "Two fixed post hoc IDs, both representations, all four curves and OOF split bands readable. Occlusion/collision/terminal markers and feedback-time caveat present. Short legend terms are defined by the accompanying report.",
+        "presentation_rerender_from_saved_csv": false
+      },
+      {
+        "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/figures/descriptive/perle_fixed_posthoc_four_curves.png",
+        "sha256": "955080984fea6764a74d2150e09104a3e6444c7c8e00523dd19633f67a29257e",
+        "review_method": "Direct view_image inspection in the integration task; original QA was not inherited.",
+        "english_labels": "pass",
+        "layout": "pass",
+        "scientific_caption_scope": "pass",
+        "findings": "Two fixed post hoc IDs, both representations, all four curves and OOF split bands readable. Occlusion/collision/terminal markers and feedback-time caveat present. Short legend terms are defined by the accompanying report.",
+        "presentation_rerender_from_saved_csv": false
+      },
+      {
+        "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/figures/paired_self_reconstruction_differences.png",
+        "sha256": "bb0b53822c0d555fbc83dd4124fd17f6462e618a17ac951d2e6178498fdc01d4",
+        "review_method": "Direct view_image inspection in the integration task; original QA was not inherited.",
+        "english_labels": "pass",
+        "layout": "pass",
+        "scientific_caption_scope": "pass",
+        "findings": "All four animal/representation panels and phase labels readable. Own-target delta signs are explicit. English short labels are defined in the report; condition means and overlapping splits are distinguished from neural trials.",
+        "presentation_rerender_from_saved_csv": false
+      }
+    ],
+    "remediation": "Five small A/B/C summary figures were rerendered from existing copied CSVs only after display-text changes. No fits, scores, masks, or randomizations were recalculated. Four descriptive and one condition-summary figure were inspected directly and retained. Source originals remain unchanged."
+  },
+  "external_atlas_scope": "Original all79 PDF atlases remain external; no new PDF inspection or inherited visual pass."
+}

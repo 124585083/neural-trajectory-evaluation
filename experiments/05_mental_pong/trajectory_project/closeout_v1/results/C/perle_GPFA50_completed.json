@@ -1,0 +1,772 @@
+{
+  "animal": "perle",
+  "representation": "GPFA50",
+  "completed": true,
+  "random_repeats": 1000,
+  "condition_splits": 100,
+  "OLS_calls": 100,
+  "independent_random_y_refits": 100000,
+  "random_xy_heads": 100000,
+  "batch_target_count": 1001,
+  "shared_x_used_for_every_q": true,
+  "OLS_equivalence": {
+    "animal": "perle",
+    "representation": "GPFA50",
+    "status": "pass",
+    "independent_vs_multioutput_max_prediction_error": 1.2434497875801753e-14,
+    "old_real_OLS_replay_error": 9.769962616701378e-15,
+    "checked_random_q": [
+      0,
+      1,
+      2
+    ],
+    "identical_label_coefficients_max_abs_error": 0.0
+  },
+  "max_identical_x_prediction_error": 1.2434497875801753e-14,
+  "actual_test_support_count": [
+    1639,
+    1684,
+    1683,
+    1689,
+    1704,
+    1770,
+    1691,
+    1703,
+    1763,
+    1684,
+    1695,
+    1612,
+    1751,
+    1727,
+    1630,
+    1633,
+    1651,
+    1786,
+    1631,
+    1739,
+    1722,
+    1707,
+    1626,
+    1781,
+    1734,
+    1694,
+    1724,
+    1658,
+    1736,
+    1755,
+    1714,
+    1618,
+    1776,
+    1737,
+    1743,
+    1692,
+    1667,
+    1749,
+    1699,
+    1787,
+    1693,
+    1612,
+    1633,
+    1674,
+    1803,
+    1714,
+    1648,
+    1706,
+    1696,
+    1783,
+    1701,
+    1627,
+    1685,
+    1734,
+    1663,
+    1713,
+    1661,
+    1717,
+    1802,
+    1696,
+    1791,
+    1740,
+    1655,
+    1715,
+    1732,
+    1812,
+    1654,
+    1701,
+    1635,
+    1741,
+    1723,
+    1704,
+    1687,
+    1766,
+    1718,
+    1629,
+    1648,
+    1741,
+    1668,
+    1649,
+    1556,
+    1662,
+    1615,
+    1680,
+    1554,
+    1708,
+    1770,
+    1705,
+    1644,
+    1724,
+    1713,
+    1662,
+    1700,
+    1795,
+    1737,
+    1723,
+    1694,
+    1840,
+    1734,
+    1645
+  ],
+  "endpoint_assignments": {
+    "path": "source_pilot://trajectory_project/closeout_v1/artifacts/C/perle_endpoint_assignments.npz",
+    "sha256": "49c7005d99012051a9657bc1b649682c5a2e9eaa91dedb178101466cd96aa414",
+    "bytes": 263135,
+    "role": "source or output"
+  },
+  "source_training_records": [
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_000/training.json",
+      "sha256": "92f7ccd0c8f41bf16cd1b3bd4d7ad7a15a25ed51a6400a081f8c3585adfd1b8f",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_001/training.json",
+      "sha256": "364b650d395e03b4a07ad592a292a2550425ddc77ad08410321912f10de922b9",
+      "bytes": 8021,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_002/training.json",
+      "sha256": "ab681e62c53e77c7a37dac6c5a8401b3c87b3be275658474e3fa33917fab8ad8",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_003/training.json",
+      "sha256": "274be52e28eca9228e9cec2cbb8a402e5e2f7a2bd4a1988985c484168337077f",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_004/training.json",
+      "sha256": "a93eb17a656197ee6d9459b0d6fae6660d34f5a809798aeb100d7e2f75a3f0ee",
+      "bytes": 8020,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_005/training.json",
+      "sha256": "52084b22f93af8cdc07393637621f06769ea2c35537dcb4fea26ab82e6a44fb4",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_006/training.json",
+      "sha256": "ef2c38aefe458b312974dc67d398b94c06f4d4a9441c97cc29a370592e5417c6",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_007/training.json",
+      "sha256": "a2a2b2048ee7134b6883ddbcb52f5f7f96085b3e41c2a271755a3bc89bb2302b",
+      "bytes": 8021,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_008/training.json",
+      "sha256": "71fabce2690019504effcad4477c53e644331b9f7b32b442d2bb527c2a5cdabe",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_009/training.json",
+      "sha256": "6aa575c0473e93740f4cccdaaf952068641f54f783bb5c146513509ca00e45c7",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_010/training.json",
+      "sha256": "e6765e66a2292c1bd5ec62261c14fd93b8f64157385388582d3cc40033384afb",
+      "bytes": 8025,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_011/training.json",
+      "sha256": "c1d72a1d01be6e5e7c9da3288812ec4386abee096f76b2ab89fa05c5f28eb610",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_012/training.json",
+      "sha256": "b88b79eda4dd13172998072056cf45d6065e23f18c4a0d9bff06d7fdb1156b82",
+      "bytes": 8020,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_013/training.json",
+      "sha256": "1e2f8aeeb5e0de6c37cafdd4d00cc4f9cdb05366ed003c7de679e4530e20a6e3",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_014/training.json",
+      "sha256": "f1a23b8038b89d66a97b3232782a4f02e488b0478352481558008abfd4c47e1f",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_015/training.json",
+      "sha256": "b0bee50c9dd0a1be9adf1d20b9c0c49ae2eb1bfca099278382279500864e0834",
+      "bytes": 8025,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_016/training.json",
+      "sha256": "b095a429f9901c15086dcdec370ca65f00b271b43c330ed17964c9718cb8d979",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_017/training.json",
+      "sha256": "ca17309128cf22698f2f15d1042c9979154b9081b1ed5f54047e6f69da258610",
+      "bytes": 8020,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_018/training.json",
+      "sha256": "ebaaffefedd6bc6b0efc32768e8bb9d48c634bdbeeb60daf4050b945d0a838ba",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_019/training.json",
+      "sha256": "1f41259c601a323084b890d0f55841228a989674dba417f36edd7376c3825e91",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_020/training.json",
+      "sha256": "209a1380f1c158ee2bdfb07d9e57a7d7bcf3785666ac7adc651c6e878ad20b6c",
+      "bytes": 8025,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_021/training.json",
+      "sha256": "18e6c430b912245dde8c1f5d273f0de3695f18edf959bdde3077cb064e423fe5",
+      "bytes": 8020,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_022/training.json",
+      "sha256": "879ef09b310044d8812b244aecff2fa3108202a5e8f68b5b44db0f6b17ec669c",
+      "bytes": 8021,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_023/training.json",
+      "sha256": "f5ecfb34e8072cf96555c8a53d9e8acf82c4f59ad2cc2f16791e20b501215a40",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_024/training.json",
+      "sha256": "a903827ceb56e78ff3bfd67d15ca1848eadee1b63849230a3ae923a8ff92d576",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_025/training.json",
+      "sha256": "2a2a57276e0205189bd4ac0500847eef79522385d407a52001a1fca644f9419f",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_026/training.json",
+      "sha256": "513ccf89a24a4349f5943b6029f68d2fba1ec37a1d8eab968aafb3a2956c6e1e",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_027/training.json",
+      "sha256": "e533d3dbd76fa28bf289cd085ab57aa0794df472bca70bf5fc7a292feccaeda1",
+      "bytes": 8020,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_028/training.json",
+      "sha256": "96dde89c97a4ce0b64f51e430b7abf52ee4f0d8a656697a00c809dac314cf8d4",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_029/training.json",
+      "sha256": "92509fa21c27bad8a00bd83286e988e3ca0d7b15428c40a2c9046331749fd157",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_030/training.json",
+      "sha256": "269ef10eb67e3498b166d8503c6636af26b6bc6d99ca7be32041bf8d6edca491",
+      "bytes": 8025,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_031/training.json",
+      "sha256": "e29bf9323c8fc82e17934a29ddf0e24636b513af96d9e05ab3ba0b8d4e8201bb",
+      "bytes": 8026,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_032/training.json",
+      "sha256": "082a6f62e14bdab8f44eacedf8fe9ed0f152c4084d767b195a8b5df98ab4aa2e",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_033/training.json",
+      "sha256": "b8b81a647c5e0a72ebf63c0fc8e9f0e5fd777fdfdbe429bfa072880bc4ad373b",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_034/training.json",
+      "sha256": "633bbb5e93a553e31fba2747f37cc595f020269ff443c716e35f06d26e9317f8",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_035/training.json",
+      "sha256": "0f468638717e8308d76d51e66eab24acedc8a0926efb74a670a78f386b3a41e5",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_036/training.json",
+      "sha256": "346cfa5cf417a599ef84f0c4f74134bc8807240b0eface7812f22fe122d7c9f1",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_037/training.json",
+      "sha256": "326a8bb461d300a86620f031fa5edcf4edeb29036c4f20404fe660c9105c99a8",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_038/training.json",
+      "sha256": "aee7b60a6d6cedd359ce679ac1f885f5a772b45ca616bb6032ec72d90db85c0a",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_039/training.json",
+      "sha256": "ded15d4cb6523b6ca43302dfe542a104c63fa1b93f37727e3c99918e70cb512a",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_040/training.json",
+      "sha256": "5a214eaca9aa39c10014daafa08369c5a0fe022ee9fc878e75d6e74abf35bf16",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_041/training.json",
+      "sha256": "6cdcb8e2d978f24140b545ebc9a0cafd495004300d98f57d6c3e19da24c6adfd",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_042/training.json",
+      "sha256": "88cb7093ad089b7af7d04b70e1bbfd7f6a8844347c1ca1228535c111b1969787",
+      "bytes": 8020,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_043/training.json",
+      "sha256": "0939c4fe8872da29c6f6fec9a185042fec2919b3b6c9ada96231a5db1392cfba",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_044/training.json",
+      "sha256": "fa09bdd21ef7cc4d90939577f6884051de3dec9f7b7018ac32ae7e3649bddef9",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_045/training.json",
+      "sha256": "d01000502f5d324bba00aca70f049d63718537e37a4b100b77106d698f8aa6b8",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_046/training.json",
+      "sha256": "41cbcae52e1f4f59a951dbf3e7cbff53e2e9f63be7af319d87fc19e468e05ac1",
+      "bytes": 8021,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_047/training.json",
+      "sha256": "7db21d4b302aa86cf6e2756a9eb799fbe5f693d3c16ce7265db523bb91b57549",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_048/training.json",
+      "sha256": "5da1a28c2e42bebf8c28893a6f674779bba2609baf354773d345386afc10d515",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_049/training.json",
+      "sha256": "218426a6c40731d3eaee38dc2f0cd42b4a0d386b9ab3d53bc58d365e956a4a2f",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_050/training.json",
+      "sha256": "cd8a14b49fa7048b653a932b12990227f3c71aa5ec94f1e792c4533dd49dba12",
+      "bytes": 8021,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_051/training.json",
+      "sha256": "2219404714d547eb992066960dda638dfc94c9694a96d9e76cd1d3634bec27c6",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_052/training.json",
+      "sha256": "71cef28fd3e30b339ca566d467c013118b48fd524a10d3853e0bd61f54fe8cbd",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_053/training.json",
+      "sha256": "29206cba391cd569145bdd02e466bab46b698ee7d2baba3771848239bdbe61ab",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_054/training.json",
+      "sha256": "8fdbf97f58684ca066b4d71a0d81eccb338983972163ebfea54c4cf58d671abd",
+      "bytes": 8019,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_055/training.json",
+      "sha256": "223c94a548ff2d59a8280f4d80661cc42c1e6e93896ccb14693ff26b4054b8ab",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_056/training.json",
+      "sha256": "25cea5d070af6bb75b0ae179129482333dd543eb6247c8617e1666fe80321797",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_057/training.json",
+      "sha256": "637a5da38f289caab2818cd23b1d46f821e9d207856c92a0d0a51c15c5079dbf",
+      "bytes": 8021,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_058/training.json",
+      "sha256": "7fcaacd28cf6bf40d6db9d0ae3129593eb56249d70af079bbf4018fe878afb16",
+      "bytes": 8026,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_059/training.json",
+      "sha256": "926bedc5aa59f8959fb11b0763db197da3212ee18180f53e5c5d9fe632f9569f",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_060/training.json",
+      "sha256": "cc28bf6c58c4769a57911c05abb51fdcfbc703907705902786e571e8c5545ab7",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_061/training.json",
+      "sha256": "db611ab4a69a7751a8c811359d1f8b434f0f7d1a396be1301df8414fac270548",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_062/training.json",
+      "sha256": "244f73ffab5a8bc24a72c58bba2bb7ae276f42b7bf4fb319df9d19cf0de99120",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_063/training.json",
+      "sha256": "462313a5c4d01c61cef5a106afd7454b744a8223012b5eb7f2633591851f9994",
+      "bytes": 8021,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_064/training.json",
+      "sha256": "f4b34d087693ba77ddcff5766643c5558c49ddfe96c7ede2633f3968c9a7bba8",
+      "bytes": 8019,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_065/training.json",
+      "sha256": "92ef6e3d23fa429d97b5ebe38c99451837739d4010f4689bc485fe0e48ecb4c4",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_066/training.json",
+      "sha256": "26d544e45476ff5699582dcec9a26620ffea956d2c83600fd1e6abf9626d9726",
+      "bytes": 8021,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_067/training.json",
+      "sha256": "4f251bfcf7bdbe50a832f7e21a2d71902a8ca97377df866731a483821a0de714",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_068/training.json",
+      "sha256": "cd231e3bd5e594a9f239b47139169d036a474cd14531add43fddae173c0ec1b1",
+      "bytes": 8021,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_069/training.json",
+      "sha256": "db864ca2e06baacea841313d975aa3fe55c6483a0a35c3a18180ac2413f99b9c",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_070/training.json",
+      "sha256": "1cbad869f8c15e6477464456ce915c8b23d03f82257965b0ff687ef5d6590f8c",
+      "bytes": 8025,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_071/training.json",
+      "sha256": "3ce310623c7c814ac4eb0769317558e45498851d1726308e5efb1430815c9ed2",
+      "bytes": 8020,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_072/training.json",
+      "sha256": "d9e17811c6b25933a0a9c5c917f3c8860f10bc9ed0e7602a6b2c9736592bc4d0",
+      "bytes": 8021,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_073/training.json",
+      "sha256": "0b106f92899d941bb4264535e8a3decc81df937c4bc416e6fce61f5b28870489",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_074/training.json",
+      "sha256": "55a621cdb8f1f4966d380c1d986e61f97e724a7403e6b88c7738b275f7b27ade",
+      "bytes": 8025,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_075/training.json",
+      "sha256": "fa927d772f699fd2a3e2f930a2a1dd54165aec9c254896afd71368b76332a25b",
+      "bytes": 8021,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_076/training.json",
+      "sha256": "21bee6e68a56739f06c550dc966c38de02a951a45231f3e2a1d6531da84daab2",
+      "bytes": 8021,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_077/training.json",
+      "sha256": "6001be6fcf3507743b7e56bf8a7834422f3e86b93f1fcb9010cb79e9b22f743d",
+      "bytes": 8020,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_078/training.json",
+      "sha256": "bb7e9bf26d2f6c444209f2ed1703b3fea2ccb24f12e2f3cda8b071a4b294bbf3",
+      "bytes": 8020,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_079/training.json",
+      "sha256": "84e93f5ba39186e0e1279a65ca017feee7bff57d5251a73ee8aec471752c92a6",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_080/training.json",
+      "sha256": "d360906b81b37577faf4decee7b2ac86ce7af2776477a884d54e0b8f73d9a780",
+      "bytes": 8021,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_081/training.json",
+      "sha256": "4339f316c424ff84063327d62c0a3c4166d97551a3ab6e2cc4ee6438f849c061",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_082/training.json",
+      "sha256": "a8383e6f55edad02163b180e93e7734e1061c72497a20343db14017a06b65004",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_083/training.json",
+      "sha256": "0c5d7e8fb01e7eccbcf8cddaafbd23f2f3477779a55444d26b6d70900fc242c6",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_084/training.json",
+      "sha256": "49fef7c2bc3513caf2239fd0ef72640b383086cc17376faf25d81c57fba3e8b9",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_085/training.json",
+      "sha256": "c5eb213ed6d9065241cfa3b5f2fe0e96f1af90b6345f54cf4e3624aa2a4a38d5",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_086/training.json",
+      "sha256": "674d201736125ead31ebcca0922560d441f449be15006eb2cd92bf67e974ae61",
+      "bytes": 8025,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_087/training.json",
+      "sha256": "3059a2e19d4fc6721285950dc24d27fd81c809da0aac13ad59b1b4d2b1d8b854",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_088/training.json",
+      "sha256": "671dded32f35e7f5cc0085367cf41398b03e996bf863635ad7ef5ff7d5c2c937",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_089/training.json",
+      "sha256": "1ec28ff57198d05cd29aa06e1884bb097a72a229ef476837fa77d4f8a00311bc",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_090/training.json",
+      "sha256": "48f89c729fb7709143776cf16e64c7b606b15f0551d2b269daeffc1bafbc088f",
+      "bytes": 8021,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_091/training.json",
+      "sha256": "dec1e4fb4f48539aced0152f15839aa70819cf071741db8c38f20930f1846077",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_092/training.json",
+      "sha256": "9e5c53443b784114866d5eee5f6aa115d40d530228f26e6142325f98a1ed7729",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_093/training.json",
+      "sha256": "31a071c309fa1fee1c0074f94b83eb33be25c4eb84eafb19c6feb8509e2e4f2c",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_094/training.json",
+      "sha256": "1b2a43da7e71ab781a625027223b11d2919b7eb28c2d06b7c70fb08c7ee4e4a6",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_095/training.json",
+      "sha256": "a8271e39c89096f37724ba767cbc6ed1c295594d02cb53f15e4c092fe820c07e",
+      "bytes": 8024,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_096/training.json",
+      "sha256": "c8d7958ebd721dc1c73fca20fc7ea98e7b71a0be90c7a2aa41fe36dba67d0063",
+      "bytes": 8021,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_097/training.json",
+      "sha256": "1696ec638ddf724a3b728b5e7737636432cb6bbd8575aa6e0b0973f28bba57b8",
+      "bytes": 8022,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_098/training.json",
+      "sha256": "9c4137ffbbc192fc775f700def72613a76cffaddfe3010ebdea960bb5ac11a2f",
+      "bytes": 8023,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations/perle/round_099/training.json",
+      "sha256": "7977cc65d72d9c05963c92f549b69294b35756fbb884c995ea3435bb23bdc4a4",
+      "bytes": 8024,
+      "role": "source or output"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/artifacts/C/perle_GPFA50_OLS_weights.npz",
+      "sha256": "2a693aad28185b4a45da03b6dc9a5996ecf805cc91eb156b2628bca7f1adb22c",
+      "bytes": 39875061,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/artifacts/C/perle_GPFA50_fixed_examples.npz",
+      "sha256": "122e5f18de239781349614723cd5954959be7068c309aae6a5242eb8f696d532",
+      "bytes": 4092253,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/results/C/perle_GPFA50_all_scores.npz",
+      "sha256": "38cd1d3a7fb58671b69e306a0a74b12cd6239be098e7bcab24465540cd984d91",
+      "bytes": 65502671,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/results/C/perle_GPFA50_summary.csv",
+      "sha256": "4c63ddbdb51d18f5a4766d79ded23e85bc23fbcfb0d3dfda9218ce13b64a6044",
+      "bytes": 27208,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/results/C/perle_GPFA50_per_q_mean100.csv",
+      "sha256": "4159e4cd5b41e908cba72a4af5924ef53e98150f62fb0bae80017ec932c6a31d",
+      "bytes": 2096528,
+      "role": "source or output"
+    }
+  ],
+  "elapsed_seconds": 54.2360601000255,
+  "raw_preprocessing": "fail",
+  "new_representation_fit": false,
+  "new_inference": false
+}

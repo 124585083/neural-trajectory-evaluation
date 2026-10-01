@@ -613,7 +613,7 @@ def _q6(
         "response_only_counterexample": "see Q4 disjoint-repeat response-score-matched output perturbation",
         "conventional_matched_pair": matched_pair,
         "leave_perturbation_family_out_regression": regression_summary,
-        "interpretation": "non-perfect out-of-family R2 and matched/counterexample results support incremental trajectory information; they do not establish mathematical independence from every possible RSA/CKA construction",
+        "interpretation": "The reversal counterexample establishes an order limitation of time-averaged condition patterns. Approximate response matching supports complementary sensitivity. Held-family ridge residuals describe the limits of this fitted predictor and do not establish general information insufficiency or independence.",
         "candidates": int(len(selection_table)),
         "conventional_features": conventional,
     }, table, family_table

@@ -1,0 +1,290 @@
+{
+  "selection": "All four animal/representation branches; q=0, split=0 selected before replay",
+  "working_directory": "Outside repository",
+  "results": [
+    {
+      "operation": "saved_random_head_replay",
+      "status": "passed",
+      "animal": "mahler",
+      "representation": "FA50",
+      "q": 0,
+      "split": 0,
+      "half": "half1",
+      "max_score_absolute_difference": 1.6370904631912708e-11,
+      "scores": [
+        {
+          "epoch": "full",
+          "n_bins": 1639,
+          "r": 0.21465330626889792,
+          "RMSE": 5.391771200571543,
+          "baseline_SSE": 9190.508741511669,
+          "skill": -4.1844454640664805
+        },
+        {
+          "epoch": "visible",
+          "n_bins": 931,
+          "r": 0.2291406685217806,
+          "RMSE": 5.5867731288098055,
+          "baseline_SSE": 1587.296407393829,
+          "skill": -17.306854039315503
+        },
+        {
+          "epoch": "hidden",
+          "n_bins": 669,
+          "r": 0.16878845477784066,
+          "RMSE": 5.149910147710526,
+          "baseline_SSE": 7392.485288055786,
+          "skill": -1.400131034267694
+        },
+        {
+          "epoch": "bounce",
+          "n_bins": 642,
+          "r": 0.2834343899995437,
+          "RMSE": 6.711848801399322,
+          "baseline_SSE": 2732.7168983639485,
+          "skill": -9.58338791661946
+        },
+        {
+          "epoch": "no_bounce",
+          "n_bins": 997,
+          "r": 0.15158648629601204,
+          "RMSE": 4.33389389169834,
+          "baseline_SSE": 6457.791843147719,
+          "skill": -1.8997974556236135
+        },
+        {
+          "epoch": "post_bounce",
+          "n_bins": 328,
+          "r": 0.27290927190457376,
+          "RMSE": 6.468961234961183,
+          "baseline_SSE": 2732.7168983639485,
+          "skill": -4.022827908339431
+        },
+        {
+          "epoch": "endpoint_influence",
+          "n_bins": 1325,
+          "r": 0.19819815480306344,
+          "RMSE": 4.948966353553406,
+          "baseline_SSE": 9190.508741511667,
+          "skill": -2.5310618781982797
+        }
+      ],
+      "new_model_fitting": false,
+      "files_written": false,
+      "raw_preprocessing": "fail"
+    },
+    {
+      "operation": "saved_random_head_replay",
+      "status": "passed",
+      "animal": "mahler",
+      "representation": "GPFA50",
+      "q": 0,
+      "split": 0,
+      "half": "half1",
+      "max_score_absolute_difference": 1.6370904631912708e-11,
+      "scores": [
+        {
+          "epoch": "full",
+          "n_bins": 1639,
+          "r": 0.23621537812637014,
+          "RMSE": 5.431093119043648,
+          "baseline_SSE": 9190.508741511669,
+          "skill": -4.260341014228397
+        },
+        {
+          "epoch": "visible",
+          "n_bins": 931,
+          "r": 0.27627292396032765,
+          "RMSE": 5.562883554163172,
+          "baseline_SSE": 1587.296407393829,
+          "skill": -17.150625072803734
+        },
+        {
+          "epoch": "hidden",
+          "n_bins": 669,
+          "r": 0.1550679558941244,
+          "RMSE": 5.267723726037408,
+          "baseline_SSE": 7392.485288055786,
+          "skill": -1.511201881838704
+        },
+        {
+          "epoch": "bounce",
+          "n_bins": 642,
+          "r": 0.2926294107158428,
+          "RMSE": 6.668920550535662,
+          "baseline_SSE": 2732.7168983639485,
+          "skill": -9.448440472447514
+        },
+        {
+          "epoch": "no_bounce",
+          "n_bins": 997,
+          "r": 0.17292433887350023,
+          "RMSE": 4.455573660475505,
+          "baseline_SSE": 6457.791843147719,
+          "skill": -2.064914558215898
+        },
+        {
+          "epoch": "post_bounce",
+          "n_bins": 328,
+          "r": 0.2524616202227237,
+          "RMSE": 6.432648025424913,
+          "baseline_SSE": 2732.7168983639485,
+          "skill": -3.9665953656445723
+        },
+        {
+          "epoch": "endpoint_influence",
+          "n_bins": 1325,
+          "r": 0.21745932694770315,
+          "RMSE": 5.0180714416975585,
+          "baseline_SSE": 9190.508741511667,
+          "skill": -2.6303626116280063
+        }
+      ],
+      "new_model_fitting": false,
+      "files_written": false,
+      "raw_preprocessing": "fail"
+    },
+    {
+      "operation": "saved_random_head_replay",
+      "status": "passed",
+      "animal": "perle",
+      "representation": "FA50",
+      "q": 0,
+      "split": 0,
+      "half": "half1",
+      "max_score_absolute_difference": 7.275957614183426e-12,
+      "scores": [
+        {
+          "epoch": "full",
+          "n_bins": 1639,
+          "r": 0.5636407026612492,
+          "RMSE": 4.479552786976901,
+          "baseline_SSE": 11801.690877420908,
+          "skill": -1.786788668622425
+        },
+        {
+          "epoch": "visible",
+          "n_bins": 931,
+          "r": 0.6859518654827453,
+          "RMSE": 4.025411822005324,
+          "baseline_SSE": 2006.889596138894,
+          "skill": -6.5170395434453585
+        },
+        {
+          "epoch": "hidden",
+          "n_bins": 669,
+          "r": 0.3161114293306981,
+          "RMSE": 5.0564296345874995,
+          "baseline_SSE": 9509.816866218647,
+          "skill": -0.7986302780760017
+        },
+        {
+          "epoch": "bounce",
+          "n_bins": 642,
+          "r": 0.710688362230574,
+          "RMSE": 5.213816479391683,
+          "baseline_SSE": 2386.9157162663414,
+          "skill": -6.311549505215545
+        },
+        {
+          "epoch": "no_bounce",
+          "n_bins": 997,
+          "r": 0.37852501660858884,
+          "RMSE": 3.93487174256215,
+          "baseline_SSE": 9414.775161154568,
+          "skill": -0.6396319316487835
+        },
+        {
+          "epoch": "post_bounce",
+          "n_bins": 328,
+          "r": 0.6427842127308487,
+          "RMSE": 5.335998131308506,
+          "baseline_SSE": 2386.9157162663414,
+          "skill": -2.9126238447212303
+        },
+        {
+          "epoch": "endpoint_influence",
+          "n_bins": 1325,
+          "r": 0.49213891105984586,
+          "RMSE": 4.3242073615758425,
+          "baseline_SSE": 11801.690877420908,
+          "skill": -1.0993491176529449
+        }
+      ],
+      "new_model_fitting": false,
+      "files_written": false,
+      "raw_preprocessing": "fail"
+    },
+    {
+      "operation": "saved_random_head_replay",
+      "status": "passed",
+      "animal": "perle",
+      "representation": "GPFA50",
+      "q": 0,
+      "split": 0,
+      "half": "half1",
+      "max_score_absolute_difference": 7.275957614183426e-12,
+      "scores": [
+        {
+          "epoch": "full",
+          "n_bins": 1639,
+          "r": 0.5776055879455558,
+          "RMSE": 4.438919608810273,
+          "baseline_SSE": 11801.690877420908,
+          "skill": -1.7364610960791302
+        },
+        {
+          "epoch": "visible",
+          "n_bins": 931,
+          "r": 0.6942122258274879,
+          "RMSE": 4.006095562894334,
+          "baseline_SSE": 2006.889596138894,
+          "skill": -6.445070408115127
+        },
+        {
+          "epoch": "hidden",
+          "n_bins": 669,
+          "r": 0.3437875348680113,
+          "RMSE": 4.9897622028404,
+          "baseline_SSE": 9509.816866218647,
+          "skill": -0.7515141974738822
+        },
+        {
+          "epoch": "bounce",
+          "n_bins": 642,
+          "r": 0.7255958285131006,
+          "RMSE": 5.178336205151561,
+          "baseline_SSE": 2386.9157162663414,
+          "skill": -6.212377194838344
+        },
+        {
+          "epoch": "no_bounce",
+          "n_bins": 997,
+          "r": 0.39089691101674146,
+          "RMSE": 3.889075236427999,
+          "baseline_SSE": 9414.775161154568,
+          "skill": -0.6016879020363612
+        },
+        {
+          "epoch": "post_bounce",
+          "n_bins": 328,
+          "r": 0.6576916516312401,
+          "RMSE": 5.285958096914954,
+          "baseline_SSE": 2386.9157162663414,
+          "skill": -2.839584163911522
+        },
+        {
+          "epoch": "endpoint_influence",
+          "n_bins": 1325,
+          "r": 0.5069566210578974,
+          "RMSE": 4.277567220850151,
+          "baseline_SSE": 11801.690877420908,
+          "skill": -1.054306921999276
+        }
+      ],
+      "new_model_fitting": false,
+      "files_written": false,
+      "raw_preprocessing": "fail"
+    }
+  ]
+}

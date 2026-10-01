@@ -1,0 +1,29 @@
+{
+  "protocol": {
+    "path": "source_pilot://trajectory_project/closeout_v1/configs/b_fixed_head_protocol.json",
+    "sha256": "b8af4d600d53045c3938e2516b317d4904ef131b24e082ffc3e63d502a9b1e01",
+    "bytes": 278089,
+    "role": "pre-score frozen protocol"
+  },
+  "mappings": [
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/artifacts/B/mahler_mappings.npz",
+      "sha256": "6aef8a77d8e2aa7fb07c4f38b6509a9c4d90b61935262c9f5500f13a613fccef",
+      "bytes": 6006273,
+      "role": "random mappings saved before all scoring",
+      "animal": "mahler",
+      "n_unique_q_mapping_bundles": 1000,
+      "n_repeated_q_mapping_bundles": 0
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/artifacts/B/perle_mappings.npz",
+      "sha256": "2ceb85cf116bc5e3db2860699948c4f9376d1bb37b9f7f8dbd0deb5a6a8a9ada",
+      "bytes": 6006615,
+      "role": "random mappings saved before all scoring",
+      "animal": "perle",
+      "n_unique_q_mapping_bundles": 1000,
+      "n_repeated_q_mapping_bundles": 0
+    }
+  ],
+  "all_mappings_exist_before_scoring": true
+}

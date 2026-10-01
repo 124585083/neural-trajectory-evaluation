@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "figures_inspected": [
+    "endpoint_mean_cancellation.png",
+    "all79_condition_heterogeneity.png",
+    "mahler_fixed_posthoc_four_curves.png",
+    "perle_fixed_posthoc_four_curves.png"
+  ],
+  "checks": [
+    "All 79 ordered identities represented; 59920 gray/unknown",
+    "Four current curves with legends and readout-split SD, both animals and both representations",
+    "Labels, axes and annotation text visible without overlap or clipping",
+    "Heterogeneity two y axes centered on the same zero to prevent sign ambiguity",
+    "No PDF regenerated; existing all79 current atlases linked",
+    "Member mean and variance decomposition checks passed",
+    "Four descriptive unit tests passed"
+  ],
+  "posthoc_cases": [
+    55062,
+    241919
+  ],
+  "model_or_data_changed": false,
+  "raw_preprocessing": "fail",
+  "source_hashes_rechecked_after_execution": 21,
+  "source_files_changed": [],
+  "test_count_passed": 4
+}

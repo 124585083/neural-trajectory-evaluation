@@ -1,6 +1,6 @@
 # Phase 1 — Encoding-model baselines
 
-This phase establishes the Static and full Dynamic encoding-model baselines on the five official Dynamic Sensorium sessions under a shared training and evaluation protocol.
+This Study 1 phase establishes Static and full Dynamic encoding-model baselines on the five official Dynamic Sensorium sessions. Both follow the shared training and evaluation protocol below.
 
 ## Purpose
 
@@ -45,7 +45,7 @@ python -m trajectory_eval.official_dynamic --config configs/phase1A_dynamic_offi
 
 Training writes run products under `checkpoints/dynamic_official_reproduction/` and `logs/dynamic_official_reproduction/`. Independent evaluation loads the published checkpoint at [`../../models/official_dynamic/best.pt`](../../models/official_dynamic/best.pt).
 
-The local full Dynamic run was stopped by project decision after epoch 103 validation. The published checkpoint retains the best complete epoch-97 state rather than representing natural completion of the official early-stopping procedure.
+The local full Dynamic run was stopped by project decision after epoch 103 validation. The published checkpoint retains the best complete epoch-97 state. The official early-stopping procedure had not terminated naturally.
 
 ## Outputs
 

@@ -1,7 +1,8 @@
 cff-version: 1.2.0
 message: >-
-  If you use this repository, please cite this software and the Dynamic
-  Sensorium dataset papers listed in the README and THIRD_PARTY_NOTICES.md.
+  If you use this repository, please cite this software and the relevant
+  Dynamic Sensorium or Mental-Pong papers and datasets listed in the README
+  and THIRD_PARTY_NOTICES.md.
 title: "Evaluating Dynamic Neural Encoding Beyond Response Correlation"
 type: software
 authors:
@@ -18,6 +19,9 @@ abstract: >-
   A controlled comparison of Static and total-parameter-matched Dynamic neural
   encoding models using response accuracy, output-space RSA/CKA, and a frozen
   neural-data-defined GPFA trajectory assay on Dynamic Sensorium 2023.
+  A separate Mental-Pong study compares objective and behavior-constrained
+  position targets using condition-mean neural representations and linear
+  readouts, with cross-scoring and randomization controls.
 keywords:
   - neural encoding
   - Dynamic Sensorium
@@ -25,6 +29,8 @@ keywords:
   - neural population trajectories
   - representational similarity analysis
   - centered kernel alignment
+  - Mental-Pong
+  - condition-mean neural response
 preferred-citation:
   type: software
   authors:

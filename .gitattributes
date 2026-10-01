@@ -1,4 +1,5 @@
 * text=auto
+
 *.py text eol=lf
 *.md text eol=lf
 *.yaml text eol=lf
@@ -8,7 +9,28 @@
 *.csv text eol=lf
 *.toml text eol=lf
 *.cff text eol=lf
+*.js text eol=lf
+*.svg text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+experiments/05_mental_pong/requirements.lock.txt text eol=lf
+# Preserve the exact upstream license copy, including its line endings.
+third_party/licenses/MentalPong-MIT.txt -text
 models/**/*.pt filter=lfs diff=lfs merge=lfs -text
 models/**/*.pth filter=lfs diff=lfs merge=lfs -text
 models/**/*.pkl filter=lfs diff=lfs merge=lfs -text
 models/**/*.npz filter=lfs diff=lfs merge=lfs -text
+
+# Preserve serialized Mental-Pong numerical results exactly as released here.
+experiments/05_mental_pong/trajectory_project/**/results/*.csv -text
+experiments/05_mental_pong/trajectory_project/**/results/**/*.csv -text
+experiments/05_mental_pong/trajectory_project/**/data/*.csv -text
+experiments/05_mental_pong/trajectory_project/**/configs/condition_splits_100.json -text
+experiments/05_mental_pong/**/*.json -text
+
+# Preserve existing serialized Sensorium records independently of host EOL rules.
+experiments/01_baselines/records/** -text
+# Generated model dumps retain their original indentation-only blank lines.
+experiments/01_baselines/records/**/*.txt whitespace=-blank-at-eol,cr-at-eol
+experiments/03_parameter_matching/records/** -text
+results/tables/** -text

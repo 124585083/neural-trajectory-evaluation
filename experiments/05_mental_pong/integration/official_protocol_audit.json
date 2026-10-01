@@ -1,0 +1,158 @@
+{
+  "status": "Read-only source audit completed before new all79 result interpretation",
+  "sources": {
+    "paper": "https://www.nature.com/articles/s41467-024-54688-y",
+    "fulltext": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11696028/fullTextXML",
+    "local_fulltext": "paper_fulltext.xml",
+    "local_fulltext_sha256": "4f4800cc57e6141fa852c95f11def7b26353f59a54ec5eb4cf6c26d6f8ddce1f",
+    "repository": "https://github.com/jazlab/MentalPong",
+    "commit": "b976255be73140c759d8f8db0fd8ff551a4e2d73",
+    "released_data": "https://zenodo.org/records/13952210",
+    "local_validation": "../../../notes/official_audit.json",
+    "local_adapter": "../../../official_reproduction.py"
+  },
+  "paper_confirmed": {
+    "section": "Methods / Decoding analyses; main text DMFC Population dynamics; Figure 3C-F caption",
+    "static_head": "One time-invariant regression over pooled condition x time rows; train and test conditions disjoint within each split",
+    "fit_epoch": "Full visible plus occluded trial, with the same readout used across both phases",
+    "cross_validation": "50% of conditions for training, 100 train/test splits, except Supplementary Figure S4A",
+    "metrics": "Pearson correlation and root mean squared error",
+    "independence": "Methods explicitly do not treat pooled condition x time rows as independent observations"
+  },
+  "official_implementation": [
+    {
+      "choice": "OLS LinearRegression() defaults; fit_intercept=True, no regularization, no sample_weight",
+      "source": "third_party/MentalPong/analyses/decode_utils.py",
+      "lines": [
+        162,
+        176
+      ]
+    },
+    {
+      "choice": "No feature standardization in the none preprocessing branch; no target standardization",
+      "source": "third_party/MentalPong/analyses/decode_utils.py",
+      "lines": [
+        118,
+        159
+      ]
+    },
+    {
+      "choice": "Current GitHub wrapper requests 33 outputs. Released Fig3 saved-author results actually used 23 outputs, as recorded in verified reproduction summaries for both animals and pooled data. Prior reproduction explicitly takes saved_author_result[beh_to_decode] before the wrapper default. New all79 uses the released 23-output joint finite-row mask; xy columns are still separable OLS outputs.",
+      "source": "third_party/MentalPong/analyses/population_decode/online/DecodeOverTime.py",
+      "lines": [
+        45,
+        54
+      ],
+      "mask_source": "third_party/MentalPong/analyses/decode_utils.py:43-67",
+      "archive_override_source": "official_reproduction.py:128-133; results/official_{perle,mahler,all}/official_summary.json:protocol.target_row_filter and author_result_check"
+    },
+    {
+      "choice": "n_splits=100 from wrapper, train_size=0.5, random_state=0 from decoder default; groups are original condition array indices. For 79 conditions, each split contains 39 training and 40 testing conditions",
+      "source": "third_party/MentalPong/analyses/population_decode/online/DecodeOverTime.py",
+      "lines": [
+        29,
+        30
+      ],
+      "group_source": "third_party/MentalPong/analyses/decode_utils.py:14-19,91-97,187-188"
+    },
+    {
+      "choice": "occ is a task category; zero-lag source mask start_end_pad0_roll0 and target start_end_pad0; matched_timepoints=True. No padded samples or temporal history added. No alignment shift during fitting; realignment is a plotting operation",
+      "source": "third_party/MentalPong/analyses/population_decode/online/DecodeOverTime.py",
+      "lines": [
+        56,
+        70
+      ],
+      "figure_mapping": "third_party/MentalPong/code/utils/decoding_summary.py:91-96,113-143,161-165"
+    },
+    {
+      "choice": "Unweighted pooled held-out condition x time Pearson r per output, then nanmean and nanstd(ddof=0) over overlapping splits. Longer conditions contribute more rows. This is not an average of per-condition r or the r of averaged predictions",
+      "source": "third_party/MentalPong/analyses/decode_utils.py",
+      "lines": [
+        99,
+        115
+      ],
+      "aggregation_source": "third_party/MentalPong/analyses/decode_utils.py:199-205; code/utils/decoding_summary.py:155-159,462-478"
+    },
+    {
+      "choice": "RMSE_x=sqrt(MSE_x), RMSE_y=sqrt(MSE_y), 2D RMSE=sqrt(MSE_x+MSE_y), no division by two. Figure time courses average squared error across held-out conditions at each aligned time and summarize these splitwise RMSEs",
+      "source": "third_party/MentalPong/code/utils/decoding_summary.py",
+      "lines": [
+        637,
+        659
+      ]
+    },
+    {
+      "choice": "Published reliable-unit FA50 factors are fit to full-mean responses across all conditions outside readout CV. This is not training-only preprocessing. Published half factors are fit independently",
+      "source": "third_party/MentalPong/analyses/dataset_augment_utils.py",
+      "lines": [
+        197,
+        272
+      ]
+    }
+  ],
+  "implementation_caveats": [
+    "Original finite 50ms masks can overlap at the visible-hidden boundary and include partial terminal bins. Local official reproduction had 3502 valid condition-time rows; the prior conservative pilot support had 3423. New GPFA/common-label support must be reported as an adaptation, not falsely restored by padding or imputation.",
+    "Figure 3 caption says mean +/- SEM, whereas the current official helper uses nanstd across overlapping splits. This version explicitly reports SD and does not interpret the 100 splits as independent experiments.",
+    "The helper computes mse_mu but omits it from its intermediate returned dictionary (decoding_summary.py:157,167,171-175). Direct explicit RMSE computation is necessary.",
+    "Figure 3 caption names a two-sided permutation test; Methods also mention scipy pearsonr p values. Current helper calls wilcoxon on hidden scores alone (line608), not a visible-hidden paired comparison. This version does not inherit these calls as a test of phase equivalence.",
+    "Official figure start-aligned time index begins at zero; new causal-latent plots use bin right-edge availability times in ms and label that convention explicitly.",
+    "All79 frozen GPFA64 analysis adapts the official downstream OLS scheme. Some readout test conditions were used for original GPFA fitting, so it is readout-condition holdout on a frozen representation, not full-pipeline unseen-condition generalization. Half1-fitted heads applied to half2 also differ from the published full-mean FA50 input."
+  ],
+  "existing_local_validation": {
+    "valid_rows_each_animal_and_pooled": 3502,
+    "n_splits": 100,
+    "published_FA50_prediction_max_absolute_difference": {
+      "perle": 1.6475709685437323e-13,
+      "mahler": 1.9451107391432743e-13,
+      "pooled": 7.283063041541027e-14
+    },
+    "note": "Values are copied from the verified existing notes/official_audit.json, not newly fitted here."
+  },
+  "archive_protocol_precedence": {
+    "used_target_count": 23,
+    "used_target_names": [
+      "ball_pos_x_TRUE",
+      "ball_pos_y_TRUE",
+      "ball_pos_dx_TRUE",
+      "ball_pos_dy_TRUE",
+      "ball_pos_dspeed_TRUE",
+      "ball_pos_dtheta_TRUE",
+      "paddle_pos_y",
+      "joy",
+      "eye_v",
+      "eye_h",
+      "eye_dv",
+      "eye_dh",
+      "eye_dtheta",
+      "eye_dspeed",
+      "t_from_start",
+      "t_from_occ",
+      "t_from_end",
+      "ball_pos_y_rel",
+      "target_y",
+      "target_y_relative",
+      "ball_final_y",
+      "ball_initial_y",
+      "ball_occ_start_y"
+    ],
+    "github_default_target_count": 33,
+    "decision": "Use actual verified released Fig3 execution, not the current wrapper default. Correct before all79 fitting; retain initial 33-target draft as superseded provenance.",
+    "same_archived_rows_all_three_runs": true,
+    "same_prediction_missingness_all_three_runs": true,
+    "archived_finite_rows": 3502,
+    "source_records": [
+      {
+        "path": "source_pilot://results/official_perle/official_summary.json",
+        "sha256": "e85dc477dd4cbf44eff0ebd34ffc886faa9fb0008027f3566f0fac823addb32b"
+      },
+      {
+        "path": "source_pilot://results/official_mahler/official_summary.json",
+        "sha256": "d2a68e024b2f4b0039dfdfcaac3213aa477f6f8f7243590bf28f21d1091f5a17"
+      },
+      {
+        "path": "source_pilot://results/official_all/official_summary.json",
+        "sha256": "8fb0e6ed1c5b6813934502aed3e081675c61427816dc2a69d711fd24f9685ac8"
+      }
+    ]
+  }
+}

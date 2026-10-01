@@ -1,0 +1,13 @@
+{
+  "animal": "mahler",
+  "representation": "FA50",
+  "status": "pass",
+  "independent_vs_multioutput_max_prediction_error": 1.509903313490213e-14,
+  "old_real_OLS_replay_error": 1.3766765505351941e-14,
+  "checked_random_q": [
+    0,
+    1,
+    2
+  ],
+  "identical_label_coefficients_max_abs_error": 0.0
+}

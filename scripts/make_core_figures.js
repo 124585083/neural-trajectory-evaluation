@@ -89,7 +89,7 @@ function workflowFigure() {
   b += arrow(530, 430, 680, 675);
   b += `<path d="M 1135 347 C 1260 347, 1240 475, 1350 475" stroke="${C.muted}" stroke-width="4" fill="none" marker-end="url(#arrow)"/>`;
   b += `<path d="M 1135 675 C 1260 675, 1240 525, 1350 525" stroke="${C.muted}" stroke-width="4" fill="none" marker-end="url(#arrow)"/>`;
-  b += card(1350, 365, 430, 270, 'Frozen neural predictions', ['Same oracle movies', 'Matched neurons and timestamps', 'No evaluation-driven fitting'], C.cka, 'OUTPUT');
+  b += card(1350, 365, 430, 270, 'Frozen neural predictions', ['Same oracle movies', 'Matched neurons and timestamps', 'Frozen encoding checkpoints'], C.cka, 'OUTPUT');
 
   b += card(1885, 210, 390, 185, 'Response', ['Per-neuron correlation', 'Predictive accuracy'], C.response, 'LEVEL 1');
   b += card(1885, 455, 390, 185, 'RSA / CKA', ['Output-space geometry', 'Predicted neural responses'], C.rsa, 'LEVEL 2');
@@ -116,7 +116,7 @@ function workflowFigure() {
 function comparisonFigure() {
   const W = 2200, H = 1350;
   const metrics = [
-    { family: 'Response', label: 'Response correlation', value: 0.04469, lo: 0.02335, hi: 0.06484, color: C.response },
+    { family: 'Response', label: 'Condition-mean response r', value: 0.04469, lo: 0.02335, hi: 0.06484, color: C.response },
     { family: 'Representation', label: 'Temporal CKA', value: 0.08543, lo: 0.03039, hi: 0.16555, color: C.cka },
     { family: 'Representation', label: 'Temporal RSA', value: 0.08923, lo: 0.03081, hi: 0.19298, color: C.rsa },
     { family: 'Trajectory', label: 'GPFA position', value: 0.22380, lo: 0.08833, hi: 0.45126, color: C.trajectory },
@@ -125,7 +125,7 @@ function comparisonFigure() {
     { family: 'Trajectory', label: 'GPFA acceleration direction', value: 0.26793, lo: 0.18217, hi: 0.33953, color: C.trajectory },
   ];
   let b = textLines(110, 100, ['Where does the Dynamic model outperform the Static model?'], { size: 48, weight: 700 });
-  b += textLines(110, 154, ['Paired condition comparison for the total-parameter-matched models; points show Dynamic - Static and bars show 95% bootstrap intervals.'], { size: 25, fill: C.muted });
+  b += textLines(110, 154, ['Paired condition comparison; bars: 95% bootstrap intervals. Trajectory points: bootstrap means; other points: observed mean differences.'], { size: 25, fill: C.muted });
 
   const chartLeft = 800, chartRight = 2070, chartTop = 270, chartBottom = 1095;
   const xMin = -0.10, xMax = 0.50;
@@ -158,7 +158,7 @@ function comparisonFigure() {
   b += `<text x="${(chartLeft + chartRight)/2}" y="${chartBottom + 105}" text-anchor="middle" font-size="27" font-weight="700" fill="${C.ink}">Dynamic - Static agreement with neural data</text>`;
   b += `<text x="${sx(0) - 18}" y="230" text-anchor="end" font-size="21" fill="${C.muted}">Static better</text>`;
   b += `<text x="${sx(0) + 18}" y="230" font-size="21" fill="${C.muted}">Dynamic better</text>`;
-  b += textLines(110, 1285, ['Response and time-aware RSA/CKA detect gains. Direction-sensitive trajectory metrics show additional separation; speed-profile evidence remains weak.'], { size: 25, fill: C.muted });
+  b += textLines(110, 1285, ['Response and time-aware RSA/CKA detect gains. Trajectory direction also differs; speed-profile evidence remains inconclusive.'], { size: 25, fill: C.muted });
   return svgDoc(W, H, 'Static-Dynamic comparison across response, RSA, CKA, and trajectory metrics', b);
 }
 
@@ -207,7 +207,7 @@ function ablationFigure() {
     b += `<text x="${x + 82}" y="${y + 8}" font-size="22" fill="${C.ink}">${name}</text>`;
   });
   b += `<rect x="1440" y="300" width="570" height="95" rx="16" fill="${C.light}"/>`;
-  b += textLines(1470, 340, ['Observed curves are monotonic, but', 'temporal specificity is not established.'], { size: 22, weight: 700, fill: C.ink, gap: 1.25 });
+  b += textLines(1470, 340, ['The displayed curves are monotonic.', 'Temporal specificity remains untested.'], { size: 22, weight: 700, fill: C.ink, gap: 1.25 });
   return svgDoc(W, H, 'Graded trajectory degradation under temporal-weight ablation', b);
 }
 

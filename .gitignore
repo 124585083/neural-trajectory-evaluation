@@ -48,3 +48,11 @@ artifacts/
 !models/**/*.pkl
 !models/**/*.npz
 
+# Private Mental-Pong locations and local verification outputs.
+experiments/05_mental_pong/configs/paths.local.json
+experiments/05_mental_pong/local_outputs/
+# Compact, immutable labels are the only published Mental-Pong binary inputs.
+!experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/
+experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/*
+!experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/*_condition_labels.npz
+

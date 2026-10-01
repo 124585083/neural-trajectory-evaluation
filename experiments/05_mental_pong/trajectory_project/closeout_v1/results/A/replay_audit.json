@@ -1,0 +1,21 @@
+{
+  "completed": true,
+  "n_animals": 2,
+  "n_representations": 2,
+  "n_splits": 100,
+  "n_prediction_files": 400,
+  "all_predictions_test_only": true,
+  "no_refitting": true,
+  "x_prediction_max_difference": 0.0,
+  "maximum_replay_errors": {
+    "round_cross": 1.0658141036401503e-14,
+    "round_self": 1.0706713293728853e-14,
+    "cross_summary": 5.329070518200751e-15,
+    "main_summary": 1.3322676295501878e-15
+  },
+  "original_support_unchanged": true,
+  "OO_BB_equals_self": true,
+  "raw_preprocessing": "fail",
+  "unique_support": "78 conditions and3369condition-time rows per animal,79split identities",
+  "interpretation": "A is cross-evaluation, not a randomized null; positive Delta means the right cell improves the named metric."
+}

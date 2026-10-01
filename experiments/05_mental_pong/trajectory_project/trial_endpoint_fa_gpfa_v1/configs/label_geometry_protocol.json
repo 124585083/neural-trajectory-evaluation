@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "objective_source": "released TRUE condition-bin means; no neural results",
+  "timestamp": "mean integer-ms centers 50*k+24.5; evaluate physical branches at 50*k+50",
+  "x_model": "OLS straight x(time) from existing conservative valid physical bins",
+  "x_end": 10.0,
+  "arrival": "T=(10-x_intercept)/x_slope, retained alongside design T; no timing search",
+  "no_bounce": "y(x) straight OLS; candidate starts at actual metadata x0,y0",
+  "known_single_collision_pre_support": "indices < audited pre_bin-1, at least 2 points",
+  "known_single_collision_post_support": "indices >= audited post_bin+1, at least 1 point",
+  "collision_two_or_more_post_points": "OLS each y(x) branch and intersect",
+  "collision_one_post_point": "Elastic vertical reflection: post_slope=-pre_slope; single post point determines intercept; intersect with pre branch",
+  "collision_no_post_event_or_points": "unknown, no invented anchor or wall",
+  "collision_accuracy": "Estimated from 50ms released means, retain audit interval; never exact raw trial log",
+  "physical_support": "existing conservative valid support, completed bins <=estimated interception T",
+  "neural_score_accessed": false,
+  "behavior_endpoint_used_for_physical_geometry": false
+}

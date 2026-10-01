@@ -1,0 +1,133 @@
+{
+  "version": "trial_endpoint_fa_gpfa_v1",
+  "data_mode": "trial_labels_with_mean_neural",
+  "primary_comparison": "Each objective/candidate trajectory scored against its own trial-labelled reference; OO vs BB.",
+  "animals": [
+    "mahler",
+    "perle"
+  ],
+  "representations": [
+    "FA50",
+    "GPFA50"
+  ],
+  "n_components": 50,
+  "model_seed": 42,
+  "split_seed": 0,
+  "n_splits": 100,
+  "train_conditions": 39,
+  "test_conditions": 40,
+  "fit_neural_half": "half1",
+  "fit_scope": "All representation parameters, feature eligibility and fixed normalization refitted using only this split training39 half1 condition responses.",
+  "FA": {
+    "n_components": 50,
+    "random_state": 42,
+    "max_iter": 300,
+    "tol": 0.01,
+    "svd_method": "lapack",
+    "iterated_power": 7,
+    "rotation": null
+  },
+  "GPFA": {
+    "initial_tau": 0.15,
+    "tau_bounds": [
+      0.025,
+      2.0
+    ],
+    "nugget": 0.001,
+    "min_noise": 0.0001,
+    "max_iterations": 400,
+    "tolerance": 1e-06,
+    "bin_size_seconds": 0.05
+  },
+  "GPFA_initialization": "This round train-only FA50 C/d/R, with existing GPFA seeded 1% loading jitter; no FA100 discarded-loading initialization. Fixed before scores, not selected by labels.",
+  "GPFA_family": "One shared learnable RBF timescale, exact Gaussian prefix posterior; same existing SharedTimescaleGPFA implementation.",
+  "preprocessing": {
+    "training_finite_fraction": 0.99,
+    "std_floor": 1e-05,
+    "bin_width_ms": 50,
+    "time_alignment": "completed-bin right edge; deterministic objective physical-branch evaluation at that timestamp; no lag search"
+  },
+  "causal_scope": {
+    "provided_input_filtering": "must pass prefix/future perturbation tests",
+    "fit_provenance": "must pass train39 vs test40 isolation",
+    "raw_preprocessing": "fail: irreversible published global-condition/time missing-condition imputation; no claim of strictly causal raw-spike analysis",
+    "endpoint_timing": "published terminal scalar; exact pre-feedback sampling not established"
+  },
+  "OLS": {
+    "class": "sklearn.linear_model.LinearRegression",
+    "fit_intercept": true,
+    "positive": false,
+    "regularization": null,
+    "scaler": null,
+    "sample_weights": null,
+    "precision": "float64",
+    "coefficients_per_coordinate": 51,
+    "coefficients_per_xy_head": 102,
+    "solve": "Multioutput [x_obj,y_obj,x_beh,y_beh], algebraically independent OLS coordinates with one shared matrix decomposition; verify against separate fits."
+  },
+  "labels": {
+    "endpoint": "Each real trial own finite valid terminal paddle_y, never averaged before supervision",
+    "no_bounce": "Initial physical anchor to own terminal paddle, using x progression",
+    "bounce": "Objective before actual collision; collision anchor to own terminal paddle afterwards",
+    "same_x": true,
+    "stable_paddle_detection": false,
+    "dynamic_updates": false,
+    "visible_override": false,
+    "clip_target": false,
+    "endpoint_correctness_filter": false,
+    "unknown_terminal_scalar": "Keep identity; invalid candidate rather than interpret default zero as final paddle",
+    "unresolved_collision": "Keep condition and trial identities; no invented collision anchor"
+  },
+  "epochs": [
+    "full",
+    "visible",
+    "hidden",
+    "bounce",
+    "no_bounce",
+    "post_bounce"
+  ],
+  "aggregation": "Raw held-out trial x time rows per split, then mean and population SD over overlapping splits; per-trial, session and condition descriptive summaries. No independent-experiment significance from split repetitions.",
+  "primary_differences": {
+    "Delta_r": "r_beh-r_obj",
+    "Delta_RMSE": "RMSE_obj-RMSE_beh"
+  },
+  "storage": "Lossless trial labels and sample index; held-out predictions factorized as same-condition same-input predictions plus real test-trial index. Explicit per-trial expansion/export supported. Scores always evaluate every real trial label.",
+  "source_records": [
+    {
+      "path": "external_source_e34d54b6a83c://.",
+      "sha256": "8e9bda68e420fe152c8a0e16798fca8af76d7020939aa9d488bdfc7b1d29159e",
+      "bytes": 17318,
+      "role": "user-authorized complete request"
+    },
+    {
+      "path": "source_pilot://gpfa_shared.py",
+      "sha256": "afb3f397dac5a28884a351ee2b90bde613678cc5414e2c11467df8d97a74e97a",
+      "bytes": 19666,
+      "role": "unchanged shared RBF model"
+    },
+    {
+      "path": "source_pilot://gpfa_config.json",
+      "sha256": "6609209359d003aa16b6155967f6f4e4f9b43a765c1d43b821f48cf9fb10d538",
+      "bytes": 2650,
+      "role": "unchanged GPFA hyperparameter source"
+    },
+    {
+      "path": "source_pilot://capacity_position_baselines.py",
+      "sha256": "2871aa8d7a2350583e8485397b503ca49bfee3fbe9baf934f7bed7e170abf426",
+      "bytes": 13843,
+      "role": "unchanged FA50 training setting source"
+    },
+    {
+      "path": "source_pilot://official_reproduction.py",
+      "sha256": "590209c4c1b360c18cce8ed391bb31bef6ddc36a137d33f5f450c51b31239f54",
+      "bytes": 16476,
+      "role": "verified instantaneous OLS reproduction"
+    },
+    {
+      "path": "source_pilot://trajectory_project/all79_official_readout_v1/sources/official_protocol_audit.json",
+      "sha256": "80f9f3eaf6f01a0f45e5a4d37941462499ae8d31763482017765cfe9277f0713",
+      "bytes": 8673,
+      "role": "previous verified official source audit"
+    }
+  ]
+}

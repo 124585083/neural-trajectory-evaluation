@@ -1,0 +1,94 @@
+{
+  "version": "condition_endpoint_fa_gpfa_v1",
+  "data_mode": "condition_mean_neural_and_behavior",
+  "animals": [
+    "mahler",
+    "perle"
+  ],
+  "representations": [
+    "FA50",
+    "GPFA50"
+  ],
+  "n_components": 50,
+  "n_splits": 100,
+  "train_conditions": 39,
+  "test_conditions": 40,
+  "split_seed": 0,
+  "representation_policy": "Reference exactly the prior per-round train39 FA50/GPFA50 weights, preprocessing and half1 prefix latents; no fitting or inference in this version.",
+  "neural_half": "half1",
+  "behavior_average": "Mean of the SAME previously valid real-trial candidate pool, one fixed pool per condition; no binwise membership changes; x copied exactly from objective.",
+  "label_construction": "Existing initial/collision endpoint interpolation is affine in b_i, so averaging valid trial candidates equals constructing from mean endpoint. No new rules or thresholds.",
+  "invalid_condition_policy": "Keep all79 split identities; keep59920 unknown; no replacement or padding.",
+  "OLS": {
+    "class": "sklearn.linear_model.LinearRegression",
+    "fit_intercept": true,
+    "positive": false,
+    "regularization": null,
+    "scaler": null,
+    "sample_weights": null,
+    "precision": "float64",
+    "coefficients_per_coordinate": 51,
+    "coefficients_per_xy_head": 102,
+    "solve": "Multioutput [x_obj,y_obj,x_beh,y_beh], algebraically independent OLS coordinates with one shared matrix decomposition; verify against separate fits."
+  },
+  "training_rows": "One valid condition x time row; no repeated trial rows, sample_weight, or condition-equal weighting. Longer conditions contribute more bins.",
+  "epochs": [
+    "full",
+    "visible",
+    "hidden",
+    "bounce",
+    "no_bounce",
+    "post_bounce"
+  ],
+  "aggregation": "Each heldout split pooled condition x time Pearson r/RMSE; then mean/population SD over100 shared splits. Condition scores and full2x2 are supplementary.",
+  "differences": {
+    "Delta_r": "r_beh-r_obj",
+    "Delta_RMSE": "RMSE_obj-RMSE_beh"
+  },
+  "comparison_to_trial_version": "Both target trial variance and trial-count weighting changed; old/new metric changes cannot be attributed solely to averaging labels.",
+  "causal_scope": {
+    "provided_input_filtering": "must pass prefix/future perturbation tests",
+    "fit_provenance": "must pass train39 vs test40 isolation",
+    "raw_preprocessing": "fail: irreversible published global-condition/time missing-condition imputation; no claim of strictly causal raw-spike analysis",
+    "endpoint_timing": "published terminal scalar; exact pre-feedback sampling not established"
+  },
+  "independent_neural_trials": 0,
+  "source_records": [
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/configs/analysis_protocol.json",
+      "sha256": "683a143d08ad8ae4d25be48240be89000c502f0a010d092d2f9d71f784e15a2b",
+      "bytes": 5688,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/configs/condition_splits_100.json",
+      "sha256": "dbd9f694ec190d046b1d000b31c5196ca41661df8d539ea17fa6b5ecf7c196f0",
+      "bytes": 222295,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/results/final_integrity_and_causal_audit.json",
+      "sha256": "f6236fba78e56a2a3932f2b47e0ea035f68e3624fecb3fa6ef4e60b652975949",
+      "bytes": 64524,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/representations.py",
+      "sha256": "9ca14b7c5f21e3b30d9057461319c086704b24e887ecc8f4c440542ae62cc261",
+      "bytes": 19203,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/protocol_diff.md",
+      "sha256": "d9f614908eb381f0af4ee25a96dd96ec3993608841476405546d31385a96225f",
+      "bytes": 6415,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/results/self_reconstruction_main_table.csv",
+      "sha256": "7c40568929b3acd5dcb2942733cbdc22a79ee16763b86e19f9bbaeefd5507c18",
+      "bytes": 25926,
+      "role": "source or output"
+    }
+  ]
+}

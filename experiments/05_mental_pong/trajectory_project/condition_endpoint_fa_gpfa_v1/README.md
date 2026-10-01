@@ -1,0 +1,11 @@
+# Condition-mean endpoint reconstruction
+
+Read the [scientific report](REPORT.md), [own-target table](results/self_reconstruction_main_table.csv), [2x2 table](results/cross_2x2_summary.csv), [condition results](results/condition_self_comparison.csv) and [coverage](results/condition_label_coverage.csv). The [protocol comparison](protocol_diff.md) explains the change from repeated trial-label fitting. The later [closeout report](../closeout_v1/FINAL_REPORT.md) adds the completed randomization controls.
+
+The publication module uses a thin [entry point](../../README.md) for read-only verification and selected saved-case replay. The full historical runner remains part of the dependency closure. Full execution requires the registered external source bundle; it was not rerun during integration.
+
+Each `condition_labels.npz` has `objective_xy` and `behavior_xy` with axes `[condition,time,xy]`. The sample index has one row per valid condition and time. The existing representation files have `FA50[half,condition,time,dimension]` and `GPFA50` with the same axes; half index 0 is the primary half1 input.
+
+Each saved test prediction file has `predictions[head,condition,time,xy]`. Head 0 is the objective-trained head and head 1 is the candidate-trained head. `condition_ids`, `times_ms`, `test_condition_indices` and `test_input_support` define identities and support. Training-side predictions remain NaN. Membership, large weights, latent files, predictions and complete atlases are listed in the [artifact registry](../../integration/artifact_registry.csv).
+
+`raw_preprocessing=fail` is retained. Fit provenance and filtering checks apply only to the released neural inputs. Original scientific audits remain separate from the integration checks and the English report's new hash.

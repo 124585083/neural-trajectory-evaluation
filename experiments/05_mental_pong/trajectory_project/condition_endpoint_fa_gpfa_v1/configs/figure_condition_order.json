@@ -1,0 +1,1582 @@
+[
+  {
+    "animal": "mahler",
+    "condition_index": 0,
+    "condition_id": 29337,
+    "n_behavior_trials_in_mean": 109,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 1,
+    "condition_id": 55062,
+    "n_behavior_trials_in_mean": 102,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 2,
+    "condition_id": 58244,
+    "n_behavior_trials_in_mean": 96,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 3,
+    "condition_id": 59920,
+    "n_behavior_trials_in_mean": 0,
+    "bounce_class": "unresolved_terminal_bounce",
+    "label_available": false,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": "unresolved_terminal_or_unsupported_collision_history"
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 4,
+    "condition_id": 68220,
+    "n_behavior_trials_in_mean": 104,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 5,
+    "condition_id": 72780,
+    "n_behavior_trials_in_mean": 98,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 6,
+    "condition_id": 77046,
+    "n_behavior_trials_in_mean": 97,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 7,
+    "condition_id": 77944,
+    "n_behavior_trials_in_mean": 96,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 8,
+    "condition_id": 90751,
+    "n_behavior_trials_in_mean": 94,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 9,
+    "condition_id": 93053,
+    "n_behavior_trials_in_mean": 84,
+    "bounce_class": "hidden_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 10,
+    "condition_id": 99902,
+    "n_behavior_trials_in_mean": 98,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 11,
+    "condition_id": 105802,
+    "n_behavior_trials_in_mean": 97,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 12,
+    "condition_id": 118879,
+    "n_behavior_trials_in_mean": 92,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 13,
+    "condition_id": 122957,
+    "n_behavior_trials_in_mean": 99,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 14,
+    "condition_id": 126479,
+    "n_behavior_trials_in_mean": 88,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 15,
+    "condition_id": 158705,
+    "n_behavior_trials_in_mean": 92,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 16,
+    "condition_id": 159613,
+    "n_behavior_trials_in_mean": 101,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 17,
+    "condition_id": 163248,
+    "n_behavior_trials_in_mean": 98,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 18,
+    "condition_id": 167848,
+    "n_behavior_trials_in_mean": 90,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 19,
+    "condition_id": 179553,
+    "n_behavior_trials_in_mean": 95,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 20,
+    "condition_id": 182748,
+    "n_behavior_trials_in_mean": 82,
+    "bounce_class": "hidden_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 21,
+    "condition_id": 183171,
+    "n_behavior_trials_in_mean": 99,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 22,
+    "condition_id": 184642,
+    "n_behavior_trials_in_mean": 86,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 23,
+    "condition_id": 187617,
+    "n_behavior_trials_in_mean": 90,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 24,
+    "condition_id": 197632,
+    "n_behavior_trials_in_mean": 95,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 25,
+    "condition_id": 199564,
+    "n_behavior_trials_in_mean": 97,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 26,
+    "condition_id": 204372,
+    "n_behavior_trials_in_mean": 97,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 27,
+    "condition_id": 204678,
+    "n_behavior_trials_in_mean": 91,
+    "bounce_class": "hidden_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 28,
+    "condition_id": 206128,
+    "n_behavior_trials_in_mean": 91,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 29,
+    "condition_id": 217817,
+    "n_behavior_trials_in_mean": 94,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 30,
+    "condition_id": 218791,
+    "n_behavior_trials_in_mean": 97,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 31,
+    "condition_id": 226533,
+    "n_behavior_trials_in_mean": 103,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 32,
+    "condition_id": 232533,
+    "n_behavior_trials_in_mean": 101,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 33,
+    "condition_id": 241919,
+    "n_behavior_trials_in_mean": 80,
+    "bounce_class": "hidden_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 34,
+    "condition_id": 242380,
+    "n_behavior_trials_in_mean": 93,
+    "bounce_class": "hidden_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 35,
+    "condition_id": 244437,
+    "n_behavior_trials_in_mean": 97,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 36,
+    "condition_id": 245662,
+    "n_behavior_trials_in_mean": 95,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 37,
+    "condition_id": 248856,
+    "n_behavior_trials_in_mean": 88,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 38,
+    "condition_id": 251629,
+    "n_behavior_trials_in_mean": 98,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 39,
+    "condition_id": 258471,
+    "n_behavior_trials_in_mean": 92,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 40,
+    "condition_id": 269179,
+    "n_behavior_trials_in_mean": 90,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 41,
+    "condition_id": 270569,
+    "n_behavior_trials_in_mean": 87,
+    "bounce_class": "hidden_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 42,
+    "condition_id": 273073,
+    "n_behavior_trials_in_mean": 97,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 43,
+    "condition_id": 273515,
+    "n_behavior_trials_in_mean": 89,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 44,
+    "condition_id": 287936,
+    "n_behavior_trials_in_mean": 99,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 45,
+    "condition_id": 297652,
+    "n_behavior_trials_in_mean": 94,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 46,
+    "condition_id": 301600,
+    "n_behavior_trials_in_mean": 96,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 47,
+    "condition_id": 320246,
+    "n_behavior_trials_in_mean": 100,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 48,
+    "condition_id": 325813,
+    "n_behavior_trials_in_mean": 76,
+    "bounce_class": "hidden_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 49,
+    "condition_id": 328386,
+    "n_behavior_trials_in_mean": 102,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 50,
+    "condition_id": 330797,
+    "n_behavior_trials_in_mean": 93,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 51,
+    "condition_id": 332165,
+    "n_behavior_trials_in_mean": 81,
+    "bounce_class": "hidden_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 52,
+    "condition_id": 340684,
+    "n_behavior_trials_in_mean": 173,
+    "bounce_class": "boundary_ambiguous",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 53,
+    "condition_id": 351612,
+    "n_behavior_trials_in_mean": 94,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 54,
+    "condition_id": 356164,
+    "n_behavior_trials_in_mean": 104,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 55,
+    "condition_id": 356765,
+    "n_behavior_trials_in_mean": 95,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 56,
+    "condition_id": 370777,
+    "n_behavior_trials_in_mean": 99,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 57,
+    "condition_id": 377134,
+    "n_behavior_trials_in_mean": 95,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 58,
+    "condition_id": 379400,
+    "n_behavior_trials_in_mean": 87,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 59,
+    "condition_id": 381514,
+    "n_behavior_trials_in_mean": 82,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 60,
+    "condition_id": 388571,
+    "n_behavior_trials_in_mean": 96,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 61,
+    "condition_id": 394672,
+    "n_behavior_trials_in_mean": 83,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 62,
+    "condition_id": 396358,
+    "n_behavior_trials_in_mean": 99,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 63,
+    "condition_id": 400995,
+    "n_behavior_trials_in_mean": 97,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 64,
+    "condition_id": 401673,
+    "n_behavior_trials_in_mean": 96,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 65,
+    "condition_id": 406460,
+    "n_behavior_trials_in_mean": 101,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 66,
+    "condition_id": 413189,
+    "n_behavior_trials_in_mean": 96,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 67,
+    "condition_id": 413513,
+    "n_behavior_trials_in_mean": 96,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 68,
+    "condition_id": 420020,
+    "n_behavior_trials_in_mean": 100,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 69,
+    "condition_id": 428615,
+    "n_behavior_trials_in_mean": 93,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 70,
+    "condition_id": 435203,
+    "n_behavior_trials_in_mean": 92,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 71,
+    "condition_id": 448412,
+    "n_behavior_trials_in_mean": 105,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 72,
+    "condition_id": 454477,
+    "n_behavior_trials_in_mean": 89,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 73,
+    "condition_id": 456038,
+    "n_behavior_trials_in_mean": 87,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 74,
+    "condition_id": 460651,
+    "n_behavior_trials_in_mean": 93,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 75,
+    "condition_id": 463174,
+    "n_behavior_trials_in_mean": 81,
+    "bounce_class": "hidden_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 76,
+    "condition_id": 464785,
+    "n_behavior_trials_in_mean": 89,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 77,
+    "condition_id": 465431,
+    "n_behavior_trials_in_mean": 102,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "mahler",
+    "condition_index": 78,
+    "condition_id": 469268,
+    "n_behavior_trials_in_mean": 83,
+    "bounce_class": "hidden_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 0,
+    "condition_id": 29337,
+    "n_behavior_trials_in_mean": 1048,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 1,
+    "condition_id": 55062,
+    "n_behavior_trials_in_mean": 1095,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 2,
+    "condition_id": 58244,
+    "n_behavior_trials_in_mean": 1151,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 3,
+    "condition_id": 59920,
+    "n_behavior_trials_in_mean": 0,
+    "bounce_class": "unresolved_terminal_bounce",
+    "label_available": false,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": "unresolved_terminal_or_unsupported_collision_history"
+  },
+  {
+    "animal": "perle",
+    "condition_index": 4,
+    "condition_id": 68220,
+    "n_behavior_trials_in_mean": 1043,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 5,
+    "condition_id": 72780,
+    "n_behavior_trials_in_mean": 1064,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 6,
+    "condition_id": 77046,
+    "n_behavior_trials_in_mean": 1081,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 7,
+    "condition_id": 77944,
+    "n_behavior_trials_in_mean": 1123,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 8,
+    "condition_id": 90751,
+    "n_behavior_trials_in_mean": 1095,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 9,
+    "condition_id": 93053,
+    "n_behavior_trials_in_mean": 1034,
+    "bounce_class": "hidden_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 10,
+    "condition_id": 99902,
+    "n_behavior_trials_in_mean": 1125,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 11,
+    "condition_id": 105802,
+    "n_behavior_trials_in_mean": 1025,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 12,
+    "condition_id": 118879,
+    "n_behavior_trials_in_mean": 1096,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 13,
+    "condition_id": 122957,
+    "n_behavior_trials_in_mean": 1024,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 14,
+    "condition_id": 126479,
+    "n_behavior_trials_in_mean": 1066,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 15,
+    "condition_id": 158705,
+    "n_behavior_trials_in_mean": 1090,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 16,
+    "condition_id": 159613,
+    "n_behavior_trials_in_mean": 1120,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 17,
+    "condition_id": 163248,
+    "n_behavior_trials_in_mean": 1078,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 18,
+    "condition_id": 167848,
+    "n_behavior_trials_in_mean": 1058,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 19,
+    "condition_id": 179553,
+    "n_behavior_trials_in_mean": 1084,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 20,
+    "condition_id": 182748,
+    "n_behavior_trials_in_mean": 1091,
+    "bounce_class": "hidden_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 21,
+    "condition_id": 183171,
+    "n_behavior_trials_in_mean": 1124,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 22,
+    "condition_id": 184642,
+    "n_behavior_trials_in_mean": 1057,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 23,
+    "condition_id": 187617,
+    "n_behavior_trials_in_mean": 1123,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 24,
+    "condition_id": 197632,
+    "n_behavior_trials_in_mean": 1110,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 25,
+    "condition_id": 199564,
+    "n_behavior_trials_in_mean": 1095,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 26,
+    "condition_id": 204372,
+    "n_behavior_trials_in_mean": 1078,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 27,
+    "condition_id": 204678,
+    "n_behavior_trials_in_mean": 1040,
+    "bounce_class": "hidden_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 28,
+    "condition_id": 206128,
+    "n_behavior_trials_in_mean": 1076,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 29,
+    "condition_id": 217817,
+    "n_behavior_trials_in_mean": 1095,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 30,
+    "condition_id": 218791,
+    "n_behavior_trials_in_mean": 1063,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 31,
+    "condition_id": 226533,
+    "n_behavior_trials_in_mean": 1105,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 32,
+    "condition_id": 232533,
+    "n_behavior_trials_in_mean": 1129,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 33,
+    "condition_id": 241919,
+    "n_behavior_trials_in_mean": 1008,
+    "bounce_class": "hidden_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 34,
+    "condition_id": 242380,
+    "n_behavior_trials_in_mean": 1148,
+    "bounce_class": "hidden_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 35,
+    "condition_id": 244437,
+    "n_behavior_trials_in_mean": 1085,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 36,
+    "condition_id": 245662,
+    "n_behavior_trials_in_mean": 1090,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 37,
+    "condition_id": 248856,
+    "n_behavior_trials_in_mean": 1101,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 38,
+    "condition_id": 251629,
+    "n_behavior_trials_in_mean": 1069,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 39,
+    "condition_id": 258471,
+    "n_behavior_trials_in_mean": 1118,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 40,
+    "condition_id": 269179,
+    "n_behavior_trials_in_mean": 1032,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 41,
+    "condition_id": 270569,
+    "n_behavior_trials_in_mean": 1139,
+    "bounce_class": "hidden_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 42,
+    "condition_id": 273073,
+    "n_behavior_trials_in_mean": 1066,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 43,
+    "condition_id": 273515,
+    "n_behavior_trials_in_mean": 1051,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 44,
+    "condition_id": 287936,
+    "n_behavior_trials_in_mean": 1049,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 45,
+    "condition_id": 297652,
+    "n_behavior_trials_in_mean": 1145,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 46,
+    "condition_id": 301600,
+    "n_behavior_trials_in_mean": 1130,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 47,
+    "condition_id": 320246,
+    "n_behavior_trials_in_mean": 1115,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 48,
+    "condition_id": 325813,
+    "n_behavior_trials_in_mean": 983,
+    "bounce_class": "hidden_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 49,
+    "condition_id": 328386,
+    "n_behavior_trials_in_mean": 1124,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 50,
+    "condition_id": 330797,
+    "n_behavior_trials_in_mean": 1016,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 51,
+    "condition_id": 332165,
+    "n_behavior_trials_in_mean": 879,
+    "bounce_class": "hidden_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 52,
+    "condition_id": 340684,
+    "n_behavior_trials_in_mean": 2073,
+    "bounce_class": "boundary_ambiguous",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 53,
+    "condition_id": 351612,
+    "n_behavior_trials_in_mean": 1066,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 54,
+    "condition_id": 356164,
+    "n_behavior_trials_in_mean": 1105,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 55,
+    "condition_id": 356765,
+    "n_behavior_trials_in_mean": 1096,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 56,
+    "condition_id": 370777,
+    "n_behavior_trials_in_mean": 1044,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 57,
+    "condition_id": 377134,
+    "n_behavior_trials_in_mean": 1038,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 58,
+    "condition_id": 379400,
+    "n_behavior_trials_in_mean": 1031,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 59,
+    "condition_id": 381514,
+    "n_behavior_trials_in_mean": 1086,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 60,
+    "condition_id": 388571,
+    "n_behavior_trials_in_mean": 1079,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 61,
+    "condition_id": 394672,
+    "n_behavior_trials_in_mean": 992,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 62,
+    "condition_id": 396358,
+    "n_behavior_trials_in_mean": 1039,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 63,
+    "condition_id": 400995,
+    "n_behavior_trials_in_mean": 1147,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 64,
+    "condition_id": 401673,
+    "n_behavior_trials_in_mean": 1042,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 65,
+    "condition_id": 406460,
+    "n_behavior_trials_in_mean": 1043,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 66,
+    "condition_id": 413189,
+    "n_behavior_trials_in_mean": 1099,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 67,
+    "condition_id": 413513,
+    "n_behavior_trials_in_mean": 1069,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 68,
+    "condition_id": 420020,
+    "n_behavior_trials_in_mean": 1104,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 69,
+    "condition_id": 428615,
+    "n_behavior_trials_in_mean": 1074,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 70,
+    "condition_id": 435203,
+    "n_behavior_trials_in_mean": 1034,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 71,
+    "condition_id": 448412,
+    "n_behavior_trials_in_mean": 1092,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 72,
+    "condition_id": 454477,
+    "n_behavior_trials_in_mean": 1084,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 73,
+    "condition_id": 456038,
+    "n_behavior_trials_in_mean": 1118,
+    "bounce_class": "visible_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 74,
+    "condition_id": 460651,
+    "n_behavior_trials_in_mean": 1084,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 75,
+    "condition_id": 463174,
+    "n_behavior_trials_in_mean": 949,
+    "bounce_class": "hidden_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 76,
+    "condition_id": 464785,
+    "n_behavior_trials_in_mean": 1067,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 77,
+    "condition_id": 465431,
+    "n_behavior_trials_in_mean": 1101,
+    "bounce_class": "no_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  },
+  {
+    "animal": "perle",
+    "condition_index": 78,
+    "condition_id": 469268,
+    "n_behavior_trials_in_mean": 1083,
+    "bounce_class": "hidden_bounce",
+    "label_available": true,
+    "display_rule": "every physical condition, sorted by condition_id; no example selection",
+    "no_label_reason": ""
+  }
+]

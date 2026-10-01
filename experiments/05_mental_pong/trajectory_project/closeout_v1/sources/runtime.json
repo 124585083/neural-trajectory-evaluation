@@ -1,0 +1,8 @@
+{
+  "python": "3.11.9",
+  "numpy": "1.26.4",
+  "scipy": "1.14.1",
+  "pandas": "2.2.3",
+  "sklearn": "1.5.2",
+  "libraries_upgraded": false
+}

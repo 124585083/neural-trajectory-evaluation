@@ -1,0 +1,23 @@
+{
+  "statements": [
+    "After condition averaging, all four full-epoch comparisons still favor objective own-target reconstruction, while the RMSE gap between targets is smaller.",
+    "Candidate full-epoch RMSE exceeds objective RMSE by 0.0220–0.0322; the corresponding trial-label range was 0.0873–0.1250. This comparison of two executed pipelines cannot assign all changes to behavioral averaging.",
+    "No-collision conditions have lower candidate RMSE by 0.0892–0.1070 but lower correlation; the metrics do not jointly establish candidate superiority.",
+    "Post-collision candidate RMSE is higher by 0.2312–0.2628. Preserve this phase and condition-type difference rather than interpreting every phase through its full-epoch mean."
+  ],
+  "metric_comparison_is_descriptive_not_significance": true,
+  "sources": [
+    {
+      "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/results/self_reconstruction_main_table.csv",
+      "sha256": "989991677474d794dab6455c7231ade8ab8aedc10022caacab3888d5f27e363e",
+      "bytes": 28269,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/results/self_reconstruction_main_table.csv",
+      "sha256": "7c40568929b3acd5dcb2942733cbdc22a79ee16763b86e19f9bbaeefd5507c18",
+      "bytes": 25926,
+      "role": "source or output"
+    }
+  ]
+}

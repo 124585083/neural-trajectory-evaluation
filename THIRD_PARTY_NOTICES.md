@@ -1,5 +1,15 @@
 # Third-Party Notices and Attribution
 
+## Mental-Pong
+
+The Mental-Pong study uses the data and analysis framework accompanying Rajalingham, Sohn, and Jazayeri, [Dynamic tracking of objects in the macaque dorsomedial frontal cortex](https://www.nature.com/articles/s41467-024-54688-y). Cite the paper and [Zenodo release 13952210](https://doi.org/10.5281/zenodo.13952210) when using these data.
+
+The local audit inspected [jazlab/MentalPong](https://github.com/jazlab/MentalPong) at commit `b976255be73140c759d8f8db0fd8ff551a4e2d73`. Its code carries the MIT License, copyright (c) 2024 JazLab. The [unmodified license](third_party/licenses/MentalPong-MIT.txt) is preserved here. Source-code licensing does not replace the dataset provider's terms.
+
+The integrated module contains project analysis code, English report editions, and compact derived results. Raw Mental-Pong data and large saved representations, readouts, and null arrays remain external. The [artifact registry](experiments/05_mental_pong/integration/artifact_registry.csv) and [official source audit](experiments/05_mental_pong/integration/official_source_audit.json) retain provenance. No affiliation with or endorsement by the original authors is implied.
+
+Known repository authorship and release identifiers are unchanged. The existing citation version and release date identify the recorded software release; this integration does not declare a new release.
+
 This repository contains original project code, documentation, configurations, trained artifacts, and compact result tables. It also depends on external data and software. The repository-level [MIT License](LICENSE) does not replace or broaden any third-party license, dataset access condition, model-use condition, or citation requirement.
 
 ## Dynamic Sensorium 2023

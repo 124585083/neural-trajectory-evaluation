@@ -1,0 +1,204 @@
+{
+  "completed": true,
+  "branches": [
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/results/C/mahler_FA50_completed.json",
+      "sha256": "53cdd90304beac0bdaa178bc8d2328a42a858285697aa916f5b1bf46f6bfab6d",
+      "bytes": 35554,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/results/C/mahler_GPFA50_completed.json",
+      "sha256": "f226df9ccbe6ee0fac87bc9fe276a83a6f64fa1a3c40467381ee97eefd65ff31",
+      "bytes": 35568,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/results/C/perle_FA50_completed.json",
+      "sha256": "023de2162fc036185052e356118f4eb1f498fd582a4bea0a97623697ca1c75ab",
+      "bytes": 35447,
+      "role": "source or output"
+    },
+    {
+      "path": "source_pilot://trajectory_project/closeout_v1/results/C/perle_GPFA50_completed.json",
+      "sha256": "15375c9f41a0deb1a783a59e96dbfd5c7178ccb1186471e7b3d89cd6c9751d26",
+      "bytes": 35459,
+      "role": "source or output"
+    }
+  ],
+  "repeats_per_animal": 1000,
+  "splits_per_repeat": 100,
+  "independent_random_xy_heads": 400000,
+  "actual_batched_sklearn_fits": 400,
+  "replay_checks": [
+    {
+      "animal": "mahler",
+      "representation": "FA50",
+      "q": 0,
+      "split": 0,
+      "status": "pass",
+      "saved_score_replay_max_abs_error": 4.3655745685100555e-11,
+      "heldout_rows": 1639,
+      "raw_preprocessing": "fail"
+    },
+    {
+      "animal": "mahler",
+      "representation": "FA50",
+      "q": 1,
+      "split": 49,
+      "status": "pass",
+      "saved_score_replay_max_abs_error": 4.3655745685100555e-11,
+      "heldout_rows": 1783,
+      "raw_preprocessing": "fail"
+    },
+    {
+      "animal": "mahler",
+      "representation": "FA50",
+      "q": 2,
+      "split": 99,
+      "status": "pass",
+      "saved_score_replay_max_abs_error": 7.275957614183426e-11,
+      "heldout_rows": 1645,
+      "raw_preprocessing": "fail"
+    },
+    {
+      "animal": "mahler",
+      "representation": "FA50",
+      "q": 999,
+      "split": 99,
+      "status": "pass",
+      "saved_score_replay_max_abs_error": 7.275957614183426e-11,
+      "heldout_rows": 1645,
+      "raw_preprocessing": "fail"
+    },
+    {
+      "animal": "mahler",
+      "representation": "GPFA50",
+      "q": 0,
+      "split": 0,
+      "status": "pass",
+      "saved_score_replay_max_abs_error": 3.2741809263825417e-11,
+      "heldout_rows": 1639,
+      "raw_preprocessing": "fail"
+    },
+    {
+      "animal": "mahler",
+      "representation": "GPFA50",
+      "q": 1,
+      "split": 49,
+      "status": "pass",
+      "saved_score_replay_max_abs_error": 4.3655745685100555e-11,
+      "heldout_rows": 1783,
+      "raw_preprocessing": "fail"
+    },
+    {
+      "animal": "mahler",
+      "representation": "GPFA50",
+      "q": 2,
+      "split": 99,
+      "status": "pass",
+      "saved_score_replay_max_abs_error": 6.912159733474255e-11,
+      "heldout_rows": 1645,
+      "raw_preprocessing": "fail"
+    },
+    {
+      "animal": "mahler",
+      "representation": "GPFA50",
+      "q": 999,
+      "split": 99,
+      "status": "pass",
+      "saved_score_replay_max_abs_error": 4.001776687800884e-11,
+      "heldout_rows": 1645,
+      "raw_preprocessing": "fail"
+    },
+    {
+      "animal": "perle",
+      "representation": "FA50",
+      "q": 0,
+      "split": 0,
+      "status": "pass",
+      "saved_score_replay_max_abs_error": 2.1827872842550278e-11,
+      "heldout_rows": 1639,
+      "raw_preprocessing": "fail"
+    },
+    {
+      "animal": "perle",
+      "representation": "FA50",
+      "q": 1,
+      "split": 49,
+      "status": "pass",
+      "saved_score_replay_max_abs_error": 2.1827872842550278e-11,
+      "heldout_rows": 1783,
+      "raw_preprocessing": "fail"
+    },
+    {
+      "animal": "perle",
+      "representation": "FA50",
+      "q": 2,
+      "split": 99,
+      "status": "pass",
+      "saved_score_replay_max_abs_error": 2.546585164964199e-11,
+      "heldout_rows": 1645,
+      "raw_preprocessing": "fail"
+    },
+    {
+      "animal": "perle",
+      "representation": "FA50",
+      "q": 999,
+      "split": 99,
+      "status": "pass",
+      "saved_score_replay_max_abs_error": 1.8189894035458565e-11,
+      "heldout_rows": 1645,
+      "raw_preprocessing": "fail"
+    },
+    {
+      "animal": "perle",
+      "representation": "GPFA50",
+      "q": 0,
+      "split": 0,
+      "status": "pass",
+      "saved_score_replay_max_abs_error": 7.639755494892597e-11,
+      "heldout_rows": 1639,
+      "raw_preprocessing": "fail"
+    },
+    {
+      "animal": "perle",
+      "representation": "GPFA50",
+      "q": 1,
+      "split": 49,
+      "status": "pass",
+      "saved_score_replay_max_abs_error": 5.820766091346741e-11,
+      "heldout_rows": 1783,
+      "raw_preprocessing": "fail"
+    },
+    {
+      "animal": "perle",
+      "representation": "GPFA50",
+      "q": 2,
+      "split": 99,
+      "status": "pass",
+      "saved_score_replay_max_abs_error": 1.4551915228366852e-11,
+      "heldout_rows": 1645,
+      "raw_preprocessing": "fail"
+    },
+    {
+      "animal": "perle",
+      "representation": "GPFA50",
+      "q": 999,
+      "split": 99,
+      "status": "pass",
+      "saved_score_replay_max_abs_error": 2.546585164964199e-11,
+      "heldout_rows": 1645,
+      "raw_preprocessing": "fail"
+    }
+  ],
+  "summary": {
+    "path": "source_pilot://trajectory_project/closeout_v1/results/C/random_endpoint_summary.csv",
+    "sha256": "7e14c16b081dad9a7e732467ff30fcdf63a8d4dc2827e9632ec533dee3174aa5",
+    "bytes": 107044,
+    "role": "source or output"
+  },
+  "raw_preprocessing": "fail",
+  "provided_input_filtering": "pass relative to released inputs only",
+  "fit_provenance": "pass relative to released inputs only"
+}

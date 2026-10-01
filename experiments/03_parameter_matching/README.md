@@ -1,10 +1,10 @@
 # Phase 3 — Total-parameter matching
 
-This phase constructs and trains a reduced Factorized3D Dynamic model whose total trainable parameter count approximately matches the Static baseline before the main Static–Dynamic comparison.
+This Study 1 phase constructs and trains a reduced Factorized3D Dynamic model. Its total trainable parameter count approximately matches the Static baseline before the main Static–Dynamic comparison.
 
 ## Purpose
 
-Phase 1 provides the Static and full Dynamic baselines, with the full Dynamic model containing substantially more total trainable parameters. Phase 3 applies one predeclared reduction to the Dynamic core and audits the resulting complete-model parameter count against Static. The trained and frozen Total-parameter-matched Dynamic checkpoint becomes the primary Dynamic model used in Phase 4. This is a complete-model architectural comparison, not a same-backbone experiment or a causal isolation of temporal history.
+Phase 1 provides the Static and full Dynamic baselines, with the full Dynamic model containing substantially more total trainable parameters. Phase 3 applies one predeclared reduction to the Dynamic core and audits the resulting complete-model parameter count against Static. The trained and frozen Total-parameter-matched Dynamic checkpoint becomes the primary Dynamic model used in Phase 4. Core architectures remain different, so this complete-model comparison cannot isolate the effect of temporal history.
 
 ## What is matched
 

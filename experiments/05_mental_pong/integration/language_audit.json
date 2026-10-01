@@ -1,0 +1,55 @@
+{
+  "status": "passed_for_published_scope",
+  "checked_at_utc": "2026-10-01T17:50:37.356460+00:00",
+  "text_and_links": {
+    "text_files": 357,
+    "python_files_parsed": 91,
+    "relative_links_checked": 418,
+    "language_issues": [],
+    "private_path_issues": [],
+    "broken_links": [],
+    "syntax_issues": [],
+    "excluded": [
+      "Git internals",
+      "ignored local configuration",
+      "external immutable source records",
+      "binary figures (separate visual inspection record)"
+    ],
+    "required_legal_exceptions": [],
+    "synthetic_path_exception": "A synthetic Windows absolute path is used in rejection tests and in this checker."
+  },
+  "compressed_tables": [
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/B/mahler_FA50_q_aggregate.csv.gz",
+      "cjk_found": false,
+      "private_path_found": false
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/B/mahler_GPFA50_q_aggregate.csv.gz",
+      "cjk_found": false,
+      "private_path_found": false
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/B/perle_FA50_q_aggregate.csv.gz",
+      "cjk_found": false,
+      "private_path_found": false
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/B/perle_GPFA50_q_aggregate.csv.gz",
+      "cjk_found": false,
+      "private_path_found": false
+    }
+  ],
+  "published_label_npz_string_fields": 0,
+  "figures": {
+    "published_pngs_inspected": 13,
+    "record": "figure_review.json",
+    "external_atlases_newly_inspected": false
+  },
+  "manual_prose_review": {
+    "existing_sensorium": "English sentences, claims, comments/templates and captions reviewed; see editorial_changes.md",
+    "mental_pong": "English reports, historical summaries, code strings and figure labels reviewed",
+    "future_design": "Reviewed as unexecuted design; no new scientific claims"
+  },
+  "legal_notices": "Protected originals preserved verbatim; no language exceptions required"
+}

@@ -1,0 +1,98 @@
+[
+  {
+    "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/manifest.json",
+    "sha256": "307dc889c21b377cbca25f8213e0f1885fa1a112e86f02ce4489f1700b2d8d70",
+    "bytes": 1259686,
+    "role": "unchanged current condition-mean source"
+  },
+  {
+    "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/REPORT.md",
+    "sha256": "3edb2180fed036cb9c4d6854aebff65207f7e5f4063b27b1168cd43204dbced4",
+    "bytes": 13030,
+    "role": "unchanged current condition-mean source"
+  },
+  {
+    "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/README.md",
+    "sha256": "b9326e95a9de3604f78038eeb0caf7092dcdacbec9a7410293e94f311fe3cb8c",
+    "bytes": 1776,
+    "role": "unchanged current condition-mean source"
+  },
+  {
+    "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/configs/analysis_protocol.json",
+    "sha256": "d29425f2289f24371a4178897e4d8af2898e1b8ffc5f9a7d613225a5cf265983",
+    "bytes": 4512,
+    "role": "unchanged current condition-mean source"
+  },
+  {
+    "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/configs/condition_splits_100.json",
+    "sha256": "dbd9f694ec190d046b1d000b31c5196ca41661df8d539ea17fa6b5ecf7c196f0",
+    "bytes": 222295,
+    "role": "unchanged current condition-mean source"
+  },
+  {
+    "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/results/previous_trial_version_comparison.csv",
+    "sha256": "2a391b7bedc6980f7d83d403374203a822482ffdae3c24b5e5acee07a88564ac",
+    "bytes": 16635,
+    "role": "unchanged current condition-mean source"
+  },
+  {
+    "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/results/self_reconstruction_main_table.csv",
+    "sha256": "989991677474d794dab6455c7231ade8ab8aedc10022caacab3888d5f27e363e",
+    "bytes": 28269,
+    "role": "unchanged current condition-mean source"
+  },
+  {
+    "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/results/cross_2x2_summary.csv",
+    "sha256": "9d4d7986816c33cb167a40225e2fd08a4ac0da6ec24da270247edd4d0b948bfe",
+    "bytes": 93883,
+    "role": "unchanged current condition-mean source"
+  },
+  {
+    "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/condition_data.py",
+    "sha256": "7b5ec271e75ba446c9b5583171950ff74a21f8ac11335da2017197c4f0f38c20",
+    "bytes": 6551,
+    "role": "unchanged current condition-mean source"
+  },
+  {
+    "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/decoding_condition.py",
+    "sha256": "56c7bf918d5ca81bdddb211d508cb5110d8947a29630346bdac089170c87a7c7",
+    "bytes": 20245,
+    "role": "unchanged current condition-mean source"
+  },
+  {
+    "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/sources/source_trial_membership.json",
+    "sha256": "642ad8b52b5eb55b3dd593c2254e5daaaf61f644edd226d49a53bf9d0542a5c7",
+    "bytes": 1463088,
+    "role": "unchanged current condition-mean source"
+  },
+  {
+    "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/results/condition_geometry.csv",
+    "sha256": "ac11743cda242bab24117d5463cdc7e3f024a339f3e099bf4699835fb6a034cb",
+    "bytes": 83453,
+    "role": "unchanged current condition-mean source"
+  },
+  {
+    "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/results/reused_representation_audit.json",
+    "sha256": "c77d21bed00b9de3ec93d271b4978bb83efdb7c6ce0c97d40af4b8b189536490",
+    "bytes": 560927,
+    "role": "unchanged current condition-mean source"
+  },
+  {
+    "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/mahler_condition_labels.npz",
+    "sha256": "4b059a6a6c5b262c85dfa5a1fe4601925708b70dd932012528c428a59bdba853",
+    "bytes": 179175,
+    "role": "source or output"
+  },
+  {
+    "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/perle_condition_labels.npz",
+    "sha256": "5fa264d9936ce67bb693ae25ae799b1e612b717ef3225dbc2373065afbfaf3fc",
+    "bytes": 179202,
+    "role": "source or output"
+  },
+  {
+    "path": "source_pilot://trajectory_project/trial_endpoint_fa_gpfa_v1/manifest.json",
+    "sha256": "e2a67957409ee912feccfeacbfb6066c5982eca12c6be49c6f43c1ea02bffaf8",
+    "bytes": 1737151,
+    "role": "unchanged original trial-version manifest"
+  }
+]

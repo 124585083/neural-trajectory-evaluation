@@ -1,6 +1,6 @@
 # Methods
 
-The study evaluates Static and Dynamic neural encoding models at the response, output-space population-similarity, and neural-trajectory levels. This document defines the data, models, training, transformations, metrics, controls, and statistical summaries used in those evaluations.
+This document describes Study 1, the Dynamic Sensorium comparison of Static and Dynamic neural encoding models. It defines the data, models, training, transformations, metrics, controls, and statistical summaries for response, output-space population similarity, and neural trajectories. Study 2 uses a separate GPFA implementation and task-coordinate readouts; its methods and input audit are described in [Mental-Pong](MENTAL_PONG.md).
 
 ## 1. Dataset and analysis scope
 
@@ -217,6 +217,8 @@ Implemented variants are:
 
 ## 8. Neural-data-defined GPFA
 
+Gaussian-process factor analysis (GPFA) combines a linear population observation model with a smooth temporal prior. Factor analysis (FA), which supplies the initial observation parameters, models shared covariance without this temporal prior.
+
 For trial `m`, time `t`, scaled neural response `y_m(t)`, and latent state `x_m(t)`, the observation model is:
 
 ```text
@@ -234,7 +236,7 @@ The implementation performs exact linear-Gaussian posterior inference. Factor an
 
 The Phase 2 method-development fit uses at most 30 EM iterations with relative tolerance `1e-4`. The comparison-subset selection fits use at most 12 iterations, and its final refit uses at most 20 with tolerance `1e-6`.
 
-GPFA parameters, train-derived scaling, neuron order, observation grid, training indices, and temporal support are frozen after fitting. Measurement reliability, null separation, sensitivity, and interpretation limits are reported in [GPFA Validation](GPFA_VALIDATION.md).
+GPFA parameters, train-derived scaling, neuron order, observation grid, training indices, and temporal support are frozen after fitting. Posterior inference still conditions each latent state on observations across the full evaluation window, including later times. This is an offline trajectory measurement; freezing the parameters does not make its inference causal. Measurement reliability, null separation, sensitivity, and interpretation limits are reported in [GPFA Validation](GPFA_VALIDATION.md).
 
 ## 9. GPFA selection and the two frozen fits
 
@@ -364,7 +366,7 @@ candidate = clip(dynamic + σ × neuron_scale × fixed_noise, 1e-5, infinity)
 
 The amplitude whose selection-half mean per-neuron response correlation is closest to the Static target is retained. **Test-half neural responses are not used to select the response-matching perturbation strength.** Static and the response-score-matched Dynamic output are then evaluated on the test half using the response, RSA/CKA, and frozen-GPFA batteries.
 
-This is a metric-sensitivity stress test, not a separately trained fair model comparison. It matches one scalar response summary and does not force individual-neuron scores, response variance, RSA, or CKA to match.
+This output perturbation tests metric sensitivity. It matches one scalar response summary while allowing individual-neuron scores, response variance, RSA, and CKA to differ. Its scores do not rank a separately trained accuracy-matched model.
 
 A secondary trained-checkpoint control selects Dynamic epoch 65 from the recorded five-session validation history by proximity to the Static validation correlation. Selection uses validation history rather than oracle trajectory metrics; this control remains distinct from the output-perturbation procedure.
 

@@ -1,0 +1,15 @@
+# Historical closeout design: behavioral groups within a condition
+
+This is the design recorded at closeout. It was not executed. The [current cross-study research plan](../../../../docs/FUTURE_DIRECTIONS.md) is the single maintained plan for future work.
+
+The proposed test asks whether neural representations differ with the direction of behavioral endpoint errors while the physical condition remains fixed. Define signed error as final paddle position minus objective endpoint. Form above-target, below-target and near-correct groups whose endpoints are reasonably similar within each group. Set thresholds from measurement precision and task tolerance before examining neural results. Exact numerical zero in the descriptive closeout audit is a counting rule, not a validated future grouping threshold. Failure alone does not identify an internal judgment error.
+
+Match absolute error, session, genuine trial count and available neural units where feasible. Record unmatched data without selecting groups by decoding performance. The prerequisite is recovery of unit/session/trial neural responses, corresponding endpoint behavior, timestamps, event and feedback boundaries, and original averaging membership. Strictly pre-feedback sampling of the terminal behavioral measurement must also be checked.
+
+With those paired records, compute each group's neural mean and evaluate it using a shared representation and readout protocol with independent splits. Ask whether reconstructed positions shift with above-target versus below-target behavior while the objective path stays fixed, and whether group-specific candidates explain structured departures from objective reconstruction. Fit representations, unit selection and data-dependent preprocessing on training data. Reliability must use genuine within-group trial splits.
+
+Group-average analysis conditions on known behavioral membership. Blind prediction for a new single trial requires its own paired observations and evaluation. Cross-session grouped pseudopopulations require correct member identities and do not establish one simultaneously observed population decision.
+
+The currently obtained data contain already mixed condition-mean neural responses. Their original members have not been recovered. A single mean cannot be decomposed into the proposed behavioral-group means; repeating it for separate behavioral records does not create new neural observations. This closeout therefore performed no grouped neural reconstruction, new download or representation search. The limitation applies to the obtained and audited data, without asserting that every unpublished record from the original experiment has the same limitation.
+
+`raw_preprocessing=fail` remains unresolved. Released-input filtering/provenance checks cannot repair upstream cross-condition/time filling. Any future recovery of raw paired data must establish a training-side preprocessing boundary at its source.

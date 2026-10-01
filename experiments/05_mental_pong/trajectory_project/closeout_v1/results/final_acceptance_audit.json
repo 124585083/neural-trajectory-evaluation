@@ -1,0 +1,88 @@
+{
+  "completed": true,
+  "checked_utc": "2026-10-01T09:12:09.492802+00:00",
+  "A_B_observed_score_max_difference": 0.0,
+  "A_C_observed_score_max_difference": 1.7763568394002505e-15,
+  "B_mapping_seed_regeneration": "pass",
+  "C_mapping_seed_regeneration": "pass",
+  "C_independent_weight_and_train_mean_baseline_replay": [
+    {
+      "animal": "mahler",
+      "representation": "FA50",
+      "q": 0,
+      "split": 0,
+      "n_test_rows": 1639,
+      "independent_r_RMSE_bias_amplitude_skill_replay": "pass"
+    },
+    {
+      "animal": "mahler",
+      "representation": "FA50",
+      "q": 999,
+      "split": 99,
+      "n_test_rows": 1645,
+      "independent_r_RMSE_bias_amplitude_skill_replay": "pass"
+    },
+    {
+      "animal": "mahler",
+      "representation": "GPFA50",
+      "q": 0,
+      "split": 0,
+      "n_test_rows": 1639,
+      "independent_r_RMSE_bias_amplitude_skill_replay": "pass"
+    },
+    {
+      "animal": "mahler",
+      "representation": "GPFA50",
+      "q": 999,
+      "split": 99,
+      "n_test_rows": 1645,
+      "independent_r_RMSE_bias_amplitude_skill_replay": "pass"
+    },
+    {
+      "animal": "perle",
+      "representation": "FA50",
+      "q": 0,
+      "split": 0,
+      "n_test_rows": 1639,
+      "independent_r_RMSE_bias_amplitude_skill_replay": "pass"
+    },
+    {
+      "animal": "perle",
+      "representation": "FA50",
+      "q": 999,
+      "split": 99,
+      "n_test_rows": 1645,
+      "independent_r_RMSE_bias_amplitude_skill_replay": "pass"
+    },
+    {
+      "animal": "perle",
+      "representation": "GPFA50",
+      "q": 0,
+      "split": 0,
+      "n_test_rows": 1639,
+      "independent_r_RMSE_bias_amplitude_skill_replay": "pass"
+    },
+    {
+      "animal": "perle",
+      "representation": "GPFA50",
+      "q": 999,
+      "split": 99,
+      "n_test_rows": 1645,
+      "independent_r_RMSE_bias_amplitude_skill_replay": "pass"
+    }
+  ],
+  "A_no_refit": true,
+  "B_no_refit": true,
+  "C_actual_batched_sklearn_fits": 400,
+  "C_random_xy_heads": 400000,
+  "n_randomizations_each_null_each_animal": 1000,
+  "old_manifest_records_verified_unchanged": {
+    "condition_endpoint_fa_gpfa_v1": 3916,
+    "trial_endpoint_fa_gpfa_v1": 4753
+  },
+  "new_neural_inputs_or_representation_training": false,
+  "causal_boundary": "No new neural future access; original raw preprocessing dependency remains.",
+  "raw_preprocessing": "fail",
+  "provided_input_filtering": "pass only relative to released inputs",
+  "fit_provenance": "pass only relative to released inputs"
+}

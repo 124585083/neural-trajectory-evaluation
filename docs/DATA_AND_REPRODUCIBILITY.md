@@ -1,6 +1,6 @@
 # Data and Reproducibility
 
-Raw Dynamic Sensorium data are not redistributed by this repository. The repository provides code, documentation, compact result tables, and selected encoding-model and GPFA artifacts through Git LFS. Reproduction is organized by experimental phase; this guide covers shared setup and navigation, while each Phase README is the authoritative source for exact commands.
+Sections 1–15 describe Study 1, Dynamic Sensorium: its code, documentation, compact result tables, and selected encoding-model and GPFA artifacts in Git LFS. Raw data remain external. Each Phase README gives the exact execution commands. Study 2 has a separate runtime and artifact registry in the [Mental-Pong module](../experiments/05_mental_pong/README.md); its directory number does not create a dependency on the Sensorium phases.
 
 ## 1. Reproducibility levels
 
@@ -64,7 +64,7 @@ neural-trajectory-evaluation/
         └── dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20/
 ```
 
-The checked-in root values are `../../data/sensorium_all_2023` and are resolved relative to the corresponding phase directory. A different location may be supplied by editing the applicable config root to an absolute path or another phase-relative path. A symlink or junction is optional; it is not part of the required repository layout.
+The checked-in root values are `../../data/sensorium_all_2023`, resolved relative to the corresponding phase directory. A local configuration can instead point to `<sensorium_data_root>`, using an absolute or phase-relative path. Keep machine-specific values in local files. A symlink or junction is optional.
 
 ## 5. Upstream code and pinned revisions
 
@@ -294,3 +294,9 @@ Tests cover selected contracts such as session/configuration identities, tensor 
 - [Internally locked GPFA protocol](supplementary/protocols/GPFA_PROTOCOL_LOCKED.md)
 - [Detailed model reports](supplementary/model_reports/)
 - [Experiment matrix](supplementary/implementation/EXPERIMENT_MATRIX.md)
+
+## 16. Mental-Pong access and execution
+
+Start with the [Mental-Pong module README](../experiments/05_mental_pong/README.md) for separate routes to reports, read-only verification, a small saved-case replay, and later full execution. Use its [path configuration example](../experiments/05_mental_pong/configs/paths.example.json) to locate external data and large artifacts. The module records availability explicitly; a report link alone does not establish that an artifact is available or that a replay succeeded.
+
+The integration preserves the completed scientific results. Integration checks, English presentation derivatives, and source hashes are recorded separately from the original scientific acceptance records. Full training and randomization studies were not repeated for publication editing.

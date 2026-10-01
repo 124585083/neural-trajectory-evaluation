@@ -1,6 +1,6 @@
 # Design Rationale
 
-The project is not designed merely to ask whether a Dynamic model predicts neural responses better. It asks whether different evaluation levels reveal different aspects of the Dynamic–Static difference, and whether trajectory-based evaluation provides interpretable temporal information beyond standard response and population-similarity summaries.
+Study 1 asks which aspects of the Dynamic–Static difference are revealed by response, population-similarity, and trajectory measurements. The design tests whether trajectory evaluation supplies interpretable temporal information beyond the conventional summaries examined here. Study 2 extends the question to task variables and behavior using separate Mental-Pong data and readouts.
 
 ## 1. The inference problem: predictive gain is not the same as dynamic explanation
 
@@ -36,7 +36,7 @@ The intended contribution is complementarity. Trajectory evaluation is not assum
 
 ## 3. Why trajectory measurement is defined by neural data
 
-Static and Dynamic should not each receive a separately optimized latent space. Independent manifold fits could differ by arbitrary rotations, scales, axis choices, noise models, and temporal priors. Post-hoc alignment could then reward flexibility in the comparison rather than fidelity to the recorded neural population.
+Static and Dynamic are evaluated in one shared latent space. Separately optimized spaces could differ in rotation, scale, axis choice, noise model, and temporal prior. Allowing post-hoc alignment would add flexibility whose contribution could be confused with agreement with the recorded population.
 
 The project instead uses one **neural-data-defined GPFA** and fixes the direction of reference:
 
@@ -87,7 +87,7 @@ The appropriate inferential scope is therefore:
 
 > A Dynamic architecture with explicit temporal convolutions is compared with a framewise Static architecture under approximately matched total trainable parameter counts.
 
-This is a complete-model architectural comparison, not a same-backbone, core-parameter-matched, or single-variable causal experiment. Any observed difference cannot be attributed solely to temporal history.
+This is a complete-model architectural comparison. Core structure and parameter counts remain different, so the observed difference cannot be attributed solely to temporal history.
 
 ## 7. Why multiple trajectory metrics are reported separately
 
@@ -140,7 +140,7 @@ Incremental value should not be assessed only against one scalar response score,
 
 The leave-perturbation-family-out analysis asks how well this enriched battery predicts trajectory-metric variation for a transformation family that was excluded from regression fitting. Holding out entire perturbation families tests whether the relationship generalizes across kinds of transformation rather than merely memorizing one degradation curve.
 
-If the conventional battery predicts substantial but incomplete trajectory variation, the appropriate interpretation is **partial predictability**, **incremental information**, and **failure of complete sufficiency**. It is not independence, orthogonality, or evidence for a wholly separate information source.
+Incomplete prediction establishes a limit of the tested ridge model on the held-out perturbation families. Residual error can reflect model capacity, finite samples, or distribution changes as well as missing features. The reversal counterexample separately establishes that time-averaged condition patterns omit temporal order. Together with the response-matching result, these tests support complementary diagnostics within the tested formulations; regression residuals alone do not establish information independence or general insufficiency.
 
 ## 12. Falsification and decision logic
 
@@ -167,7 +167,7 @@ Within its evidence scope, the design can support claims about:
 - reproducible condition-average neural trajectories;
 - model differences in trajectory position and local direction;
 - temporal-order sensitivity of the tested trajectory metrics;
-- incremental diagnostic information relative to the tested conventional battery.
+- complementary diagnostics and limits of prediction by the tested conventional battery.
 
 The design does not by itself identify:
 
@@ -180,7 +180,17 @@ The design does not by itself identify:
 
 Response prediction, population-response representational similarity, and trajectory evaluation answer different but complementary questions.
 
-## 14. Documentation pointers
+## 14. Study 2: task references and the averaging unit
+
+Sensorium evaluates whether model-predicted population activity follows the recorded neural trajectory in a common representation space. [Mental-Pong](MENTAL_PONG.md) instead maps neural representations to task coordinates and compares reconstructed position with an objective ball path and a behavior-constrained candidate path. Task variables give these readouts an external reference. The candidate is constructed from endpoint behavior and geometry, so its shape alone cannot establish a neural representation or computational mechanism.
+
+The completed Mental-Pong comparison uses condition-mean neural responses. A condition denotes a fixed physical task configuration. A pseudopopulation combines condition-aligned recordings whose units need not have been observed simultaneously. These data support condition-level reconstruction comparisons, while the unknown neural mean membership prevents a test of different behavioral choices within the same condition. The versioned [closeout report](../experiments/05_mental_pong/trajectory_project/closeout_v1/FINAL_REPORT.md) preserves this boundary and the observed behavioral averaging effect.
+
+Averaging should preserve the contrast required by the question. Repeat averages in Sensorium estimate reproducible stimulus-related activity. A future test of above-target and below-target choices would require identifiable behavior groups before their neural responses were averaged. The available behavioral records show partial cancellation of opposite endpoint errors; they do not measure neural information loss. The earlier trial-label comparison also changed condition weighting, so it is not a one-factor test of averaging.
+
+The shared research direction is to establish reliable temporal measurements, relate them to task variables and behavior, and determine which data would distinguish competing explanations. The studies retain separate scores, GPFA implementations, and validation claims. [Future directions](FUTURE_DIRECTIONS.md) develops the required data and controls without treating the proposed experiments as completed.
+
+## 15. Documentation pointers
 
 - [README](../README.md): concise scientific story.
 - [Methods](METHODS.md): complete procedures.

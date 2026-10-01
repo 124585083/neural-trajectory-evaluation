@@ -1,0 +1,45 @@
+{
+  "latent_dim": 50,
+  "seed": 42,
+  "fa_options": {
+    "n_components": 50,
+    "random_state": 42,
+    "max_iter": 300,
+    "tol": 0.01,
+    "svd_method": "lapack",
+    "iterated_power": 7,
+    "rotation": null
+  },
+  "gpfa_options": {
+    "initial_tau": 0.15,
+    "tau_bounds": [
+      0.025,
+      2.0
+    ],
+    "nugget": 0.001,
+    "min_noise": 0.0001,
+    "max_iterations": 400,
+    "tolerance": 1e-06,
+    "bin_size_seconds": 0.05
+  },
+  "gpfa_initialization": "same-round training-only FA50 C/d/R then existing 1% loading jitter seed42",
+  "initialization_difference": "old GPFA grid initialized from FA100 with omitted variance added to R; this fixed equal-rank branch shares its separately evaluated FA50 initializer; no label-based choice",
+  "fit_half": "half1",
+  "neuron_training_finite_fraction": 0.99,
+  "std_floor": 1e-05,
+  "measurement_min_observed_neuron_fraction": 0.95,
+  "input_dtype": "float64",
+  "latent_coordinates": "raw posterior, not orthogonalized",
+  "bin_ms": 50,
+  "bin_available_rule": "(bin_index + 1) * 50 ms",
+  "support_rule": "published start_end_pad0 minus any f_pad0 overlap; excludes feedback-straddling terminal bins",
+  "source_sha256": {
+    "source_pilot://gpfa_shared.py": "afb3f397dac5a28884a351ee2b90bde613678cc5414e2c11467df8d97a74e97a",
+    "source_pilot://gpfa_config.json": "6609209359d003aa16b6155967f6f4e4f9b43a765c1d43b821f48cf9fb10d538",
+    "source_pilot://capacity_position_baselines.py": "2871aa8d7a2350583e8485397b503ca49bfee3fbe9baf934f7bed7e170abf426",
+    "source_pilot://data_pipeline.py": "35a65c395fd03f7db74464b3089d5cb557ed34988db90c46901ca743c4c87315",
+    "source_pilot://third_party/MentalPong/analyses/PhysDataset.py": "a11b214d9123e73812c9d4ff7212f6b8c09d606d771f10e00409b345e344f974",
+    "source_pilot://third_party/MentalPong/analyses/phys_utils.py": "63dcaee931c7771784077ca24c65b96afe2f820a6a605da32b824caa96a884be"
+  },
+  "analysis_protocol_sha256": "683a143d08ad8ae4d25be48240be89000c502f0a010d092d2f9d71f784e15a2b"
+}

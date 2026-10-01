@@ -1,0 +1,13 @@
+animal,epoch,n_conditions,n_bins,n_condition_time_rows,n_unique_neural_input_ids,n_behavior_trials_in_means,n_neural_trials
+mahler,full,78,3369,3369,3369,7407,0
+mahler,visible,78,1931,1931,1931,7407,0
+mahler,hidden,78,1360,1360,1360,7407,0
+mahler,bounce,26,1207,1207,1207,2438,0
+mahler,no_bounce,52,2162,2162,2162,4969,0
+mahler,post_bounce,26,631,631,631,2438,0
+perle,full,78,3369,3369,3369,84873,0
+perle,visible,78,1931,1931,1931,84873,0
+perle,hidden,78,1360,1360,1360,84873,0
+perle,bounce,26,1207,1207,1207,28690,0
+perle,no_bounce,52,2162,2162,2162,56183,0
+perle,post_bounce,26,631,631,631,28690,0

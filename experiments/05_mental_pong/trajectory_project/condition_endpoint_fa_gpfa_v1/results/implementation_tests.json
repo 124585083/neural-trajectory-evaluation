@@ -1,0 +1,7 @@
+{
+  "command": ".venv/Scripts/python.exe -B -m pytest -q -p no:cacheprovider trajectory_project/condition_endpoint_fa_gpfa_v1/tests",
+  "passed": 29,
+  "failed": 0,
+  "duration_seconds": 2.13,
+  "scope": "condition averaging, representation source audit, condition-time OLS and scores"
+}

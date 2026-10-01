@@ -1,0 +1,112 @@
+{
+  "scope": "Publication code integration checks; historical analysis completion is recorded separately.",
+  "new_scientific_analysis": false,
+  "original_source_files_modified": false,
+  "scientific_status": "CLOSED_EXPLORATORY_WITH_LIMITATIONS",
+  "raw_preprocessing": "fail",
+  "unit_checks": {
+    "complete_imported_test_suite": {
+      "passed": 104,
+      "skipped": 3,
+      "failed": 0,
+      "duration_seconds": 10.46,
+      "skip_reason": "Three historical C delivery tests expect large arrays at local analysis paths; those arrays remain registered external artifacts. Saved-parameter replay checks exercise registered artifacts through the portable entrypoint instead.",
+      "warnings": "Matplotlib/Pyparsing deprecations and one convergence warning from a deliberately short synthetic FactorAnalysis test.",
+      "command": "PYTHONPATH=<module-root> python -B -m pytest -q -p no:cacheprovider --import-mode=importlib <module-root>/tests/test_integration.py <module-root>/trajectory_project/condition_endpoint_fa_gpfa_v1/tests <module-root>/trajectory_project/trial_endpoint_fa_gpfa_v1/tests <module-root>/trajectory_project/closeout_v1/tests",
+      "execution_directory": "An unrelated temporary directory outside the repository.",
+      "raw_dataset_required": false
+    },
+    "subsequent_targeted_raw_path_adapter_checks": {
+      "passed": 11,
+      "failed": 0,
+      "duration_seconds": 3.52,
+      "suite": "tests/test_integration.py",
+      "new_cases": 5,
+      "checks": [
+        "Relocate an immutable Windows-path source manifest under a configured data root.",
+        "Retain SHA-256 verification and leave the source manifest unchanged.",
+        "Reject duplicate basename matches, ambiguous raw anchors, and traversal.",
+        "Reject modified member bytes."
+      ]
+    },
+    "final_combined_suite_after_path_adapter": {
+      "passed": 109,
+      "skipped": 3,
+      "failed": 0,
+      "warnings": 15,
+      "duration_seconds": 9.82,
+      "working_directory": "Outside repository",
+      "bytecode_and_pytest_cache_writes": false,
+      "temporary_outputs": "Separate external integration work directory"
+    }
+  },
+  "dependency_import_check": {
+    "top_level_analysis_modules_imported": 28,
+    "errors": 0,
+    "sys_path_unchanged": true,
+    "side_effect_scope": "Imports performed in a separate process with bytecode writing disabled; no historical runner was called."
+  },
+  "scientific_function_structure_check": {
+    "implementation_files": 31,
+    "function_bodies_compared": 236,
+    "expected_non_prose_function_changes": [
+      {
+        "file": "data_pipeline.py",
+        "function": "verified_file",
+        "reason": "Resolve a source-manifest raw-relative member below the configured data root; reject ambiguous or escaping paths and verify the original checksum."
+      },
+      {
+        "file": "trajectory_project/trial_endpoint_fa_gpfa_v1/representations.py",
+        "function": "configuration",
+        "reason": "Read original frozen protocol and model_options provenance through the configured external source root."
+      }
+    ],
+    "other_function_structures_equal": true,
+    "comparison_scope": "AST comparison ignores string constants, docstrings, and translated display-column keyword labels. It checks numerical/control-flow structure, not semantic equivalence of every string-valued key; focused tests and source review complement this limited check.",
+    "top_level_changes": "Package-qualified imports, private dependency loading, configurable path roots, and display text; these are outside the function-structure comparison."
+  },
+  "saved_parameter_replays": [
+    {
+      "animal": "mahler",
+      "representation": "FA50",
+      "q": 0,
+      "split": 0,
+      "epochs": 7,
+      "status": "passed",
+      "maximum_score_absolute_difference": 1.6370904631912708e-11
+    },
+    {
+      "animal": "perle",
+      "representation": "GPFA50",
+      "q": 999,
+      "split": 99,
+      "epochs": 7,
+      "status": "passed",
+      "maximum_score_absolute_difference": 9.094947017729282e-12
+    }
+  ],
+  "published_input_access_check": {
+    "configured_root": "source_data",
+    "status": "original_SHA256_verified",
+    "members": [
+      "mahler_hand_dmfc_dataset_50ms.pkl",
+      "perle_hand_dmfc_dataset_50ms.pkl",
+      "valid_meta_sample_full.pkl"
+    ],
+    "raw_preprocessing_claim": "Access and byte identity only; this does not repair the original full-condition/full-time imputation limitation."
+  },
+  "legacy_global_config_scope": {
+    "reference": "source_pilot://gpfa_config.json",
+    "used_by_current_representation_configuration": "model_options only",
+    "not_current_protocol": [
+      "legacy 47/16/16 split",
+      "historical dimensionality grid"
+    ],
+    "current_protocol": "The retained final analysis uses the saved 100 condition splits and FA50/GPFA50 settings."
+  },
+  "full_reproduction": {
+    "executed_during_integration": false,
+    "entrypoint": "python run.py --full-plan",
+    "limits": "The retained full scientific write routes require materialized external dependencies, an isolated writable output workspace, and new execution records. Their end-to-end portability was not exercised or claimed during this integration."
+  }
+}

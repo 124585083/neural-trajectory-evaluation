@@ -1,0 +1,8 @@
+{
+  "artifact_roots": {
+    "source_pilot": "/path/to/mentalpong_ae_pilot",
+    "source_data": "/path/to/MentalPong",
+    "preservation_snapshot": "/path/to/integration_snapshot"
+  },
+  "notes": "Copy to ignored paths.local.json. Environment variables MENTAL_PONG_SOURCE_ROOT, MENTAL_PONG_DATA_ROOT, and MENTAL_PONG_SNAPSHOT_ROOT override these roots. published_module resolves automatically."
+}

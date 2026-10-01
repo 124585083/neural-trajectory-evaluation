@@ -1,0 +1,108 @@
+{
+  "integration_status": "COMPLETE_FOR_PUBLISHED_REVIEW_AND_SAVED_REPLAY_SCOPE",
+  "scientific_status": "CLOSED_EXPLORATORY_WITH_LIMITATIONS",
+  "raw_preprocessing": "fail",
+  "checked_at_utc": "2026-10-01T17:50:37.359126+00:00",
+  "target_commit": "784f1b0afb98c14b0f9dfef9deaa230b2b5c6813",
+  "source_preservation": {
+    "operation": "read_only_verification",
+    "status": "passed_with_availability_report",
+    "published_records_checked": 387,
+    "artifact_status_counts": {
+      "unavailable": 1,
+      "verified": 7573
+    },
+    "deep_external_checksums": true,
+    "failures": [],
+    "unavailable_artifacts": [
+      {
+        "artifact_id": "external_source_229047a1ad4f:.",
+        "storage_location_id": "external_source_229047a1ad4f",
+        "status": "unavailable"
+      }
+    ],
+    "scientific_status": "CLOSED_EXPLORATORY_WITH_LIMITATIONS",
+    "raw_preprocessing": "fail",
+    "new_model_fitting": false,
+    "files_written": false
+  },
+  "existing_user_readme_change": "Preserved in external pre-edit target snapshot before integration",
+  "numerical_checks": {
+    "status": "passed",
+    "self_target_rows": 48,
+    "cross_target_rows": 192,
+    "rounds_per_group": 100,
+    "fixed_splits_checked": 100,
+    "maximum_absolute_aggregation_difference": 3.3306690738754696e-15,
+    "english_summary_display_matches_full_precision_table": "passed",
+    "own_target_to_diagonal_identity": "passed",
+    "new_model_fitting": false
+  },
+  "evidence_index": {
+    "status": "passed",
+    "claims": 26,
+    "file_references": 52
+  },
+  "text_and_links": {
+    "text_files": 357,
+    "python_files_parsed": 91,
+    "relative_links_checked": 418,
+    "language_issues": [],
+    "private_path_issues": [],
+    "broken_links": [],
+    "syntax_issues": [],
+    "excluded": [
+      "Git internals",
+      "ignored local configuration",
+      "external immutable source records",
+      "binary figures (separate visual inspection record)"
+    ],
+    "required_legal_exceptions": [],
+    "synthetic_path_exception": "A synthetic Windows absolute path is used in rejection tests and in this checker."
+  },
+  "sensorium_tests": {
+    "passed": 14,
+    "data_test_deselected": 1,
+    "phase1_not_run": "Requires raw Sensorium data/full baseline setup",
+    "record": "sensorium_editorial_verification.json"
+  },
+  "mental_pong_tests": {
+    "passed": 109,
+    "skipped": 3,
+    "failed": 0,
+    "skip_scope": "Historical large-C delivery arrays are external; small saved C replay was verified separately",
+    "record": "code_portability_checks.json"
+  },
+  "saved_replay": {
+    "cases": 4,
+    "fixed_q": 0,
+    "fixed_split": 0,
+    "maximum_score_absolute_difference": 1.6370904631912708e-11,
+    "record": "saved_replay_verification.json",
+    "working_directory": "Outside repository"
+  },
+  "visual_review": {
+    "new_inspections": 13,
+    "record": "figure_review.json"
+  },
+  "runtime": "Existing environments used; no package upgrade or download",
+  "scientific_reruns": {
+    "representation_training": false,
+    "full_100_split_or_1000_randomization_rerun": false,
+    "future_experiments": false,
+    "only_synthetic_tests_and_saved_value_replays": true
+  },
+  "external_limits": [
+    "Large scientific artifacts require configured storage roots.",
+    "One historical request attachment is unavailable; its original hash is retained.",
+    "Full scientific execution after relocation is not tested end to end.",
+    "Historical PDF export runtime and all79 atlas visual reinspection are not certified by this integration."
+  ],
+  "git_policy": {
+    "record_scope": "Integration-time state before the later user-authorized publication. Subsequent commits and publication are recorded in Git history.",
+    "commits_created": false,
+    "push_performed": false,
+    "changes_left_for_review": true
+  },
+  "verification_manifest_policy": "migration_map.csv contains the finalized publication checksums and excludes its own checksum to avoid recursion."
+}

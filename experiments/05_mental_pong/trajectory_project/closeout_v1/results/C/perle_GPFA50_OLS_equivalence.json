@@ -1,0 +1,13 @@
+{
+  "animal": "perle",
+  "representation": "GPFA50",
+  "status": "pass",
+  "independent_vs_multioutput_max_prediction_error": 1.2434497875801753e-14,
+  "old_real_OLS_replay_error": 9.769962616701378e-15,
+  "checked_random_q": [
+    0,
+    1,
+    2
+  ],
+  "identical_label_coefficients_max_abs_error": 0.0
+}
