@@ -94,12 +94,6 @@
   "storage": "Lossless trial labels and sample index; held-out predictions factorized as same-condition same-input predictions plus real test-trial index. Explicit per-trial expansion/export supported. Scores always evaluate every real trial label.",
   "source_records": [
     {
-      "path": "external_source_e34d54b6a83c://.",
-      "sha256": "8e9bda68e420fe152c8a0e16798fca8af76d7020939aa9d488bdfc7b1d29159e",
-      "bytes": 17318,
-      "role": "user-authorized complete request"
-    },
-    {
       "path": "source_pilot://gpfa_shared.py",
       "sha256": "afb3f397dac5a28884a351ee2b90bde613678cc5414e2c11467df8d97a74e97a",
       "bytes": 19666,
@@ -129,5 +123,6 @@
       "bytes": 8673,
       "role": "previous verified official source audit"
     }
-  ]
+  ],
+  "publication_record_scope": "Public technical edition. Scientific values and historical source hashes are retained; historical locks identify preserved original records, not this edited prose edition."
 }

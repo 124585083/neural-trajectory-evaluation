@@ -259,7 +259,7 @@ def run_condition_round(payload, representations, split, output_dir, *, threads=
                             causal_status=np.asarray(rep["causal_status"]), common_mask_sha256=np.asarray(common_hash),
                             source_representation_directory=np.asarray(source_directory), provenance_json=np.asarray(provenance),
                             source_causal_audit_json=np.asarray(causal_audit_json),
-                            fit_method=np.asarray("LinearRegression(fit_intercept=True,positive=False); unweighted original condition-time rows; four independent outputs"))
+                            fit_method=np.asarray("LinearRegression(fit_intercept=True,positive=False); unweighted original condition-time rows; four separately parameterized outputs"))
         np.savez_compressed(prediction_path, predictions=predictions, condition_ids=ids, times_ms=times,
                             test_condition_indices=test, test_input_support=test_mask, common_mask=common,
                             common_mask_sha256=np.asarray(common_hash), n_behavior_trials_in_means=n_behavior,

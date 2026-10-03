@@ -1,6 +1,6 @@
 # Current post hoc cases
 
-Conditions 55062 and 241919 were selected after earlier aggregate results had been examined. They are illustrations, without independent confirmatory status. Scores below average the original per-split held-out results. Four-curve figures instead show the mean and SD of test predictions for visualization.
+Conditions 55062 and 241919 were selected after earlier aggregate results had been examined. They are illustrations, without independent confirmatory status. Scores below average the original per-split held-out results. The table reports y for the indicated interval. Correlation is dimensionless; RMSE uses centered MWorks display-coordinate units. Each condition's scores average only the splits where it was held out. Delta_r = r_beh - r_obj and Delta_RMSE = RMSE_obj - RMSE_beh; positive differences favor the candidate. Four-curve figures instead show the mean and population SD of those test predictions for visualization.
 
 | animal | representation | condition_id | epoch | r_obj | r_beh | RMSE_obj | RMSE_beh | Delta_r | Delta_RMSE |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -21,7 +21,7 @@ Conditions 55062 and 241919 were selected after earlier aggregate results had be
 | perle | GPFA50 | 55062 | hidden | 0.8455 | 0.8543 | 5.1201 | 4.0633 | 0.0088 | 1.0568 |
 | perle | GPFA50 | 241919 | hidden | 0.8083 | 0.7942 | 4.7154 | 4.7384 | -0.0142 | -0.0230 |
 
-For condition 55062, candidate own-target RMSE improves across both animals and representations. Full-epoch correlation decreases in Mahler and increases in Perle. For condition 241919, candidate RMSE worsens in all four groups; full-epoch correlation increases in Mahler and decreases slightly in Perle. One error metric and the old stop-proxy result cannot summarize these cases.
+For condition 55062, candidate own-target RMSE improves across both animals and representations. Correlation over the full evaluated interval decreases in Mahler and increases in Perle. For condition 241919, candidate RMSE worsens in all four groups; full-interval correlation increases in Mahler and decreases slightly in Perle. One error metric and the old stop-proxy result cannot summarize these cases.
 
 The two readout curves are close relative to the reconstruction-error scale. Their separation is smaller than the label separation for both Mahler cases and Perle 55062. Perle 241919 has nearly coincident labels and a larger readout-mean separation. The [curve-separation table](fixed_posthoc_case_curve_separation.csv) describes that distinction without replacing per-split reconstruction scores. [Complete cross-scores](fixed_posthoc_case_2x2.csv) retain both references.
 

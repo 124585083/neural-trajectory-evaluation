@@ -30,12 +30,12 @@ matched nulls. It does not yet rank the Static and Dynamic encoding models.
 
 ## Data classification
 
-- A separate observation manifold is required for every mouse/session because neuron identities
+- A separate linear observation mapping is required for every mouse/session because neuron identities
   differ.
 - The initial experiment contains natural-video trials only.
 - Oracle movie conditions are recovered from grayscale stimulus similarity; behavior channels are
   explicitly excluded from condition identity.
-- Individual movie identities do not receive separately fit observation manifolds.
+- Individual movie identities do not receive separately fitted neural loading matrices.
 - Future stimulus/behavior-conditioned fits must share `C`, `d`, and `R`; only temporal-kernel
   hyperparameters may vary unless a held-out analysis explicitly justifies a stronger model.
 - Behavior-state candidates use balanced low/middle/high strata derived from training covariates

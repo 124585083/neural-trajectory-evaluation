@@ -4,9 +4,9 @@
 
 Each readout is scored against the target it was fitted to reconstruct: the objective head against the objective path and the candidate head against the candidate path.
 
-All four full-epoch comparisons favor the objective ball path. The behavior-constrained candidate path has lower correlation and slightly higher RMSE. Candidate RMSE exceeds objective RMSE by 0.0220–0.0322 position units. The earlier trial-label version had a larger gap; the two versions also differ in condition weighting, so this change cannot be attributed solely to averaging.
+All four full-interval comparisons favor the objective ball path. The behavior-constrained candidate path has lower correlation and slightly higher RMSE. Candidate RMSE exceeds objective RMSE by 0.0220–0.0322 position units. The earlier trial-label version had a larger gap; the two versions also differ in condition weighting, so this change cannot be attributed solely to averaging.
 
-Define `Delta_r = r_beh - r_obj` and `Delta_RMSE = RMSE_obj - RMSE_beh`. A positive difference favors the candidate on that metric. Each split is scored on its original held-out condition-by-time predictions before the 100 split scores are summarized. Scores of an averaged prediction curve are a separate descriptive quantity.
+Define `Delta_r = r_beh - r_obj` and `Delta_RMSE = RMSE_obj - RMSE_beh`. A positive difference favors the candidate on that metric. Each split is scored on its original held-out condition-by-time predictions before the 100 split scores are summarized. The first table reports y over the full evaluated interval. Correlation is dimensionless; RMSE uses centered MWorks display-coordinate units. Means and population SD describe 100 overlapping condition splits. Scores of an averaged prediction curve are a separate descriptive quantity.
 
 | animal | representation | r_obj (mean +/- SD) | r_beh (mean +/- SD) | RMSE_obj (mean +/- SD) | RMSE_beh (mean +/- SD) | Delta_r (mean +/- SD) | Delta_RMSE (mean +/- SD) |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -30,7 +30,7 @@ The study reuses each split's training-side factor analysis (FA50) and Gaussian-
 ## Coverage and label checks
 
 | Animal | Source behavioral records | Records in means | Valid conditions | Condition-by-time rows |
-| --- | ---: | ---: | ---: | ---: |
+| --- | --- | --- | --- | --- |
 | Mahler | 8078 | 7407 | 78 | 3369 |
 | Perle | 89601 | 84873 | 78 | 3369 |
 
@@ -42,7 +42,7 @@ Behavioral mean membership is traceable. The released neural means' original uni
 
 ## Phase-specific reconstruction
 
-Position and RMSE use MWorks centered display-coordinate units. Counts in the main table describe unique valid support across the dataset; per-split counts are also saved. Undefined correlations remain NA, including constant targets, while RMSE can remain defined.
+The phase-specific table also reports y. Position and RMSE use MWorks centered display-coordinate units; correlation is dimensionless. Each entry averages separately scored results over 100 splits. Counts in the saved main-results CSV describe unique valid support across the dataset; per-split counts are also saved. Undefined correlations remain NA, including constant targets, while RMSE can remain defined.
 
 | animal | representation | epoch | r_obj | r_beh | RMSE_obj | RMSE_beh | Delta_r | Delta_RMSE |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -71,11 +71,13 @@ Position and RMSE use MWorks centered display-coordinate units. Counts in the ma
 | perle | GPFA50 | no_bounce | 0.6768 | 0.6696 | 2.8571 | 2.7679 | -0.0072 | 0.0892 |
 | perle | GPFA50 | post_bounce | 0.8608 | 0.8499 | 4.8036 | 5.0392 | -0.0109 | -0.2357 |
 
-No-collision segments have lower candidate RMSE but lower candidate correlation. Post-collision segments have higher candidate RMSE. These phase differences remain distinct from the full-epoch result. The 100 splits share conditions; their population SD measures readout-split stability, not 100 independent animal experiments. The [complete table](results/self_reconstruction_main_table.csv), [split scores](results/round_self_metrics.csv) and [condition comparisons](results/condition_self_comparison.csv) preserve counts, missing values and test membership frequencies.
+No-collision segments have lower candidate RMSE but lower candidate correlation. Post-collision segments have higher candidate RMSE. These phase differences remain distinct from the full-interval result. The 100 splits share conditions; their population SD measures readout-split stability, not 100 independent animal experiments. The [complete table](results/self_reconstruction_main_table.csv), [split scores](results/round_self_metrics.csv) and [condition comparisons](results/condition_self_comparison.csv) preserve counts, missing values and test membership frequencies.
 
 ![Paired own-target reconstruction differences over 100 overlapping condition splits](figures/paired_self_reconstruction_differences.png)
 
 ## Condition, time, bias and amplitude
+
+These y-coordinate counts first average each condition's paired held-out split differences within the indicated interval. A condition is counted when candidate RMSE is strictly lower, or candidate r strictly higher.
 
 | animal | representation | epoch | n_valid_conditions | candidate_lower_RMSE | candidate_higher_r |
 | --- | --- | --- | --- | --- | --- |
@@ -105,7 +107,7 @@ Aggregate scores do not describe every condition. The [binwise table](results/bi
 | perle | GPFA50 | D_beh | 5.1190 | 2.6399 | -0.0573 | 0.5174 |
 | perle | GPFA50 | D_obj | 5.1456 | 2.6697 | -0.0524 | 0.5204 |
 
-Bias is reconstructed position minus its own target. An amplitude ratio below one means reconstructed positions vary less than the reference. Opposite errors can cancel in a pooled bias, so a small bias does not imply small condition-specific shifts.
+These diagnostics report y over the full evaluated interval and average the original 100 split values. Target SD, prediction SD and bias use centered display-coordinate units; the amplitude ratio is dimensionless. Bias is reconstructed position minus its own target. An amplitude ratio below one means reconstructed positions vary less than the reference. Opposite errors can cancel in a pooled bias, so a small bias does not imply small condition-specific shifts.
 
 The original 20-page atlases cover all 79 IDs for each animal. Each condition has parallel FA/GPFA panels with the objective path, objective-head reconstruction, candidate path and candidate-head reconstruction. They use shared time and coordinate ranges and show occlusion, the estimated collision interval and arrival time. Condition 59920 is explicitly missing. Prediction bands show mean plus or minus one SD across splits in which the condition was held out. They describe readout-split stability, not biological trial variation. Curves stop at the last shared valid time; gray marks occlusion and gold marks the estimated collision interval. Arrival time is estimated and the exact feedback time is unknown. Locate the preserved atlases and their figure manifests through the [artifact inventory](../../integration/artifact_registry.csv); their availability is separate from the compact report.
 
@@ -117,6 +119,8 @@ The original 20-page atlases cover all 79 IDs for each animal. Each condition ha
 | mahler | GPFA50 | 0.5276 | 0.5374 | 0.4964 | 0.5126 | 4.5077 | 4.4458 | 4.6327 | 4.4781 |
 | perle | FA50 | 0.7000 | 0.7019 | 0.6831 | 0.6910 | 3.9135 | 3.8586 | 4.0008 | 3.8829 |
 | perle | GPFA50 | 0.7190 | 0.7204 | 0.7015 | 0.7094 | 3.8544 | 3.8005 | 3.9449 | 3.8265 |
+
+The version table reports full-interval y scores: dimensionless r and RMSE in centered display-coordinate units, averaged over each version's 100 splits.
 
 The [complete version comparison](results/previous_trial_version_comparison.csv) retains every phase. Averaging removes within-condition target variation. Moving from trial-by-time rows to condition-by-time rows also removes the additional fitting and scoring contribution of conditions with more behavioral records. In the earlier version, repeated neural inputs make fitting algebraically equivalent to a condition-mean fit weighted by valid record count. This is a two-change comparison rather than a one-factor averaging ablation. Both versions use the same representations.
 

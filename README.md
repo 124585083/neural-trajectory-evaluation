@@ -7,7 +7,7 @@ This independent secondary analysis uses public data from two tasks. Dynamic Sen
 <a id="why-trajectory-evaluation"></a>
 ## Study 1: predicting responses to natural movies
 
-Dynamic Sensorium contains mouse visual-cortex recordings during repeated natural movies. **Static** evaluates each movie frame and its current behavioral covariates separately. **Dynamic** uses learned temporal convolutions that combine nearby frames. The comparison approximately matches total parameters: 2,814,015 for Static and 2,862,063 for the reduced Dynamic model, a difference of 48,048 (1.707%). Different cores prevent attributing this difference to temporal input alone.
+Dynamic Sensorium contains mouse visual-cortex recordings during repeated natural movies. **Static** evaluates each movie frame and its current behavioral covariates separately. **Dynamic** uses learned temporal convolutions that combine nearby frames. The comparison approximately matches total parameters: 2,814,015 for Static and 2,862,063 for the reduced Dynamic model, a difference of 48,048 (1.707%). The models have similar total parameter counts but different cores. Their performance difference therefore does not isolate the effect of temporal input.
 
 We compare: individual neural-response accuracy; population-pattern similarity using representational similarity analysis (RSA) and centered kernel alignment (CKA); and trajectories in a common low-dimensional neural space. Gaussian-process factor analysis (GPFA) fits that space using training neural responses. Recorded responses and both models then use the same frozen transform. Full-window GPFA inference uses later observations, so these are offline trajectory measurements. Querying the posterior at roughly 30 Hz does not create independently observed 30 Hz neural dynamics. [Methods](docs/METHODS.md) describes the models and temporal sampling.
 
@@ -28,7 +28,7 @@ Detailed RSA/CKA and trajectory comparisons cover one pilot session: 512 neurons
 *Each interval belongs to its metric family; absolute effect magnitudes cannot be compared across families. Trajectory points are saved bootstrap means, while response, RSA and CKA points are observed differences.*
 
 <a id="3-trajectory-metrics-provide-additional-sensitivity-to-temporal-structure"></a>
-Output perturbations nearly match response correlation while retaining position and direction differences. This tests measurement sensitivity; it does not create two independently trained models with equivalent accuracy. Time reversal leaves the tested order-insensitive summaries unchanged while disrupting trajectory agreement. Attenuating temporal weights also degrades trajectory scores, but a matched non-temporal damage control is still needed. Regression residuals from richer conventional metrics do not prove information independence. The [stress-test account](docs/results/Q1_Q6_ANSWERS.md) explains these distinct conclusions.
+Output perturbations nearly match response correlation while retaining position and direction differences. This tests measurement sensitivity; it does not create two independently trained models with equivalent accuracy. Time reversal leaves the tested time-averaged condition-pattern RSA/CKA summaries unchanged while disrupting trajectory agreement. Attenuating temporal weights also degrades trajectory scores, but a matched non-temporal damage control is still needed. Regression residuals from richer conventional metrics do not prove information independence. The [stress-test account](docs/results/Q1_Q6_ANSWERS.md) explains these distinct conclusions.
 
 ## Study 2: reconstructing a hidden ball's path
 
@@ -58,7 +58,7 @@ python scripts/verify_integration.py
 python experiments/05_mental_pong/run.py --verify
 ```
 
-The mini-replay source uses saved split 0 and endpoint allocation q=0, without new training or randomization. Its [instructions and availability status](experiments/05_mental_pong/mini_replay/README.md) distinguish local numerical verification from public artifact availability. The new numerical bundle is withheld while permission for derived-data redistribution remains unresolved under the dataset's recorded CC BY-NC-ND terms. A clone alone cannot run that numerical replay. Full requirements, environments and Git LFS instructions are in [Data and Reproducibility](docs/DATA_AND_REPRODUCIBILITY.md).
+The mini-replay source uses saved split 0 and endpoint allocation q=0, without new training or randomization. Its [instructions and availability status](experiments/05_mental_pong/mini_replay/README.md) distinguish local numerical verification from public artifact availability. The new numerical bundle is withheld while permission for derived-data redistribution remains unresolved under the dataset's recorded CC BY-NC-ND terms. A clone alone cannot run that numerical replay. Full requirements, environments and external artifact instructions are in [Data and Reproducibility](docs/DATA_AND_REPRODUCIBILITY.md).
 
 ## License, citation, and contact
 
@@ -66,8 +66,8 @@ Original project code and documentation use the [MIT License](LICENSE). Data red
 
 ## References
 
-1. Wang et al. (2024). [Retrospective for the Dynamic Sensorium Competition for predicting large-scale mouse primary visual cortex activity from videos](https://proceedings.neurips.cc/paper_files/paper/2024/hash/d758d7c0a88d741c8ca4637579c9df87-Abstract-Datasets_and_Benchmarks_Track.html). *NeurIPS 2024 Datasets and Benchmarks Track*.
-2. Willeke et al. (2023). [Retrospective on the SENSORIUM 2022 competition](https://proceedings.mlr.press/v220/willeke23a.html). *Proceedings of Machine Learning Research, 220*.
+1. Turishcheva et al. (2024). [Retrospective for the Dynamic Sensorium Competition for predicting large-scale mouse primary visual cortex activity from videos](https://proceedings.neurips.cc/paper_files/paper/2024/hash/d758d7c0a88d741c8ca4637579c9df87-Abstract-Datasets_and_Benchmarks_Track.html). *NeurIPS 2024 Datasets and Benchmarks Track*.
+2. Willeke et al. (2022). [Retrospective on the SENSORIUM 2022 competition](https://proceedings.mlr.press/v220/willeke23a.html). *Proceedings of Machine Learning Research, 220*.
 3. Yu et al. (2009). [Gaussian-process factor analysis for low-dimensional single-trial analysis of neural population activity](https://doi.org/10.1152/jn.90941.2008). *Journal of Neurophysiology, 102*(1), 614–635.
 4. Kriegeskorte, Mur, and Bandettini (2008). [Representational similarity analysis—connecting the branches of systems neuroscience](https://doi.org/10.3389/neuro.06.004.2008). *Frontiers in Systems Neuroscience, 2*.
 5. Kornblith et al. (2019). [Similarity of Neural Network Representations Revisited](https://proceedings.mlr.press/v97/kornblith19a.html). *Proceedings of Machine Learning Research, 97*, 3519–3529.

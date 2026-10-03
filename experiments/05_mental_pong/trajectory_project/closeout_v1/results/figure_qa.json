@@ -5,31 +5,31 @@
       "path": "source_pilot://trajectory_project/closeout_v1/figures/A_own_reconstruction.png",
       "sha256": "54d21e6198b478adbaa3e050c848bc7b1cc21b4d68786faed65c702e1a1423f1",
       "bytes": 163352,
-      "role": "root visually inspected labels, legends, scales and layout"
+      "role": "historical visual inspection of source-figure labels, legends, scales and layout"
     },
     {
       "path": "source_pilot://trajectory_project/closeout_v1/figures/A_paired_differences.png",
       "sha256": "a5492123bc31c2aed5b0f96e41c5fc5c249dc8d81fa2e425240a3d314ad095f6",
       "bytes": 110330,
-      "role": "root visually inspected labels, legends, scales and layout"
+      "role": "historical visual inspection of source-figure labels, legends, scales and layout"
     },
     {
       "path": "source_pilot://trajectory_project/closeout_v1/figures/B_paired_null_distributions.png",
       "sha256": "46015dfe2932ceb9176f5cb4552394c427cc3bb847a3ad830eec5bd613e7a139",
       "bytes": 125607,
-      "role": "root visually inspected labels, legends, scales and layout"
+      "role": "historical visual inspection of source-figure labels, legends, scales and layout"
     },
     {
       "path": "source_pilot://trajectory_project/closeout_v1/figures/C_full_null_distributions.png",
       "sha256": "c58c6ab21d4d1716dcd51d98590aaa841c343d5e7887ecfaea8508df3fa49f6f",
       "bytes": 176354,
-      "role": "root visually inspected labels, legends, scales and layout"
+      "role": "historical visual inspection of source-figure labels, legends, scales and layout"
     },
     {
       "path": "source_pilot://trajectory_project/closeout_v1/figures/C_phase_null_scores.png",
       "sha256": "183377a05d0c518ffd1e4f3e5ef3b5a2d31780feec06da7c031496b8ce996414",
       "bytes": 269891,
-      "role": "root visually inspected labels, legends, scales and layout"
+      "role": "historical visual inspection of source-figure labels, legends, scales and layout"
     }
   ],
   "descriptive_figures_visually_inspected": [
@@ -37,25 +37,25 @@
       "path": "source_pilot://trajectory_project/closeout_v1/figures/descriptive/all79_condition_heterogeneity.png",
       "sha256": "abb3f14d7018a87f2f453af986e6290c1aef9c21066aaa5f00dc6db976d15653",
       "bytes": 549967,
-      "role": "delegated agent visual inspection, Perle case also inspected by root"
+      "role": "historical visual inspection of source figures"
     },
     {
       "path": "source_pilot://trajectory_project/closeout_v1/figures/descriptive/endpoint_mean_cancellation.png",
       "sha256": "645a53ae1d7a5a95e06bd3c7bb6a737b51e1a8881bf83d9e0ad6e2e977ab0045",
       "bytes": 151359,
-      "role": "delegated agent visual inspection, Perle case also inspected by root"
+      "role": "historical visual inspection of source figures"
     },
     {
       "path": "source_pilot://trajectory_project/closeout_v1/figures/descriptive/mahler_fixed_posthoc_four_curves.png",
       "sha256": "cbd2701812bbead131c5c241086784f6f869682ec4f164d5e98635a9b5e0f1b7",
       "bytes": 648235,
-      "role": "delegated agent visual inspection, Perle case also inspected by root"
+      "role": "historical visual inspection of source figures"
     },
     {
       "path": "source_pilot://trajectory_project/closeout_v1/figures/descriptive/perle_fixed_posthoc_four_curves.png",
       "sha256": "955080984fea6764a74d2150e09104a3e6444c7c8e00523dd19633f67a29257e",
       "bytes": 609579,
-      "role": "delegated agent visual inspection, Perle case also inspected by root"
+      "role": "historical visual inspection of source figures"
     }
   ],
   "descriptive_review": {
@@ -70,5 +70,6 @@
     "Zero reference shown for paired differences and geometry skill",
     "Posthoc cases labeled and four current curves preserved",
     "No favorable condition or stage selection"
-  ]
+  ],
+  "publication_record_scope": "Public technical edition. Scientific values and historical source hashes are retained; historical locks identify preserved original records, not this edited prose edition. Visual checks in this record concern the historical source figures; current figure provenance is indexed separately."
 }

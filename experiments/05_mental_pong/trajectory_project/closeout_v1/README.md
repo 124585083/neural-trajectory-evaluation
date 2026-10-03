@@ -2,7 +2,7 @@
 
 [Summary](FINAL_SUMMARY.md) · [Full report](FINAL_REPORT.md) · [Experiment ledger](experiment_ledger.md) · [Sources](SOURCES.md)
 
-This version completed own-target/2x2 replay (A), 1000 fixed-readout condition mismatches (B), 1000 random-endpoint OLS refits (C), and descriptive averaging checks. Every random repeat covers the original 100 nominal 39/40 condition splits. Existing half1 FA50/GPFA50 representations were reused.
+This version completed own-target/2x2 replay (A), 1000 fixed-readout condition mismatches (B), 1000 random-endpoint OLS refits (C), and descriptive averaging checks. Every random repeat covers the original 100 nominal 39/40 condition splits. Existing half1 50-dimensional factor-analysis (FA50) and Gaussian-process factor-analysis (GPFA50) representations were reused. Position readouts used ordinary least squares (OLS) with an intercept.
 
 `raw_preprocessing=fail` remains visible throughout the record. Released-input filtering and fit provenance do not repair upstream cross-condition/time filling. The [historical future design](future_design.md) was not executed and now links to the single current plan.
 
@@ -21,6 +21,6 @@ Use the [publication entry point](../../README.md) for reading, default read-onl
 
 Large mappings, coefficients, latent arrays, predictions, behavioral member records and complete all-condition atlases are registered in the [artifact inventory](../../integration/artifact_registry.csv). Unavailable local storage must be reported as unavailable, not treated as a completed replay.
 
-Each xy head has 102 coefficients. C's 400 multioutput solves represent 400000 independent random-label heads, with one equivalent x solution for identical x labels. These are model fits rather than independent animal experiments. Final behavioral labels are constructed after observing the endpoint; that does not make endpoint behavior an input feature to the neural readout.
+Each xy head has 102 coefficients. C's 400 multioutput solves represent 400000 separately parameterized random-label heads, with one equivalent x solution for identical x labels. These are model fits rather than independent animal experiments. Final behavioral labels are constructed after observing the endpoint; that does not make endpoint behavior an input feature to the neural readout.
 
 English figure copies require their own presentation checks. Original scientific visual-inspection records remain source evidence and are not automatically transferred to a changed figure.

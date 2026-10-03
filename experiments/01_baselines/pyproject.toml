@@ -35,5 +35,5 @@ testpaths = ["tests"]
 addopts = "-q"
 pythonpath = ["src"]
 markers = [
-  "data: requires the five authorized Dynamic Sensorium sessions",
+  "data: requires the five official Dynamic Sensorium sessions",
 ]

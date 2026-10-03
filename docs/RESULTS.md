@@ -68,7 +68,7 @@ The reliability evidence and metric restrictions are documented in [GPFA Validat
 
 ### 5.1 Response-matching stress test
 
-The response-score-matched output perturbation asks whether trajectory metrics still distinguish the predictions when their scalar response correlations are nearly matched. Perturbation strength is selected on one repeat half; test-half neural responses are not used to select that strength.
+The response-score-matched output perturbation asks whether trajectory metrics still distinguish the predictions when their scalar response correlations are nearly matched. The selection half chooses the noise amplitude. Test-half neural responses are excluded from amplitude selection, but both halves belong to the oracle tier already used for encoding-model checkpoint selection.
 
 On the held-out repeat half:
 
@@ -78,7 +78,7 @@ On the held-out repeat half:
 | Response-score-matched Dynamic output | 0.15687 |
 | Dynamic − Static | +0.00036 |
 
-The paired-bootstrap interval for the response difference is `[-0.00510, +0.00537]`. The scores are nearly matched under this interval, but no formal equivalence test was performed and they are not described as statistically equivalent.
+The paired-bootstrap interval for the response difference is `[-0.00510, +0.00537]`. The test-half point estimates are close under the selected perturbation. No equivalence margin or formal equivalence test was used.
 
 Despite the close response scores, frozen-GPFA position remains higher for the perturbed Dynamic output (`0.5130 → 0.6914`), as do velocity direction (`0.2892 → 0.4737`) and acceleration direction (`0.1450 → 0.3946`). The speed comparison remains inconclusive. Scalar response correlation can therefore be nearly matched while substantial trajectory-position and local-direction differences remain.
 
@@ -94,7 +94,7 @@ The appropriate interpretation is: **consistent with a graded temporal-history e
 
 ### 5.3 Time reversal and incremental information
 
-Full time reversal provides a strict counterexample for standard condition-averaged representational metrics. It preserves the time-averaged condition patterns, leaving condition CKA and RSA unchanged, while strongly disrupting trajectory agreement:
+Full time reversal provides a strict counterexample for the tested time-averaged condition-pattern RSA/CKA summaries. It preserves the time-averaged condition patterns, leaving condition CKA and RSA unchanged, while strongly disrupting trajectory agreement:
 
 | Metric | Original Dynamic | Time-reversed Dynamic |
 |---|---:|---:|
@@ -105,7 +105,7 @@ Full time reversal provides a strict counterexample for standard condition-avera
 | GPFA speed correlation | 0.5375 | 0.1068 |
 | GPFA acceleration cosine | 0.4525 | 0.0440 |
 
-This demonstrates that standard condition-averaged RSA/CKA are insufficient to encode temporal order and direction. It does not imply that trajectory metrics are mathematically independent of RSA/CKA.
+This demonstrates that the tested time-averaged condition-pattern RSA/CKA summaries omit temporal order and direction. It does not imply that trajectory metrics are mathematically independent of RSA/CKA.
 
 An enriched conventional battery was also used to predict GPFA metrics across held-out perturbation families:
 
@@ -127,7 +127,7 @@ The evidence forms a coherent sequence:
 2. Time-aware output-space RSA and CKA also detect the Dynamic–Static difference, so trajectory evaluation is not being compared with an artificially weak conventional baseline.
 3. Frozen neural-data-defined GPFA reveals especially strong differences in trajectory position and local direction, while speed-profile evidence remains uncertain.
 4. Nearly matching scalar response correlation does not eliminate the position, velocity, and acceleration differences.
-5. Time reversal exposes a concrete temporal-order limitation of condition-averaged RSA/CKA.
+5. Time reversal exposes a concrete temporal-order limitation of time-averaged condition-pattern RSA/CKA.
 6. Graded temporal-weight attenuation produces a graded trajectory response consistent with sensitivity to learned temporal history, without uniquely isolating temporal causality.
 
 Together, the response-matching and reversal tests show temporal-order and local-direction sensitivity that the particular matched or reversal-invariant summaries do not capture. Time-aware conventional measures also detect model differences and predict substantial trajectory-score variation. Trajectory evaluation adds a diagnostic within this scope; response prediction and population-response similarity remain separate evaluation criteria.
@@ -156,8 +156,8 @@ These boundaries limit the breadth and causal interpretation of the result witho
 
 The completed [Mental-Pong exploration](MENTAL_PONG.md) compares position reconstructed from condition-mean DMFC responses with an objective ball path and a behavior-constrained candidate path. FA50 and GPFA50 use matched ordinary least squares (OLS) readouts and the same condition splits. This task-coordinate comparison is separate from Sensorium's shared-space neural trajectory comparison.
 
-Each readout is first scored against the target it was trained to reconstruct. All four animal-by-representation full-epoch comparisons favor the objective target on these correlation and RMSE scores. No-collision segments have lower candidate RMSE and lower candidate correlation; post-collision segments favor the objective target on own-target RMSE. Cross-scoring distinguishes a change of target from a change of trained readout. The [versioned final report and tables](../experiments/05_mental_pong/trajectory_project/closeout_v1/FINAL_REPORT.md) retain these phase differences and the complete two-by-two comparisons.
+Each readout is first scored against the target it was trained to reconstruct. All four animal-by-representation comparisons over the full evaluated interval favor the objective target on these correlation and RMSE scores. No-collision segments have lower candidate RMSE and lower candidate correlation; post-collision segments favor the objective target on own-target RMSE. Cross-scoring distinguishes a change of target from a change of trained readout. The [versioned final report and tables](../experiments/05_mental_pong/trajectory_project/closeout_v1/FINAL_REPORT.md) retain these phase differences and the complete two-by-two comparisons.
 
-The condition-mismatch control keeps each readout fixed and assigns its predictions to other conditions. Matched and mismatched scores use the same valid time points. Random-endpoint controls preserve condition geometry and fit new readouts to each randomized target. The actual candidate exceeds the random-endpoint reference in full, hidden, and endpoint-influence evaluations, with post-collision RMSE exceptions. Full-epoch neural results remain below the mean-endpoint geometry baseline, while some Perle phase-specific skills are slightly positive. These controls support recoverable task-position structure within the available data scope. They do not establish an overall candidate-path advantage or differences between opposite behavioral choices within the same condition.
+The condition-mismatch control keeps each readout fixed and assigns its predictions to other conditions. Matched and mismatched scores use the same valid time points. Random-endpoint controls preserve condition geometry and fit new readouts to each randomized target. The actual candidate exceeds the random-endpoint reference in full, hidden, and endpoint-influence evaluations, with post-collision RMSE exceptions. Neural results over the full evaluated interval remain below the mean-endpoint geometry baseline, while some Perle phase-specific skills are slightly positive. These controls support recoverable task-position structure within the available data scope. They do not establish an overall candidate-path advantage or differences between opposite behavioral choices within the same condition.
 
 The scientific status remains `CLOSED_EXPLORATORY_WITH_LIMITATIONS` and `raw_preprocessing=fail`. Filtering and fit-source checks pass within the published inputs; unresolved upstream filling across conditions and times remains outside those checks. The unknown membership of the neural means also prevents a direct test of neural information lost through behavioral averaging. The [current future plan](FUTURE_DIRECTIONS.md) specifies the paired records needed for that question.

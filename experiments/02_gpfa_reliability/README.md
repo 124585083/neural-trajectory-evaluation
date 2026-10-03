@@ -1,5 +1,7 @@
 # Phase 2 — GPFA reliability
 
+Model payloads are external. The [artifact guide](../../docs/DATA_AND_REPRODUCIBILITY.md#8-external-model-and-gpfa-artifacts) gives expected restore paths and integrity checks; checkpoint links below point to identity records.
+
 This Study 1 phase fits a neural-data-defined Gaussian-process factor analysis (GPFA) model and tests trajectory reliability before Static–Dynamic comparison. Its posterior uses the full observation window. The separate Mental-Pong GPFA has its own implementation and audit.
 
 ## Purpose
@@ -58,7 +60,7 @@ python -m trajectory_reliability.cli condition-prior --config configs/pilot.yaml
 | Session and neurons | Pilot session; deterministic seed-42 order; first 512 units |
 | Temporal support | Original frames 50–299 |
 | Selection/refit trials | 278 fit, 70 calibration; refit on all 348 train trials |
-| Latent dimensions | Candidates `4, 8, 12, 16`; released artifact uses calibration-selected `q = 4` |
+| Latent dimensions | Candidates `4, 8, 12, 16`; recorded artifact uses calibration-selected `q = 4` |
 | Temporal grids | Every fourth frame: 63 observations at approximately 7.5 Hz; posterior queried at all 250 timestamps |
 | Selection rule | Smallest dimension within one standard error of the best calibration marginal NLL |
 | Reliability | Seed 42; 200 balanced split-half draws after freezing |
@@ -66,7 +68,7 @@ python -m trajectory_reliability.cli condition-prior --config configs/pilot.yaml
 
 ## Outputs
 
-- **Frozen GPFA and preprocessing:** generated under `outputs/pilot/`; released as [`../../models/gpfa_reliability/gpfa.pkl`](../../models/gpfa_reliability/gpfa.pkl) and [`../../models/gpfa_reliability/preprocessing.npz`](../../models/gpfa_reliability/preprocessing.npz).
+- **Frozen GPFA and preprocessing:** generated under `outputs/pilot/`; recorded externally as [`../../models/gpfa_reliability/gpfa.pkl`](../../results/manifests/model_files.csv) and [`../../models/gpfa_reliability/preprocessing.npz`](../../results/manifests/model_files.csv).
 - **Selection summary:** [`../../results/tables/02_gpfa_reliability/model_selection.csv`](../../results/tables/02_gpfa_reliability/model_selection.csv).
 - **Reliability and null outputs:** observed split halves, matched-null distributions, data/run audits, and the compact summary in [`../../results/tables/02_gpfa_reliability/`](../../results/tables/02_gpfa_reliability/).
 - **Sensitivity outputs:** saturation and split-count artifacts in [`../../results/tables/02_gpfa_reliability/saturation/`](../../results/tables/02_gpfa_reliability/saturation/), plus the train-tier prior diagnostic in [`../../results/tables/02_gpfa_reliability/behavior_conditioned_prior.json`](../../results/tables/02_gpfa_reliability/behavior_conditioned_prior.json).

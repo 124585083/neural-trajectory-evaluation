@@ -1,0 +1,11 @@
+# Current post hoc cases
+
+Conditions 55062 and 241919 were selected after earlier aggregate results had been examined. They are illustrations, without independent confirmatory status. Scores below average the original per-split held-out results. The table reports y for the indicated interval. Correlation is dimensionless; RMSE uses centered MWorks display-coordinate units. Each condition's scores average only the splits where it was held out. Delta_r = r_beh - r_obj and Delta_RMSE = RMSE_obj - RMSE_beh; positive differences favor the candidate. Four-curve figures instead show the mean and population SD of those test predictions for visualization.
+
+{{TABLE_0}}
+
+For condition 55062, candidate own-target RMSE improves across both animals and representations. Correlation over the full evaluated interval decreases in Mahler and increases in Perle. For condition 241919, candidate RMSE worsens in all four groups; full-interval correlation increases in Mahler and decreases slightly in Perle. One error metric and the old stop-proxy result cannot summarize these cases.
+
+The two readout curves are close relative to the reconstruction-error scale. Their separation is smaller than the label separation for both Mahler cases and Perle 55062. Perle 241919 has nearly coincident labels and a larger readout-mean separation. The [curve-separation table](fixed_posthoc_case_curve_separation.csv) describes that distinction without replacing per-split reconstruction scores. [Complete cross-scores](fixed_posthoc_case_2x2.csv) retain both references.
+
+`raw_preprocessing=fail` remains. Neural membership, terminal behavior timing and collision-estimation limits are unchanged.

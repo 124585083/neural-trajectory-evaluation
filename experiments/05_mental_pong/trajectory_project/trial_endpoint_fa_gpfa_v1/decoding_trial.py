@@ -144,7 +144,7 @@ def _validate(payload, representations, split):
 
 
 def fit_expanded_ols(X, objective, behavior, *, threads=4):
-    """One four-output solve equals two independent two-output OLS heads."""
+    """One four-output solve equals two separately parameterized two-output OLS heads."""
     X, objective, behavior = np.asarray(X, float), np.asarray(objective, float), np.asarray(behavior, float)
     if X.ndim != 2 or X.shape[1] != 50 or objective.shape != (len(X), 2) or behavior.shape != objective.shape or not len(X):
         raise ValueError("Nonempty actually expanded [row,50] and paired [row,2] labels required")
@@ -366,7 +366,7 @@ def estimate_cost(payload, n_splits=100):
 
 
 def run_trial_round(payload, representations, split, output_dir, *, chunk_trials=2048, threads=4):
-    """Fit one caller-authorized round; never launches a formal 100-round run."""
+    """Fit one explicitly specified round; never launches a formal 100-round run."""
     table, ci, common, epochs, train_conditions, test_conditions = _validate(payload, representations, split)
     root = Path(output_dir)
     for name in ("models", "predictions", "trial_scores", "round_results"):
@@ -421,7 +421,7 @@ def run_trial_round(payload, representations, split, output_dir, *, chunk_trials
                             train_condition_indices=train_conditions, test_condition_indices=test_conditions,
                             condition_ids=payload["condition_ids"], head_names=np.asarray(HEADS), data_mode=np.asarray(MODE),
                             causal_status=np.asarray(rep["causal_status"]), provenance_json=np.asarray(provenance_json),
-                            fit_method=np.asarray("LinearRegression(fit_intercept=True, positive=False), four independent outputs; actual expanded trial rows"))
+                            fit_method=np.asarray("LinearRegression(fit_intercept=True, positive=False), four separately parameterized outputs; actual expanded trial rows"))
         np.savez_compressed(prediction_path, predictions=predictions, condition_ids=payload["condition_ids"],
                             times_ms=payload["times_ms"], test_condition_indices=test_conditions,
                             test_input_support=test_input_support, head_names=np.asarray(HEADS),

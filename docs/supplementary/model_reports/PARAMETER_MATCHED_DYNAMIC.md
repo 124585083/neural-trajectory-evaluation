@@ -43,7 +43,7 @@ in the project. The original full-width baseline is documented separately.
 The match applies to total trainable count. Core structure remains different: Static uses a
 four-layer 2D frame-wise core with 50,624 parameters; Dynamic uses a three-stage
 Factorized3D core with 98,672 parameters and learned temporal convolutions. The
-identical 2,763,106-parameter readout dominates both totals. The comparison therefore
+readouts each contain 2,763,106 parameters and dominate both totals; their learned weights are separate. The comparison therefore
 does not equate core parameterization, convolutional operations, inductive bias,
 effective computation, or temporal access.
 

@@ -1,32 +1,30 @@
 # Data and Reproducibility
 
-Sections 1–15 describe Study 1, Dynamic Sensorium: its code, documentation, compact result tables, and selected encoding-model and GPFA artifacts in Git LFS. Raw data remain external. Each Phase README gives the exact execution commands. Study 2 has a separate runtime and artifact registry in the [Mental-Pong module](../experiments/05_mental_pong/README.md); its directory number does not create a dependency on the Sensorium phases.
+Sections 1–15 describe Study 1, Dynamic Sensorium: its code, documentation, compact result tables, and identity records for the encoding-model and GPFA artifacts. Raw data and model payloads remain external; their redistribution basis is unresolved. See [third-party terms](../THIRD_PARTY_NOTICES.md). Each Phase README gives the exact execution commands. Study 2 has a separate runtime and artifact registry in the [Mental-Pong module](../experiments/05_mental_pong/README.md); its directory number does not create a dependency on the Sensorium phases.
 
 ## 1. Reproducibility levels
 
-| Level | Requires raw Sensorium data? | Requires released checkpoints? | What can be done |
+| Level | Requires raw Sensorium data? | Requires external checkpoints? | What can be done |
 |---|---|---|---|
 | Documentation and code inspection | No | No | Inspect the scientific documentation, source, configurations, tests, and compact result tables. |
 | Lightweight unit and contract tests | No | No | Run the confirmed synthetic, temporary-file, metric, and configuration tests listed in Section 13. |
-| Released-artifact inspection | No | Yes | Pull the Git LFS objects, verify sizes and SHA-256 digests, and inspect trusted checkpoint or GPFA files in the appropriate environment. |
-| Analysis from released encoding checkpoints | Yes | Yes | Reconstruct models, export aligned predictions, and run downstream evaluation without retraining the encoding models. |
-| Full public analysis reproduction | Yes | Released or regenerated | Run the four phase workflows and compare regenerated compact outputs with `results/tables/`. |
+| External-artifact inspection | No | Yes | Obtain an authorized copy, verify its size and SHA-256 digest, and inspect trusted checkpoint or GPFA files in the appropriate environment. |
+| Analysis from external encoding checkpoints | Yes | Yes | Reconstruct models, export aligned predictions, and run downstream evaluation without retraining the encoding models. |
+| Full analysis reproduction | Yes | Externally supplied or regenerated | Run the four phase workflows and compare regenerated compact outputs with `results/tables/`. |
 | Full encoding-model retraining | Yes | No, if all encoding models are retrained | Recreate Phase 1 and Phase 3 training runs; this is the most compute-intensive path. |
 
 A minimal clone is sufficient for reading and lightweight tests, but not for model inference or scientific recomputation from the raw stimuli and responses.
 
-## 2. Repository clone and Git LFS
+## 2. Repository clone and external artifacts
 
-Files under `models/` with extensions `.pt`, `.pth`, `.pkl`, and `.npz` are configured for Git LFS in `.gitattributes`.
+The current publication tree contains model identities and checksums, but does not distribute the eight Sensorium checkpoint, GPFA, and preprocessing payloads. A clone therefore does not supply the models needed for inference.
 
 ```text
 git clone https://github.com/124585083/neural-trajectory-evaluation.git
 cd neural-trajectory-evaluation
-git lfs install
-git lfs pull
 ```
 
-Without `git lfs pull`, model paths may contain small pointer files instead of usable checkpoints or fitted GPFA objects.
+If you have authorized access to the original artifacts, place copies at the expected local paths in Section 8 and verify them against the model manifest before execution. No download route is asserted here; `git lfs pull` does not restore payloads absent from the current tree.
 
 ## 3. Raw Dynamic Sensorium data
 
@@ -106,12 +104,12 @@ python -m pip install --upgrade pip setuptools wheel
 python -m pip install "pytest>=8,<10"
 python -m pip install -e ./experiments/01_baselines
 python -m pip install -e ./experiments/03_parameter_matching
-python -m pip install "scipy>=1.12,<2"
+python -m pip install "scipy>=1.12,<2" "scikit-learn>=1.4,<2"
 python -m pip install -e ./experiments/02_gpfa_reliability --no-deps
 python -m pip install -e ./experiments/04_model_comparison --no-deps
 ```
 
-The `--no-deps` installs expose the Phase 2 data-contract code and Phase 4 command package without replacing the pinned encoding stack.
+The `--no-deps` installs expose the Phase 2 data-contract code and Phase 4 command package without replacing the pinned encoding stack. Importing the Phase 2 package also imports its GPFA module, so scikit-learn is required even when only the data-contract helpers are used.
 
 ### Analysis / GPFA environment
 
@@ -143,31 +141,31 @@ The formal Phase 1 and Phase 3 training/evaluation workflows and the Phase 4 pre
 
 Phase 2 and the non-inference Phase 4 analyses use NumPy/SciPy/scikit-learn and do not require a GPU. GPFA fitting, reliability resampling, null generation, and sensitivity profiles can be CPU- and memory-intensive, but no exact runtime is guaranteed across machines.
 
-## 8. Released model and GPFA artifacts
+## 8. External model and GPFA artifacts
 
-All paths below are Git LFS-managed.
+The following are expected local restore paths, relative to the repository root. Links lead to identity records, not model downloads. Availability and redistribution terms are described in [Third-Party Notices](../THIRD_PARTY_NOTICES.md).
 
 ### Encoding models
 
-| Role | Released path |
+| Role | Expected local path |
 |---|---|
-| Full Dynamic baseline | [`../models/official_dynamic/best.pt`](../models/official_dynamic/best.pt) |
-| Static-on-Dynamic baseline | [`../models/static_on_dynamic/best.pt`](../models/static_on_dynamic/best.pt) |
-| Total-parameter-matched Dynamic | [`../models/parameter_matched_dynamic/best.pt`](../models/parameter_matched_dynamic/best.pt) |
-| Validation-matched auxiliary checkpoint | [`../models/parameter_matched_dynamic/epoch_65_validation_matched.pth`](../models/parameter_matched_dynamic/epoch_65_validation_matched.pth) |
+| Full Dynamic baseline | [`models/official_dynamic/best.pt`](../results/manifests/model_files.csv) |
+| Static-on-Dynamic baseline | [`models/static_on_dynamic/best.pt`](../results/manifests/model_files.csv) |
+| Total-parameter-matched Dynamic | [`models/parameter_matched_dynamic/best.pt`](../results/manifests/model_files.csv) |
+| Validation-matched auxiliary checkpoint | [`models/parameter_matched_dynamic/epoch_65_validation_matched.pth`](../results/manifests/model_files.csv) |
 
 ### GPFA objects
 
 | Role | Model and preprocessing |
 |---|---|
-| Phase 2 full-train reliability GPFA | [`gpfa.pkl`](../models/gpfa_reliability/gpfa.pkl), [`preprocessing.npz`](../models/gpfa_reliability/preprocessing.npz) |
-| Phase 4 comparison-subset GPFA | [`gpfa.pkl`](../models/gpfa_model_comparison/gpfa.pkl), [`preprocessing.npz`](../models/gpfa_model_comparison/preprocessing.npz) |
+| Phase 2 full-train reliability GPFA | [`models/gpfa_reliability/gpfa.pkl`](../results/manifests/model_files.csv), [`models/gpfa_reliability/preprocessing.npz`](../results/manifests/model_files.csv) |
+| Phase 4 comparison-subset GPFA | [`models/gpfa_model_comparison/gpfa.pkl`](../results/manifests/model_files.csv), [`models/gpfa_model_comparison/preprocessing.npz`](../results/manifests/model_files.csv) |
 
-The Phase 2 and Phase 4 GPFAs are different fitted objects. Their scientific roles are documented in [GPFA Validation](GPFA_VALIDATION.md). Python pickle files may execute code during deserialization; load the `.pkl` objects only from a trusted checkout after verifying their digests.
+The Phase 2 and Phase 4 GPFAs are different fitted objects. Their scientific roles are documented in [GPFA Validation](GPFA_VALIDATION.md). Python pickle files may execute code during deserialization; load the `.pkl` objects only from a trusted source after verifying their digests.
 
 ## 9. Checksums and artifact manifests
 
-[`results/manifests/model_files.csv`](../results/manifests/model_files.csv) is the canonical model-artifact manifest. It records each released path, byte size, SHA-256 digest, and purpose; the guide does not duplicate those values.
+[`results/manifests/model_files.csv`](../results/manifests/model_files.csv) is the canonical model-artifact manifest. It records each expected path, byte size, SHA-256 digest, and purpose; the guide does not duplicate those values.
 
 Verify an individual file against the corresponding manifest row with either:
 
@@ -179,7 +177,7 @@ sha256sum models/official_dynamic/best.pt
 (Get-FileHash -Algorithm SHA256 models/official_dynamic/best.pt).Hash
 ```
 
-If a size or digest does not match, rerun `git lfs pull` before using the artifact.
+If a size or digest does not match, do not use that copy as the recorded artifact. Restore a matching authorized copy; a similarly named checkpoint is not interchangeable.
 
 ## 10. Phase-by-phase reproduction map
 
@@ -201,37 +199,37 @@ Phase 2 can run independently of encoding-model retraining once its pilot-sessio
 
 ## 11. Minimal end-to-end reproduction order
 
-1. Clone the repository and pull Git LFS objects.
+1. Clone the repository and obtain authorized external model artifacts if following the saved-checkpoint route.
 2. Obtain the five official Dynamic Sensorium sessions and configure the shared data root.
 3. Create the encoding and analysis environments.
-4. In the encoding environment, either evaluate the released Phase 1 checkpoints or retrain the Phase 1 models.
+4. In the encoding environment, either evaluate the external Phase 1 checkpoints or retrain the Phase 1 models.
 5. In the analysis environment, run the Phase 2 primary workflow and any required sensitivity stages.
-6. In the encoding environment, either evaluate the released Phase 3 checkpoint or retrain Phase 3.
+6. In the encoding environment, either evaluate the external Phase 3 checkpoint or retrain Phase 3.
 7. Run Phase 4 in the exact cross-environment sequence documented in its README.
 8. Compare regenerated compact outputs with the corresponding directories under `results/tables/`.
 
 Phase 2 may run while encoding-model work is in progress because it uses recorded neural data rather than model predictions.
 
-### Reproduce analysis from released checkpoints
+### Reproduce analysis from external checkpoints
 
-This is the shorter path. Keep the released Phase 1 and Phase 3 checkpoints, use the raw Sensorium data to reconstruct their session-specific readouts and aligned predictions, and then run Phase 4. The pilot session is sufficient for the detailed Phase 4 analysis; all five sessions are required to re-evaluate the five-session response benchmarks.
+This is the shorter path. Use authorized copies of the recorded Phase 1 and Phase 3 checkpoints, use the raw Sensorium data to reconstruct their session-specific readouts and aligned predictions, and then run Phase 4. The pilot session is sufficient for the detailed Phase 4 analysis; all five sessions are required to re-evaluate the five-session response benchmarks.
 
 ### Retrain encoding models from raw data
 
 Run the Phase 1 and Phase 3 training commands before their evaluation commands, then continue to Phase 4. Full retraining requires all five sessions and the CUDA encoding environment.
 
-## 12. Using released checkpoints instead of retraining
+## 12. Using external checkpoints instead of retraining
 
-| Workflow | Released artifact support | Raw data still required? |
+| Workflow | External artifact support | Raw data still required? |
 |---|---|---|
-| Phase 1 evaluation | `evaluate` loads the published Static or full Dynamic checkpoint selected by its config. | Yes, all five sessions. |
-| Phase 1 Dynamic prediction export | `export` loads the published full Dynamic checkpoint. | Yes, all five sessions. |
-| Phase 3 evaluation | `evaluate` loads the published Total-parameter-matched Dynamic checkpoint. | Yes, all five sessions. |
-| Phase 4 prediction generation | `predict` loads the released Static and Total-parameter-matched Dynamic checkpoints; `extended-predict` additionally loads the auxiliary validation-matched checkpoint. | Yes, the pilot session. |
+| Phase 1 evaluation | `evaluate` loads the restored Static or full Dynamic checkpoint selected by its config. | Yes, all five sessions. |
+| Phase 1 Dynamic prediction export | `export` loads the restored full Dynamic checkpoint. | Yes, all five sessions. |
+| Phase 3 evaluation | `evaluate` loads the restored Total-parameter-matched Dynamic checkpoint. | Yes, all five sessions. |
+| Phase 4 prediction generation | `predict` loads the restored Static and Total-parameter-matched Dynamic checkpoints; `extended-predict` additionally loads the auxiliary validation-matched checkpoint. | Yes, the pilot session. |
 
-Released checkpoints remove the need to repeat encoding-model training; they do not replace stimulus, neural-response, behavior, pupil, or session metadata files.
+Restored checkpoints remove the need to repeat encoding-model training; they do not replace stimulus, neural-response, behavior, pupil, or session metadata files.
 
-The released GPFA objects support integrity checking and independent reuse. The current formal Phase 2 `run` and Phase 4 `gpfa` commands regenerate GPFA files under their ignored `outputs/pilot/` directories, and dependent CLI stages read those generated locations. The current CLIs do not provide a restore command that copies the top-level released GPFA files into those output locations.
+The recorded GPFA objects can be checked and reused once authorized copies are available. The current formal Phase 2 `run` and Phase 4 `gpfa` commands regenerate GPFA files under their ignored `outputs/pilot/` directories, and dependent CLI stages read those generated locations. The current CLIs do not provide a restore command that copies the top-level restored GPFA files into those output locations.
 
 ## 13. Tests and validation checks
 
@@ -278,7 +276,7 @@ Tests cover selected contracts such as session/configuration identities, tensor 
 - Large prediction archives and other intermediate outputs are generated locally and excluded by `.gitignore`; curated compact tables are retained under `results/`.
 - Current encoding-model training uses a single seed.
 - Fixed seeds improve repeatability, but exact floating-point values may vary slightly across compatible hardware, CUDA, BLAS, and package builds.
-- Released state dictionaries still require the matching model configuration and Sensorium metadata to reconstruct session-specific readouts.
+- Restored state dictionaries still require the matching model configuration and Sensorium metadata to reconstruct session-specific readouts.
 
 ## 15. Documentation map
 
@@ -300,6 +298,6 @@ Tests cover selected contracts such as session/configuration identities, tensor 
 
 Start with the [Mental-Pong module README](../experiments/05_mental_pong/README.md) for separate routes to reports, read-only verification, a small saved-case replay, and later full execution. Use its [path configuration example](../experiments/05_mental_pong/configs/paths.example.json) to locate external data and large artifacts. The module records availability explicitly; a report link alone does not establish that an artifact is available or that a replay succeeded.
 
-The [NumPy-only mini replay](../experiments/05_mental_pong/mini_replay/README.md) directly applies saved weights to saved features from split 0 for both animals and both representations. Its default calculation does not fit a model. Public source availability and numerical artifact availability are reported separately: the new bundle remains outside the publication tree because permission for redistributing transformed arrays has not been established. The [rights audit](../experiments/05_mental_pong/integration/revision_20261003/data_rights_audit.json) identifies the actual saved provider metadata, the failed API refresh, and the archive files inspected. The MIT code license does not replace the data terms.
+The [NumPy-only mini replay](../experiments/05_mental_pong/mini_replay/README.md) directly applies saved weights to saved features from split 0 for both animals and both representations. Its default calculation does not fit a model. Public source availability and numerical artifact availability are reported separately: the new bundle remains outside the publication tree because permission for redistributing transformed arrays has not been established. The [third-party notices](../THIRD_PARTY_NOTICES.md) identify the sources and unresolved redistribution basis. The MIT code license does not replace the data terms.
 
 The integration preserves the completed scientific results. Integration checks, English presentation derivatives, and source hashes are recorded separately from the original scientific acceptance records. Full training and randomization studies were not repeated for publication editing.

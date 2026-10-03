@@ -89,10 +89,6 @@
       "numeric_scalar_and_shape_equivalence": true
     },
     {
-      "destination": "experiments/05_mental_pong/trajectory_project/closeout_v1/sources/user_request_record.json",
-      "numeric_scalar_and_shape_equivalence": true
-    },
-    {
       "destination": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/configs/analysis_protocol.json",
       "numeric_scalar_and_shape_equivalence": true
     },
@@ -150,7 +146,6 @@
     }
   ],
   "source_artifacts_verified": 7573,
-  "missing_original_request_attachments": 1,
   "copied_label_NPZ_text_fields": 0,
   "saved_tables": {
     "status": "passed",
@@ -163,5 +158,6 @@
     "own_target_to_diagonal_identity": "passed",
     "new_model_fitting": false
   },
-  "note": "Immutable numerical artifacts retain source hashes; edited metadata retain scalar values, shapes and CSV columns. English source-location aliases have separate publication hashes."
+  "note": "Immutable numerical artifacts retain source hashes; edited metadata retain scalar values, shapes and CSV columns. English source-location aliases have separate publication hashes.",
+  "record_scope": "Historical numerical comparison from the original integration, before later editorial editions. The source count describes that original inventory."
 }

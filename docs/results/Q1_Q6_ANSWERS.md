@@ -34,7 +34,7 @@ Dynamic has higher response correlation in all five sessions. The session-level 
 
 **Answer: Yes, especially in RSA/CKA variants that preserve temporal structure.**
 
-Treating the six repeated movies as independent conditions:
+Using the six movie conditions as the paired resampling units:
 
 | Metric | Static | Dynamic | Difference | Condition bootstrap 95% interval |
 |---|---:|---:|---:|---:|
@@ -66,9 +66,9 @@ Trajectory evaluation therefore supports the conclusion that Dynamic more closel
 
 **Answer: Yes, in a prespecified response-score-matched output perturbation.**
 
-For each movie, repeats are divided into non-overlapping selection and test halves, with 28 trials in each. The selection half is used only to add train-independent amplitude noise to the best Dynamic predictions so that scalar response correlation matches Static; the test half is completely excluded from selection.
+Repeats were split within each of the six movie conditions. Pooled across conditions, the selection and test halves each contained 28 trials: five/five for ten-repeat conditions and four/four with one unused repeat for nine-repeat conditions. The saved Q4 summary records these pooled counts; individual half-membership indices were not saved. The selection half was used to choose the amplitude of fixed, neuron-scaled Gaussian noise added to the frozen Dynamic predictions. Test-half neural responses were excluded from this amplitude-selection step, but the oracle tier had already been used for encoding-model checkpoint selection. The noise seed, amplitude grid, scaling, and clipping are specified in [Methods](../METHODS.md#141-response-matching-stress-test).
 
-Selection response: Static `0.15553`, response-score-matched Dynamic output `0.15520`. Held-out test response: Static `0.15651`, response-score-matched Dynamic output `0.15687`; the per-neuron paired-bootstrap difference is `+0.00036`, with 95% interval `[-0.00510, +0.00537]`. The held-out response scores are therefore nearly identical under the predefined perturbation. Because no formal equivalence test was performed, this result is not described as statistical indistinguishability.
+Selection response: Static `0.15553`, response-score-matched Dynamic output `0.15520`. Held-out test response: Static `0.15651`, response-score-matched Dynamic output `0.15687`; the per-neuron paired-bootstrap difference is `+0.00036`, with 95% interval `[-0.00510, +0.00537]`. The test-half point estimates were close under the selected perturbation. No equivalence margin or formal equivalence test was used.
 
 The test-half frozen-GPFA results are:
 
@@ -108,7 +108,7 @@ It is therefore appropriate to state that the major trajectory-similarity metric
 
 ### Strict Counterexample: Time Reversal
 
-After fully reversing the Dynamic prediction in time, the condition-average pattern remains unchanged. As a result, standard condition CKA is effectively identical: `0.84860060` vs `0.84860060`; condition RSA is exactly identical: `0.342857` vs `0.342857`.
+After fully reversing the Dynamic prediction in time, the time-averaged condition pattern remains unchanged. As a result, standard condition CKA is effectively identical: `0.84860060` vs `0.84860060`; condition RSA is exactly identical: `0.342857` vs `0.342857`.
 
 The frozen-GPFA metrics change substantially:
 

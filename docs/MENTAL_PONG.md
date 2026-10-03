@@ -8,7 +8,7 @@ This differs from the Dynamic Sensorium study, which compares neural and model-p
 
 ## Data level
 
-The released DMFC responses form a condition-mean pseudopopulation: units recorded across sessions are assembled by physical task condition, rather than observed together on a single trial. Mahler and Perle are analyzed separately using half1 and 50 ms completed bins. The 100 fixed nominal 39/40 splits retain all 79 IDs. Unresolved collision geometry for 59920 leaves 78 usable conditions and 3369 condition-by-time rows per animal. Behavioral means use 7407/84873 records, without an equivalent count of independent neural trials.
+The released dorsomedial frontal cortex (DMFC) responses form a condition-mean pseudopopulation: units recorded across sessions are assembled by physical task condition, rather than observed together on a single trial. Mahler and Perle are analyzed separately using half1 and 50 ms completed bins. The 100 fixed nominal 39/40 splits retain all 79 IDs. Unresolved collision geometry for 59920 leaves 78 usable conditions and 3369 condition-by-time rows per animal. Behavioral means use 7407/84873 records, without an equivalent count of independent neural trials.
 
 The original unit-by-trial membership of the neural means is unknown. Behavioral mean membership is traceable, but exact neural-behavioral membership matching has not been established. The [coverage and methods](../experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/REPORT.md#coverage-and-label-checks) preserve the available support and missing identities.
 
@@ -20,13 +20,13 @@ This construction gives a behavioral reference for decoding. It is not a measure
 
 ## FA, GPFA and a fixed linear readout
 
-Factor analysis (FA) describes shared neural variation using latent factors. Gaussian-process factor analysis (GPFA) adds a time prior; the version here has one shared learnable RBF time scale. Both have 50 latent dimensions. The study reuses each split's training-side FA50/GPFA50 and applies ordinary least squares (OLS), a linear regression with an intercept. Each coordinate has 51 coefficients and each xy head has 102. No added regularization, scaling, behavioral features or record-count weights are used. A single mapping spans valid visible and hidden rows.
+Factor analysis (FA) describes shared neural variation using latent factors. Gaussian-process factor analysis (GPFA) adds a time prior; the version here has one shared learnable radial-basis-function (RBF) time scale. Both have 50 latent dimensions. The study reuses each split's training-side FA50/GPFA50 and applies ordinary least squares (OLS), a linear regression with an intercept. Each coordinate has 51 coefficients and each xy head has 102. No added regularization, scaling, behavioral features or record-count weights are used. A single mapping spans valid visible and hidden rows.
 
 Each target has its own trained readout. Both use the same neural inputs, condition split and valid time points. The [locked protocol](../experiments/05_mental_pong/trajectory_project/closeout_v1/configs/closeout_protocol.json) retains the original timing and fit boundaries. This GPFA implementation and its tests are separate from Sensorium's brain-defined GPFA.
 
 ## Own-target reconstruction
 
-Each position readout is scored against the target it was trained to reconstruct. This is the own-target comparison. Each split is scored before the 100 split scores are summarized. Repeated splits describe readout stability and are not independent animal experiments.
+Each position readout is scored against the target it was trained to reconstruct. This is the own-target comparison. Each split is scored before the 100 split scores are summarized. The table reports y over the full evaluated interval. Correlation r is dimensionless; RMSE uses centered MWorks display-coordinate units. Values are means of 100 separately scored condition splits. Delta_r = r_beh - r_obj and Delta_RMSE = RMSE_obj - RMSE_beh; positive differences favor the candidate. Repeated splits describe readout stability and are not independent animal experiments.
 
 | animal | representation | r_obj | r_beh | RMSE_obj | RMSE_beh | Delta_r | Delta_RMSE |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -35,11 +35,11 @@ Each position readout is scored against the target it was trained to reconstruct
 | perle | FA50 | 0.7019 | 0.6910 | 3.8586 | 3.8829 | -0.0108 | -0.0242 |
 | perle | GPFA50 | 0.7204 | 0.7094 | 3.8005 | 3.8265 | -0.0110 | -0.0261 |
 
-All four full-epoch comparisons favor the objective target. No-collision candidates have lower RMSE but lower correlation; post-collision own-target RMSE favors the objective path. Different target variances and difficulties limit a neural-preference interpretation. The [complete report](../experiments/05_mental_pong/trajectory_project/closeout_v1/FINAL_REPORT.md#a-own-target-reconstruction) keeps phase-specific and per-condition results, including the post hoc examples 55062 and 241919.
+All four full-interval comparisons favor the objective target. No-collision candidates have lower RMSE but lower correlation; post-collision own-target RMSE favors the objective path. Different target variances and difficulties limit a neural-preference interpretation. The [complete report](../experiments/05_mental_pong/trajectory_project/closeout_v1/FINAL_REPORT.md#a-own-target-reconstruction) keeps phase-specific and per-condition results, including the post hoc examples 55062 and 241919.
 
 ## Cross-scoring
 
-A 2x2 evaluation scores each head against both targets. OO versus BB changes both target and trained head. OB versus BB holds the candidate target fixed, and OO versus BO holds the objective target fixed. In all four full-epoch groups the objective-trained head performs better against either shared target. These comparisons do not reduce to decoding the target difference. [All four cells](../experiments/05_mental_pong/trajectory_project/closeout_v1/results/A/cross_2x2_summary.csv) retain r and RMSE.
+A 2x2 evaluation scores each head against both targets. OO versus BB changes both target and trained head. OB versus BB holds the candidate target fixed, and OO versus BO holds the objective target fixed. In all four full-interval groups the objective-trained head performs better against either shared target. These comparisons do not reduce to decoding the target difference. [All four cells](../experiments/05_mental_pong/trajectory_project/closeout_v1/results/A/cross_2x2_summary.csv) retain r and RMSE.
 
 ## Two randomization controls
 
@@ -49,7 +49,7 @@ A 2x2 evaluation scores each head against both targets. OO versus BB changes bot
 
 ## Mean-endpoint geometry baseline
 
-The baseline combines a training-set mean endpoint with each test condition's known anchor and horizontal motion. It uses task geometry beyond the neural input. All four full-epoch neural results have negative `skill = 1 - SSE_neural/SSE_baseline`. Perle has small positive candidate skills for GPFA50 hidden samples and both representations' no-collision samples. Exceeding randomized endpoints therefore does not imply a general gain over shared geometry. The [phase-specific baseline account](../experiments/05_mental_pong/trajectory_project/closeout_v1/FINAL_REPORT.md#mean-endpoint-geometry-baseline) retains these exceptions.
+The baseline combines a training-set mean endpoint with each test condition's known anchor and horizontal motion. It uses task geometry beyond the neural input. All four full-interval neural results have negative `skill = 1 - SSE_neural/SSE_baseline`. Perle has small positive candidate skills for GPFA50 hidden samples and both representations' no-collision samples. Exceeding randomized endpoints therefore does not imply a general gain over shared geometry. The [phase-specific baseline account](../experiments/05_mental_pong/trajectory_project/closeout_v1/FINAL_REPORT.md#mean-endpoint-geometry-baseline) retains these exceptions.
 
 ## What averaging changes
 
@@ -59,6 +59,6 @@ These results establish behavioral cancellation. They do not measure neural info
 
 ## Evidence limits and next design
 
-The final scientific status is `CLOSED_EXPLORATORY_WITH_LIMITATIONS`. **`raw_preprocessing=fail` remains unresolved.** The filtering check verifies use of completed released-input bins. The fitting check verifies which released conditions trained the representation. Filling across conditions and times occurred upstream and remains unresolved. Unknown neural members, terminal timing uncertainty and estimated collision anchors further limit interpretation. The results support readable task-position structure, do not support a full-epoch candidate-path advantage, and cannot test opposite behavioral groups within one physical condition. They do not establish a unique computation or neural causal mechanism.
+The final scientific status is `CLOSED_EXPLORATORY_WITH_LIMITATIONS`. **`raw_preprocessing=fail` remains unresolved.** The filtering check verifies use of completed released-input bins. The fitting check verifies which released conditions trained the representation. Filling across conditions and times occurred upstream and remains unresolved. Unknown neural members, terminal timing uncertainty and estimated collision anchors further limit interpretation. The results support reconstructable task-position structure, do not support a full-interval candidate-path advantage, and cannot test opposite behavioral groups within one physical condition. They do not establish a unique computation or neural causal mechanism.
 
 The [single current future plan](FUTURE_DIRECTIONS.md) specifies the paired trial records needed for above-target/below-target/near-correct group comparisons, then asks what additional temporal information could distinguish explanations. It remains a design. Start with the [module reading and execution guide](../experiments/05_mental_pong/README.md) or the [final summary](../experiments/05_mental_pong/trajectory_project/closeout_v1/FINAL_SUMMARY.md). The [history](../experiments/05_mental_pong/archive/HISTORY.md) retains earlier experiments without blending their results into the final analysis.

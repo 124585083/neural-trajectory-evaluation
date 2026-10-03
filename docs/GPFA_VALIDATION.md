@@ -10,7 +10,7 @@ The shared latent coordinate system is fitted exclusively from recorded training
 y(t) = C x(t) + d + ε(t),    ε(t) ~ Normal(0, R)
 ```
 
-The observation manifold `C`, neural mean `d`, diagonal observation noise `R`, and latent temporal priors are shared. After fitting, they remain fixed for recorded oracle responses and for every encoding-model prediction.
+The neural loading matrix `C`, neural mean `d`, diagonal observation noise `R`, and latent temporal priors are shared. After fitting, they remain fixed for recorded oracle responses and for every encoding-model prediction.
 
 The comparison obeys the following invariants:
 
@@ -54,7 +54,7 @@ After selection, the GPFA and its preprocessing metadata are refitted on the des
 
 ## 4. Why two GPFA fits appear in the repository
 
-The repository contains two related but non-identical frozen GPFA objects:
+The study uses two related but non-identical frozen GPFA objects:
 
 | Role | Available train trials | Fit / calibration split | Final refit | Main use |
 |---|---:|---:|---:|---|
@@ -220,5 +220,5 @@ This document answers whether that measurement can be trusted. The resulting Sta
 - [Results](RESULTS.md): Static–Dynamic scientific findings obtained with the validated comparison GPFA.
 - [Internally locked GPFA protocol](supplementary/protocols/GPFA_PROTOCOL_LOCKED.md): result-blind Phase 2 analysis specification. It was internally locked before reliability results were inspected and was not registered on an external preregistration platform.
 - [Phase 2 implementation and configuration](../experiments/02_gpfa_reliability/): assay fitting, reliability, null, and sensitivity workflow.
-- [Full-train frozen GPFA](../models/gpfa_reliability/) and [comparison-subset frozen GPFA](../models/gpfa_model_comparison/): released fitted objects and preprocessing metadata.
+- [Full-train frozen GPFA](../results/manifests/model_files.csv) and [comparison-subset frozen GPFA](../results/manifests/model_files.csv): recorded identities of the external fitted objects and preprocessing; see [restore requirements](DATA_AND_REPRODUCIBILITY.md#8-external-model-and-gpfa-artifacts).
 - [Phase 2 reliability outputs](../results/tables/02_gpfa_reliability/) and [comparison-GPFA reliability outputs](../results/tables/04_model_comparison/): compact public validation artifacts.

@@ -18,7 +18,7 @@
   "neural_half": "half1",
   "behavior_average": "Mean of the SAME previously valid real-trial candidate pool, one fixed pool per condition; no binwise membership changes; x copied exactly from objective.",
   "label_construction": "Existing initial/collision endpoint interpolation is affine in b_i, so averaging valid trial candidates equals constructing from mean endpoint. No new rules or thresholds.",
-  "invalid_condition_policy": "Keep all79 split identities; keep59920 unknown; no replacement or padding.",
+  "invalid_condition_policy": "Keep all 79 split identities; keep 59920 unknown; no replacement or padding.",
   "OLS": {
     "class": "sklearn.linear_model.LinearRegression",
     "fit_intercept": true,
@@ -40,7 +40,7 @@
     "no_bounce",
     "post_bounce"
   ],
-  "aggregation": "Each heldout split pooled condition x time Pearson r/RMSE; then mean/population SD over100 shared splits. Condition scores and full2x2 are supplementary.",
+  "aggregation": "Each heldout split pooled condition x time Pearson r/RMSE; then mean/population SD over 100 shared splits. Condition scores and full 2x2 are supplementary.",
   "differences": {
     "Delta_r": "r_beh-r_obj",
     "Delta_RMSE": "RMSE_obj-RMSE_beh"
@@ -90,5 +90,6 @@
       "bytes": 25926,
       "role": "source or output"
     }
-  ]
+  ],
+  "publication_record_scope": "Public technical edition. Scientific values and historical source hashes are retained; historical locks identify preserved original records, not this edited prose edition."
 }

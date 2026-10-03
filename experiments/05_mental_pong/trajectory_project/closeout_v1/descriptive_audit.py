@@ -1,6 +1,7 @@
 """Read-only descriptive closeout of fixed condition-mean labels and saved OOF results.
 
-No model fitting, neural re-averaging, hypothesis selection, or old-file writes.
+No model fitting or neural re-averaging occurs. Completed descriptive results
+and figures are written to this module's output directories.
 """
 from __future__ import annotations
 
@@ -221,6 +222,54 @@ def mean_audit():
     return labels, geometry, detail, mem, current_scores, main_scores, summary
 
 
+def plot_condition_heterogeneity(scores, condition_ids, output_dir):
+    """Show every fixed condition, with panels in ascending condition-ID order."""
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    ids = np.asarray(condition_ids, dtype=int)
+    if len(ids) != 79 or len(np.unique(ids)) != 79 or np.any(np.diff(ids) <= 0):
+        raise ValueError("Expected all 79 physical conditions in ascending ID order.")
+    groups = [(a, r, e) for a in ANIMALS for r in REPS for e in ("full", "hidden")]
+    values = {}
+    for metric in ("Delta_RMSE", "Delta_r"):
+        values[metric] = np.stack([
+            scores[(scores.animal == a) & (scores.representation == r) &
+                   (scores.epoch == e) & scores.coordinate.eq("y")].set_index("condition_id").reindex(ids)[metric]
+            for a, r, e in groups])
+    # Each metric has its own fixed color scale; no comparison of their absolute sizes is implied.
+    labels = [f"{a.title()} {r} {e}" for a, r, e in groups]
+    cmap = plt.colormaps["PiYG"].copy()
+    cmap.set_bad("#b5b5b5")
+    paths = []
+    blocks = [("all79_condition_heterogeneity", np.arange(79))]
+    blocks += [(f"all79_condition_heterogeneity_part_{i+1}", np.arange(i*20, min((i+1)*20, 79)))
+               for i in range(4)]
+    for name, indices in blocks:
+        overview = len(indices) == 79
+        fig, axes = plt.subplots(2, 1, figsize=(13, 9), layout="constrained")
+        for ax, metric in zip(axes, ("Delta_RMSE", "Delta_r")):
+            limit = float(np.nanmax(np.abs(values[metric])))
+            shown = np.ma.masked_invalid(values[metric][:, indices])
+            im = ax.imshow(shown, aspect="auto", cmap=cmap, vmin=-limit, vmax=limit,
+                           interpolation="nearest")
+            ax.set_yticks(range(len(labels)), labels, fontsize=10)
+            ticks = np.arange(0, len(indices), 10) if overview else np.arange(len(indices))
+            ax.set_xticks(ticks, ids[indices[ticks]], rotation=45, ha="right", fontsize=10)
+            ax.set_xlabel("Physical condition ID (fixed ascending order)")
+            ax.set_title("RMSE objective − candidate (MWorks position units)" if metric == "Delta_RMSE"
+                         else "r candidate − objective (dimensionless)", loc="left", fontsize=12)
+            fig.colorbar(im, ax=ax, shrink=.8, pad=.015)
+        suffix = "all 79 conditions" if overview else f"ascending-ID positions {indices[0]+1}–{indices[-1]+1} of 79"
+        fig.suptitle(f"Own-target y reconstruction: {suffix}\n"
+                     "Means of held-out split scores; green favors the candidate, magenta the objective.\n"
+                     "Gray marks unresolved 59920. All panels use the same scale within each metric.", fontsize=12)
+        path = output_dir / (name + ".png")
+        fig.savefig(path, dpi=170)
+        plt.close(fig)
+        paths.append(path)
+    return paths
+
+
 def create_figures(labels, geometry, detail, scores):
     plt.rcParams.update({"font.size": 9, "axes.spines.top": False, "axes.spines.right": False})
     fig, axes = plt.subplots(2, 2, figsize=(11, 8), constrained_layout=True)
@@ -239,31 +288,9 @@ def create_figures(labels, geometry, detail, scores):
     fig.savefig(FIG / "endpoint_mean_cancellation.png", dpi=170)
     plt.close(fig)
     all_ids = labels[ANIMALS[0]]["condition_ids"]
-    fig, axes = plt.subplots(4, 2, figsize=(19, 10), sharex=True, constrained_layout=True)
-    for ri, (animal, rep) in enumerate((a, r) for a in ANIMALS for r in REPS):
-        for ei, epoch in enumerate(("full", "hidden")):
-            d = scores.query("animal == @animal and representation == @rep and epoch == @epoch and coordinate == 'y'").set_index("condition_id").reindex(all_ids)
-            ax = axes[ri, ei]
-            x = np.arange(len(all_ids))
-            ax.bar(x, d.Delta_RMSE, width=.8, color=np.where(d.Delta_RMSE >= 0, "#007f75", "#a35279"))
-            ax.axhline(0, color="black", lw=.7)
-            ax.axvspan(int(np.where(all_ids == 59920)[0][0]) - .5, int(np.where(all_ids == 59920)[0][0]) + .5, color=".75")
-            ax.set(title=f"{animal.title()} / {rep} / {epoch}", ylabel="RMSE obj - beh")
-            ax2 = ax.twinx()
-            ax2.plot(x, d.Delta_r, color="#20324b", marker=".", ms=2, lw=.5)
-            ax2.set_ylabel("r beh - obj", color="#20324b")
-            # Both zero levels must agree despite the two units.
-            scale_rmse = max(float(d.Delta_RMSE.abs().max()) * 1.1, .01)
-            scale_r = max(float(d.Delta_r.abs().max()) * 1.1, .001)
-            ax.set_ylim(-scale_rmse, scale_rmse)
-            ax2.set_ylim(-scale_r, scale_r)
-            ax.set_xticks(x)
-            ax.set_xticklabels(all_ids, rotation=90, fontsize=5.5)
-    fig.suptitle("Reconstruction differences across all 79 conditions\nMean of held-out split scores. Positive favors the candidate: bars show RMSE, navy lines show r; gray marks unresolved 59920.")
-    fig.savefig(FIG / "all79_condition_heterogeneity.png", dpi=180)
-    plt.close(fig)
+    plot_condition_heterogeneity(scores, all_ids, FIG)
     fixed = scores[(scores.condition_id.isin(CASES)) & (scores.coordinate == "y")].copy()
-    fixed["selection_status"] = "posthoc after aggregate result inspection; not confirmatory"
+    fixed["selection_status"] = "post hoc after aggregate result inspection; not confirmatory"
     fixed.to_csv(OUT / "fixed_posthoc_case_scores.csv", index=False)
     cross = read_csv(CURRENT / "results/condition_cross_summary.csv")
     cross[(cross.condition_id.isin(CASES)) & (cross.coordinate == "y")].to_csv(OUT / "fixed_posthoc_case_2x2.csv", index=False)
@@ -318,16 +345,11 @@ def create_figures(labels, geometry, detail, scores):
         fig.savefig(FIG / f"{animal}_fixed_posthoc_four_curves.png", dpi=180)
         plt.close(fig)
     pd.DataFrame(case_shapes).to_csv(OUT / "fixed_posthoc_case_curve_separation.csv", index=False)
-    (OUT / "fixed_posthoc_case_interpretation.md").write_text(
-        "# Current post hoc cases\n\n"
-        "Conditions 55062 and 241919 are post hoc illustrations selected after aggregate results were examined. They provide no independent confirmation. Scores average original per-split held-out results; the four curves show test-prediction means and readout-split SD for visualization.\n\n"
-        + markdown_table(fixed[fixed.epoch.isin(["full", "hidden"])][["animal", "representation", "condition_id", "epoch", "r_obj", "r_beh", "RMSE_obj", "RMSE_beh", "Delta_r", "Delta_RMSE"]])
-        + "\n\nCandidate own-target RMSE for 55062 improves in both animals and representations. Full-epoch correlation decreases in Mahler and increases in Perle. For 241919, candidate RMSE worsens in all four groups; Mahler correlation rises while Perle has no corresponding improvement. Preserve these metric differences rather than importing the old stopping-proxy result.\n\n"
-        "The two readout curves are close relative to the overall error scale. Readout separation is smaller than label separation for both Mahler cases and Perle 55062. Perle 241919 has nearly coincident labels and a larger readout-mean separation. The phase-specific label_path_RMS and OOF_mean_head_separation_RMS comparison is in fixed_posthoc_case_curve_separation.csv; it does not replace per-split own-target error. Complete cross-scores are in fixed_posthoc_case_2x2.csv.\n\n"
-        "raw_preprocessing=fail remains. Neural mean membership, strictly pre-feedback endpoint timing and collision-estimation limits remain unresolved.\n",
-        encoding="utf-8")
+    from trajectory_project.publication_reports import render_template, IDENTITY, METRICS
+    render_template("posthoc_cases", OUT / "fixed_posthoc_case_interpretation.md",
+                    [fixed[fixed.epoch.isin(["full", "hidden"])][IDENTITY + ["condition_id", "epoch"] + METRICS]])
     save_json(FIG / "descriptive_figure_manifest.json", {
-        "posthoc_ids_fixed_by_request": list(CASES), "condition_order": [int(x) for x in all_ids],
+        "fixed_posthoc_condition_ids": list(CASES), "condition_order": [int(x) for x in all_ids],
         "prediction_source": "Existing test-only OOF mean/SD; current per-split scores unchanged",
         "raw_preprocessing": "fail", "shadow_interpretation": "readout split stability, not animal trial variation",
         "all79_atlases": [str(CURRENT / f"figures/{a}_all79_condition_atlas.pdf") for a in ANIMALS],
@@ -365,7 +387,7 @@ def closeout_ledger_status(kind):
         for (animal, rep, head), d in full.groupby(["animal", "representation", "head"]):
             m = d.set_index("metric")["mean"]
             parts.append(f"{animal}/{rep}/{head}: matched→null r {m.matched_r:.4f}→{m.null_r:.4f}, RMSE {m.matched_RMSE:.4f}→{m.null_RMSE:.4f}")
-        text = f"{repeats} random correspondences x {splits} original splits; all four groups/two heads/two targets saved. Full-epoch own-target cells on matched support: " + "; ".join(parts)
+        text = f"{repeats} random correspondences x {splits} original splits; all four groups/two heads/two targets saved. Full-interval own-target cells on matched support: " + "; ".join(parts)
         support = "Correct correspondence exceeds mismatches on shared support, supporting task/condition specificity without isolating behavior."
     else:
         complete = (marker.get("completed") is True and marker.get("repeats_per_animal") == repeats
@@ -391,11 +413,11 @@ def closeout_ledger_status(kind):
             parts.append(f"{animal}/{rep}: actual/random candidate means r {m.loc['r','behavior_mean']:.4f}/{m.loc['r','null_mean']:.4f}, RMSE {m.loc['RMSE','behavior_mean']:.4f}/{m.loc['RMSE','null_mean']:.4f}, candidate geometry-baseline skill {m.loc['skill','behavior_mean']:.4f}")
         positive = summary[(summary.metric == "skill") & (summary.behavior_mean > 0)]
         exceptions = "; ".join(f"{r.animal}/{r.representation}/{r.epoch}={r.behavior_mean:.4f}" for r in positive.itertuples()) or "none"
-        text = (f"{repeats} random endpoint allocations x {splits} original splits with actual new OLS fits and fixed representations. Full epoch: "
+        text = (f"{repeats} random endpoint allocations x {splits} original splits with actual new OLS fits and fixed representations. Full evaluated interval: "
                 + "; ".join(parts) + ". Positive candidate geometry-baseline skill exceptions: " + exceptions + "; complete objective/candidate/random skill for all other phases is retained in the source table.")
         full_skill = summary[(summary.metric == "skill") & (summary.epoch == "full")]
         support = ("Actual task/candidate labels exceed this random-endpoint reference; that result does not establish candidate superiority over objective paths. "
-                   + ("All four full-epoch objective and candidate skills are negative relative to the mean-endpoint geometry baseline. Phase-specific exceptions remain."
+                   + ("All four full-interval objective and candidate skills are negative relative to the mean-endpoint geometry baseline. Phase-specific exceptions remain."
                       if ((full_skill.objective_mean < 0) & (full_skill.behavior_mean < 0)).all()
                       else "Geometry-baseline skill differs by group and phase; consult the complete table."))
     if marker.get("raw_preprocessing") != "fail" or not (summary.raw_preprocessing == "fail").all():
@@ -430,8 +452,8 @@ def create_ledger(main_scores):
         dict(category=1, stage="Original reproduction and representation selection", status="EXECUTED", question="Assess the published reproduction and a usable representation tool", input_level="Separate animals; condition-mean neural halves; original FA and later GPFA protocols differ", labels="Objective x/y and cross-half neural responses", representation="Original FA50; tested AE/GPFA 32/64; historical frozen causal GPFA64", readout="Original OLS; validation-selected Ridge for tool evaluation", splits="Original 100 condition splits with 50% held out; tool selection 47/16/16", actual_results=records(ref, ["animal", "position_x_r", "position_y_r"])+"; GPFA64="+records(rep[(rep.latent_dim==64)&rep.method.str.contains("GPFA",case=False)], ["animal","representation_parameters","cross_response_r","position_x_r","position_y_r"]), support="Supports a tool choice for these released data, without a universal optimum or identical protocol", limitations="One million is a parameter cap, not parameter matching; causal filtering does not undo upstream cross-condition/time preprocessing", sources="../reports/01_representation_selection.md;../results/official_fa50_reference.csv;../results/representation_comparison.csv"),
         dict(category=2, stage="Early stopping/average-behavior proxy exploration", status="EXECUTED", question="Construct continuous candidates from stable mean segments and read out deviations", input_level="Condition-mean behavior and neural responses; exact shared membership unknown", labels="Stable-window targets and continuous segment updates; no individual stopped-paddle observation", representation="Frozen GPFA64 seed42", readout="Small-set Ridge with shared lambda and equal condition weighting", splits="Original 47/16/16; Mahler 3 and Perle 2 test conditions", actual_results=records(proxy[(proxy.split=="test")&(proxy.half=="half1")], ["animal","n_conditions","n_bins","mean_delta_r","mean_delta_mse","mean_zero_delta_mse","D_obj_to_y_obj_mse","D_beh_to_y_beh_mse"]), support="Completed physical preview and small-sample deviation analysis; not a substitute for current full-path own-target reconstruction", limitations="Low-ambiguity selection, small sample and short proxy windows; historical MSE/delta scores do not substitute for current E_OO/E_BB", sources="../condition_mean_behavior_preview_v1/preview_report.md;../condition_mean_behavior_stageB_v1/REPORT.md;../condition_mean_behavior_stageB_v1/results/primary_summary.csv"),
         dict(category=3, stage="Old all 79 segmented-candidate OLS", status="EXECUTED", question="Reconstruct each complete objective and segmented candidate path", input_level="Condition-mean half1; half2 uses the same readout as a supplement", labels="Physical reference until qualifying stable-proxy activation, then continuous segment updates", representation="Frozen GPFA64 fitted on the earlier 47 training conditions", readout="Intercept OLS, 65 coefficients per coordinate, one full-time mapping", splits="100 random 39/40 condition splits", actual_results=records(old[(old.half=="half1")&(old.epoch=="full")&(old.coordinate=="y")], ["animal","r_obj","r_beh","RMSE_obj","RMSE_beh","Delta_r","Delta_RMSE"]), support="Completed direct own-target evaluation with small full-path candidate improvements", limitations="Only 4.5%/5.6% of bins have active proxies; representation-fit conditions overlap some readout-test conditions; this is not the current endpoint-label result", sources="../all79_official_readout_v1/REPORT.md;../all79_official_readout_v1/results/self_reconstruction_main_table.csv"),
-        dict(category=4, stage="Trial-endpoint label version", status="EXECUTED", question="Assess the readability of individual endpoint-constrained labels", input_level="Route B: each behavioral record reuses the same condition-mean neural input", labels="Individual endpoint connection after a single-collision anchor or from the no-collision starting point", representation="Per-split train39 FA50 and shared-single-learnable-RBF GPFA50", readout="Intercept OLS without explicit weights; record expansion increases the contribution of conditions with more trials", splits="Same 100 nominal 39/40 splits ; 78 valid conditions ; 59920 retained as unknown", actual_results=records(trial[(trial.epoch=="full")&(trial.coordinate=="y")], ["animal","representation","r_obj_trial_version","r_beh_trial_version","RMSE_obj_trial_version","RMSE_beh_trial_version"]), support="Evaluates repeated condition inputs against individual label sets; not single-trial neural validation", limitations="No independent paired neural trials; repeated inputs add neither neural information nor rank; raw_preprocessing=fail", sources="../trial_endpoint_fa_gpfa_v1/REPORT.md;../condition_endpoint_fa_gpfa_v1/results/previous_trial_version_comparison.csv"),
-        dict(category=5, stage="Current condition-mean endpoint FA50/GPFA50", status="EXECUTED", question="Compare own-target reconstruction of two condition-mean paths", input_level="One condition-by-time row, half1 ; 7407/84873 behavioral members", labels="Fixed-membership mean endpoints, original anchors and shared time support", representation="Existing per-split FA50/GPFA50; no further representation fitting", readout="OLS 51 coefficients per coordinate, 102 per xy head; no trial-count weighting", splits="Same 100 nominal 39/40 splits ; 78 valid conditions / 3369 rows ; all 79 identities retained", actual_results=records(main_scores[(main_scores.epoch=="full")&(main_scores.coordinate=="y")],core), support="All four full-epoch candidate correlations are lower and RMSEs slightly higher; no overall candidate advantage", limitations="Within-condition target variance and extra trial-count weighting are removed together; not a one-factor ablation; raw_preprocessing=fail", sources="../condition_endpoint_fa_gpfa_v1/REPORT.md;../condition_endpoint_fa_gpfa_v1/results/self_reconstruction_main_table.csv;../condition_endpoint_fa_gpfa_v1/results/previous_trial_version_comparison.csv"),
+        dict(category=4, stage="Trial-endpoint label version", status="EXECUTED", question="Assess reconstruction of individual endpoint-constrained labels", input_level="Route B: each behavioral record reuses the same condition-mean neural input", labels="Individual endpoint connection after a single-collision anchor or from the no-collision starting point", representation="Per-split train39 FA50 and shared-single-learnable-RBF GPFA50", readout="Intercept OLS without explicit weights; record expansion increases the contribution of conditions with more trials", splits="Same 100 nominal 39/40 splits; 78 valid conditions ; 59920 retained as unknown", actual_results=records(trial[(trial.epoch=="full")&(trial.coordinate=="y")], ["animal","representation","r_obj_trial_version","r_beh_trial_version","RMSE_obj_trial_version","RMSE_beh_trial_version"]), support="Evaluates repeated condition inputs against individual label sets; not single-trial neural validation", limitations="No independent paired neural trials; repeated inputs add neither neural information nor rank; raw_preprocessing=fail", sources="../trial_endpoint_fa_gpfa_v1/REPORT.md;../condition_endpoint_fa_gpfa_v1/results/previous_trial_version_comparison.csv"),
+        dict(category=5, stage="Current condition-mean endpoint FA50/GPFA50", status="EXECUTED", question="Compare own-target reconstruction of two condition-mean paths", input_level="One condition-by-time row, half1; 7407/84873 behavioral members", labels="Fixed-membership mean endpoints, original anchors and shared time support", representation="Existing per-split FA50/GPFA50; no further representation fitting", readout="OLS 51 coefficients per coordinate, 102 per xy head; no trial-count weighting", splits="Same 100 nominal 39/40 splits; 78 valid conditions / 3369 rows; all 79 identities retained", actual_results=records(main_scores[(main_scores.epoch=="full")&(main_scores.coordinate=="y")],core), support="All four full-interval candidate correlations are lower and RMSEs slightly higher; no overall candidate advantage", limitations="Within-condition target variance and extra trial-count weighting are removed together; not a one-factor ablation; raw_preprocessing=fail", sources="../condition_endpoint_fa_gpfa_v1/REPORT.md;../condition_endpoint_fa_gpfa_v1/results/self_reconstruction_main_table.csv;../condition_endpoint_fa_gpfa_v1/results/previous_trial_version_comparison.csv"),
         dict(category=6, stage="Closeout A: own-target and 2x2 replay", status="EXECUTED", question="Verify own-target and cross-target column identities", input_level="Existing current test-only predictions", labels="Current fixed objective and candidate labels", representation="Current per-split FA50/GPFA50 unchanged", readout="Rescore existing fixed OLS readouts without fitting", splits="All 100 fixed splits", actual_results="See results/A; A is cross-scoring without a randomized null distribution", support="Source and prediction replay checks", limitations="Current shared-input evidence limits remain", sources="results/A"),
         dict(category=6, stage="Closeout B: fixed-readout condition mismatch", status="PENDING", question="Assess task specificity of correct condition correspondence", input_level="Permute current test-condition correspondence on shared valid time support", labels="Both fixed target types, matched-support rescoring for each q/split", representation="No representation fitting", readout="Existing OLS readouts remain fixed", splits="Fixed 1000 q x 100 original splits", actual_results="Formal completion remains to be verified; smoke results are insufficient", support="Awaiting executed outputs", limitations="Mapping-dependent support requires empirical comparison proportions; not separate evidence for behavioral representation", sources="configs/closeout_protocol.json"),
         dict(category=6, stage="Closeout C: random endpoints and new OLS fits", status="PENDING", question="Assess real endpoint correspondence against random endpoints with retained geometry", input_level="Original neural inputs and geometry; reallocate 78 mean endpoints preserving their marginal distribution", labels="Each q allocation fixed across 100 splits and the complete sequence", representation="Reuse representations without FA/GPFA fitting", readout="Actual new random-target OLS fits and a mean-endpoint geometry baseline", splits="Fixed 1000 q x 100 original splits", actual_results="Formal completion remains to be verified; randomization results are not assumed", support="Awaiting executed outputs", limitations="Exceeding random endpoints does not establish candidate superiority, an internal path or trial-level behavior correspondence", sources="configs/closeout_protocol.json"),
@@ -440,49 +462,26 @@ def create_ledger(main_scores):
     rows[-1].update(closeout_ledger_status("C"))
     table = pd.DataFrame(rows)
     table.to_csv(ROOT / "results/experiment_ledger.csv", index=False)
-    text = "# Executed experiment ledger\n\nEntries are organized by scientific question and retain historical protocol identities. B/C status comes from actual completion markers, branches and score summaries; incomplete records remain PENDING/PARTIAL. **raw_preprocessing = fail** remains the upstream boundary.\n"
-    for row in rows:
-        text += f"\n## {row['category']}. {row['stage']}（{row['status']}）\n\n"
-        for label, key in [("Question", "question"),("Input level","input_level"),("Target definition","labels"),("Representation","representation"),("Readout","readout"),("Splits","splits"),("Observed result","actual_results"),("Supported scope","support"),("Limitations","limitations")]:
-            text += f"**{label}**：{row[key]}\n\n"
-        text += "**Sources**: " + "; ".join(f"[{Path(s).name}]({s})" for s in row["sources"].split(";")) + ".\n"
-    text += "\nThe current version changes target averaging and condition weighting together, so score changes cannot be assigned entirely to averaging. Historical tables use saved results; no procedure was adjusted to approach paper values.\n"
-    (ROOT / "experiment_ledger.md").write_text(text, encoding="utf-8")
+    from trajectory_project.publication_reports import render_template
+    render_template("experiment_ledger", ROOT / "experiment_ledger.md")
 
 
-def write_interpretation(summary):
-    text = "# Behavioral averaging and path separation\n\nThe frozen membership JSON and verified source-record SHA256 values define each recomputed mean. Endpoint errors use **objective_end_y from the current released-trajectory geometry**, rather than trial yf_mworks. Signs use exact floating zero without an inferred near-correct threshold. Variance uses ddof=0. endpoint_condition_audit.csv retains means, variances and SDs for each condition and its positive, negative and exact-zero subgroups; empty subgroups are NA.\n\n"
-    for animal, s in summary["animals"].items():
-        q=s["mean_endpoint_error_quantiles"]
-        text += (f"{animal.title()}: 78 valid conditions and {s['n_members']} behavioral records; positive {s['n_up_records']}, negative {s['n_down_records']}, exact zero {s['n_exact_zero_records']}. Both signs occur in {s['n_conditions_with_both_error_signs']} conditions. Equal-condition mean_i|e_ci| is {s['condition_equal_mean_abs_trial_error']:.4f}, and |mean_i e_ci| is {s['condition_equal_abs_mean_error']:.4f}. Median within-condition cancellation is {s['median_condition_cancellation_fraction']:.1%}. Mean endpoint error interquartile range {q['0.25']:.4f}–{q['0.75']:.4f}, median {q['0.5']:.4f}, range {q['0']}–{q['1']} .\n\n"
-                 f"Equal-condition mean_i(e_ci^2)={s['condition_equal_mean_square_trial_error']:.6f} decomposes into mean_i(e_ci)^2={s['condition_equal_mean_squared_mean_error']:.6f} and within-condition variance={s['condition_equal_mean_within_variance']:.6f}.\n\n")
-    text += f"Maximum variance-identity residual across conditions {summary['variance_identity_max_abs_residual']:.3g}; maximum difference between recomputed behavioral means and existing labels {summary['membership_replay_max_abs_difference']:.3g}. This provides descriptive evidence that averaging cancels opposite endpoint errors.\n\n"
-    paths=pd.DataFrame(summary["path_separation"])
-    text += markdown_table(paths[paths.epoch.isin(["full","hidden"])][["animal","representation","epoch","path_RMS_pooled_bins","RMSE_obj_mean_of_100_splits","RMSE_beh_mean_of_100_splits"]])+"\n\n"
-    text += "Path separation is descriptive RMS over all valid label rows. Reconstruction error is scored per held-out split and then averaged over 100 splits. Their magnitude comparison uses different aggregation. path_separation_vs_error.csv retains every condition and phase; scores of averaged prediction curves do not replace the original per-split scores.\n\n"
-    text += "Behavioral cancellation does not establish that neural means contain exactly the same behavioral members. The comparison with trial labels removes within-condition target variation and extra record-count weighting together; it is not a one-factor ablation. A lack of overall candidate advantage cannot be assigned entirely to averaging, and weak separation of condition means does not rule out trial-level behavioral representation. **raw_preprocessing=fail**, unverified strictly pre-feedback terminal timing and estimated collision anchors remain.\n\n"
-    text += "## Fixed post hoc cases and all conditions\n\nConditions 55062 and 241919 are post hoc illustrations selected after aggregate results were examined, without independent confirmation. fixed_posthoc_case_scores.csv and fixed_posthoc_case_2x2.csv retain all phases for both animals and representations. Four-curve PNGs show existing test-prediction means; bands describe readout-split stability rather than animal trial variation. The all-79 heterogeneity figure retains invalid 59920 without favorable selection.\n\n"
-    text += "Complete current atlases are listed in the [artifact registry](../../../../integration/artifact_registry.csv). Local improvements from the old stopping-proxy version do not transfer to current labels.\n"
-    (OUT / "mean_cancellation_interpretation.md").write_text(text, encoding="utf-8")
+def write_interpretation(summary, output_dir=None):
+    """Render the averaging account from the supplied completed summary."""
+    from trajectory_project.publication_reports import render_template, cancellation_table, IDENTITY
+    destination = Path(output_dir) if output_dir is not None else OUT
+    paths = pd.DataFrame(summary["path_separation"])
+    paths = paths[paths.epoch.isin(["full", "hidden"])][IDENTITY + ["epoch", "path_RMS_pooled_bins",
+                  "RMSE_obj_mean_of_100_splits", "RMSE_beh_mean_of_100_splits"]]
+    return render_template("mean_cancellation", destination / "mean_cancellation_interpretation.md",
+                           [cancellation_table(summary), paths])
 
 
-def write_future_design():
-    (ROOT / "future_design.md").write_text("""# Historical closeout design: behavioral groups within a condition
-
-This is the design recorded at closeout. It was not executed. The [current cross-study research plan](../../../../docs/FUTURE_DIRECTIONS.md) is the single maintained plan for future work.
-
-The proposed test asks whether neural representations differ with the direction of behavioral endpoint errors while the physical condition remains fixed. Define signed error as final paddle position minus objective endpoint. Form above-target, below-target and near-correct groups whose endpoints are reasonably similar within each group. Set thresholds from measurement precision and task tolerance before examining neural results. Exact numerical zero in the descriptive closeout audit is a counting rule, not a validated future grouping threshold. Failure alone does not identify an internal judgment error.
-
-Match absolute error, session, genuine trial count and available neural units where feasible. Record unmatched data without selecting groups by decoding performance. The prerequisite is recovery of unit/session/trial neural responses, corresponding endpoint behavior, timestamps, event and feedback boundaries, and original averaging membership. Strictly pre-feedback sampling of the terminal behavioral measurement must also be checked.
-
-With those paired records, compute each group's neural mean and evaluate it using a shared representation and readout protocol with independent splits. Ask whether reconstructed positions shift with above-target versus below-target behavior while the objective path stays fixed, and whether group-specific candidates explain structured departures from objective reconstruction. Fit representations, unit selection and data-dependent preprocessing on training data. Reliability must use genuine within-group trial splits.
-
-Group-average analysis conditions on known behavioral membership. Blind prediction for a new single trial requires its own paired observations and evaluation. Cross-session grouped pseudopopulations require correct member identities and do not establish one simultaneously observed population decision.
-
-The currently obtained data contain already mixed condition-mean neural responses. Their original members have not been recovered. A single mean cannot be decomposed into the proposed behavioral-group means; repeating it for separate behavioral records does not create new neural observations. This closeout therefore performed no grouped neural reconstruction, new download or representation search. The limitation applies to the obtained and audited data, without asserting that every unpublished record from the original experiment has the same limitation.
-
-`raw_preprocessing=fail` remains unresolved. Released-input filtering/provenance checks cannot repair upstream cross-condition/time filling. Any future recovery of raw paired data must establish a training-side preprocessing boundary at its source.
-""", encoding="utf-8")
+def write_future_design(output_dir=None):
+    """Write the unexecuted design; this function runs no experiment."""
+    from trajectory_project.publication_reports import render_template
+    destination = Path(output_dir) if output_dir is not None else ROOT
+    return render_template("future_design", destination / "future_design.md")
 
 
 def main():

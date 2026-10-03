@@ -8,13 +8,11 @@ The local audit inspected [jazlab/MentalPong](https://github.com/jazlab/MentalPo
 
 The integrated module contains project analysis code, English report editions, and compact derived results. Raw Mental-Pong data and large saved representations, readouts, and null arrays remain external. The [artifact registry](experiments/05_mental_pong/integration/artifact_registry.csv) and [official source audit](experiments/05_mental_pong/integration/official_source_audit.json) retain provenance. No affiliation with or endorsement by the original authors is implied.
 
-The locally preserved provider JSON for this specific Zenodo record specifies **CC BY-NC-ND 4.0**. The record's public landing page was checked during this revision; a fresh API request returned HTTP 403, so the license assertion is tied to the saved metadata and its checksum in the [data-rights audit](experiments/05_mental_pong/integration/revision_20261003/data_rights_audit.json). The downloaded archive contains no separate license granting broader data rights. Neither the GitHub code's MIT license nor Zenodo's platform default establishes permission for derived data redistribution.
+The locally preserved provider JSON for this specific Zenodo record specifies **CC BY-NC-ND 4.0**. The record's public landing page was checked on 3 October 2026. The API refresh recorded in the audit returned HTTP 403, so the license assertion is tied to the saved metadata and its checksum in the [data-rights audit](experiments/05_mental_pong/integration/revision_20261003/data_rights_audit.json). The downloaded archive contains no separate license granting broader data rights. Neither the GitHub code's MIT license nor Zenodo's platform default establishes permission for derived data redistribution.
 
-The [CC BY-NC-ND terms](https://creativecommons.org/licenses/by-nc-nd/4.0/) restrict redistribution of modified material. This project has not resolved their application to the transformed neural and behavioral arrays. Accordingly, the new numerical mini-replay payload is withheld from the publication tree; the exporter, replay source, dependency inventory, and local verification record remain available. Existing published scientific records are preserved, with their derived-data redistribution status also marked unresolved. This is a documented publication limitation, not a claim that every numerical derivative has a settled legal classification. Rights-holder clarification would be needed before expanding the public payload.
+The [CC BY-NC-ND terms](https://creativecommons.org/licenses/by-nc-nd/4.0/) restrict redistribution of modified material. This project has not resolved their application to the transformed neural and behavioral arrays. Accordingly, the new numerical mini-replay payload is withheld from the publication tree; the exporter, replay source, dependency inventory, and local verification record remain available. The two condition-label NPZ files and their two condition-by-time CSV equivalents are also withheld because their redistribution basis has not been established. Aggregate scores, reports, and source identities remain available; their presence does not grant rights to the underlying dataset or establish a blanket permission for numerical derivatives. This is a documented publication limitation, not a claim that every numerical derivative has a settled legal classification. Rights-holder clarification would be needed before expanding the public payload.
 
-Known repository authorship and release identifiers are unchanged. The existing citation version and release date identify the recorded software release; this integration does not declare a new release.
-
-This repository contains original project code, documentation, configurations, trained artifacts, and compact result tables. It also depends on external data and software. The repository-level [MIT License](LICENSE) does not replace or broaden any third-party license, dataset access condition, model-use condition, or citation requirement.
+This repository contains original project code, documentation, configurations, model identity records, and compact result tables. It also depends on external data and software. The repository-level [MIT License](LICENSE) does not replace or broaden any third-party license, dataset access condition, model-use condition, or citation requirement.
 
 ## Dynamic Sensorium 2023
 
@@ -24,11 +22,11 @@ This repository contains original project code, documentation, configurations, t
 - Source revision pinned by Phase 1: `0e02656220e84a50f3be1b92d6f66c2f9ccd51ef`
 - Official data record: [GIN — sensorium_2023_dataset](https://gin.g-node.org/pollytur/sensorium_2023_dataset)
 - Benchmark description: [Turishcheva et al., arXiv:2305.19654v2](https://arxiv.org/abs/2305.19654v2), revised 12 July 2024; version 1 was submitted 31 May 2023.
-- Competition retrospective: [Wang et al., 2024](https://proceedings.neurips.cc/paper_files/paper/2024/hash/d758d7c0a88d741c8ca4637579c9df87-Abstract-Datasets_and_Benchmarks_Track.html)
+- Competition retrospective: [Turishcheva et al., 2024](https://proceedings.neurips.cc/paper_files/paper/2024/hash/d758d7c0a88d741c8ca4637579c9df87-Abstract-Datasets_and_Benchmarks_Track.html)
 
-Raw Dynamic Sensorium data are not included in this repository. Users must obtain them from the official source and comply with the terms displayed there. As of 14 August 2026, the upstream `sensorium_2023` repository does not expose a root-level `LICENSE` file. This project therefore treats it as an external dependency and scientific reference; it does not claim that its own MIT license grants rights to upstream Sensorium 2023 code or data.
+Raw Dynamic Sensorium data are external. Appendix A.8.4–A.8.5 of the [2024 retrospective](https://proceedings.neurips.cc/paper_files/paper/2024/file/d758d7c0a88d741c8ca4637579c9df87-Paper-Datasets_and_Benchmarks_Track.pdf) identifies CC BY-NC-ND 4.0 terms for data and code. The pinned upstream checkout has no root `LICENSE`; that absence does not establish unrestricted use. Upstream code is an external dependency, and this project's MIT license does not broaden its terms.
 
-The released checkpoints were trained on Dynamic Sensorium 2023. Their inclusion does not redistribute raw recordings and does not waive any conditions that the data providers may apply to trained derivatives. Users are responsible for confirming that their intended reuse complies with the current official terms.
+The four fitted encoding checkpoints, two GPFA objects, and two preprocessing arrays are withheld pending a documented redistribution basis. Their original hashes and historical paths remain in the [model inventory](results/manifests/model_files.csv). This conservative availability decision does not determine whether trained parameters are legally adapted material. Existing Git/LFS history is unchanged; future inference requires appropriately obtained external copies.
 
 ## Sensorium 2022
 
@@ -39,7 +37,7 @@ The released checkpoints were trained on Dynamic Sensorium 2023. Their inclusion
 - Upstream license: MIT
 - Upstream copyright notice: Copyright (c) 2024 Sensorium GitHub Contributors
 - Local copy of the upstream notice: [`third_party/licenses/SENSORIUM-2022-MIT.txt`](third_party/licenses/SENSORIUM-2022-MIT.txt)
-- Competition retrospective: [Willeke et al., 2023](https://proceedings.mlr.press/v220/willeke23a.html)
+- Competition retrospective: [Willeke et al., 2022](https://proceedings.mlr.press/v220/willeke23a.html)
 
 The Static-on-Dynamic model in this repository is a project-specific transfer experiment. It is not an official Sensorium 2022 score and not an official Static-on-Dynamic benchmark released by the Sensorium organizers.
 

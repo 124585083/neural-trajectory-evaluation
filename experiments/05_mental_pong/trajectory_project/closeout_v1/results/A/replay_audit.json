@@ -16,6 +16,7 @@
   "original_support_unchanged": true,
   "OO_BB_equals_self": true,
   "raw_preprocessing": "fail",
-  "unique_support": "78 conditions and3369condition-time rows per animal,79split identities",
-  "interpretation": "A is cross-evaluation, not a randomized null; positive Delta means the right cell improves the named metric."
+  "unique_support": "78 conditions and 3369 condition-time rows per animal; 79 split identities",
+  "interpretation": "A is cross-evaluation, not a randomized null; positive Delta means the right cell improves the named metric.",
+  "publication_record_scope": "Public technical edition. Scientific values and historical source hashes are retained; historical locks identify preserved original records, not this edited prose edition."
 }

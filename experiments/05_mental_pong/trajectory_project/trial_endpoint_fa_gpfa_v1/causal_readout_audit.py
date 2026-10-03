@@ -51,7 +51,7 @@ def audit_saved_round(payload, data, representations_folder, readout_model_paths
                 set(train_ids + test_ids) == set(map(int, data['condition_ids'])) and
                 meta['fingerprint']['source_sha256'] == data['metadata']['source_sha256'])
     if not fit_pass:
-        raise ValueError('Saved parameter provenance does not match39/40 source split')
+        raise ValueError('Saved parameter provenance does not match the 39/40 source split')
     files = {'fa': folder / 'fa50.joblib', 'gpfa': folder / 'gpfa50.npz',
              'preprocessing': folder / 'preprocessing.npz'}
     files.update({f'readout_{k}': Path(v) for k, v in readout_model_paths.items()})

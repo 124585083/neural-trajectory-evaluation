@@ -207,8 +207,8 @@
     "tampering": "feature/mask/coefficient/file hash rejected; refreshed feature/coefficient hashes still fail recomputed scores; contradictory metadata and axes rejected",
     "public_default_command": "exit 1;explicit payload-withheld reason;no output directory created",
     "initial_test_failures_resolved": [
-      "Private-path regex initially matched storage aliases; refined drive-prefix boundary.",
-      "Cold network/file guard exposed NumPy testing platform probes; replaced runtime test assertions with NumPy value comparisons and avoided hostname-dependent platform lookup."
+      "An initial alias-path false positive was corrected by requiring a Windows drive prefix.",
+      "The isolation test initially exposed hostname-dependent platform probes; default replay avoids those probes."
     ],
     "overwrite_guard": "Existing nonempty output directories rejected; preserved scientific records are never overwritten."
   },
@@ -264,8 +264,6 @@
   "new_representation_fitting": false,
   "full_randomizations_rerun": false,
   "full_analysis_rebuilt": false,
-  "prior_scientific_files_edited": false,
-  "figures_generated": false,
   "unverified_platforms": [
     "Linux",
     "macOS"
@@ -284,5 +282,6 @@
     "scripts/export_mini_replay.py",
     "README.md",
     "run.py"
-  ]
+  ],
+  "record_scope": "Historical Windows checks for the 651b764 source edition. The four-case numerical bundle was verified privately and is not included in this distribution."
 }

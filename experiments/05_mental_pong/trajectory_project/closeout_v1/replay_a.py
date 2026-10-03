@@ -141,13 +141,13 @@ def run():
         shutil.copy2(source,dest);copied.append(record(source,'byte-identical retained detailed current results'))
     sources+=copied
     for animal in ANIMALS:
-        sources.append(record(SOURCE/'figures'/f'{animal}_all79_condition_atlas.pdf','retained full79 atlas; no new curve averaging'))
+        sources.append(record(SOURCE/'figures'/f'{animal}_all79_condition_atlas.pdf','retained all-79-condition atlas; no new curve averaging'))
     write_json(ROOT/'sources/A_sources.json',sources)
     audit=dict(completed=True,n_animals=2,n_representations=2,n_splits=100,n_prediction_files=400,
         all_predictions_test_only=True,no_refitting=True,x_prediction_max_difference=xerror,
         maximum_replay_errors=dict(round_cross=maxcross,round_self=maxown,cross_summary=maxsummary,main_summary=maxmain),
         original_support_unchanged=True,OO_BB_equals_self=True,raw_preprocessing='fail',
-        unique_support='78 conditions and3369condition-time rows per animal,79split identities',
+        unique_support='78 valid conditions and 3369 condition-time rows per animal; 79 split identities',
         interpretation='A is cross-evaluation, not a randomized null; positive Delta means the right cell improves the named metric.')
     assert xerror<1e-12
     write_json(output/'replay_audit.json',audit)

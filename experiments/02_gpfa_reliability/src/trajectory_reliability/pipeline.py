@@ -137,7 +137,7 @@ def run_pipeline(config_path: str | Path, smoke: bool = False) -> dict[str, Any]
     selection.table.to_csv(output_dir / "model_selection.csv", index=False)
 
     # Hyperparameters are frozen after train/calibration selection. Refit on all
-    # official train trials; oracle responses remain completely unseen.
+    # official train trials; oracle responses remain excluded from GPFA fitting.
     all_train_indices = np.sort(np.concatenate([fit_indices, calibration_indices]))
     final_precision = compute_train_neuron_precision(
         metadata, all_train_indices, neuron_indices, frame_start, frame_stop

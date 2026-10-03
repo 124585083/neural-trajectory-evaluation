@@ -539,5 +539,6 @@
   ],
   "test_write_policy": "All tests invoked outside the repository with -B and cacheprovider disabled; synthetic temporary files were directed to the external integration work directory. No packages were installed or upgraded.",
   "total_lightweight_tests_passed": 14,
-  "new_scientific_analyses": false
+  "new_scientific_analyses": false,
+  "record_scope": "Historical parser, numerical-preservation, rendering, and lightweight-test results for the original integration edition. String-insensitive AST equality and a character scan do not establish full language correctness."
 }

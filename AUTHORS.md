@@ -2,7 +2,7 @@
 
 **Xiaotian Zhu** led this independent secondary analysis of public neural and behavioral data. He set the research aims, revised the hypotheses and comparison targets, specified analysis constraints, and evaluated the reported results. He is responsible for the final study decisions and the claims presented here.
 
-The analysis and repository were developed with assistance from **ChatGPT and Codex**. ChatGPT supported literature discussion, analysis planning, examination of interpretations and writing. Codex supported implementation, adaptation of existing code, debugging, local execution, tests, and preparation of figures and reports. These tools provided substantial analytical and implementation assistance. This statement does not attribute every idea or code line solely to the author, quantify tool-generated work, or assert that every artifact received a complete manual review.
+The analysis and repository were developed with assistance from **ChatGPT and Codex**. ChatGPT supported literature discussion, analysis planning, examination of interpretations and writing. Codex supported implementation, adaptation of existing code, debugging, local execution, tests, and preparation of figures and reports. These tools provided substantial analytical and implementation assistance.
 
 | Area | Human research role | Tool assistance | Evidence |
 |---|---|---|---|

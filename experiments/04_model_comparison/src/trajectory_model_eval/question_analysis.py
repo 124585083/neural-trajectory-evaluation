@@ -613,7 +613,7 @@ def _q6(
         "response_only_counterexample": "see Q4 disjoint-repeat response-score-matched output perturbation",
         "conventional_matched_pair": matched_pair,
         "leave_perturbation_family_out_regression": regression_summary,
-        "interpretation": "The reversal counterexample establishes an order limitation of time-averaged condition patterns. Approximate response matching supports complementary sensitivity. Held-family ridge residuals describe the limits of this fitted predictor and do not establish general information insufficiency or independence.",
+        "interpretation": "The reversal counterexample establishes an order limitation of time-averaged condition patterns. Approximate response matching supports complementary sensitivity. Ridge residuals for excluded perturbation families describe the limits of this fitted predictor and do not establish general information insufficiency or independence.",
         "candidates": int(len(selection_table)),
         "conventional_features": conventional,
     }, table, family_table

@@ -1,5 +1,5 @@
 {
-  "integration_status": "COMPLETE_FOR_PUBLISHED_REVIEW_AND_SAVED_REPLAY_SCOPE",
+  "integration_status": "HISTORICAL_INTEGRATION_AND_SAVED_REPLAY_RESULTS",
   "scientific_status": "CLOSED_EXPLORATORY_WITH_LIMITATIONS",
   "raw_preprocessing": "fail",
   "checked_at_utc": "2026-10-01T17:50:37.359126+00:00",
@@ -14,19 +14,12 @@
     },
     "deep_external_checksums": true,
     "failures": [],
-    "unavailable_artifacts": [
-      {
-        "artifact_id": "external_source_229047a1ad4f:.",
-        "storage_location_id": "external_source_229047a1ad4f",
-        "status": "unavailable"
-      }
-    ],
     "scientific_status": "CLOSED_EXPLORATORY_WITH_LIMITATIONS",
     "raw_preprocessing": "fail",
     "new_model_fitting": false,
-    "files_written": false
+    "files_written": false,
+    "inventory_scope": "The historical inventory contained one unavailable non-scientific item. It is excluded from current scientific dependencies; original aggregate counts below remain historical."
   },
-  "existing_user_readme_change": "Preserved in external pre-edit target snapshot before integration",
   "numerical_checks": {
     "status": "passed",
     "self_target_rows": 48,
@@ -58,7 +51,8 @@
       "binary figures (separate visual inspection record)"
     ],
     "required_legal_exceptions": [],
-    "synthetic_path_exception": "A synthetic Windows absolute path is used in rejection tests and in this checker."
+    "synthetic_path_exception": "A synthetic Windows absolute path is used in rejection tests and in this checker.",
+    "scope": "Historical automated character/path/syntax/link checks; not full language review."
   },
   "sensorium_tests": {
     "passed": 14,
@@ -94,15 +88,9 @@
   },
   "external_limits": [
     "Large scientific artifacts require configured storage roots.",
-    "One historical request attachment is unavailable; its original hash is retained.",
     "Full scientific execution after relocation is not tested end to end.",
     "Historical PDF export runtime and all79 atlas visual reinspection are not certified by this integration."
   ],
-  "git_policy": {
-    "record_scope": "Integration-time state before the later user-authorized publication. Subsequent commits and publication are recorded in Git history.",
-    "commits_created": false,
-    "push_performed": false,
-    "changes_left_for_review": true
-  },
-  "verification_manifest_policy": "migration_map.csv contains the finalized publication checksums and excludes its own checksum to avoid recursion."
+  "verification_manifest_policy": "Historical source/publication identities are in migration_map.csv; current retained membership and bounded retirements are in revision_20261003/publication_map.csv.",
+  "record_scope": "Historical results recorded before source commit 0637c08bca6661e32753f7f4c52d141bcd76f61b. This sanitized edition retains executed outcomes; it does not rerun or update them."
 }

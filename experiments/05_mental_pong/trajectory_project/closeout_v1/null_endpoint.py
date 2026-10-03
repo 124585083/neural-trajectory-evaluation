@@ -1,7 +1,8 @@
 """C: actual multioutput OLS refits of fixed, permuted endpoint candidates.
 
 All source directories are read-only. Columns in the batched regression are
-independent OLS targets, not an average or a new multivariate regularizer.
+separately parameterized OLS targets. They share the design matrix and are
+not statistically independent biological observations.
 """
 from pathlib import Path
 import argparse
@@ -160,7 +161,7 @@ def fit_batch(X, targets):
 
 
 def score_batch(target, prediction, baseline, objective):
-    """rows x independent outputs -> outputs x named metrics."""
+    """Rows x separately parameterized outputs -> outputs x named metrics."""
     target, prediction, baseline = map(lambda a: np.asarray(a, np.float64), (target, prediction, baseline))
     if target.ndim == 1:
         target, prediction, baseline = target[:,None], prediction[:,None], baseline[:,None]
@@ -210,7 +211,7 @@ def _indices(mask, split):
 
 
 def validate_real_OLS(p, assignments, offset, alpha, split, representation):
-    """Numerically compare batched fits with independently fitted sklearn OLS."""
+    """Numerically compare batched fits with separately fitted sklearn OLS."""
     z,_=_load_source(p,0,representation)
     train,test=_indices(p['common_mask'],split)
     tc,tb=train;vc,vb=test

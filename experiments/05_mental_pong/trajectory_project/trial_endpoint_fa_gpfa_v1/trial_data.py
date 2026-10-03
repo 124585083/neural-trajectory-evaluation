@@ -1,7 +1,7 @@
 """Real terminal behavior records and endpoint-constrained trajectory labels.
 
 No neural response is selected, fitted, or paired to a real trial here. The
-released response arrays are condition means; trial labels remain independent.
+released response arrays are condition means; trial labels are constructed without neural responses.
 """
 from __future__ import annotations
 
@@ -83,7 +83,7 @@ def deduplicate_records(frame):
 
 def endpoint_candidates(xy_objective, endpoint, *, x_start, y_start, x_end,
                         collision_x=None, collision_y=None):
-    """Independent endpoint labels; no movement/stability/event detection.
+    """Endpoint labels constructed without movement, stability or event detection.
 
     The input x coordinates and output x coordinates are bit-identical.
     A non-finite endpoint produces missing labels rather than a physical copy.

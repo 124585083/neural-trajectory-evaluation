@@ -8,8 +8,8 @@
     "repository": "https://github.com/jazlab/MentalPong",
     "commit": "b976255be73140c759d8f8db0fd8ff551a4e2d73",
     "released_data": "https://zenodo.org/records/13952210",
-    "local_validation": "../../../notes/official_audit.json",
-    "local_adapter": "../../../official_reproduction.py"
+    "local_validation": "source_pilot://notes/official_audit.json",
+    "local_adapter": "source_pilot://official_reproduction.py"
   },
   "paper_confirmed": {
     "section": "Methods / Decoding analyses; main text DMFC Population dynamics; Figure 3C-F caption",
@@ -136,7 +136,7 @@
       "ball_occ_start_y"
     ],
     "github_default_target_count": 33,
-    "decision": "Use actual verified released Fig3 execution, not the current wrapper default. Correct before all79 fitting; retain initial 33-target draft as superseded provenance.",
+    "decision": "The verified released Figure 3 execution used 23 targets; the initial 33-target wrapper-default draft was superseded before all79 fitting.",
     "same_archived_rows_all_three_runs": true,
     "same_prediction_missingness_all_three_runs": true,
     "archived_finite_rows": 3502,
@@ -154,5 +154,6 @@
         "sha256": "8fb0e6ed1c5b6813934502aed3e081675c61427816dc2a69d711fd24f9685ac8"
       }
     ]
-  }
+  },
+  "record_scope": "Historical source audit for the all79 frozen-GPFA64 version. Its adaptation notes do not define the final per-split FA50/GPFA50 condition-mean protocol."
 }

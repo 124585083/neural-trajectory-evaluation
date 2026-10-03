@@ -87,7 +87,7 @@ Dynamic uses a three-stage Factorized3D core. Each block applies a spatial convo
 | 1 | `(1, 5, 5)` | `(5, 1, 1)` | 64 | 32 |
 | 2 | `(1, 5, 5)` | `(5, 1, 1)` | 128 | 64 |
 
-All convolutions use stride 1 and zero padding. The effective temporal receptive field is 19 frames, and an 80-frame input produces 62 feature timestamps. Blocks use BatchNorm3d, ELU, a first-spatial-layer Laplace penalty, and a first-temporal-layer regularizer.
+All convolutions use stride 1 and no padding (`padding=0`). The effective temporal receptive field is 19 frames, and an 80-frame input produces 62 feature timestamps. Blocks use BatchNorm3d, ELU, a first-spatial-layer Laplace penalty, and a first-temporal-layer regularizer.
 
 Dynamic uses the same readout family, cortical-coordinate grid predictor, pupil-shifter architecture, behavioral inputs, and positive output nonlinearity as the Static pipeline, with Dynamic-specific readout initialization and regularization settings. It contains no GRU; temporal access is supplied by the three learned temporal convolutions.
 
@@ -133,9 +133,9 @@ Static, the full Dynamic benchmark, and Total-parameter-matched Dynamic use the 
 
 `LongCycler` cycles the shorter session loaders to the length of the longest session. Gradients are accumulated sequentially over the five session microbatches before each optimizer update. Model-specific regularization remains part of the respective architecture configuration: Static uses its 2D input/readout penalties, whereas Dynamic uses the Factorized3D spatial/temporal penalties.
 
-The published checkpoints are the best complete states restored by the official trainer. The full-width Dynamic benchmark is the procedural exception: its local run was stopped by project decision after validation at epoch 103, before natural official early-stop termination; the published best complete state is from epoch 97, and the partial epoch-104 state is not used. This status does not alter the Static versus Total-parameter-matched Dynamic training protocol used in the primary control.
+The recorded checkpoints are the best complete states restored by the official trainer. The full-width Dynamic benchmark is the procedural exception: its local run was stopped by project decision after validation at epoch 103, before natural official early-stop termination; the recorded best complete state is from epoch 97, and the partial epoch-104 state is not used. This status does not alter the Static versus Total-parameter-matched Dynamic training protocol used in the primary control.
 
-Reloaded full-sequence oracle evaluation reconstructs each architecture, loads the released state dictionary strictly, processes each complete trial with batch size 1, retains original frames 50–299, and computes correlations with `sensorium.utility.scores.get_correlations`.
+Reloaded full-sequence oracle evaluation reconstructs each architecture, loads the recorded state dictionary strictly, processes each complete trial with batch size 1, retains original frames 50–299, and computes correlations with `sensorium.utility.scores.get_correlations`.
 
 <a id="data-use-and-evaluation-independence"></a>
 ### Data use and evaluation independence
@@ -156,7 +156,7 @@ Evidence is retained in the [Static training record](../experiments/01_baselines
 
 ## 5. Prediction export and shared response tensor
 
-Phase 4 reconstructs the Static and Total-parameter-matched Dynamic models using their locked configurations and published checkpoints. The official oracle loader is instantiated with `batch_size=1`, snippet cutting disabled, and zero offset. For each batch, the complete model output is reduced to its final 250 predictions, while recorded responses are explicitly indexed at frames 50–299.
+Phase 4 reconstructs the Static and Total-parameter-matched Dynamic models using their locked configurations and recorded checkpoints. The official oracle loader is instantiated with `batch_size=1`, snippet cutting disabled, and zero offset. For each batch, the complete model output is reduced to its final 250 predictions, while recorded responses are explicitly indexed at frames 50–299.
 
 The same locked 512 neuron indices are applied to predictions and responses. Export requires:
 
@@ -193,7 +193,7 @@ At every trial/time sample, Pearson correlation is computed across neurons betwe
 
 ### Temporal-difference and lag diagnostics
 
-First differences are taken along time after condition averaging. Trial and time are flattened and per-neuron correlations are computed on the difference tensors. Additional diagnostics include pooled zero-lag correlation, best pooled correlation over lags from −15 to +15 frames, normalized mean-squared error, pooled explained variance, and the ratio of predicted to recorded temporal standard deviation.
+First differences are taken along time after averaging repeats within each condition. Condition and time are flattened and per-neuron correlations are computed on the difference tensors. Additional diagnostics include pooled zero-lag correlation, best pooled correlation over lags from −15 to +15 frames, normalized mean-squared error, pooled explained variance, and the ratio of predicted to recorded temporal standard deviation.
 
 The five-session benchmark separately applies the official Sensorium correlation implementation to full-sequence predictions and reports the neuron-weighted mean together with session-specific values.
 
@@ -375,7 +375,7 @@ No model-specific GPFA refit, Procrustes alignment, rotation, scale adjustment, 
 
 ### 14.1 Response-matching stress test
 
-Within each movie condition, repeats are split with seed `20260813` into disjoint selection and test halves. Each half contains 28 trials; the extra repeat from each nine-repeat condition is unused. Static's mean per-neuron response correlation on the selection half defines the matching target.
+Repeats are split within each of the six movie conditions with seed `20260813`. Pooled across conditions, the selection and test halves each contain 28 trials. Ten-repeat conditions contribute five trials to each half; nine-repeat conditions contribute four to each half and leave one unused. The saved result records the pooled counts; it does not retain the individual Q4 half-membership indices. Static's mean per-neuron response correlation on the selection half defines the matching target.
 
 A fixed Gaussian noise tensor with seed `123` is generated at the shape of the intact Total-parameter-matched Dynamic prediction. Noise is scaled separately for each neuron by that neuron's prediction standard deviation over the locked trial/time tensor. One hundred amplitudes logarithmically spaced from `0.01` to `10` are evaluated:
 
@@ -383,7 +383,7 @@ A fixed Gaussian noise tensor with seed `123` is generated at the shape of the i
 candidate = clip(dynamic + σ × neuron_scale × fixed_noise, 1e-5, infinity)
 ```
 
-The amplitude whose selection-half mean per-neuron response correlation is closest to the Static target is retained. **Test-half neural responses are not used to select the response-matching perturbation strength.** Static and the response-score-matched Dynamic output are then evaluated on the test half using the response, RSA/CKA, and frozen-GPFA batteries.
+The amplitude whose selection-half mean per-neuron response correlation is closest to the Static target is retained. Test-half neural responses are excluded from this amplitude-selection step, but the oracle tier had already been used for encoding-model checkpoint selection. Static and the response-score-matched Dynamic output are then evaluated on the test half using the response, RSA/CKA, and frozen-GPFA batteries.
 
 This output perturbation tests metric sensitivity. It matches one scalar response summary while allowing individual-neuron scores, response variance, RSA, and CKA to differ. Its scores do not rank a separately trained accuracy-matched model.
 
@@ -411,7 +411,7 @@ The intact Total-parameter-matched Dynamic prediction is reversed along its 250-
 reversed_dynamic = dynamic[:, ::-1, :]
 ```
 
-Condition-average population patterns, condition CKA/RSA, the conventional temporal battery, and frozen-GPFA trajectory metrics are recomputed against the same recorded response tensor. No model weights or neural responses are altered.
+Time-averaged condition patterns, condition-pattern CKA/RSA, the conventional temporal battery, and frozen-GPFA trajectory metrics are recomputed against the same recorded response tensor. No model weights or neural responses are altered.
 
 ### 14.4 Conventional-metric sufficiency and leave-family-out regression
 
@@ -444,7 +444,7 @@ Resampling units are chosen separately for each analysis:
 | Condition-level temporal CKA/RSA | Resample the six paired movie-condition differences; enumerate all condition-level sign flips where reported |
 | Static–Dynamic trajectory comparison | Resample six movie conditions and recompute both models on each paired draw |
 | Response-matched held-out response | Resample paired neuron-level response differences on the test repeat half |
-| Response-matched trajectory comparison | Resample held-out movie conditions |
+| Response-matched trajectory comparison | Resample the six movie conditions using test-half repeat trajectories |
 | Temporal-weight attenuation | Resample movie conditions and recompute every retention level on the same draw |
 
 Unless otherwise specified, 2,000 percentile-bootstrap draws are used. For normalized position RMSE, signs are reversed when an oriented higher-is-better advantage is reported. The Q2 sign-flip summary enumerates all `2^6` sign assignments for the six condition differences.
@@ -475,7 +475,7 @@ The Phase 2 trajectory-reliability protocol was internally locked before its res
 - [Data and Reproducibility Guide](DATA_AND_REPRODUCIBILITY.md): official data source, directory structure, environments, tests, and weight loading.
 - Phase workflows: [Phase 1](../experiments/01_baselines/README.md), [Phase 2](../experiments/02_gpfa_reliability/README.md), [Phase 3](../experiments/03_parameter_matching/README.md), and [Phase 4](../experiments/04_model_comparison/README.md).
 - Locked configurations: [Static](../experiments/01_baselines/configs/static_dynamic_sensorium2023.yaml), [full Dynamic](../experiments/01_baselines/configs/phase1A_dynamic_official.yaml), [Total-parameter-matched Dynamic](../experiments/03_parameter_matching/configs/dynamic_parameter_matched.yaml), [method-development GPFA](../experiments/02_gpfa_reliability/configs/pilot.yaml), and [model comparison](../experiments/04_model_comparison/configs/pilot.yaml).
-- Released artifacts: [encoding-model and frozen-GPFA objects](../models/).
+- External artifact identities: [encoding-model and frozen-GPFA manifest](../results/manifests/model_files.csv); [restore requirements](DATA_AND_REPRODUCIBILITY.md#8-external-model-and-gpfa-artifacts).
 - Scientific findings: [Results](RESULTS.md) and [detailed Q1–Q6 evidence](results/Q1_Q6_ANSWERS.md).
 - Measurement validation: [GPFA Validation](GPFA_VALIDATION.md).
 - Design logic: [Design Rationale](DESIGN_RATIONALE.md).

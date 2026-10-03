@@ -646,12 +646,6 @@
       "unchanged": true
     },
     {
-      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/sources/user_request_record.json",
-      "baseline_sha256": "ba463ace927dc75194eabfe8a2392db8aaa6760960bac1abd1dcb5a7d99bdb7c",
-      "publication_sha256": "ba463ace927dc75194eabfe8a2392db8aaa6760960bac1abd1dcb5a7d99bdb7c",
-      "unchanged": true
-    },
-    {
       "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/mahler_condition_labels.npz",
       "baseline_sha256": "4b059a6a6c5b262c85dfa5a1fe4601925708b70dd932012528c428a59bdba853",
       "publication_sha256": "4b059a6a6c5b262c85dfa5a1fe4601925708b70dd932012528c428a59bdba853",
@@ -1341,5 +1335,7 @@
       "publication_sha256": "2041a4a1ebaaaac0dc850c82bd9f13adf90a0186a1599bda08d990158255ff14",
       "unchanged": true
     }
-  ]
+  ],
+  "record_scope": "Historical byte comparison from 0637c08 to the 651b764 source edition. The original check covered 223 files; this public edition lists 222 research and technical records after excluding one instruction-only record. These historical identities do not certify later editions.",
+  "listed_records": 222
 }

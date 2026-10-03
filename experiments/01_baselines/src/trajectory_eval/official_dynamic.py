@@ -702,7 +702,7 @@ def recover_user_stopped_training(
     best_score: float,
     best_post_epoch_score: float,
 ) -> dict[str, Any]:
-    """Package complete epoch states after an intentional user stop."""
+    """Package complete epoch states after an intentional execution stop."""
 
     audit = audit_architecture(config)
     checkpoint_dir = resolve_path(config, config["artifacts"]["checkpoint_dir"])
@@ -732,7 +732,7 @@ def recover_user_stopped_training(
         "seed": int(config["project"]["seed"]),
         "single_seed_reproduction": True,
         "training_completion": f"stopped_by_user_after_epoch_{last_epoch}_validation",
-        "stop_reason": "User requested no further training and selection of the current official best model.",
+        "stop_reason": "Training stopped by project decision before natural early stopping; the best complete checkpoint was retained.",
         "config": config_snapshot,
         "parameter_counts": EXPECTED_PARAMETER_COUNTS,
         "environment": _environment_snapshot(),
@@ -978,7 +978,7 @@ def generate_final_test_submission(config: dict[str, Any]) -> dict[str, Any]:
         "rows_by_session": per_session_rows,
         "bytes": int(submission_path.stat().st_size),
         "sha256": digest,
-        "note": "External upload was not performed without explicit user authorization.",
+        "note": "The submission was generated locally and was not uploaded.",
     }
     manifest_path = output_dir / "submission_manifest.json"
     manifest_path.write_text(_json(manifest, indent=2), encoding="utf-8")

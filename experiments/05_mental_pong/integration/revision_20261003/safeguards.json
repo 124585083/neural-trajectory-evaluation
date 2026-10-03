@@ -6,7 +6,7 @@
     "python": "3.11.9",
     "torch": "2.5.1+cu124",
     "device": "cpu",
-    "static_source": "original encoding environment; no workspace.env was found or used",
+    "static_source": "Pinned local Sensorium and neuralpredictors sources in a command-local import path.",
     "sensorium_commit": "0e02656220e84a50f3be1b92d6f66c2f9ccd51ef",
     "neuralpredictors_archive_comment": "efdda679596517fad95d71f36d0385d7450dd207",
     "neuralpredictors_archive_sha256": "97789c4f73043a19c73c31b987abca6bca4783706f69e39f2c4eebc8778cf831",
@@ -16,7 +16,6 @@
   "tests": {
     "static": {
       "passed": 4,
-      "junit": "static_independence_tests.xml",
       "input_shape": [
         1,
         3,
@@ -151,7 +150,6 @@
     "protocol": {
       "passed": 13,
       "all_phase4_tests_passed": 18,
-      "junit": "phase4_guard_and_existing_tests.xml",
       "checks": [
         "matching inputs and no file change",
         "four scientific configuration changes",
@@ -228,8 +226,5 @@
     "new GPFA fitting",
     "historical protocol regeneration"
   ],
-  "warnings": [
-    "Initial import diagnostic encountered stale OneDrive editable paths; resolved by pointing PYTHONPATH to byte-verified local upstream packages. No source dependency changed."
-  ],
-  "original_private_check_record_sha256": "742901d773d0d50942d6f3a932fe7779386b3ab20cab9943e4f333811c69a52a"
+  "record_scope": "Historical synthetic safeguard results for the source hashes listed here; later source changes require a new test run."
 }

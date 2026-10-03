@@ -1,6 +1,6 @@
 # Mental-Pong: task-coordinate reconstruction
 
-This independent study compares objective ball paths with behavior-constrained candidate paths using condition-mean DMFC neural representations. Directory number 05 is organizational; no output from Sensorium stages 01–04 is required. Scientific completion is `CLOSED_EXPLORATORY_WITH_LIMITATIONS`, with `raw_preprocessing=fail`. The published-input fit and filtering checks have a narrower passing scope.
+This independent study compares objective ball paths with behavior-constrained candidate paths using condition-mean dorsomedial frontal cortex (DMFC) representations. Directory number 05 is organizational; no output from Sensorium stages 01–04 is required. Scientific completion is `CLOSED_EXPLORATORY_WITH_LIMITATIONS`, with `raw_preprocessing=fail`. The published-input fit and filtering checks have a narrower passing scope.
 
 ## Read the study
 
@@ -33,7 +33,7 @@ python experiments/05_mental_pong/run.py --mini-replay --output /tmp/mental-pong
 
 An authorized holder can follow the [private export and replay instructions](mini_replay/README.md#commands-and-availability). The mini runner does not consult `source_pilot`, raw recordings, GPU tools or local path configuration. Its optional `--ols-refit` performs a small check of the original OLS specification. It never fits a neural representation.
 
-The code and public links can be verified now. A saved split has been replayed from a private copy. The full analysis has not been rebuilt during this revision. These are separate verification states.
+The code and public links can be verified now. A saved split has been replayed from a private copy. The recorded verification did not rebuild the full analysis. These are separate verification states.
 
 ## Existing local random-head replay
 
@@ -42,6 +42,16 @@ python /path/to/neural-trajectory-evaluation/experiments/05_mental_pong/run.py -
 ```
 
 This older route requires the configured external pilot and uses saved coefficients, labels and the corresponding latent values. Missing required storage produces an unavailable result. It does not fit a new model or rerun the 1000 randomizations. Use the mini route when an authorized exported package is available.
+
+## Render reports from saved tables
+
+The maintained reports can be rendered from the compact result tables in this checkout. This route rebuilds displayed tables and text without fitting models, collecting predictions, or writing scientific results. Choose an output directory outside the repository:
+
+```shell
+python experiments/05_mental_pong/trajectory_project/publication_reports.py --output /tmp/mental-pong-reports
+```
+
+The [templates](trajectory_project/report_templates/) and [renderer](trajectory_project/publication_reports.py) share the same narrative as the published reports. The renderer requires the completed study's saved results and rejects incompatible primary conclusions.
 
 ## Full historical execution
 
@@ -53,4 +63,4 @@ python /path/to/neural-trajectory-evaluation/experiments/05_mental_pong/run.py -
 
 Consult `run.py --help`, the [dependency manifest](integration/dependency_manifest.csv) and [runtime lock](requirements.lock.txt). Full execution requires the external raw/prepared data and representation bundle. Documentation of this route is not a claim that integration repeated the experiments. Default checks remain read-only; legacy `--all` and `--tests` paths can write reports or test records and require separate output handling.
 
-The [integration summary](integration/INTEGRATION_SUMMARY.md) and [integration verification record](integration/verification.json) preserve the earlier integration checks. The [current verification checks](integration/revision_20261003/verification.json) record the available source and numerical checks. [Original acceptance](trajectory_project/closeout_v1/results/final_acceptance_audit.json) and source hashes remain separate. The historical migration map is unchanged; the [publication map](integration/revision_20261003/publication_map.csv) links its hashes to current edited files. Immutable numerical files retain their scientific identity. Source user requests and original-language documents stay in external preservation storage.
+The [integration summary](integration/INTEGRATION_SUMMARY.md) and [integration verification record](integration/verification.json) preserve the earlier integration checks. The [current verification checks](integration/revision_20261003/verification.json) record the available source and numerical checks. [Original acceptance](trajectory_project/closeout_v1/results/final_acceptance_audit.json) and source hashes remain separate. The [publication map](integration/revision_20261003/publication_map.csv) links historical hashes to current public editions and records explicit publication exclusions. Protected scientific values retain their source identity. Condition-label arrays and their row-wise time indices are held outside the candidate public tree while their redistribution basis remains unresolved; their absence limits local figure regeneration and full historical execution.

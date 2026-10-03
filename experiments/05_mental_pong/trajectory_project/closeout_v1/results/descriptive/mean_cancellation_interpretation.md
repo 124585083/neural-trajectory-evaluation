@@ -1,6 +1,6 @@
 # Behavioral averaging and path separation
 
-The audit uses exactly the behavioral members in the frozen membership JSON and verifies their source-record SHA256 hashes. Endpoint errors are relative to the current geometry's `objective_end_y`, rather than the trial metadata field `yf_mworks`. Signs use exact numerical zero. No near-correct threshold is estimated from these results. All variances use `ddof=0`; empty sign subgroups are NA.
+The audit uses exactly the behavioral members in the frozen membership JSON and verifies their source-record SHA256 hashes. Endpoint errors are relative to the current geometry's `objective_end_y`, rather than the trial metadata field `yf_mworks`. Signs use exact numerical zero. No near-correct threshold is estimated from these results. All variances use `ddof=0`; empty sign subgroups are NA. Error moments give equal weight to the 78 valid conditions. Endpoint errors, absolute errors and y-path RMS use centered MWorks display-coordinate units; second moments and variances use squared units.
 
 | animal | n_up | n_down | both_sign_conditions | mean_abs | abs_mean | mean_square | squared_mean | within_variance |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |

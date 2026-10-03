@@ -4,15 +4,15 @@
 
 The study asks how well two position targets can be reconstructed from the same neural representation: the objective ball path and a behavior-constrained candidate path. Check A first scores each readout against its training target, then scores each readout against the other target. Check B changes test-condition correspondence while keeping the trained readouts fixed. Check C redistributes endpoints, constructs new candidate paths and fits new OLS readouts. A has no randomized null distribution; B and C test different correspondences.
 
-The released neural representations contain readable task-position structure. All four full-epoch own-target comparisons favor the objective path. Actual candidates outperform the random-endpoint reference over full, hidden and endpoint-influence ranges, with post-collision RMSE exceptions. Full-epoch neural reconstruction remains below the mean-endpoint geometry baseline; some Perle phase-specific skills are slightly positive.
+The released neural representations contain reconstructable task-position structure. All four full-interval own-target comparisons favor the objective path. Actual candidates outperform the random-endpoint reference over full, hidden and endpoint-influence ranges, with post-collision RMSE exceptions. Neural reconstruction over the full evaluated interval remains below the mean-endpoint geometry baseline; some Perle phase-specific skills are slightly positive.
 
-**Scientific status: `CLOSED_EXPLORATORY_WITH_LIMITATIONS`. `raw_preprocessing=fail`.** Filtering and fit-source checks pass within the released-input scope. Upstream filling across conditions and times remains unresolved. This English publication edition preserves the completed science and records its editorial changes separately.
+**Scientific status: `CLOSED_EXPLORATORY_WITH_LIMITATIONS`. `raw_preprocessing=fail`.** Filtering and fit-source checks pass within the released-input scope. Upstream filling across conditions and times remains unresolved. The scientific status and original execution records remain separate from current software verification.
 
 ## Data and fixed candidate definition
 
-Mahler and Perle are analyzed separately using half1 condition-mean DMFC responses. A condition identifies a fixed physical task configuration. The pseudopopulation combines units recorded across sessions; it does not represent a simultaneously observed single-trial population. All 79 IDs remain in 100 nominal 39-training/40-test splits. Condition 59920 lacks a usable collision anchor, leaving 78 valid conditions and 3369 condition-by-time rows per animal. Actual valid counts can be 38/39 training and 39/40 test conditions. Behavioral means use 7407 Mahler and 84873 Perle records; these are not independent neural trial counts.
+Mahler and Perle are analyzed separately using half1 condition-mean dorsomedial frontal cortex (DMFC) responses. A condition identifies a fixed physical task configuration. The pseudopopulation combines units recorded across sessions; it does not represent a simultaneously observed single-trial population. All 79 IDs remain in 100 nominal 39-training/40-test splits. Condition 59920 lacks a usable collision anchor, leaving 78 valid conditions and 3369 condition-by-time rows per animal. Actual valid counts can be 38 or 39 training conditions and 39 or 40 test conditions. Behavioral means use 7407 Mahler and 84873 Perle records; these are not independent neural trial counts.
 
-Each split reuses stored factor analysis (FA50) and Gaussian-process factor analysis (GPFA50) representations. GPFA has one shared learnable RBF time scale. Ordinary least squares (OLS) uses 50 latent inputs and an intercept, giving 51 coefficients per coordinate and 102 per xy readout. There is no added regularization, scaling, behavioral feature or trial-count weighting. A single mapping covers valid visible and hidden rows at the original completed 50 ms bin-right-edge times. Existing mixed-boundary and terminal masks remain fixed.
+Each split reuses stored factor analysis (FA50) and Gaussian-process factor analysis (GPFA50) representations. GPFA has one shared learnable radial-basis-function (RBF) time scale. Ordinary least squares (OLS) uses 50 latent inputs and an intercept, giving 51 coefficients per coordinate and 102 per xy readout. There is no added regularization, scaling, behavioral feature or trial-count weighting. A single mapping covers valid visible and hidden rows at the original completed 50 ms bin-right-edge times. Existing mixed-boundary and terminal masks remain fixed.
 
 For a collision condition, the candidate follows the objective path before collision and connects the original collision anchor to the condition-mean final paddle position afterward. A no-collision condition connects its starting point to that endpoint. After the anchor,
 
@@ -31,7 +31,7 @@ The trial-endpoint version repeated each condition's neural mean for multiple be
 
 ## A: own-target reconstruction
 
-`OO` denotes the objective-trained readout scored against the objective path. `BB` denotes the candidate-trained readout scored against its candidate path. Define `Delta_r = r_beh - r_obj` and `Delta_RMSE = RMSE_obj - RMSE_beh`. Each split is scored on its original held-out rows before averaging over the 100 overlapping splits. Position units are centered MWorks display coordinates.
+`OO` denotes the objective-trained readout scored against the objective path. `BB` denotes the candidate-trained readout scored against its candidate path. Define `Delta_r = r_beh - r_obj` and `Delta_RMSE = RMSE_obj - RMSE_beh`. Each split is scored on its original held-out rows before averaging over the 100 overlapping splits. The main and phase-specific tables report y, with dimensionless correlation and RMSE in centered MWorks display-coordinate units. Positive Delta_r and Delta_RMSE favor the candidate. Values are means of 100 split scores; differences use the saved full-precision scores.
 
 | animal | representation | r_obj | r_beh | RMSE_obj | RMSE_beh | Delta_r | Delta_RMSE |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -40,7 +40,7 @@ The trial-endpoint version repeated each condition's neural mean for multiple be
 | perle | FA50 | 0.7019 | 0.6910 | 3.8586 | 3.8829 | -0.0108 | -0.0242 |
 | perle | GPFA50 | 0.7204 | 0.7094 | 3.8005 | 3.8265 | -0.0110 | -0.0261 |
 
-All four full-epoch candidate RMSEs are higher by 0.0220–0.0322, and their correlations are lower. Hidden-period results have the same direction. No-collision segments have lower candidate RMSE and lower candidate correlation. Post-collision own-target RMSE favors the objective path.
+All four full-interval candidate RMSEs are higher by 0.0220–0.0322, and their correlations are lower. Hidden-period results have the same direction. No-collision segments have lower candidate RMSE and lower candidate correlation. Post-collision own-target RMSE favors the objective path.
 
 | animal | representation | epoch | r_obj | r_beh | RMSE_obj | RMSE_beh | Delta_r | Delta_RMSE |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -63,7 +63,7 @@ The [full table](results/A/self_reconstruction_main_table.csv) retains all six p
 
 ## A: complete cross-scoring
 
-`OB` scores the objective head against the candidate; `BO` scores the candidate head against the objective. Each cell below is r / RMSE.
+`OB` scores the objective head against the candidate; `BO` scores the candidate head against the objective. Each cell below is y correlation / y RMSE, averaged over 100 separately scored splits for the indicated interval. Correlation is dimensionless; RMSE uses centered display-coordinate units.
 
 | animal | representation | epoch | OO | OB | BO | BB |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -76,11 +76,11 @@ The [full table](results/A/self_reconstruction_main_table.csv) retains all six p
 | perle | GPFA50 | full | 0.7204 / 3.8005 | 0.7133 / 3.8047 | 0.7160 / 3.8249 | 0.7094 / 3.8265 |
 | perle | GPFA50 | hidden | 0.7705 / 3.5718 | 0.7556 / 3.5955 | 0.7678 / 3.5946 | 0.7534 / 3.6130 |
 
-In all four full-epoch groups, OB is better than BB for the same candidate target, and OO is better than BO for the same objective target. Training the candidate head does not improve full-epoch held-out performance against either shared target. This comparison differs from OO versus BB, which changes both head and target. Changing the reference for a fixed head can also move r and RMSE in different directions: Mahler's objective predictions have slightly lower RMSE against the candidate but lower correlation.
+In all four full-interval groups, OB is better than BB for the same candidate target, and OO is better than BO for the same objective target. Training the candidate head does not improve full-interval held-out performance against either shared target. This comparison differs from OO versus BB, which changes both head and target. Changing the reference for a fixed head can also move r and RMSE in different directions: Mahler's objective predictions have slightly lower RMSE against the candidate but lower correlation.
 
 The [contrast summary](results/A/contrast_summary.csv) keeps these comparisons separate. Independent replay of 400 test-prediction files agreed with the source scores to approximately 1.1e-14. Training predictions did not enter the summaries. The [complete cross table](results/A/cross_2x2_summary.csv) retains every phase.
 
-The [all-condition heterogeneity plot](figures/descriptive/all79_condition_heterogeneity.png) includes missing condition 59920. Cases 55062 and 241919 were selected after aggregate results were examined. They are exploratory illustrations. Condition 55062 has lower candidate own-target RMSE in all four groups; correlation decreases in Mahler and increases in Perle. Condition 241919 has worse candidate RMSE in all four groups. The [current case scores](results/descriptive/fixed_posthoc_case_scores.csv), [cross-scores](results/descriptive/fixed_posthoc_case_2x2.csv) and [case interpretation](results/descriptive/fixed_posthoc_case_interpretation.md) retain these differences.
+The [all-condition heterogeneity overview](figures/descriptive/all79_condition_heterogeneity.png) includes missing condition 59920. Four larger panels cover consecutive positions in the ascending condition-ID order: [1–20](figures/descriptive/all79_condition_heterogeneity_part_1.png), [21–40](figures/descriptive/all79_condition_heterogeneity_part_2.png), [41–60](figures/descriptive/all79_condition_heterogeneity_part_3.png) and [61–79](figures/descriptive/all79_condition_heterogeneity_part_4.png), with identical color scales within each metric. Cases 55062 and 241919 were selected after aggregate results were examined. They are exploratory illustrations. Condition 55062 has lower candidate own-target RMSE in all four groups; correlation decreases in Mahler and increases in Perle. Condition 241919 has worse candidate RMSE in all four groups. The [current case scores](results/descriptive/fixed_posthoc_case_scores.csv), [cross-scores](results/descriptive/fixed_posthoc_case_2x2.csv) and [case interpretation](results/descriptive/fixed_posthoc_case_interpretation.md) retain these differences.
 
 ![Mahler: two post hoc cases, four curves and test-split stability](figures/descriptive/mahler_fixed_posthoc_four_curves.png)
 
@@ -111,7 +111,7 @@ Each animal has 1000 random repeats, each covering the original 100 splits. A re
 | perle | GPFA50 | hidden | D_beh | 0.7848 | 0.0047 | 0.7801 | 3.4971 | 5.9357 | 2.4386 |
 | perle | GPFA50 | hidden | D_obj | 0.7976 | 0.0047 | 0.7929 | 3.5032 | 6.0380 | 2.5348 |
 
-Both entries in each paired mean use the same valid time points. Subtracting a null score over fewer valid bins from the original score would mix different sets of observations. The null destroys both physical and behavioral condition associations, so it supports condition-related correspondence without isolating behavior-specific representation.
+This table reports y. Each q statistic first averages the original 100 split scores; displayed values then average the 1,000 q statistics. Paired_r = matched_r - null_r and paired_RMSE = null_RMSE - matched_RMSE; positive values favor correct correspondence. Correlation is dimensionless and RMSE uses centered display-coordinate units. Both entries in each paired mean use the same valid time points. Subtracting a null score over fewer valid bins from the original score would mix different sets of observations. The null destroys both physical and behavioral condition associations, so it supports condition-related correspondence without isolating behavior-specific representation.
 
 | animal | epoch | mean_of_q_means | q025 | q975 | minimum_over_all_q_splits | maximum_over_all_q_splits | n_zero_support_q_splits |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -128,7 +128,7 @@ Both entries in each paired mean use the same valid time points. Subtracting a n
 | perle | no_bounce | 0.5822 | 0.5729 | 0.5918 | 0.2046 | 0.8241 | 0 |
 | perle | post_bounce | 0.1759 | 0.1604 | 0.1929 | 0.0000 | 0.6200 | 1894 |
 
-The overlap fraction divides shared bins by the split's original phase support. Quantiles describe each random repeat's mean over 100 splits; extrema cover all repeat-by-split scores. Post-collision overlap averages about 17.6%, and some split mappings have zero phase support. Those cases remain in the records. Every split's 1000 sampled permutations was distinct, although an individual condition can keep its own mapping.
+The overlap fraction divides shared bins by the split's original phase support. Quantiles describe each random repeat's mean over 100 splits; extrema cover all repeat-by-split scores. Post-collision overlap averages about 17.6%, and some split mappings have zero phase support. Those cases remain in the records. Each split has 1,000 distinct sampled permutations, although an individual condition can keep its own mapping.
 
 ![Paired fixed-readout mismatch distributions](figures/B_paired_null_distributions.png)
 
@@ -136,9 +136,11 @@ Because support changes with the mapping, tail quantities are empirical random-c
 
 ## C: random endpoints with new OLS fits
 
-For each animal, 1000 permutations redistribute the 78 observed mean endpoints. A permutation remains fixed across time, all 100 splits and both representations. Each condition retains its own anchor, x, branch, arrival time and mask. All 78-by-78 anchor-endpoint combinations passed the geometry audit before new neural scoring; there was no clipping, score-based rejection or anchor adjustment. About 98.8% of Mahler and 98.7% of Perle endpoint identities change on average. Each animal's 1000 allocations is distinct.
+For each animal, 1000 permutations redistribute the 78 observed mean endpoints. A permutation remains fixed across time, all 100 splits and both representations. Each condition retains its own anchor, x, branch, arrival time and mask. All 78-by-78 anchor-endpoint combinations passed the geometry audit before new neural scoring; there was no clipping, score-based rejection or anchor adjustment. About 98.8% of Mahler and 98.7% of Perle endpoint identities change on average. The 1,000 endpoint allocations for each animal are distinct.
 
 The implementation completed 400 multioutput sklearn OLS solves, representing 400000 random xy heads. Each random y target has its own 51 coefficients. Identical x targets share the equivalent x solution. Batched fits were checked against separate OLS and the saved real-label heads. Random readouts see only training conditions' assigned labels and are scored against their own held-out random paths. Representations remain fixed. Saved coefficients, all split scores and preselected q=0/1/2 examples allow replay.
+
+The following tables report y correlation and RMSE in the indicated interval. Objective and candidate values average 100 split scores; null values average 1,000 statistics, each first averaged over those same splits. Correlation is dimensionless and RMSE uses centered display-coordinate units.
 
 The endpoint-influence range consists of the existing 631 post-collision bins plus 2162 no-collision bins after the initial anchor: 2793 bins. It changes scoring support without fitting another readout.
 
@@ -170,7 +172,7 @@ Post-collision correlation still favors actual candidates, while RMSE has except
 
 Random paths retain shared starting points, collision anchors, horizontal motion and time structure; pre-collision samples are unchanged. Positive random-path correlation is therefore plausible. Matching endpoint distributions does not equalize path difficulty. The [complete results](results/C/random_endpoint_summary.csv) retain target SD, range, objective-path separation and scores for all phases.
 
-![Full-epoch own-target scores for random-endpoint candidates](figures/C_full_null_distributions.png)
+![Own-target scores over the full evaluated interval for random-endpoint candidates](figures/C_full_null_distributions.png)
 
 ## Mean-endpoint geometry baseline
 
@@ -180,7 +182,7 @@ For each split and label set, the baseline uses the valid training conditions' m
 skill = 1 - SSE(neural reconstruction, target) / SSE(geometry baseline, target)
 ```
 
-A zero denominator gives NA. The name refers to a mean endpoint, not a geometric mean.
+A zero denominator gives NA. Skill is dimensionless and is computed for y. Objective and candidate entries average 100 split scores; null entries average the 1,000 corresponding split-mean statistics. The name refers to a mean endpoint, not a geometric mean.
 
 | animal | representation | epoch | objective_mean | behavior_mean | null_mean |
 | --- | --- | --- | --- | --- | --- |
@@ -201,7 +203,7 @@ A zero denominator gives NA. The name refers to a mean endpoint, not a geometric
 | perle | GPFA50 | no_bounce | 0.1907 | 0.1065 | -0.8763 |
 | perle | GPFA50 | endpoint_influence | -0.2626 | -0.4286 | -1.1260 |
 
-All four full-epoch neural results are below the mean-endpoint geometry baseline. Phase-specific exceptions include Perle GPFA50 candidate skill of approximately 0.0288 in hidden samples and no-collision candidate skills of 0.0623/0.1065 for FA50/GPFA50. These small positive results prevent a claim that every phase falls below baseline. Exceeding random endpoints establishes neither a candidate advantage over the objective path nor broad superiority to shared geometry.
+All four full-interval neural results are below the mean-endpoint geometry baseline. Phase-specific exceptions include Perle GPFA50 candidate skill of approximately 0.0288 in hidden samples and no-collision candidate skills of 0.0623/0.1065 for FA50/GPFA50. These small positive results prevent a claim that every phase falls below baseline. Exceeding random endpoints establishes neither a candidate advantage over the objective path nor broad superiority to shared geometry.
 
 ![Phase-specific random-endpoint scores and geometry-baseline skill](figures/C_phase_null_scores.png)
 
@@ -211,13 +213,13 @@ The [C methods and axes](results/C/README.md), [geometry audit](results/C/geomet
 
 **Recoverable task-position structure is supported within this data scope.** Held-out reconstruction, correct correspondence in B and actual-label advantages over C's primary ranges support this conclusion. The stronger mean-endpoint geometry baseline limits a performance claim beyond shared geometry.
 
-**A full-epoch candidate-path advantage is not supported.** All four OO/BB comparisons favor the objective target. No-collision RMSE improvements and post-collision differences remain phase-specific findings. Winning against random endpoints cannot reverse the direct own-target comparison, and different target difficulties prevent translating scores directly into neural preference.
+**A full-interval candidate-path advantage is not supported.** All four OO/BB comparisons favor the objective target. No-collision RMSE improvements and post-collision differences remain phase-specific findings. Winning against random endpoints cannot reverse the direct own-target comparison, and different target difficulties prevent translating scores directly into neural preference.
 
 **Within-condition neural differences between opposite behavioral outcomes were not tested.** Original members of the neural means remain unknown. The data cannot reconstruct those groups, and this limitation does not show that their neural representations are identical.
 
 ## Averaging and remaining limits
 
-For a fixed condition, let `e_ci = endpoint_ci - objective_end_y_c` and `e_c = mean_i(e_ci)`. Signs use exact numerical zero; they do not classify psychological judgment errors. The table uses equal weight per condition for the error moments. Both animals have zero exactly zero-error records.
+For a fixed condition, let `e_ci = endpoint_ci - objective_end_y_c` and `e_c = mean_i(e_ci)`. Signs use exact numerical zero; they do not classify psychological judgment errors. The table uses equal weight per condition for the error moments. Neither animal has a record with exactly zero error. Error and absolute-error columns use centered display-coordinate units; second moments and variances use squared units.
 
 | animal | n_up | n_down | both_sign_conditions | mean_abs | abs_mean | mean_square | squared_mean | within_variance |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -236,6 +238,6 @@ The unresolved limits are upstream cross-condition/time filling, unknown neural 
 
 ## Future design and closeout
 
-The [historical future design](future_design.md) requires genuine paired neural and behavioral records before constructing above-target, below-target and near-correct group means. It does not authorize new experiments. The [current cross-study plan](../../../../docs/FUTURE_DIRECTIONS.md) is the single active research plan.
+The [historical future design](future_design.md) requires genuine paired neural and behavioral records before constructing above-target, below-target and near-correct group means. It remains unexecuted. The [current cross-study plan](../../../../docs/FUTURE_DIRECTIONS.md) is the single active research plan.
 
-The source project completed A, B1000 and C1000, averaging checks, condition heterogeneity and post hoc examples. It retains `CLOSED_EXPLORATORY_WITH_LIMITATIONS`. [Scientific acceptance](results/final_acceptance_audit.json) and the [source manifest](manifest.json) are separate from [integration verification](../../integration/verification.json). See the [entry point](../../README.md) for read-only checks and replay. No full scientific run was performed to produce this English edition.
+The source project completed A, B1000 and C1000, averaging checks, condition heterogeneity and post hoc examples. It retains `CLOSED_EXPLORATORY_WITH_LIMITATIONS`. [Scientific acceptance](results/final_acceptance_audit.json) and the [source manifest](manifest.json) are separate from [integration verification](../../integration/verification.json). See the [entry point](../../README.md) for read-only checks and replay. Publication rendering uses saved results and does not rerun the scientific analyses.

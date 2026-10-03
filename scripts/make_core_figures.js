@@ -3,7 +3,8 @@ const path = require('path');
 const sharp = require('sharp');
 
 const ROOT = path.resolve(__dirname, '..');
-const OUT = path.join(ROOT, 'results', 'figures');
+const outputArg = process.argv.find(value => value.startsWith('--output-dir='));
+const OUT = outputArg ? path.resolve(outputArg.slice('--output-dir='.length)) : path.join(ROOT, 'results', 'figures');
 fs.mkdirSync(OUT, { recursive: true });
 
 const C = {
@@ -98,8 +99,8 @@ function workflowFigure() {
   b += arrow(1780, 500, 1885, 548);
   b += arrow(1780, 530, 1885, 800);
 
-  b += card(885, 995, 520, 255, 'Neural-data-defined GPFA', ['Fit only on neural training data', 'Frozen before model evaluation', 'No model-specific latent alignment'], C.green, 'LATENT SPACE');
-  b += arrow(530, 505, 885, 1080);
+  b += card(885, 995, 520, 255, 'Neural-data-defined GPFA', ['Fit only on neural training data', 'Frozen before model evaluation', 'No model-specific latent alignment', 'Offline posterior uses later observations'], C.green, 'LATENT SPACE');
+  b += `<path d="M 530 505 L 620 900 L 885 1080" stroke="${C.muted}" stroke-width="4" fill="none" marker-end="url(#arrow)"/>`;
   b += arrow(1405, 1120, 1885, 850);
 
   b += `<rect x="120" y="1300" width="2150" height="92" rx="18" fill="${C.light}"/>`;
@@ -185,15 +186,15 @@ function comparisonFigure() {
 
 function ablationFigure() {
   const W = 2200, H = 1350;
-  const xVals = [0, 25, 50, 75, 100];
-  const raw = {
-    'Position': [0.726219, 0.552833, 0.186907, -0.129463, -0.194901],
-    'Velocity': [0.498462, 0.452724, 0.304845, 0.065920, -0.067456],
-    'Speed': [0.537538, 0.512594, 0.339678, 0.032340, -0.034254],
-    'Acceleration': [0.452488, 0.410768, 0.286180, 0.091460, -0.029123],
-  };
-  const colors = { Position: C.trajectory, Velocity: '#2E8B57', Speed: '#C84C4C', Acceleration: '#8F63B8' };
-  const dashes = { Position: '', Velocity: '12 8', Speed: '3 8', Acceleration: '18 6 3 6' };
+  // Read saved point estimates; retain the original six-decimal display convention.
+  const lines = fs.readFileSync(path.join(ROOT, 'results', 'tables', '04_model_comparison', 'q5_temporal_ablation_curve.csv'), 'utf8').trim().split(/\r?\n/);
+  const fields = lines.shift().split(',');
+  const rows = lines.map(line => Object.fromEntries(line.split(',').map((value, i) => [fields[i], Number(value)])));
+  const xVals = rows.map(row => row.severity * 100);
+  const columns = { Position: 'position_correlation', 'Velocity direction': 'velocity_direction_cosine', 'Speed profile': 'speed_profile_correlation', 'Acceleration direction': 'acceleration_direction_cosine' };
+  const raw = Object.fromEntries(Object.entries(columns).map(([label, metric]) => [label, rows.map(row => Number(row[metric].toFixed(6)))]));
+  const colors = { Position: C.trajectory, 'Velocity direction': '#2E8B57', 'Speed profile': '#C84C4C', 'Acceleration direction': '#8F63B8' };
+  const dashes = { Position: '', 'Velocity direction': '12 8', 'Speed profile': '3 8', 'Acceleration direction': '18 6 3 6' };
   const normalized = {};
   for (const [name, vals] of Object.entries(raw)) normalized[name] = vals.map(v => v / vals[0]);
   const x0 = 185, x1 = 2070, y0 = 270, y1 = 1090;
@@ -202,6 +203,7 @@ function ablationFigure() {
   const sy = v => y1 - (y1 - y0) * (v - yMin) / (yMax - yMin);
   let b = textLines(110, 100, ['Graded trajectory degradation under temporal-weight ablation'], { size: 48, weight: 700 });
   b += textLines(110, 154, ['Observed dose-response after scaling off-center temporal-kernel weights; no magnitude-matched non-temporal damage control is included.'], { size: 25, fill: C.muted });
+  b += textLines(110, 196, ['One session, six movies, 512 neurons; offline full-window GPFA inference.'], { size: 25, fill: C.muted });
   b += `<rect x="${x0}" y="${y0}" width="${x1-x0}" height="${y1-y0}" fill="${C.white}" stroke="${C.grid}" stroke-width="2"/>`;
   [-0.5, 0, 0.5, 1.0].forEach(v => {
     const y = sy(v);

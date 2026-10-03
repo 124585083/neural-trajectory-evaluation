@@ -31,7 +31,7 @@ class PosteriorSystem:
 class GaussianProcessFactorAnalysis:
     """Exact linear-Gaussian GPFA with diagonal observation noise.
 
-    The observation manifold is shared across trials and optional condition
+    The linear observation mapping is shared across trials and optional condition
     classes. Each latent dimension has an independent squared-exponential GP.
     Classes may have different temporal lengthscales while retaining the same
     C, d, and R, so their latent coordinates remain directly comparable.

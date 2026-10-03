@@ -6,7 +6,7 @@ Scientific record date: 2026-08-11. This English publication edition preserves t
 
 The project reproduced and trained the full official 3D Factorized baseline from Dynamic Sensorium / Sensorium 2023. The model covers all five competition sessions and 40,034 neurons, while preserving the three-layer `[32,64,128]` Factorized3D core, full spatiotemporal kernels, behavior channels, Gaussian readouts, cortical grid predictors, and pupil shifters. No reduction was made to the architecture, resolution, temporal window, or data scope.
 
-Formal training used seed 42. As specified by the project protocol, training was stopped after validation at epoch 103, and the best weights from epoch 97 were recovered from the complete epoch checkpoints. The frozen `best.pt` was reloaded and evaluated in a fresh process on all 293 full-length oracle trials, yielding:
+Formal training used seed 42. By project execution decision, training was stopped after validation at epoch 103, and the best weights from epoch 97 were recovered from the complete epoch checkpoints. The frozen `best.pt` was reloaded and evaluated in a fresh process on all 293 full-length oracle trials, yielding:
 
 ```text
 best epoch                                  97
@@ -37,7 +37,7 @@ The historical `neuralpredictors` pin contains a channel-wiring issue for the va
 
 The published configurations use `data/sensorium_all_2023` relative to the repository. The original local run used a directory junction to external data. Reproduction can use a direct configured root or an optional junction; see [Data and Reproducibility](../../DATA_AND_REPRODUCIBILITY.md).
 
-All ten Dynamic Sensorium sessions and their verified archives are retained. The formal baseline uses only the five competition sessions specified by the official configuration; the other five OOD sessions were not deleted. The MD5 hashes of all five formal archives match the official values.
+Ten Dynamic Sensorium sessions were available locally. The formal baseline used the five competition sessions specified by the official configuration; the other five out-of-distribution sessions were outside this analysis. The MD5 hashes of the five formal archives matched the official values.
 
 | Session | Train | Oracle | Neurons |
 |---|---:|---:|---:|
@@ -68,7 +68,7 @@ behavior     [2,324]
 pupil_center [2,324]
 ```
 
-The official `CutVideos` transform extracts the common valid temporal interval shared by all four modalities, producing 300 aligned frames. Calcium signals were originally acquired at approximately 8 Hz and were resampled by the official dataset to 30 Hz; this is explicitly accounted for in the downstream GPFA design. Dynamic Sensorium includes video, neural responses, running/pupil measurements, and related behavioral variables. Detailed acquisition and dataset information is provided in the [competition retrospective](https://pmc.ncbi.nlm.nih.gov/articles/PMC11261979/).
+The official `CutVideos` transform extracts the common valid temporal interval shared by all four modalities, producing 300 aligned frames. Calcium signals were originally acquired at approximately 8 Hz and were resampled by the official dataset to 30 Hz; this is explicitly accounted for in the downstream GPFA design. Dynamic Sensorium includes video, neural responses, running/pupil measurements, and related behavioral variables. Detailed acquisition and dataset information is provided in the [benchmark description](https://pmc.ncbi.nlm.nih.gov/articles/PMC11261979/).
 
 ### 2.3 Training tensor contract
 
@@ -375,7 +375,7 @@ temporal alignment
 experiments/01_baselines/records/dynamic/temporal_alignment.json
 
 continuous predictions
-regenerated locally by the evaluation command; full tensors are excluded from Git because of size
+regenerated locally by the separate `export` command; `evaluate` writes scores rather than continuous prediction archives. Full tensors are excluded from Git because of size
 ```
 
 ## 9. Final assessment

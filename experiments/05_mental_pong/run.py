@@ -1,4 +1,4 @@
-"""Read-only access to the integrated Mental-Pong evidence.
+"""Verify Mental-Pong files or replay saved readout parameters.
 
 The default command verifies publication files and registered artifact access.
 The legacy replay reads saved parameters without writing. The packaged replay
@@ -104,7 +104,15 @@ def verify(access, deep=False):
         revision = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(revision)
         try:
-            publication = revision.publication_rows(access.root, read_csv(migration_path))
+            legacy = read_csv(migration_path)
+            publication = revision.publication_rows(access.root, legacy)
+            map_path = access.root / 'integration/revision_20261003/publication_map.csv'
+            if map_path.is_file():
+                for row in revision.read_publication_map(access.root, legacy):
+                    if row.get('publication_disposition') in ('PRIVATE_ONLY', 'RIGHTS_HOLD'):
+                        path = access.repository / row['destination']
+                        if path.exists() or path.is_symlink():
+                            failures.append(f'Intentionally excluded file remains in publication tree: {row["destination"]}')
         except (ValueError, KeyError) as error:
             failures.append(f'Invalid publication revision manifest: {error}')
             publication = []
@@ -231,8 +239,8 @@ def full_plan(access):
         'limits': ['These commands write analyses and reports. Do not run them on the preserved source directories.',
             'The publication package registers large inputs externally; it does not materialize a full analysis workspace.',
             'Original freeze records refer to original implementation bytes. A new execution needs separate output and execution records.',
-            'Full rerun portability has not been exercised during integration. Small saved replays are the verified execution route.',
-            'No representation training or 1000-repeat randomization was performed for this integration.']}
+            'Full rebuild portability has not been exercised using only published files. Saved-weight replay has been checked with private artifacts.',
+            'Listing these commands does not execute representation training or the 1,000-allocation analyses.']}
 
 
 def main(argv=None):

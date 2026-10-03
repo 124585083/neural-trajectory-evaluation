@@ -38,22 +38,16 @@ artifacts/
 *.zarr/
 *.parquet.brotli
 
-# Model parameters intentionally published under the top-level models/ folder.
+# Model and data payloads are external pending redistribution clearance.
 *.pt
 *.pth
 *.pkl
 *.npz
-!models/**/*.pt
-!models/**/*.pth
-!models/**/*.pkl
-!models/**/*.npz
 
 # Private Mental-Pong locations and local verification outputs.
 experiments/05_mental_pong/configs/paths.local.json
 experiments/05_mental_pong/local_outputs/
-# Compact, immutable labels are the only published Mental-Pong binary inputs.
-!experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/
-experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/*
-!experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/*_condition_labels.npz
+# Mental-Pong label payloads require a documented redistribution basis.
+experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/data/*_condition_time_index.csv
 
 /docs/REVISION_REPORT.md

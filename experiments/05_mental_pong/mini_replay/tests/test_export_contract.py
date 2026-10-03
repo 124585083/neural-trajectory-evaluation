@@ -1,10 +1,26 @@
 """Inspect real export identities and provenance without accessing source roots."""
 import json
+import importlib.util
+from pathlib import Path
 import re
 
 import numpy as np
+import pytest
 
 from conftest import replay
+
+
+def test_private_export_cannot_enter_another_repository_directory(tmp_path, monkeypatch):
+    module = Path(__file__).resolve().parents[2]
+    spec = importlib.util.spec_from_file_location('mini_export_contract', module / 'scripts/export_mini_replay.py')
+    exporter = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(exporter)
+    repository = tmp_path / 'repository'
+    monkeypatch.setattr(exporter, 'REPOSITORY', repository)
+    output = repository / 'another_module' / 'payload'
+    with pytest.raises(ValueError, match='explicit passed rights record'):
+        exporter.export(tmp_path / 'preserved_source', output)
+    assert not output.exists()
 
 
 def test_export_has_complete_fixed_cases_and_safe_numeric_arrays(real_bundle):

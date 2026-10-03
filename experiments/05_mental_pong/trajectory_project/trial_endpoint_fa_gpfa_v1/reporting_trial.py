@@ -199,11 +199,12 @@ def fixed_case_metrics(data,root):
     return result
 
 
-def polish_report(root):
+def polish_report(root, source_root=None):
     """Add plain-language findings derived only from the completed score tables."""
     import re
     root=Path(root)
-    main=pd.read_csv(root/'results/self_reconstruction_main_table.csv')
+    source=Path(source_root) if source_root is not None else root
+    main=pd.read_csv(source/'results/self_reconstruction_main_table.csv')
     y=main[main.coordinate.eq('y')]
     full=y[y.epoch.eq('full')]
     assert len(full)==4 and full.n_rounds.eq(100).all()
@@ -215,14 +216,14 @@ def polish_report(root):
     else:
         finding='Own-target results do not uniformly favor one label. Interpret each animal, representation, and metric separately.'
     if larger_hidden_gap:
-        finding+=' Candidate RMSE disadvantages are larger in hidden than visible samples in all four groups. Full-epoch correlation alone does not describe this temporal difference.'
-    cross=pd.read_csv(root/'results/cross_2x2_summary.csv')
+        finding+=' Candidate RMSE disadvantages are larger in hidden than visible samples in all four groups. Full-interval correlation alone does not describe this temporal difference.'
+    cross=pd.read_csv(source/'results/cross_2x2_summary.csv')
     own=cross[cross.coordinate.eq('y')&cross.epoch.eq('full')&(((cross['head']=='D_obj')&(cross.target=='objective'))|((cross['head']=='D_beh')&(cross.target=='behavior')))]
-    counts=pd.read_csv(root/'results/condition_self_comparison.csv')
+    counts=pd.read_csv(source/'results/condition_self_comparison.csv')
     counts=counts[counts.coordinate.eq('y')&counts.epoch.eq('full')]
     benefit=counts.groupby(['animal','representation']).Delta_RMSE.apply(lambda a:int((a>0).sum()))
-    shapes=(f'Full-epoch mean bias ranges from {own.bias.min():.3f} to {own.bias.max():.3f}, but prediction/target SD ratios are only {own.amplitude_ratio.min():.3f}–{own.amplitude_ratio.max():.3f}. Both readouts compress position variation. A common vertical offset does not explain the full error, and near-zero pooled bias can hide cancellation across conditions.'
-            f'Candidate disadvantage is not universal across conditions: {int(benefit.min())}–{int(benefit.max())} of78 valid conditions per group have lower candidate RMSE. All condition and time-bin results remain available.')
+    shapes=(f'Full-interval mean bias ranges from {own.bias.min():.3f} to {own.bias.max():.3f}, but prediction/target SD ratios are only {own.amplitude_ratio.min():.3f}–{own.amplitude_ratio.max():.3f}. Both readouts compress position variation. A common vertical offset does not explain the full error, and near-zero pooled bias can hide cancellation across conditions.'
+            f'Candidate disadvantage is not universal across conditions: {int(benefit.min())}–{int(benefit.max())} of 78 valid conditions per group have lower candidate RMSE. All condition and time-bin results remain available.')
     path=root/'REPORT.md';text=path.read_text(encoding='utf-8')
     for tag in ('MAIN_FINDING','SHAPE_FINDING'):
         text=re.sub(r'<!-- BEGIN '+tag+r' -->.*?<!-- END '+tag+r' -->\n\n','',text,flags=re.S)
@@ -237,7 +238,7 @@ def polish_report(root):
         'all_four_hidden_RMSE_gap_larger_than_visible':larger_hidden_gap,'full_own_bias_range':[float(own.bias.min()),float(own.bias.max())],
         'full_own_amplitude_ratio_range':[float(own.amplitude_ratio.min()),float(own.amplitude_ratio.max())],
         'condition_counts_with_candidate_lower_RMSE':{f'{a}/{r}':int(n) for (a,r),n in benefit.items()},
-        'sources':[record(root/'results'/name) for name in ('self_reconstruction_main_table.csv','cross_2x2_summary.csv','condition_self_comparison.csv')]})
+        'sources':[record(source/'results'/name) for name in ('self_reconstruction_main_table.csv','cross_2x2_summary.csv','condition_self_comparison.csv')]})
 
 
 def make_report(data,root):
@@ -252,6 +253,23 @@ def make_report(data,root):
     validate_delivery(data,root)
     from trajectory_project.trial_endpoint_fa_gpfa_v1.hierarchy_summary import write_unit_heterogeneity
     hierarchy=write_unit_heterogeneity(data,root,frames)['summary']
+    return _write_saved_report(root, root, main, cross, conditions, audits, cases)
+
+
+def render_saved_report(source_root, output_dir):
+    """Render the historical diagnostic from saved tables into a separate directory."""
+    source, destination = Path(source_root).resolve(), Path(output_dir).resolve()
+    if destination.is_relative_to(source) or source.is_relative_to(destination):
+        raise ValueError("Choose a report destination outside the historical source tree.")
+    (destination/'results').mkdir(parents=True, exist_ok=True)
+    def read(name):
+        return pd.read_csv(source/'results'/name)
+    return _write_saved_report(source, destination, read('self_reconstruction_main_table.csv'),
+        read('cross_2x2_summary.csv'), read('condition_self_comparison.csv'),
+        read('representation_training_and_causal_audit.csv'), read('fixed_trial_case_metrics.csv'))
+
+
+def _write_saved_report(root, output, main, cross, conditions, audits, cases):
     audit=json.loads((root/'results/data_pairing_audit.json').read_text())
     y=main[main.coordinate.eq('y')]
     core=y[y.epoch.isin(['full','visible','hidden'])]
@@ -259,11 +277,11 @@ def make_report(data,root):
         return float(y[(y.animal==animal)&(y.representation==rep)&(y.epoch==epoch)][column].iloc[0])
     def compare(animal,rep):
         dr=v(animal,rep,'full','Delta_r');de=v(animal,rep,'full','Delta_RMSE')
-        return f'{animal.capitalize()} / {rep}：Δr={dr:+.4f}，ΔRMSE={de:+.4f}。'
+        return f'{animal.capitalize()} / {rep}: Δr={dr:+.4f}, ΔRMSE={de:+.4f}.'
     concordance=[]
     for animal in ('mahler','perle'):
         signs={m:np.sign(v(animal,'FA50','full',m))==np.sign(v(animal,'GPFA50','full',m)) for m in ('Delta_r','Delta_RMSE')}
-        concordance.append(f'{animal.capitalize()}: FA and GPFA full-epoch RMSE effects '+('agree' if signs['Delta_RMSE'] else 'differ')+'; correlation effects '+('agree' if signs['Delta_r'] else 'differ')+'.')
+        concordance.append(f'{animal.capitalize()}: FA and GPFA full-interval RMSE effects '+('agree' if signs['Delta_RMSE'] else 'differ')+'; correlation effects '+('agree' if signs['Delta_r'] else 'differ')+'.')
     def sh(animal,rep,head,col,epoch='full'):
         target='objective' if head=='D_obj' else 'behavior'
         frame=cross[(cross.animal==animal)&(cross.representation==rep)&(cross.epoch==epoch)&cross.coordinate.eq('y')&cross['head'].eq(head)&cross.target.eq(target)]
@@ -277,7 +295,7 @@ def make_report(data,root):
         condition_counts.append({'animal':a,'representation':r,'epoch':e,'valid_conditions':int(g.Delta_RMSE.notna().sum()),
             'conditions_with_lower_candidate_RMSE':int((g.Delta_RMSE>0).sum()),'conditions_with_higher_candidate_r':int((g.Delta_r>0).sum())})
     condition_counts=pd.DataFrame(condition_counts)
-    condition_counts.to_csv(root/'results/condition_difference_counts.csv',index=False)
+    condition_counts.to_csv(output/'results/condition_difference_counts.csv',index=False)
     tablecols=['animal','representation','epoch',*METRICS]
     stability=core[core.epoch.eq('full')][['animal','representation']].copy()
     for metric in METRICS:
@@ -288,7 +306,7 @@ def make_report(data,root):
 
 ## 1. Reconstruction of each training target
 
-Compare each recorded behavioral trial's objective target with objective-head predictions and its own endpoint candidate with candidate-head predictions. Score each held-out trial and time before summarizing 100 complete condition splits. Trial targets are not averaged before the primary score.
+The analysis compared each recorded behavioral trial's objective target with objective-head predictions and its endpoint candidate with candidate-head predictions. Each held-out trial and time was scored before the 100 complete condition splits were summarized. Trial targets were not averaged before primary scoring. Factor analysis (FA50) and Gaussian-process factor analysis (GPFA50) each provided 50 features to ordinary least-squares (OLS) position readouts.
 
 {compare('mahler','FA50')} {compare('mahler','GPFA50')}
 
@@ -304,33 +322,33 @@ Delta_r=r_beh-r_obj; Delta_RMSE=RMSE_obj-RMSE_beh. Positive differences favor th
 
 {md(pd.DataFrame(cover),digits=0)}
 
-All 79 condition identities enter each nominal 39/40 split.78 conditions have usable candidates;59920 has an unresolved terminal collision anchor and retains its identity with zero valid contribution. Representations still fit the specified39 training conditions, while OLS valid counts can be 38/39 for training and 39/40 for testing; see the [fit audit](results/ols_fit_audit.csv). Unknown records also retain identities:576 Mahler and3641 Perle terminal scalars disagree with display positions and may be defaults. Successes and failures remain included without accuracy or error-size selection.
+All 79 condition identities enter each nominal 39/40 split. 78 conditions have usable candidates; condition 59920 has an unresolved terminal collision anchor and retains its identity with zero valid contribution. Representations still fit the specified 39 training conditions, while OLS valid counts can be 38 or 39 for training and 39 or 40 for testing; see the [fit audit](results/ols_fit_audit.csv). Unknown records also retain identities: 576 Mahler and 3641 Perle terminal scalars disagree with display positions and may be defaults. Successes and failures remain included without accuracy or error-size selection.
 
-Released paddle_y is assigned from joystick_output as a terminal-position scalar, rather than treating a joystick control curve as position. Comparison with final display samples differs by about one0.17-unit discrete control step; no correction was imposed. Strictly pre-feedback sampling remains unverified. No duplicate session+t_sync record keys were found. Physical initial parameters agree within conditions, allowing objective targets to be broadcast by real-trial identity. This adds no neural trials. Raw trial responses and stable/half membership are unavailable. [Pairing audit](results/data_pairing_audit.json), [labels and records](artifacts/), and [sample indices](data/) preserve provenance.
+Released paddle_y is assigned from joystick_output as a terminal-position scalar, rather than treating a joystick control curve as position. Comparison with final display samples differs by about one 0.17-unit discrete control step; no correction was imposed. Strictly pre-feedback sampling remains unverified. No duplicate session+t_sync record keys were found. Physical initial parameters agree within conditions, allowing objective targets to be broadcast by real-trial identity. This adds no neural trials. Raw trial responses and stable/half membership are unavailable. [Pairing audit](results/data_pairing_audit.json), [labels and records](artifacts/), and [sample indices](data/) preserve provenance.
 
 ## 3. Candidate rules and time support
 
-Without a collision, connect task initial(x0,y0) to the trial endpoint. With a collision, preserve the objective path before the estimated anchor and connect that anchor to the endpoint afterward. x_beh=x_obj throughout; horizontal progress reaches b_i at common x_end=10 and common T. There is no stop detection, stability threshold, repeated proxy update, visible-phase reset, clipping, or new reflection. The target is a retrospective endpoint-constrained candidate, not a measured internal path.
+Without a collision, the candidate connected the initial position (x0,y0) to the trial endpoint. With a collision, it retained the objective path before the estimated anchor and connected that anchor to the endpoint afterward. x_beh=x_obj throughout; horizontal progress reaches b_i at common x_end=10 and common T. There is no stop detection, stability threshold, repeated proxy update, visible-phase reset, clipping, or new reflection. The target is a retrospective endpoint-constrained candidate, not a measured internal path.
 
-Released bins average integer-ms samples and have centers50k+24.5ms; complete neural bins are available at50k+50ms. Objective branches are evaluated at bin right edges. The25.5ms shift follows timing definitions and was not selected. Collision estimates use released50ms physical branches with uncertainty intervals. Two conditions with only one post-collision point use a known single-reflection constraint and are labeled low-support estimates. T comes from the x branch reaching the paddle plane. Differences from design timing and metadata y(T) remain in the [geometry table](results/condition_geometry.csv), without adjustments toward paper or behavioral results.
+Released bins average integer-ms samples and have centers at 50k+24.5 ms; complete neural bins are available at 50k+50 ms. Objective branches are evaluated at bin right edges. The 25.5 ms shift follows timing definitions and was not selected. Collision estimates use released 50 ms physical branches with uncertainty intervals. Two conditions with only one post-collision point use a known single-reflection constraint and are labeled low-support estimates. T comes from the x branch reaching the paddle plane. Differences from design timing and metadata y(T) remain in the [geometry table](results/condition_geometry.csv), without adjustments toward paper or behavioral results.
 
-Score completed bins before estimated arrival and within trusted released neural support; exclude bins crossing feedback/end boundaries. Exact feedback times remain unknown. Mixed occlusion-boundary bins enter full only, so pure visible and hidden bin counts may sum to less than full. Phase masks define scoring, not candidate activation. [Label checks](results/actual_label_validation.json) verify endpoints, continuity, common x, and missing labels; the [geometry protocol](configs/label_geometry_protocol.json) records estimation rules.
+Scoring used completed bins before estimated arrival and within trusted released neural support. Bins crossing feedback or end boundaries were excluded. Exact feedback times remain unknown. Mixed occlusion-boundary bins enter full only, so pure visible and hidden bin counts may sum to less than full. Phase masks define scoring, not candidate activation. [Label checks](results/actual_label_validation.json) verify endpoints, continuity, common x, and missing labels; the [geometry protocol](configs/label_geometry_protocol.json) records estimation rules.
 
 ## 4. FA/GPFA and the paper OLS framework
 
-Both animals use the same100 physical-condition39/40 splits with seed0. Each split refits finite/variance neuron selection, fixed normalization, FA50, and shared-time-scale GPFA50 on training39 half1 only. The same-round FA50 initializes GPFA50. FA preserves300 iterations, tolerance.01, LAPACK, and seed42; GPFA preserves400 iterations and tolerance1e-6. No parameter or seed search was performed. Local fits do not directly read test conditions, although published imputation creates upstream indirect dependencies. Earlier GPFA64 and paper-reference full-condition FA50 remain separate historical fits.
+Both animals use the same 100 physical-condition splits, with 39 training and 40 test conditions and seed 0. Each split refits finite/variance neuron selection, fixed normalization, FA50, and GPFA50 with one shared learnable radial-basis-function time scale on the 39 training conditions in half1 only. The same-round FA50 initializes GPFA50. FA used 300 iterations, tolerance 0.01, LAPACK and seed 42; GPFA used 400 iterations and tolerance 1e-6. No parameter or seed search was performed. Local fits do not directly read test conditions, although published imputation creates upstream indirect dependencies. Earlier GPFA64 and paper-reference full-condition FA50 remain separate historical fits.
 
-All four OLS groups use50 inputs,51 coefficients per coordinate, and 102 per xy head. LinearRegression(fit_intercept=True,positive=False) uses float64 with no regularization, added scaling, or sample weights. Training trial-by-time rows are explicitly expanded. Four outputs share a matrix decomposition, numerically equivalent to separate position regressions. Conditions with more trials contribute more rows. One fixed mapping covers visible and hidden times; phases change scoring only. See [protocol differences](protocol_diff.md) and [configuration](configs/analysis_protocol.json).
+All four OLS groups use 50 inputs, 51 coefficients per coordinate, and 102 per xy head. LinearRegression(fit_intercept=True,positive=False) uses float64 with no regularization, added scaling, or sample weights. Training trial-by-time rows are explicitly expanded. Four outputs share a matrix decomposition, numerically equivalent to separate position regressions. Conditions with more trials contribute more rows. One fixed mapping covers visible and hidden times; phases change scoring only. See [protocol differences](protocol_diff.md) and [configuration](configs/analysis_protocol.json).
 
 Future perturbation, explicit-prefix endpoint comparisons, and cross-condition state resets were checked in every representation split; maximum error is {audits.prefix_max_error.max():.3g}. Local fit_provenance and provided_input_filtering pass. Released arrays already contain imputation using all conditions and times, leaving irreversible raw_preprocessing=fail. [Training and causal audits](results/representation_training_and_causal_audit.csv) also retain convergence status and fixed-iteration-limit outcomes without downstream-score-based refitting.
 
 ## 5. Own-target main results
 
-The table below reports y. Position/RMSE units are centered MWorks display coordinates; table times use ms and plots use seconds. Scores average 100 held-out splits. The [full table](results/self_reconstruction_main_table.csv) retains data_mode, causal_status, and counts. n_conditions, n_real_trials, and n_bins describe unique full-data support; per-split means are separate. n_neural_trials remains 0 because repeated regression rows are not independent neural trials.
+The table below reports y. Correlation r is dimensionless. Position/RMSE units are centered MWorks display coordinates; table times use ms and plots use seconds. Scores average 100 held-out splits. The [full table](results/self_reconstruction_main_table.csv) retains data_mode, causal_status, and counts. n_conditions, n_real_trials, and n_bins describe unique full-data support; per-split means are separate. n_neural_trials remains 0 because repeated regression rows are not independent neural trials.
 
 {md(core,tablecols)}
 
-Full-epoch variation across splits:
+Full-interval y variation across splits (mean and population SD over 100 overlapping condition splits):
 
 {md(stability)}
 
@@ -354,7 +372,7 @@ A separate [descriptive heterogeneity table](results/descriptive_unit_heterogene
 
 All condition and time-bin directions are retained without score-based selection. [Condition comparisons](results/condition_self_comparison.csv) and [binwise errors](results/binwise_trial_reconstruction.csv) locate differences. The latter retains actual time, behavioral record count, and test frequency, with errors against original trial targets rather than averaged curves.
 
-Full-epoch offset/amplitude diagnostics follow. bias=prediction-target. Prediction/target SD ratios above one indicate greater predicted variation; ratios below one indicate compression. These ratios are not measures of information content.
+Full-interval y offset/amplitude diagnostics follow; values average 100 split scores. Position SD and bias use centered display-coordinate units; amplitude ratios are dimensionless. bias=prediction-target. Prediction/target SD ratios above one indicate greater predicted variation; ratios below one indicate compression. These ratios are not measures of information content.
 
 {md(shape,shapecols)}
 
@@ -362,7 +380,7 @@ Candidate endpoint ranges, variances, and within-condition trial variance at eac
 
 ## 7. Trial-specific four-curve examples and all conditions
 
-The [Mahler](figures/mahler_all79_trial_atlas.pdf) and [Perle](figures/perle_all79_trial_atlas.pdf) atlases cover all79 conditions. Trial ID determines one recorded trial per condition, shared between FA and GPFA with common axes. The target is that trial's own endpoint candidate, not a condition mean. Unknown anchors remain missing.
+The [Mahler](figures/mahler_all79_trial_atlas.pdf) and [Perle](figures/perle_all79_trial_atlas.pdf) atlases cover all 79 conditions. Trial ID determines one recorded trial per condition, shared between FA and GPFA with common axes. The target is that trial's own endpoint candidate, not a condition mean. Unknown anchors remain missing.
 
 Each panel shows the objective path, objective-head reconstruction, trial candidate, and candidate-head reconstruction. Predictions use only splits holding out that condition; shading is split stability. Different trials within one condition have different candidates but identical predictions from the same mean latent, a route-B limitation. Collision, occlusion, and estimated T are marked; exact feedback timing is unknown. The [atlas manifest](figures/figure_manifest.json) indexes fixed trials and pages.
 
@@ -372,11 +390,11 @@ Examples below use the smallest condition ID per collision type and the atlas fi
 
 ## 8. Cross-scoring and evidence limits
 
-E_OO/E_BB compare own-target reconstruction. E_OB/E_BB fix the candidate target; E_OO/E_BO fix the objective target. The [complete2x2 means/SDs](results/cross_2x2_summary.csv) retain all phases and x/y without mislabeling cross-errors as own-errors. Within a representation, both heads have identical x targets, weights, and predictions to numerical precision. FA and GPFA need not predict identical x.
+E_OO/E_BB compare own-target reconstruction. E_OB/E_BB fix the candidate target; E_OO/E_BO fix the objective target. The [complete 2x2 means/SDs](results/cross_2x2_summary.csv) retain all phases and x/y without mislabeling cross-errors as own-errors. Within a representation, both heads have identical x targets, weights, and predictions to numerical precision. FA and GPFA need not predict identical x.
 
 For identical neural inputs within a condition, squared error decomposes as:
 
-`sum_i ||y_i-f(z)||² = n||mean(y_i)-f(z)||² + sum_i||y_i-mean(y_i)||²`。
+`sum_i ||y_i-f(z)||² = n||mean(y_i)-f(z)||² + sum_i||y_i-mean(y_i)||²`.
 
 Real-data and unit checks confirm this identity. Trial supervision is retained and used in actual fitting; weighted means only test algebraic equivalence. Repeating inputs increases neither design rank nor trial-specific neural information. Exchanging trial labels within a condition cannot create a trial-specific neural test or independent significance.
 
@@ -384,14 +402,14 @@ This diagnostic asks how easily both paths can be reconstructed, when difference
 
 ## 9. Files and reproduction
 
-The [sample index](data/) identifies recorded trials and condition/bin pairs. [Models](readouts/models/) and [held-out predictions](readouts/predictions/) use lossless factorization: condition predictions plus actual test_trial_indices and exact common masks. Each trial/time prediction is recoverable without averaging labels or reducing scored rows. Exporters expand selected splits/trials. Representation weights, preprocessing, and provenance are in [representations](representations/); requests and runtime records are in [sources](sources/).
+The [sample index](data/) identifies recorded trials and condition/bin pairs. [Models](readouts/models/) and [held-out predictions](readouts/predictions/) use lossless factorization: condition predictions plus actual test_trial_indices and exact common masks. Each trial/time prediction is recoverable without averaging labels or reducing scored rows. Exporters expand selected splits/trials. Representation weights, preprocessing, and provenance are in [representations](representations/); source identities and runtime records are in [sources](sources/).
 
 The [README](README.md), [completion checks](results/completion_audit.json), [file/weight audit](results/final_integrity_and_causal_audit.json), and [manifest](manifest.json) trace reproducibility. Historical code, models, and results remain preserved.
 '''
-    (root/'REPORT.md').write_text(text,encoding='utf-8')
-    (root/'README.md').write_text('''# Trial endpoint candidates with FA50/GPFA50 and OLS
+    (output/'REPORT.md').write_text(text,encoding='utf-8')
+    (output/'README.md').write_text('''# Trial endpoint candidates with FA50/GPFA50 and OLS
 
-This is a trial_labels_with_mean_neural descriptive diagnostic without paired trial neural data. raw_preprocessing=fail. Each split fits50-dimensional FA/GPFA using39 training conditions; prefix-causal checks apply only to published inputs.
+This is a trial_labels_with_mean_neural descriptive diagnostic without paired trial neural data. raw_preprocessing=fail. Each split fits 50-dimensional factor analysis (FA) and Gaussian-process factor analysis (GPFA) using 39 training conditions; prefix-causal checks apply only to published inputs.
 
 Run in a separately materialized, isolated analysis workspace:
 
@@ -399,7 +417,7 @@ Run in a separately materialized, isolated analysis workspace:
 & '.venv/Scripts/python.exe' -B 'trajectory_project/trial_endpoint_fa_gpfa_v1/run_analysis.py' --workers 3 --decode-workers 3 --threads 2
 ```
 
-Run an initial end-to-end check(round0 can be reused), or generate reports from completed models:
+Run an initial end-to-end check (round 0 can be reused), or generate reports from completed models:
 
 ```powershell
 & '.venv/Scripts/python.exe' -B 'trajectory_project/trial_endpoint_fa_gpfa_v1/run_analysis.py' --pilot-only
@@ -410,7 +428,7 @@ Run an initial end-to-end check(round0 can be reused), or generate reports from 
 
 Trial labels are in artifacts/*_trial_labels.npz and records in results/*_trial_records.csv.gz. Each trial retains its own candidate; objective targets are broadcast by verified condition identity. Predictions in readouts/predictions/*_test_predictions.npz combine predictions[head,condition,time,xy], test_trial_indices, and test_common_mask_packed to recover every held-out trial prediction. Training predictions remain NaN. readouts/trial_scores/*_self_scores.npz retains trial, phase, head, xy, and own-target metrics.
 
-data/*_sample_index.csv.gz identifies trial, condition, and time. For one split, inputs are FA50[0,condition_index,time_index,:] and GPFA50[0,condition_index,time_index,:] in representations/<animal>/round_XXX/latents.npz;0 denotes half1. Targets are objective_xy[objective_condition_index,time_index,:] and behavior_xy[behavior_trial_index,time_index,:]. These are lossless indices, not extra neural trials. Rows sharing unique_neural_input_id add no independent neural information. Shared support was checked in all 100 splits.
+data/*_sample_index.csv.gz identifies trial, condition, and time. For one split, inputs are FA50[0,condition_index,time_index,:] and GPFA50[0,condition_index,time_index,:] in representations/<animal>/round_XXX/latents.npz; 0 denotes half1. Targets are objective_xy[objective_condition_index,time_index,:] and behavior_xy[behavior_trial_index,time_index,:]. These are lossless indices, not extra neural trials. Rows sharing unique_neural_input_id add no independent neural information. Shared support was checked in all 100 splits.
 
 Expand saved held-out trial predictions; omit --trial-id to export all real test trials in that split. This does not refit models:
 
@@ -422,5 +440,6 @@ Add --scores to export phase-specific own-target metrics. A trial outside that s
 
 [Report](REPORT.md) · [Protocol differences](protocol_diff.md) · [Main results](results/self_reconstruction_main_table.csv) · [2x2](results/cross_2x2_summary.csv) · [Causal audit](results/representation_training_and_causal_audit.csv) · [Pairing audit](results/data_pairing_audit.json) · [Fixed splits](configs/condition_splits_100.json) · [Sample index](data/) · [All-condition atlas](figures/)
 ''',encoding='utf-8')
-    polish_report(root)
+    polish_report(output, source_root=root)
+    return [output/'REPORT.md', output/'README.md']
     print(core[tablecols].to_string(index=False),flush=True)

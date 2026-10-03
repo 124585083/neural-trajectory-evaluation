@@ -2433,12 +2433,12 @@
     "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/figures/mahler_all79_condition_atlas.pdf",
     "sha256": "9aa3591640947cf30a0d1a7bca41c0257fcb15ddf434ca1f5be172dd5ea68533",
     "bytes": 9622981,
-    "role": "retained full79 atlas; no new curve averaging"
+    "role": "retained all-79-condition atlas; no new curve averaging"
   },
   {
     "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/figures/perle_all79_condition_atlas.pdf",
     "sha256": "7d48cea105eae37244a030c587574c0d2ec7c8b6126b9a5f13e629cfdb14c37d",
     "bytes": 8612846,
-    "role": "retained full79 atlas; no new curve averaging"
+    "role": "retained all-79-condition atlas; no new curve averaging"
   }
 ]

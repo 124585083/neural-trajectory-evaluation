@@ -1,5 +1,7 @@
 # Phase 3 — Total-parameter matching
 
+Model payloads are external. The [artifact guide](../../docs/DATA_AND_REPRODUCIBILITY.md#8-external-model-and-gpfa-artifacts) gives expected restore paths and integrity checks; checkpoint links below point to identity records.
+
 This Study 1 phase constructs and trains a reduced Factorized3D Dynamic model. Its total trainable parameter count approximately matches the Static baseline before the main Static–Dynamic comparison.
 
 ## Purpose
@@ -50,7 +52,7 @@ python -m trajectory_param_match.experiment --config configs/dynamic_parameter_m
 python -m trajectory_param_match.experiment --config configs/dynamic_parameter_matched.yaml evaluate
 ```
 
-`audit` verifies the configuration, data/split identities, architecture, tensor shapes, and total/core/readout/shifter counts. Formal training should begin only after `audit` and `smoke` pass; `evaluate` reloads the published checkpoint for full-sequence oracle evaluation.
+`audit` verifies the configuration, data/split identities, architecture, tensor shapes, and total/core/readout/shifter counts. Formal training should begin only after `audit` and `smoke` pass; `evaluate` reloads the externally restored checkpoint for full-sequence oracle evaluation.
 
 ## Training protocol
 
@@ -58,7 +60,7 @@ The reduced control uses the locked five-session protocol shared with the baseli
 
 ## Outputs
 
-- **Model:** [`../../models/parameter_matched_dynamic/best.pt`](../../models/parameter_matched_dynamic/best.pt), the released frozen Total-parameter-matched Dynamic checkpoint.
+- **Model:** [`../../models/parameter_matched_dynamic/best.pt`](../../results/manifests/model_files.csv), the external frozen Total-parameter-matched Dynamic checkpoint.
 - **Parameter and architecture audits:** [`records/architecture_audit.json`](records/architecture_audit.json), [`records/audit_summary.json`](records/audit_summary.json), and the locked config above.
 - **Data lock:** [`records/data_split_lock.json`](records/data_split_lock.json), recording the five-session data and tier identities.
 - **Training and evaluation records:** [`records/training_summary.json`](records/training_summary.json), [`records/validation_events.jsonl`](records/validation_events.jsonl), and [`records/official_evaluation.json`](records/official_evaluation.json).

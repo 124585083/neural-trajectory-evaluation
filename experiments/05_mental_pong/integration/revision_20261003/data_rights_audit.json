@@ -1,6 +1,6 @@
 {
   "checked_on": "2026-10-03",
-  "status": "NEW_DERIVED_PAYLOAD_WITHHELD_PENDING_PERMISSION",
+  "status": "LABEL_AND_MODEL_PAYLOADS_WITHHELD_PENDING_REDISTRIBUTION_BASIS",
   "record_url": "https://zenodo.org/records/13952210",
   "record_id": 13952210,
   "record_title": "Rajalingham_Sohn_Jazayeri_MentalPong_NHP_DorsoMedialFrontalCortex",
@@ -18,7 +18,7 @@
   "current_source_checks": {
     "landing_page": "Accessed successfully; title, v1, publication date and archive MD5 agree with preserved metadata. Its parsed text does not expose the license value.",
     "api_url": "https://zenodo.org/api/records/13952210",
-    "api_status": "HTTP 403 on refresh; current license not independently retrieved through the API.",
+    "api_status": "The prior direct refresh returned HTTP 403. A browser refresh on 3 October 2026 was also inaccessible; no new API license verification is claimed.",
     "license_terms_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
     "terms_checked": "Attribution, noncommercial and no-derivatives restrictions; format-only changes are not automatically derivatives."
   },
@@ -26,7 +26,7 @@
     "file": "MentalPong.zip",
     "bytes": 6145726435,
     "provider_md5": "382e420c6f053d8ac2bdd4acd2fb02b2",
-    "checks_in_this_revision": "Read complete archive member list and both non-resource-fork README files; reused original download digest record, without downloading again.",
+    "checks_in_this_revision": "Historical archive member and README checks, repeated locally on 3 October 2026; no new download. The archive MD5 is the recorded provider/download digest, not a fresh 6.1 GB hash.",
     "separate_license_files": [],
     "readmes": [
       {
@@ -48,10 +48,119 @@
     "scope": "Audited GitHub source; not proof of the license on neural or behavioral dataset derivatives."
   },
   "publication_decision": {
-    "new_numerical_bundle": "Withhold from publication tree; export and test privately from existing authorized local artifacts.",
-    "new_code_and_instructions": "Publishable project-owned source and explicit availability status.",
-    "existing_derived_records": "Preserved byte-for-byte where scientific; redistribution permission remains unresolved and is not newly certified.",
-    "legal_classification": "No definitive legal classification of numerical derivatives is asserted. Explicit permission to redistribute this transformed bundle was not found.",
-    "needed_for_public_payload": "Applicable rights-holder permission or another documented basis covering the actual transformed arrays."
-  }
+    "label_arrays": "Two NPZ label packages and two CSV equivalents are withheld from the current public file set. Their arrays, masks, hashes, and original source files are preserved externally. Three public summary-table editions also omit the mean_endpoint input column: the two condition-label coverage tables and the endpoint-condition audit. Their remaining scientific fields are unchanged; complete originals and source hashes remain external.",
+    "mini_payload": "The transformed neural/behavioral replay bundle remains external. Source, exporter, and explicit no-payload behavior remain available.",
+    "sensorium_model_payloads": "Eight trained-model, GPFA, and preprocessing files are withheld conservatively pending a documented redistribution basis. Historical file identities remain in results/manifests/model_files.csv.",
+    "scientific_results": "Aggregate evaluation tables, scientific reports, figures, configurations, and source identities remain available. Retention does not grant a blanket license to underlying data or determine the legal classification of every numerical derivative.",
+    "legal_classification": "No conclusion is asserted that trained weights or every numerical transformation are legally adapted material. The hold records unresolved publication prerequisites.",
+    "execution_consequences": "A source-only clone can inspect results, aggregate saved scores, and run synthetic checks. Label-dependent rendering, numerical mini replay, and trained-model inference need appropriately obtained external payloads.",
+    "history": "Exclusion from the proposed latest tree does not remove previous Git or LFS objects, forks, caches, or clones."
+  },
+  "sensorium_terms": {
+    "provider": "Dynamic Sensorium 2023; Turishcheva et al. (2024)",
+    "primary_source": "https://proceedings.neurips.cc/paper_files/paper/2024/file/d758d7c0a88d741c8ca4637579c9df87-Paper-Datasets_and_Benchmarks_Track.pdf",
+    "location": "Appendix A.8.4 and A.8.5, printed page 21",
+    "recorded_terms": "CC BY-NC-ND 4.0 for data and code",
+    "checked_on": "2026-10-03",
+    "pinned_software_revision": "0e02656220e84a50f3be1b92d6f66c2f9ccd51ef",
+    "limits": "The pinned checkout has no root LICENSE. The publication statement supplies evidence of provider terms; it does not establish specific permission for redistribution of these fitted weights or preprocessing arrays. The GIN license endpoint was inaccessible."
+  },
+  "withheld_paths": [
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/mahler_condition_labels.npz",
+      "sha256": "4b059a6a6c5b262c85dfa5a1fe4601925708b70dd932012528c428a59bdba853",
+      "bytes": 179175,
+      "present_in_starting_HEAD": true,
+      "candidate_availability": "external_only",
+      "original_payload_preserved": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/data/mahler_condition_time_index.csv",
+      "sha256": "d7df215ed4d23f6ae83aec1dd77fbcd75ef608b61bab91c5c43ea29657c94ca6",
+      "bytes": 484427,
+      "present_in_starting_HEAD": true,
+      "candidate_availability": "external_only",
+      "original_payload_preserved": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/perle_condition_labels.npz",
+      "sha256": "5fa264d9936ce67bb693ae25ae799b1e612b717ef3225dbc2373065afbfaf3fc",
+      "bytes": 179202,
+      "present_in_starting_HEAD": true,
+      "candidate_availability": "external_only",
+      "original_payload_preserved": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/data/perle_condition_time_index.csv",
+      "sha256": "e4decce60b0e82bdba3578c84570ba24a6992419d0ae065ad8fbc27a8f1a9a15",
+      "bytes": 486883,
+      "present_in_starting_HEAD": true,
+      "candidate_availability": "external_only",
+      "original_payload_preserved": true
+    },
+    {
+      "path": "models/official_dynamic/best.pt",
+      "sha256": "263d7abb29956934d529e8ad600337a8ea0930f4ff6d8b0dd0d08e94849e072f",
+      "bytes": 23190584,
+      "present_in_starting_HEAD": true,
+      "candidate_availability": "external_only",
+      "original_payload_preserved": true
+    },
+    {
+      "path": "models/static_on_dynamic/best.pt",
+      "sha256": "23773f48c6e439f4df828b8a8b31e4bdd0f5e045970474d2d461553d50eaed77",
+      "bytes": 11619200,
+      "present_in_starting_HEAD": true,
+      "candidate_availability": "external_only",
+      "original_payload_preserved": true
+    },
+    {
+      "path": "models/parameter_matched_dynamic/best.pt",
+      "sha256": "210bf9b0d0e7da6dce93680b383c70ff3626df9f83f25024f818085f86c8ae72",
+      "bytes": 11806968,
+      "present_in_starting_HEAD": true,
+      "candidate_availability": "external_only",
+      "original_payload_preserved": true
+    },
+    {
+      "path": "models/parameter_matched_dynamic/epoch_65_validation_matched.pth",
+      "sha256": "6c2aaf90a2897a369d04e245995adfca8883329fe3b3d6371da905bd7d82158d",
+      "bytes": 11810541,
+      "present_in_starting_HEAD": true,
+      "candidate_availability": "external_only",
+      "original_payload_preserved": true
+    },
+    {
+      "path": "models/gpfa_reliability/gpfa.pkl",
+      "sha256": "eef5ee1d8fa5eb928ac7988ee979bd93a4ec98b111b88b37ee63c911e1fa8b84",
+      "bytes": 26042,
+      "present_in_starting_HEAD": true,
+      "candidate_availability": "external_only",
+      "original_payload_preserved": true
+    },
+    {
+      "path": "models/gpfa_reliability/preprocessing.npz",
+      "sha256": "2cecb5e4e68a3d8e3062576b7a02af9f5594619664f086c1dd77850478da04a1",
+      "bytes": 7972,
+      "present_in_starting_HEAD": true,
+      "candidate_availability": "external_only",
+      "original_payload_preserved": true
+    },
+    {
+      "path": "models/gpfa_model_comparison/gpfa.pkl",
+      "sha256": "8fb3a6c1aec03a1bf91323ddb896b8c82b8eb44e63c715f73f87318db656f99b",
+      "bytes": 26412,
+      "present_in_starting_HEAD": true,
+      "candidate_availability": "external_only",
+      "original_payload_preserved": true
+    },
+    {
+      "path": "models/gpfa_model_comparison/preprocessing.npz",
+      "sha256": "16371f35125e4b9406dda185136fa2420df962d4b2c5862b3ffb2e3a62e5f07d",
+      "bytes": 1170929,
+      "present_in_starting_HEAD": true,
+      "candidate_availability": "external_only",
+      "original_payload_preserved": true
+    }
+  ]
 }

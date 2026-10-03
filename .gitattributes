@@ -2,6 +2,7 @@
 
 *.py text eol=lf
 *.md text eol=lf
+experiments/05_mental_pong/trajectory_project/report_templates/*.md.in text eol=lf
 *.yaml text eol=lf
 *.yml text eol=lf
 *.json text eol=lf
@@ -35,3 +36,9 @@ experiments/01_baselines/records/** -text
 experiments/01_baselines/records/**/*.txt whitespace=-blank-at-eol,cr-at-eol
 experiments/03_parameter_matching/records/** -text
 results/tables/** -text
+
+# Preserve exact legal notices and placeholder bytes across Git checkouts.
+LICENSE -text
+data/.gitkeep -text
+third_party/licenses/NEURALPREDICTORS-MIT.txt -text
+third_party/licenses/SENSORIUM-2022-MIT.txt -text

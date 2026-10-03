@@ -11,5 +11,5 @@
   "raw_epoch_checkpoints_retained": true,
   "validation_events": 213,
   "full_official_early_stopping_completed": false,
-  "next_action": "independent best-checkpoint evaluation and prediction export"
+  "next_action": "fresh-process best-checkpoint evaluation and prediction export"
 }

@@ -1,6 +1,6 @@
 # Future research: preserving behavior contrasts and testing temporal organization
 
-This is the current joint research plan for Dynamic Sensorium and Mental-Pong. It describes future work; none of these experiments was run during repository integration. The completed [Sensorium results](RESULTS.md) and [Mental-Pong study](MENTAL_PONG.md) establish different starting points. Their measurements, noise ceilings, and GPFA implementations remain separate.
+This is the current joint research plan for Dynamic Sensorium and Mental-Pong. It describes future work; these experiments have not been executed. The completed [Sensorium results](RESULTS.md) and [Mental-Pong study](MENTAL_PONG.md) establish different starting points. Their measurements, noise ceilings, and GPFA implementations remain separate.
 
 **First question:** With the physical condition fixed, do above-target and below-target trial groups show reliable neural readout shifts in the corresponding directions? Answering it requires neural and behavioral records with matching trial identities. The current condition means cannot be separated into those neural groups.
 
@@ -8,7 +8,7 @@ The plan proceeds from recovering identities and timing, to defining reliable be
 
 ## 1. What the completed averaging audit shows
 
-The final Mental-Pong candidate uses a condition-mean paddle endpoint. Positive and negative endpoint errors partly cancel before a candidate path is constructed. The following quantities give each valid physical condition equal weight, rather than weighting conditions by their number of behavioral records.
+The final Mental-Pong candidate uses a condition-mean paddle endpoint. Positive and negative endpoint errors partly cancel before a candidate path is constructed. The following quantities give each valid physical condition equal weight, rather than weighting conditions by their number of behavioral records. The two endpoint-error rows use centered MWorks display-coordinate units; the other rows report counts and percentages.
 
 | Quantity | Mahler | Perle |
 |---|---:|---:|
@@ -28,7 +28,7 @@ y_{\mathrm{behavior},ci}(t)-F(c,y_{\mathrm{end},c})(t)
 
 Here \(F\) is the fixed geometric interpolation and \(\alpha_c(t)\) is its endpoint weight. In the ideal geometry, \(F(c,y_{\mathrm{end},c})\) is the objective ball path, giving \(y_{\mathrm{behavior},ci}(t)-y_{\mathrm{objective},c}(t)=\alpha_c(t)e_{ci}\). The saved objective trajectory differs slightly from this interpolation because its anchor is estimated from published samples. The [geometry audit](../experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/geometry_feasibility.json) records that numerical discrepancy. The original objective values were retained.
 
-Averaging opposite endpoint errors reduces the candidate-to-objective difference. Full-path RMS separation is 0.6760 for Mahler and 0.5612 for Perle. These magnitudes are smaller than the reported reconstruction RMSE, but the aggregation differs: separation pools valid bins, whereas the readout result averages scores over held-out splits. This is a descriptive scale comparison, not a power calculation.
+Averaging opposite endpoint errors reduces the candidate-to-objective difference. Full-path RMS separation is 0.6760 for Mahler and 0.5612 for Perle, in the same position units. These magnitudes are smaller than the reported reconstruction RMSE, but the aggregation differs: separation pools valid bins, whereas the readout result averages scores over held-out splits. This is a descriptive scale comparison, not a power calculation.
 
 The observed cancellation concerns behavior. The trial membership of each released neural mean is unknown, so the corresponding neural group differences cannot be measured or recovered from the combined mean. The behavioral cancellation percentages must not be interpreted as percentages of neural information lost. The [earlier trial-label version](../experiments/05_mental_pong/archive/README.md) also changed condition weighting; its comparison with the final version is not a one-factor averaging experiment.
 
@@ -60,7 +60,7 @@ Once a reliable group difference is established, ask when it becomes readable, w
 
 A current GPFA state can already contain past neural information. A history comparison should therefore distinguish a current state, an equal-duration history summary, and an ordered trajectory description. Use comparable readout capacity and sample support where feasible. This comparison tests whether temporal order adds value beyond additional observations and noise reduction.
 
-Keep both physical and behavioral references. Geometric interpolation supplies part of the candidate path's shape. An interpretable neural reconstruction requires evidence beyond that shared shape, including comparison with the mean-endpoint geometry baseline. The existing full-epoch readouts did not outperform that baseline.
+Keep both physical and behavioral references. Geometric interpolation supplies part of the candidate path's shape. An interpretable neural reconstruction requires evidence beyond that shared shape, including comparison with the mean-endpoint geometry baseline. The existing readouts over the full evaluated interval did not outperform that baseline.
 
 ## 5. Make competing explanations predict different observations
 

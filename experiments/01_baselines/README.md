@@ -1,5 +1,7 @@
 # Phase 1 — Encoding-model baselines
 
+Model payloads are external. The [artifact guide](../../docs/DATA_AND_REPRODUCIBILITY.md#8-external-model-and-gpfa-artifacts) gives expected restore paths and integrity checks; checkpoint links below point to identity records.
+
 This Study 1 phase establishes Static and full Dynamic encoding-model baselines on the five official Dynamic Sensorium sessions. Both follow the shared training and evaluation protocol below.
 
 ## Purpose
@@ -32,7 +34,7 @@ python -m trajectory_eval.static_dynamic --config configs/static_dynamic_sensori
 python -m trajectory_eval.static_dynamic --config configs/static_dynamic_sensorium2023.yaml evaluate
 ```
 
-Training writes run products under `checkpoints/static_dynamic_sensorium2023/` and `logs/static_dynamic_sensorium2023/`. Reloaded oracle evaluation loads the published checkpoint at [`../../models/static_on_dynamic/best.pt`](../../models/static_on_dynamic/best.pt).
+Training writes run products under `checkpoints/static_dynamic_sensorium2023/` and `logs/static_dynamic_sensorium2023/`. Reloaded oracle evaluation loads the externally restored checkpoint identified at [`../../models/static_on_dynamic/best.pt`](../../results/manifests/model_files.csv).
 
 ### Full Dynamic baseline
 
@@ -43,16 +45,16 @@ python -m trajectory_eval.official_dynamic --config configs/phase1A_dynamic_offi
 python -m trajectory_eval.official_dynamic --config configs/phase1A_dynamic_official.yaml evaluate
 ```
 
-Training writes run products under `checkpoints/dynamic_official_reproduction/` and `logs/dynamic_official_reproduction/`. Reloaded oracle evaluation loads the published checkpoint at [`../../models/official_dynamic/best.pt`](../../models/official_dynamic/best.pt).
+Training writes run products under `checkpoints/dynamic_official_reproduction/` and `logs/dynamic_official_reproduction/`. Reloaded oracle evaluation loads the externally restored checkpoint identified at [`../../models/official_dynamic/best.pt`](../../results/manifests/model_files.csv).
 
-The local full Dynamic run was stopped by project decision after epoch 103 validation. The published checkpoint retains the best complete epoch-97 state. The official early-stopping procedure had not terminated naturally.
+The local full Dynamic run was stopped by project decision after epoch 103 validation. The recorded checkpoint retains the best complete epoch-97 state. The official early-stopping procedure had not terminated naturally.
 
 ## Outputs
 
 ### Models
 
-- Static best checkpoint: [`../../models/static_on_dynamic/best.pt`](../../models/static_on_dynamic/best.pt)
-- Full Dynamic best checkpoint: [`../../models/official_dynamic/best.pt`](../../models/official_dynamic/best.pt)
+- Static best checkpoint: [`../../models/static_on_dynamic/best.pt`](../../results/manifests/model_files.csv)
+- Full Dynamic best checkpoint: [`../../models/official_dynamic/best.pt`](../../results/manifests/model_files.csv)
 
 ### Evaluation
 
@@ -97,4 +99,4 @@ Encoding checkpoints were selected using the oracle tier that later supplies ful
 
 [Frame-permutation tests](tests/test_static_dynamic_locks.py) check equivariance: moving a frame and its covariates moves the corresponding prediction. The separate [frame-independence test](tests/test_static_frame_independence.py) changes one retained frame while keeping all other frames and covariates fixed. It tests visual channels, behavioral channels, the separate behavior argument and pupil input through the actual Static adapter in evaluation mode.
 
-The revision checks passed for 15 perturbations at three input positions, using 27 frames, an 18-frame crop, nine retained outputs and seven neurons. Unchanged outputs agree within the declared `2e-6` tolerance. A deliberately sequence-coupled control passes permutation equivariance and fails independence. These CPU checks use synthetic inputs and the actual model implementation. They verify evaluation-mode execution, not training-mode batch normalization or upstream data normalization.
+The recorded checks passed for 15 perturbations at three input positions, using 27 frames, an 18-frame crop, nine retained outputs and seven neurons. Unchanged outputs agree within the declared `2e-6` tolerance. A deliberately sequence-coupled control passes permutation equivariance and fails independence. These CPU checks use synthetic inputs and the actual model implementation. They verify evaluation-mode execution, not training-mode batch normalization or upstream data normalization.

@@ -32,5 +32,6 @@
     }
   ],
   "scientific_models_fitted": false,
-  "full_randomization_rerun": false
+  "full_randomization_rerun": false,
+  "record_scope": "Historical execution for the 651b764 source edition, including the initial collection failure and the successful rerun. Later test counts are separate."
 }

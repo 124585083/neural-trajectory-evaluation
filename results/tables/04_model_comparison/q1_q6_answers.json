@@ -674,7 +674,7 @@
         "held_candidates": 40
       }
     ],
-    "interpretation": "The reversal counterexample establishes an order limitation of time-averaged condition patterns. Approximate response matching supports complementary sensitivity. Held-family ridge residuals describe the limits of this fitted predictor and do not establish general information insufficiency or independence.",
+    "interpretation": "The reversal counterexample establishes an order limitation of time-averaged condition patterns. Approximate response matching supports complementary sensitivity. Ridge residuals for excluded perturbation families describe the limits of this fitted predictor and do not establish general information insufficiency or independence.",
     "candidates": 43,
     "conventional_features": [
       "response_single",

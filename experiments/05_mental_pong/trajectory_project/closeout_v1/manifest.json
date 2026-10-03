@@ -2494,18 +2494,6 @@
       "role": "closeout generated artifact or implementation"
     },
     {
-      "path": "source_pilot://trajectory_project/closeout_v1/sources/user_closeout_request.txt",
-      "sha256": "0209c8d62fa60277f0869966d598ce317ec35153c893f829da871df4e2745cbe",
-      "bytes": 19009,
-      "role": "closeout generated artifact or implementation"
-    },
-    {
-      "path": "source_pilot://trajectory_project/closeout_v1/sources/user_request_record.json",
-      "sha256": "0ce3bae278240eacaae1a7a797fecc9c70574f6698e01ccd433c83b6bf116fa4",
-      "bytes": 264,
-      "role": "closeout generated artifact or implementation"
-    },
-    {
       "path": "source_pilot://trajectory_project/closeout_v1/SOURCES.md",
       "sha256": "58afe241efd54ea22fcda687dbf166298bf852352dd3ac1302d7897908010756",
       "bytes": 1928,
@@ -2546,5 +2534,6 @@
     "condition_endpoint_fa_gpfa_v1": 3916,
     "trial_endpoint_fa_gpfa_v1": 4753
   },
-  "future_work_executed": false
+  "future_work_executed": false,
+  "publication_record_scope": "Public technical edition. Scientific values and historical source hashes are retained; historical locks identify preserved original records, not this edited prose edition."
 }

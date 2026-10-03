@@ -35,7 +35,7 @@
     "raw_preprocessing_fail_boundary_visible": true,
     "n_readout_rounds_per_representation": 100,
     "findings": [
-      "All79 condition identities retained; last page intentionally has3 conditions.",
+      "All 79 condition identities retained; the last page has 3 conditions.",
       "Condition59920 explicitly marked unresolved terminal collision with no valid mean candidate; no substituted curve.",
       "Terminal record counts indicate contributions to each condition mean; zero means no constructed valid candidate, not zero collected trials.",
       "Four trajectories, shared axis ranges, physical event markers and test-split uncertainty visible without overlap.",
@@ -79,7 +79,7 @@
     "raw_preprocessing_fail_boundary_visible": true,
     "n_readout_rounds_per_representation": 100,
     "findings": [
-      "All79 condition identities retained; last page intentionally has3 conditions.",
+      "All 79 condition identities retained; the last page has 3 conditions.",
       "Condition59920 explicitly marked unresolved terminal collision with no valid mean candidate; no substituted curve.",
       "Terminal record counts indicate contributions to each condition mean; zero means no constructed valid candidate, not zero collected trials.",
       "Four trajectories, shared axis ranges, physical event markers and test-split uncertainty visible without overlap.",

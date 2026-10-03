@@ -1,5 +1,7 @@
 # Phase 4 — Model comparison
 
+Model payloads are external. The [artifact guide](../../docs/DATA_AND_REPRODUCIBILITY.md#8-external-model-and-gpfa-artifacts) gives expected restore paths and integrity checks; checkpoint links below point to identity records.
+
 This Study 1 phase compares Static and Total-parameter-matched Dynamic predictions with response, output-space RSA/CKA, and frozen neural-data-defined trajectory metrics. Predefined stress tests examine the sensitivity of these measurements.
 
 ## Purpose
@@ -9,10 +11,10 @@ Phase 1 provides the frozen Static checkpoint, and Phase 3 provides the frozen T
 ## Inputs and frozen artifacts
 
 - **Recorded data:** pilot session `dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20`; 58 oracle trials in six repeated-movie conditions; deterministic 512-neuron order; original frames 50–299.
-- **Static model:** [`../01_baselines/records/static/training_config.yaml`](../01_baselines/records/static/training_config.yaml) and [`../../models/static_on_dynamic/best.pt`](../../models/static_on_dynamic/best.pt).
-- **Total-parameter-matched Dynamic:** [`../03_parameter_matching/configs/dynamic_parameter_matched.yaml`](../03_parameter_matching/configs/dynamic_parameter_matched.yaml) and [`../../models/parameter_matched_dynamic/best.pt`](../../models/parameter_matched_dynamic/best.pt).
+- **Static model:** [`../01_baselines/records/static/training_config.yaml`](../01_baselines/records/static/training_config.yaml) and [`../../models/static_on_dynamic/best.pt`](../../results/manifests/model_files.csv).
+- **Total-parameter-matched Dynamic:** [`../03_parameter_matching/configs/dynamic_parameter_matched.yaml`](../03_parameter_matching/configs/dynamic_parameter_matched.yaml) and [`../../models/parameter_matched_dynamic/best.pt`](../../results/manifests/model_files.csv).
 - **Comparison protocol:** [`configs/pilot.yaml`](configs/pilot.yaml), with generated locks under `outputs/pilot/` and a compact released record at [`../../results/tables/04_model_comparison/protocol_lock.json`](../../results/tables/04_model_comparison/protocol_lock.json).
-- **Auxiliary checkpoint:** [`../../models/parameter_matched_dynamic/epoch_65_validation_matched.pth`](../../models/parameter_matched_dynamic/epoch_65_validation_matched.pth), used only for the separately named validation-matched checkpoint diagnostic.
+- **Auxiliary checkpoint:** [`../../models/parameter_matched_dynamic/epoch_65_validation_matched.pth`](../../results/manifests/model_files.csv), used only for the separately named validation-matched checkpoint diagnostic.
 - **Comparison GPFA training data:** a deterministic 174-of-348 training-trial subset, divided into 139 fit and 35 calibration trials, then refitted on all 174 after initialization selection.
 
 The resulting `q = 4` comparison-subset GPFA is the exact neural-data-defined GPFA used for model evaluation. Phase 2 establishes the measurement design on the full train tier; Phase 4 separately fits and revalidates the locked 174-trial comparison GPFA used here. See [GPFA Validation](../../docs/GPFA_VALIDATION.md) for the relationship between the two fits.
@@ -81,7 +83,7 @@ The CLI also exposes `all`, which runs only `lock` through `gpfa-evaluate` in in
 ## Outputs
 
 - **Aligned predictions and protocol:** generated `outputs/pilot/protocol_lock.npz`, `protocol_lock.json`, and `oracle_predictions.npz`; compact summaries are released in [`../../results/tables/04_model_comparison/`](../../results/tables/04_model_comparison/).
-- **Frozen comparison GPFA:** [`../../models/gpfa_model_comparison/gpfa.pkl`](../../models/gpfa_model_comparison/gpfa.pkl), [`../../models/gpfa_model_comparison/preprocessing.npz`](../../models/gpfa_model_comparison/preprocessing.npz), and selection/reliability metadata in the Phase 4 result directory.
+- **Frozen comparison GPFA:** [`../../models/gpfa_model_comparison/gpfa.pkl`](../../results/manifests/model_files.csv), [`../../models/gpfa_model_comparison/preprocessing.npz`](../../results/manifests/model_files.csv), and selection/reliability metadata in the Phase 4 result directory.
 - **Conventional metrics:** response and RSA/CKA tables and paired summaries are released in the Phase 4 result directory; detailed distributions are generated under `outputs/pilot/`.
 - **Trajectory comparison:** latent trajectory archives are generated under `outputs/pilot/`; model metrics, condition bootstrap summaries, and model-prediction null distributions are released in the Phase 4 result directory.
 - **Stress tests and Q1–Q6:** extended-prediction summary, response-score-matching output, temporal-attenuation tables, Q6 candidate/leave-family-out tables, and [`../../results/tables/04_model_comparison/q1_q6_answers.json`](../../results/tables/04_model_comparison/q1_q6_answers.json).

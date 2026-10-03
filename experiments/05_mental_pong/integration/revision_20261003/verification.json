@@ -1,14 +1,8 @@
 {
   "revision_date": "2026-10-03",
   "checked_at_utc": "2026-10-02T17:22:32.914071+00:00",
-  "status": "COMPLETE_FOR_AVAILABLE_REVISION_SCOPE_PUBLIC_PAYLOAD_WITHHELD",
+  "status": "HISTORICAL_TECHNICAL_RESULTS_WITH_PAYLOAD_UNAVAILABLE",
   "starting_commit": "0637c08bca6661e32753f7f4c52d141bcd76f61b",
-  "batch_status": {
-    "1_research_entry_attribution_references_data_use": "complete",
-    "2_English_metrics_figures_future_plan": "complete",
-    "3_source_and_verification": "complete_for_source_export_safeguards_and_private_verification",
-    "3_public_numerical_payload": "blocked_pending_derived_data_permission"
-  },
   "publication_checks": {
     "status": "passed",
     "files_written": false,
@@ -28,7 +22,8 @@
         "binary figures (separate visual inspection record)"
       ],
       "required_legal_exceptions": [],
-      "synthetic_path_exception": "A synthetic Windows absolute path is used in rejection tests and in this checker."
+      "synthetic_path_exception": "A synthetic Windows absolute path is used in rejection tests and in this checker.",
+      "scope": "Character, path-pattern, syntax, and local-link checks only; no grammatical-language certification."
     },
     "saved_score_checks": {
       "status": "passed",
@@ -57,17 +52,11 @@
       },
       "deep_external_checksums": false,
       "failures": [],
-      "unavailable_artifacts": [
-        {
-          "artifact_id": "external_source_229047a1ad4f:.",
-          "storage_location_id": "external_source_229047a1ad4f",
-          "status": "unavailable"
-        }
-      ],
       "scientific_status": "CLOSED_EXPLORATORY_WITH_LIMITATIONS",
       "raw_preprocessing": "fail",
       "new_model_fitting": false,
-      "files_written": false
+      "files_written": false,
+      "inventory_scope": "The historical inventory included one non-scientific unavailable item, excluded from current scientific dependencies. Of the remaining artifacts, 7,347 hashes were verified and 226 large files were present without deep checksum verification."
     },
     "failed_checks": []
   },
@@ -75,7 +64,8 @@
     "files_checked": 223,
     "all_byte_identical": true,
     "record": "scientific_preservation.json",
-    "original_completion_and_integration_records_changed": false
+    "original_completion_and_integration_records_changed": false,
+    "scope": "223 files checked in the recorded revision. Later edits and availability must be evaluated against the current publication map."
   },
   "tests": {
     "protocol_and_phase4_passed": 18,
@@ -94,28 +84,12 @@
     "version": "0.1.0",
     "date_released": "2026-08-14"
   },
-  "editorial_record": "writing_and_figures.json",
   "mini_record": "mini_replay.json",
   "rights_record": "data_rights_audit.json",
   "safeguard_record": "safeguards.json",
-  "review_crosswalk": {
-    "prior_document": "Repository_Review_2026-10-02.md",
-    "available": false,
-    "original_R1_R12_mapping": "unverified"
-  },
   "publication_manifest": {
     "path": "publication_map.csv",
-    "policy": "Additive baseline-to-publication map covering every publication file except itself. Original integration migration_map.csv and source SHA values remain immutable. This verification record is included after it is written, then a final read-only pass checks the complete map."
+    "policy": "Current retained paths and explicit bounded retirements are checked by publication_map.csv. Historical source hashes remain historical; the manifest has an explicit self-hash exclusion."
   },
-  "not_performed": [
-    "New scientific comparisons",
-    "Neural representation training",
-    "New seeds or splits",
-    "Full randomization rerun",
-    "Full raw-data rebuild",
-    "Linux or macOS execution",
-    "Commit or push",
-    "Public release or DOI registration"
-  ],
-  "release_state": "Working tree only; reviewable changes, no staged commit or network publication."
+  "record_scope": "Results recorded for the 651b764e5b64368a4f22959bf6b97dcda8881caa source edition. Counts and outcomes below are historical, not a certification of later candidate bytes."
 }

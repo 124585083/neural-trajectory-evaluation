@@ -111,14 +111,14 @@ def verify_previous(project, step):
             if revision["original_sha256"] != item["sha256"]:
                 raise ValueError("Documentation archive does not match the historical manifest")
             if sha(project / "README.md") != revision["current_sha256"]:
-                raise ValueError("Current README differs from the approved Step 3 documentation revision")
+                raise ValueError("Current README differs from the recorded Step 3 documentation revision")
             archived = Path(revision["archived_original_path"]).resolve()
             if archived != project / "artifacts/history/README_step1.md":
                 raise ValueError("Unexpected documentation archive location")
             if sha(archived) != item["sha256"]:
                 raise ValueError("Historical README bytes were not preserved")
             substitutions.append({"original_path": item["path"], "original_sha256": item["sha256"],
-                                  "checked_archive": str(archived), "reason": "user-requested integrated README; scientific files unchanged"})
+                                  "checked_archive": str(archived), "reason": "combined three-step README; scientific files unchanged"})
             item["path"] = str(archived)
         verified.append(item)
     count = verify_records(verified)
@@ -147,7 +147,7 @@ def update_readme(project, body):
     current = project / "README.md"
     current.write_text(body, encoding="utf-8")
     write_json(project / "notes/step3_readme_revision.json", {
-        "reason": "User requested README commands for all three completed steps and an integrated project narrative",
+        "reason": "Combined execution commands and scientific narrative for the three completed steps",
         "original_sha256": sha(original), "archived_original_path": str(original),
         "current_sha256": sha(current), "current_path": str(current),
         "previous_manifests_modified": False, "scientific_configuration_or_artifact_changed": False,

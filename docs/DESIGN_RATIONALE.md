@@ -118,7 +118,7 @@ This is a **metric-sensitivity stress test**, not a newly trained model comparis
 
 ## 9. Why time reversal is an important counterexample
 
-Some condition-averaged representational summaries operate on state sets or time-averaged patterns that do not uniquely encode order. Complete time reversal can preserve the visited population states, condition-level averages, and some representational summaries while reversing local direction, sequence, and phase.
+The tested time-averaged condition-pattern RSA/CKA summaries do not encode temporal order. Complete time reversal can preserve the visited population states, condition-level averages, and some representational summaries while reversing local direction, sequence, and phase.
 
 Time reversal therefore provides a controlled sufficiency test. If a conventional summary remains unchanged after reversal while an order-sensitive trajectory metric changes, that conventional summary is not sufficient to encode the temporal property destroyed by reversal.
 

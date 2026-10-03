@@ -16,8 +16,6 @@ import sklearn
 from sklearn.model_selection import GroupShuffleSplit
 from trajectory_project.step3_io import read_json, write_json, record, sha, collect_records, verify_records
 
-from trajectory_project.runtime_paths import configured_root
-REQUEST = configured_root("source_pilot") / "trajectory_project/trial_endpoint_fa_gpfa_v1/sources/user_request.txt"
 
 
 def initialize():
@@ -31,9 +29,6 @@ def initialize():
         count=verify_records(records)
         prior.append(dict(name=name,manifest=record(path,'immutable historical analysis'),records=records,count=count))
     write_json(ROOT/'sources/historical_preservation.json',prior,immutable=True)
-    request_copy=ROOT/'sources/user_request.txt'
-    if not request_copy.exists():request_copy.write_bytes(REQUEST.read_bytes())
-    assert sha(request_copy)==sha(REQUEST)
     config={
         'version':'trial_endpoint_fa_gpfa_v1','data_mode':'trial_labels_with_mean_neural',
         'primary_comparison':'Each objective/candidate trajectory scored against its own trial-labelled reference; OO vs BB.',
@@ -52,7 +47,7 @@ def initialize():
         'aggregation':'Raw held-out trial x time rows per split, then mean and population SD over overlapping splits; per-trial, session and condition descriptive summaries. No independent-experiment significance from split repetitions.',
         'primary_differences':{'Delta_r':'r_beh-r_obj','Delta_RMSE':'RMSE_obj-RMSE_beh'},
         'storage':'Lossless trial labels and sample index; held-out predictions factorized as same-condition same-input predictions plus real test-trial index. Explicit per-trial expansion/export supported. Scores always evaluate every real trial label.',
-        'source_records':[record(REQUEST,'user-authorized complete request'),record(PILOT/'gpfa_shared.py','unchanged shared RBF model'),record(PILOT/'gpfa_config.json','unchanged GPFA hyperparameter source'),record(PILOT/'capacity_position_baselines.py','unchanged FA50 training setting source'),record(PILOT/'official_reproduction.py','verified instantaneous OLS reproduction'),record(PROJECT/'all79_official_readout_v1/sources/official_protocol_audit.json','previous verified official source audit')]
+        'source_records':[record(PILOT/'gpfa_shared.py','unchanged shared RBF model'),record(PILOT/'gpfa_config.json','unchanged GPFA hyperparameter source'),record(PILOT/'capacity_position_baselines.py','unchanged FA50 training setting source'),record(PILOT/'official_reproduction.py','verified instantaneous OLS reproduction'),record(PROJECT/'all79_official_readout_v1/sources/official_protocol_audit.json','previous verified official source audit')]
     }
     write_json(ROOT/'configs/analysis_protocol.json',config,immutable=True)
     write_json(ROOT/'configs/protocol_lock.json',{'sha256':sha(ROOT/'configs/analysis_protocol.json'),'locked_before_new_scores':True},immutable=True)

@@ -1,5 +1,5 @@
 {
-  "scope": "Unedited 0637c08 snapshot; read-only checks; no fitting",
+  "scope": "Historical read-only regression results for source commit 0637c08bca6661e32753f7f4c52d141bcd76f61b; no model fitting.",
   "numerical_checks": {
     "status": "passed",
     "self_target_rows": 48,
@@ -26,7 +26,8 @@
       "binary figures (separate visual inspection record)"
     ],
     "required_legal_exceptions": [],
-    "synthetic_path_exception": "A synthetic Windows absolute path is used in rejection tests and in this checker."
+    "synthetic_path_exception": "A synthetic Windows absolute path is used in rejection tests and in this checker.",
+    "scope": "Historical character, path-pattern, syntax, and link checks. Empty language_issues means no CJK matches; it does not establish grammatical or scientific-language correctness."
   },
   "evidence_index": {
     "status": "passed",

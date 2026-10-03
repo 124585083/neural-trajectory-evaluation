@@ -211,5 +211,6 @@
       },
       "distinction": "Fresh reliability filtering and FA fitting from published full-mean response arrays; follows original all-condition/transductive preprocessing, not pilot strict split"
     }
-  }
+  },
+  "record_scope": "Historical upstream audit and FA reproduction. The reproduction_plan field preserves the prospectively defined procedure; completed runs are recorded separately below."
 }

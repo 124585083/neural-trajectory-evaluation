@@ -16,6 +16,7 @@ import sys
 import numpy as np
 
 MODULE = Path(__file__).resolve().parents[1]
+REPOSITORY = MODULE.parents[1]
 spec = importlib.util.spec_from_file_location('mini_replay_core', MODULE/'mini_replay/replay.py')
 core = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(core)
@@ -28,9 +29,9 @@ def export(source, output, rights_record=None):
     source, output = Path(source).resolve(), Path(output).resolve()
     if output == source or output.is_relative_to(source):
         raise ValueError('The export must be outside the preserved scientific source.')
-    if output.exists() and any(output.iterdir()):
+    if output.exists() and (not output.is_dir() or any(output.iterdir())):
         raise ValueError('Use a new, empty export directory; existing exports are immutable.')
-    if output.is_relative_to(MODULE) and rights_record is None:
+    if output.is_relative_to(REPOSITORY) and rights_record is None:
         raise ValueError('Publication-tree payload export requires an explicit passed rights record.')
     rights = {'status':'unresolved','public_payload_permitted':False}
     if rights_record:

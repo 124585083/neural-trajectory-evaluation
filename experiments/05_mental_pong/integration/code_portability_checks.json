@@ -36,8 +36,7 @@
       "warnings": 15,
       "duration_seconds": 9.82,
       "working_directory": "Outside repository",
-      "bytecode_and_pytest_cache_writes": false,
-      "temporary_outputs": "Separate external integration work directory"
+      "bytecode_and_pytest_cache_writes": false
     }
   },
   "dependency_import_check": {
@@ -108,5 +107,6 @@
     "executed_during_integration": false,
     "entrypoint": "python run.py --full-plan",
     "limits": "The retained full scientific write routes require materialized external dependencies, an isolated writable output workspace, and new execution records. Their end-to-end portability was not exercised or claimed during this integration."
-  }
+  },
+  "record_scope": "Historical portability checks for the original integration source edition; saved numerical outcomes and failures are retained."
 }

@@ -1,5 +1,5 @@
 {
-  "status": "passed_for_published_scope",
+  "status": "HISTORICAL_AUTOMATED_SCAN_RESULTS",
   "checked_at_utc": "2026-10-01T17:50:37.356460+00:00",
   "text_and_links": {
     "text_files": 357,
@@ -46,10 +46,6 @@
     "record": "figure_review.json",
     "external_atlases_newly_inspected": false
   },
-  "manual_prose_review": {
-    "existing_sensorium": "English sentences, claims, comments/templates and captions reviewed; see editorial_changes.md",
-    "mental_pong": "English reports, historical summaries, code strings and figure labels reviewed",
-    "future_design": "Reviewed as unexecuted design; no new scientific claims"
-  },
-  "legal_notices": "Protected originals preserved verbatim; no language exceptions required"
+  "legal_notices": "Protected originals preserved verbatim; no language exceptions required",
+  "scope": "Character, limited path-pattern, and syntax checks for the original integration edition. These findings do not establish grammatical English or publication suitability."
 }

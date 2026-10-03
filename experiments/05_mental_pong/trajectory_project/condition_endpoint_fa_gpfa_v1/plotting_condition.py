@@ -1,4 +1,4 @@
-"""All79 condition-average trajectories from held-out readout predictions only."""
+"""All 79 condition-average trajectories from held-out readout predictions only."""
 from __future__ import annotations
 
 import json
@@ -36,7 +36,7 @@ COLORS = {"objective": "#263445", "D_obj": "#1674B8", "behavior": "#CF7514", "D_
 
 
 def condition_figure_order(data):
-    """Retain all79 identities, sorted by ID; no trial or score selection."""
+    """Retain all 79 identities, sorted by ID; no trial or score selection."""
     rows = []
     for animal, a in sorted(data.items()):
         geometry = a["geometry"].set_index("condition_index")
@@ -193,7 +193,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.utils import ImageReader
 d=json.load(open(sys.argv[1],encoding='utf-8'))
 c=canvas.Canvas(d['target'],pagesize=A4,pageCompression=1)
-c.setTitle('Mental-Pong all79 condition-average endpoint candidates: FA50 and GPFA50')
+c.setTitle('Mental-Pong all 79 condition-average endpoint candidates: FA50 and GPFA50')
 c.setAuthor('Mental-Pong local analysis')
 W,H=A4
 for p in d['images']:
@@ -272,11 +272,11 @@ def _paired_distribution(round_summary, root):
             ax.grid(axis="y", alpha=.2)
             ax.spines[["top", "right"]].set_visible(False)
     fig.suptitle("Reconstructing objective and candidate paths", x=.07, y=.97, ha="left", fontsize=20, fontweight="bold")
-    fig.text(.07, .92, "Each readout is scored against its training target. Positive differences favor the candidate path.", fontsize=10.5)
+    fig.text(.07, .92, "y coordinate; each held-out prediction is scored against its own target. Positive differences favor the candidate path.", fontsize=10.5)
     fig.legend(handles=[Patch(facecolor="#87B7D5", label="FA50"), Patch(facecolor="#D3A2BF", label="GPFA50")],
                loc="upper right", bbox_to_anchor=(.96, .96), ncol=2, frameon=False)
-    fig.text(.07, .026, "Overlapping condition splits describe readout stability; they are not independent experiments.\n"
-             "Neural input and behavioral labels are condition averages. Results do not measure trial-specific neural prediction.", fontsize=9.5, color="#52606D")
+    fig.text(.07, .026, "100 overlapping condition splits: median and quartiles; whiskers reach observations within 1.5 IQR; points mark outliers.\n"
+             "Neural inputs and targets are condition means; split variation does not measure biological trial variation.", fontsize=9.5, color="#52606D")
     fig.subplots_adjust(left=.07, right=.975, top=.84, bottom=.13, hspace=.35, wspace=.2)
     path = root/"figures/paired_self_reconstruction_differences.png"
     fig.savefig(path, dpi=170, facecolor="white")

@@ -1,9 +1,9 @@
 {
   "statements": [
-    "After condition averaging, all four full-epoch comparisons still favor objective own-target reconstruction, while the RMSE gap between targets is smaller.",
-    "Candidate full-epoch RMSE exceeds objective RMSE by 0.0220–0.0322; the corresponding trial-label range was 0.0873–0.1250. This comparison of two executed pipelines cannot assign all changes to behavioral averaging.",
+    "After condition averaging, all four full-interval comparisons still favor objective own-target reconstruction, while the RMSE gap between targets is smaller.",
+    "Candidate full-interval RMSE exceeds objective RMSE by 0.0220–0.0322; the corresponding trial-label range was 0.0873–0.1250. This comparison of two executed pipelines cannot assign all changes to behavioral averaging.",
     "No-collision conditions have lower candidate RMSE by 0.0892–0.1070 but lower correlation; the metrics do not jointly establish candidate superiority.",
-    "Post-collision candidate RMSE is higher by 0.2312–0.2628. Preserve this phase and condition-type difference rather than interpreting every phase through its full-epoch mean."
+    "Post-collision candidate RMSE is higher by 0.2312–0.2628. Preserve this phase and condition-type difference rather than interpreting every phase through its full-interval mean."
   ],
   "metric_comparison_is_descriptive_not_significance": true,
   "sources": [
@@ -19,5 +19,6 @@
       "bytes": 25926,
       "role": "source or output"
     }
-  ]
+  ],
+  "publication_record_scope": "Public technical edition. Scientific values and historical source hashes are retained; historical locks identify preserved original records, not this edited prose edition."
 }

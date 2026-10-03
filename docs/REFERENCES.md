@@ -14,8 +14,8 @@ The code checkout has an MIT license. The saved Zenodo provider metadata identif
 ## Dynamic Sensorium and Static Sensorium
 
 - **Dynamic benchmark description:** Turishcheva, P., Fahey, P. G., Hansel, L., Froebe, R., Ponder, K., Vystrčilová, M., Willeke, K. F., Bashiri, M., Wang, E., Ding, Z., Tolias, A. S., Sinz, F. H., and Ecker, A. S. (2024 version). [The Dynamic Sensorium competition for predicting large-scale mouse visual cortex activity from videos](https://arxiv.org/abs/2305.19654v2). arXiv:2305.19654v2. Version 1 was submitted on 31 May 2023; the cited version 2 is dated 12 July 2024. DOI: `10.48550/arXiv.2305.19654`.
-- **Dynamic competition retrospective:** Wang et al. (2024). [Retrospective for the Dynamic Sensorium Competition for predicting large-scale mouse primary visual cortex activity from videos](https://proceedings.neurips.cc/paper_files/paper/2024/hash/d758d7c0a88d741c8ca4637579c9df87-Abstract-Datasets_and_Benchmarks_Track.html). *NeurIPS 2024 Datasets and Benchmarks Track*. This retrospective and the benchmark description have different roles.
-- **Static competition retrospective:** Willeke et al. (2023). [Retrospective on the SENSORIUM 2022 competition](https://proceedings.mlr.press/v220/willeke23a.html). *Proceedings of Machine Learning Research*, **220**.
+- **Dynamic competition retrospective:** Turishcheva et al. (2024). [Retrospective for the Dynamic Sensorium Competition for predicting large-scale mouse primary visual cortex activity from videos](https://proceedings.neurips.cc/paper_files/paper/2024/hash/d758d7c0a88d741c8ca4637579c9df87-Abstract-Datasets_and_Benchmarks_Track.html). *NeurIPS 2024 Datasets and Benchmarks Track*. This retrospective and the benchmark description have different roles.
+- **Static competition retrospective:** Willeke et al. (2022). [Retrospective on the SENSORIUM 2022 competition](https://proceedings.mlr.press/v220/willeke23a.html). *Proceedings of Machine Learning Research*, **220**, 314–333. The publisher's citation gives 2022, although the URL identifier ends in `willeke23a`.
 
 The exact Sensorium and neuralpredictors revisions and their licensing boundaries are recorded in [Third-Party Notices](../THIRD_PARTY_NOTICES.md). The [data-use audit](METHODS.md) distinguishes training gradients, checkpoint selection, GPFA fitting, perturbation selection, and final scoring.
 
@@ -24,5 +24,3 @@ The exact Sensorium and neuralpredictors revisions and their licensing boundarie
 - Yu et al. (2009). [Gaussian-process factor analysis for low-dimensional single-trial analysis of neural population activity](https://doi.org/10.1152/jn.90941.2008). *Journal of Neurophysiology*, **102**(1), 614–635.
 - Kriegeskorte, N., Mur, M., and Bandettini, P. A. (2008). [Representational similarity analysis—connecting the branches of systems neuroscience](https://doi.org/10.3389/neuro.06.004.2008). *Frontiers in Systems Neuroscience*, **2**.
 - Kornblith et al. (2019). [Similarity of neural network representations revisited](https://proceedings.mlr.press/v97/kornblith19a.html). *Proceedings of Machine Learning Research*, **97**.
-
-Bibliographic corrections do not change the scientific results or declare a new software release. The revision record separately identifies the public sources checked and any inaccessible endpoints.

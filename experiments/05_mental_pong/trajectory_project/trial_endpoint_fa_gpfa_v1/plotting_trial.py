@@ -185,7 +185,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.utils import ImageReader
 d=json.load(open(sys.argv[1],encoding='utf-8'))
 c=canvas.Canvas(d['target'],pagesize=A4,pageCompression=1)
-c.setTitle('Mental-Pong all79 real-trial examples: FA50 and GPFA50')
+c.setTitle('Mental-Pong all 79 real-trial examples: FA50 and GPFA50')
 c.setAuthor('Mental-Pong local analysis')
 W,H=A4
 for p in d['images']:
