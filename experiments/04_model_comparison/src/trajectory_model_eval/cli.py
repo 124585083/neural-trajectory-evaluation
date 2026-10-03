@@ -29,8 +29,14 @@ def main() -> None:
         ),
     )
     parser.add_argument("--config", default=str(DEFAULT_CONFIG))
+    parser.add_argument("--output-dir", help="Use a separate output directory for an intentional new protocol")
+    parser.add_argument("--allow-legacy-unverified", action="store_true", help="Explicit diagnostic override for historical locks without verifiable input metadata; never updates the lock")
     args = parser.parse_args()
     config = load_config(args.config)
+    if args.output_dir:
+        config["project"]["output_dir"] = args.output_dir
+    if args.allow_legacy_unverified:
+        config["protocol_guard"] = {"allow_legacy_unverified": True}
     if args.command in {"lock", "all"}:
         print(prepare_protocol(config))
     if args.command in {"predict", "all"}:

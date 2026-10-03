@@ -271,8 +271,8 @@ def _paired_distribution(round_summary, root):
             ax.set_ylabel("MWorks coordinate units" if col == 0 else "Pearson r difference")
             ax.grid(axis="y", alpha=.2)
             ax.spines[["top", "right"]].set_visible(False)
-    fig.suptitle("Paired own-target reconstruction differences", x=.07, y=.97, ha="left", fontsize=20, fontweight="bold")
-    fig.text(.07, .92, "Positive favors the mean-endpoint candidate on its own target. Scores use held-out condition x time rows.", fontsize=10.5)
+    fig.suptitle("Reconstructing objective and candidate paths", x=.07, y=.97, ha="left", fontsize=20, fontweight="bold")
+    fig.text(.07, .92, "Each readout is scored against its training target. Positive differences favor the candidate path.", fontsize=10.5)
     fig.legend(handles=[Patch(facecolor="#87B7D5", label="FA50"), Patch(facecolor="#D3A2BF", label="GPFA50")],
                loc="upper right", bbox_to_anchor=(.96, .96), ncol=2, frameon=False)
     fig.text(.07, .026, "Overlapping condition splits describe readout stability; they are not independent experiments.\n"

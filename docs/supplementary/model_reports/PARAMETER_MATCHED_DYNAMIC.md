@@ -54,3 +54,7 @@ preferred total-parameter difference  <= 5%
 absolute maximum                       <= 10%
 selected difference                     1.707%
 ```
+
+## Selection and evaluation data
+
+The training entry point uses the official train tier for gradients and the oracle correlation closure for scheduling, stopping decisions and checkpoint selection. Complete-sequence evaluation reloads the selected weights and scores the same oracle tier. It verifies saved-checkpoint execution but does not provide a new independent test set. Hidden server scoring was unavailable for this local comparison. The [Methods data-use table](../../METHODS.md#data-use-and-evaluation-independence) distinguishes these uses from train-only GPFA fitting and perturbation-half selection. The [reference guide](../../REFERENCES.md) credits the original benchmark and reused software.

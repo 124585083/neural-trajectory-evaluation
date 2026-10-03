@@ -226,7 +226,7 @@ def polish_report(root):
     path=root/'REPORT.md';text=path.read_text(encoding='utf-8')
     for tag in ('MAIN_FINDING','SHAPE_FINDING'):
         text=re.sub(r'<!-- BEGIN '+tag+r' -->.*?<!-- END '+tag+r' -->\n\n','',text,flags=re.S)
-    anchor='## 1. Own-target reconstruction differences\n\n'
+    anchor='## 1. Reconstruction of each training target\n\n'
     assert anchor in text
     text=text.replace(anchor,anchor+'<!-- BEGIN MAIN_FINDING -->\n'+finding+'\n<!-- END MAIN_FINDING -->\n\n',1)
     anchor='Candidate endpoint ranges, variances, and within-condition trial variance at each time'
@@ -286,9 +286,9 @@ def make_report(data,root):
     shape=cross[(cross.coordinate=='y')&(cross.epoch=='full')&(((cross['head']=='D_obj')&(cross.target=='objective'))|((cross['head']=='D_beh')&(cross.target=='behavior')))]
     text=f'''# Trial endpoint candidates with FA50/GPFA50 and OLS position reconstruction
 
-## 1. Own-target reconstruction differences
+## 1. Reconstruction of each training target
 
-Compare each recorded behavioral trial's objective target with objective-head predictions and its own endpoint candidate with candidate-head predictions. Score each held-out trial and time before summarizing100 complete condition splits. Trial targets are not averaged before the primary score.
+Compare each recorded behavioral trial's objective target with objective-head predictions and its own endpoint candidate with candidate-head predictions. Score each held-out trial and time before summarizing 100 complete condition splits. Trial targets are not averaged before the primary score.
 
 {compare('mahler','FA50')} {compare('mahler','GPFA50')}
 
@@ -304,7 +304,7 @@ Delta_r=r_beh-r_obj; Delta_RMSE=RMSE_obj-RMSE_beh. Positive differences favor th
 
 {md(pd.DataFrame(cover),digits=0)}
 
-All79 condition identities enter each nominal39/40 split.78 conditions have usable candidates;59920 has an unresolved terminal collision anchor and retains its identity with zero valid contribution. Representations still fit the specified39 training conditions, while OLS valid counts can be38/39 for training and39/40 for testing; see the [fit audit](results/ols_fit_audit.csv). Unknown records also retain identities:576 Mahler and3641 Perle terminal scalars disagree with display positions and may be defaults. Successes and failures remain included without accuracy or error-size selection.
+All 79 condition identities enter each nominal 39/40 split.78 conditions have usable candidates;59920 has an unresolved terminal collision anchor and retains its identity with zero valid contribution. Representations still fit the specified39 training conditions, while OLS valid counts can be 38/39 for training and 39/40 for testing; see the [fit audit](results/ols_fit_audit.csv). Unknown records also retain identities:576 Mahler and3641 Perle terminal scalars disagree with display positions and may be defaults. Successes and failures remain included without accuracy or error-size selection.
 
 Released paddle_y is assigned from joystick_output as a terminal-position scalar, rather than treating a joystick control curve as position. Comparison with final display samples differs by about one0.17-unit discrete control step; no correction was imposed. Strictly pre-feedback sampling remains unverified. No duplicate session+t_sync record keys were found. Physical initial parameters agree within conditions, allowing objective targets to be broadcast by real-trial identity. This adds no neural trials. Raw trial responses and stable/half membership are unavailable. [Pairing audit](results/data_pairing_audit.json), [labels and records](artifacts/), and [sample indices](data/) preserve provenance.
 
@@ -320,13 +320,13 @@ Score completed bins before estimated arrival and within trusted released neural
 
 Both animals use the same100 physical-condition39/40 splits with seed0. Each split refits finite/variance neuron selection, fixed normalization, FA50, and shared-time-scale GPFA50 on training39 half1 only. The same-round FA50 initializes GPFA50. FA preserves300 iterations, tolerance.01, LAPACK, and seed42; GPFA preserves400 iterations and tolerance1e-6. No parameter or seed search was performed. Local fits do not directly read test conditions, although published imputation creates upstream indirect dependencies. Earlier GPFA64 and paper-reference full-condition FA50 remain separate historical fits.
 
-All four OLS groups use50 inputs,51 coefficients per coordinate, and102 per xy head. LinearRegression(fit_intercept=True,positive=False) uses float64 with no regularization, added scaling, or sample weights. Training trial-by-time rows are explicitly expanded. Four outputs share a matrix decomposition, numerically equivalent to separate position regressions. Conditions with more trials contribute more rows. One fixed mapping covers visible and hidden times; phases change scoring only. See [protocol differences](protocol_diff.md) and [configuration](configs/analysis_protocol.json).
+All four OLS groups use50 inputs,51 coefficients per coordinate, and 102 per xy head. LinearRegression(fit_intercept=True,positive=False) uses float64 with no regularization, added scaling, or sample weights. Training trial-by-time rows are explicitly expanded. Four outputs share a matrix decomposition, numerically equivalent to separate position regressions. Conditions with more trials contribute more rows. One fixed mapping covers visible and hidden times; phases change scoring only. See [protocol differences](protocol_diff.md) and [configuration](configs/analysis_protocol.json).
 
 Future perturbation, explicit-prefix endpoint comparisons, and cross-condition state resets were checked in every representation split; maximum error is {audits.prefix_max_error.max():.3g}. Local fit_provenance and provided_input_filtering pass. Released arrays already contain imputation using all conditions and times, leaving irreversible raw_preprocessing=fail. [Training and causal audits](results/representation_training_and_causal_audit.csv) also retain convergence status and fixed-iteration-limit outcomes without downstream-score-based refitting.
 
 ## 5. Own-target main results
 
-The table below reports y. Position/RMSE units are centered MWorks display coordinates; table times use ms and plots use seconds. Scores average100 held-out splits. The [full table](results/self_reconstruction_main_table.csv) retains data_mode, causal_status, and counts. n_conditions, n_real_trials, and n_bins describe unique full-data support; per-split means are separate. n_neural_trials remains0 because repeated regression rows are not independent neural trials.
+The table below reports y. Position/RMSE units are centered MWorks display coordinates; table times use ms and plots use seconds. Scores average 100 held-out splits. The [full table](results/self_reconstruction_main_table.csv) retains data_mode, causal_status, and counts. n_conditions, n_real_trials, and n_bins describe unique full-data support; per-split means are separate. n_neural_trials remains 0 because repeated regression rows are not independent neural trials.
 
 {md(core,tablecols)}
 
@@ -342,11 +342,11 @@ x consistency reference: the two heads have identical x predictions, so only one
 
 {md(main[main.coordinate.eq('x')&main.epoch.eq('full')],['animal','representation','r_obj','r_obj_sd','RMSE_obj','RMSE_obj_sd'])}
 
-Variation across100 splits describes readout/representation split stability on shared data. It is not100 independent experiments. Lossless [trial scores](readouts/trial_scores/) preserve original scores, with [condition](results/condition_metrics_summary.csv) and [session](results/session_metrics_summary.csv) summaries.
+Variation across 100 splits describes readout/representation split stability on shared data. It is not 100 independent experiments. Lossless [trial scores](readouts/trial_scores/) preserve original scores, with [condition](results/condition_metrics_summary.csv) and [session](results/session_metrics_summary.csv) summaries.
 
 A separate [descriptive heterogeneity table](results/descriptive_unit_heterogeneity.csv) first averages each trial, condition, or session across its held-out splits, then reports count, SD, median, Q25/Q75, and finite pair counts. Paired differences are formed within split before aggregation. These hierarchical descriptions are not confidence intervals over independent neural observations and do not replace primary trial-by-time scoring.
 
-![Paired scores over100 splits](figures/paired_self_reconstruction_differences.png)
+![Paired scores over 100 splits](figures/paired_self_reconstruction_differences.png)
 
 ## 6. Condition, time, offset, and amplitude
 
@@ -410,7 +410,7 @@ Run an initial end-to-end check(round0 can be reused), or generate reports from 
 
 Trial labels are in artifacts/*_trial_labels.npz and records in results/*_trial_records.csv.gz. Each trial retains its own candidate; objective targets are broadcast by verified condition identity. Predictions in readouts/predictions/*_test_predictions.npz combine predictions[head,condition,time,xy], test_trial_indices, and test_common_mask_packed to recover every held-out trial prediction. Training predictions remain NaN. readouts/trial_scores/*_self_scores.npz retains trial, phase, head, xy, and own-target metrics.
 
-data/*_sample_index.csv.gz identifies trial, condition, and time. For one split, inputs are FA50[0,condition_index,time_index,:] and GPFA50[0,condition_index,time_index,:] in representations/<animal>/round_XXX/latents.npz;0 denotes half1. Targets are objective_xy[objective_condition_index,time_index,:] and behavior_xy[behavior_trial_index,time_index,:]. These are lossless indices, not extra neural trials. Rows sharing unique_neural_input_id add no independent neural information. Shared support was checked in all100 splits.
+data/*_sample_index.csv.gz identifies trial, condition, and time. For one split, inputs are FA50[0,condition_index,time_index,:] and GPFA50[0,condition_index,time_index,:] in representations/<animal>/round_XXX/latents.npz;0 denotes half1. Targets are objective_xy[objective_condition_index,time_index,:] and behavior_xy[behavior_trial_index,time_index,:]. These are lossless indices, not extra neural trials. Rows sharing unique_neural_input_id add no independent neural information. Shared support was checked in all 100 splits.
 
 Expand saved held-out trial predictions; omit --trial-id to export all real test trials in that split. This does not refit models:
 

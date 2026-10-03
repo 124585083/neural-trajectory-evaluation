@@ -9,7 +9,7 @@
 | perle | FA50 | 0.7019 | 0.6910 | 3.8586 | 3.8829 | -0.0108 | -0.0242 |
 | perle | GPFA50 | 0.7204 | 0.7094 | 3.8005 | 3.8265 | -0.0110 | -0.0261 |
 
-The representations contain readable task-position structure. Correct condition correspondence outperforms fixed-readout mismatches. Actual candidates also outperform the random-endpoint reference over full, hidden and endpoint-influence ranges.
+Each readout is scored against the target it was fitted to reconstruct. The representations contain readable task-position structure. Correct condition correspondence outperforms fixed-readout mismatches. Actual candidates also outperform the random-endpoint reference over full, hidden and endpoint-influence ranges.
 
 The full-epoch comparisons do not support a behavior-constrained candidate-path advantage: all four objective own-target results are better. No-collision candidates have lower RMSE and lower correlation. Post-collision RMSE advantages over random endpoints are inconsistent.
 

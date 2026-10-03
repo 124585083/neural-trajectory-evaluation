@@ -26,7 +26,7 @@ The trajectory comparison is consequently anchored to a coordinate system learne
 
 ### Train/oracle separation
 
-GPFA fitting, neural scaling, dimensionality selection, and timescale-initialization selection use neural responses from the official training tier. The 58 oracle trials are introduced only after the relevant GPFA has been frozen, first to evaluate neural split-half reliability and then to evaluate encoding-model predictions.
+GPFA fitting, neural scaling, dimensionality selection, and timescale-initialization selection use neural responses from the official training tier. For GPFA, the 58 oracle trials enter only after its parameters have been frozen, first for neural split-half reliability and then for trajectory comparison. The encoding-model trainer separately used the oracle tier for checkpoint selection. These are different data-use boundaries; the [Methods table](METHODS.md#data-use-and-evaluation-independence) records their overlap.
 
 ### Offline inference
 
@@ -34,7 +34,7 @@ The frozen GPFA conditions a latent state on the complete observation window. La
 
 ### Evaluation interval and response scaling
 
-The assay uses original frames 50–299: 250 timestamps covering the same temporal support as the encoding-model evaluation. A deterministic, seed-42 selection fixes 512 neuron identities and their order independently of response magnitude, reliability, or model performance.
+The measurement uses original frames 50–299: 250 timestamps covering the same temporal support as the encoding-model evaluation. A deterministic, seed-42 selection fixes 512 neuron identities and their order independently of response magnitude, reliability, or model performance.
 
 Scaling is also train-only. One scalar precision is estimated for each selected neuron from the applicable training responses; no oracle-derived or model-derived scale is used. Recorded responses and model predictions are converted into this same frozen GPFA input scale. Detailed normalization and conversion formulas are provided in [Methods](METHODS.md).
 
@@ -82,7 +82,7 @@ The primary battery reports complementary aspects of agreement:
 - **Position correlation** and **normalized position RMSE** measure time-aligned latent state.
 - **Velocity-direction cosine** measures local direction of motion.
 - **Speed-profile correlation** measures whether fast and slow trajectory segments occur at corresponding times while discarding direction.
-- **Acceleration-direction cosine** is a higher-order, higher-variance diagnostic of local directional change.
+- **Acceleration-direction cosine** measures agreement in changes of the velocity vector and has higher variance than the position measurement. It includes speed changes and is not a direct curvature measure.
 - **Path-length similarity** describes total traveled distance but is retained only as a descriptive quantity.
 
 Condition-average trajectories are primary because their reliability is substantially higher than single-repeat trajectories.

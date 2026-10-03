@@ -4,9 +4,9 @@ Scientific record date: 2026-08-11. This English publication edition preserves t
 
 ## One-page summary
 
-I reproduced and trained the full official 3D Factorized baseline from Dynamic Sensorium / Sensorium 2023. The model covers all five competition sessions and 40,034 neurons, while preserving the three-layer `[32,64,128]` Factorized3D core, full spatiotemporal kernels, behavior channels, Gaussian readouts, cortical grid predictors, and pupil shifters. No reduction was made to the architecture, resolution, temporal window, or data scope.
+The project reproduced and trained the full official 3D Factorized baseline from Dynamic Sensorium / Sensorium 2023. The model covers all five competition sessions and 40,034 neurons, while preserving the three-layer `[32,64,128]` Factorized3D core, full spatiotemporal kernels, behavior channels, Gaussian readouts, cortical grid predictors, and pupil shifters. No reduction was made to the architecture, resolution, temporal window, or data scope.
 
-Formal training used seed 42. As specified by the project protocol, training was stopped after validation at epoch 103, and the best weights from epoch 97 were recovered from the complete epoch checkpoints. The frozen `best.pt` was independently evaluated in a fresh process on all 293 full-length oracle trials, yielding:
+Formal training used seed 42. As specified by the project protocol, training was stopped after validation at epoch 103, and the best weights from epoch 97 were recovered from the complete epoch checkpoints. The frozen `best.pt` was reloaded and evaluated in a fresh process on all 293 full-length oracle trials, yielding:
 
 ```text
 best epoch                                  97
@@ -272,7 +272,7 @@ partial epoch 104 state used            no
 
 Both `best.pt` and `last.pt` were reconstructed from complete raw states; the checkpoint kind of `best.pt` is `official_early_stopping_best`.
 
-### 6.2 Independent full-sequence oracle evaluation
+### 6.2 Reloaded full-sequence oracle evaluation
 
 In a fresh process, the model was rebuilt, `best.pt` was loaded strictly, and the official `get_correlations` function was run on complete 300-frame oracle trials with batch size 1:
 
@@ -302,7 +302,7 @@ seed-42 hidden final_test_main trial-average                0.3569
 
 Official table source: [NeurIPS 2024 paper](https://proceedings.neurips.cc/paper_files/paper/2024/file/d758d7c0a88d741c8ca4637579c9df87-Paper-Datasets_and_Benchmarks_Track.pdf).
 
-The local `0.1966732591` is an oracle score, whereas the official `0.1887` is from hidden `final_test_main`. Because they use different splits and stimulus trials, I do not compute their difference. A valid hidden final-test submission has been generated but has not yet been uploaded; formal hidden benchmark status therefore remains pending.
+The local `0.1966732591` is an oracle score, whereas the official `0.1887` is from hidden `final_test_main`. Because they use different splits and stimulus trials, their difference is not treated as a reproduction error. A valid hidden final-test submission has been generated but has not yet been uploaded; formal hidden benchmark status therefore remains pending.
 
 ### 6.4 Continuous prediction export
 
@@ -368,7 +368,7 @@ experiments/01_baselines/records/dynamic/
 checkpoint
 models/official_dynamic/best.pt
 
-independent evaluation
+reloaded oracle evaluation
 experiments/01_baselines/records/dynamic/official_evaluation.json
 
 temporal alignment
@@ -392,3 +392,7 @@ Training to natural official early-stop termination: NOT COMPLETED BY PROJECT DE
 ```
 
 Downstream trajectory evaluation should always report response correlation alongside trajectory metrics. GPFA trajectory metrics should not replace the original response-prediction benchmark.
+
+## Selection and evaluation data
+
+The training entry point uses the official train tier for gradients and the oracle correlation closure for scheduling, stopping decisions and checkpoint selection. Complete-sequence evaluation reloads the selected weights and scores the same oracle tier. It verifies saved-checkpoint execution but does not provide a new independent test set. Hidden server scoring was unavailable for this local comparison. The [Methods data-use table](../../METHODS.md#data-use-and-evaluation-independence) distinguishes these uses from train-only GPFA fitting and perturbation-half selection. The [reference guide](../../REFERENCES.md) credits the original benchmark and reused software.

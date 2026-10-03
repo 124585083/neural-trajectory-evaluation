@@ -30,7 +30,7 @@ This is deliberate: the project compares evaluation methods for neural-response 
 
 ### Trajectory evaluation
 
-Trajectory metrics add explicitly time-resolved questions: where the population state is, how it moves, whether its local direction is correct, when it speeds up or slows down, and how its direction changes locally.
+Trajectory metrics ask where the population state is, where it moves next, and when it speeds up or slows down. The acceleration-direction measure asks how the velocity vector changes.
 
 The intended contribution is complementarity. Trajectory evaluation is not assumed to be intrinsically superior to RSA/CKA or response correlation in every setting; the question is whether it supplies useful temporal diagnostics that those summaries do not fully provide in the present comparison.
 
@@ -54,7 +54,7 @@ GPFA is used because it combines a shared low-dimensional observation model with
 
 ## 4. Why GPFA reliability is established before model comparison
 
-Introducing a trajectory assay only after observing a favorable model result would create a circularity: a reader could not distinguish a genuinely reliable neural measurement from an analysis chosen because it ranks one model highly.
+A trajectory measurement chosen after a favorable model result could favor that model by construction. Reliability checks therefore precede the model comparison.
 
 The project therefore separates two questions:
 
@@ -97,7 +97,7 @@ Trajectory properties are not interchangeable:
 - **Normalized position error** measures the magnitude of state mismatch relative to the recorded trajectory scale.
 - **Velocity direction** asks whether local motion points in the corresponding direction.
 - **Speed profile** asks whether fast and slow movement occurs at corresponding times.
-- **Acceleration direction** measures local changes in direction and curvature-related motion.
+- **Acceleration-direction agreement** measures agreement in how the velocity vector changes over time. It includes speed changes along a straight path and does not directly measure curvature.
 - **Path length** summarizes total distance traveled.
 
 Collapsing these quantities into one composite would obscure metric-specific successes and failures and would introduce arbitrary weights. They are therefore reported as a battery rather than as a single trajectory score.
@@ -112,7 +112,7 @@ When one model has both higher scalar response correlation and higher trajectory
 
 > Can trajectory metrics remain sensitive when a major scalar response-correlation summary is made nearly the same?
 
-The test deliberately degrades the Dynamic output using a perturbation strength selected on one repeat half, then evaluates the comparison using held-out neural responses. Selection and testing are separated so the perturbation is not chosen to maximize a test-side trajectory difference.
+The test adds noise to the Dynamic output. Its strength is chosen using one oracle repeat half, then evaluated on the other half. The evaluation half is excluded from perturbation selection, so the noise strength is not chosen to maximize its trajectory difference. Both halves had been available for earlier encoding-checkpoint selection, as recorded in the [data-use table](METHODS.md#data-use-and-evaluation-independence).
 
 This is a **metric-sensitivity stress test**, not a newly trained model comparison. It does not match every neuron, response variance, RSA, CKA, or other property of the outputs, and no formal equivalence test is implied. Its purpose is to test whether the chosen scalar response summary is sufficient to explain the trajectory distinction. The procedure is specified in [Methods](METHODS.md), with findings in [Results](RESULTS.md) and the detailed evidence ledger.
 
@@ -122,7 +122,7 @@ Some condition-averaged representational summaries operate on state sets or time
 
 Time reversal therefore provides a controlled sufficiency test. If a conventional summary remains unchanged after reversal while an order-sensitive trajectory metric changes, that conventional summary is not sufficient to encode the temporal property destroyed by reversal.
 
-The inference is deliberately limited to **sufficiency failure for the tested metric formulation**. It does not establish mathematical independence, universal statistical independence, or the inability of every possible time-aware RSA/CKA construction to represent temporal information.
+The result shows that **the tested summary omits this temporal property**. It does not establish mathematical independence, universal statistical independence, or the inability of every possible time-aware RSA/CKA construction to represent temporal information.
 
 ## 10. Why graded temporal-weight attenuation is used
 
@@ -148,15 +148,15 @@ The design includes outcomes that would weaken its methodological interpretation
 
 | Design question | Pattern supporting usefulness | Pattern weakening the interpretation | Consequence |
 |---|---|---|---|
-| Is the GPFA measurement trustworthy? | Repeated-movie trajectories are reproducible and exceed structured condition/time/population nulls | Recorded repeat halves are not more consistent than the structured nulls | The trajectory assay should not serve as a primary model-comparison measure |
+| Is the GPFA measurement trustworthy? | Repeated-movie trajectories are reproducible and exceed structured condition/time/population nulls | Recorded repeat halves are not more consistent than the structured nulls | The trajectory measurement should not serve as a primary model-comparison measure |
 | Is there a response-level gain to explain? | Dynamic shows a reproducible response advantage | Little or no response advantage | Trajectory evaluation may still compare temporal structure, but it is no longer explaining an established predictive gain |
 | Do conventional population metrics detect relevant structure? | Time-aware RSA/CKA detect some model differences, while trajectory metrics expose additional order/direction sensitivity | RSA/CKA fully capture the same structure and trajectory behavior | Trajectory evaluation offers little incremental value; RSA/CKA detecting a difference alone is not a failure |
 | Does trajectory sensitivity remain after response matching? | Trajectory differences remain when the selected scalar response summary is nearly matched | Trajectory differences disappear with response-score matching | The trajectory result may largely restate scalar predictive quality |
 | Is the trajectory battery sensitive to temporal order? | Reversal changes direction/order-sensitive trajectory metrics | Trajectory metrics remain largely invariant to reversal | The battery is not adequately diagnostic of temporal order or direction |
-| Does the assay track graded temporal-weight perturbation? | Trajectory quality changes systematically with attenuation severity | No consistent relation between attenuation and trajectory quality | The proposed link to learned temporal-history weighting is weak; monotonicity alone would still not establish temporal specificity |
-| Does the enriched conventional battery fully explain trajectory variation? | Conventional features predict some but not all held-family trajectory variation | Held-family trajectory metrics are almost completely predictable | Trajectory evaluation has limited incremental diagnostic value for the tested perturbations |
+| Does the measurement track graded temporal-weight perturbation? | Trajectory quality changes systematically with attenuation severity | No consistent relation between attenuation and trajectory quality | The proposed link to learned temporal-history weighting is weak; monotonicity alone would still not establish temporal specificity |
+| Does the enriched conventional battery fully explain trajectory variation? | Conventional features predict some but not all variation in excluded perturbation families | Trajectory metrics for excluded perturbation families are almost completely predictable | Trajectory evaluation has limited incremental diagnostic value for the tested perturbations |
 
-Assay failure and hypothesis weakening are not identical. Poor neural reliability, leakage, or dependence on arbitrary model-specific alignment would mean that the measurement cannot adjudicate the question; they would not demonstrate that temporal population organization is scientifically irrelevant. This is why measurement validation is placed before model comparison.
+A failed measurement cannot decide between the hypotheses. Poor neural reliability, leakage, or dependence on arbitrary model-specific alignment would mean that the measurement cannot adjudicate the question; they would not demonstrate that temporal population organization is scientifically irrelevant. This is why measurement validation is placed before model comparison.
 
 ## 13. What the project can and cannot claim
 

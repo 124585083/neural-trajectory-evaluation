@@ -4,9 +4,9 @@ Scientific record date: 2026-08-11. This English publication edition preserves t
 
 ## One-page summary
 
-The full Sensorium+ static CNN architecture was trained on the five official Dynamic Sensorium 2023 competition sessions. It retains the original width and serves as the reference for the later total-parameter-matched Dynamic control. It preserves the official static baseline's four-layer 2D CNN core, Gaussian readout, cortical-coordinate grid predictor, pupil shifter, and behavioral inputs. To apply the static model to dynamic data, I added only a parameter-free framewise reshape/crop adapter so that its output time indices are exactly aligned with those of the Dynamic Factorized3D model.
+The full Sensorium+ static CNN architecture was trained on the five official Dynamic Sensorium 2023 competition sessions. It retains the original width and serves as the reference for the later total-parameter-matched Dynamic control. It preserves the official static baseline's four-layer 2D CNN core, Gaussian readout, cortical-coordinate grid predictor, pupil shifter, and behavioral inputs. To apply the static model to dynamic data, the implementation adds a parameter-free framewise reshape/crop adapter so that its output time indices are exactly aligned with those of the Dynamic Factorized3D model.
 
-Using seed 42, training naturally terminated through the official Dynamic Sensorium 2023 early-stopping procedure at epoch 63. After reloading the frozen `best.pt`, I independently ran inference on complete 300-frame oracle trials and discarded the first 50 frames according to the official evaluation rule. The resulting single-trial correlation, aggregated across five sessions and 40,034 neurons, was:
+Using seed 42, training naturally terminated through the official Dynamic Sensorium 2023 early-stopping procedure at epoch 63. After reloading the frozen `best.pt`, the evaluation process ran inference on complete 300-frame oracle trials and discarded the first 50 frames according to the official evaluation rule. The resulting single-trial correlation, aggregated across five sessions and 40,034 neurons, was:
 
 ```text
 Static full-sequence oracle correlation = 0.1644077748
@@ -108,7 +108,7 @@ Given an input:
 x: [B, 3, T, 36, 64]
 ```
 
-I first apply a parameter-free reshape:
+The adapter first applies a parameter-free reshape:
 
 ```text
 [B, 3, T, 36, 64]
@@ -133,7 +133,7 @@ This procedure contains no temporal convolution, recurrent state, frame mixing, 
 
 ### 3.2 Temporal alignment with the Dynamic model
 
-The Dynamic Factorized3D model has effective temporal kernels of 11, 5, and 5 frames. An 80-frame input therefore loses 18 frames and produces 62 outputs. To make the Static training target exactly match the Dynamic target, I retain only source frames 18–79 from the Static model's 80 framewise outputs:
+The Dynamic Factorized3D model has effective temporal kernels of 11, 5, and 5 frames. An 80-frame input therefore loses 18 frames and produces 62 outputs. To make the Static training target exactly match the Dynamic target, The adapter retains source frames 18–79 from the Static model's 80 framewise outputs:
 
 ```text
 all static outputs: [B, 80, N]
@@ -154,15 +154,17 @@ final aligned interval              original frames 50–299
 
 Thus, there is no process in which 80-frame windows are repeatedly predicted and then concatenated. Training uses random 80-frame snippets; final oracle evaluation performs one forward pass over each complete 300-frame trial.
 
-### 3.3 Verification of no temporal leakage
+### 3.3 Frame-permutation equivariance
 
-In evaluation mode, I randomly permuted the input frames together with their corresponding pupil-center frames and then inverted the permutation on the outputs. Every prediction matched the original output exactly:
+In evaluation mode, The recorded test randomly permuted the input frames together with their corresponding pupil-center frames and then inverted the permutation on the outputs. Every prediction matched the original output exactly:
 
 ```text
 maximum frame-permutation error = 0.0
 ```
 
-This check confirms frame-permutation invariance in evaluation mode for the tested implementation. It detects cross-frame dependence introduced by reshaping or evaluation-time normalization. It does not audit the provenance of the upstream normalization statistics.
+This check establishes permutation equivariance in evaluation mode for the tested input: outputs follow the same frame permutation. It does not establish frame independence, because a sequence-wide mean can be permutation-equivariant while coupling frames. A separate frame-perturbation check addresses that property. It does not audit the provenance of the upstream normalization statistics.
+
+The revision added a distinct [single-frame perturbation test](../../../experiments/01_baselines/tests/test_static_frame_independence.py) in evaluation mode. Through the actual core, readout, shifter and adapter, it tested 15 perturbations across visual, behavioral and pupil inputs at three positions. The input has 27 frames; cropping 18 leaves nine output times and seven output neurons. Other output times agree within `2e-6`. The CPU test uses synthetic inputs and does not audit upstream normalization or training-mode batch normalization. A sequence-mean control passes permutation equivariance and fails this independence check.
 
 ## 4. Model architecture
 
@@ -289,7 +291,7 @@ The Static core uses `gamma_hidden=0`. Although some coefficients are zero, the 
 
 ### 5.3 Hyperparameter selection principle
 
-I did not search model width, depth, or kernels against the final oracle score. Static core/readout hyperparameters are locked directly to the official Sensorium+ static architecture. The Dynamic Sensorium 2023 loader, Poisson objective, AdamW optimizer, batch accumulation, scheduler, and early-stopping procedure are kept consistent with the Dynamic baseline.
+The project did not search model width, depth, or kernels against the final oracle score. Static core/readout hyperparameters are locked directly to the official Sensorium+ static architecture. The Dynamic Sensorium 2023 loader, Poisson objective, AdamW optimizer, batch accumulation, scheduler, and early-stopping procedure are kept consistent with the Dynamic baseline.
 
 The only newly introduced design element is the zero-parameter temporal adapter. Its 18-frame crop is determined exactly by the temporal reduction of the Dynamic model's valid temporal kernels and was not tuned from the results.
 
@@ -324,9 +326,9 @@ elapsed                    7.226 h
 
 The official early-stopping routine terminated naturally and restored the best weights. The highest individual intermediate validation event in the log was `0.1704876721`. Because random positions of the 80-frame oracle subsequences cause event-level variation, this instantaneous value is not the formal reloaded result of the frozen `best.pt` and should not replace the final score.
 
-### 6.2 Independent full-sequence evaluation
+### 6.2 Reloaded full-sequence evaluation
 
-In a fresh process, I reconstructed the full architecture, strictly loaded `best.pt`, changed the oracle loader to batch size 1 with `to_cut=false`, passed complete 300-frame trials, and called the official `sensorium.utility.scores.get_correlations` function:
+In a fresh process, The evaluation process reconstructed the full architecture, strictly loaded `best.pt`, changed the oracle loader to batch size 1 with `to_cut=false`, passed complete 300-frame trials, and called the official `sensorium.utility.scores.get_correlations` function:
 
 | Session | Full-sequence oracle correlation |
 |---|---:|
@@ -385,7 +387,7 @@ The recorded checks establish the following properties of this Static-on-Dynamic
 - full five-session Dynamic Sensorium 2023 data scope;
 - behavioral channels, pupil shifters, and Gaussian readouts retained;
 - exact alignment with the Dynamic model's training targets and final 250-frame evaluation interval;
-- evaluation-mode frame-permutation invariance;
+- evaluation-mode frame-permutation equivariance;
 - normal completion of the official early-stopping procedure;
 - independently reloadable `best.pt`, reproducing `0.1644077748` on complete oracle trials.
 
@@ -394,3 +396,7 @@ Three qualifications must still be retained:
 1. This is a Dynamic Sensorium 2023 oracle result, not a Sensorium 2022 static benchmark reproduction.
 2. Hidden `final_test_main` labels are unavailable locally, so there is no Sensorium server hidden-test score.
 3. The response comparison alone shows only that the Dynamic model achieves higher predictive correlation. Trajectory-level conclusions are evaluated separately using the frozen neural-data-defined GPFA and the result-blind locked null/reliability protocol.
+
+## Selection and evaluation data
+
+The training entry point uses the official train tier for gradients and the oracle correlation closure for scheduling, stopping decisions and checkpoint selection. Complete-sequence evaluation reloads the selected weights and scores the same oracle tier. It verifies saved-checkpoint execution but does not provide a new independent test set. Hidden server scoring was unavailable for this local comparison. The [Methods data-use table](../../METHODS.md#data-use-and-evaluation-independence) distinguishes these uses from train-only GPFA fitting and perturbation-half selection. The [reference guide](../../REFERENCES.md) credits the original benchmark and reused software.

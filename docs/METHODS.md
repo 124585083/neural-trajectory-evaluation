@@ -4,7 +4,7 @@ This document describes Study 1, the Dynamic Sensorium comparison of Static and 
 
 ## 1. Dataset and analysis scope
 
-The project uses Dynamic Sensorium 2023 natural-movie stimuli, mouse V1 population responses, two behavioral covariates, and pupil-center measurements. Five official competition sessions are used for encoding-model training and full-sequence oracle evaluation:
+The project uses Dynamic Sensorium 2023 natural-movie stimuli, mouse V1 population responses, two behavioral covariates, and pupil-center measurements. The [reference guide](REFERENCES.md) distinguishes the original benchmark description from the competition retrospective. Five official competition sessions are used for encoding-model training and full-sequence oracle evaluation:
 
 | Session | Train trials | Oracle trials | Neurons |
 |---|---:|---:|---:|
@@ -75,7 +75,7 @@ Layers use batch normalization and AdaptiveELU. The final core feature map for o
 
 Each session has a `FullGaussian2d` readout with a cortical-coordinate grid predictor (`2 → 30 → 2 → tanh`), plus an MLP pupil shifter (`2 → 5 → 5 → 2`). The output nonlinearity is `ELU(x) + 1`. The parameter-free temporal adapter crops the first 18 framewise outputs solely to match Dynamic's valid-convolution support.
 
-A frame-permutation implementation check permutes input frames and their pupil-center values, applies the model, reverses the output permutation, and verifies exact recovery of the original predictions. This checks that the reshape, normalization, readout, and shifter introduce no cross-frame dependence.
+A frame-permutation implementation check permutes input frames and their pupil-center values, applies the model, reverses the output permutation, and verifies exact recovery of the original predictions. This is a permutation-equivariance check: matching the frame permutation should match the output permutation. A sequence-mean operation can pass this check while coupling frames, so frame independence requires a separate single-frame perturbation test. The [separate evaluation-mode test](../experiments/01_baselines/tests/test_static_frame_independence.py) changes one retained frame at three positions through the actual Static adapter, including visual, behavioral and pupil pathways. The 15 perturbations leave other outputs unchanged within `2e-6`. A deliberately coupled control fails this test while passing equivariance. This checks evaluation-mode execution; it does not audit training-mode batch normalization or upstream normalization statistics.
 
 ### 3.2 Dynamic encoding model
 
@@ -128,14 +128,31 @@ Static, the full Dynamic benchmark, and Total-parameter-matched Dynamic use the 
 | AdamW settings | betas `(0.9, 0.999)`, epsilon `1e-8`, weight decay `0.01`, AMSGrad off |
 | Scheduler | ReduceLROnPlateau, factor `0.3`, up to four decay stages |
 | Stopping settings | patience 5, absolute tolerance `1e-6`, minimum learning rate `1e-4` |
-| Checkpoint rule | Restore the best state according to the official correlation closure |
+| Checkpoint rule | Restore the best state according to oracle single-trial correlation |
 | Numerical precision | FP32; mixed precision disabled |
 
 `LongCycler` cycles the shorter session loaders to the length of the longest session. Gradients are accumulated sequentially over the five session microbatches before each optimizer update. Model-specific regularization remains part of the respective architecture configuration: Static uses its 2D input/readout penalties, whereas Dynamic uses the Factorized3D spatial/temporal penalties.
 
 The published checkpoints are the best complete states restored by the official trainer. The full-width Dynamic benchmark is the procedural exception: its local run was stopped by project decision after validation at epoch 103, before natural official early-stop termination; the published best complete state is from epoch 97, and the partial epoch-104 state is not used. This status does not alter the Static versus Total-parameter-matched Dynamic training protocol used in the primary control.
 
-Full-sequence oracle evaluation reconstructs each architecture, loads the released state dictionary strictly, processes each complete trial with batch size 1, retains original frames 50–299, and computes correlations with `sensorium.utility.scores.get_correlations`.
+Reloaded full-sequence oracle evaluation reconstructs each architecture, loads the released state dictionary strictly, processes each complete trial with batch size 1, retains original frames 50–299, and computes correlations with `sensorium.utility.scores.get_correlations`.
+
+<a id="data-use-and-evaluation-independence"></a>
+### Data use and evaluation independence
+
+The three training entry points were checked separately. Static, full-width Dynamic and reduced Dynamic all call the pinned official trainer: gradients use `dataloaders['train']`, while its correlation closure uses `dataloaders['oracle']`. That closure drives the learning-rate scheduler, early-stopping logic and restoration of the best checkpoint. Each final evaluator loads those selected weights and scores complete sequences from the same oracle tier.
+
+| Operation | Static | Full-width Dynamic | Total-parameter-matched Dynamic | Grouping and overlap with later scoring |
+|---|---|---|---|---|
+| Gradient-based model fitting | Official train tier | Official train tier | Official train tier | Random 80-frame snippets from the five sessions' 1,744 train trials; separate from oracle scoring trials |
+| Scheduler and early-stopping decisions | Oracle correlation; natural termination at epoch 63 | Oracle correlation; stopped after complete epoch 103 by project decision, before natural termination | Oracle correlation; natural termination at epoch 99 | Oracle snippets are reused across training decisions; their parent trials later contribute full-sequence scores |
+| Checkpoint selection | Best oracle-correlation state restored | Best complete epoch-97 state recovered using the oracle closure | Best oracle-correlation state restored | Same oracle tier later scored; selection units are correlation summaries across sessions, neurons and snippet times |
+| GPFA fitting and dimension/time-scale selection | No model output used | No model output used | No model output used | Neural train tier only: 278/70 development fit/calibration, refit 348; comparison 139/35, refit 174. Oracle data excluded from GPFA fitting and selection |
+| Perturbation-strength selection | Oracle selection-half correlation supplies the target | Not used in the primary stress test | Output-noise strength selected against that target; epoch-65 control selected from training oracle history | 28 selection and 28 test oracle repeats; test-half responses excluded from perturbation selection, but available to earlier checkpoint selection |
+| Final reported response and trajectory scoring | Complete oracle trials, frames 50–299 | Complete oracle trials for response only | Complete oracle trials, frames 50–299 | Response: all five sessions; detailed comparison: 58 trials, six movies, 512 neurons. These oracle observations are reused after checkpoint selection |
+| Hidden server evaluation | No scored submission available | Submission generated; no independently scored local submission available | No scored submission available | Hidden `final_test_main` response labels unavailable locally; published upstream scores belong to their source models |
+
+Evidence is retained in the [Static training record](../experiments/01_baselines/records/static/training_summary.json), [full Dynamic record](../experiments/01_baselines/records/dynamic/training_summary.json), [reduced Dynamic record](../experiments/03_parameter_matching/records/training_summary.json), their adjacent validation-event logs, and the pinned trainer described in [References](REFERENCES.md). A fresh-process reload checks that the saved checkpoint executes correctly. It does not make the reused oracle observations an independent test set. Exclusion from GPFA fitting or a particular perturbation choice is narrower than exclusion from every model and analysis decision.
 
 ## 5. Prediction export and shared response tensor
 
@@ -248,7 +265,7 @@ At `q = 4`, initial timescales `0.125`, `0.25`, `0.5`, and `1.0 s` are compared 
 
 ### 9.2 Comparison-subset GPFA
 
-The model-comparison protocol deterministically selects 174 of the same session's 348 training trials using seed 42. A second shuffle divides this locked subset into 139 fit trials and 35 calibration trials. The primary dimension `q = 4` is retained from assay development rather than reselected using oracle or model-comparison results.
+The model-comparison protocol deterministically selects 174 of the same session's 348 training trials using seed 42. A second shuffle divides this locked subset into 139 fit trials and 35 calibration trials. The primary dimension `q = 4` is retained from measurement development without reselection using oracle or model-comparison results.
 
 The four initial timescales are compared on the 35 calibration trials. After selecting the initialization, the exact GPFA used for Static–Dynamic trajectory evaluation is refitted on all 174 selected training trials and frozen.
 
@@ -330,11 +347,13 @@ For position metrics, a pooled latent mean is computed across both trajectories 
 | Velocity-direction cosine | Mean cosine between `diff(Z)/dt` and `diff(Z_hat)/dt` | Higher; local direction |
 | Speed-profile correlation | Pearson correlation between velocity norms | Higher; timing of fast/slow motion |
 | Path-length similarity | `exp(−abs(log(mean predicted/recorded path ratio)))` | Higher; total traveled distance; descriptive only |
-| Acceleration-direction cosine | Mean cosine between second temporal derivatives | Higher; local directional change |
+| Acceleration-direction cosine | Mean cosine between second temporal derivatives | Higher; agreement in how the velocity vector changes over time |
 | Zero-lag correlation | Flattened latent correlation at lag zero | Higher; pooled synchronous agreement |
 | Best-lag correlation | Maximum flattened correlation over lags −15…+15 frames | Higher; lag-tolerant agreement |
 
-Metrics are reported separately rather than combined into an arbitrary scalar. Path length is not used as primary evidence of temporal alignment; the validation basis for that restriction is given in [GPFA Validation](GPFA_VALIDATION.md).
+Acceleration includes changes in speed and direction. A straight path can accelerate, so acceleration-direction cosine is not a direct curvature measurement. Physical ball velocity, response differences and GPFA posterior derivatives are distinct quantities.
+
+Metrics are reported separately to preserve these different meanings. Path length is not used as primary evidence of temporal alignment; the validation basis for that restriction is given in [GPFA Validation](GPFA_VALIDATION.md).
 
 ## 13. Static–Dynamic trajectory evaluation
 
@@ -368,7 +387,7 @@ The amplitude whose selection-half mean per-neuron response correlation is close
 
 This output perturbation tests metric sensitivity. It matches one scalar response summary while allowing individual-neuron scores, response variance, RSA, and CKA to differ. Its scores do not rank a separately trained accuracy-matched model.
 
-A secondary trained-checkpoint control selects Dynamic epoch 65 from the recorded five-session validation history by proximity to the Static validation correlation. Selection uses validation history rather than oracle trajectory metrics; this control remains distinct from the output-perturbation procedure.
+A secondary trained-checkpoint control selects Dynamic epoch 65 from the recorded five-session validation history by proximity to the Static validation correlation. Selection uses the oracle-correlation history from training, without consulting oracle trajectory metrics. These oracle observations are reused for final scoring; this control remains distinct from the output-perturbation procedure.
 
 ### 14.2 Graded temporal-weight attenuation
 
@@ -409,9 +428,9 @@ condition × time state RSA
 within-condition temporal RSA
 ```
 
-The GPFA targets are position, velocity direction, speed profile, acceleration direction, and negative normalized RMSE (quality orientation). For each held perturbation family, a pipeline of `StandardScaler` followed by `Ridge(alpha=1.0)` is fitted on selection-half candidates from all other families. It predicts the held family's GPFA targets using that family's test-half conventional features. Predictions and observed test-half targets are pooled across held families to compute leave-family-out `R²` and error summaries.
+The GPFA targets are position, velocity direction, speed profile, acceleration direction, and negative normalized RMSE (quality orientation). For each held perturbation family, a pipeline of `StandardScaler` followed by `Ridge(alpha=1.0)` is fitted on selection-half candidates from all other families. It predicts the held family's GPFA targets using the conventional features measured for that family on the test repeat half. Predictions and observed test-half targets are pooled across held families to compute leave-family-out `R²` and error summaries.
 
-A separate matched-pair diagnostic standardizes the six conventional features on selection repeats, searches across candidates from different perturbation families for the closest conventional-feature pair while preferring nontrivial GPFA separation, and evaluates the selected pair on untouched test repeats.
+A separate matched-pair diagnostic standardizes the six conventional features on selection repeats, searches across candidates from different perturbation families for the closest conventional-feature pair while preferring nontrivial GPFA separation, and evaluates the selected pair on repeats excluded from pair selection. Those repeats had already been available for encoding-checkpoint selection.
 
 ## 15. Statistical summaries and resampling
 
@@ -449,7 +468,7 @@ Neuron-level and trial × time bootstraps are descriptive summaries of those axe
 
 Training/calibration indices, the 174-trial comparison subset, oracle trial/condition identities, neuron IDs/order, frame indices, checkpoint paths, and artifact hashes are stored in the phase locks and records. Oracle responses are excluded from GPFA fitting, scaling, dimensionality selection, and timescale-initialization selection. Model predictions never define or modify the GPFA coordinates.
 
-The Phase 2 trajectory-reliability protocol was internally locked before its results were inspected; it was not externally preregistered. Metric definitions and model-comparison preprocessing are frozen before the final comparisons, and the pipeline fails closed when stored identities or tensor contracts do not match.
+The Phase 2 trajectory-reliability protocol was internally locked before its results were inspected; it was not externally preregistered. Metric definitions and model-comparison preprocessing are frozen before the final comparisons, and tensor comparisons reject mismatched identities. The revised protocol-lock guard also checks requested scientific settings and data identities before reuse; historical locks without sufficient evidence require an explicit diagnostic override.
 
 ## 17. Reproducibility pointers
 

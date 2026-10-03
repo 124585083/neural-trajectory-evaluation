@@ -2,6 +2,8 @@
 
 ## Own-target reconstruction
 
+Each readout is scored against the target it was fitted to reconstruct: the objective head against the objective path and the candidate head against the candidate path.
+
 All four full-epoch comparisons favor the objective ball path. The behavior-constrained candidate path has lower correlation and slightly higher RMSE. Candidate RMSE exceeds objective RMSE by 0.0220–0.0322 position units. The earlier trial-label version had a larger gap; the two versions also differ in condition weighting, so this change cannot be attributed solely to averaging.
 
 Define `Delta_r = r_beh - r_obj` and `Delta_RMSE = RMSE_obj - RMSE_beh`. A positive difference favors the candidate on that metric. Each split is scored on its original held-out condition-by-time predictions before the 100 split scores are summarized. Scores of an averaged prediction curve are a separate descriptive quantity.
@@ -105,7 +107,7 @@ Aggregate scores do not describe every condition. The [binwise table](results/bi
 
 Bias is reconstructed position minus its own target. An amplitude ratio below one means reconstructed positions vary less than the reference. Opposite errors can cancel in a pooled bias, so a small bias does not imply small condition-specific shifts.
 
-The original 20-page atlases cover all 79 IDs for each animal. Each condition has parallel FA/GPFA panels with the objective path, objective-head reconstruction, candidate path and candidate-head reconstruction. They use shared time and coordinate ranges and show occlusion, the estimated collision interval and arrival time. Condition 59920 is explicitly missing. Prediction bands describe test-split stability. Locate the preserved atlases and their figure manifests through the [artifact inventory](../../integration/artifact_registry.csv); their availability is separate from the compact report.
+The original 20-page atlases cover all 79 IDs for each animal. Each condition has parallel FA/GPFA panels with the objective path, objective-head reconstruction, candidate path and candidate-head reconstruction. They use shared time and coordinate ranges and show occlusion, the estimated collision interval and arrival time. Condition 59920 is explicitly missing. Prediction bands show mean plus or minus one SD across splits in which the condition was held out. They describe readout-split stability, not biological trial variation. Curves stop at the last shared valid time; gray marks occlusion and gold marks the estimated collision interval. Arrival time is estimated and the exact feedback time is unknown. Locate the preserved atlases and their figure manifests through the [artifact inventory](../../integration/artifact_registry.csv); their availability is separate from the compact report.
 
 ## Comparison with trial-label fitting
 
@@ -126,4 +128,4 @@ Targets differ in variance and reconstruction difficulty. Lower own-target error
 
 ## Reproducibility and publication provenance
 
-Use the [module entry point](../../README.md) to inspect reports, verify available artifacts or replay a saved case. The [original score audit](results/final_integrity_and_score_audit.json), [fixed splits](configs/condition_splits_100.json) and [manifest](manifest.json) document the scientific record. Large weights, predictions and source representations are listed in the [registry](../../integration/artifact_registry.csv). This English edition has a new document hash recorded in the [migration map](../../integration/migration_map.csv); it does not inherit the original report's byte hash.
+Use the [module entry point](../../README.md) to inspect reports, verify available artifacts or replay a saved case. The [original score audit](results/final_integrity_and_score_audit.json), [fixed splits](configs/condition_splits_100.json) and [manifest](manifest.json) document the scientific record. Large weights, predictions and source representations are listed in the [registry](../../integration/artifact_registry.csv). The [historical migration map](../../integration/migration_map.csv) preserves the original integration hashes. Hashes for this editorial revision are recorded separately in the [revision publication map](../../integration/revision_20261003/publication_map.csv); an English edition does not inherit its source report's byte hash.

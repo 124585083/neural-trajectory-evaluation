@@ -15,7 +15,7 @@ Phase 1 provides the frozen Static checkpoint, and Phase 3 provides the frozen T
 - **Auxiliary checkpoint:** [`../../models/parameter_matched_dynamic/epoch_65_validation_matched.pth`](../../models/parameter_matched_dynamic/epoch_65_validation_matched.pth), used only for the separately named validation-matched checkpoint diagnostic.
 - **Comparison GPFA training data:** a deterministic 174-of-348 training-trial subset, divided into 139 fit and 35 calibration trials, then refitted on all 174 after initialization selection.
 
-The resulting `q = 4` comparison-subset GPFA is the exact neural-data-defined GPFA used for model evaluation. Phase 2 establishes the assay design on the full train tier; Phase 4 separately fits and revalidates the locked 174-trial comparison GPFA used here. See [GPFA Validation](../../docs/GPFA_VALIDATION.md) for the relationship between the two fits.
+The resulting `q = 4` comparison-subset GPFA is the exact neural-data-defined GPFA used for model evaluation. Phase 2 establishes the measurement design on the full train tier; Phase 4 separately fits and revalidates the locked 174-trial comparison GPFA used here. See [GPFA Validation](../../docs/GPFA_VALIDATION.md) for the relationship between the two fits.
 
 ## Locked analysis scope
 
@@ -34,7 +34,9 @@ Both model predictions enter the same frozen GPFA posterior inference without mo
 
 ## Protocol-lock behavior
 
-The `lock` command deterministically regenerates and overwrites `protocol_lock.npz` and `protocol_lock.json` from the current data and config. Other commands call `load_protocol`: a missing NPZ lock is generated automatically, while an existing NPZ lock is reused without recomputing or comparing its fingerprints to the current config. Rerun `lock` explicitly after an intentional data/config change. Prediction generation requires identical Static/Dynamic sampler order and neural targets and rejects oracle trials absent from the lock; extended predictions must match the primary trial indices and neural tensor exactly. Missing checkpoints or stage-specific prediction/GPFA artifacts stop the dependent stage, but a missing protocol lock alone does not.
+Before an existing lock is reused, the revised guard compares canonical scientific settings and data identities with the requested run. It checks condition/trial identities, neurons and order, frames, seeds, model/GPFA sources and numerical settings. Moving a root or changing an output path alone does not create a scientific mismatch. A meaningful mismatch raises a precise error and does not replace the saved lock.
+
+Historical locks without verifiable identity metadata are reported as `legacy-unverified`. The explicit `--allow-legacy-unverified` option permits diagnostic access without relabeling them as verified. An intentional new protocol must use `lock` with a new, empty `--output-dir`; completed locks are not overwritten. Missing model, prediction or GPFA files stop dependent stages. The [focused lock tests](tests/test_protocol.py) cover matching settings, changed scientific values, changed data identities, path-only changes and legacy behavior. Original lock and result bytes remain preserved.
 
 ## Formal workflow
 
@@ -99,3 +101,7 @@ The CLI also exposes `all`, which runs only `lock` through `gpfa-evaluate` in in
 - [GPFA Validation](../../docs/GPFA_VALIDATION.md) — reliability and measurement limits of the comparison assay
 - [Design Rationale](../../docs/DESIGN_RATIONALE.md) — reasons for the controls and stress tests
 - [Data and Reproducibility](../../docs/DATA_AND_REPRODUCIBILITY.md) — environment, data, and artifact setup
+
+## Evaluation data reuse
+
+Encoding checkpoints were selected using the oracle tier that later supplies full-sequence scores. Reloading a checkpoint checks execution without creating an independent test set. The [Methods data-use table](../../docs/METHODS.md#data-use-and-evaluation-independence) identifies model-specific training, selection and scoring uses. Excluding oracle responses from GPFA fitting or one perturbation choice does not undo their earlier use in checkpoint selection.

@@ -1,5 +1,6 @@
 # Q1–Q6: Hierarchical Conclusions for Static vs. Total-Parameter-Matched Dynamic
 
+The reported model checkpoints were selected using the oracle tier later used for scoring. A repeat half excluded from a perturbation choice remains part of that reused oracle dataset; see the [data-use table](../METHODS.md#data-use-and-evaluation-independence).
 Scientific results recorded: 2026-08-13. This English publication edition clarifies interpretation without changing the recorded values.
 
 ## Summary
@@ -59,7 +60,7 @@ Using the frozen q=4 neural-data-defined GPFA, with no latent alignment applied 
 | Speed-profile correlation | 0.5271 | 0.5375 | -0.0513--+0.0859 |
 | Acceleration-direction cosine | 0.1850 | 0.4525 | +0.1822--+0.3395 |
 
-Trajectory evaluation therefore supports the conclusion that Dynamic more closely matches the recorded neural trajectory in position, local direction, and curvature/acceleration. The speed-profile difference is small and its interval crosses zero, so no reliable model difference should be claimed for that metric.
+Trajectory evaluation therefore supports the conclusion that Dynamic more closely matches the recorded neural trajectory in position, local direction, and acceleration direction. The speed-profile difference is small and its interval crosses zero, so no reliable model difference should be claimed for that metric.
 
 ## Q4: When Response Scores Are Similar, Can Trajectory Evaluation Still Detect a Trajectory Difference?
 
@@ -132,7 +133,7 @@ Across 40 temporal/non-temporal stress candidates, six conventional features—s
 | Acceleration | 0.420 |
 | RMSE quality | 0.733 |
 
-These values show substantial held-family predictability under the fitted ridge model, with larger remaining errors for acceleration/direction. Residuals can reflect finite samples, model capacity, and distribution changes. A cross-family pair selected for nearby conventional features on selection repeats retains GPFA position and RMSE differences on held-out repeats. This supports complementary diagnostic sensitivity within the tested candidates.
+These values show substantial predictability for perturbation families excluded from fitting the ridge model, with larger remaining errors for acceleration/direction. Residuals can reflect finite samples, model capacity, and distribution changes. A cross-family pair selected for nearby conventional features on selection repeats retains GPFA position and RMSE differences on held-out repeats. This supports complementary diagnostic sensitivity within the tested candidates.
 
 The most accurate statement is:
 

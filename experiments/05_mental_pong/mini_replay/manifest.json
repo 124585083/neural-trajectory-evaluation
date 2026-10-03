@@ -1,0 +1,13 @@
+{
+  "schema": "mental_pong_mini_replay_v1",
+  "selection": {"split": 0, "q": 0, "half": "half1"},
+  "payload_status": "withheld_pending_derived_data_permission",
+  "public_payload_permitted": false,
+  "reason": "The data record specifies CC BY-NC-ND 4.0. Permission to redistribute these transformed latent and behavioral artifacts has not been established.",
+  "provider_record": "https://zenodo.org/records/13952210",
+  "data_license": "CC-BY-NC-ND-4.0",
+  "files": {},
+  "arrays": {},
+  "raw_preprocessing": "fail",
+  "scientific_status": "CLOSED_EXPLORATORY_WITH_LIMITATIONS"
+}

@@ -21,13 +21,27 @@ python /path/to/neural-trajectory-evaluation/experiments/05_mental_pong/run.py -
 
 Invoking `run.py` without an action also performs read-only verification. Configure external storage with the ignored local path file based on [paths.example.json](configs/paths.example.json), the `--paths` option, or the documented `MENTAL_PONG_SOURCE_ROOT` environment variable. The source-root variable identifies the preserved pilot bundle, without putting machine-specific locations in tracked documents.
 
-## Replay one saved random-head case
+## Small replay and its current availability
+
+The [mini replay](mini_replay/README.md) now contains a NumPy runner and an exporter for the fixed split 0/q=0 examples from both animals and FA50/GPFA50. It recomputes predictions, the objective/behavior 2×2 scores, random-candidate scores and geometry skill, and the fixed-head mismatch control. A genuine 5.7 MB private export passed numerical, cold-copy and tampering checks. The [dependency inventory](mini_replay/dependencies.csv) separates source code from scientific arrays.
+
+The new public payload is **withheld pending derived-data redistribution permission**. The specific data record lists CC BY-NC-ND 4.0. Permission to redistribute these transformed neural and behavioral arrays has not been established; see [third-party notices](../../THIRD_PARTY_NOTICES.md). The command below therefore returns a clear unavailable status in a public-only checkout:
+
+```shell
+python experiments/05_mental_pong/run.py --mini-replay --output /tmp/mental-pong-replay
+```
+
+An authorized holder can follow the [private export and replay instructions](mini_replay/README.md#commands-and-availability). The mini runner does not consult `source_pilot`, raw recordings, GPU tools or local path configuration. Its optional `--ols-refit` performs a small check of the original OLS specification. It never fits a neural representation.
+
+The code and public links can be verified now. A saved split has been replayed from a private copy. The full analysis has not been rebuilt during this revision. These are separate verification states.
+
+## Existing local random-head replay
 
 ```shell
 python /path/to/neural-trajectory-evaluation/experiments/05_mental_pong/run.py --replay --animal mahler --representation FA50 --q 0 --split 0
 ```
 
-This route uses saved coefficients, labels and the corresponding latent values. Missing required storage produces an unavailable result rather than a false pass. It does not fit a new model or rerun the 1000 randomizations.
+This older route requires the configured external pilot and uses saved coefficients, labels and the corresponding latent values. Missing required storage produces an unavailable result. It does not fit a new model or rerun the 1000 randomizations. Use the mini route when an authorized exported package is available.
 
 ## Full historical execution
 
@@ -39,4 +53,4 @@ python /path/to/neural-trajectory-evaluation/experiments/05_mental_pong/run.py -
 
 Consult `run.py --help`, the [dependency manifest](integration/dependency_manifest.csv) and [runtime lock](requirements.lock.txt). Full execution requires the external raw/prepared data and representation bundle. Documentation of this route is not a claim that integration repeated the experiments. Default checks remain read-only; legacy `--all` and `--tests` paths can write reports or test records and require separate output handling.
 
-The [integration summary](integration/INTEGRATION_SUMMARY.md) and [verification record](integration/verification.json) list checks actually performed now. [Original acceptance](trajectory_project/closeout_v1/results/final_acceptance_audit.json) and source hashes remain separate. English edits change document hashes; immutable numerical files retain their scientific identity. Source user requests and original-language documents stay in external preservation storage.
+The [integration summary](integration/INTEGRATION_SUMMARY.md) and [integration verification record](integration/verification.json) preserve the earlier integration checks. The [current revision checks](integration/revision_20261003/verification.json) and [revision report](../../docs/REVISION_REPORT.md) record work performed in this revision. [Original acceptance](trajectory_project/closeout_v1/results/final_acceptance_audit.json) and source hashes remain separate. The historical migration map is unchanged; the [publication map](integration/revision_20261003/publication_map.csv) links its hashes to current edited files. Immutable numerical files retain their scientific identity. Source user requests and original-language documents stay in external preservation storage.

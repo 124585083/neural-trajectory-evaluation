@@ -23,7 +23,7 @@ FIG = ROOT / "figures" / "descriptive"
 ANIMALS = ("mahler", "perle")
 REPS = ("FA50", "GPFA50")
 EPOCHS = ("full", "visible", "hidden", "bounce", "no_bounce", "post_bounce")
-CASES = (55062, 241919)  # User-specified posthoc cases; never score-selected.
+CASES = (55062, 241919)  # Fixed post hoc cases selected after aggregate results were examined.
 SOURCES = {}
 
 
@@ -235,7 +235,7 @@ def create_figures(labels, geometry, detail, scores):
         lim = max(d.mean_abs_error.max(), d.abs_mean_error.max()) * 1.05
         ax.plot([0, lim], [0, lim], "--", color=".5", lw=1)
         ax.set(xlim=(0, lim), ylim=(0, lim), xlabel="mean |individual endpoint error|", ylabel="|mean endpoint error|", title="Below identity: cancellation by averaging")
-    fig.suptitle("Behavior members only: neural mean membership remains unknown\nExact zero sign rule; no behavior-group threshold or new neural analysis")
+    fig.suptitle("Opposite endpoint errors partly cancel in condition averages.\nBehavioral description only; neural trial membership is unavailable.")
     fig.savefig(FIG / "endpoint_mean_cancellation.png", dpi=170)
     plt.close(fig)
     all_ids = labels[ANIMALS[0]]["condition_ids"]
@@ -259,11 +259,11 @@ def create_figures(labels, geometry, detail, scores):
             ax2.set_ylim(-scale_r, scale_r)
             ax.set_xticks(x)
             ax.set_xticklabels(all_ids, rotation=90, fontsize=5.5)
-    fig.suptitle("All 79 fixed condition identities: mean of held-out split scores, not scores of averaged predictions\nBars: positive favors candidate RMSE; navy line: positive favors candidate r. Gray = unresolved 59920.")
+    fig.suptitle("Reconstruction differences across all 79 conditions\nMean of held-out split scores. Positive favors the candidate: bars show RMSE, navy lines show r; gray marks unresolved 59920.")
     fig.savefig(FIG / "all79_condition_heterogeneity.png", dpi=180)
     plt.close(fig)
     fixed = scores[(scores.condition_id.isin(CASES)) & (scores.coordinate == "y")].copy()
-    fixed["selection_status"] = "user-specified posthoc; not confirmatory"
+    fixed["selection_status"] = "posthoc after aggregate result inspection; not confirmatory"
     fixed.to_csv(OUT / "fixed_posthoc_case_scores.csv", index=False)
     cross = read_csv(CURRENT / "results/condition_cross_summary.csv")
     cross[(cross.condition_id.isin(CASES)) & (cross.coordinate == "y")].to_csv(OUT / "fixed_posthoc_case_2x2.csv", index=False)
@@ -314,13 +314,13 @@ def create_figures(labels, geometry, detail, scores):
                 ax.set(title=f"Condition {cid} / {rep} / test memberships {cache['test_membership_count'][ci]}\nfull RMSE obj {row.RMSE_obj:.3f}, beh {row.RMSE_beh:.3f}; r {row.r_obj:.3f}, {row.r_beh:.3f}", xlabel="Time from trial-aligned origin (s; completed bin end)", ylabel="y (position units)", ylim=(lo-pad, hi+pad), xlim=(time[mask].min()-.05, g.T_ms/1000+.05))
         handles = [Line2D([], [], color="black", label="Objective ball path"), Line2D([], [], color="#3069a5", label="Objective reconstruction"), Line2D([], [], color="#c23b74", ls="--", label="Behavior-constrained candidate path"), Line2D([], [], color="#d15c2f", label="Candidate reconstruction")]
         fig.legend(handles=handles, loc="outside lower center", ncol=2, frameon=False)
-        fig.suptitle(f"{animal.title()} | fixed posthoc cases, not confirmatory\nShading on predictions: readout-split SD; gray: hidden; gold: estimated collision interval. T is estimated, exact feedback time unknown.", fontsize=11)
+        fig.suptitle(f"{animal.title()}: objective and candidate path reconstruction\nPost hoc examples; bands show readout-split SD, not biological trial variability.", fontsize=13)
         fig.savefig(FIG / f"{animal}_fixed_posthoc_four_curves.png", dpi=180)
         plt.close(fig)
     pd.DataFrame(case_shapes).to_csv(OUT / "fixed_posthoc_case_curve_separation.csv", index=False)
     (OUT / "fixed_posthoc_case_interpretation.md").write_text(
         "# Current post hoc cases\n\n"
-        "Conditions 55062 and 241919 are user-specified post hoc illustrations. They provide no independent confirmation. Scores average original per-split held-out results; the four curves show test-prediction means and readout-split SD for visualization.\n\n"
+        "Conditions 55062 and 241919 are post hoc illustrations selected after aggregate results were examined. They provide no independent confirmation. Scores average original per-split held-out results; the four curves show test-prediction means and readout-split SD for visualization.\n\n"
         + markdown_table(fixed[fixed.epoch.isin(["full", "hidden"])][["animal", "representation", "condition_id", "epoch", "r_obj", "r_beh", "RMSE_obj", "RMSE_beh", "Delta_r", "Delta_RMSE"]])
         + "\n\nCandidate own-target RMSE for 55062 improves in both animals and representations. Full-epoch correlation decreases in Mahler and increases in Perle. For 241919, candidate RMSE worsens in all four groups; Mahler correlation rises while Perle has no corresponding improvement. Preserve these metric differences rather than importing the old stopping-proxy result.\n\n"
         "The two readout curves are close relative to the overall error scale. Readout separation is smaller than label separation for both Mahler cases and Perle 55062. Perle 241919 has nearly coincident labels and a larger readout-mean separation. The phase-specific label_path_RMS and OOF_mean_head_separation_RMS comparison is in fixed_posthoc_case_curve_separation.csv; it does not replace per-split own-target error. Complete cross-scores are in fixed_posthoc_case_2x2.csv.\n\n"
@@ -461,7 +461,7 @@ def write_interpretation(summary):
     text += markdown_table(paths[paths.epoch.isin(["full","hidden"])][["animal","representation","epoch","path_RMS_pooled_bins","RMSE_obj_mean_of_100_splits","RMSE_beh_mean_of_100_splits"]])+"\n\n"
     text += "Path separation is descriptive RMS over all valid label rows. Reconstruction error is scored per held-out split and then averaged over 100 splits. Their magnitude comparison uses different aggregation. path_separation_vs_error.csv retains every condition and phase; scores of averaged prediction curves do not replace the original per-split scores.\n\n"
     text += "Behavioral cancellation does not establish that neural means contain exactly the same behavioral members. The comparison with trial labels removes within-condition target variation and extra record-count weighting together; it is not a one-factor ablation. A lack of overall candidate advantage cannot be assigned entirely to averaging, and weak separation of condition means does not rule out trial-level behavioral representation. **raw_preprocessing=fail**, unverified strictly pre-feedback terminal timing and estimated collision anchors remain.\n\n"
-    text += "## Fixed post hoc cases and all conditions\n\nConditions 55062 and 241919 are user-specified post hoc illustrations, without independent confirmation. fixed_posthoc_case_scores.csv and fixed_posthoc_case_2x2.csv retain all phases for both animals and representations. Four-curve PNGs show existing test-prediction means; bands describe readout-split stability rather than animal trial variation. The all-79 heterogeneity figure retains invalid 59920 without favorable selection.\n\n"
+    text += "## Fixed post hoc cases and all conditions\n\nConditions 55062 and 241919 are post hoc illustrations selected after aggregate results were examined, without independent confirmation. fixed_posthoc_case_scores.csv and fixed_posthoc_case_2x2.csv retain all phases for both animals and representations. Four-curve PNGs show existing test-prediction means; bands describe readout-split stability rather than animal trial variation. The all-79 heterogeneity figure retains invalid 59920 without favorable selection.\n\n"
     text += "Complete current atlases are listed in the [artifact registry](../../../../integration/artifact_registry.csv). Local improvements from the old stopping-proxy version do not transfer to current labels.\n"
     (OUT / "mean_cancellation_interpretation.md").write_text(text, encoding="utf-8")
 

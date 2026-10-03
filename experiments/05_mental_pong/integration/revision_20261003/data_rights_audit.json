@@ -1,0 +1,57 @@
+{
+  "checked_on": "2026-10-03",
+  "status": "NEW_DERIVED_PAYLOAD_WITHHELD_PENDING_PERMISSION",
+  "record_url": "https://zenodo.org/records/13952210",
+  "record_id": 13952210,
+  "record_title": "Rajalingham_Sohn_Jazayeri_MentalPong_NHP_DorsoMedialFrontalCortex",
+  "publication_date": "2024-11-18",
+  "version": "v1",
+  "saved_provider_metadata": {
+    "source_artifact_id": "source_pilot:notes/zenodo_record.json",
+    "sha256": "f5e88a2f6f4a2924d9814610800ddc96318ac61cf1b609a9a9ecfcb19077846e",
+    "license": {
+      "id": "cc-by-nc-nd-4.0"
+    },
+    "access_right": "open",
+    "record_revision": 4
+  },
+  "current_source_checks": {
+    "landing_page": "Accessed successfully; title, v1, publication date and archive MD5 agree with preserved metadata. Its parsed text does not expose the license value.",
+    "api_url": "https://zenodo.org/api/records/13952210",
+    "api_status": "HTTP 403 on refresh; current license not independently retrieved through the API.",
+    "license_terms_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "terms_checked": "Attribution, noncommercial and no-derivatives restrictions; format-only changes are not automatically derivatives."
+  },
+  "archive": {
+    "file": "MentalPong.zip",
+    "bytes": 6145726435,
+    "provider_md5": "382e420c6f053d8ac2bdd4acd2fb02b2",
+    "checks_in_this_revision": "Read complete archive member list and both non-resource-fork README files; reused original download digest record, without downloading again.",
+    "separate_license_files": [],
+    "readmes": [
+      {
+        "member": "MentalPong/README.md",
+        "sha256": "54134c7227a39ad3a63531b6310f9ae291f5671c9b6ea1793f91f9515a32927c",
+        "broader_data_redistribution_permission_found": false
+      },
+      {
+        "member": "MentalPong/analyses/rnn/rnn_analysis/readme.txt",
+        "sha256": "13278b3f41994f6b75f0e82671374be1360989834c0372c15eff377f6febae41",
+        "broader_data_redistribution_permission_found": false
+      }
+    ]
+  },
+  "software_license": {
+    "repository": "https://github.com/jazlab/MentalPong",
+    "revision": "b976255be73140c759d8f8db0fd8ff551a4e2d73",
+    "license": "MIT",
+    "scope": "Audited GitHub source; not proof of the license on neural or behavioral dataset derivatives."
+  },
+  "publication_decision": {
+    "new_numerical_bundle": "Withhold from publication tree; export and test privately from existing authorized local artifacts.",
+    "new_code_and_instructions": "Publishable project-owned source and explicit availability status.",
+    "existing_derived_records": "Preserved byte-for-byte where scientific; redistribution permission remains unresolved and is not newly certified.",
+    "legal_classification": "No definitive legal classification of numerical derivatives is asserted. Explicit permission to redistribute this transformed bundle was not found.",
+    "needed_for_public_payload": "Applicable rights-holder permission or another documented basis covering the actual transformed arrays."
+  }
+}

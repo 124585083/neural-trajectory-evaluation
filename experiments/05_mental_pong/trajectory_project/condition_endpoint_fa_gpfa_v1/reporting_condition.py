@@ -103,7 +103,7 @@ def polish_report(root):
     path=root/'REPORT.md';text=path.read_text(encoding='utf-8')
     tag='COMPLETED_SCORE_INTERPRETATION'
     text=re.sub(r'<!-- BEGIN '+tag+r' -->.*?<!-- END '+tag+r' -->\n\n','',text,flags=re.S)
-    anchor='## 1. Own-target reconstruction results\n\n';assert anchor in text
+    anchor='## 1. Reconstruction of each training target\n\n';assert anchor in text
     text=text.replace(anchor,anchor+'<!-- BEGIN '+tag+' -->\n'+'\n\n'.join(statements)+'\n<!-- END '+tag+' -->\n\n',1)
     path.write_text(text,encoding='utf-8')
     write_json(root/'results/interpretation_summary.json',{'statements':statements,
@@ -142,9 +142,11 @@ def make_report(data,root):
     fullold=comparison[comparison.epoch.eq('full')&comparison.coordinate.eq('y')]
     text=f'''# Condition-mean candidates with FA50/GPFA50 and OLS position reconstruction
 
-## 1. Own-target reconstruction results
+## 1. Reconstruction of each training target
 
 {summary}
+
+Each readout is scored against the target it was fitted to reconstruct: objective predictions against the objective path and candidate predictions against the candidate path.
 
 Delta_r=r_beh-r_obj; Delta_RMSE=RMSE_obj-RMSE_beh. A positive difference favors the candidate on the corresponding own-target metric. Score the original held-out condition-by-time predictions in each split before summarizing 100 splits. Scores of averaged prediction curves are separate descriptions.
 
@@ -220,7 +222,7 @@ Use the [README routes](README.md), [weight-replay audit](results/final_integrit
 | Condition contribution | Trial count times valid bins | Valid bins; no extra equal-condition weights |
 | Main score | Held-out trial-by-time targets | Held-out condition-by-time mean targets |
 | Representation, dimension, half, preprocessing | Per-split train39 FA50/GPFA50, half1 | Exactly the same saved weights and latents; no representation refit |
-| Splits, timing, geometry | 100 nominal39/40 splits, seed0, audited physical labels | Preserved |
+| Splits, timing, geometry | 100 nominal 39/40 splits, seed0, audited physical labels | Preserved |
 | Readout capacity | 50 inputs plus intercept;102 coefficients per xy head | Preserved |
 | Atlas | Fixed trial examples within each condition | Condition-mean targets and held-out reconstruction |
 | Causal boundary | Published-input prefix pass; raw_preprocessing fail | Preserved |

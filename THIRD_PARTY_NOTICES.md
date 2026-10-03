@@ -2,11 +2,15 @@
 
 ## Mental-Pong
 
-The Mental-Pong study uses the data and analysis framework accompanying Rajalingham, Sohn, and Jazayeri, [Dynamic tracking of objects in the macaque dorsomedial frontal cortex](https://www.nature.com/articles/s41467-024-54688-y). Cite the paper and [Zenodo release 13952210](https://doi.org/10.5281/zenodo.13952210) when using these data.
+The Mental-Pong study uses the data and analysis framework accompanying Rajalingham, Sohn, and Jazayeri (2025), [Dynamic tracking of objects in the macaque dorsomedial frontal cortex](https://www.nature.com/articles/s41467-024-54688-y), *Nature Communications* 16, 346, published 2 January 2025. Cite this paper and the separate 2024 [Zenodo release 13952210](https://doi.org/10.5281/zenodo.13952210), version v1, when using these data. The earlier task and behavioral study is Rajalingham, Piccato, and Jazayeri (2022), DOI `10.1038/s41467-022-33581-6`. The [reference guide](docs/REFERENCES.md) gives full source identities.
 
 The local audit inspected [jazlab/MentalPong](https://github.com/jazlab/MentalPong) at commit `b976255be73140c759d8f8db0fd8ff551a4e2d73`. Its code carries the MIT License, copyright (c) 2024 JazLab. The [unmodified license](third_party/licenses/MentalPong-MIT.txt) is preserved here. Source-code licensing does not replace the dataset provider's terms.
 
 The integrated module contains project analysis code, English report editions, and compact derived results. Raw Mental-Pong data and large saved representations, readouts, and null arrays remain external. The [artifact registry](experiments/05_mental_pong/integration/artifact_registry.csv) and [official source audit](experiments/05_mental_pong/integration/official_source_audit.json) retain provenance. No affiliation with or endorsement by the original authors is implied.
+
+The locally preserved provider JSON for this specific Zenodo record specifies **CC BY-NC-ND 4.0**. The record's public landing page was checked during this revision; a fresh API request returned HTTP 403, so the license assertion is tied to the saved metadata and its checksum in the [data-rights audit](experiments/05_mental_pong/integration/revision_20261003/data_rights_audit.json). The downloaded archive contains no separate license granting broader data rights. Neither the GitHub code's MIT license nor Zenodo's platform default establishes permission for derived data redistribution.
+
+The [CC BY-NC-ND terms](https://creativecommons.org/licenses/by-nc-nd/4.0/) restrict redistribution of modified material. This project has not resolved their application to the transformed neural and behavioral arrays. Accordingly, the new numerical mini-replay payload is withheld from the publication tree; the exporter, replay source, dependency inventory, and local verification record remain available. Existing published scientific records are preserved, with their derived-data redistribution status also marked unresolved. This is a documented publication limitation, not a claim that every numerical derivative has a settled legal classification. Rights-holder clarification would be needed before expanding the public payload.
 
 Known repository authorship and release identifiers are unchanged. The existing citation version and release date identify the recorded software release; this integration does not declare a new release.
 
@@ -19,7 +23,7 @@ This repository contains original project code, documentation, configurations, t
 - Upstream repository: [ecker-lab/sensorium_2023](https://github.com/ecker-lab/sensorium_2023)
 - Source revision pinned by Phase 1: `0e02656220e84a50f3be1b92d6f66c2f9ccd51ef`
 - Official data record: [GIN — sensorium_2023_dataset](https://gin.g-node.org/pollytur/sensorium_2023_dataset)
-- Dataset white paper: [Turishcheva et al., 2024](https://arxiv.org/abs/2305.19654)
+- Benchmark description: [Turishcheva et al., arXiv:2305.19654v2](https://arxiv.org/abs/2305.19654v2), revised 12 July 2024; version 1 was submitted 31 May 2023.
 - Competition retrospective: [Wang et al., 2024](https://proceedings.neurips.cc/paper_files/paper/2024/hash/d758d7c0a88d741c8ca4637579c9df87-Abstract-Datasets_and_Benchmarks_Track.html)
 
 Raw Dynamic Sensorium data are not included in this repository. Users must obtain them from the official source and comply with the terms displayed there. As of 14 August 2026, the upstream `sensorium_2023` repository does not expose a root-level `LICENSE` file. This project therefore treats it as an external dependency and scientific reference; it does not claim that its own MIT license grants rights to upstream Sensorium 2023 code or data.

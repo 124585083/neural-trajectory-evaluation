@@ -620,6 +620,9 @@ def _q6(
 
 
 def run_question_analysis(config: dict[str, Any], bootstrap_samples: int = 2000) -> dict[str, Any]:
+    from .protocol import load_protocol
+
+    load_protocol(config)
     out = output_dir(config)
     with np.load(out / "oracle_predictions.npz", allow_pickle=True) as values:
         base = {key: values[key] for key in values.files}

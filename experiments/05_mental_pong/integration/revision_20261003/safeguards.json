@@ -1,0 +1,235 @@
+{
+  "status": "passed",
+  "scope": "narrow synthetic implementation safeguards; no scientific analysis or retraining",
+  "execution": {
+    "os": "Windows",
+    "python": "3.11.9",
+    "torch": "2.5.1+cu124",
+    "device": "cpu",
+    "static_source": "original encoding environment; no workspace.env was found or used",
+    "sensorium_commit": "0e02656220e84a50f3be1b92d6f66c2f9ccd51ef",
+    "neuralpredictors_archive_comment": "efdda679596517fad95d71f36d0385d7450dd207",
+    "neuralpredictors_archive_sha256": "97789c4f73043a19c73c31b987abca6bca4783706f69e39f2c4eebc8778cf831",
+    "neuralpredictors_python_files_checked": 64,
+    "neuralpredictors_python_mismatches": []
+  },
+  "tests": {
+    "static": {
+      "passed": 4,
+      "junit": "static_independence_tests.xml",
+      "input_shape": [
+        1,
+        3,
+        27,
+        36,
+        64
+      ],
+      "output_shape": [
+        1,
+        9,
+        7
+      ],
+      "actual_implementation": "FramewiseStaticVideoEncoder with locked Stacked2dCore, Gaussian readout and MLP shifter; synthetic neuron geometry, untrained parameters",
+      "details": {
+        "absolute_tolerance": 2e-06,
+        "checks": [
+          {
+            "input_frame": 18,
+            "max_changed_frame_effect": 2.384185791015625e-05,
+            "max_other_frame_error": 0.0,
+            "output_position": 0,
+            "pathway": "input_channel_0"
+          },
+          {
+            "input_frame": 18,
+            "max_changed_frame_effect": 2.7179718017578125e-05,
+            "max_other_frame_error": 0.0,
+            "output_position": 0,
+            "pathway": "input_channel_1"
+          },
+          {
+            "input_frame": 18,
+            "max_changed_frame_effect": 2.2530555725097656e-05,
+            "max_other_frame_error": 0.0,
+            "output_position": 0,
+            "pathway": "input_channel_2"
+          },
+          {
+            "input_frame": 18,
+            "max_changed_frame_effect": 7.641315460205078e-05,
+            "max_other_frame_error": 0.0,
+            "output_position": 0,
+            "pathway": "pupil_center"
+          },
+          {
+            "input_frame": 18,
+            "max_changed_frame_effect": 0.0,
+            "max_other_frame_error": 0.0,
+            "output_position": 0,
+            "pathway": "behavior_argument"
+          },
+          {
+            "input_frame": 22,
+            "max_changed_frame_effect": 3.123283386230469e-05,
+            "max_other_frame_error": 0.0,
+            "output_position": 4,
+            "pathway": "input_channel_0"
+          },
+          {
+            "input_frame": 22,
+            "max_changed_frame_effect": 6.687641143798828e-05,
+            "max_other_frame_error": 0.0,
+            "output_position": 4,
+            "pathway": "input_channel_1"
+          },
+          {
+            "input_frame": 22,
+            "max_changed_frame_effect": 4.267692565917969e-05,
+            "max_other_frame_error": 0.0,
+            "output_position": 4,
+            "pathway": "input_channel_2"
+          },
+          {
+            "input_frame": 22,
+            "max_changed_frame_effect": 0.00015044212341308594,
+            "max_other_frame_error": 0.0,
+            "output_position": 4,
+            "pathway": "pupil_center"
+          },
+          {
+            "input_frame": 22,
+            "max_changed_frame_effect": 0.0,
+            "max_other_frame_error": 0.0,
+            "output_position": 4,
+            "pathway": "behavior_argument"
+          },
+          {
+            "input_frame": 26,
+            "max_changed_frame_effect": 3.647804260253906e-05,
+            "max_other_frame_error": 0.0,
+            "output_position": 8,
+            "pathway": "input_channel_0"
+          },
+          {
+            "input_frame": 26,
+            "max_changed_frame_effect": 3.314018249511719e-05,
+            "max_other_frame_error": 0.0,
+            "output_position": 8,
+            "pathway": "input_channel_1"
+          },
+          {
+            "input_frame": 26,
+            "max_changed_frame_effect": 3.826618194580078e-05,
+            "max_other_frame_error": 0.0,
+            "output_position": 8,
+            "pathway": "input_channel_2"
+          },
+          {
+            "input_frame": 26,
+            "max_changed_frame_effect": 0.0001424551010131836,
+            "max_other_frame_error": 0.0,
+            "output_position": 8,
+            "pathway": "pupil_center"
+          },
+          {
+            "input_frame": 26,
+            "max_changed_frame_effect": 0.0,
+            "max_other_frame_error": 0.0,
+            "output_position": 8,
+            "pathway": "behavior_argument"
+          }
+        ],
+        "mode": "eval",
+        "retained_input_frames": [
+          18,
+          26
+        ],
+        "status": "pass"
+      },
+      "counterexample": "sequence mean passes permutation equivariance; independence rejects it"
+    },
+    "protocol": {
+      "passed": 13,
+      "all_phase4_tests_passed": 18,
+      "junit": "phase4_guard_and_existing_tests.xml",
+      "checks": [
+        "matching inputs and no file change",
+        "four scientific configuration changes",
+        "neuron order",
+        "response bytes",
+        "checkpoint bytes",
+        "path aliases and timestamp",
+        "lock array tampering",
+        "legacy explicit override",
+        "missing lock not generated",
+        "new lock refuses a directory with existing results"
+      ]
+    }
+  },
+  "historical_locks": "No historical scientific metadata was reconstructed. Existing locks lack version2 input identity and require an explicit diagnostic override. Completed scientific lock bytes are unchanged.",
+  "source_changes": {
+    "experiments/01_baselines/src/trajectory_eval/static_dynamic.py": "cbbc81b74a032d89cca4b2f8c898fcf7d5bc5d9cf969e7acc860f8cef4672d32",
+    "experiments/01_baselines/src/trajectory_eval/official_dynamic.py": "a6192d4b4e57035ffb288d1b1ee8fd5c204d9636215dab23ca26031e8284fa1d",
+    "experiments/01_baselines/tests/test_static_frame_independence.py": "80f941e456bb4b3a133de3eada4ebfbb0c20952a57e3baa6ff10b0b6aee3d40b",
+    "experiments/04_model_comparison/src/trajectory_model_eval/protocol.py": "3c22bcc9dd58779f158024321fc939d0bbac39d53884b51239747f983e69ca46",
+    "experiments/04_model_comparison/src/trajectory_model_eval/cli.py": "cab9bdbad9651b68bc00302fcfcec710ba9205496e9f17f3f4b285872d0aea8e",
+    "experiments/04_model_comparison/src/trajectory_model_eval/evaluate.py": "e6060b04b5449bd8710fdfb79686d5fb171198a8ab965c24c529bb6afa239949",
+    "experiments/04_model_comparison/src/trajectory_model_eval/question_analysis.py": "0a9e715a29374574fe28b1cc05eeea274e8cab8ece832f929c0df393de1d6bc1",
+    "experiments/04_model_comparison/tests/test_protocol.py": "71b91b3c2b7a415fbb38964879b29603997b3c8c3691b924604ceb194a5f34b4"
+  },
+  "training_data_use": {
+    "all_three_models": {
+      "gradient": "official train tier; 80-frame crops",
+      "scheduler_early_stop_checkpoint": "oracle get_correlations; random 80-frame crop loaders used during fitting/selection",
+      "final_scoring": "reloaded complete sequences from reused oracle tier, frames50..299",
+      "independent_hidden_test": "unavailable for local models; upstream .1887 is an external reported reference"
+    },
+    "static": {
+      "status": "training_complete",
+      "seed": 42,
+      "validation_score": 0.16395580768585205,
+      "last_epoch": 63,
+      "elapsed_seconds": 26013.439940929413,
+      "best_checkpoint": "models/static_on_dynamic/best.pt",
+      "last_checkpoint": "not published",
+      "validation_events": 138
+    },
+    "dynamic": {
+      "status": "training_stopped_by_user_best_recovered",
+      "single_seed": 42,
+      "best_epoch": 97,
+      "last_complete_epoch": 103,
+      "best_official_early_stopping_closure": 0.19800327718257904,
+      "best_post_epoch_validation_score": 0.1977536529302597,
+      "best_checkpoint": "models/official_dynamic/best.pt",
+      "last_checkpoint": "not published",
+      "raw_epoch_checkpoint_count": 103,
+      "raw_epoch_checkpoints_retained": true,
+      "validation_events": 213,
+      "full_official_early_stopping_completed": false
+    },
+    "matched_dynamic": {
+      "status": "training_complete",
+      "seed": 42,
+      "validation_score": 0.18789274990558624,
+      "last_epoch": 99,
+      "elapsed_seconds": 41015.70227384567,
+      "best_checkpoint": "models/parameter_matched_dynamic/best.pt",
+      "last_checkpoint": "not published",
+      "raw_epoch_checkpoints": 99,
+      "validation_events": 210
+    },
+    "upstream_trainer_sha256": "f5529a511e23ebbd4c3ae5d23d2ee3e157aa737284d657e328f1bc7be543e632",
+    "interpretation": "Copied numerical training summaries describe completed historical runs; no training or evaluation action is scheduled by this record."
+  },
+  "not_executed": [
+    "full architecture audit on raw Sensorium trials",
+    "encoding training or scoring",
+    "new GPFA fitting",
+    "historical protocol regeneration"
+  ],
+  "warnings": [
+    "Initial import diagnostic encountered stale OneDrive editable paths; resolved by pointing PYTHONPATH to byte-verified local upstream packages. No source dependency changed."
+  ],
+  "original_private_check_record_sha256": "742901d773d0d50942d6f3a932fe7779386b3ab20cab9943e4f333811c69a52a"
+}

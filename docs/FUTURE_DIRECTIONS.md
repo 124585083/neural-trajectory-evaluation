@@ -2,6 +2,10 @@
 
 This is the current joint research plan for Dynamic Sensorium and Mental-Pong. It describes future work; none of these experiments was run during repository integration. The completed [Sensorium results](RESULTS.md) and [Mental-Pong study](MENTAL_PONG.md) establish different starting points. Their measurements, noise ceilings, and GPFA implementations remain separate.
 
+**First question:** With the physical condition fixed, do above-target and below-target trial groups show reliable neural readout shifts in the corresponding directions? Answering it requires neural and behavioral records with matching trial identities. The current condition means cannot be separated into those neural groups.
+
+The plan proceeds from recovering identities and timing, to defining reliable behavior groups, testing their position readouts, examining temporal organization, and finally designing observations that separate competing computations.
+
 ## 1. What the completed averaging audit shows
 
 The final Mental-Pong candidate uses a condition-mean paddle endpoint. Positive and negative endpoint errors partly cancel before a candidate path is constructed. The following quantities give each valid physical condition equal weight, rather than weighting conditions by their number of behavioral records.
@@ -40,11 +44,11 @@ E[R(t)\mid\mathrm{condition}]
 E[R(t)\mid\mathrm{condition},\mathrm{behavioral\ group}].
 \]
 
-Repeat averaging remains useful for estimating reproducible structure. The averaging unit must preserve the contrast required by the question. A finer grouping is useful only if enough observations remain to estimate its signal and reliability. This connects the repeat-averaged measurement rationale in [Study 1](DESIGN_RATIONALE.md) to a task where choices within one condition matter.
+Repeat averaging remains useful for estimating reproducible structure. Trials should be averaged within groups that preserve the behavioral contrast being tested. Each behavior group must retain enough observations to estimate its mean response and split-half reliability. This connects the repeat-averaged measurement rationale in [Study 1](DESIGN_RATIONALE.md) to a task where choices within one condition matter.
 
 ## 3. Compare behavior groups within a physical condition
 
-Define signed endpoint error and group thresholds before inspecting neural differences. Above-target, below-target, and near-correct groups should use measurement precision and task tolerance. Keep endpoints reasonably similar within each group. Match absolute error, session, trial count, and available units where feasible, and report remaining imbalance.
+Define signed endpoint error and group thresholds before inspecting neural differences, then check the reliability of the resulting group averages. Above-target, below-target, and near-correct groups should use measurement precision and task tolerance. Keep endpoints reasonably similar within each group. Match absolute error, session, trial count, and available units where feasible, and report remaining imbalance.
 
 Use the neural records that actually belong to each behavior group. Fit a common representation on training neural data and apply a shared readout protocol. Separate model-fitting trials from evaluation trials and split-half reliability trials. Keep objective paths fixed within a condition, then ask whether reconstructed positions shift in the direction of the group's behavior. Retain own-target comparisons, cross-scoring, and within-condition controls for correspondence.
 

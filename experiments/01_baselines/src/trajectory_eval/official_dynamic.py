@@ -785,7 +785,7 @@ def recover_user_stopped_training(
         "raw_epoch_checkpoints_retained": True,
         "validation_events": len(validation_events),
         "full_official_early_stopping_completed": False,
-        "next_action": "independent best-checkpoint evaluation and prediction export",
+        "next_action": "reloaded best-checkpoint oracle evaluation and prediction export",
     }
     (log_dir / "training_summary.json").write_text(_json(summary, indent=2), encoding="utf-8")
     return summary

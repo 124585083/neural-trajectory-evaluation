@@ -1,0 +1,36 @@
+{
+  "status": "passed_with_explicit_skips",
+  "command_from_module_directory": "python -B -m pytest tests trajectory_project -q",
+  "working_directory": "experiments/05_mental_pong",
+  "passed": 115,
+  "skipped": 3,
+  "failed": 0,
+  "warnings": {
+    "count": 15,
+    "types": [
+      "Matplotlib/Pyparsing deprecation warnings",
+      "Expected short synthetic FactorAnalysis nonconvergence warning (five iterations in unit fixture)"
+    ]
+  },
+  "initial_attempt": {
+    "working_directory": "repository root",
+    "status": "collection_failed",
+    "reason": "Eight legacy test modules require trajectory_project imports from the module directory. Retried with the documented module working directory, without code or science changes."
+  },
+  "skips": [
+    {
+      "test": "test_all_random_baseline_denominators_train_only_and_same_between_representations",
+      "reason": "Full external C artifacts are not materialized here; use the read-only run.py --replay route."
+    },
+    {
+      "test": "test_example_predictions_are_heldout_only_and_x_cannot_change_with_q",
+      "reason": "Full external C artifacts are not materialized here; use the read-only run.py --replay route."
+    },
+    {
+      "test": "test_observed_geometric_baseline_uses_train_endpoints_only",
+      "reason": "Full external C artifacts are not materialized here; use the read-only run.py --replay route."
+    }
+  ],
+  "scientific_models_fitted": false,
+  "full_randomization_rerun": false
+}

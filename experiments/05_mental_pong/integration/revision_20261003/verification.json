@@ -1,0 +1,122 @@
+{
+  "revision_date": "2026-10-03",
+  "checked_at_utc": "2026-10-02T17:22:32.914071+00:00",
+  "status": "COMPLETE_FOR_AVAILABLE_REVISION_SCOPE_PUBLIC_PAYLOAD_WITHHELD",
+  "starting_commit": "0637c08bca6661e32753f7f4c52d141bcd76f61b",
+  "batch_status": {
+    "1_research_entry_attribution_references_data_use": "complete",
+    "2_English_metrics_figures_future_plan": "complete",
+    "3_source_and_verification": "complete_for_source_export_safeguards_and_private_verification",
+    "3_public_numerical_payload": "blocked_pending_derived_data_permission"
+  },
+  "publication_checks": {
+    "status": "passed",
+    "files_written": false,
+    "scientific_analysis_rerun": false,
+    "text_and_links": {
+      "text_files": 384,
+      "python_files_parsed": 101,
+      "relative_links_checked": 486,
+      "language_issues": [],
+      "private_path_issues": [],
+      "broken_links": [],
+      "syntax_issues": [],
+      "excluded": [
+        "Git internals",
+        "ignored local configuration",
+        "external immutable source records",
+        "binary figures (separate visual inspection record)"
+      ],
+      "required_legal_exceptions": [],
+      "synthetic_path_exception": "A synthetic Windows absolute path is used in rejection tests and in this checker."
+    },
+    "saved_score_checks": {
+      "status": "passed",
+      "self_target_rows": 48,
+      "cross_target_rows": 192,
+      "rounds_per_group": 100,
+      "fixed_splits_checked": 100,
+      "maximum_absolute_aggregation_difference": 3.3306690738754696e-15,
+      "english_summary_display_matches_full_precision_table": "passed",
+      "own_target_to_diagonal_identity": "passed",
+      "new_model_fitting": false
+    },
+    "evidence_index": {
+      "status": "passed",
+      "claims": 26,
+      "file_references": 52
+    },
+    "artifact_checks": {
+      "operation": "read_only_verification",
+      "status": "passed_with_availability_report",
+      "published_records_checked": 414,
+      "artifact_status_counts": {
+        "unavailable": 1,
+        "verified": 7347,
+        "available_large_checksum_not_checked": 226
+      },
+      "deep_external_checksums": false,
+      "failures": [],
+      "unavailable_artifacts": [
+        {
+          "artifact_id": "external_source_229047a1ad4f:.",
+          "storage_location_id": "external_source_229047a1ad4f",
+          "status": "unavailable"
+        }
+      ],
+      "scientific_status": "CLOSED_EXPLORATORY_WITH_LIMITATIONS",
+      "raw_preprocessing": "fail",
+      "new_model_fitting": false,
+      "files_written": false
+    },
+    "failed_checks": []
+  },
+  "scientific_preservation": {
+    "files_checked": 223,
+    "all_byte_identical": true,
+    "record": "scientific_preservation.json",
+    "original_completion_and_integration_records_changed": false
+  },
+  "tests": {
+    "protocol_and_phase4_passed": 18,
+    "static_adapter_passed": 4,
+    "mental_pong_suite_passed": 115,
+    "mental_pong_suite_skipped": 3,
+    "mini_real_bundle_passed": 20,
+    "mini_public_only_passed": 1,
+    "mini_public_only_skipped": 19,
+    "publication_map_tests_included_in_mental_pong_count": 6
+  },
+  "citation_validation": {
+    "syntax": "YAML valid",
+    "human_authors_unchanged": true,
+    "preferred_citation_unchanged": true,
+    "version": "0.1.0",
+    "date_released": "2026-08-14"
+  },
+  "editorial_record": "writing_and_figures.json",
+  "mini_record": "mini_replay.json",
+  "rights_record": "data_rights_audit.json",
+  "safeguard_record": "safeguards.json",
+  "review_crosswalk": {
+    "prior_document": "Repository_Review_2026-10-02.md",
+    "available": false,
+    "original_R1_R12_mapping": "unverified",
+    "replacement": "Twelve C1-C12 local checks in docs/REVISION_REPORT.md are derived from the supplied revision specification, not attributed to missing review text."
+  },
+  "publication_manifest": {
+    "path": "publication_map.csv",
+    "policy": "Additive baseline-to-publication map covering every publication file except itself. Original integration migration_map.csv and source SHA values remain immutable. This verification record is included after it is written, then a final read-only pass checks the complete map."
+  },
+  "not_performed": [
+    "New scientific comparisons",
+    "Neural representation training",
+    "New seeds or splits",
+    "Full randomization rerun",
+    "Full raw-data rebuild",
+    "Linux or macOS execution",
+    "Commit or push",
+    "Public release or DOI registration"
+  ],
+  "release_state": "Working tree only; reviewable changes, no staged commit or network publication."
+}

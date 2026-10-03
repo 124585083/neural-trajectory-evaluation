@@ -1,7 +1,8 @@
 """Read-only access to the integrated Mental-Pong evidence.
 
 The default command verifies publication files and registered artifact access.
-Small replays read saved parameters; they never fit a model or write results.
+The legacy replay reads saved parameters without writing. The packaged replay
+writes checks to an explicit output directory; OLS refitting is an optional flag.
 Historical completion and the current integration checks remain separate.
 """
 from __future__ import annotations
@@ -9,6 +10,7 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -98,7 +100,15 @@ def verify(access, deep=False):
     if not migration_path.exists():
         failures.append('integration/migration_map.csv is unavailable')
     else:
-        for row in read_csv(migration_path):
+        spec = importlib.util.spec_from_file_location('mental_pong_publication_revision', ROOT / 'revision_manifest.py')
+        revision = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(revision)
+        try:
+            publication = revision.publication_rows(access.root, read_csv(migration_path))
+        except (ValueError, KeyError) as error:
+            failures.append(f'Invalid publication revision manifest: {error}')
+            publication = []
+        for row in publication:
             destination = row.get('destination', '')
             if not destination or not row.get('destination_sha256'):
                 continue
@@ -230,6 +240,7 @@ def main(argv=None):
     action = parser.add_mutually_exclusive_group()
     action.add_argument('--verify', action='store_true', help='Read-only verification; the default action.')
     action.add_argument('--replay', action='store_true', help='Read and replay one saved random OLS head.')
+    action.add_argument('--mini-replay', action='store_true', help='Replay the fixed packaged split without consulting external storage configuration.')
     action.add_argument('--full-plan', action='store_true', help='List full-analysis inputs and retained commands; do not execute them.')
     parser.add_argument('--paths', type=Path, help='Local path configuration; environment variables override its storage roots.')
     parser.add_argument('--deep', action='store_true', help='Hash all registered external files during verification.')
@@ -237,14 +248,26 @@ def main(argv=None):
     parser.add_argument('--representation', choices=('FA50', 'GPFA50'), default='FA50')
     parser.add_argument('--q', type=int, default=0)
     parser.add_argument('--split', type=int, default=0)
+    parser.add_argument('--output', type=Path, help='Required caller-selected output directory for --mini-replay.')
+    parser.add_argument('--mini-bundle', type=Path, help='Optional privately exported mini package; the default is mini_replay beside this script.')
+    parser.add_argument('--ols-refit', action='store_true', help='Explicit optional OLS refit of the mini package training rows.')
     args = parser.parse_args(argv)
-    access = ArtifactAccess(args.paths)
+    if (args.ols_refit or args.mini_bundle or args.output) and not args.mini_replay:
+        parser.error('--output, --mini-bundle and --ols-refit apply only to --mini-replay.')
     try:
-        if args.replay:
+        if args.mini_replay:
+            if args.output is None:
+                parser.error('--mini-replay requires --output outside the immutable bundle.')
+            from mini_replay.replay import run as mini_run
+            result = mini_run(args.mini_bundle or ROOT/'mini_replay', args.output, args.ols_refit)
+        elif args.replay:
+            access = ArtifactAccess(args.paths)
             result = replay(access, args.animal, args.representation, args.q, args.split)
         elif args.full_plan:
+            access = ArtifactAccess(args.paths)
             result = full_plan(access)
         else:
+            access = ArtifactAccess(args.paths)
             result = verify(access, args.deep)
     except (FileNotFoundError, ValueError, AssertionError) as exc:
         result = {'status': 'unavailable_or_failed', 'reason': str(exc), 'files_written': False,

@@ -13,7 +13,7 @@ Use the [publication entry point](../../README.md) for reading, default read-onl
 ## Results and array axes
 
 - [Configurations](configs/closeout_protocol.json) preserve the protocol, seeds and splits. B seeds are 314159/314160 and C seeds 271828/271829 for Mahler/Perle, using PCG64.
-- [A scores](results/A/self_reconstruction_main_table.csv) and [cross-scores](results/A/cross_2x2_summary.csv) are independent test-only replays, scored per split before aggregation.
+- [A scores](results/A/self_reconstruction_main_table.csv) and [cross-scores](results/A/cross_2x2_summary.csv) are recomputed from saved held-out predictions, scored per split before aggregation.
 - [B summary](results/B/B_summary.csv) averages the 100 splits within each random repeat. Full arrays use `[q,split,epoch,head,target,coordinate,metric]`; mappings use `[q,split,condition]`, with -1 outside valid test identities. Matched and mismatched scores share support.
 - [C methods](results/C/README.md) describe `[q,split,epoch,metric]` scores, fixed endpoint allocations and actual new OLS coefficients. Read axis names from each array. Candidate labels can be reconstructed as `offset + alpha * endpoint`; invalid entries remain NaN.
 - [Descriptive results](results/descriptive/mean_cancellation_interpretation.md) cover exact behavioral members, sign cancellation, variance decomposition, path separation and fixed post hoc examples.

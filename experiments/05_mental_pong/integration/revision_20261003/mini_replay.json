@@ -1,0 +1,288 @@
+{
+  "status": "partial_public_payload_withheld",
+  "selection": {
+    "split": 0,
+    "q": 0,
+    "half": "half1"
+  },
+  "real_cases": 4,
+  "real_export_bytes": 5713262,
+  "source_parent_hashes_checked_before_and_after": 27,
+  "source_parent_hashes_unchanged": true,
+  "saved_weight_replay": {
+    "status": "passed",
+    "operation": "packaged_saved_split_replay",
+    "selection": {
+      "split": 0,
+      "q": 0,
+      "half": "half1"
+    },
+    "cases": 4,
+    "score_rows": 604,
+    "maximum_metric_absolute_difference": 1.6370904631912708e-11,
+    "atol": 1e-08,
+    "rtol": 1e-10,
+    "raw_preprocessing": "fail",
+    "scientific_status": "CLOSED_EXPLORATORY_WITH_LIMITATIONS",
+    "external_storage_accessed": false,
+    "representation_refit": false,
+    "OLS_refit": false,
+    "full_analysis_rebuilt": false,
+    "limitation": "One saved split and allocation; does not reproduce the 100-split or 1000-randomization distributions.",
+    "environment": {
+      "python": "3.11.9",
+      "platform": "Windows",
+      "numpy": "1.26.4"
+    },
+    "optional_refits": []
+  },
+  "optional_refit": {
+    "status": "passed",
+    "operation": "packaged_saved_split_replay",
+    "selection": {
+      "split": 0,
+      "q": 0,
+      "half": "half1"
+    },
+    "cases": 4,
+    "score_rows": 604,
+    "maximum_metric_absolute_difference": 1.6370904631912708e-11,
+    "atol": 1e-08,
+    "rtol": 1e-10,
+    "raw_preprocessing": "fail",
+    "scientific_status": "CLOSED_EXPLORATORY_WITH_LIMITATIONS",
+    "external_storage_accessed": false,
+    "representation_refit": false,
+    "OLS_refit": true,
+    "full_analysis_rebuilt": false,
+    "limitation": "One saved split and allocation; does not reproduce the 100-split or 1000-randomization distributions.",
+    "environment": {
+      "python": "3.11.9",
+      "platform": "Windows",
+      "numpy": "1.26.4"
+    },
+    "optional_refits": [
+      {
+        "case": "mahler_FA50",
+        "head": "objective",
+        "rank": 50,
+        "solver": "sklearn LinearRegression dense scipy.linalg.lstsq",
+        "sklearn": "1.5.2",
+        "scipy": "1.14.1",
+        "max_prediction_absolute_difference": 9.992007221626409e-15,
+        "max_metric_absolute_difference": 8.881784197001252e-16,
+        "coefficients_identity_required": false
+      },
+      {
+        "case": "mahler_FA50",
+        "head": "behavior",
+        "rank": 50,
+        "solver": "sklearn LinearRegression dense scipy.linalg.lstsq",
+        "sklearn": "1.5.2",
+        "scipy": "1.14.1",
+        "max_prediction_absolute_difference": 9.43689570931383e-15,
+        "max_metric_absolute_difference": 8.881784197001252e-16,
+        "coefficients_identity_required": false
+      },
+      {
+        "case": "mahler_FA50",
+        "head": "random",
+        "rank": 50,
+        "solver": "sklearn LinearRegression dense scipy.linalg.lstsq",
+        "sklearn": "1.5.2",
+        "scipy": "1.14.1",
+        "max_prediction_absolute_difference": 1.3322676295501878e-14,
+        "max_metric_absolute_difference": 8.881784197001252e-16,
+        "coefficients_identity_required": false
+      },
+      {
+        "case": "mahler_GPFA50",
+        "head": "objective",
+        "rank": 50,
+        "solver": "sklearn LinearRegression dense scipy.linalg.lstsq",
+        "sklearn": "1.5.2",
+        "scipy": "1.14.1",
+        "max_prediction_absolute_difference": 1.2878587085651816e-14,
+        "max_metric_absolute_difference": 8.881784197001252e-16,
+        "coefficients_identity_required": false
+      },
+      {
+        "case": "mahler_GPFA50",
+        "head": "behavior",
+        "rank": 50,
+        "solver": "sklearn LinearRegression dense scipy.linalg.lstsq",
+        "sklearn": "1.5.2",
+        "scipy": "1.14.1",
+        "max_prediction_absolute_difference": 1.021405182655144e-14,
+        "max_metric_absolute_difference": 8.881784197001252e-16,
+        "coefficients_identity_required": false
+      },
+      {
+        "case": "mahler_GPFA50",
+        "head": "random",
+        "rank": 50,
+        "solver": "sklearn LinearRegression dense scipy.linalg.lstsq",
+        "sklearn": "1.5.2",
+        "scipy": "1.14.1",
+        "max_prediction_absolute_difference": 1.4210854715202004e-14,
+        "max_metric_absolute_difference": 1.7763568394002505e-15,
+        "coefficients_identity_required": false
+      },
+      {
+        "case": "perle_FA50",
+        "head": "objective",
+        "rank": 50,
+        "solver": "sklearn LinearRegression dense scipy.linalg.lstsq",
+        "sklearn": "1.5.2",
+        "scipy": "1.14.1",
+        "max_prediction_absolute_difference": 1.021405182655144e-14,
+        "max_metric_absolute_difference": 1.7763568394002505e-15,
+        "coefficients_identity_required": false
+      },
+      {
+        "case": "perle_FA50",
+        "head": "behavior",
+        "rank": 50,
+        "solver": "sklearn LinearRegression dense scipy.linalg.lstsq",
+        "sklearn": "1.5.2",
+        "scipy": "1.14.1",
+        "max_prediction_absolute_difference": 7.105427357601002e-15,
+        "max_metric_absolute_difference": 4.440892098500626e-16,
+        "coefficients_identity_required": false
+      },
+      {
+        "case": "perle_FA50",
+        "head": "random",
+        "rank": 50,
+        "solver": "sklearn LinearRegression dense scipy.linalg.lstsq",
+        "sklearn": "1.5.2",
+        "scipy": "1.14.1",
+        "max_prediction_absolute_difference": 9.769962616701378e-15,
+        "max_metric_absolute_difference": 8.881784197001252e-16,
+        "coefficients_identity_required": false
+      },
+      {
+        "case": "perle_GPFA50",
+        "head": "objective",
+        "rank": 50,
+        "solver": "sklearn LinearRegression dense scipy.linalg.lstsq",
+        "sklearn": "1.5.2",
+        "scipy": "1.14.1",
+        "max_prediction_absolute_difference": 7.993605777301127e-15,
+        "max_metric_absolute_difference": 8.881784197001252e-16,
+        "coefficients_identity_required": false
+      },
+      {
+        "case": "perle_GPFA50",
+        "head": "behavior",
+        "rank": 50,
+        "solver": "sklearn LinearRegression dense scipy.linalg.lstsq",
+        "sklearn": "1.5.2",
+        "scipy": "1.14.1",
+        "max_prediction_absolute_difference": 1.2434497875801753e-14,
+        "max_metric_absolute_difference": 4.440892098500626e-16,
+        "coefficients_identity_required": false
+      },
+      {
+        "case": "perle_GPFA50",
+        "head": "random",
+        "rank": 50,
+        "solver": "sklearn LinearRegression dense scipy.linalg.lstsq",
+        "sklearn": "1.5.2",
+        "scipy": "1.14.1",
+        "max_prediction_absolute_difference": 1.509903313490213e-14,
+        "max_metric_absolute_difference": 1.3322676295501878e-15,
+        "coefficients_identity_required": false
+      }
+    ]
+  },
+  "tests": {
+    "private_payload_suite": "20 passed",
+    "public_only_payload_tests": "1 passed;19 skipped with missing real-payload reason",
+    "cold_copy": "passed",
+    "cold_copy_platform": "Windows",
+    "cold_copy_python": "3.11.9",
+    "cold_copy_numpy": "1.26.4",
+    "isolation": "new temporary directory with spaces; source file access denied by Python audit allowlist; network socket operations denied; project environment and PYTHONPATH cleared; no torch/scipy/sklearn imports in default replay",
+    "tampering": "feature/mask/coefficient/file hash rejected; refreshed feature/coefficient hashes still fail recomputed scores; contradictory metadata and axes rejected",
+    "public_default_command": "exit 1;explicit payload-withheld reason;no output directory created",
+    "initial_test_failures_resolved": [
+      "Private-path regex initially matched storage aliases; refined drive-prefix boundary.",
+      "Cold network/file guard exposed NumPy testing platform probes; replaced runtime test assertions with NumPy value comparisons and avoided hostname-dependent platform lookup."
+    ],
+    "overwrite_guard": "Existing nonempty output directories rejected; preserved scientific records are never overwritten."
+  },
+  "source_closure": {
+    "internal_runtime_modules_checked": 35,
+    "missing_project_module_imports": [],
+    "modules": [
+      "trajectory_project/__init__.py",
+      "trajectory_project/_dependencies.py",
+      "trajectory_project/closeout_v1/__init__.py",
+      "trajectory_project/closeout_v1/closeout_setup.py",
+      "trajectory_project/closeout_v1/descriptive_audit.py",
+      "trajectory_project/closeout_v1/final_audit.py",
+      "trajectory_project/closeout_v1/null_condition.py",
+      "trajectory_project/closeout_v1/null_endpoint.py",
+      "trajectory_project/closeout_v1/plot_closeout.py",
+      "trajectory_project/closeout_v1/replay_a.py",
+      "trajectory_project/closeout_v1/report_closeout.py",
+      "trajectory_project/closeout_v1/run_closeout.py",
+      "trajectory_project/condition_endpoint_fa_gpfa_v1/__init__.py",
+      "trajectory_project/condition_endpoint_fa_gpfa_v1/condition_data.py",
+      "trajectory_project/condition_endpoint_fa_gpfa_v1/decoding_condition.py",
+      "trajectory_project/condition_endpoint_fa_gpfa_v1/final_validation.py",
+      "trajectory_project/condition_endpoint_fa_gpfa_v1/plotting_condition.py",
+      "trajectory_project/condition_endpoint_fa_gpfa_v1/project_setup.py",
+      "trajectory_project/condition_endpoint_fa_gpfa_v1/reporting_condition.py",
+      "trajectory_project/condition_endpoint_fa_gpfa_v1/reuse_audit.py",
+      "trajectory_project/condition_endpoint_fa_gpfa_v1/run_analysis.py",
+      "trajectory_project/runtime_paths.py",
+      "trajectory_project/step3_io.py",
+      "trajectory_project/trial_endpoint_fa_gpfa_v1/__init__.py",
+      "trajectory_project/trial_endpoint_fa_gpfa_v1/causal_readout_audit.py",
+      "trajectory_project/trial_endpoint_fa_gpfa_v1/decoding_trial.py",
+      "trajectory_project/trial_endpoint_fa_gpfa_v1/export_trial.py",
+      "trajectory_project/trial_endpoint_fa_gpfa_v1/final_validation.py",
+      "trajectory_project/trial_endpoint_fa_gpfa_v1/hierarchy_summary.py",
+      "trajectory_project/trial_endpoint_fa_gpfa_v1/plotting_trial.py",
+      "trajectory_project/trial_endpoint_fa_gpfa_v1/project_setup.py",
+      "trajectory_project/trial_endpoint_fa_gpfa_v1/reporting_trial.py",
+      "trajectory_project/trial_endpoint_fa_gpfa_v1/representations.py",
+      "trajectory_project/trial_endpoint_fa_gpfa_v1/run_analysis.py",
+      "trajectory_project/trial_endpoint_fa_gpfa_v1/trial_data.py"
+    ],
+    "retained_helpers": [
+      "data_pipeline.py",
+      "gpfa_shared.py",
+      "trajectory_project/_dependencies.py"
+    ],
+    "capacity_position_baselines": "historical configuration fingerprint only; never imported by final fitting or evaluation; external original record required by historical seal"
+  },
+  "public_payload_available": false,
+  "rights": "CC-BY-NC-ND-4.0 source record; permission for transformed neural/behavioral payload redistribution unresolved",
+  "new_representation_fitting": false,
+  "full_randomizations_rerun": false,
+  "full_analysis_rebuilt": false,
+  "prior_scientific_files_edited": false,
+  "figures_generated": false,
+  "unverified_platforms": [
+    "Linux",
+    "macOS"
+  ],
+  "publication_files": [
+    "mini_replay/__init__.py",
+    "mini_replay/dependencies.csv",
+    "mini_replay/manifest.json",
+    "mini_replay/README.md",
+    "mini_replay/replay.py",
+    "mini_replay/requirements-refit.txt",
+    "mini_replay/requirements.txt",
+    "mini_replay/tests/conftest.py",
+    "mini_replay/tests/test_export_contract.py",
+    "mini_replay/tests/test_replay.py",
+    "scripts/export_mini_replay.py",
+    "README.md",
+    "run.py"
+  ]
+}

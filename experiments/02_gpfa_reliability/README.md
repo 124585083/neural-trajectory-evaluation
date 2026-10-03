@@ -4,7 +4,7 @@ This Study 1 phase fits a neural-data-defined Gaussian-process factor analysis (
 
 ## Purpose
 
-Phase 2 asks whether repeated presentations of the same natural movie yield reproducible neural-population trajectories in a GPFA space fitted only from training neural responses. Static and Dynamic predictions do not define or modify this coordinate system. Reliability is evaluated only after model selection, preprocessing, and fitting are frozen. Structured nulls test dependence on movie identity, temporal alignment and order, and coordinated population timing before the assay design is applied to model comparison.
+Phase 2 asks whether repeated presentations of the same natural movie yield reproducible neural-population trajectories in a GPFA space fitted only from training neural responses. Static and Dynamic predictions do not define or modify this coordinate system. Reliability is evaluated only after model selection, preprocessing, and fitting are frozen. Structured nulls test dependence on movie identity, temporal alignment and order, and coordinated population timing before this measurement is applied to model comparison.
 
 ## Inputs and prerequisites
 
@@ -39,7 +39,7 @@ Run the smoke test before the primary analysis because it writes reduced test ar
 python -m trajectory_reliability.cli run --config configs/pilot.yaml
 ```
 
-This command applies the locked 278/70 fit/calibration split, selects GPFA hyperparameters from calibration likelihood, refits on all 348 training trials, freezes the assay, and then evaluates oracle split-half reliability and matched nulls.
+This command applies the locked 278/70 fit/calibration split, selects GPFA hyperparameters from calibration likelihood, refits on all 348 training trials, freezes the GPFA measurement, and then evaluates oracle split-half reliability and matched nulls.
 
 ### Sensitivity and auxiliary diagnostics
 
@@ -76,7 +76,7 @@ python -m trajectory_reliability.cli condition-prior --config configs/pilot.yaml
 
 - A neural-data-defined GPFA and its preprocessing can be fitted without encoding-model predictions.
 - Balanced repeat reliability and structured-null checks can be applied only after the assay is frozen.
-- Phase 4 applies the same validated assay design to a separately fitted and revalidated 174-trial comparison-subset GPFA; the Phase 2 `gpfa.pkl` is not the final model-comparison fit.
+- Phase 4 applies the same validated measurement design to a separately fitted and revalidated 174-trial comparison-subset GPFA; the Phase 2 `gpfa.pkl` is not the final model-comparison fit.
 
 ## Documentation
 
@@ -84,3 +84,5 @@ python -m trajectory_reliability.cli condition-prior --config configs/pilot.yaml
 - [Methods](../../docs/METHODS.md) — fitting, inference, temporal sampling, metrics, and null procedures
 - [Design Rationale](../../docs/DESIGN_RATIONALE.md) — why measurement validation precedes model comparison
 - [Data and Reproducibility](../../docs/DATA_AND_REPRODUCIBILITY.md) — data and environment setup
+
+The train-only GPFA boundary is specific to representation fitting and selection. The encoding models used oracle correlation for checkpoint selection before the later trajectory comparison; see the [data-use table](../../docs/METHODS.md#data-use-and-evaluation-independence).

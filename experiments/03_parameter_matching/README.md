@@ -50,7 +50,7 @@ python -m trajectory_param_match.experiment --config configs/dynamic_parameter_m
 python -m trajectory_param_match.experiment --config configs/dynamic_parameter_matched.yaml evaluate
 ```
 
-`audit` verifies the configuration, data/split identities, architecture, tensor shapes, and total/core/readout/shifter counts. Formal training should begin only after `audit` and `smoke` pass; `evaluate` independently reloads the published checkpoint for full-sequence oracle evaluation.
+`audit` verifies the configuration, data/split identities, architecture, tensor shapes, and total/core/readout/shifter counts. Formal training should begin only after `audit` and `smoke` pass; `evaluate` reloads the published checkpoint for full-sequence oracle evaluation.
 
 ## Training protocol
 
@@ -78,3 +78,7 @@ Phase 4 consumes the frozen config and `best.pt`, reconstructs the model, and ex
 - [Results](../../docs/RESULTS.md) — response and trajectory comparison results
 - [Design Rationale](../../docs/DESIGN_RATIONALE.md) — purpose and inferential scope of total-parameter matching
 - [Data and Reproducibility](../../docs/DATA_AND_REPRODUCIBILITY.md) — data, environment, and artifact loading
+
+## Evaluation data reuse
+
+Encoding checkpoints were selected using the oracle tier that later supplies full-sequence scores. Reloading a checkpoint checks execution without creating an independent test set. The [Methods data-use table](../../docs/METHODS.md#data-use-and-evaluation-independence) identifies model-specific training, selection and scoring uses. Excluding oracle responses from GPFA fitting or one perturbation choice does not undo their earlier use in checkpoint selection.

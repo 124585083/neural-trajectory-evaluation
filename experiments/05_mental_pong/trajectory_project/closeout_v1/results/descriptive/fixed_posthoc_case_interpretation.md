@@ -1,6 +1,6 @@
 # Current post hoc cases
 
-Conditions 55062 and 241919 were requested after earlier results had been viewed. They are illustrations, without independent confirmatory status. Scores below average the original per-split held-out results. Four-curve figures instead show the mean and SD of test predictions for visualization.
+Conditions 55062 and 241919 were selected after earlier aggregate results had been examined. They are illustrations, without independent confirmatory status. Scores below average the original per-split held-out results. Four-curve figures instead show the mean and SD of test predictions for visualization.
 
 | animal | representation | condition_id | epoch | r_obj | r_beh | RMSE_obj | RMSE_beh | Delta_r | Delta_RMSE |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |

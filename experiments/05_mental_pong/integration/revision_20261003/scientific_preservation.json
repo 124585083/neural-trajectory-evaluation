@@ -1,0 +1,1345 @@
+{
+  "baseline_commit": "0637c08bca6661e32753f7f4c52d141bcd76f61b",
+  "files_checked": 223,
+  "all_unchanged": true,
+  "files": [
+    {
+      "path": "experiments/01_baselines/records/dynamic/architecture_audit.json",
+      "baseline_sha256": "fbe068e43bcc649d265259489c71c4247cc210439a6d217b5dd327cacbb1be0e",
+      "publication_sha256": "fbe068e43bcc649d265259489c71c4247cc210439a6d217b5dd327cacbb1be0e",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/01_baselines/records/dynamic/dynamic_official_model.txt",
+      "baseline_sha256": "3f186c22d331e0ceaa5e7b2647514c12f876b308d5bc78522948c6844c29ba13",
+      "publication_sha256": "3f186c22d331e0ceaa5e7b2647514c12f876b308d5bc78522948c6844c29ba13",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/01_baselines/records/dynamic/official_evaluation.json",
+      "baseline_sha256": "b05e8b61ee96268d76037e37fff7276eb44dd4b94ef98a345afbc68f1c0d8df0",
+      "publication_sha256": "b05e8b61ee96268d76037e37fff7276eb44dd4b94ef98a345afbc68f1c0d8df0",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/01_baselines/records/dynamic/optimizer_configuration.json",
+      "baseline_sha256": "bc232f0890141578f23e7e201bb0b073ec5447db02dfd89d3e59edbb1213a447",
+      "publication_sha256": "bc232f0890141578f23e7e201bb0b073ec5447db02dfd89d3e59edbb1213a447",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/01_baselines/records/dynamic/random_seed.json",
+      "baseline_sha256": "92cb7f047bb75a8c9e5fc3e5cd2b6b798867d19e8dbfcd4bb4c9d9d159458a2d",
+      "publication_sha256": "92cb7f047bb75a8c9e5fc3e5cd2b6b798867d19e8dbfcd4bb4c9d9d159458a2d",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/01_baselines/records/dynamic/scheduler_configuration.json",
+      "baseline_sha256": "1c62d92c0ed140dff4434155636b22e28b667fe8c9b718070deb35908b9ea58a",
+      "publication_sha256": "1c62d92c0ed140dff4434155636b22e28b667fe8c9b718070deb35908b9ea58a",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/01_baselines/records/dynamic/temporal_alignment.json",
+      "baseline_sha256": "41404a09c0ef7d0a93b7ade52fbc9c9af1e0f60de040c06834ca336596b458d0",
+      "publication_sha256": "41404a09c0ef7d0a93b7ade52fbc9c9af1e0f60de040c06834ca336596b458d0",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/01_baselines/records/dynamic/training_config.yaml",
+      "baseline_sha256": "e63fcb352dbf7bd0315381b4d3283b20077ceb03c1af45b6ef141746815f4ec8",
+      "publication_sha256": "e63fcb352dbf7bd0315381b4d3283b20077ceb03c1af45b6ef141746815f4ec8",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/01_baselines/records/dynamic/training_summary.json",
+      "baseline_sha256": "2489d1d6e5ee66008c29411bb2c22491a6f8f61ae63cd3b90687515273ae3fd1",
+      "publication_sha256": "2489d1d6e5ee66008c29411bb2c22491a6f8f61ae63cd3b90687515273ae3fd1",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/01_baselines/records/dynamic/validation_events.jsonl",
+      "baseline_sha256": "63165be02ffdc40acb25802211cd094db55674c392f75711e6d2c58e71390e90",
+      "publication_sha256": "63165be02ffdc40acb25802211cd094db55674c392f75711e6d2c58e71390e90",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/01_baselines/records/static/architecture_audit.json",
+      "baseline_sha256": "01ce43cd8d23a935627fdee12b0f032013860502a48e4d64bb1cd8130c78c415",
+      "publication_sha256": "01ce43cd8d23a935627fdee12b0f032013860502a48e4d64bb1cd8130c78c415",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/01_baselines/records/static/model_architecture.txt",
+      "baseline_sha256": "d7e1b9ea2193e3e9cf24dc6b80ff124fcb87f14856d1e385d7d72bc96a940607",
+      "publication_sha256": "d7e1b9ea2193e3e9cf24dc6b80ff124fcb87f14856d1e385d7d72bc96a940607",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/01_baselines/records/static/official_evaluation.json",
+      "baseline_sha256": "edd1d416d28cdcfa7292913ef5bfccc4f41b1f886c04a69560cfed839f44c70f",
+      "publication_sha256": "edd1d416d28cdcfa7292913ef5bfccc4f41b1f886c04a69560cfed839f44c70f",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/01_baselines/records/static/training_config.yaml",
+      "baseline_sha256": "6ab522cebcc262c1346f9680c76bbf1f6a25562e8678f7bd84b1046850b3362b",
+      "publication_sha256": "6ab522cebcc262c1346f9680c76bbf1f6a25562e8678f7bd84b1046850b3362b",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/01_baselines/records/static/training_summary.json",
+      "baseline_sha256": "8458be1ecae57fc1d34b882669c310687841e1de8246417dd2e61562ef584b6f",
+      "publication_sha256": "8458be1ecae57fc1d34b882669c310687841e1de8246417dd2e61562ef584b6f",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/01_baselines/records/static/validation_events.jsonl",
+      "baseline_sha256": "8095905cf20374e2488d4d35b0010cc679b3bb459050ac004098e0b91484420f",
+      "publication_sha256": "8095905cf20374e2488d4d35b0010cc679b3bb459050ac004098e0b91484420f",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/03_parameter_matching/records/architecture_audit.json",
+      "baseline_sha256": "4bf587b24d3f02bf55aa179175eb319a4fbf38c586a3938b1557e6addbc7eb18",
+      "publication_sha256": "4bf587b24d3f02bf55aa179175eb319a4fbf38c586a3938b1557e6addbc7eb18",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/03_parameter_matching/records/audit_summary.json",
+      "baseline_sha256": "4512612a7c20aca8cfcded52aedc4f5bb80fd1043031bf2fc35df44b2b7e8821",
+      "publication_sha256": "4512612a7c20aca8cfcded52aedc4f5bb80fd1043031bf2fc35df44b2b7e8821",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/03_parameter_matching/records/data_split_lock.json",
+      "baseline_sha256": "9da4bff3d262661de9012191eb12cbb2ce74382be415cc619d87f4aad255fa97",
+      "publication_sha256": "9da4bff3d262661de9012191eb12cbb2ce74382be415cc619d87f4aad255fa97",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/03_parameter_matching/records/official_evaluation.json",
+      "baseline_sha256": "4cd2f5e76c55e830ff851fd96618aae2b4da7f3c02aa8314987e154c753b0a8a",
+      "publication_sha256": "4cd2f5e76c55e830ff851fd96618aae2b4da7f3c02aa8314987e154c753b0a8a",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/03_parameter_matching/records/training_config.yaml",
+      "baseline_sha256": "686769021635276af4cbd4cb934f0ad7fc87658b605cf82347c30fb3709213dc",
+      "publication_sha256": "686769021635276af4cbd4cb934f0ad7fc87658b605cf82347c30fb3709213dc",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/03_parameter_matching/records/training_summary.json",
+      "baseline_sha256": "5fb83fd9ed9d94120bc03548980d4c5e999abe9c08e3bb0db55585baef031f10",
+      "publication_sha256": "5fb83fd9ed9d94120bc03548980d4c5e999abe9c08e3bb0db55585baef031f10",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/03_parameter_matching/records/validation_events.jsonl",
+      "baseline_sha256": "33ac0f4d03548aa529e35de1734b1fd1a9aba18c88c92648ec2f5f8657dd8990",
+      "publication_sha256": "33ac0f4d03548aa529e35de1734b1fd1a9aba18c88c92648ec2f5f8657dd8990",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/configs/paths.example.json",
+      "baseline_sha256": "b8f911d47aed957271449736bcbd2c13f817e9ef5ba139f3401731bce21ae6f7",
+      "publication_sha256": "b8f911d47aed957271449736bcbd2c13f817e9ef5ba139f3401731bce21ae6f7",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/gpfa_config.json",
+      "baseline_sha256": "234be5f0a8f766d166af40b6e7f386f0de6a006e3597bba71c0f1b1b230b9b36",
+      "publication_sha256": "234be5f0a8f766d166af40b6e7f386f0de6a006e3597bba71c0f1b1b230b9b36",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/integration/artifact_registry.csv",
+      "baseline_sha256": "0eed8479214bb6ba865d1244d2bbacf6ebdd427d7d6dae4ccecabc7af1211dfe",
+      "publication_sha256": "0eed8479214bb6ba865d1244d2bbacf6ebdd427d7d6dae4ccecabc7af1211dfe",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/integration/code_portability_checks.json",
+      "baseline_sha256": "31f9e2dd6f14c8507d8f13942caa6485f308d3ada50f6084b45871f54b5db63a",
+      "publication_sha256": "31f9e2dd6f14c8507d8f13942caa6485f308d3ada50f6084b45871f54b5db63a",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/integration/dependency_manifest.csv",
+      "baseline_sha256": "97e4b6e8d01d28b319ff5bcde6645d31461ae8b366af3db6f306160fb417962a",
+      "publication_sha256": "97e4b6e8d01d28b319ff5bcde6645d31461ae8b366af3db6f306160fb417962a",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/integration/figure_review.json",
+      "baseline_sha256": "c263983c01a8531aac246f19b2e5a9e2c7b2e6035e3c13eaacb1a03dcff8dd65",
+      "publication_sha256": "c263983c01a8531aac246f19b2e5a9e2c7b2e6035e3c13eaacb1a03dcff8dd65",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/integration/language_audit.json",
+      "baseline_sha256": "e9c00a4388ccfda509114cb264bb2815d5d838f2b0c9688aced2c41e3abb521b",
+      "publication_sha256": "e9c00a4388ccfda509114cb264bb2815d5d838f2b0c9688aced2c41e3abb521b",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/integration/migration_map.csv",
+      "baseline_sha256": "9d2972aada5187398e74dca26d872a0d01a063f0f1f3e447648c9340c87da772",
+      "publication_sha256": "9d2972aada5187398e74dca26d872a0d01a063f0f1f3e447648c9340c87da772",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/integration/numerical_preservation.json",
+      "baseline_sha256": "8da0bde6d904d4fcdf976348f6bec88a38b0d1c8991a62573f2c96cba66fb748",
+      "publication_sha256": "8da0bde6d904d4fcdf976348f6bec88a38b0d1c8991a62573f2c96cba66fb748",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/integration/official_protocol_audit.json",
+      "baseline_sha256": "e5c7fd1090cff6dd4d02d525b14056b16add36605d0918f6665c3b6784187d86",
+      "publication_sha256": "e5c7fd1090cff6dd4d02d525b14056b16add36605d0918f6665c3b6784187d86",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/integration/official_source_audit.json",
+      "baseline_sha256": "b993de260f36ee06acdcf4963ab7c25a041e2b8745b6817e44539318c39ad506",
+      "publication_sha256": "b993de260f36ee06acdcf4963ab7c25a041e2b8745b6817e44539318c39ad506",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/integration/saved_replay_verification.json",
+      "baseline_sha256": "0d42bc4d30ac35e2655cece33163e674491be18302fd6375985957ee87ecf17a",
+      "publication_sha256": "0d42bc4d30ac35e2655cece33163e674491be18302fd6375985957ee87ecf17a",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/integration/sensorium_editorial_verification.json",
+      "baseline_sha256": "e920410d956904ed23d0d3151597b99e88ba44b04258b4b1c95aaee9964a46da",
+      "publication_sha256": "e920410d956904ed23d0d3151597b99e88ba44b04258b4b1c95aaee9964a46da",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/integration/verification.json",
+      "baseline_sha256": "2a35a600951f6fb86dbf3890b36403255407f0ecc0c789946d84dddcdd3a6d3a",
+      "publication_sha256": "2a35a600951f6fb86dbf3890b36403255407f0ecc0c789946d84dddcdd3a6d3a",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/configs/b_fixed_head_protocol.json",
+      "baseline_sha256": "1acff12c0fa8e4b493bd9c1c91be5a924eaf408bd809d283df4b5d8710ae62db",
+      "publication_sha256": "1acff12c0fa8e4b493bd9c1c91be5a924eaf408bd809d283df4b5d8710ae62db",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/configs/b_mapping_lock.json",
+      "baseline_sha256": "5f5d3a425ef06a42c08b6863fa734c4eb082f52ca4d9b2ba4d2fdc29fe47d661",
+      "publication_sha256": "5f5d3a425ef06a42c08b6863fa734c4eb082f52ca4d9b2ba4d2fdc29fe47d661",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/configs/c_endpoint_lock.json",
+      "baseline_sha256": "b306fa063ede76524eefc0acd2bb77bcbdb835daca15352d2a0e7cd4e4e46b16",
+      "publication_sha256": "b306fa063ede76524eefc0acd2bb77bcbdb835daca15352d2a0e7cd4e4e46b16",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/configs/c_endpoint_protocol.json",
+      "baseline_sha256": "76a7c35822491c61e9fecc5ecaa87b52a43fc430840c28644e902aa1bf2128e1",
+      "publication_sha256": "76a7c35822491c61e9fecc5ecaa87b52a43fc430840c28644e902aa1bf2128e1",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/configs/closeout_protocol.json",
+      "baseline_sha256": "fb9528444f7a5d419dda2fdb55ca6fadc41e57d8e61e10be21d055119a2ceb21",
+      "publication_sha256": "fb9528444f7a5d419dda2fdb55ca6fadc41e57d8e61e10be21d055119a2ceb21",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/configs/condition_splits_100.json",
+      "baseline_sha256": "dbd9f694ec190d046b1d000b31c5196ca41661df8d539ea17fa6b5ecf7c196f0",
+      "publication_sha256": "dbd9f694ec190d046b1d000b31c5196ca41661df8d539ea17fa6b5ecf7c196f0",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/configs/protocol_lock.json",
+      "baseline_sha256": "f413c470b12bb5a50458b71577af5c31248b425864b6318e2d47487b632fc1d4",
+      "publication_sha256": "f413c470b12bb5a50458b71577af5c31248b425864b6318e2d47487b632fc1d4",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/manifest.json",
+      "baseline_sha256": "4a1337c13eb470703f3e7849603cceb70e3ec82ffef5bef11a17dcb92fee970c",
+      "publication_sha256": "4a1337c13eb470703f3e7849603cceb70e3ec82ffef5bef11a17dcb92fee970c",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/A/binwise_reconstruction.csv",
+      "baseline_sha256": "a76d21abd6a87f4af41a6eb7eaad4e23ca42d0335e8f1f3a6928b8987e4d1d99",
+      "publication_sha256": "a76d21abd6a87f4af41a6eb7eaad4e23ca42d0335e8f1f3a6928b8987e4d1d99",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/A/condition_cross_summary.csv",
+      "baseline_sha256": "6f87c2513bb0105fd02e57028116d1941ac3f65f7ae74529be2147d31ee645e1",
+      "publication_sha256": "6f87c2513bb0105fd02e57028116d1941ac3f65f7ae74529be2147d31ee645e1",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/A/condition_label_coverage.csv",
+      "baseline_sha256": "40a77cd2e554e1cd0c10e67560df5694088aff96300cdf4800b39ef68432eed2",
+      "publication_sha256": "40a77cd2e554e1cd0c10e67560df5694088aff96300cdf4800b39ef68432eed2",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/A/condition_self_comparison.csv",
+      "baseline_sha256": "b525503ad65cfa1aa8fe038f9005ca5bdaf0cff3ec53ab9cfa3108b84ee272e3",
+      "publication_sha256": "b525503ad65cfa1aa8fe038f9005ca5bdaf0cff3ec53ab9cfa3108b84ee272e3",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/A/contrast_summary.csv",
+      "baseline_sha256": "758342d80f5af7d441ada1ec152c179fe39aeee4e373f51a10373d76b47498a3",
+      "publication_sha256": "758342d80f5af7d441ada1ec152c179fe39aeee4e373f51a10373d76b47498a3",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/A/cross_2x2_summary.csv",
+      "baseline_sha256": "dd8dda46234088cabee49f4bc56d2da7a4faaba2ca52285df71156c9100a3f6a",
+      "publication_sha256": "dd8dda46234088cabee49f4bc56d2da7a4faaba2ca52285df71156c9100a3f6a",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/A/previous_trial_version_comparison.csv",
+      "baseline_sha256": "2a391b7bedc6980f7d83d403374203a822482ffdae3c24b5e5acee07a88564ac",
+      "publication_sha256": "2a391b7bedc6980f7d83d403374203a822482ffdae3c24b5e5acee07a88564ac",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/A/replay_audit.json",
+      "baseline_sha256": "c57d1e66d524d8a766c228317c82d65b7f0e3ad080ef7405e47c2039fa10c74d",
+      "publication_sha256": "c57d1e66d524d8a766c228317c82d65b7f0e3ad080ef7405e47c2039fa10c74d",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/A/round_contrasts.csv",
+      "baseline_sha256": "b6bd7ab05f1aaa2baf490a738687921089e91b2b9acf0105eb0b965616f893fd",
+      "publication_sha256": "b6bd7ab05f1aaa2baf490a738687921089e91b2b9acf0105eb0b965616f893fd",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/A/round_cross_2x2.csv",
+      "baseline_sha256": "e7b66b8b1db8a728b8bdad353d82bc640d7ee2449f34f8024fd74e1cfbfc7323",
+      "publication_sha256": "e7b66b8b1db8a728b8bdad353d82bc640d7ee2449f34f8024fd74e1cfbfc7323",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/A/round_self_metrics.csv",
+      "baseline_sha256": "5ad307c765addafe05511cb507ffb7974095f3465c74b21caa8c42e4b4a636f5",
+      "publication_sha256": "5ad307c765addafe05511cb507ffb7974095f3465c74b21caa8c42e4b4a636f5",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/A/self_reconstruction_main_table.csv",
+      "baseline_sha256": "b6e0bc7f89b53dae5678087a6fa061a88fd5319b7d6f89b5d845c2ee3619a9bf",
+      "publication_sha256": "b6e0bc7f89b53dae5678087a6fa061a88fd5319b7d6f89b5d845c2ee3619a9bf",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/B/B_coverage_summary.csv",
+      "baseline_sha256": "4c03c5eddc9eafe9130d99432f36a3c2d1a614e9418a55928e99905720693246",
+      "publication_sha256": "4c03c5eddc9eafe9130d99432f36a3c2d1a614e9418a55928e99905720693246",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/B/B_mapping_audit.csv",
+      "baseline_sha256": "a259232479c7e60699061693a1d8f7b1a52b5d41f0cea2042cffe4f14ceacfa4",
+      "publication_sha256": "a259232479c7e60699061693a1d8f7b1a52b5d41f0cea2042cffe4f14ceacfa4",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/B/B_observed_full_support.csv",
+      "baseline_sha256": "9df70a8338bf14d8b1a203ae6ed5f921b6fc5a17a9b43e9248ce4646b3235f72",
+      "publication_sha256": "9df70a8338bf14d8b1a203ae6ed5f921b6fc5a17a9b43e9248ce4646b3235f72",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/B/B_outputs.json",
+      "baseline_sha256": "ff2e3205d19375babb8c1c608e054cdef468e1c02d904b6b2f4c9ca495e014e7",
+      "publication_sha256": "ff2e3205d19375babb8c1c608e054cdef468e1c02d904b6b2f4c9ca495e014e7",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/B/B_summary.csv",
+      "baseline_sha256": "9affe3502f0186702959f1076f5510aeb2fce5159668f3305f1cea2e341b6016",
+      "publication_sha256": "9affe3502f0186702959f1076f5510aeb2fce5159668f3305f1cea2e341b6016",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/B/B_validation.json",
+      "baseline_sha256": "3cd6c840ec5cfa944b576780c3af48e460c55cf901a8582741e8c13ee0a300f8",
+      "publication_sha256": "3cd6c840ec5cfa944b576780c3af48e460c55cf901a8582741e8c13ee0a300f8",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/B/mahler_FA50_q_aggregate.csv.gz",
+      "baseline_sha256": "63a9136a5beea4b5368d77b0349152c34397120b7670dbbf62af22aab2ecf3a0",
+      "publication_sha256": "63a9136a5beea4b5368d77b0349152c34397120b7670dbbf62af22aab2ecf3a0",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/B/mahler_GPFA50_q_aggregate.csv.gz",
+      "baseline_sha256": "596dc943c7f959525178635ceab68ff31e24afb50996af18ec7e705f26c9a38f",
+      "publication_sha256": "596dc943c7f959525178635ceab68ff31e24afb50996af18ec7e705f26c9a38f",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/B/mahler_mapping_audit.csv",
+      "baseline_sha256": "cf471e0ac02ced3b2699318ffd81e6e04232a4c720b94058e401a7dcd20a90a6",
+      "publication_sha256": "cf471e0ac02ced3b2699318ffd81e6e04232a4c720b94058e401a7dcd20a90a6",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/B/perle_FA50_q_aggregate.csv.gz",
+      "baseline_sha256": "19b1b152dc6890fe37b8fd1ec82dd6f619f39bfd2220f54b92c4b3950e52533e",
+      "publication_sha256": "19b1b152dc6890fe37b8fd1ec82dd6f619f39bfd2220f54b92c4b3950e52533e",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/B/perle_GPFA50_q_aggregate.csv.gz",
+      "baseline_sha256": "964f728e11c9c87b0644f86749b4b005dbd2ade5f663b15298c921613e2e3d1b",
+      "publication_sha256": "964f728e11c9c87b0644f86749b4b005dbd2ade5f663b15298c921613e2e3d1b",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/B/perle_mapping_audit.csv",
+      "baseline_sha256": "b4deb9f074518ece705b6407bb35994e4a55ecb1fb2d3a1957eb2588b1d3fa63",
+      "publication_sha256": "b4deb9f074518ece705b6407bb35994e4a55ecb1fb2d3a1957eb2588b1d3fa63",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/completed.json",
+      "baseline_sha256": "879714857c87fcdff007c7a3b8f8b22ae09075db584c57324eddf131f51d4395",
+      "publication_sha256": "879714857c87fcdff007c7a3b8f8b22ae09075db584c57324eddf131f51d4395",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/geometry_feasibility.json",
+      "baseline_sha256": "c9e17b711c2c37af0cc28dd8856c48e73f858f5774c019b766cd7ef1e93b9d4b",
+      "publication_sha256": "c9e17b711c2c37af0cc28dd8856c48e73f858f5774c019b766cd7ef1e93b9d4b",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/mahler_FA50_OLS_equivalence.json",
+      "baseline_sha256": "720ca484f87af4f52dfbd038861e8381dcf352501020c9cf532d3f4099c6d312",
+      "publication_sha256": "720ca484f87af4f52dfbd038861e8381dcf352501020c9cf532d3f4099c6d312",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/mahler_FA50_completed.json",
+      "baseline_sha256": "b2edf800da1ce4a86c340a54c2227a635954eec24cae4a02e036f9e6cb4d2218",
+      "publication_sha256": "b2edf800da1ce4a86c340a54c2227a635954eec24cae4a02e036f9e6cb4d2218",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/mahler_FA50_per_q_mean100.csv",
+      "baseline_sha256": "7a86363cc9c7b413f7ad1315951fbca797cb886573ba7d7479e6010dd0fabfe3",
+      "publication_sha256": "7a86363cc9c7b413f7ad1315951fbca797cb886573ba7d7479e6010dd0fabfe3",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/mahler_FA50_summary.csv",
+      "baseline_sha256": "d530cd93f992137bdac7892f5bde8c38850b40f78e73f8c1766891c87b287ff3",
+      "publication_sha256": "d530cd93f992137bdac7892f5bde8c38850b40f78e73f8c1766891c87b287ff3",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/mahler_GPFA50_OLS_equivalence.json",
+      "baseline_sha256": "6b48f077941cd77f6633e1367199c7aa0263f39f2b1e6472500c281a0e250bd3",
+      "publication_sha256": "6b48f077941cd77f6633e1367199c7aa0263f39f2b1e6472500c281a0e250bd3",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/mahler_GPFA50_completed.json",
+      "baseline_sha256": "7255f5c14ed3d09301afb1c2921da8fe3d496341f7754b13642cb173528a7ad5",
+      "publication_sha256": "7255f5c14ed3d09301afb1c2921da8fe3d496341f7754b13642cb173528a7ad5",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/mahler_GPFA50_per_q_mean100.csv",
+      "baseline_sha256": "ba7be6fe0b06e15bbd691086835afb4bf622b5b8a608f3c8f679d362119a02d5",
+      "publication_sha256": "ba7be6fe0b06e15bbd691086835afb4bf622b5b8a608f3c8f679d362119a02d5",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/mahler_GPFA50_summary.csv",
+      "baseline_sha256": "4b9f986cb896a65f6b080b58f31a350e0ca8a8e4cceb92c17d844fd2926d98ad",
+      "publication_sha256": "4b9f986cb896a65f6b080b58f31a350e0ca8a8e4cceb92c17d844fd2926d98ad",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/mahler_mapping_summary.csv",
+      "baseline_sha256": "8ee8a37afad98fda486d2c5fac1c0ad215b3af33a49f4242ad8991aad116ead3",
+      "publication_sha256": "8ee8a37afad98fda486d2c5fac1c0ad215b3af33a49f4242ad8991aad116ead3",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/perle_FA50_OLS_equivalence.json",
+      "baseline_sha256": "72b643126d428fd0a7c6902504afdd3fd4546f8dcf1c980767c081967dce7f60",
+      "publication_sha256": "72b643126d428fd0a7c6902504afdd3fd4546f8dcf1c980767c081967dce7f60",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/perle_FA50_completed.json",
+      "baseline_sha256": "1b197d16e17402bfc925b6bb79d0b8a4d1e95ded3ca179f5c54292d8690daee1",
+      "publication_sha256": "1b197d16e17402bfc925b6bb79d0b8a4d1e95ded3ca179f5c54292d8690daee1",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/perle_FA50_per_q_mean100.csv",
+      "baseline_sha256": "1e87b2fca024c4d37ba38c2bfc2aacf52f14f0c8308e2c3755ffed586016e140",
+      "publication_sha256": "1e87b2fca024c4d37ba38c2bfc2aacf52f14f0c8308e2c3755ffed586016e140",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/perle_FA50_summary.csv",
+      "baseline_sha256": "5f88f4fb115b0d6991f1772d6d3b544217ee462f18e08a5792ba6462c07dafd5",
+      "publication_sha256": "5f88f4fb115b0d6991f1772d6d3b544217ee462f18e08a5792ba6462c07dafd5",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/perle_GPFA50_OLS_equivalence.json",
+      "baseline_sha256": "3693c11b1a276e6ddfe12ae50f5a9c887a5dca71a3bd51b173f243f7336618c7",
+      "publication_sha256": "3693c11b1a276e6ddfe12ae50f5a9c887a5dca71a3bd51b173f243f7336618c7",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/perle_GPFA50_completed.json",
+      "baseline_sha256": "b469ea3a59f01a8461fdc705b02c46d7395863d22ed63596d08f076f38d7e481",
+      "publication_sha256": "b469ea3a59f01a8461fdc705b02c46d7395863d22ed63596d08f076f38d7e481",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/perle_GPFA50_per_q_mean100.csv",
+      "baseline_sha256": "4159e4cd5b41e908cba72a4af5924ef53e98150f62fb0bae80017ec932c6a31d",
+      "publication_sha256": "4159e4cd5b41e908cba72a4af5924ef53e98150f62fb0bae80017ec932c6a31d",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/perle_GPFA50_summary.csv",
+      "baseline_sha256": "4c63ddbdb51d18f5a4766d79ded23e85bc23fbcfb0d3dfda9218ce13b64a6044",
+      "publication_sha256": "4c63ddbdb51d18f5a4766d79ded23e85bc23fbcfb0d3dfda9218ce13b64a6044",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/perle_mapping_summary.csv",
+      "baseline_sha256": "942ace96bdc3104230561e194dd8c7b4cf93f6d40ddb6032bd39614dd86756d5",
+      "publication_sha256": "942ace96bdc3104230561e194dd8c7b4cf93f6d40ddb6032bd39614dd86756d5",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/C/random_endpoint_summary.csv",
+      "baseline_sha256": "7e14c16b081dad9a7e732467ff30fcdf63a8d4dc2827e9632ec533dee3174aa5",
+      "publication_sha256": "7e14c16b081dad9a7e732467ff30fcdf63a8d4dc2827e9632ec533dee3174aa5",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/descriptive/endpoint_condition_audit.csv",
+      "baseline_sha256": "a6ff512655edf7aec28000bf18c614c7e031e54640c32a14092fff7491d9db1f",
+      "publication_sha256": "a6ff512655edf7aec28000bf18c614c7e031e54640c32a14092fff7491d9db1f",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/descriptive/fixed_posthoc_case_2x2.csv",
+      "baseline_sha256": "3852a6879e347682ca09630fde86265d4d3e66012ffce8fab7e6bad0eb3d0547",
+      "publication_sha256": "3852a6879e347682ca09630fde86265d4d3e66012ffce8fab7e6bad0eb3d0547",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/descriptive/fixed_posthoc_case_curve_separation.csv",
+      "baseline_sha256": "0dd1850cffd04737e3e79b72fcd13dff8ab0dfdf8bb081aa8376e29e5bb90d85",
+      "publication_sha256": "0dd1850cffd04737e3e79b72fcd13dff8ab0dfdf8bb081aa8376e29e5bb90d85",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/descriptive/fixed_posthoc_case_scores.csv",
+      "baseline_sha256": "4639c6cc5a5bb698663c756cd58ef32cac61f006caceb5933312a9b58645cdd2",
+      "publication_sha256": "4639c6cc5a5bb698663c756cd58ef32cac61f006caceb5933312a9b58645cdd2",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/descriptive/mean_cancellation_summary.json",
+      "baseline_sha256": "316500d435455ae7399055ea95aaea0b5235091a74cdae8dc22823d99f81c4ca",
+      "publication_sha256": "316500d435455ae7399055ea95aaea0b5235091a74cdae8dc22823d99f81c4ca",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/descriptive/path_separation_summary.csv",
+      "baseline_sha256": "25a71cf2903fb2e396efd177aee016e4f51e433574fc81432902f2b38c683f27",
+      "publication_sha256": "25a71cf2903fb2e396efd177aee016e4f51e433574fc81432902f2b38c683f27",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/descriptive/path_separation_vs_error.csv",
+      "baseline_sha256": "002f23066afadab338ac2acd18f5d549d3df05acf81a7c1b25c563c5c3e2634b",
+      "publication_sha256": "002f23066afadab338ac2acd18f5d549d3df05acf81a7c1b25c563c5c3e2634b",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/descriptive/source_hashes.json",
+      "baseline_sha256": "eff6bc33ca445083430b7ebb7bc7193e68ef51d1e99c69637c602c7c28f8f7d8",
+      "publication_sha256": "eff6bc33ca445083430b7ebb7bc7193e68ef51d1e99c69637c602c7c28f8f7d8",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/descriptive/visual_and_implementation_qa.json",
+      "baseline_sha256": "d5b548112955c540c8a2a1fe01936e80a1aeab1f58c7ac20c5c443b818e1548e",
+      "publication_sha256": "d5b548112955c540c8a2a1fe01936e80a1aeab1f58c7ac20c5c443b818e1548e",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/experiment_ledger.csv",
+      "baseline_sha256": "dc2c559638f19a770568e7471be17d779b8a7daf410c3a3cf12ffdd2e15fe1bb",
+      "publication_sha256": "dc2c559638f19a770568e7471be17d779b8a7daf410c3a3cf12ffdd2e15fe1bb",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/figure_qa.json",
+      "baseline_sha256": "6e43a74891fc0e07b845ae81f980759087fd00bbbab15a96e644b1a7be75b0e6",
+      "publication_sha256": "6e43a74891fc0e07b845ae81f980759087fd00bbbab15a96e644b1a7be75b0e6",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/final_acceptance_audit.json",
+      "baseline_sha256": "446f383f914c8285506edeb68c4b6731a8117c5173c73e7c0737d287f227deb1",
+      "publication_sha256": "446f383f914c8285506edeb68c4b6731a8117c5173c73e7c0737d287f227deb1",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/test_execution.json",
+      "baseline_sha256": "29e169b9d6834ff5099af6d5c3abfdd473ce6bdc4996cc5cc1f85e68ae6d1844",
+      "publication_sha256": "29e169b9d6834ff5099af6d5c3abfdd473ce6bdc4996cc5cc1f85e68ae6d1844",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/sources/A_sources.json",
+      "baseline_sha256": "22d0454cf9e08a1047702cde5dc2bdee46d2c8554c421e1bf5b38f9089bc5f9a",
+      "publication_sha256": "22d0454cf9e08a1047702cde5dc2bdee46d2c8554c421e1bf5b38f9089bc5f9a",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/sources/frozen_source_records.json",
+      "baseline_sha256": "378073aa7e3b61dcf773ed7f829346cfe41b483f05b32f38caad4d9097579384",
+      "publication_sha256": "378073aa7e3b61dcf773ed7f829346cfe41b483f05b32f38caad4d9097579384",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/sources/initial_source_verification.json",
+      "baseline_sha256": "68e11827df6184bd77c6167f60c25a60be7ad5f5dfea6d686f325ff172a5af51",
+      "publication_sha256": "68e11827df6184bd77c6167f60c25a60be7ad5f5dfea6d686f325ff172a5af51",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/sources/runtime.json",
+      "baseline_sha256": "5a146fbb4441d8e2beaba03207f409813dd120fe8297d2ac1ba559fa7e5fdc79",
+      "publication_sha256": "5a146fbb4441d8e2beaba03207f409813dd120fe8297d2ac1ba559fa7e5fdc79",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/sources/user_request_record.json",
+      "baseline_sha256": "ba463ace927dc75194eabfe8a2392db8aaa6760960bac1abd1dcb5a7d99bdb7c",
+      "publication_sha256": "ba463ace927dc75194eabfe8a2392db8aaa6760960bac1abd1dcb5a7d99bdb7c",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/mahler_condition_labels.npz",
+      "baseline_sha256": "4b059a6a6c5b262c85dfa5a1fe4601925708b70dd932012528c428a59bdba853",
+      "publication_sha256": "4b059a6a6c5b262c85dfa5a1fe4601925708b70dd932012528c428a59bdba853",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/perle_condition_labels.npz",
+      "baseline_sha256": "5fa264d9936ce67bb693ae25ae799b1e612b717ef3225dbc2373065afbfaf3fc",
+      "publication_sha256": "5fa264d9936ce67bb693ae25ae799b1e612b717ef3225dbc2373065afbfaf3fc",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/configs/analysis_protocol.json",
+      "baseline_sha256": "9d8e580e5370f32a333030af66becae5701b83855a380867737b9225faed5106",
+      "publication_sha256": "9d8e580e5370f32a333030af66becae5701b83855a380867737b9225faed5106",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/configs/condition_splits_100.json",
+      "baseline_sha256": "dbd9f694ec190d046b1d000b31c5196ca41661df8d539ea17fa6b5ecf7c196f0",
+      "publication_sha256": "dbd9f694ec190d046b1d000b31c5196ca41661df8d539ea17fa6b5ecf7c196f0",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/configs/figure_condition_order.json",
+      "baseline_sha256": "eb1563a9787cd80fd968bec141ee730f9cd951289da48732a77b588f66fd1125",
+      "publication_sha256": "eb1563a9787cd80fd968bec141ee730f9cd951289da48732a77b588f66fd1125",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/configs/protocol_lock.json",
+      "baseline_sha256": "bec5174e5e668507c0a6d37e0a7f0950501fb7fae568d372d7cde3b4f7b1286f",
+      "publication_sha256": "bec5174e5e668507c0a6d37e0a7f0950501fb7fae568d372d7cde3b4f7b1286f",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/data/mahler_condition_time_index.csv",
+      "baseline_sha256": "d7df215ed4d23f6ae83aec1dd77fbcd75ef608b61bab91c5c43ea29657c94ca6",
+      "publication_sha256": "d7df215ed4d23f6ae83aec1dd77fbcd75ef608b61bab91c5c43ea29657c94ca6",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/data/perle_condition_time_index.csv",
+      "baseline_sha256": "e4decce60b0e82bdba3578c84570ba24a6992419d0ae065ad8fbc27a8f1a9a15",
+      "publication_sha256": "e4decce60b0e82bdba3578c84570ba24a6992419d0ae065ad8fbc27a8f1a9a15",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/manifest.json",
+      "baseline_sha256": "c3f87f3e0ade18aa9727f10aeef2323397ad43c9c660b8d5477ad88ce2a4cc4f",
+      "publication_sha256": "c3f87f3e0ade18aa9727f10aeef2323397ad43c9c660b8d5477ad88ce2a4cc4f",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/binwise_reconstruction.csv",
+      "baseline_sha256": "a76d21abd6a87f4af41a6eb7eaad4e23ca42d0335e8f1f3a6928b8987e4d1d99",
+      "publication_sha256": "a76d21abd6a87f4af41a6eb7eaad4e23ca42d0335e8f1f3a6928b8987e4d1d99",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/condition_averaging_audit.json",
+      "baseline_sha256": "344d3fa4e7bc6e4ff70fc5e43beed4afa92a83e60db85f5e496de0b78ba26905",
+      "publication_sha256": "344d3fa4e7bc6e4ff70fc5e43beed4afa92a83e60db85f5e496de0b78ba26905",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/condition_cross_summary.csv",
+      "baseline_sha256": "6f87c2513bb0105fd02e57028116d1941ac3f65f7ae74529be2147d31ee645e1",
+      "publication_sha256": "6f87c2513bb0105fd02e57028116d1941ac3f65f7ae74529be2147d31ee645e1",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/condition_difference_counts.csv",
+      "baseline_sha256": "e3d630a94ae042df1956b3585d2daca07aa3962f1763bb5a339ae9d576292855",
+      "publication_sha256": "e3d630a94ae042df1956b3585d2daca07aa3962f1763bb5a339ae9d576292855",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/condition_geometry.csv",
+      "baseline_sha256": "ac11743cda242bab24117d5463cdc7e3f024a339f3e099bf4699835fb6a034cb",
+      "publication_sha256": "ac11743cda242bab24117d5463cdc7e3f024a339f3e099bf4699835fb6a034cb",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/condition_label_coverage.csv",
+      "baseline_sha256": "40a77cd2e554e1cd0c10e67560df5694088aff96300cdf4800b39ef68432eed2",
+      "publication_sha256": "40a77cd2e554e1cd0c10e67560df5694088aff96300cdf4800b39ef68432eed2",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/condition_self_comparison.csv",
+      "baseline_sha256": "b525503ad65cfa1aa8fe038f9005ca5bdaf0cff3ec53ab9cfa3108b84ee272e3",
+      "publication_sha256": "b525503ad65cfa1aa8fe038f9005ca5bdaf0cff3ec53ab9cfa3108b84ee272e3",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/coverage.csv",
+      "baseline_sha256": "790b199261db46bd8be3b65bc14853bd9196fcc38318fea2ae946ab366b9dff3",
+      "publication_sha256": "790b199261db46bd8be3b65bc14853bd9196fcc38318fea2ae946ab366b9dff3",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/cross_2x2_summary.csv",
+      "baseline_sha256": "9d4d7986816c33cb167a40225e2fd08a4ac0da6ec24da270247edd4d0b948bfe",
+      "publication_sha256": "9d4d7986816c33cb167a40225e2fd08a4ac0da6ec24da270247edd4d0b948bfe",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/end_to_end_pilot.json",
+      "baseline_sha256": "ca0a4dfeef9605ca0b7434363be4221fe865f9e8b34366eadff690765aadec11",
+      "publication_sha256": "ca0a4dfeef9605ca0b7434363be4221fe865f9e8b34366eadff690765aadec11",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/figure_structural_checks.json",
+      "baseline_sha256": "b40eb85c0424f95ff25093a6086826950205afe991b924ec227079b6d50adf20",
+      "publication_sha256": "b40eb85c0424f95ff25093a6086826950205afe991b924ec227079b6d50adf20",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/figure_visual_qa.json",
+      "baseline_sha256": "555a000ee2e748fc8ebc5875531ebdd64ff05cb25303617829212a413f7daa0c",
+      "publication_sha256": "555a000ee2e748fc8ebc5875531ebdd64ff05cb25303617829212a413f7daa0c",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/final_integrity_and_score_audit.json",
+      "baseline_sha256": "4942165ae244ba2fa04eca176253de0ea6089ebe65d78d0ed6fcae8a61f5a55a",
+      "publication_sha256": "4942165ae244ba2fa04eca176253de0ea6089ebe65d78d0ed6fcae8a61f5a55a",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/implementation_tests.json",
+      "baseline_sha256": "3a7bb81ca1c4ad051f0ef0350998d0cf184cfe58f7ca0fb9b2093e6e53099b52",
+      "publication_sha256": "3a7bb81ca1c4ad051f0ef0350998d0cf184cfe58f7ca0fb9b2093e6e53099b52",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/interpretation_summary.json",
+      "baseline_sha256": "4e358d86e71b771e77bf50ee1bff3e3cb0acf647c72fbdbc5b28ffe7ed0dad37",
+      "publication_sha256": "4e358d86e71b771e77bf50ee1bff3e3cb0acf647c72fbdbc5b28ffe7ed0dad37",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/ols_fit_audit.csv",
+      "baseline_sha256": "aa648482e2e873e6d7b557e4ff8593d99f291b9fd033b62a6cbcff13cdb288c3",
+      "publication_sha256": "aa648482e2e873e6d7b557e4ff8593d99f291b9fd033b62a6cbcff13cdb288c3",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/previous_trial_version_comparison.csv",
+      "baseline_sha256": "2a391b7bedc6980f7d83d403374203a822482ffdae3c24b5e5acee07a88564ac",
+      "publication_sha256": "2a391b7bedc6980f7d83d403374203a822482ffdae3c24b5e5acee07a88564ac",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/reused_representation_audit.json",
+      "baseline_sha256": "c1e16be585842dbad0a812b0537b99184abcf44070b3965e4fe0ada3c495cc1a",
+      "publication_sha256": "c1e16be585842dbad0a812b0537b99184abcf44070b3965e4fe0ada3c495cc1a",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/round_cross_2x2.csv",
+      "baseline_sha256": "4a359fa6b77dc38f274ab0f6c3471a6d6647b34af8692305d079227869d6c4df",
+      "publication_sha256": "4a359fa6b77dc38f274ab0f6c3471a6d6647b34af8692305d079227869d6c4df",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/round_self_metrics.csv",
+      "baseline_sha256": "768caa48bc4e86787c4202a0ef2bd9cbd96771708e4ff69e36a4cd2bc7fabc46",
+      "publication_sha256": "768caa48bc4e86787c4202a0ef2bd9cbd96771708e4ff69e36a4cd2bc7fabc46",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/self_reconstruction_main_table.csv",
+      "baseline_sha256": "989991677474d794dab6455c7231ade8ab8aedc10022caacab3888d5f27e363e",
+      "publication_sha256": "989991677474d794dab6455c7231ade8ab8aedc10022caacab3888d5f27e363e",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/sources/label_sources.json",
+      "baseline_sha256": "e65674399f120cbc322bf1f11ba14fed96c4bf971a45f0f10a9c6fbb23c70c0d",
+      "publication_sha256": "e65674399f120cbc322bf1f11ba14fed96c4bf971a45f0f10a9c6fbb23c70c0d",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/sources/prior_manifest_record.json",
+      "baseline_sha256": "2c8d9f97c3f4454d8ce257017fafa857f49f0175be87436d4da5569ac5ef81f8",
+      "publication_sha256": "2c8d9f97c3f4454d8ce257017fafa857f49f0175be87436d4da5569ac5ef81f8",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/sources/runtime.json",
+      "baseline_sha256": "5a146fbb4441d8e2beaba03207f409813dd120fe8297d2ac1ba559fa7e5fdc79",
+      "publication_sha256": "5a146fbb4441d8e2beaba03207f409813dd120fe8297d2ac1ba559fa7e5fdc79",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/sources/source_trial_membership.json",
+      "baseline_sha256": "bb41b76e35525011f4d1a2a8ce4ca9365628eaeceeb01ae7babb3a80c8dc3925",
+      "publication_sha256": "bb41b76e35525011f4d1a2a8ce4ca9365628eaeceeb01ae7babb3a80c8dc3925",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/trial_endpoint_fa_gpfa_v1/configs/analysis_protocol.json",
+      "baseline_sha256": "a27b8a1d3c77e5bbf33ead5c347b5a1457420a4bf49442906a0ed8b59180c9ec",
+      "publication_sha256": "a27b8a1d3c77e5bbf33ead5c347b5a1457420a4bf49442906a0ed8b59180c9ec",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/trial_endpoint_fa_gpfa_v1/configs/condition_splits_100.json",
+      "baseline_sha256": "dbd9f694ec190d046b1d000b31c5196ca41661df8d539ea17fa6b5ecf7c196f0",
+      "publication_sha256": "dbd9f694ec190d046b1d000b31c5196ca41661df8d539ea17fa6b5ecf7c196f0",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/trial_endpoint_fa_gpfa_v1/configs/figure_trial_examples.json",
+      "baseline_sha256": "61cdf45aea9e28a43cf773e59dac80544ff739c51d4316492d9cb6a1db70b2ba",
+      "publication_sha256": "61cdf45aea9e28a43cf773e59dac80544ff739c51d4316492d9cb6a1db70b2ba",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/trial_endpoint_fa_gpfa_v1/configs/label_geometry_protocol.json",
+      "baseline_sha256": "5514f198447097bb9b98007cb9d146966a08ade870538925fc99494cf62b7fd3",
+      "publication_sha256": "5514f198447097bb9b98007cb9d146966a08ade870538925fc99494cf62b7fd3",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/trial_endpoint_fa_gpfa_v1/configs/protocol_lock.json",
+      "baseline_sha256": "918bdf494fb76df79a28d3db0f1c0e16242b591fd2d87fd8c553282d9e8bcdc7",
+      "publication_sha256": "918bdf494fb76df79a28d3db0f1c0e16242b591fd2d87fd8c553282d9e8bcdc7",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/trial_endpoint_fa_gpfa_v1/configs/representation_config.json",
+      "baseline_sha256": "c088a3c4fec4f69dfee876aa5918d3de4fc7c7054f716e883a78eecd4d99fa24",
+      "publication_sha256": "c088a3c4fec4f69dfee876aa5918d3de4fc7c7054f716e883a78eecd4d99fa24",
+      "unchanged": true
+    },
+    {
+      "path": "models/gpfa_model_comparison/gpfa.pkl",
+      "baseline_sha256": "8fb3a6c1aec03a1bf91323ddb896b8c82b8eb44e63c715f73f87318db656f99b",
+      "publication_sha256": "8fb3a6c1aec03a1bf91323ddb896b8c82b8eb44e63c715f73f87318db656f99b",
+      "unchanged": true
+    },
+    {
+      "path": "models/gpfa_model_comparison/preprocessing.npz",
+      "baseline_sha256": "16371f35125e4b9406dda185136fa2420df962d4b2c5862b3ffb2e3a62e5f07d",
+      "publication_sha256": "16371f35125e4b9406dda185136fa2420df962d4b2c5862b3ffb2e3a62e5f07d",
+      "unchanged": true
+    },
+    {
+      "path": "models/gpfa_reliability/gpfa.pkl",
+      "baseline_sha256": "eef5ee1d8fa5eb928ac7988ee979bd93a4ec98b111b88b37ee63c911e1fa8b84",
+      "publication_sha256": "eef5ee1d8fa5eb928ac7988ee979bd93a4ec98b111b88b37ee63c911e1fa8b84",
+      "unchanged": true
+    },
+    {
+      "path": "models/gpfa_reliability/preprocessing.npz",
+      "baseline_sha256": "2cecb5e4e68a3d8e3062576b7a02af9f5594619664f086c1dd77850478da04a1",
+      "publication_sha256": "2cecb5e4e68a3d8e3062576b7a02af9f5594619664f086c1dd77850478da04a1",
+      "unchanged": true
+    },
+    {
+      "path": "models/official_dynamic/best.pt",
+      "baseline_sha256": "263d7abb29956934d529e8ad600337a8ea0930f4ff6d8b0dd0d08e94849e072f",
+      "publication_sha256": "263d7abb29956934d529e8ad600337a8ea0930f4ff6d8b0dd0d08e94849e072f",
+      "unchanged": true
+    },
+    {
+      "path": "models/parameter_matched_dynamic/best.pt",
+      "baseline_sha256": "210bf9b0d0e7da6dce93680b383c70ff3626df9f83f25024f818085f86c8ae72",
+      "publication_sha256": "210bf9b0d0e7da6dce93680b383c70ff3626df9f83f25024f818085f86c8ae72",
+      "unchanged": true
+    },
+    {
+      "path": "models/parameter_matched_dynamic/epoch_65_validation_matched.pth",
+      "baseline_sha256": "6c2aaf90a2897a369d04e245995adfca8883329fe3b3d6371da905bd7d82158d",
+      "publication_sha256": "6c2aaf90a2897a369d04e245995adfca8883329fe3b3d6371da905bd7d82158d",
+      "unchanged": true
+    },
+    {
+      "path": "models/static_on_dynamic/best.pt",
+      "baseline_sha256": "23773f48c6e439f4df828b8a8b31e4bdd0f5e045970474d2d461553d50eaed77",
+      "publication_sha256": "23773f48c6e439f4df828b8a8b31e4bdd0f5e045970474d2d461553d50eaed77",
+      "unchanged": true
+    },
+    {
+      "path": "results/manifests/mental_pong_integration.json",
+      "baseline_sha256": "328c53d42ce4a15e169a6fd504cd3824e8fe46a6159cd0ea34febcad3a121145",
+      "publication_sha256": "328c53d42ce4a15e169a6fd504cd3824e8fe46a6159cd0ea34febcad3a121145",
+      "unchanged": true
+    },
+    {
+      "path": "results/manifests/model_files.csv",
+      "baseline_sha256": "78531df8530a3dd0a685f08dae084c6063074d932c2781e2ae9b15fcde154010",
+      "publication_sha256": "78531df8530a3dd0a685f08dae084c6063074d932c2781e2ae9b15fcde154010",
+      "unchanged": true
+    },
+    {
+      "path": "results/study_evidence_index.csv",
+      "baseline_sha256": "84a13b853ac98ed5b1b7f9c28e5958b9c6a379e8ccfcd5e510e92987c0cf01fa",
+      "publication_sha256": "84a13b853ac98ed5b1b7f9c28e5958b9c6a379e8ccfcd5e510e92987c0cf01fa",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/01_baselines/official_dynamic_oracle.json",
+      "baseline_sha256": "b05e8b61ee96268d76037e37fff7276eb44dd4b94ef98a345afbc68f1c0d8df0",
+      "publication_sha256": "b05e8b61ee96268d76037e37fff7276eb44dd4b94ef98a345afbc68f1c0d8df0",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/01_baselines/static_on_dynamic_oracle.json",
+      "baseline_sha256": "edd1d416d28cdcfa7292913ef5bfccc4f41b1f886c04a69560cfed839f44c70f",
+      "publication_sha256": "edd1d416d28cdcfa7292913ef5bfccc4f41b1f886c04a69560cfed839f44c70f",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/behavior_conditioned_prior.json",
+      "baseline_sha256": "d5e40dfb440a7ec87337e119ff0a5d7413cb6fdfe9c6613cac8cf7d351c8f432",
+      "publication_sha256": "d5e40dfb440a7ec87337e119ff0a5d7413cb6fdfe9c6613cac8cf7d351c8f432",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/data_audit.json",
+      "baseline_sha256": "af04835a6e645679d3a5ecd8cb04382953ec7e17dd5a91505c777937a5f00509",
+      "publication_sha256": "af04835a6e645679d3a5ecd8cb04382953ec7e17dd5a91505c777937a5f00509",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/model_selection.csv",
+      "baseline_sha256": "302bdb03ae0f6adc32a9d6f400a587b1f85061b2a8d0208552b6c023cfbe9893",
+      "publication_sha256": "302bdb03ae0f6adc32a9d6f400a587b1f85061b2a8d0208552b6c023cfbe9893",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/null_distributions.csv",
+      "baseline_sha256": "0fc406a418fbeb761cadc206c110a44b66f84329366dfda2cf46d85c7a4c84cf",
+      "publication_sha256": "0fc406a418fbeb761cadc206c110a44b66f84329366dfda2cf46d85c7a4c84cf",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/reliability_summary.csv",
+      "baseline_sha256": "ecb24d60e84054f7e41db67ddaed3e5f9c134a0aa62b9a4bf7e667de2d615f8e",
+      "publication_sha256": "ecb24d60e84054f7e41db67ddaed3e5f9c134a0aa62b9a4bf7e667de2d615f8e",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/run_summary.json",
+      "baseline_sha256": "2c456cc28d10e90bda33fb22e280c026391b6931581ac38127fe391f9953a1d0",
+      "publication_sha256": "2c456cc28d10e90bda33fb22e280c026391b6931581ac38127fe391f9953a1d0",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_latent_dim_12.csv",
+      "baseline_sha256": "ceecf425b3482f5c221c9e2f0f99b4bf40dbef7031c3982acfb79b5a80c67ad6",
+      "publication_sha256": "ceecf425b3482f5c221c9e2f0f99b4bf40dbef7031c3982acfb79b5a80c67ad6",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_latent_dim_16.csv",
+      "baseline_sha256": "91318c39a2e6c3efcb82b19d7e310dc5845cefe3b6cd01393f296d952b42237b",
+      "publication_sha256": "91318c39a2e6c3efcb82b19d7e310dc5845cefe3b6cd01393f296d952b42237b",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_latent_dim_4.csv",
+      "baseline_sha256": "7c64ce1195b2fd4dd22591c4d15b79a9201fc5d017e2e4f26cb57f76979695d0",
+      "publication_sha256": "7c64ce1195b2fd4dd22591c4d15b79a9201fc5d017e2e4f26cb57f76979695d0",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_latent_dim_8.csv",
+      "baseline_sha256": "8e5bd191b587f5929129713a31d41cd20da19109293198c50f590e601ae3395c",
+      "publication_sha256": "8e5bd191b587f5929129713a31d41cd20da19109293198c50f590e601ae3395c",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_neuron_count_1024.csv",
+      "baseline_sha256": "e69b52ce3440f36c0817be8bfc0695de6e9db461b81f8ce4049b62e19ce60b81",
+      "publication_sha256": "e69b52ce3440f36c0817be8bfc0695de6e9db461b81f8ce4049b62e19ce60b81",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_neuron_count_128.csv",
+      "baseline_sha256": "051a397a08a508755124c2678388c9971218d9b1a72a9543d1249b42ec7b9d15",
+      "publication_sha256": "051a397a08a508755124c2678388c9971218d9b1a72a9543d1249b42ec7b9d15",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_neuron_count_256.csv",
+      "baseline_sha256": "610ea06c7084ba0b5c31c94e4f63439eb5aff07b5fa7565b9c464c0b51000971",
+      "publication_sha256": "610ea06c7084ba0b5c31c94e4f63439eb5aff07b5fa7565b9c464c0b51000971",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_neuron_count_512.csv",
+      "baseline_sha256": "f2bf56442d52acbcb0db142554e18c0d4e1b59df0c925c8c5a1128d572b11526",
+      "publication_sha256": "f2bf56442d52acbcb0db142554e18c0d4e1b59df0c925c8c5a1128d572b11526",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_observation_step_1.csv",
+      "baseline_sha256": "72a4a6117ba2d2dc5fa1e8ea2f76c3e400e47b0de62228594e82fc4070989c6c",
+      "publication_sha256": "72a4a6117ba2d2dc5fa1e8ea2f76c3e400e47b0de62228594e82fc4070989c6c",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_observation_step_4.csv",
+      "baseline_sha256": "106fca28134c76743d10ca260b34e0bd4efa9a3793487a6fa436da8472f5856c",
+      "publication_sha256": "106fca28134c76743d10ca260b34e0bd4efa9a3793487a6fa436da8472f5856c",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_random_seed_2718.csv",
+      "baseline_sha256": "b229e123d48feea3aae26826bf14c067560233994ad8fddf2016046732970d49",
+      "publication_sha256": "b229e123d48feea3aae26826bf14c067560233994ad8fddf2016046732970d49",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_random_seed_314.csv",
+      "baseline_sha256": "a9db39b7230c8be42825ca1586f90b73b2eba920ffd3abf0a7dabffacf055930",
+      "publication_sha256": "a9db39b7230c8be42825ca1586f90b73b2eba920ffd3abf0a7dabffacf055930",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_random_seed_42.csv",
+      "baseline_sha256": "b3148e5f4a6ee94356888de2103acb51810f535e95ecad91b13aad4a88d9fb01",
+      "publication_sha256": "b3148e5f4a6ee94356888de2103acb51810f535e95ecad91b13aad4a88d9fb01",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_split_count_500.csv",
+      "baseline_sha256": "a9176020c7dfd8aa0bdf481128a61d909c5e73bd821662db20768e93e509ad4a",
+      "publication_sha256": "a9176020c7dfd8aa0bdf481128a61d909c5e73bd821662db20768e93e509ad4a",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_train_fraction_0.25.csv",
+      "baseline_sha256": "684760cd69e605e9380a1f0c1415e4d94a61280bb2bcd7255d2926e3b15cfc78",
+      "publication_sha256": "684760cd69e605e9380a1f0c1415e4d94a61280bb2bcd7255d2926e3b15cfc78",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_train_fraction_0.5.csv",
+      "baseline_sha256": "8f19d3b14976be6b30063a2e431293f244f51c17762e17389637b2b94b18bb0f",
+      "publication_sha256": "8f19d3b14976be6b30063a2e431293f244f51c17762e17389637b2b94b18bb0f",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_train_fraction_0.75.csv",
+      "baseline_sha256": "14c2de063aaea41c6c9bf22ae7ed33ab1048a2cd490bc4a9c84479d4fc6d77bc",
+      "publication_sha256": "14c2de063aaea41c6c9bf22ae7ed33ab1048a2cd490bc4a9c84479d4fc6d77bc",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/nulls_train_fraction_1.0.csv",
+      "baseline_sha256": "88e1ca3dacac59e99535b5f853ba738ed2e0584f9a94eb2e418c417112c0d2c2",
+      "publication_sha256": "88e1ca3dacac59e99535b5f853ba738ed2e0584f9a94eb2e418c417112c0d2c2",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/saturation_metrics.csv",
+      "baseline_sha256": "fea73fef3097041d4cf926eff669ce6d13885dd53406317f8280b4f21a422b62",
+      "publication_sha256": "fea73fef3097041d4cf926eff669ce6d13885dd53406317f8280b4f21a422b62",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/saturation_runs.json",
+      "baseline_sha256": "42f1ecf1bf0f0a969be3a38b1e8a67fd0f5d95b9749dc4382774b9fe126aa8f4",
+      "publication_sha256": "42f1ecf1bf0f0a969be3a38b1e8a67fd0f5d95b9749dc4382774b9fe126aa8f4",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/saturation_summary.json",
+      "baseline_sha256": "9975811139ab1ff78216ac2891b4d889ca7fe62e1df2f695c6861a006e2bb855",
+      "publication_sha256": "9975811139ab1ff78216ac2891b4d889ca7fe62e1df2f695c6861a006e2bb855",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/split_count_convergence.csv",
+      "baseline_sha256": "05dd5b379316fe62c9251055b39b37b012f7cc3db2b34cb71d138c6f66f25f41",
+      "publication_sha256": "05dd5b379316fe62c9251055b39b37b012f7cc3db2b34cb71d138c6f66f25f41",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/split_count_nulls_500.csv",
+      "baseline_sha256": "3edc5d3ab9e88b0ef431edad8c7319d951f981bb7fd01339e26d070e4fe53331",
+      "publication_sha256": "3edc5d3ab9e88b0ef431edad8c7319d951f981bb7fd01339e26d070e4fe53331",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/split_count_observed_500.csv",
+      "baseline_sha256": "c71aee02655984d6e0d6575db32cb1d8ed1c0d4d45beb002eaede81b8c57e266",
+      "publication_sha256": "c71aee02655984d6e0d6575db32cb1d8ed1c0d4d45beb002eaede81b8c57e266",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/saturation/split_count_summary.json",
+      "baseline_sha256": "90a03ad34a3ae970c3b2396556f373243ef10721fd757d06d36430c52128b16d",
+      "publication_sha256": "90a03ad34a3ae970c3b2396556f373243ef10721fd757d06d36430c52128b16d",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/02_gpfa_reliability/split_half_observed.csv",
+      "baseline_sha256": "585608a62b95a19fdafac3e8bd877e3f7cbcfedc7bb555063b73c655fa17ba3c",
+      "publication_sha256": "585608a62b95a19fdafac3e8bd877e3f7cbcfedc7bb555063b73c655fa17ba3c",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/03_parameter_matching/parameter_matched_dynamic_oracle.json",
+      "baseline_sha256": "4cd2f5e76c55e830ff851fd96618aae2b4da7f3c02aa8314987e154c753b0a8a",
+      "publication_sha256": "4cd2f5e76c55e830ff851fd96618aae2b4da7f3c02aa8314987e154c753b0a8a",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/extended_prediction_summary.json",
+      "baseline_sha256": "92e967893e48f67a41a84a5a82ea93dffa9e5bf12ae003bc8398135b5a28b439",
+      "publication_sha256": "92e967893e48f67a41a84a5a82ea93dffa9e5bf12ae003bc8398135b5a28b439",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/gpfa_model_metrics.csv",
+      "baseline_sha256": "7cb50c652706294e93919b403c441a0ad798f1025c94561101d7e4778b5a2b93",
+      "publication_sha256": "7cb50c652706294e93919b403c441a0ad798f1025c94561101d7e4778b5a2b93",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/gpfa_model_null_summary.csv",
+      "baseline_sha256": "cd330752a66dfbb5db5f7a2cfbfa1edd15b3e446e47ff8c8295568ce44f872ba",
+      "publication_sha256": "cd330752a66dfbb5db5f7a2cfbfa1edd15b3e446e47ff8c8295568ce44f872ba",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/gpfa_model_nulls.csv",
+      "baseline_sha256": "ad83fcbbc0e1a2fcb57a49fe55d0d8a742b4161bc193e102110df57dd13f09df",
+      "publication_sha256": "ad83fcbbc0e1a2fcb57a49fe55d0d8a742b4161bc193e102110df57dd13f09df",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/gpfa_model_paired_bootstrap.csv",
+      "baseline_sha256": "fd7fbc3b2a22bfc27821e9c9a5d5ed2eba408d39c082ddef43d3713addbfffa0",
+      "publication_sha256": "fd7fbc3b2a22bfc27821e9c9a5d5ed2eba408d39c082ddef43d3713addbfffa0",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/gpfa_model_paired_bootstrap_raw.csv",
+      "baseline_sha256": "d867fbf5753085bb277d9c57b37b63dd9c3e061d094c88fd95ca56a184e0cb64",
+      "publication_sha256": "d867fbf5753085bb277d9c57b37b63dd9c3e061d094c88fd95ca56a184e0cb64",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/gpfa_model_selection.csv",
+      "baseline_sha256": "c33381e4bbccb79018b6e25953406d9ba90d920d85269099c585c0ea1a8bebf7",
+      "publication_sha256": "c33381e4bbccb79018b6e25953406d9ba90d920d85269099c585c0ea1a8bebf7",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/gpfa_model_summary.json",
+      "baseline_sha256": "c7a3a553e7dcda51e68a7855ea73ab890ab1821bc80fb13ea59e6bdd3f622795",
+      "publication_sha256": "c7a3a553e7dcda51e68a7855ea73ab890ab1821bc80fb13ea59e6bdd3f622795",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/gpfa_reliability_nulls.csv",
+      "baseline_sha256": "55cad330e74b5edfed6b614f5243ec6eae515be0fffd2e109965fb196a2aaa87",
+      "publication_sha256": "55cad330e74b5edfed6b614f5243ec6eae515be0fffd2e109965fb196a2aaa87",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/gpfa_reliability_observed.csv",
+      "baseline_sha256": "db63274fb856036acfc79b9ab4c42b0804a558cdeac62078b0c0b8f32554b678",
+      "publication_sha256": "db63274fb856036acfc79b9ab4c42b0804a558cdeac62078b0c0b8f32554b678",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/gpfa_reliability_summary.csv",
+      "baseline_sha256": "4bc3e94e96864f4a61b872ec23f93185fc7c9e9f6a5ba447f98f269faf269d70",
+      "publication_sha256": "4bc3e94e96864f4a61b872ec23f93185fc7c9e9f6a5ba447f98f269faf269d70",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/gpfa_run_summary.json",
+      "baseline_sha256": "613dc4fb3581c1fa4fbc62c455d407406450996ef95118306093c604e4b9a4ff",
+      "publication_sha256": "613dc4fb3581c1fa4fbc62c455d407406450996ef95118306093c604e4b9a4ff",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/prediction_summary.json",
+      "baseline_sha256": "d2e944822dbd2a9f8dda5c77cb41230035aa2513fe2f1465a4fe2a6bbb5a9d9e",
+      "publication_sha256": "d2e944822dbd2a9f8dda5c77cb41230035aa2513fe2f1465a4fe2a6bbb5a9d9e",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/protocol_lock.json",
+      "baseline_sha256": "cb2e5edd136ed1b2ae7371b8c897545c178e288a1691d300f0f64b5ad3fc60d4",
+      "publication_sha256": "cb2e5edd136ed1b2ae7371b8c897545c178e288a1691d300f0f64b5ad3fc60d4",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/q1_q6_answers.json",
+      "baseline_sha256": "afcc0259c9d2730c26c18d168b0737828d14fb8a8aeb678e9fc0b481d85c3886",
+      "publication_sha256": "afcc0259c9d2730c26c18d168b0737828d14fb8a8aeb678e9fc0b481d85c3886",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/q2_condition_conventional_bootstrap.csv",
+      "baseline_sha256": "115af2c715f38db2c3ed5893e9abe2ceb12d607c23659ce1508e63b446661bb2",
+      "publication_sha256": "115af2c715f38db2c3ed5893e9abe2ceb12d607c23659ce1508e63b446661bb2",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/q4_response_score_matched_output_gpfa_bootstrap.csv",
+      "baseline_sha256": "c31e68f6bbd433b97a69aed65ef0f9e6add0bcff604405148508d2c5b6281444",
+      "publication_sha256": "c31e68f6bbd433b97a69aed65ef0f9e6add0bcff604405148508d2c5b6281444",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/q5_temporal_ablation_curve.csv",
+      "baseline_sha256": "89b6a218382583b8254fbc00847c7950b231c8f888508b69ba7cd8788af8a445",
+      "publication_sha256": "89b6a218382583b8254fbc00847c7950b231c8f888508b69ba7cd8788af8a445",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/q5_temporal_ablation_monotonicity.csv",
+      "baseline_sha256": "881f9c14e0b3033d69983284c1257c3aea1f5239bd4263c8db6573883ac7a139",
+      "publication_sha256": "881f9c14e0b3033d69983284c1257c3aea1f5239bd4263c8db6573883ac7a139",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/q6_candidate_metrics.csv",
+      "baseline_sha256": "3944cbe12ddef29d7b36e5b6bad20d41e9f62726fcdf018faf34d87d657f2e9e",
+      "publication_sha256": "3944cbe12ddef29d7b36e5b6bad20d41e9f62726fcdf018faf34d87d657f2e9e",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/q6_leave_family_out_errors.csv",
+      "baseline_sha256": "1eae73026ca9cb4d742aec4192105817ba3915da8dde168fadf634d810003003",
+      "publication_sha256": "1eae73026ca9cb4d742aec4192105817ba3915da8dde168fadf634d810003003",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/sensitivity/sensitivity_metrics.csv",
+      "baseline_sha256": "5e7614cf83ffb3898a20d3367bd75763b33f273a4cf8e86ae513240bd3878324",
+      "publication_sha256": "5e7614cf83ffb3898a20d3367bd75763b33f273a4cf8e86ae513240bd3878324",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/sensitivity/sensitivity_null_summary.csv",
+      "baseline_sha256": "cb4ba9580459066ec55afd4541ae48506eee6d352a2fe015ed25e5397b880ab2",
+      "publication_sha256": "cb4ba9580459066ec55afd4541ae48506eee6d352a2fe015ed25e5397b880ab2",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/sensitivity/sensitivity_runs.json",
+      "baseline_sha256": "8ba8095407ab5f65328d7da9f73cf6f309300f8d0055d4ba8b59f9835ec2a000",
+      "publication_sha256": "8ba8095407ab5f65328d7da9f73cf6f309300f8d0055d4ba8b59f9835ec2a000",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/sensitivity/sensitivity_summary.json",
+      "baseline_sha256": "753ac43e8e181b7cb094f10f2a0dadf57602bbbfe6560d5a727352052af8ce82",
+      "publication_sha256": "753ac43e8e181b7cb094f10f2a0dadf57602bbbfe6560d5a727352052af8ce82",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/sensitivity/split_count_convergence.csv",
+      "baseline_sha256": "3b7448447078907983e20309f3896499e49e8865b1af021d1fdf719a9fc8ddad",
+      "publication_sha256": "3b7448447078907983e20309f3896499e49e8865b1af021d1fdf719a9fc8ddad",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/traditional_metrics.csv",
+      "baseline_sha256": "1a33c12d0018d219f72c04c14b91bd8d920eaab859f32f5e1586bf643edb5dc1",
+      "publication_sha256": "1a33c12d0018d219f72c04c14b91bd8d920eaab859f32f5e1586bf643edb5dc1",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/traditional_paired_bootstrap.csv",
+      "baseline_sha256": "9c9adf5111191a491fbbdf60fd952c93dd9b1e1df39526aabf9eb29c179610e4",
+      "publication_sha256": "9c9adf5111191a491fbbdf60fd952c93dd9b1e1df39526aabf9eb29c179610e4",
+      "unchanged": true
+    },
+    {
+      "path": "results/tables/04_model_comparison/traditional_summary.json",
+      "baseline_sha256": "2041a4a1ebaaaac0dc850c82bd9f13adf90a0186a1599bda08d990158255ff14",
+      "publication_sha256": "2041a4a1ebaaaac0dc850c82bd9f13adf90a0186a1599bda08d990158255ff14",
+      "unchanged": true
+    }
+  ]
+}

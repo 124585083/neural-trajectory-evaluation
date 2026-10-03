@@ -1,8 +1,8 @@
 cff-version: 1.2.0
 message: >-
   If you use this repository, please cite this software and the relevant
-  Dynamic Sensorium or Mental-Pong papers and datasets listed in the README
-  and THIRD_PARTY_NOTICES.md.
+  Dynamic Sensorium or Mental-Pong papers and datasets listed in
+  docs/REFERENCES.md and THIRD_PARTY_NOTICES.md.
 title: "Evaluating Dynamic Neural Encoding Beyond Response Correlation"
 type: software
 authors:

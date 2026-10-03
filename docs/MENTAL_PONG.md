@@ -2,7 +2,7 @@
 
 ## Motivation
 
-A reliable neural trajectory can describe how a representation changes, but its geometry alone does not identify a task variable or a computation. Mental-Pong adds external task references: an objective ball path and a behavior-constrained candidate path. We asked which path is easier to reconstruct from the same neural representation and whether the correspondence survives two distinct randomization controls.
+In Mental-Pong, macaques moved a paddle to intercept a ball that later became hidden. The [2025 neural study, 2024 data release and 2022 task paper](REFERENCES.md) provide distinct sources for the recordings and task design. A reliable neural trajectory describes how population activity changes; external task variables are needed to interpret those changes. Mental-Pong adds external task references: an objective ball path and a behavior-constrained candidate path. We asked which path is easier to reconstruct from the same neural representation and whether the correspondence survives two distinct randomization controls.
 
 This differs from the Dynamic Sensorium study, which compares neural and model-predicted trajectories in a shared representation space. Mental-Pong uses task-coordinate readouts and external paths. Their scores, implementations and validation scopes remain separate. The common research direction concerns reliable temporal structure, its relationship to observable variables and the data needed to distinguish competing explanations.
 
@@ -22,11 +22,11 @@ This construction gives a behavioral reference for decoding. It is not a measure
 
 Factor analysis (FA) describes shared neural variation using latent factors. Gaussian-process factor analysis (GPFA) adds a time prior; the version here has one shared learnable RBF time scale. Both have 50 latent dimensions. The study reuses each split's training-side FA50/GPFA50 and applies ordinary least squares (OLS), a linear regression with an intercept. Each coordinate has 51 coefficients and each xy head has 102. No added regularization, scaling, behavioral features or record-count weights are used. A single mapping spans valid visible and hidden rows.
 
-Each target has its own trained head but shares the same inputs, split and support. The [locked protocol](../experiments/05_mental_pong/trajectory_project/closeout_v1/configs/closeout_protocol.json) retains the original timing and fit boundaries. This GPFA implementation and its tests are separate from Sensorium's brain-defined GPFA.
+Each target has its own trained readout. Both use the same neural inputs, condition split and valid time points. The [locked protocol](../experiments/05_mental_pong/trajectory_project/closeout_v1/configs/closeout_protocol.json) retains the original timing and fit boundaries. This GPFA implementation and its tests are separate from Sensorium's brain-defined GPFA.
 
 ## Own-target reconstruction
 
-Each split is scored before the 100 split scores are summarized. Repeated splits describe readout stability and are not independent animal experiments.
+Each position readout is scored against the target it was trained to reconstruct. This is the own-target comparison. Each split is scored before the 100 split scores are summarized. Repeated splits describe readout stability and are not independent animal experiments.
 
 | animal | representation | r_obj | r_beh | RMSE_obj | RMSE_beh | Delta_r | Delta_RMSE |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -59,6 +59,6 @@ These results establish behavioral cancellation. They do not measure neural info
 
 ## Evidence limits and next design
 
-The final scientific status is `CLOSED_EXPLORATORY_WITH_LIMITATIONS`. **`raw_preprocessing=fail` remains unresolved.** Filtering and fit provenance pass within the released-input scope, while filling across conditions and times persists upstream. Unknown neural members, terminal timing uncertainty and estimated collision anchors further limit interpretation. The results support readable task-position structure, do not support a full-epoch candidate-path advantage, and cannot test opposite behavioral groups within one physical condition. They do not establish a unique computation or neural causal mechanism.
+The final scientific status is `CLOSED_EXPLORATORY_WITH_LIMITATIONS`. **`raw_preprocessing=fail` remains unresolved.** The filtering check verifies use of completed released-input bins. The fitting check verifies which released conditions trained the representation. Filling across conditions and times occurred upstream and remains unresolved. Unknown neural members, terminal timing uncertainty and estimated collision anchors further limit interpretation. The results support readable task-position structure, do not support a full-epoch candidate-path advantage, and cannot test opposite behavioral groups within one physical condition. They do not establish a unique computation or neural causal mechanism.
 
 The [single current future plan](FUTURE_DIRECTIONS.md) specifies the paired trial records needed for above-target/below-target/near-correct group comparisons, then asks what additional temporal information could distinguish explanations. It remains a design. Start with the [module reading and execution guide](../experiments/05_mental_pong/README.md) or the [final summary](../experiments/05_mental_pong/trajectory_project/closeout_v1/FINAL_SUMMARY.md). The [history](../experiments/05_mental_pong/archive/HISTORY.md) retains earlier experiments without blending their results into the final analysis.

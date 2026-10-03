@@ -250,7 +250,7 @@ python -m pytest experiments/02_gpfa_reliability/tests -q
 python -m pytest experiments/04_model_comparison/tests -q
 ```
 
-Phase 1 currently has no raw-data-independent pytest test.
+Phase 1 also has an evaluation-mode frame-independence regression test using the real Static adapter and pinned upstream model components with synthetic inputs. It checks whether changing one frame affects retained outputs at other times; the permutation check alone does not establish this property. No neural recordings or training are used. See the [Phase 1 tests](../experiments/01_baselines/tests/).
 
 ### Raw Sensorium data required
 
@@ -266,7 +266,7 @@ These tests do not require a sixth legacy session.
 
 ### Artifact and integration requirements
 
-No committed pytest test currently loads a released neural-network checkpoint, frozen GPFA object, or generated prediction archive. Artifact-dependent integration occurs through the formal phase commands: evaluation and prediction require the applicable checkpoints; Phase 2 saturation requires the preceding Phase 2 `run` outputs; and downstream Phase 4 stages require their earlier protocol, prediction, GPFA, or extended-prediction outputs. Consult the relevant Phase README for the exact dependency order.
+The routine Sensorium pytest suite does not load released checkpoints or scientific prediction archives. Artifact-dependent integration occurs through the formal phase commands: evaluation and prediction require the applicable checkpoints; Phase 2 saturation requires the preceding Phase 2 `run` outputs; and downstream Phase 4 stages require their earlier protocol, prediction, GPFA, or extended-prediction outputs. Consult the relevant Phase README for the exact dependency order. The separate Mental-Pong mini replay checks saved numerical artifacts when an authorized local bundle is supplied.
 
 Tests cover selected contracts such as session/configuration identities, tensor and architecture shapes, GPFA interfaces, metric behavior, split logic, and temporal-perturbation mechanics. Passing them is not evidence by itself for the scientific conclusions.
 
@@ -274,6 +274,7 @@ Tests cover selected contracts such as session/configuration identities, tensor 
 
 - Raw Dynamic Sensorium data are externally hosted and not redistributed.
 - Hidden `final_test_main` neural responses are unavailable locally; local oracle evaluation is not the same as the official hidden benchmark.
+- The Static, official Dynamic, and parameter-matched Dynamic training routes used oracle correlations for checkpoint selection. Reloading their weights for full-sequence scoring does not make those same observations an independent test set; [Methods](METHODS.md) documents selection and measurement separately.
 - Large prediction archives and other intermediate outputs are generated locally and excluded by `.gitignore`; curated compact tables are retained under `results/`.
 - Current encoding-model training uses a single seed.
 - Fixed seeds improve repeatability, but exact floating-point values may vary slightly across compatible hardware, CUDA, BLAS, and package builds.
@@ -298,5 +299,7 @@ Tests cover selected contracts such as session/configuration identities, tensor 
 ## 16. Mental-Pong access and execution
 
 Start with the [Mental-Pong module README](../experiments/05_mental_pong/README.md) for separate routes to reports, read-only verification, a small saved-case replay, and later full execution. Use its [path configuration example](../experiments/05_mental_pong/configs/paths.example.json) to locate external data and large artifacts. The module records availability explicitly; a report link alone does not establish that an artifact is available or that a replay succeeded.
+
+The [NumPy-only mini replay](../experiments/05_mental_pong/mini_replay/README.md) directly applies saved weights to saved features from split 0 for both animals and both representations. Its default calculation does not fit a model. Public source availability and numerical artifact availability are reported separately: the new bundle remains outside the publication tree because permission for redistributing transformed arrays has not been established. The [rights audit](../experiments/05_mental_pong/integration/revision_20261003/data_rights_audit.json) identifies the actual saved provider metadata, the failed API refresh, and the archive files inspected. The MIT code license does not replace the data terms.
 
 The integration preserves the completed scientific results. Integration checks, English presentation derivatives, and source hashes are recorded separately from the original scientific acceptance records. Full training and randomization studies were not repeated for publication editing.

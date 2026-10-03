@@ -2,7 +2,7 @@
 
 ## Research question and result
 
-The study asks how well two position targets can be reconstructed from the same neural representation: the objective ball path and a behavior-constrained candidate path. Check A compares own-target and cross-target scores. Check B changes test-condition correspondence while keeping the trained readouts fixed. Check C redistributes endpoints, constructs new candidate paths and fits new OLS readouts. A has no randomized null distribution; B and C test different correspondences.
+The study asks how well two position targets can be reconstructed from the same neural representation: the objective ball path and a behavior-constrained candidate path. Check A first scores each readout against its training target, then scores each readout against the other target. Check B changes test-condition correspondence while keeping the trained readouts fixed. Check C redistributes endpoints, constructs new candidate paths and fits new OLS readouts. A has no randomized null distribution; B and C test different correspondences.
 
 The released neural representations contain readable task-position structure. All four full-epoch own-target comparisons favor the objective path. Actual candidates outperform the random-endpoint reference over full, hidden and endpoint-influence ranges, with post-collision RMSE exceptions. Full-epoch neural reconstruction remains below the mean-endpoint geometry baseline; some Perle phase-specific skills are slightly positive.
 
@@ -80,13 +80,13 @@ In all four full-epoch groups, OB is better than BB for the same candidate targe
 
 The [contrast summary](results/A/contrast_summary.csv) keeps these comparisons separate. Independent replay of 400 test-prediction files agreed with the source scores to approximately 1.1e-14. Training predictions did not enter the summaries. The [complete cross table](results/A/cross_2x2_summary.csv) retains every phase.
 
-The [all-condition heterogeneity plot](figures/descriptive/all79_condition_heterogeneity.png) includes missing condition 59920. Cases 55062 and 241919 are post hoc illustrations specified by the user. Condition 55062 has lower candidate own-target RMSE in all four groups; correlation decreases in Mahler and increases in Perle. Condition 241919 has worse candidate RMSE in all four groups. The [current case scores](results/descriptive/fixed_posthoc_case_scores.csv), [cross-scores](results/descriptive/fixed_posthoc_case_2x2.csv) and [case interpretation](results/descriptive/fixed_posthoc_case_interpretation.md) retain these differences.
+The [all-condition heterogeneity plot](figures/descriptive/all79_condition_heterogeneity.png) includes missing condition 59920. Cases 55062 and 241919 were selected after aggregate results were examined. They are exploratory illustrations. Condition 55062 has lower candidate own-target RMSE in all four groups; correlation decreases in Mahler and increases in Perle. Condition 241919 has worse candidate RMSE in all four groups. The [current case scores](results/descriptive/fixed_posthoc_case_scores.csv), [cross-scores](results/descriptive/fixed_posthoc_case_2x2.csv) and [case interpretation](results/descriptive/fixed_posthoc_case_interpretation.md) retain these differences.
 
 ![Mahler: two post hoc cases, four curves and test-split stability](figures/descriptive/mahler_fixed_posthoc_four_curves.png)
 
 ![Perle: two post hoc cases, four curves and test-split stability](figures/descriptive/perle_fixed_posthoc_four_curves.png)
 
-Bands summarize predictions only when that condition was held out. They describe readout-split stability rather than animal trial variability. Complete all-79 atlases remain registered in the [source and artifact account](SOURCES.md).
+The four curves show the objective path, its neural reconstruction, the candidate path and its neural reconstruction. Both paths use the same time axis and position units. Curves stop where the shared validity mask ends; gray marks occlusion and gold marks the estimated collision interval. Bands show the mean plus or minus one SD of predictions from splits that held out the condition. They describe readout-split stability, not biological trial variability. Arrival time is estimated and exact feedback time is unknown. Complete all-79 atlases remain registered in the [source and artifact account](SOURCES.md).
 
 ## B: fixed-readout condition mismatch
 
@@ -111,7 +111,7 @@ Each animal has 1000 random repeats, each covering the original 100 splits. A re
 | perle | GPFA50 | hidden | D_beh | 0.7848 | 0.0047 | 0.7801 | 3.4971 | 5.9357 | 2.4386 |
 | perle | GPFA50 | hidden | D_obj | 0.7976 | 0.0047 | 0.7929 | 3.5032 | 6.0380 | 2.5348 |
 
-These are paired-support means. Subtracting a short-support null from the original full-support score would answer a different question. The null destroys both physical and behavioral condition associations, so it supports condition-related correspondence without isolating behavior-specific representation.
+Both entries in each paired mean use the same valid time points. Subtracting a null score over fewer valid bins from the original score would mix different sets of observations. The null destroys both physical and behavioral condition associations, so it supports condition-related correspondence without isolating behavior-specific representation.
 
 | animal | epoch | mean_of_q_means | q025 | q975 | minimum_over_all_q_splits | maximum_over_all_q_splits | n_zero_support_q_splits |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -209,7 +209,7 @@ The [C methods and axes](results/C/README.md), [geometry audit](results/C/geomet
 
 ## Evidence assessment
 
-**Recoverable task-position structure is supported within this data scope.** Held-out reconstruction, correct correspondence in B and actual-label advantages over C's primary ranges support this conclusion. The stronger known-geometry baseline limits a performance claim beyond shared geometry.
+**Recoverable task-position structure is supported within this data scope.** Held-out reconstruction, correct correspondence in B and actual-label advantages over C's primary ranges support this conclusion. The stronger mean-endpoint geometry baseline limits a performance claim beyond shared geometry.
 
 **A full-epoch candidate-path advantage is not supported.** All four OO/BB comparisons favor the objective target. No-collision RMSE improvements and post-collision differences remain phase-specific findings. Winning against random endpoints cannot reverse the direct own-target comparison, and different target difficulties prevent translating scores directly into neural preference.
 
@@ -226,7 +226,9 @@ For a fixed condition, let `e_ci = endpoint_ci - objective_end_y_c` and `e_c = m
 
 `mean_square = squared_mean + within_variance` holds to a maximum residual of 8.9e-15. Opposite errors occur in 77/78 Mahler and 78/78 Perle conditions. Median within-condition cancellation is 54.0% and 48.0%. Full-path candidate-objective RMS separation is 0.6760/0.5612; hidden separation is 1.0006/0.8472. These are below the reconstruction RMSE scale. Path separation pools valid label rows, whereas the primary reconstruction score averages separately scored splits. Their comparison is descriptive, not a power calculation.
 
-![Endpoint error cancellation in the behavioral averages](figures/descriptive/endpoint_mean_cancellation.png)
+![Opposite endpoint errors partly cancel in condition averages](figures/descriptive/endpoint_mean_cancellation.png)
+
+*Each point represents a physical condition. This figure describes behavioral endpoints; neural trial membership is unavailable. The cancellation fraction is not a percentage of neural information loss.*
 
 The [condition audit](results/descriptive/endpoint_condition_audit.csv), [path comparison](results/descriptive/path_separation_vs_error.csv) and [descriptive account](results/descriptive/mean_cancellation_interpretation.md) support cancellation in behavior. They do not measure lost neural information or establish identical behavior and neural membership. The trial-label comparison also changes condition weights, so averaging cannot explain the full result on its own.
 

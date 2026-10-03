@@ -1,6 +1,6 @@
 """Provenance checks for Step 3, with an explicit documentation-only revision.
 
-Scientific Step 1/2 files remain byte-identical. The user requested a combined
+Scientific Step 1/2 files remain byte-identical. This module provides a combined
 README; its historical bytes are archived and verified instead of rewriting
 either earlier manifest to pretend the documentation never changed.
 """

@@ -1,0 +1,730 @@
+{
+  "status": "editorial_and_visual_checks_passed",
+  "reviewed_at_utc": "2026-10-02T17:17:50.757436+00:00",
+  "files": [
+    {
+      "path": "README.md",
+      "source_sha256": "6720399458c323c66943e2da08f2f1207e6f53357346964dc39bda24d4571016",
+      "publication_sha256": "57c2b51a03c05b1cb34c54fb6db5b4ab93fa0b781c02397fe209daf54a4e3b8a",
+      "change_class": "editorial"
+    },
+    {
+      "path": "AUTHORS.md",
+      "source_sha256": "9b346f5d5181111c6fb1670ca5e658074ab6785d544c5b6226fca0b5f9b21503",
+      "publication_sha256": "63a61498b17b429c076882963da1a56c97abfc6d3c0a83a581241882519231b9",
+      "change_class": "editorial"
+    },
+    {
+      "path": "docs/METHODS.md",
+      "source_sha256": "7c8b44fc2604de957c07719ed4a1cd6235e39b0b47e4d612a1c5dbb3c0c09146",
+      "publication_sha256": "6c7d25c2093078dd54177b6961ab74489b41414d762076993adf5c6ae08a42b6",
+      "change_class": "editorial"
+    },
+    {
+      "path": "docs/RESULTS.md",
+      "source_sha256": "92fd48b646aa5def0628e7ebe95bb35f409510e885d2235ebd6f99b8273d35ec",
+      "publication_sha256": "a8ffc7acc4f0b604d76166f0a2d2802ec8cdfcc6a958db54f29681ae0c25735f",
+      "change_class": "editorial"
+    },
+    {
+      "path": "docs/GPFA_VALIDATION.md",
+      "source_sha256": "b5ce3e2e88bd25f04f8071027499d239b0936c894969dad5fd142db8a09bad5f",
+      "publication_sha256": "6866bd03d73622f7e9b0e48a93af27a173d5a3bd8507bf690f2c20743d6b577d",
+      "change_class": "editorial"
+    },
+    {
+      "path": "docs/DESIGN_RATIONALE.md",
+      "source_sha256": "a5130a16f9247c0800b42d9ae8cd92b9da1f68804db169011cfe9f7888bc3e2c",
+      "publication_sha256": "5169c6f50997e62f0aaf5269f5d30e461bc50dcc6437b0c88e5eaf026db86662",
+      "change_class": "editorial"
+    },
+    {
+      "path": "docs/FUTURE_DIRECTIONS.md",
+      "source_sha256": "06942f2964d78c8107d0099184e437dea859d4f8ac3aca6229c345d9e013c238",
+      "publication_sha256": "a2f2074b57e3e1a722c994f31f9498143a93531d6275a89888da6c4f72dabc94",
+      "change_class": "editorial"
+    },
+    {
+      "path": "docs/WRITING_GUIDE.md",
+      "source_sha256": "4f51a683e23e4ce77ac7e93e3786fb609b7291a88d8efade18451bf595e45c14",
+      "publication_sha256": "ee8972fdf2d6a982b63dffe2260b8849ac7a2ded67f9553a7330b8d57f19a235",
+      "change_class": "editorial"
+    },
+    {
+      "path": "docs/MENTAL_PONG.md",
+      "source_sha256": "4f63264b3cf699df4e5b7ee10f6f8551318298f905295e82e0f3c00321c5016b",
+      "publication_sha256": "1517023fadc9f7d6a6c2491781efc0b6a218f9d1a85995a742820f70e5096b4d",
+      "change_class": "editorial"
+    },
+    {
+      "path": "docs/results/Q1_Q6_ANSWERS.md",
+      "source_sha256": "ef23dcc7039059598efb9797559c4b1bca7656e56f65cb841ce94743c7520b15",
+      "publication_sha256": "fdeb7a2af2f67d6cd5ad1b4f56654bd378fb2dea32f54d777196662f126358d3",
+      "change_class": "editorial"
+    },
+    {
+      "path": "docs/supplementary/model_reports/STATIC_MODEL.md",
+      "source_sha256": "68cddad1b17debb29e65a02f6e4f37b55dfd98f1de5e0123b9ab025700530557",
+      "publication_sha256": "6a4c6a4aedb4cc8516f87068872e5d0f2937eb61d495541797590cd708b547e2",
+      "change_class": "editorial"
+    },
+    {
+      "path": "docs/supplementary/model_reports/DYNAMIC_MODEL.md",
+      "source_sha256": "ab99833818efb08bfafb32fa7c04935ac65a03c7d59c32fb56d96fba6c0c19f3",
+      "publication_sha256": "15fb485b737e6711e710c74fa89393f86342842767dee4b6c4818e93bf84f978",
+      "change_class": "editorial"
+    },
+    {
+      "path": "docs/supplementary/model_reports/PARAMETER_MATCHED_DYNAMIC.md",
+      "source_sha256": "3eb0371db233dac86e5848340739cb4d9ff0edc39a7fc89705717e2219c2e876",
+      "publication_sha256": "318533d2bcbf467b45df197754b1df4beb32c539b95d9c67144e0a35ef55288c",
+      "change_class": "editorial"
+    },
+    {
+      "path": "experiments/01_baselines/README.md",
+      "source_sha256": "a9d7b65d7a1e79d528996fef34db5e2c34b4eae50c7d4502d3e87f4e728cf360",
+      "publication_sha256": "5f240515886ac88327ab3a806f68ca3eca7427c3b575d51439f778a61cded91b",
+      "change_class": "editorial"
+    },
+    {
+      "path": "experiments/02_gpfa_reliability/README.md",
+      "source_sha256": "43cd89c34e92b6c5ce3097f755ba5a7bd8eef3c5d30af30a3e2daf7af8358d03",
+      "publication_sha256": "fa43946c9ea67d5e6ff33684315ccab2b1fe4033bf19f65825758d5d8ccb4f32",
+      "change_class": "editorial"
+    },
+    {
+      "path": "experiments/03_parameter_matching/README.md",
+      "source_sha256": "8b24b498d8679870e338b6c7cc369474b3c4e0c48392de9fde029b8f6cbab13e",
+      "publication_sha256": "c71562fbd0c243b7e053933299c08dbd4e738523383744cf751ba3cdebd0e2bc",
+      "change_class": "editorial"
+    },
+    {
+      "path": "experiments/04_model_comparison/README.md",
+      "source_sha256": "0a989719b858f2ab7ef0e56e3daf44b50ffa4199a171ed538f19c622bfeb527d",
+      "publication_sha256": "dd32233476654aa464183fe6d9d01ea8001ab394e6b9e69a4ca87cf909f9f684",
+      "change_class": "editorial"
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/FINAL_REPORT.md",
+      "source_sha256": "623b8baa518b005a4e842bf650740c549325aabf0c569e228013ba21b5fc1f81",
+      "publication_sha256": "7d4d98ed226ac25fdfd2ac722de2e30eea6bcda1188cd1d5424d785c631b3119",
+      "change_class": "editorial"
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/FINAL_SUMMARY.md",
+      "source_sha256": "abc67eae0e97969440759da10fe761ff63d44ac7fee3928e778013ad2f8e6a40",
+      "publication_sha256": "f577588be1a193b4e0dd1283bbe84314f02ab5eeee88e04b4f6710044e481990",
+      "change_class": "editorial"
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/README.md",
+      "source_sha256": "8f304ed234161024db5828066ccd541282a057545a1df9c099bea70785661ff5",
+      "publication_sha256": "8349dfa47b5634748ed020112b4f0c7af14f24c0a0e3aacac3ff7655fff41c67",
+      "change_class": "editorial"
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/descriptive/fixed_posthoc_case_interpretation.md",
+      "source_sha256": "f2ad8f9ef4286e752cf95cf0ad08786c4605217ca2840db2c6cb5c8c573b4e5d",
+      "publication_sha256": "32241b457ca1baec7e749c0b117342e72abf4c25cf600cf076a153de5c368f63",
+      "change_class": "editorial"
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/REPORT.md",
+      "source_sha256": "973a4a5753d079ab26ce37dc877549362f777173665c37ea3a58e307f966cc7d",
+      "publication_sha256": "e38889c2fe78e13ab83a67aa521c42eec04c8c08b763a7a532b0f13812f24066",
+      "change_class": "editorial"
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/report_closeout.py",
+      "source_sha256": "ca537af48f40ee311f91d6eb15cdfeedaee12d1bd7a4591df1a3fcfb0bacaf5d",
+      "publication_sha256": "0d523fac0f47486c66c7d2773eda97a9a16d289dea52cedc1598321e5cb5810d",
+      "change_class": "editorial"
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/descriptive_audit.py",
+      "source_sha256": "f68a7d22e218bc9b4e25f186957814a2ef66ef8bda2ea1a6cabd05625695a61c",
+      "publication_sha256": "e761138201232261375a8498007f8fe344b4359b3f661c68da7e5500cd60f892",
+      "change_class": "editorial"
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/reporting_condition.py",
+      "source_sha256": "41f7f95087110ff041959ea61bfc0f2f401cb862ecf1a2738f41fe7632deacd0",
+      "publication_sha256": "c3cb17556c516c183b9932b55fde0ce1776aa5f5a9ee7097196c8ed65bf95df9",
+      "change_class": "editorial"
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/plotting_condition.py",
+      "source_sha256": "a471154eb3f11df17fd5ddbc32fb7a2d58576f8e7391d9b930201acb803e8d6d",
+      "publication_sha256": "81b7923be73f9630f66891c36b5e1a312057c222349ccb038f0288afeabe619b",
+      "change_class": "editorial"
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/trial_endpoint_fa_gpfa_v1/reporting_trial.py",
+      "source_sha256": "353511c1b828b2cf42ca218dfe2bea9d77cbd55a6109003834a60adc9083a5c1",
+      "publication_sha256": "66d6027a20d3e68de5b98b08c410945b9ee70337e017323c687a99545e6df315",
+      "change_class": "editorial"
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/step3_io.py",
+      "source_sha256": "5d5c499be5907eb0a0eaf8d2005d8872ba6558f304a1ace56c68dbd5ebebe9d0",
+      "publication_sha256": "5aec430377654ca4b17052c851358ad04c3093d3c18f330f03f75edc93732de1",
+      "change_class": "editorial"
+    },
+    {
+      "path": "scripts/make_core_figures.js",
+      "source_sha256": "2619afbd7355ae2d1de5138f2303642a89104b1064b94becb50e2f1e21f97606",
+      "publication_sha256": "6680400aaab3db661b46ac74e5f7ff4c66116711e45b6dce09a9b917988db43e",
+      "change_class": "editorial"
+    },
+    {
+      "path": "results/figures/figure-2-static-dynamic-comparison.svg",
+      "source_sha256": "278f7bb9f073367945950b9068ef127ae953bd6903b7d795907babe1d67535a5",
+      "publication_sha256": "15328a2f2c9a4f906adc3af24322f8e303c47d47e30f8bcedd33356bbfeaecce",
+      "change_class": "presentation_render"
+    },
+    {
+      "path": "results/figures/figure-2-static-dynamic-comparison.png",
+      "source_sha256": "db3fa4b4b1dc1caff116638080631039135d1c1121401409c5e659e985fda356",
+      "publication_sha256": "589628751f199628ffc3295374d3e2e946e18648ce7e9e752a644e1801b6feb8",
+      "change_class": "presentation_render"
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/figures/descriptive/endpoint_mean_cancellation.png",
+      "source_sha256": "645a53ae1d7a5a95e06bd3c7bb6a737b51e1a8881bf83d9e0ad6e2e977ab0045",
+      "publication_sha256": "6c68ac394dee3a4b81190e815de8ba7a77e2e7f038ed7e1c495d20513044c8f9",
+      "change_class": "presentation_render"
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/figures/descriptive/all79_condition_heterogeneity.png",
+      "source_sha256": "abb3f14d7018a87f2f453af986e6290c1aef9c21066aaa5f00dc6db976d15653",
+      "publication_sha256": "f168c877057953a6502edd50b8b4f48fd311a9e98bd51901863ce927bfecb1a3",
+      "change_class": "presentation_render"
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/figures/descriptive/mahler_fixed_posthoc_four_curves.png",
+      "source_sha256": "cbd2701812bbead131c5c241086784f6f869682ec4f164d5e98635a9b5e0f1b7",
+      "publication_sha256": "d49591f5d01a3da281960c9f3f7ea5136fade3b32de3b8e0b0f8eb87de4692f0",
+      "change_class": "presentation_render"
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/figures/descriptive/perle_fixed_posthoc_four_curves.png",
+      "source_sha256": "955080984fea6764a74d2150e09104a3e6444c7c8e00523dd19633f67a29257e",
+      "publication_sha256": "87624096c83093e4bf1a07e034750fb9cf442ea48c1c429b60dcc509d70a8c33",
+      "change_class": "presentation_render"
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/figures/paired_self_reconstruction_differences.png",
+      "source_sha256": "bb0b53822c0d555fbc83dd4124fd17f6462e618a17ac951d2e6178498fdc01d4",
+      "publication_sha256": "7c51aaa7c34da083c664a4d1bb1482e3c678655e29d165b51272bbde345c4d2a",
+      "change_class": "presentation_render"
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/SOURCES.md",
+      "change_class": "editorial",
+      "source_sha256": "bf7ddfd234064a48d8c499ad3f8cc1e1bc34b6b99d2613a792fdb58bdfd0a9c3",
+      "publication_sha256": "37aad41b04eaf2286fc26641ddbc9be4cbd7c157294f9253ab5a6f6dde1816b7"
+    }
+  ],
+  "readme_introduction_words": 1000,
+  "link_check": {
+    "missing": [],
+    "pending_parent_publication_map": []
+  },
+  "english_check": {
+    "Han_files": []
+  },
+  "numeric_table_checks": [
+    {
+      "file": "README.md",
+      "preexisting_numeric_table_rows_preserved": true,
+      "unmatched": []
+    },
+    {
+      "file": "AUTHORS.md",
+      "preexisting_numeric_table_rows_preserved": true,
+      "unmatched": []
+    },
+    {
+      "file": "docs/METHODS.md",
+      "preexisting_numeric_table_rows_preserved": true,
+      "unmatched": []
+    },
+    {
+      "file": "docs/RESULTS.md",
+      "preexisting_numeric_table_rows_preserved": true,
+      "unmatched": []
+    },
+    {
+      "file": "docs/GPFA_VALIDATION.md",
+      "preexisting_numeric_table_rows_preserved": true,
+      "unmatched": []
+    },
+    {
+      "file": "docs/DESIGN_RATIONALE.md",
+      "preexisting_numeric_table_rows_preserved": true,
+      "unmatched": []
+    },
+    {
+      "file": "docs/FUTURE_DIRECTIONS.md",
+      "preexisting_numeric_table_rows_preserved": true,
+      "unmatched": []
+    },
+    {
+      "file": "docs/WRITING_GUIDE.md",
+      "preexisting_numeric_table_rows_preserved": true,
+      "unmatched": []
+    },
+    {
+      "file": "docs/MENTAL_PONG.md",
+      "preexisting_numeric_table_rows_preserved": true,
+      "unmatched": []
+    },
+    {
+      "file": "docs/results/Q1_Q6_ANSWERS.md",
+      "preexisting_numeric_table_rows_preserved": true,
+      "unmatched": []
+    },
+    {
+      "file": "docs/supplementary/model_reports/STATIC_MODEL.md",
+      "preexisting_numeric_table_rows_preserved": true,
+      "unmatched": []
+    },
+    {
+      "file": "docs/supplementary/model_reports/DYNAMIC_MODEL.md",
+      "preexisting_numeric_table_rows_preserved": true,
+      "unmatched": []
+    },
+    {
+      "file": "docs/supplementary/model_reports/PARAMETER_MATCHED_DYNAMIC.md",
+      "preexisting_numeric_table_rows_preserved": true,
+      "unmatched": []
+    },
+    {
+      "file": "experiments/01_baselines/README.md",
+      "preexisting_numeric_table_rows_preserved": true,
+      "unmatched": []
+    },
+    {
+      "file": "experiments/02_gpfa_reliability/README.md",
+      "preexisting_numeric_table_rows_preserved": true,
+      "unmatched": []
+    },
+    {
+      "file": "experiments/03_parameter_matching/README.md",
+      "preexisting_numeric_table_rows_preserved": true,
+      "unmatched": []
+    },
+    {
+      "file": "experiments/04_model_comparison/README.md",
+      "preexisting_numeric_table_rows_preserved": true,
+      "unmatched": []
+    },
+    {
+      "file": "experiments/05_mental_pong/trajectory_project/closeout_v1/FINAL_REPORT.md",
+      "preexisting_numeric_table_rows_preserved": true,
+      "unmatched": []
+    },
+    {
+      "file": "experiments/05_mental_pong/trajectory_project/closeout_v1/FINAL_SUMMARY.md",
+      "preexisting_numeric_table_rows_preserved": true,
+      "unmatched": []
+    },
+    {
+      "file": "experiments/05_mental_pong/trajectory_project/closeout_v1/README.md",
+      "preexisting_numeric_table_rows_preserved": true,
+      "unmatched": []
+    },
+    {
+      "file": "experiments/05_mental_pong/trajectory_project/closeout_v1/results/descriptive/fixed_posthoc_case_interpretation.md",
+      "preexisting_numeric_table_rows_preserved": true,
+      "unmatched": []
+    },
+    {
+      "file": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/REPORT.md",
+      "preexisting_numeric_table_rows_preserved": true,
+      "unmatched": []
+    }
+  ],
+  "template_AST_checks": [
+    {
+      "file": "experiments/05_mental_pong/trajectory_project/closeout_v1/report_closeout.py",
+      "executable_AST_identical_excluding_text_and_suptitle_fontsize": true
+    },
+    {
+      "file": "experiments/05_mental_pong/trajectory_project/closeout_v1/descriptive_audit.py",
+      "executable_AST_identical_excluding_text_and_suptitle_fontsize": true
+    },
+    {
+      "file": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/reporting_condition.py",
+      "executable_AST_identical_excluding_text_and_suptitle_fontsize": true
+    },
+    {
+      "file": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/plotting_condition.py",
+      "executable_AST_identical_excluding_text_and_suptitle_fontsize": true
+    },
+    {
+      "file": "experiments/05_mental_pong/trajectory_project/trial_endpoint_fa_gpfa_v1/reporting_trial.py",
+      "executable_AST_identical_excluding_text_and_suptitle_fontsize": true
+    },
+    {
+      "file": "experiments/05_mental_pong/trajectory_project/step3_io.py",
+      "executable_AST_identical_excluding_text_and_suptitle_fontsize": true
+    }
+  ],
+  "sensorium_figure_display_statistics_equal_to_source_constants": true,
+  "original_scientific_artifact_checks": {
+    "count": 120,
+    "changed": []
+  },
+  "figure_visual_QA": [
+    {
+      "path": "results/figures/figure-2-static-dynamic-comparison.png",
+      "sha256": "589628751f199628ffc3295374d3e2e946e18648ce7e9e752a644e1801b6feb8",
+      "passed": true,
+      "inspection": "Directly opened in view_image. English labels, axes, legends and plot geometry are readable; no clipping. The one-session/six-condition pilot and metric-family warning are plainly visible. Intervals and sign conventions match saved values; speed still crosses zero.",
+      "source_inputs": [
+        {
+          "path": "results/tables/04_model_comparison/q2_condition_conventional_bootstrap.csv",
+          "sha256": "115af2c715f38db2c3ed5893e9abe2ceb12d607c23659ce1508e63b446661bb2"
+        },
+        {
+          "path": "results/tables/04_model_comparison/gpfa_model_paired_bootstrap.csv",
+          "sha256": "fd7fbc3b2a22bfc27821e9c9a5d5ed2eba408d39c082ddef43d3713addbfffa0"
+        }
+      ],
+      "plot_code": "scripts/make_core_figures.js",
+      "plot_code_sha256": "6680400aaab3db661b46ac74e5f7ff4c66116711e45b6dce09a9b917988db43e"
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/figures/descriptive/endpoint_mean_cancellation.png",
+      "sha256": "6c68ac394dee3a4b81190e815de8ba7a77e2e7f038ed7e1c495d20513044c8f9",
+      "passed": true,
+      "inspection": "Directly opened in view_image. English labels, axes, legends and plot geometry are readable; no clipping. The requested cancellation title and unknown neural-membership qualification are visible; each point denotes a condition.",
+      "source_inputs": [
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/mahler_condition_labels.npz",
+          "sha256": "4b059a6a6c5b262c85dfa5a1fe4601925708b70dd932012528c428a59bdba853"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/perle_condition_labels.npz",
+          "sha256": "5fa264d9936ce67bb693ae25ae799b1e612b717ef3225dbc2373065afbfaf3fc"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/condition_geometry.csv",
+          "sha256": "ac11743cda242bab24117d5463cdc7e3f024a339f3e099bf4699835fb6a034cb"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/closeout_v1/results/descriptive/endpoint_condition_audit.csv",
+          "sha256": "a6ff512655edf7aec28000bf18c614c7e031e54640c32a14092fff7491d9db1f"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/condition_self_comparison.csv",
+          "sha256": "b525503ad65cfa1aa8fe038f9005ca5bdaf0cff3ec53ab9cfa3108b84ee272e3"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/results/condition_cross_summary.csv",
+          "sha256": "6f87c2513bb0105fd02e57028116d1941ac3f65f7ae74529be2147d31ee645e1"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/mahler_FA50_condition_oof.npz",
+          "sha256": "d0cc4965d4c8ba303c8531291da1fd0bb5d13ac581057bf35e06094f4e460e6d"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/mahler_GPFA50_condition_oof.npz",
+          "sha256": "b091255d01c32be9431e2a8e51a64ba93730f5ea8c5f8d69283c025a71769a2d"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/perle_FA50_condition_oof.npz",
+          "sha256": "2a313b77f7a935ec0ac9edabf145410b5b5be7ab6a676a5b7c3d4881935f2d50"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/perle_GPFA50_condition_oof.npz",
+          "sha256": "28e3448d3abd05e8186d7d97934d9daf71e5a123d51c2237bb81e54b0d27ab18"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/round_self_metrics.csv",
+          "sha256": "768caa48bc4e86787c4202a0ef2bd9cbd96771708e4ff69e36a4cd2bc7fabc46"
+        }
+      ],
+      "plot_code": "experiments/05_mental_pong/trajectory_project/closeout_v1/descriptive_audit.py",
+      "plot_code_sha256": "e761138201232261375a8498007f8fe344b4359b3f661c68da7e5500cd60f892"
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/figures/descriptive/all79_condition_heterogeneity.png",
+      "sha256": "f168c877057953a6502edd50b8b4f48fd311a9e98bd51901863ce927bfecb1a3",
+      "passed": true,
+      "inspection": "Directly opened in view_image. English labels, axes, legends and plot geometry are readable; no clipping. All 79 identities remain in sorted order, including gray unresolved 59920. The dense axis is legible at the original image resolution.",
+      "source_inputs": [
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/mahler_condition_labels.npz",
+          "sha256": "4b059a6a6c5b262c85dfa5a1fe4601925708b70dd932012528c428a59bdba853"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/perle_condition_labels.npz",
+          "sha256": "5fa264d9936ce67bb693ae25ae799b1e612b717ef3225dbc2373065afbfaf3fc"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/condition_geometry.csv",
+          "sha256": "ac11743cda242bab24117d5463cdc7e3f024a339f3e099bf4699835fb6a034cb"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/closeout_v1/results/descriptive/endpoint_condition_audit.csv",
+          "sha256": "a6ff512655edf7aec28000bf18c614c7e031e54640c32a14092fff7491d9db1f"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/condition_self_comparison.csv",
+          "sha256": "b525503ad65cfa1aa8fe038f9005ca5bdaf0cff3ec53ab9cfa3108b84ee272e3"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/results/condition_cross_summary.csv",
+          "sha256": "6f87c2513bb0105fd02e57028116d1941ac3f65f7ae74529be2147d31ee645e1"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/mahler_FA50_condition_oof.npz",
+          "sha256": "d0cc4965d4c8ba303c8531291da1fd0bb5d13ac581057bf35e06094f4e460e6d"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/mahler_GPFA50_condition_oof.npz",
+          "sha256": "b091255d01c32be9431e2a8e51a64ba93730f5ea8c5f8d69283c025a71769a2d"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/perle_FA50_condition_oof.npz",
+          "sha256": "2a313b77f7a935ec0ac9edabf145410b5b5be7ab6a676a5b7c3d4881935f2d50"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/perle_GPFA50_condition_oof.npz",
+          "sha256": "28e3448d3abd05e8186d7d97934d9daf71e5a123d51c2237bb81e54b0d27ab18"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/round_self_metrics.csv",
+          "sha256": "768caa48bc4e86787c4202a0ef2bd9cbd96771708e4ff69e36a4cd2bc7fabc46"
+        }
+      ],
+      "plot_code": "experiments/05_mental_pong/trajectory_project/closeout_v1/descriptive_audit.py",
+      "plot_code_sha256": "e761138201232261375a8498007f8fe344b4359b3f661c68da7e5500cd60f892"
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/figures/descriptive/mahler_fixed_posthoc_four_curves.png",
+      "sha256": "d49591f5d01a3da281960c9f3f7ea5136fade3b32de3b8e0b0f8eb87de4692f0",
+      "passed": true,
+      "inspection": "Directly opened in view_image. English labels, axes, legends and plot geometry are readable; no clipping. Four labeled curves, split-SD shading, original post hoc IDs, test membership counts and shared time axes are retained. The report caption defines collision/occlusion marks, valid times and unknown exact feedback timing.",
+      "source_inputs": [
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/mahler_condition_labels.npz",
+          "sha256": "4b059a6a6c5b262c85dfa5a1fe4601925708b70dd932012528c428a59bdba853"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/perle_condition_labels.npz",
+          "sha256": "5fa264d9936ce67bb693ae25ae799b1e612b717ef3225dbc2373065afbfaf3fc"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/condition_geometry.csv",
+          "sha256": "ac11743cda242bab24117d5463cdc7e3f024a339f3e099bf4699835fb6a034cb"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/closeout_v1/results/descriptive/endpoint_condition_audit.csv",
+          "sha256": "a6ff512655edf7aec28000bf18c614c7e031e54640c32a14092fff7491d9db1f"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/condition_self_comparison.csv",
+          "sha256": "b525503ad65cfa1aa8fe038f9005ca5bdaf0cff3ec53ab9cfa3108b84ee272e3"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/results/condition_cross_summary.csv",
+          "sha256": "6f87c2513bb0105fd02e57028116d1941ac3f65f7ae74529be2147d31ee645e1"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/mahler_FA50_condition_oof.npz",
+          "sha256": "d0cc4965d4c8ba303c8531291da1fd0bb5d13ac581057bf35e06094f4e460e6d"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/mahler_GPFA50_condition_oof.npz",
+          "sha256": "b091255d01c32be9431e2a8e51a64ba93730f5ea8c5f8d69283c025a71769a2d"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/perle_FA50_condition_oof.npz",
+          "sha256": "2a313b77f7a935ec0ac9edabf145410b5b5be7ab6a676a5b7c3d4881935f2d50"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/perle_GPFA50_condition_oof.npz",
+          "sha256": "28e3448d3abd05e8186d7d97934d9daf71e5a123d51c2237bb81e54b0d27ab18"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/round_self_metrics.csv",
+          "sha256": "768caa48bc4e86787c4202a0ef2bd9cbd96771708e4ff69e36a4cd2bc7fabc46"
+        }
+      ],
+      "plot_code": "experiments/05_mental_pong/trajectory_project/closeout_v1/descriptive_audit.py",
+      "plot_code_sha256": "e761138201232261375a8498007f8fe344b4359b3f661c68da7e5500cd60f892"
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/closeout_v1/figures/descriptive/perle_fixed_posthoc_four_curves.png",
+      "sha256": "87624096c83093e4bf1a07e034750fb9cf442ea48c1c429b60dcc509d70a8c33",
+      "passed": true,
+      "inspection": "Directly opened in view_image. English labels, axes, legends and plot geometry are readable; no clipping. Four labeled curves, split-SD shading, original post hoc IDs, test membership counts and shared time axes are retained. The report caption defines collision/occlusion marks, valid times and unknown exact feedback timing.",
+      "source_inputs": [
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/mahler_condition_labels.npz",
+          "sha256": "4b059a6a6c5b262c85dfa5a1fe4601925708b70dd932012528c428a59bdba853"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/perle_condition_labels.npz",
+          "sha256": "5fa264d9936ce67bb693ae25ae799b1e612b717ef3225dbc2373065afbfaf3fc"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/condition_geometry.csv",
+          "sha256": "ac11743cda242bab24117d5463cdc7e3f024a339f3e099bf4699835fb6a034cb"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/closeout_v1/results/descriptive/endpoint_condition_audit.csv",
+          "sha256": "a6ff512655edf7aec28000bf18c614c7e031e54640c32a14092fff7491d9db1f"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/condition_self_comparison.csv",
+          "sha256": "b525503ad65cfa1aa8fe038f9005ca5bdaf0cff3ec53ab9cfa3108b84ee272e3"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/results/condition_cross_summary.csv",
+          "sha256": "6f87c2513bb0105fd02e57028116d1941ac3f65f7ae74529be2147d31ee645e1"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/mahler_FA50_condition_oof.npz",
+          "sha256": "d0cc4965d4c8ba303c8531291da1fd0bb5d13ac581057bf35e06094f4e460e6d"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/mahler_GPFA50_condition_oof.npz",
+          "sha256": "b091255d01c32be9431e2a8e51a64ba93730f5ea8c5f8d69283c025a71769a2d"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/perle_FA50_condition_oof.npz",
+          "sha256": "2a313b77f7a935ec0ac9edabf145410b5b5be7ab6a676a5b7c3d4881935f2d50"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/perle_GPFA50_condition_oof.npz",
+          "sha256": "28e3448d3abd05e8186d7d97934d9daf71e5a123d51c2237bb81e54b0d27ab18"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/round_self_metrics.csv",
+          "sha256": "768caa48bc4e86787c4202a0ef2bd9cbd96771708e4ff69e36a4cd2bc7fabc46"
+        }
+      ],
+      "plot_code": "experiments/05_mental_pong/trajectory_project/closeout_v1/descriptive_audit.py",
+      "plot_code_sha256": "e761138201232261375a8498007f8fe344b4359b3f661c68da7e5500cd60f892"
+    },
+    {
+      "path": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/figures/paired_self_reconstruction_differences.png",
+      "sha256": "7c51aaa7c34da083c664a4d1bb1482e3c678655e29d165b51272bbde345c4d2a",
+      "passed": true,
+      "inspection": "Directly opened in view_image. English labels, axes, legends and plot geometry are readable; no clipping. Both animals and representations remain visible, with explicit delta signs and the dependent-split caveat.",
+      "source_inputs": [
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/mahler_condition_labels.npz",
+          "sha256": "4b059a6a6c5b262c85dfa5a1fe4601925708b70dd932012528c428a59bdba853"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/perle_condition_labels.npz",
+          "sha256": "5fa264d9936ce67bb693ae25ae799b1e612b717ef3225dbc2373065afbfaf3fc"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/condition_geometry.csv",
+          "sha256": "ac11743cda242bab24117d5463cdc7e3f024a339f3e099bf4699835fb6a034cb"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/closeout_v1/results/descriptive/endpoint_condition_audit.csv",
+          "sha256": "a6ff512655edf7aec28000bf18c614c7e031e54640c32a14092fff7491d9db1f"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/condition_self_comparison.csv",
+          "sha256": "b525503ad65cfa1aa8fe038f9005ca5bdaf0cff3ec53ab9cfa3108b84ee272e3"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/results/condition_cross_summary.csv",
+          "sha256": "6f87c2513bb0105fd02e57028116d1941ac3f65f7ae74529be2147d31ee645e1"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/mahler_FA50_condition_oof.npz",
+          "sha256": "d0cc4965d4c8ba303c8531291da1fd0bb5d13ac581057bf35e06094f4e460e6d"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/mahler_GPFA50_condition_oof.npz",
+          "sha256": "b091255d01c32be9431e2a8e51a64ba93730f5ea8c5f8d69283c025a71769a2d"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/perle_FA50_condition_oof.npz",
+          "sha256": "2a313b77f7a935ec0ac9edabf145410b5b5be7ab6a676a5b7c3d4881935f2d50"
+        },
+        {
+          "path": "source_pilot://trajectory_project/condition_endpoint_fa_gpfa_v1/artifacts/perle_GPFA50_condition_oof.npz",
+          "sha256": "28e3448d3abd05e8186d7d97934d9daf71e5a123d51c2237bb81e54b0d27ab18"
+        },
+        {
+          "path": "repository://experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/results/round_self_metrics.csv",
+          "sha256": "768caa48bc4e86787c4202a0ef2bd9cbd96771708e4ff69e36a4cd2bc7fabc46"
+        }
+      ],
+      "plot_code": "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/plotting_condition.py",
+      "plot_code_sha256": "81b7923be73f9630f66891c36b5e1a312057c222349ccb038f0288afeabe619b"
+    }
+  ],
+  "executed": "Read-only source audit, editorial revisions, figures rendered from saved values, direct visual inspection, Python AST parsing, link and hash checks. No models, readouts, scoring tables or randomizations rerun. Figure-only extraction disabled table/report/manifest writes.",
+  "author_confirmation_note": "Public contribution statement uses the supplied author account and does not claim complete manual review or an AI-generated percentage. Any more specific personal manual-validation account requires author confirmation.",
+  "rights_note": "No public mini payload claim added; availability and legal status are owned by the parent rights audit.",
+  "line_endings": {
+    "format": "LF",
+    "scope": "Owned edited .md/.py/.js/.svg files only; no scientific records normalized",
+    "paths": [
+      "README.md",
+      "AUTHORS.md",
+      "docs/METHODS.md",
+      "docs/RESULTS.md",
+      "docs/GPFA_VALIDATION.md",
+      "docs/DESIGN_RATIONALE.md",
+      "docs/FUTURE_DIRECTIONS.md",
+      "docs/WRITING_GUIDE.md",
+      "docs/MENTAL_PONG.md",
+      "docs/results/Q1_Q6_ANSWERS.md",
+      "docs/supplementary/model_reports/STATIC_MODEL.md",
+      "docs/supplementary/model_reports/DYNAMIC_MODEL.md",
+      "docs/supplementary/model_reports/PARAMETER_MATCHED_DYNAMIC.md",
+      "experiments/01_baselines/README.md",
+      "experiments/02_gpfa_reliability/README.md",
+      "experiments/03_parameter_matching/README.md",
+      "experiments/04_model_comparison/README.md",
+      "experiments/05_mental_pong/trajectory_project/closeout_v1/FINAL_REPORT.md",
+      "experiments/05_mental_pong/trajectory_project/closeout_v1/FINAL_SUMMARY.md",
+      "experiments/05_mental_pong/trajectory_project/closeout_v1/README.md",
+      "experiments/05_mental_pong/trajectory_project/closeout_v1/results/descriptive/fixed_posthoc_case_interpretation.md",
+      "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/REPORT.md",
+      "experiments/05_mental_pong/trajectory_project/closeout_v1/report_closeout.py",
+      "experiments/05_mental_pong/trajectory_project/closeout_v1/descriptive_audit.py",
+      "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/reporting_condition.py",
+      "experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/plotting_condition.py",
+      "experiments/05_mental_pong/trajectory_project/trial_endpoint_fa_gpfa_v1/reporting_trial.py",
+      "experiments/05_mental_pong/trajectory_project/step3_io.py",
+      "scripts/make_core_figures.js",
+      "results/figures/figure-2-static-dynamic-comparison.svg",
+      "experiments/05_mental_pong/trajectory_project/closeout_v1/SOURCES.md"
+    ]
+  },
+  "checksum_policy": "Historical integration migration_map.csv, verification.json and scientific manifests remain immutable. Current publication hashes are additive in integration/revision_20261003/publication_map.csv.",
+  "historical_integration_byte_checks": [
+    {
+      "path": "experiments/05_mental_pong/integration/migration_map.csv",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/integration/verification.json",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/integration/editorial_changes.md",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/05_mental_pong/integration/INTEGRATION_SUMMARY.md",
+      "unchanged": true
+    }
+  ],
+  "final_readonly_check_at_utc": "2026-10-02T17:19:32.825713+00:00",
+  "publication_record_note": "Source paths use aliases; current hashes include final link edits and LF publication text. Historical source hashes are unchanged."
+}

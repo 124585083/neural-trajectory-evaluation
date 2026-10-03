@@ -7,10 +7,12 @@ import numpy as np
 import pandas as pd
 
 from .common import json_dump, output_dir, resolve
+from .protocol import load_protocol
 from .traditional import evaluate_traditional, metric_family, paired_bootstrap
 
 
 def _load_predictions(config: dict[str, Any]) -> dict[str, np.ndarray]:
+    load_protocol(config)
     path = output_dir(config) / "oracle_predictions.npz"
     if not path.exists():
         raise FileNotFoundError("oracle_predictions.npz is missing; run predictions first")

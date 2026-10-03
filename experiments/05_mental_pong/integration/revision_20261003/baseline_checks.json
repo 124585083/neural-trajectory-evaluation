@@ -1,0 +1,36 @@
+{
+  "scope": "Unedited 0637c08 snapshot; read-only checks; no fitting",
+  "numerical_checks": {
+    "status": "passed",
+    "self_target_rows": 48,
+    "cross_target_rows": 192,
+    "rounds_per_group": 100,
+    "fixed_splits_checked": 100,
+    "maximum_absolute_aggregation_difference": 3.3306690738754696e-15,
+    "english_summary_display_matches_full_precision_table": "passed",
+    "own_target_to_diagonal_identity": "passed",
+    "new_model_fitting": false
+  },
+  "text_and_links": {
+    "text_files": 357,
+    "python_files_parsed": 91,
+    "relative_links_checked": 418,
+    "language_issues": [],
+    "private_path_issues": [],
+    "broken_links": [],
+    "syntax_issues": [],
+    "excluded": [
+      "Git internals",
+      "ignored local configuration",
+      "external immutable source records",
+      "binary figures (separate visual inspection record)"
+    ],
+    "required_legal_exceptions": [],
+    "synthetic_path_exception": "A synthetic Windows absolute path is used in rejection tests and in this checker."
+  },
+  "evidence_index": {
+    "status": "passed",
+    "claims": 26,
+    "file_references": 52
+  }
+}

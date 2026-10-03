@@ -303,6 +303,76 @@ def parameter_counts(model: nn.Module) -> dict[str, int]:
     }
 
 
+def audit_frame_independence(
+    model: nn.Module,
+    inputs: torch.Tensor,
+    *,
+    data_key: str,
+    pupil_center: torch.Tensor,
+    behavior: torch.Tensor | None = None,
+    positions: tuple[int, ...] | None = None,
+    tolerance: float = 2e-6,
+) -> dict[str, Any]:
+    """Perturb one retained frame and compare every other aligned output.
+
+    Inputs already include the loader's per-frame behavior channels. The
+    separate behavior argument is checked as well, although this adapter does
+    not consume it. This checks evaluation execution, not dataset normalization.
+    """
+    reduction = int(model.temporal_reduction)
+    retained = inputs.shape[2] - reduction
+    if retained < 3:
+        raise ValueError("the independence check needs at least three retained frames")
+    positions = positions or (reduction, reduction + retained // 2, inputs.shape[2] - 1)
+    if any(position < reduction or position >= inputs.shape[2] for position in positions):
+        raise ValueError("perturbation positions must be retained input frames")
+    training_modes = {module: module.training for module in model.modules()}
+    deterministic = torch.are_deterministic_algorithms_enabled()
+    deterministic_warn_only = torch.is_deterministic_algorithms_warn_only_enabled()
+    cudnn_benchmark = torch.backends.cudnn.benchmark
+    records = []
+    try:
+        model.eval()
+        torch.use_deterministic_algorithms(True)
+        torch.backends.cudnn.benchmark = False
+        with torch.inference_mode():
+            original = model(inputs, data_key=data_key, pupil_center=pupil_center, behavior=behavior)
+            if original.shape[1] != retained:
+                raise AssertionError("output alignment does not match the leading-frame crop")
+            pathways = [f"input_channel_{channel}" for channel in range(inputs.shape[1])] + ["pupil_center"]
+            if behavior is not None:
+                pathways.append("behavior_argument")
+            for position in positions:
+                for pathway in pathways:
+                    changed_input, changed_pupil = inputs.clone(), pupil_center.clone()
+                    changed_behavior = None if behavior is None else behavior.clone()
+                    if pathway.startswith("input_channel_"):
+                        channel = int(pathway.rsplit("_", 1)[1])
+                        changed_input[:, channel, position] += .75
+                    elif pathway == "pupil_center":
+                        changed_pupil[:, :, position] += .25
+                    else:
+                        changed_behavior[:, :, position] += .75
+                    changed = model(changed_input, data_key=data_key, pupil_center=changed_pupil, behavior=changed_behavior)
+                    difference = (changed - original).abs()
+                    others = torch.ones(retained, dtype=torch.bool, device=difference.device)
+                    output_position = position - reduction
+                    others[output_position] = False
+                    error = float(difference[:, others].max())
+                    if not math.isfinite(error) or error > tolerance:
+                        raise AssertionError(f"frame independence failed for {pathway}, input frame {position}, output position {output_position}: other-frame error {error} > {tolerance}")
+                    records.append({"pathway": pathway, "input_frame": position, "output_position": output_position,
+                                    "max_other_frame_error": error,
+                                    "max_changed_frame_effect": float(difference[:, output_position].max())})
+    finally:
+        torch.use_deterministic_algorithms(deterministic, warn_only=deterministic_warn_only)
+        torch.backends.cudnn.benchmark = cudnn_benchmark
+        for module, mode in training_modes.items():
+            module.training = mode
+    return {"status": "pass", "mode": "eval", "absolute_tolerance": tolerance,
+            "retained_input_frames": [reduction, inputs.shape[2] - 1], "checks": records}
+
+
 def audit_architecture(config: dict[str, Any], *, save: bool = True) -> dict[str, Any]:
     locked = audit_locked_config(config)
     dataloaders = make_official_loaders(config, cuda=False, batch_size=1)
@@ -339,7 +409,8 @@ def audit_architecture(config: dict[str, Any], *, save: bool = True) -> dict[str
         raise AssertionError("the static comparison crop is not an exact view of frames 18..79")
 
     # In evaluation mode, permuting frames and undoing the permutation must
-    # preserve every prediction. This is the explicit no-temporal-leakage test.
+    # preserve every prediction. This tests permutation equivariance; a separate
+    # single-frame perturbation check below tests evaluation-mode independence.
     generator = torch.Generator().manual_seed(42)
     permutation = torch.randperm(batch.videos.shape[2], generator=generator)
     inverse = torch.argsort(permutation)
@@ -351,7 +422,12 @@ def audit_architecture(config: dict[str, Any], *, save: bool = True) -> dict[str
         )[:, inverse]
     max_permutation_error = float((permuted - all_frames).abs().max())
     if max_permutation_error > 2e-6:
-        raise AssertionError(f"static frame permutation invariance failed: {max_permutation_error}")
+        raise AssertionError(f"static frame permutation equivariance failed: {max_permutation_error}")
+
+    independence = audit_frame_independence(
+        model, batch.videos, data_key=first_key,
+        pupil_center=batch.pupil_center, behavior=batch.behavior,
+    )
 
     audit = {
         **locked,
@@ -368,6 +444,7 @@ def audit_architecture(config: dict[str, Any], *, save: bool = True) -> dict[str
         "core_output_per_frame": list(features.shape[1:]),
         "compared_source_frames": [TEMPORAL_REDUCTION, 79],
         "max_frame_permutation_error": max_permutation_error,
+        "frame_independence": independence,
         "model": str(model),
     }
     if save:

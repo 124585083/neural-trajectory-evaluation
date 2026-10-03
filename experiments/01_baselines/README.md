@@ -32,7 +32,7 @@ python -m trajectory_eval.static_dynamic --config configs/static_dynamic_sensori
 python -m trajectory_eval.static_dynamic --config configs/static_dynamic_sensorium2023.yaml evaluate
 ```
 
-Training writes run products under `checkpoints/static_dynamic_sensorium2023/` and `logs/static_dynamic_sensorium2023/`. Independent evaluation loads the published checkpoint at [`../../models/static_on_dynamic/best.pt`](../../models/static_on_dynamic/best.pt).
+Training writes run products under `checkpoints/static_dynamic_sensorium2023/` and `logs/static_dynamic_sensorium2023/`. Reloaded oracle evaluation loads the published checkpoint at [`../../models/static_on_dynamic/best.pt`](../../models/static_on_dynamic/best.pt).
 
 ### Full Dynamic baseline
 
@@ -43,7 +43,7 @@ python -m trajectory_eval.official_dynamic --config configs/phase1A_dynamic_offi
 python -m trajectory_eval.official_dynamic --config configs/phase1A_dynamic_official.yaml evaluate
 ```
 
-Training writes run products under `checkpoints/dynamic_official_reproduction/` and `logs/dynamic_official_reproduction/`. Independent evaluation loads the published checkpoint at [`../../models/official_dynamic/best.pt`](../../models/official_dynamic/best.pt).
+Training writes run products under `checkpoints/dynamic_official_reproduction/` and `logs/dynamic_official_reproduction/`. Reloaded oracle evaluation loads the published checkpoint at [`../../models/official_dynamic/best.pt`](../../models/official_dynamic/best.pt).
 
 The local full Dynamic run was stopped by project decision after epoch 103 validation. The published checkpoint retains the best complete epoch-97 state. The official early-stopping procedure had not terminated naturally.
 
@@ -76,7 +76,7 @@ The configured local output is `predictions/dynamic_official_reproduction/`; lar
 
 ## What Phase 1 establishes
 
-- Both baseline architectures can be trained and independently evaluated under the same five-session Dynamic Sensorium protocol.
+- Both baseline architectures can be trained and evaluated after reloading under the same five-session Dynamic Sensorium protocol.
 - Full-sequence predictions and neural targets are compared on original frames 50–299 after the shared burn-in.
 - The resulting checkpoints and alignment records feed later total-parameter matching and trajectory-evaluation phases.
 
@@ -88,3 +88,13 @@ Numerical results and scientific interpretation are reported in [Results](../../
 - [Results](../../docs/RESULTS.md) — response-level and downstream comparison results
 - [Data and Reproducibility](../../docs/DATA_AND_REPRODUCIBILITY.md) — data acquisition, environment setup, and artifact loading
 - [Design Rationale](../../docs/DESIGN_RATIONALE.md) — reasons for comparing Static, Dynamic, and later controls
+
+## Evaluation data reuse
+
+Encoding checkpoints were selected using the oracle tier that later supplies full-sequence scores. Reloading a checkpoint checks execution without creating an independent test set. The [Methods data-use table](../../docs/METHODS.md#data-use-and-evaluation-independence) identifies model-specific training, selection and scoring uses. Excluding oracle responses from GPFA fitting or one perturbation choice does not undo their earlier use in checkpoint selection.
+
+## Static frame checks
+
+[Frame-permutation tests](tests/test_static_dynamic_locks.py) check equivariance: moving a frame and its covariates moves the corresponding prediction. The separate [frame-independence test](tests/test_static_frame_independence.py) changes one retained frame while keeping all other frames and covariates fixed. It tests visual channels, behavioral channels, the separate behavior argument and pupil input through the actual Static adapter in evaluation mode.
+
+The revision checks passed for 15 perturbations at three input positions, using 27 frames, an 18-frame crop, nine retained outputs and seven neurons. Unchanged outputs agree within the declared `2e-6` tolerance. A deliberately sequence-coupled control passes permutation equivariance and fails independence. These CPU checks use synthetic inputs and the actual model implementation. They verify evaluation-mode execution, not training-mode batch normalization or upstream data normalization.

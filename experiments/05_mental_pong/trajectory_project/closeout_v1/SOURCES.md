@@ -1,6 +1,6 @@
 # Source versions and evidence boundaries
 
-The completed source of record is `condition_endpoint_fa_gpfa_v1` followed by its sibling `closeout_v1`. Original reports, audit records, models and serialized outputs remain preserved outside this publication tree. English editions have new hashes, documented in the [migration map](../../integration/migration_map.csv).
+The completed source of record is `condition_endpoint_fa_gpfa_v1` followed by its sibling `closeout_v1`. Original reports, audit records, models and serialized outputs remain preserved outside this publication tree. The [historical migration map](../../integration/migration_map.csv) preserves the original integration hashes. Current editorial changes have separate hashes in the [revision publication map](../../integration/revision_20261003/publication_map.csv).
 
 The filenames shown in downloaded copies as `REPORT(2).md` and `previous_trial_version_comparison(1).csv` correspond to the actual source files [condition-mean report](../condition_endpoint_fa_gpfa_v1/REPORT.md) and [version comparison](../condition_endpoint_fa_gpfa_v1/results/previous_trial_version_comparison.csv). The suffixes are not separate scientific versions.
 

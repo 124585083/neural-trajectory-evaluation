@@ -115,17 +115,37 @@ function workflowFigure() {
 
 function comparisonFigure() {
   const W = 2200, H = 1350;
+  // Display the saved statistics, without recomputing scientific comparisons.
+  const readRows = (name) => {
+    const lines = fs.readFileSync(path.join(ROOT, 'results', 'tables', '04_model_comparison', name), 'utf8').trim().split(/\r?\n/);
+    const fields = lines.shift().split(',');
+    return Object.fromEntries(lines.map(line => {
+      const values = line.split(',');
+      const row = Object.fromEntries(fields.map((field, i) => [field, values[i]]));
+      return [row.metric, row];
+    }));
+  };
+  const conventional = readRows('q2_condition_conventional_bootstrap.csv');
+  const trajectory = readRows('gpfa_model_paired_bootstrap.csv');
+  const saved = (rows, metric, family, label, color, valueField) => {
+    const row = rows[metric];
+    if (!row) throw new Error(`Missing saved figure metric: ${metric}`);
+    // Retain the original five-decimal plotting convention.
+    const value = key => Number(Number(row[key]).toFixed(5));
+    return { family, label, value: value(valueField), lo: value('ci_low'), hi: value('ci_high'), color };
+  };
   const metrics = [
-    { family: 'Response', label: 'Condition-mean response r', value: 0.04469, lo: 0.02335, hi: 0.06484, color: C.response },
-    { family: 'Representation', label: 'Temporal CKA', value: 0.08543, lo: 0.03039, hi: 0.16555, color: C.cka },
-    { family: 'Representation', label: 'Temporal RSA', value: 0.08923, lo: 0.03081, hi: 0.19298, color: C.rsa },
-    { family: 'Trajectory', label: 'GPFA position', value: 0.22380, lo: 0.08833, hi: 0.45126, color: C.trajectory },
-    { family: 'Trajectory', label: 'GPFA velocity direction', value: 0.19473, lo: 0.13357, hi: 0.24861, color: C.trajectory },
-    { family: 'Trajectory', label: 'GPFA speed profile', value: 0.01084, lo: -0.05126, hi: 0.08586, color: C.trajectory },
-    { family: 'Trajectory', label: 'GPFA acceleration direction', value: 0.26793, lo: 0.18217, hi: 0.33953, color: C.trajectory },
+    saved(conventional, 'response_r', 'Response', 'Condition-mean response r', C.response, 'dynamic_minus_static'),
+    saved(conventional, 'temporal_cka', 'Representation', 'Temporal CKA', C.cka, 'dynamic_minus_static'),
+    saved(conventional, 'temporal_rsa', 'Representation', 'Temporal RSA', C.rsa, 'dynamic_minus_static'),
+    saved(trajectory, 'position_correlation', 'Trajectory', 'GPFA position', C.trajectory, 'mean_oriented_advantage'),
+    saved(trajectory, 'velocity_direction_cosine', 'Trajectory', 'GPFA velocity direction', C.trajectory, 'mean_oriented_advantage'),
+    saved(trajectory, 'speed_profile_correlation', 'Trajectory', 'GPFA speed profile', C.trajectory, 'mean_oriented_advantage'),
+    saved(trajectory, 'acceleration_direction_cosine', 'Trajectory', 'GPFA acceleration direction', C.trajectory, 'mean_oriented_advantage'),
   ];
   let b = textLines(110, 100, ['Where does the Dynamic model outperform the Static model?'], { size: 48, weight: 700 });
-  b += textLines(110, 154, ['Paired condition comparison; bars: 95% bootstrap intervals. Trajectory points: bootstrap means; other points: observed mean differences.'], { size: 25, fill: C.muted });
+  b += textLines(110, 154, ['One-session, six-condition pilot; 512 neurons. Metric families are shown separately.'], { size: 25, fill: C.muted });
+  b += textLines(110, 196, ['Do not compare absolute effect sizes across metric families.'], { size: 27, weight: 700, fill: C.ink });
 
   const chartLeft = 800, chartRight = 2070, chartTop = 270, chartBottom = 1095;
   const xMin = -0.10, xMax = 0.50;
@@ -158,6 +178,7 @@ function comparisonFigure() {
   b += `<text x="${(chartLeft + chartRight)/2}" y="${chartBottom + 105}" text-anchor="middle" font-size="27" font-weight="700" fill="${C.ink}">Dynamic - Static agreement with neural data</text>`;
   b += `<text x="${sx(0) - 18}" y="230" text-anchor="end" font-size="21" fill="${C.muted}">Static better</text>`;
   b += `<text x="${sx(0) + 18}" y="230" font-size="21" fill="${C.muted}">Dynamic better</text>`;
+  b += textLines(110, 1240, ['Bars: 95% bootstrap intervals. Trajectory points: bootstrap means; other points: observed mean differences.'], { size: 24, fill: C.muted });
   b += textLines(110, 1285, ['Response and time-aware RSA/CKA detect gains. Trajectory direction also differs; speed-profile evidence remains inconclusive.'], { size: 25, fill: C.muted });
   return svgDoc(W, H, 'Static-Dynamic comparison across response, RSA, CKA, and trajectory metrics', b);
 }
@@ -212,8 +233,9 @@ function ablationFigure() {
 }
 
 (async () => {
-  await saveFigure('figure-1-experimental-workflow', workflowFigure(), 2400);
-  await saveFigure('figure-2-static-dynamic-comparison', comparisonFigure(), 2200);
-  await saveFigure('figure-3-temporal-ablation', ablationFigure(), 2200);
+  const selected = process.argv.find(value => value.startsWith('--figure='))?.split('=')[1];
+  if (!selected || selected === '1') await saveFigure('figure-1-experimental-workflow', workflowFigure(), 2400);
+  if (!selected || selected === '2') await saveFigure('figure-2-static-dynamic-comparison', comparisonFigure(), 2200);
+  if (!selected || selected === '3') await saveFigure('figure-3-temporal-ablation', ablationFigure(), 2200);
   console.log(`Wrote figures to ${OUT}`);
 })().catch((error) => { console.error(error); process.exit(1); });
