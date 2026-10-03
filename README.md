@@ -60,8 +60,6 @@ python experiments/05_mental_pong/run.py --verify
 
 The mini-replay source uses saved split 0 and endpoint allocation q=0, without new training or randomization. Its [instructions and availability status](experiments/05_mental_pong/mini_replay/README.md) distinguish local numerical verification from public artifact availability. The new numerical bundle is withheld while permission for derived-data redistribution remains unresolved under the dataset's recorded CC BY-NC-ND terms. A clone alone cannot run that numerical replay. Full requirements, environments and Git LFS instructions are in [Data and Reproducibility](docs/DATA_AND_REPRODUCIBILITY.md).
 
-The [revision report](docs/REVISION_REPORT.md) records the source audit, checks actually run, unchanged scientific artifacts and remaining publication limits.
-
 ## License, citation, and contact
 
 Original project code and documentation use the [MIT License](LICENSE). Data redistribution follows each provider's actual terms; see [Third-Party Notices](THIRD_PARTY_NOTICES.md). Use [CITATION.cff](CITATION.cff) for this repository and cite the relevant data, methods and papers separately through the [reference guide](docs/REFERENCES.md). Reproducibility questions can be filed through [GitHub Issues](https://github.com/124585083/neural-trajectory-evaluation/issues).

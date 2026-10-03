@@ -101,8 +101,7 @@
   "review_crosswalk": {
     "prior_document": "Repository_Review_2026-10-02.md",
     "available": false,
-    "original_R1_R12_mapping": "unverified",
-    "replacement": "Twelve C1-C12 local checks in docs/REVISION_REPORT.md are derived from the supplied revision specification, not attributed to missing review text."
+    "original_R1_R12_mapping": "unverified"
   },
   "publication_manifest": {
     "path": "publication_map.csv",
