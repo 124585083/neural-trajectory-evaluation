@@ -42,7 +42,7 @@ The released inputs contain preprocessing across conditions and times. This limi
 
 ## Contribution and next question
 
-Xiaotian Zhu led this independent analysis, revised its questions and behavioral references, specified comparison constraints, and evaluated the results. ChatGPT assisted discussion, planning and writing; Codex assisted implementation, debugging, execution, tests and reports. [AUTHORS](AUTHORS.md) distinguishes these roles from the original data collection, published methods and upstream software.
+Xiaotian Zhu led this independent analysis, revised its questions and behavioral references, specified comparison constraints, and evaluated the results. ChatGPT assisted discussion, planning and part of writing; Codex assisted implementation, debugging, execution, tests and reports. [AUTHORS](AUTHORS.md) distinguishes these roles from the original data collection, published methods and upstream software.
 
 Neither study identifies an internal simulation algorithm or a causal neural mechanism. The next question is whether above-target and below-target trials from the same physical condition show reliable neural readout shifts in the corresponding directions. That test requires matching neural and behavioral trial identities, which the current means lack. The [future plan](docs/FUTURE_DIRECTIONS.md) places reliable behavioral groups before further temporal and computational tests; it has not been executed.
 
