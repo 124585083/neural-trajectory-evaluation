@@ -1,0 +1,24 @@
+{
+  "baseline_replay_absolute_tolerance": 3e-06,
+  "bootstrap_samples": 2000,
+  "condition_pattern_space": "Encoder target units; float64 accumulation over repeats and time",
+  "condition_pattern_uncertainty": "Deterministic invariance check; no randomization p-value",
+  "conventional_interval_estimand": "equal_weight_mean_paired_condition_score",
+  "existing_null_difference": "The completed main model null reverses after GPFA input conversion; time-dependent encoder precision makes that a different operation",
+  "metric_absolute_tolerance": 1e-10,
+  "objects": [
+    "static",
+    "dynamic"
+  ],
+  "operation": "Reverse each complete 250-frame encoder-target-scaled prediction along time, then apply the unchanged time-indexed conversion and main GPFA",
+  "pattern_absolute_tolerance": 1e-10,
+  "protocol": "retrained_v1_supplementary_reversal_v1",
+  "reference": "Neural targets, trials, conditions, neurons and timestamps remain fixed",
+  "resampling_unit": "whole_movie_condition",
+  "seed": 42,
+  "source_freeze_sha256": "139162d5a7309f90e26990d627124ff442935ea4ce370166ede7fdc82030da90",
+  "source_protocol": "retrained_v1",
+  "status": "supplementary_diagnostic_fixed_before_execution_not_original_preregistration",
+  "trajectory_estimand": "pooled_condition_trajectory",
+  "undefined": "NA with support; no zero replacement"
+}

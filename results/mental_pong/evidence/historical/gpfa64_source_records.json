@@ -1,0 +1,33 @@
+{
+  "status": "metadata_and_existing_results_only",
+  "new_analysis": false,
+  "records": [
+    {
+      "storage_location_id": "source_pilot",
+      "source_relative_path": "trajectory_project/results/trajectory_phase_summary.csv",
+      "destination": "gpfa64_trajectory_phase_summary.csv",
+      "original_sha256": "d0e376f1d54fc1f202c6d6590e58dd437d7b30b4d2ab535b54d32a3c1c654b2b",
+      "bytes": 27838,
+      "copied_byte_identical": true,
+      "scope": "Historical frozen GPFA64 / visible-only Ridge / original47-16-16 split. Not current per-split FA50/GPFA50 results."
+    },
+    {
+      "storage_location_id": "source_pilot",
+      "source_relative_path": "trajectory_project/results/event_results.csv",
+      "destination": "gpfa64_event_results.csv",
+      "original_sha256": "1b26cdb1a6788413802dc134d9647cc55b3b569a8ae63a1248fbe67e2af2e13e",
+      "bytes": 53561,
+      "copied_byte_identical": true,
+      "scope": "Historical frozen GPFA64 / visible-only Ridge / original47-16-16 split. Not current per-split FA50/GPFA50 results."
+    },
+    {
+      "storage_location_id": "source_pilot",
+      "source_relative_path": "trajectory_project/results/readout_calibration.csv",
+      "destination": "gpfa64_readout_calibration.csv",
+      "original_sha256": "503d310fe289bfd23aa158231cbbe465fe8416e56701dbcd34c59e1a04731c5f",
+      "bytes": 3758,
+      "copied_byte_identical": true,
+      "scope": "Historical frozen GPFA64 / visible-only Ridge / original47-16-16 split. Not current per-split FA50/GPFA50 results."
+    }
+  ]
+}

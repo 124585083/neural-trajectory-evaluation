@@ -1,0 +1,24 @@
+{
+  "counts": {
+    "static": {
+      "core": 50624,
+      "readout": 2763106,
+      "shifter": 285,
+      "total": 2814015
+    },
+    "dynamic": {
+      "core": 98672,
+      "readout": 2763106,
+      "shifter": 285,
+      "total": 2862063
+    }
+  },
+  "relative_total_difference": 0.01707453585002212,
+  "actual_instances": true,
+  "shared_parameters_counted_once": true,
+  "dynamic_channels": [
+    16,
+    32,
+    64
+  ]
+}

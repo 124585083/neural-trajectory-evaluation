@@ -1,0 +1,33 @@
+{
+  "config_sha256": "9e8007178f439cccd0809d2578afe6dbbdddc6bc784c0dd94fa2eb79dc1d877c",
+  "deterministic_transformations_per_model": 1,
+  "files": {
+    "condition_metrics.csv": "6355bac6815d268aa95ed0759d51264f9c6658323399babb715445cba717a99d",
+    "configuration.json": "2d3a85f308c2e9ce355116e840275f996839056c1a48632c9454aca9179ad62b",
+    "metrics.csv": "f708e18a9f6e473b05ada0bcaf77d848b4150a783e8d9e4aca42a3af3fcbde0b",
+    "numerical_checks.csv": "a07b911d42be5a52c7728728b6bdd44c5141c009130a699f419c686e4a43f777",
+    "paired_intervals.csv": "b168507fb210801f54d362f4449c6088f5eb16eaf1b23154489e9114720da880",
+    "summary.json": "a78994ce3366f44163f17e65c469f9f80d0a58b9f474c65e431e153cfcac76f6"
+  },
+  "inference": "unchanged offline primary GPFA",
+  "main_artifacts_unchanged": true,
+  "protocol": "retrained_v1_supplementary_reversal_v1",
+  "reversal_cache_sha256": "c310f5deafc04079e756e62d1e448b8b4634dd3e06b704674087e3406b3b19bc",
+  "scope": "Supplementary prediction-order diagnostic; no independent-information claim",
+  "source_artifacts": {
+    "analysis_protocol.json": "f07217a6ef049289e0b3af4c44952eb1360e9359488d8a4de32846dc782dddaf",
+    "data/preprocessing.json": "1c2adcef36a23d083f510cabafe7de3dea2bdfc6da505bfd718867b5669c3c1e",
+    "data/split_manifest.json": "fff7fb35794244102563225d7609e4b85c2ad6c9fcddef5d2cc4f055ec0d27c1",
+    "encoders/dynamic/best.pt": "c6eff392ec412494ef69d6e599193711f4b5428862fe57633899280144531954",
+    "encoders/static/best.pt": "3ded37a0fac494f47a8553a432e04e8be7e95a0a99ed9444b07ae61f31ff7052",
+    "evaluation/pilot/paired_bootstrap.csv": "e4186fb5c19efaaf8a4c7e79ec9c0a2be3fcde0770f703cf3cd2befdb6f8e0b3",
+    "evaluation/summary.json": "a74752ca287d95f9598e9222749c1501900db3538137b12477f10595ecb668a5",
+    "frozen/frozen_analysis.json": "e5492076adf723059f45e6b392617ed856aacc897d9684ee76f18ade8929f206",
+    "frozen/frozen_control.npz": "ff0e9318482ecf2ebfd0516e962e55d28be88c95f6159cb88f170d0a34e18283",
+    "gpfa/frozen_gpfa.pkl": "98de0cef99973c8a57b5b44d330763a5cd0fc5ad0cab36654c058591ae6eb52c",
+    "gpfa/frozen_gpfa_arrays.npz": "e1d5f87d29eab8f9406fc2a2ee1b9c72a509707c6583df839a888199e47a09f5",
+    "test/dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20/aligned_predictions.npz": "af4a82203bfdc5de3cfd667c35d1d31b68c790bfe9921c1ef995122b87e8e0cb"
+  },
+  "source_freeze_sha256": "139162d5a7309f90e26990d627124ff442935ea4ce370166ede7fdc82030da90",
+  "status": "complete"
+}

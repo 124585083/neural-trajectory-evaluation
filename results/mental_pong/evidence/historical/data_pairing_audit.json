@@ -1,0 +1,78 @@
+{
+  "route": "B",
+  "data_mode": "trial_labels_with_mean_neural",
+  "route_A_available": false,
+  "reason": "Release has neuron x condition x time arrays; no real trial responses or per-unit stable/half trial-membership map.",
+  "endpoint_semantics": "paddle_y assigned from joystick_output and checked against display scalar; exact terminal sample time is not released.",
+  "ignore_policy": "Retain incomplete records in audit; predominantly zero terminal scalar conflicts with display, so unknown endpoint, never a valid zero target.",
+  "units": "MWorks centered display coordinate units, common interception plane x=10",
+  "objective_reference": "Physical parameters identical within condition; broadcast condition reference. Actual frame-by-frame trial timing is not released.",
+  "label_clock": "Published means use integer-ms center 50k+24.5; physical branch models evaluated at fixed bin end 50k+50.",
+  "arrival_time": "Solve released x(t) straight branch at physical paddle plane x=10; design discrete-step T also retained for comparison.",
+  "collision_clock": "Estimated from published 50ms branch intersection; uncertainty interval retained, not exact original single-trial log.",
+  "feedback_boundary": "Exclude completed bins ending after estimated physical interception and release conservative support; no exact original feedback log available.",
+  "old_stability_proxy_used": false,
+  "endpoint_correctness_filter": false,
+  "independent_neural_trial_count": 0,
+  "animals": {
+    "mahler": {
+      "published_scalar_rows": 10158,
+      "all79_occ_records_before_dedup": 8078,
+      "duplicate_real_records_removed": 0,
+      "all79_occ_records": 8078,
+      "n_sessions": 6,
+      "n_valid_terminal_endpoints": 7502,
+      "n_success": 4725,
+      "n_failure": 2777,
+      "n_terminal_status_unknown": 576,
+      "n_trials_with_candidate_labels": 7407,
+      "n_label_rows": 320352,
+      "all79_identity_retained": true,
+      "condition_physical_parameters_max_nunique": 1,
+      "paddle_scalar_vs_display_completed_median_abs_difference": 0.1699997901916488,
+      "paddle_scalar_vs_display_completed_max_abs_difference": 0.17000041961669687,
+      "paddle_scalar_vs_display_ignore_max_abs_difference": 7.309999942779541,
+      "endpoint_equals_joystick_output_max_error": 0.0,
+      "data_mode": "trial_labels_with_mean_neural",
+      "n_independent_neural_trials": 0,
+      "terminal_time_verified_pre_feedback": false,
+      "sources": {
+        "raw": "source_data://raw\\extracted\\MentalPong\\data\\mahler_hand_dmfc_dataset_50ms.pkl",
+        "prepared": "source_data://processed\\mahler_prepared.npz"
+      }
+    },
+    "perle": {
+      "published_scalar_rows": 129084,
+      "all79_occ_records_before_dedup": 89601,
+      "duplicate_real_records_removed": 0,
+      "all79_occ_records": 89601,
+      "n_sessions": 58,
+      "n_valid_terminal_endpoints": 85960,
+      "n_success": 64876,
+      "n_failure": 21084,
+      "n_terminal_status_unknown": 3641,
+      "n_trials_with_candidate_labels": 84873,
+      "n_label_rows": 3676846,
+      "all79_identity_retained": true,
+      "condition_physical_parameters_max_nunique": 1,
+      "paddle_scalar_vs_display_completed_median_abs_difference": 0.1699997901916488,
+      "paddle_scalar_vs_display_completed_max_abs_difference": 0.170000457763674,
+      "paddle_scalar_vs_display_ignore_max_abs_difference": 10.539999961853027,
+      "endpoint_equals_joystick_output_max_error": 0.0,
+      "data_mode": "trial_labels_with_mean_neural",
+      "n_independent_neural_trials": 0,
+      "terminal_time_verified_pre_feedback": false,
+      "sources": {
+        "raw": "source_data://raw\\extracted\\MentalPong\\data\\perle_hand_dmfc_dataset_50ms.pkl",
+        "prepared": "source_data://processed\\perle_prepared.npz"
+      }
+    }
+  },
+  "_source_record": {
+    "storage_location_id": "source_pilot",
+    "relative_path": "trajectory_project/trial_endpoint_fa_gpfa_v1/results/data_pairing_audit.json",
+    "original_sha256": "d6406d6f17dea3affaa321afd1403e6bf02016582e6e7bdfbb3a9df194190e19",
+    "original_bytes": 4067,
+    "edition": "All numeric values retained; local root strings aliased. Original source remains unchanged."
+  }
+}

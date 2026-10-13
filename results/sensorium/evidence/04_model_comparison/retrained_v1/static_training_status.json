@@ -1,0 +1,20 @@
+{
+  "status": "training_complete",
+  "run_id": "retrained_v1_static_seed42",
+  "identity_digest": "6138ff88ed88c3043ad83d7b4a8f486b0cd72d4680892ce339f2a59ad6239688",
+  "best_epoch": 59,
+  "validation_score": 0.17430678009986877,
+  "last_epoch": 69,
+  "stop_reason": "patience_cycles_exhausted",
+  "elapsed_seconds": 10387.25,
+  "parameter_counts": {
+    "core": 50624,
+    "readout": 2763106,
+    "shifter": 285,
+    "total": 2814015
+  },
+  "best_sha256": "3ded37a0fac494f47a8553a432e04e8be7e95a0a99ed9444b07ae61f31ff7052",
+  "last_sha256": "e623a13f8dc41b5b13a696a25d4e66e29cdd972bba8f7a00388bb681fa9c65c1",
+  "best_state_sha256": "54de7d97cdd1267dda560c6b3a1e1fbc59fcff3d11638a29dd7031d6080467d1",
+  "test_read_by_trainer": false
+}

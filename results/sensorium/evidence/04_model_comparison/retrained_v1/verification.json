@@ -1,0 +1,1083 @@
+{
+  "schema_version": "sensorium_retrained_v1_software_verification",
+  "date": "2026-10-10",
+  "scope": "Historical software regression snapshot, completed encoder identity checks, and a current public-record review. Final scientific test evaluation is not attested by this verification record.",
+  "base_commit": "5626e177a0e23f609b06dea3526e471b8efe3dad",
+  "split_sha256": "52d021ee699ddd5d026a4deba3375838548b352f7d46ec3b878d5460b261e926",
+  "preprocessing_sha256": "52a9b81d45ffd23fdee5b2502a025d4234946f24568dee95b8eb2a8a9e88ac73",
+  "suites": {
+    "part1_existing": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 32.569
+    },
+    "part2_existing": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 1.759
+    },
+    "parameter_matching_existing": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 7.544
+    },
+    "model_comparison_existing_and_new": {
+      "tests": 83,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 19.282
+    },
+    "model_comparison_upstream_compatibility": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 4.204
+    }
+  },
+  "total_unique_tests": 101,
+  "model_comparison_breakdown": {
+    "historical": 18,
+    "retrained_v1": 30,
+    "unified_v1": 37
+  },
+  "status": "all_requested_software_checks_passed",
+  "environments": {
+    "encoding": {
+      "python": "3.11.9",
+      "numpy": "1.26.4",
+      "torch": "2.5.1+cu124",
+      "pytest": "8.3.5",
+      "use": "Part 1, parameter-matching, and two upstream-compatibility tests"
+    },
+    "analysis": {
+      "python": "3.11.9",
+      "numpy": "1.26.4",
+      "torch": "2.5.1+cu124",
+      "pytest": "8.3.3",
+      "scikit_learn": "1.5.2",
+      "use": "Part 2 and 83 model-comparison tests"
+    },
+    "gpu_used_by_verification": false,
+    "new_dependencies_installed": false,
+    "resolved_environment_attempts": "The encoding environment does not include scikit-learn. The analysis environment does not include all upstream encoder dependencies. Tests were assigned to the existing environment containing their requirements; all 101 distinct checks passed, including both compatibility checks. Initial collection and dependency failures remain in local logs."
+  },
+  "preservation": {
+    "part1": {
+      "changed_tracked_files": [],
+      "n_checked_tracked_files": 29,
+      "unchanged": true
+    },
+    "part2": {
+      "changed_tracked_files": [],
+      "n_checked_tracked_files": 49,
+      "unchanged": true
+    },
+    "parameter_matching": {
+      "changed_tracked_files": [],
+      "n_checked_tracked_files": 14,
+      "unchanged": true
+    },
+    "mental_pong": {
+      "changed_tracked_files": [],
+      "n_checked_tracked_files": 238,
+      "unchanged": true
+    },
+    "historical_comparison": {
+      "changed_tracked_files": [],
+      "n_checked_tracked_files": 46,
+      "unchanged": true
+    },
+    "shared_historical_figures_and_manifests": {
+      "changed_tracked_files": [],
+      "n_checked_tracked_files": 8,
+      "unchanged": true
+    }
+  },
+  "historical_artifact_checks": [
+    {
+      "artifact": "historical_static",
+      "sha256": "1fa17c66e454241f0564fef7f582ee86be4c56aa91c45f2bbbf7b538da4055bd",
+      "expected_sha256": "1fa17c66e454241f0564fef7f582ee86be4c56aa91c45f2bbbf7b538da4055bd",
+      "matches_record": true
+    },
+    {
+      "artifact": "historical_dynamic",
+      "sha256": "1fc5c2c4f77cd6ad26dee58879e290c94ef74a2fac9c4ee82f03378a5573d01d",
+      "expected_sha256": "1fc5c2c4f77cd6ad26dee58879e290c94ef74a2fac9c4ee82f03378a5573d01d",
+      "matches_record": true
+    },
+    {
+      "artifact": "part2_gpfa",
+      "sha256": "eef5ee1d8fa5eb928ac7988ee979bd93a4ec98b111b88b37ee63c911e1fa8b84",
+      "parameter_digest": "789771cab85943288c022a19a2f571a1704fe0e0af547465e9a06b6ef9051180",
+      "expected_parameter_digest": "789771cab85943288c022a19a2f571a1704fe0e0af547465e9a06b6ef9051180",
+      "matches_record": true
+    },
+    {
+      "artifact": "historical_comparison_gpfa",
+      "sha256": "8fb3a6c1aec03a1bf91323ddb896b8c82b8eb44e63c715f73f87318db656f99b",
+      "parameter_digest": "f4ee7dded5fdb8910be641fd414962129207c355d365283ad0b21ed58f3e4a35",
+      "expected_parameter_digest": "f4ee7dded5fdb8910be641fd414962129207c355d365283ad0b21ed58f3e4a35",
+      "matches_record": true
+    }
+  ],
+  "actual_data_adapter": {
+    "sessions_checked": 5,
+    "loader_role_pairs_checked": 10,
+    "oracle_closure_role": "new validation only",
+    "test_trials_in_training_closures": 0,
+    "input_shape_per_example": [
+      3,
+      80,
+      36,
+      64
+    ],
+    "response_shape": "session neuron count by 80 frames",
+    "finite": true,
+    "source_record_sha256": "ed2e7453559ef71e4f627511d96079aa7ccbd24cf8c74c481655a212d5e5cc93"
+  },
+  "preprocessing_checks": [
+    "Only new train trial identities enter normalization",
+    "Changing validation/test values cannot affect train statistics",
+    "Original upstream transform mathematics agrees numerically with the replacement statistics",
+    "Original response signs are retained without centering or clipping",
+    "Neuron order and anatomical readout initialization source are fixed"
+  ],
+  "dependency_provenance": {
+    "sensorium_git_head": "0e02656220e84a50f3be1b92d6f66c2f9ccd51ef",
+    "neuralpredictors_previously_audited_pin": "efdda679596517fad95d71f36d0385d7450dd207"
+  },
+  "reproduction_commands": {
+    "part1": "cd experiments/01_baselines; python -m pytest tests -q",
+    "part2": "cd experiments/02_gpfa_reliability; python -m pytest tests -q",
+    "parameter_matching": "cd experiments/03_parameter_matching; python -m pytest tests -q",
+    "comparison_analysis_environment": "cd experiments/04_model_comparison; python -m pytest tests -q -k 'not adapter_matches_original_transform_math_with_replacement_statistics and not patience_and_restore_match_official_generator'",
+    "comparison_encoding_environment": "cd experiments/04_model_comparison; python -m pytest tests/test_retrained_data.py::test_adapter_matches_original_transform_math_with_replacement_statistics tests/test_retrained_training.py::test_patience_and_restore_match_official_generator -q"
+  },
+  "source_files_recorded_at_verification": {
+    "experiments/04_model_comparison/src/trajectory_model_eval/retrained_analysis.py": "f428cd7ff24f5cd23cee720fb0786738867edd09695e627bdd1cdcb6f7630cab",
+    "experiments/04_model_comparison/src/trajectory_model_eval/retrained_cli.py": "c41c15ab1cb3d7148dc88d693f9551c08e54f981f9807f6d40348d4d65234360",
+    "experiments/04_model_comparison/src/trajectory_model_eval/retrained_data.py": "81a57a1ebf6e01c348b89633af085f709710a4035e3f6ff7d57666ae4b38250f",
+    "experiments/04_model_comparison/src/trajectory_model_eval/retrained_predictions.py": "31168d6675ee303af46e7781bb45e8550fbd6a2eb662f9aa11be66cc9d346f36",
+    "experiments/04_model_comparison/src/trajectory_model_eval/retrained_reporting.py": "ee8eae91d8952c97253e4cee7d36c1eb1a515a4042529d37c4a83b1ad29c2c38",
+    "experiments/04_model_comparison/src/trajectory_model_eval/retrained_training.py": "c6b26df2c355327326173060958be0eabef6a1020fa351a274762224ac759929",
+    "experiments/04_model_comparison/tests/test_retrained_analysis.py": "777630d76814876e0fc48d4725487be7e283d233da5d9899d4e5f752f9a3d8f2",
+    "experiments/04_model_comparison/tests/test_retrained_data.py": "e2ab6cf70cfbca4eb7bb6ec981564ac8ecc38d3d481b5355b8491bbeea40524e",
+    "experiments/04_model_comparison/tests/test_retrained_predictions.py": "204cf4309bb1c7d478d32d771d09f8b4e3f765d9d935ea9f8dbf17bb2f5de587",
+    "experiments/04_model_comparison/tests/test_retrained_training.py": "1248a907c1ff47843ccc0a4b65504619da122645521b6490f616f3abe6171bc9",
+    "experiments/04_model_comparison/run_retrained.py": "03285d5d792dd0850e4673da13eef30e4ad17b7b26b6e2f9561c3288a4f83247"
+  },
+  "limitations": [
+    "Software test outcomes are not scientific model-comparison results.",
+    "The two existing environments have different optional dependencies; encoder compatibility checks require the pinned upstream source and encoder dependencies.",
+    "XML and command logs contain local execution details and remain in ignored outputs."
+  ],
+  "followup_checks": {
+    "changes": "Separate development prediction export from analysis calibration; verify frozen GPFA bytes without importing the GPFA fitting runtime; refresh reporting status fields.",
+    "prediction_regression": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "counted_as_additional_unique_tests": false,
+      "result": "pass"
+    },
+    "cli_help_encoding_environment": "pass; predict-development is available",
+    "cli_help_analysis_environment": "pass; predict-development is available",
+    "encoding_frozen_gate": {
+      "status": "pass",
+      "fixture": "synthetic bytes only",
+      "real_data_read": false,
+      "sklearn_imported": false,
+      "gpfa_unpickled": false,
+      "frozen_file_hash_gate": "pass",
+      "modified_gpfa_rejected": true
+    },
+    "no_real_test_data_read": true
+  },
+  "current_review": {
+    "date": "2026-10-11",
+    "observed_at_utc": "2026-10-10T18:16:18.959144+00:00",
+    "historical_snapshot": {
+      "date": "2026-10-10",
+      "unique_tests": 101,
+      "preceding_record_sha256": "d13389052c501e90727f1e77c5f095e2710cab20320351bca2717831578f9179",
+      "preservation": "Earlier suites, source hashes, follow-up tests and their dates remain unchanged; these outcomes are not retroactively assigned to later code."
+    },
+    "formal_training_identity_verification": {
+      "static": {
+        "status": "pass",
+        "run_id": "retrained_v1_static_seed42",
+        "check_count": 25,
+        "checks": {
+          "completed_summary_and_freeze": "pass",
+          "run_identity_consistency": "pass",
+          "protocol_identity": "pass",
+          "split_and_preprocessing_identity": "pass",
+          "training_adapter_identity": "pass",
+          "architecture_source_identity": "pass",
+          "best_checkpoint_file_identity": "pass",
+          "last_checkpoint_file_identity": "pass",
+          "best_state_identity": "pass",
+          "fresh_initialization_matches_independent_smoke": "pass",
+          "fresh_batchnorm": "pass",
+          "completed_epoch_and_stop_state": "pass",
+          "best_validation_selection": "pass",
+          "complete_validation_event_sequence": "pass",
+          "complete_resume_state": "pass",
+          "loader_roles_dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+          "normalization_train_sources_dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+          "loader_roles_dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+          "normalization_train_sources_dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+          "loader_roles_dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+          "normalization_train_sources_dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+          "loader_roles_dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+          "normalization_train_sources_dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+          "loader_roles_dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+          "normalization_train_sources_dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass"
+        },
+        "identities": {
+          "run_identity_sha256": "6138ff88ed88c3043ad83d7b4a8f486b0cd72d4680892ce339f2a59ad6239688",
+          "protocol_sha256": "882065b68a1a9ebef1cfa387db10a75cb3f7b334037ab5eefbd6131c96057293",
+          "split_sha256": "52d021ee699ddd5d026a4deba3375838548b352f7d46ec3b878d5460b261e926",
+          "preprocessing_sha256": "52a9b81d45ffd23fdee5b2502a025d4234946f24568dee95b8eb2a8a9e88ac73",
+          "architecture_sha256": "6ab522cebcc262c1346f9680c76bbf1f6a25562e8678f7bd84b1046850b3362b",
+          "training_code_sha256": "c6b26df2c355327326173060958be0eabef6a1020fa351a274762224ac759929",
+          "best_checkpoint_sha256": "3ded37a0fac494f47a8553a432e04e8be7e95a0a99ed9444b07ae61f31ff7052",
+          "best_state_sha256": "54de7d97cdd1267dda560c6b3a1e1fbc59fcff3d11638a29dd7031d6080467d1",
+          "initial_state_sha256": "4473e57e916eb80e27a87b572f62ba5d732677d4bf52f59d7f5bfeeb2d850d19"
+        },
+        "training": {
+          "best_epoch": 59,
+          "last_epoch": 69,
+          "validation_r": 0.17430678009986877,
+          "stop_reason": "patience_cycles_exhausted",
+          "patience_cycles": 4,
+          "selection_events": 30,
+          "validation_event_counts": {
+            "initial_selection": 1,
+            "epoch_log": 69,
+            "selection": 69,
+            "before_cycle_restore": 4,
+            "after_cycle_restore": 4
+          },
+          "parameter_counts": {
+            "core": 50624,
+            "readout": 2763106,
+            "shifter": 285,
+            "total": 2814015
+          },
+          "changed_state_entries": 104
+        },
+        "role_counts": {
+          "dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20": {
+            "train": 282,
+            "validation": 66,
+            "test": 58
+          },
+          "dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20": {
+            "train": 252,
+            "validation": 77,
+            "test": 56
+          },
+          "dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20": {
+            "train": 281,
+            "validation": 73,
+            "test": 60
+          },
+          "dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20": {
+            "train": 287,
+            "validation": 72,
+            "test": 60
+          },
+          "dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20": {
+            "train": 293,
+            "validation": 61,
+            "test": 59
+          }
+        },
+        "validation_identity_basis": "Saved actual loader parent trial IDs agree with the manifest; every recorded validation call uses this fixed validation-loader mapping",
+        "local_audit_sha256": "5cbb33fb311ae3c192c58981fad52923696b94ea4710e05c8ccede342605976a",
+        "referenced_source_hashes_rechecked": 24,
+        "referenced_source_hash_mismatches": [],
+        "test_results_read": false
+      },
+      "dynamic": {
+        "status": "pass",
+        "run_id": "retrained_v1_dynamic_seed42",
+        "check_count": 26,
+        "checks": {
+          "completed_summary_and_freeze": "pass",
+          "run_identity_consistency": "pass",
+          "protocol_identity": "pass",
+          "split_and_preprocessing_identity": "pass",
+          "training_adapter_identity": "pass",
+          "architecture_source_identity": "pass",
+          "configuration_snapshot": "pass",
+          "best_checkpoint_file_identity": "pass",
+          "last_checkpoint_file_identity": "pass",
+          "best_state_identity": "pass",
+          "fresh_initialization_matches_independent_smoke": "pass",
+          "fresh_batchnorm": "pass",
+          "completed_epoch_and_stop_state": "pass",
+          "best_validation_selection": "pass",
+          "complete_validation_event_sequence": "pass",
+          "complete_resume_state": "pass",
+          "loader_roles_dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+          "normalization_train_sources_dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+          "loader_roles_dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+          "normalization_train_sources_dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+          "loader_roles_dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+          "normalization_train_sources_dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+          "loader_roles_dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+          "normalization_train_sources_dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+          "loader_roles_dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+          "normalization_train_sources_dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass"
+        },
+        "identities": {
+          "run_identity_sha256": "483acefdc193c9c34f40ecb53fb03e075a6b946a4efb838a2a1f783aa926390a",
+          "protocol_sha256": "882065b68a1a9ebef1cfa387db10a75cb3f7b334037ab5eefbd6131c96057293",
+          "split_sha256": "52d021ee699ddd5d026a4deba3375838548b352f7d46ec3b878d5460b261e926",
+          "preprocessing_sha256": "52a9b81d45ffd23fdee5b2502a025d4234946f24568dee95b8eb2a8a9e88ac73",
+          "architecture_sha256": "b81f7b149420dc09ff680bd3654522c9cce7da86a73c0a72c988a3d46e6097e8",
+          "training_code_sha256": "c6b26df2c355327326173060958be0eabef6a1020fa351a274762224ac759929",
+          "best_checkpoint_sha256": "c6eff392ec412494ef69d6e599193711f4b5428862fe57633899280144531954",
+          "best_state_sha256": "eab215d8ac83d2910692ea4a0325f538932497eab2c2f244ca8e12ec6c1a2bda",
+          "initial_state_sha256": "362c551a6ea595ef2935b9d99eeb4a125857f72be8d9ff1f4967b84365954780"
+        },
+        "training": {
+          "best_epoch": 109,
+          "last_epoch": 119,
+          "validation_r": 0.20814694464206696,
+          "stop_reason": "patience_cycles_exhausted",
+          "patience_cycles": 4,
+          "selection_events": 58,
+          "validation_event_counts": {
+            "initial_selection": 1,
+            "epoch_log": 119,
+            "selection": 119,
+            "before_cycle_restore": 4,
+            "after_cycle_restore": 4
+          },
+          "parameter_counts": {
+            "core": 98672,
+            "readout": 2763106,
+            "shifter": 285,
+            "total": 2862063
+          },
+          "changed_state_entries": 92,
+          "initial_batchnorm_counters": {
+            "core.features.layer0.norm.num_batches_tracked": 0,
+            "core.features.layer1.norm.num_batches_tracked": 0,
+            "core.features.layer2.norm.num_batches_tracked": 0
+          }
+        },
+        "role_counts": {
+          "dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20": {
+            "train": 282,
+            "validation": 66,
+            "test": 58
+          },
+          "dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20": {
+            "train": 252,
+            "validation": 77,
+            "test": 56
+          },
+          "dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20": {
+            "train": 281,
+            "validation": 73,
+            "test": 60
+          },
+          "dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20": {
+            "train": 287,
+            "validation": 72,
+            "test": 60
+          },
+          "dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20": {
+            "train": 293,
+            "validation": 61,
+            "test": 59
+          }
+        },
+        "validation_identity_basis": "Saved actual loader parent trial IDs agree with the manifest; every recorded validation call uses this fixed validation-loader mapping",
+        "local_audit_sha256": "c15122853bfb5f5b126efff4e89983cefe28a7e63478e60d0a6320d3cb129b75",
+        "referenced_source_hashes_rechecked": 24,
+        "referenced_source_hash_mismatches": [],
+        "test_results_read": false
+      }
+    },
+    "development_source_verification": {
+      "status": "passed",
+      "roles": [
+        "train",
+        "validation"
+      ],
+      "all_four_modalities_verified": true,
+      "split_sha256": "52d021ee699ddd5d026a4deba3375838548b352f7d46ec3b878d5460b261e926",
+      "test_responses_read": false,
+      "source_record_sha256": "4f4e34bef64fd438dd0cede5d1ed7c6c2589f9d4d3651cce0c12341aaea6b327",
+      "scope": "Existing audit of original train and validation input files in all four modalities; raw inputs were not reread by this documentation refresh."
+    },
+    "current_source_files": {
+      "experiments/04_model_comparison/src/trajectory_model_eval/retrained_analysis.py": {
+        "sha256": "f428cd7ff24f5cd23cee720fb0786738867edd09695e627bdd1cdcb6f7630cab",
+        "matches_historical_test_snapshot": true,
+        "verification_basis": "Unchanged from the recorded software-test snapshot; no additional unit-test run claimed."
+      },
+      "experiments/04_model_comparison/src/trajectory_model_eval/retrained_cli.py": {
+        "sha256": "f392062d216b3b28fdf959580a7fc5ba6599d326fa737f3a807e4729ae698b5c",
+        "matches_historical_test_snapshot": false,
+        "verification_basis": "Changed since the recorded software-test snapshot; earlier tests are not asserted to cover this revision. Current --help executes successfully in both environments; this checks command availability, not end-to-end scientific completion."
+      },
+      "experiments/04_model_comparison/src/trajectory_model_eval/retrained_data.py": {
+        "sha256": "81a57a1ebf6e01c348b89633af085f709710a4035e3f6ff7d57666ae4b38250f",
+        "matches_historical_test_snapshot": true,
+        "verification_basis": "Unchanged from the recorded software-test snapshot; no additional unit-test run claimed. Completed training records verify the train/validation loader identities and train-only normalization sources."
+      },
+      "experiments/04_model_comparison/src/trajectory_model_eval/retrained_predictions.py": {
+        "sha256": "31168d6675ee303af46e7781bb45e8550fbd6a2eb662f9aa11be66cc9d346f36",
+        "matches_historical_test_snapshot": true,
+        "verification_basis": "Unchanged from the recorded software-test snapshot; no additional unit-test run claimed."
+      },
+      "experiments/04_model_comparison/src/trajectory_model_eval/retrained_reporting.py": {
+        "sha256": "2987c59bfa678bce95c76fc3772fc6fecb5e1259b6d1d5e9e834ec50f77dc1ee",
+        "matches_historical_test_snapshot": false,
+        "verification_basis": "Changed since the recorded software-test snapshot; earlier tests are not asserted to cover this revision. Current source was inspected for public export boundaries; no new unit-test or final-report execution claim is made here."
+      },
+      "experiments/04_model_comparison/src/trajectory_model_eval/retrained_training.py": {
+        "sha256": "c6b26df2c355327326173060958be0eabef6a1020fa351a274762224ac759929",
+        "matches_historical_test_snapshot": true,
+        "verification_basis": "Unchanged from the recorded software-test snapshot; no additional unit-test run claimed. Formal Static and Dynamic training used this exact source hash; completed artifact checks verified both runs."
+      },
+      "experiments/04_model_comparison/tests/test_retrained_analysis.py": {
+        "sha256": "777630d76814876e0fc48d4725487be7e283d233da5d9899d4e5f752f9a3d8f2",
+        "matches_historical_test_snapshot": true,
+        "verification_basis": "Unchanged from the recorded software-test snapshot; no additional unit-test run claimed."
+      },
+      "experiments/04_model_comparison/tests/test_retrained_data.py": {
+        "sha256": "e2ab6cf70cfbca4eb7bb6ec981564ac8ecc38d3d481b5355b8491bbeea40524e",
+        "matches_historical_test_snapshot": true,
+        "verification_basis": "Unchanged from the recorded software-test snapshot; no additional unit-test run claimed."
+      },
+      "experiments/04_model_comparison/tests/test_retrained_predictions.py": {
+        "sha256": "204cf4309bb1c7d478d32d771d09f8b4e3f765d9d935ea9f8dbf17bb2f5de587",
+        "matches_historical_test_snapshot": true,
+        "verification_basis": "Unchanged from the recorded software-test snapshot; no additional unit-test run claimed."
+      },
+      "experiments/04_model_comparison/tests/test_retrained_training.py": {
+        "sha256": "1248a907c1ff47843ccc0a4b65504619da122645521b6490f616f3abe6171bc9",
+        "matches_historical_test_snapshot": true,
+        "verification_basis": "Unchanged from the recorded software-test snapshot; no additional unit-test run claimed."
+      },
+      "experiments/04_model_comparison/run_retrained.py": {
+        "sha256": "03285d5d792dd0850e4673da13eef30e4ad17b7b26b6e2f9561c3288a4f83247",
+        "matches_historical_test_snapshot": true,
+        "verification_basis": "Unchanged from the recorded software-test snapshot; no additional unit-test run claimed."
+      }
+    },
+    "current_execution_checks": {
+      "cli_help": [
+        {
+          "environment": "encoding",
+          "exit_code": 0,
+          "predict_development_present": true,
+          "predict_test_present": true
+        },
+        {
+          "environment": "analysis",
+          "exit_code": 0,
+          "predict_development_present": true,
+          "predict_test_present": true
+        }
+      ],
+      "raw_test_data_read": false,
+      "models_loaded_on_gpu": false,
+      "additional_unique_unit_tests": 0
+    },
+    "protected_historical_files": {
+      "base_commit": "5626e177a0e23f609b06dea3526e471b8efe3dad",
+      "tracked_files_checked": 384,
+      "groups": {
+        "part1": {
+          "n_checked_tracked_files": 29,
+          "changed_tracked_files": [],
+          "unchanged": true
+        },
+        "part2": {
+          "n_checked_tracked_files": 49,
+          "changed_tracked_files": [],
+          "unchanged": true
+        },
+        "parameter_matching": {
+          "n_checked_tracked_files": 14,
+          "changed_tracked_files": [],
+          "unchanged": true
+        },
+        "mental_pong": {
+          "n_checked_tracked_files": 238,
+          "changed_tracked_files": [],
+          "unchanged": true
+        },
+        "shared_historical_figures_and_manifests": {
+          "n_checked_tracked_files": 8,
+          "changed_tracked_files": [],
+          "unchanged": true
+        },
+        "historical_comparison": {
+          "n_checked_tracked_files": 46,
+          "changed_tracked_files": [],
+          "unchanged": true
+        }
+      },
+      "external_artifact_note": "External historical checkpoint checks above retain their original verification date; this refresh checks the 384 protected tracked files."
+    },
+    "public_review": {
+      "scope": "Current Git-visible changed and untracked publication candidates, the seven changed Markdown documents, and the study evidence index. Ignored run outputs are excluded.",
+      "candidate_files_checked": 57,
+      "private_absolute_path_or_machine_identifier_findings": [],
+      "private_preparation_filename_findings": [],
+      "raw_array_or_weight_or_archive_candidates": [],
+      "largest_candidates_over_one_mb": [
+        {
+          "file": "results/tables/04_model_comparison/retrained_v1/split_manifest.json",
+          "bytes": 8501580
+        },
+        {
+          "file": "results/tables/04_model_comparison/unified_v1/split_manifest.json",
+          "bytes": 6729680
+        }
+      ],
+      "markdown_documents_checked": [
+        "README.md",
+        "docs/DATA_AND_REPRODUCIBILITY.md",
+        "docs/GPFA_VALIDATION.md",
+        "docs/METHODS.md",
+        "docs/RESULTS.md",
+        "docs/results/Q1_Q6_ANSWERS.md",
+        "experiments/04_model_comparison/README.md"
+      ],
+      "relative_links_checked": 189,
+      "markdown_anchor_links_checked": 24,
+      "evidence_index_rows_checked": 37,
+      "link_findings": [],
+      "generated_manifest_note": "The existing generated manifest is intentionally not modified by this review; the final report export must regenerate it after verification and final results are saved."
+    },
+    "completion_boundary": "The formal encoders have completed. This refresh does not read raw test inputs or attest test predictions, metric completion, scientific conclusions, or a GitHub publication."
+  },
+  "frozen_export_verification": {
+    "date": "2026-10-11",
+    "observed_at_utc": "2026-10-10T18:23:44.940380+00:00",
+    "schema_version": "sensorium_retrained_frozen_export_verification_v1",
+    "status": "pass",
+    "scope": "Completed frozen inference export and source-identity checks. These checks do not establish scientific metric results.",
+    "local_audit_sha256": "9da5ad99f7a946881379aaef7806feadb274e2efbf576b84387de57e1cb2fd53",
+    "check_count": 72,
+    "checks": {
+      "actual_frozen_gate": "pass",
+      "gpfa_fitting_and_selection_roles": "pass",
+      "control_fitting_and_selection_roles": "pass",
+      "preprocessing_record_identity": "pass",
+      "frozen_static_own_fresh_run": "pass",
+      "frozen_dynamic_own_fresh_run": "pass",
+      "normalization_payload_dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "normalization_payload_dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "normalization_payload_dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "normalization_payload_dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "normalization_payload_dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "gpfa_train_trial_ids": "pass",
+      "gpfa_validation_trial_ids": "pass",
+      "gpfa_neuron_ids": "pass",
+      "gpfa_frame_indices": "pass",
+      "gpfa_time_grids": "pass",
+      "current_test_source_file_bytes_match_manifest": "pass",
+      "bundle_identity_dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "bundle_payload_dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "frozen_inference_flags_dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "freeze_precedes_export_dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "aligned_neural_and_prediction_shapes_dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "identical_numeric_response_dtypes_dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "encoder_precision_shape_dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "trial_and_condition_identity_dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "test_only_roles_and_session_dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "full_neuron_ids_and_order_dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "original_frame_indices_dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "bundle_identity_dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "bundle_payload_dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "frozen_inference_flags_dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "freeze_precedes_export_dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "aligned_neural_and_prediction_shapes_dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "identical_numeric_response_dtypes_dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "encoder_precision_shape_dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "trial_and_condition_identity_dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "test_only_roles_and_session_dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "full_neuron_ids_and_order_dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "original_frame_indices_dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "bundle_identity_dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "bundle_payload_dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "frozen_inference_flags_dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "freeze_precedes_export_dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "aligned_neural_and_prediction_shapes_dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "identical_numeric_response_dtypes_dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "encoder_precision_shape_dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "trial_and_condition_identity_dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "test_only_roles_and_session_dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "full_neuron_ids_and_order_dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "original_frame_indices_dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "bundle_identity_dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "bundle_payload_dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "frozen_inference_flags_dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "freeze_precedes_export_dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "aligned_neural_and_prediction_shapes_dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "identical_numeric_response_dtypes_dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "encoder_precision_shape_dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "trial_and_condition_identity_dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "test_only_roles_and_session_dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "full_neuron_ids_and_order_dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "original_frame_indices_dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "bundle_identity_dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "bundle_payload_dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "frozen_inference_flags_dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "freeze_precedes_export_dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "aligned_neural_and_prediction_shapes_dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "identical_numeric_response_dtypes_dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "encoder_precision_shape_dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "trial_and_condition_identity_dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "test_only_roles_and_session_dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "full_neuron_ids_and_order_dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass",
+      "original_frame_indices_dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20": "pass"
+    },
+    "identities": {
+      "freeze_sha256": "139162d5a7309f90e26990d627124ff442935ea4ce370166ede7fdc82030da90",
+      "config_sha256": "882065b68a1a9ebef1cfa387db10a75cb3f7b334037ab5eefbd6131c96057293",
+      "split_sha256": "52d021ee699ddd5d026a4deba3375838548b352f7d46ec3b878d5460b261e926",
+      "preprocessing_sha256": "52a9b81d45ffd23fdee5b2502a025d4234946f24568dee95b8eb2a8a9e88ac73",
+      "gpfa_sha256": "98de0cef99973c8a57b5b44d330763a5cd0fc5ad0cab36654c058591ae6eb52c",
+      "checkpoint_sha256": {
+        "dynamic": "c6eff392ec412494ef69d6e599193711f4b5428862fe57633899280144531954",
+        "static": "3ded37a0fac494f47a8553a432e04e8be7e95a0a99ed9444b07ae61f31ff7052"
+      }
+    },
+    "sessions": {
+      "dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20": {
+        "n_trials": 58,
+        "n_conditions": 6,
+        "n_neurons": 7863,
+        "frame_range_inclusive": [
+          50,
+          299
+        ],
+        "shape": [
+          58,
+          250,
+          7863
+        ],
+        "test_sources_sha256": "a69289d920817ab75f34d126112e1fd2281f9b33fd14f0efa4873171a72cca2c",
+        "source_modalities_hashed": 232,
+        "bundle_identity_sha256": "c56697c95b24edb30e1d1af255e96a4cebc4febff4bc63b900937e250f4f53e5",
+        "payload_sha256": "af4a82203bfdc5de3cfd667c35d1d31b68c790bfe9921c1ef995122b87e8e0cb",
+        "sidecar_sha256": "f076095e05418aaae81c00c3b9a649562a13b411381d58351cc1434809ed4cb4",
+        "neural_and_prediction_headers": {
+          "neural": {
+            "shape": [
+              58,
+              250,
+              7863
+            ],
+            "dtype": "float32",
+            "fortran_order": false
+          },
+          "static": {
+            "shape": [
+              58,
+              250,
+              7863
+            ],
+            "dtype": "float32",
+            "fortran_order": false
+          },
+          "dynamic": {
+            "shape": [
+              58,
+              250,
+              7863
+            ],
+            "dtype": "float32",
+            "fortran_order": false
+          }
+        },
+        "parameters_and_batchnorm_unchanged": true
+      },
+      "dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20": {
+        "n_trials": 56,
+        "n_conditions": 6,
+        "n_neurons": 7908,
+        "frame_range_inclusive": [
+          50,
+          299
+        ],
+        "shape": [
+          56,
+          250,
+          7908
+        ],
+        "test_sources_sha256": "8be0c1c553494f89ca6e6fac77884c6434fe76ad1be98098f5d6ef38ff8d8c97",
+        "source_modalities_hashed": 224,
+        "bundle_identity_sha256": "265e0bd89fed6ddb270f4f9273fce64c9d38199404217a955b34bedc3982eb82",
+        "payload_sha256": "a2b9733a0b56e40c45fc467995b4e21feb6418703bc2242038d08a894afc15c5",
+        "sidecar_sha256": "8b33bcbf4a181b440d28d7f3a908b83b2620ba0d0c872046e43f9a60adcd45c0",
+        "neural_and_prediction_headers": {
+          "neural": {
+            "shape": [
+              56,
+              250,
+              7908
+            ],
+            "dtype": "float32",
+            "fortran_order": false
+          },
+          "static": {
+            "shape": [
+              56,
+              250,
+              7908
+            ],
+            "dtype": "float32",
+            "fortran_order": false
+          },
+          "dynamic": {
+            "shape": [
+              56,
+              250,
+              7908
+            ],
+            "dtype": "float32",
+            "fortran_order": false
+          }
+        },
+        "parameters_and_batchnorm_unchanged": true
+      },
+      "dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20": {
+        "n_trials": 60,
+        "n_conditions": 6,
+        "n_neurons": 8202,
+        "frame_range_inclusive": [
+          50,
+          299
+        ],
+        "shape": [
+          60,
+          250,
+          8202
+        ],
+        "test_sources_sha256": "e1f0783cb5d830fe241592602435f81ca84d9a2aaf99c3a629be9b5be50d1057",
+        "source_modalities_hashed": 240,
+        "bundle_identity_sha256": "3da82a050c3f7d49ff372149f7e1eec30647df1fe22e0f243886046236b23113",
+        "payload_sha256": "a29233974a4e563101bdbbf2525813ab6450d36f6ff29ae2bb4f52f8786a5be2",
+        "sidecar_sha256": "b46994f953ea50f48f522a8b4eb009bc19848ec8dc9d987a579c6ed685800790",
+        "neural_and_prediction_headers": {
+          "neural": {
+            "shape": [
+              60,
+              250,
+              8202
+            ],
+            "dtype": "float32",
+            "fortran_order": false
+          },
+          "static": {
+            "shape": [
+              60,
+              250,
+              8202
+            ],
+            "dtype": "float32",
+            "fortran_order": false
+          },
+          "dynamic": {
+            "shape": [
+              60,
+              250,
+              8202
+            ],
+            "dtype": "float32",
+            "fortran_order": false
+          }
+        },
+        "parameters_and_batchnorm_unchanged": true
+      },
+      "dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20": {
+        "n_trials": 60,
+        "n_conditions": 6,
+        "n_neurons": 7939,
+        "frame_range_inclusive": [
+          50,
+          299
+        ],
+        "shape": [
+          60,
+          250,
+          7939
+        ],
+        "test_sources_sha256": "b60aacdab19433d89f8f73e2babce654156b0679f4407bd39976917fa59afe94",
+        "source_modalities_hashed": 240,
+        "bundle_identity_sha256": "4712f5853c193865a9bf62aa50d5d697111fa6e1029d35522adc8c0200b0338b",
+        "payload_sha256": "7d269f41f8c4c9dbc62bdf56f6861db5bb53a854bca93da21c8e9d899d4016b0",
+        "sidecar_sha256": "5179a8305eca5d843d6fdd6b9ae54f349cd93c851a534b08e75071e932ba4333",
+        "neural_and_prediction_headers": {
+          "neural": {
+            "shape": [
+              60,
+              250,
+              7939
+            ],
+            "dtype": "float32",
+            "fortran_order": false
+          },
+          "static": {
+            "shape": [
+              60,
+              250,
+              7939
+            ],
+            "dtype": "float32",
+            "fortran_order": false
+          },
+          "dynamic": {
+            "shape": [
+              60,
+              250,
+              7939
+            ],
+            "dtype": "float32",
+            "fortran_order": false
+          }
+        },
+        "parameters_and_batchnorm_unchanged": true
+      },
+      "dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20": {
+        "n_trials": 59,
+        "n_conditions": 6,
+        "n_neurons": 8122,
+        "frame_range_inclusive": [
+          50,
+          299
+        ],
+        "shape": [
+          59,
+          250,
+          8122
+        ],
+        "test_sources_sha256": "d9c6a6420e3aac0010ebcff230d3d5ccb9a08447bba48a0e7145f7f8f2cce20c",
+        "source_modalities_hashed": 236,
+        "bundle_identity_sha256": "dd80b71d6e7a01c4b0bbea9b9df38d9153e556e71b6ea5d463bdbecde47d60ec",
+        "payload_sha256": "f03aa6b36c2b7f909d56488bedef7d517ebe73b24551baffc967cf470a8b2e76",
+        "sidecar_sha256": "4d92ff4a5ffde044b3c736ed160b32689c14109ff6bda2a7c4f5197205bfb630",
+        "neural_and_prediction_headers": {
+          "neural": {
+            "shape": [
+              59,
+              250,
+              8122
+            ],
+            "dtype": "float32",
+            "fortran_order": false
+          },
+          "static": {
+            "shape": [
+              59,
+              250,
+              8122
+            ],
+            "dtype": "float32",
+            "fortran_order": false
+          },
+          "dynamic": {
+            "shape": [
+              59,
+              250,
+              8122
+            ],
+            "dtype": "float32",
+            "fortran_order": false
+          }
+        },
+        "parameters_and_batchnorm_unchanged": true
+      }
+    },
+    "totals": {
+      "sessions": 5,
+      "test_trials": 293,
+      "source_modality_files_hashed": 1172
+    },
+    "source_record_count": 28,
+    "source_records_manifest_sha256": "69e544540f5266db84dab801b1397532f6a6cdb4ebbcbba409e34b6ff673872f",
+    "source_record_provenance": "The recorded audit verified 28 artifact/source records and hashed 1172 original test modality files. This append reads the audit; it does not repeat raw-source or large-bundle reads.",
+    "execution": {
+      "model_allocated_on_gpu": false,
+      "neural_and_prediction_arrays_loaded": false,
+      "scientific_scores_read": false,
+      "raw_source_access": "SHA-256 byte verification only",
+      "small_identity_arrays_loaded": true
+    },
+    "additional_unique_unit_tests": 0,
+    "later_reporting_revision": {
+      "path": "experiments/04_model_comparison/src/trajectory_model_eval/retrained_reporting.py",
+      "sha256": "45aed6be736f60b4d5c74b72f00d8f95826c98e4697ad60f1cb7c17b8220de76",
+      "change": "Explicit stage status export for reliability/null evaluation, the main comparison, and response-matching control.",
+      "verification_status": "Recorded only; the earlier unit-test and source-hash snapshots do not attest this revision. Final report execution and documentation checks remain separate."
+    },
+    "completion_boundary": "Frozen exports are verified. Analysis evaluation and final scientific conclusions are not claimed by this append."
+  },
+  "final_public_review": {
+    "date": "2026-10-11",
+    "observed_at_utc": "2026-10-10T18:34:42.756471+00:00",
+    "status": "passed",
+    "scope": "Final documentation, public artifacts, source identity, and completed execution records. Scientific metrics were read from their existing outputs; no new analysis or model fit was run by this review.",
+    "historical_verification_preserved": {
+      "unique_unit_tests": 101,
+      "earlier_source_hash_snapshots_unchanged": true,
+      "new_unique_unit_tests": 0,
+      "note": "Earlier incomplete-stage statements and untested-source notes remain timestamped historical snapshots. This final append records the later completed pipeline and actual report execution."
+    },
+    "actual_report_execution": {
+      "status": "completed_and_checked",
+      "entry_point": "experiments/04_model_comparison/run_retrained.py report",
+      "reporting_source": "experiments/04_model_comparison/src/trajectory_model_eval/retrained_reporting.py",
+      "reporting_source_sha256": "da14c13815c038681bf1548e830353fec0d03993e45f6e27f1ffbcb122a1ce3e",
+      "report_log_sha256": "c36b00bcc95cdd4933047e32a2a008d1f637c326795f3772a49fa29c8fb8977f",
+      "completion_record_sha256": "ff1ed7bd54ef83e3cfb36924125f61d629152a21777e92d9505f79d85f91ddeb",
+      "public_status_sha256": "c36b00bcc95cdd4933047e32a2a008d1f637c326795f3772a49fa29c8fb8977f",
+      "public_evaluation_summary_sha256": "a74752ca287d95f9598e9222749c1501900db3538137b12477f10595ecb668a5",
+      "exported_stage_statuses": {
+        "split": "complete",
+        "normalization": "complete",
+        "static": "training_complete",
+        "dynamic": "training_complete",
+        "gpfa": "complete",
+        "validation_control": "complete",
+        "test_evaluation": "held_out_evaluation_after_retraining_complete",
+        "test_reliability_null": "computed",
+        "test_main_comparison": "complete",
+        "test_response_matching_control": "computed"
+      },
+      "report_log_matches_public_status": true,
+      "verification_basis": "The completed coordinator record, report output, public status and stage assertions agree. The coordinator reports success only after each subprocess returns zero. The current reporting revision was exercised by that report call, not by a newly rerun unit-test suite.",
+      "raw_test_data_read_by_this_review": false
+    },
+    "current_source_hashes": {
+      "experiments/04_model_comparison/src/trajectory_model_eval/retrained_analysis.py": "f428cd7ff24f5cd23cee720fb0786738867edd09695e627bdd1cdcb6f7630cab",
+      "experiments/04_model_comparison/src/trajectory_model_eval/retrained_cli.py": "f392062d216b3b28fdf959580a7fc5ba6599d326fa737f3a807e4729ae698b5c",
+      "experiments/04_model_comparison/src/trajectory_model_eval/retrained_data.py": "81a57a1ebf6e01c348b89633af085f709710a4035e3f6ff7d57666ae4b38250f",
+      "experiments/04_model_comparison/src/trajectory_model_eval/retrained_predictions.py": "31168d6675ee303af46e7781bb45e8550fbd6a2eb662f9aa11be66cc9d346f36",
+      "experiments/04_model_comparison/src/trajectory_model_eval/retrained_reporting.py": "da14c13815c038681bf1548e830353fec0d03993e45f6e27f1ffbcb122a1ce3e",
+      "experiments/04_model_comparison/src/trajectory_model_eval/retrained_training.py": "c6b26df2c355327326173060958be0eabef6a1020fa351a274762224ac759929",
+      "experiments/04_model_comparison/tests/test_retrained_analysis.py": "777630d76814876e0fc48d4725487be7e283d233da5d9899d4e5f752f9a3d8f2",
+      "experiments/04_model_comparison/tests/test_retrained_data.py": "e2ab6cf70cfbca4eb7bb6ec981564ac8ecc38d3d481b5355b8491bbeea40524e",
+      "experiments/04_model_comparison/tests/test_retrained_predictions.py": "204cf4309bb1c7d478d32d771d09f8b4e3f765d9d935ea9f8dbf17bb2f5de587",
+      "experiments/04_model_comparison/tests/test_retrained_training.py": "1248a907c1ff47843ccc0a4b65504619da122645521b6490f616f3abe6171bc9",
+      "experiments/04_model_comparison/run_retrained.py": "03285d5d792dd0850e4673da13eef30e4ad17b7b26b6e2f9561c3288a4f83247"
+    },
+    "protected_historical_content": {
+      "base_commit": "5626e177a0e23f609b06dea3526e471b8efe3dad",
+      "files_checked": 384,
+      "method": "Compute Git blob SHA-1 directly from each working file byte sequence and compare with the base commit tree; also retain SHA-256 in the ignored audit.",
+      "groups": {
+        "part1": {
+          "files_checked": 29,
+          "byte_content_matches_base_git_blobs": true,
+          "mismatches": []
+        },
+        "part2": {
+          "files_checked": 49,
+          "byte_content_matches_base_git_blobs": true,
+          "mismatches": []
+        },
+        "parameter_matching": {
+          "files_checked": 14,
+          "byte_content_matches_base_git_blobs": true,
+          "mismatches": []
+        },
+        "mental_pong": {
+          "files_checked": 238,
+          "byte_content_matches_base_git_blobs": true,
+          "mismatches": []
+        },
+        "shared_historical_figures_and_manifests": {
+          "files_checked": 8,
+          "byte_content_matches_base_git_blobs": true,
+          "mismatches": []
+        },
+        "historical_comparison": {
+          "files_checked": 46,
+          "byte_content_matches_base_git_blobs": true,
+          "mismatches": []
+        }
+      }
+    },
+    "public_documentation": {
+      "documents": {
+        "README.md": "b56d7d4a9c3153eecdfc1ffd85d60bac31d53a92c09537bb7bb207b74ada08ec",
+        "docs/DATA_AND_REPRODUCIBILITY.md": "71f5d45a354c2c40cd9f4d34acc50dd003b615fd09e9dbb78880d4a453744293",
+        "docs/GPFA_VALIDATION.md": "59e3dc64d6da579194fc48a4e15d451e8939284c8126b93a65c73d8ad78318d8",
+        "docs/METHODS.md": "077ed70fb5c75b2f856061f6e92c64b845c4d2d0091cbb6048360480a29a83d7",
+        "docs/RESULTS.md": "46070bde5d73467ef7a06afee5cf4e38d43c0749f8a0064955e2f9cbadd82429",
+        "docs/results/Q1_Q6_ANSWERS.md": "2a6c76240dbab980b277bcf5bd3837013b7315855148da447c5ff05ac40d6336",
+        "experiments/04_model_comparison/README.md": "26ca015d3dc839d175541b60012ffd05396636252b75f671d63e0d4fc61b53db"
+      },
+      "relative_links_checked": 213,
+      "markdown_anchor_links_checked": 28,
+      "evidence_index_rows": 40,
+      "evidence_index_sha256": "54752f40915e226f6d04236d99fe843c66b6f1ca80358a440a749d6f2b65d24a",
+      "link_findings": [],
+      "reading_scope": "Reviewed the new scientific narrative, methods, current results, reliability quantiles, commands, historical pointers and claim entries. Historical evidence is distinguished from the completed retrained comparison."
+    },
+    "public_content_checks": {
+      "git_visible_candidate_files": 79,
+      "text_files_scanned": 74,
+      "private_absolute_path_or_machine_identifier_findings": [],
+      "private_preparation_filename_findings": [],
+      "raw_array_weight_or_archive_findings": [],
+      "non_English_CJK_findings": [],
+      "language_scope": "The changed documentation was read as English prose; candidate source comments, templates and serialized text were scanned for CJK text. Scientific symbols and proper names are retained. Figure rendering was checked separately during finalization.",
+      "files_over_one_mb": [
+        {
+          "file": "results/tables/04_model_comparison/retrained_v1/pilot/model_nulls.csv",
+          "bytes": 1487774
+        },
+        {
+          "file": "results/tables/04_model_comparison/retrained_v1/pilot/reliability_split_identities.csv",
+          "bytes": 1085878
+        },
+        {
+          "file": "results/tables/04_model_comparison/retrained_v1/split_manifest.json",
+          "bytes": 8501580
+        },
+        {
+          "file": "results/tables/04_model_comparison/unified_v1/split_manifest.json",
+          "bytes": 6729680
+        }
+      ]
+    },
+    "public_manifest_snapshot": {
+      "sha256_before_this_append": "1c3cf914274461743c393d74469e7c6f5d71ae325814222ebea375b8155bb6bd",
+      "files_verified_before_this_append": 39,
+      "mismatches": [],
+      "note": "All 39 entries matched immediately before this append. This verification edit changes its own hash; regenerate generated_manifest.json after the append."
+    },
+    "remaining_limits": [
+      "Oracle was explored in earlier work; the completed analysis is held-out evaluation after retraining, not previously untouched external validation.",
+      "The overlap audit is approximate and upstream source-film identities remain unavailable.",
+      "One seed and one pilot session support the detailed trajectory analysis; five sessions support response comparisons.",
+      "Offline GPFA inference uses future observations within the window.",
+      "Source/raw arrays and model payloads remain external; successful local execution does not imply their public redistribution or a completed GitHub push."
+    ]
+  }
+}

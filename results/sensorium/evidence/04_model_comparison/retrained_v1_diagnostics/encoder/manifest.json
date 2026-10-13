@@ -1,0 +1,435 @@
+{
+  "baseline_test_max_absolute_error": 0.0,
+  "config_sha256": "e46dfc86f5e76719828da978abd7bca6d37be9a0d0cb2b9555093fa7a6ed5bb2",
+  "files": {
+    "condition_scores.csv": "278aa9e3c7086bd98661e10951e0c1c96bf321266457b3ea2792b7226c20a1a2",
+    "intervention_scores.csv": "8a5e0d4d25165948c7254ecc172d4e4dc6b7deff712a82e29c2811efb925c258",
+    "paired_condition_scores.csv": "5d5782c96bcddb193af23f21774b46f4d21d0c06babdf401a8d9bfa44cee5363",
+    "paired_intervals.csv": "357b2682357331e700b745e74f5401fb5a297073d0010747d7593695b50ab505",
+    "parameter_counts.json": "0f367586264d36d8ce72ddbe1e5be8364ad5ca08ce973d21c625700b4cb3b1f0",
+    "response_numeric_support.csv": "1e9aa0329f0688093f6e79e23ec8bfa1ff3c0ea5e987a84735bcb76e55f3db23",
+    "spatial_response_matches.csv": "e35715d3e7904d4a96e7d9f598d8de149e89ca3a8bff7066c217a2ffa627e60b",
+    "static_frame_independence.json": "82ac7555a85a07f1303b4aef10853bde2aad324783a9178cea54ff02827f0807",
+    "temporal_support.json": "8901858999dc5245977d11b6720764edcab5f8067e067d9e8dee681f2ea70313",
+    "validation_grid.csv": "4ac24d6305ab5826a8fa188d86a08adb1ae49b17e63f00b0f6f578033747b7f8",
+    "weight_attenuation.png": "973fc14b168b778f1e3aff41e25a4308c99a074baf8c7b2ddfad103e84e592fd",
+    "weight_changes.json": "1c1de3ad8a571bb4403553e67a7f03fc6a3bf6fa75bed672d080560909c77a46"
+  },
+  "implementation_sha256": "29e55d2922aaadc732a323f65cef6c1d2134f7e7b3508f44003a69505084ffa7",
+  "individual_curve_support": {
+    "spatial_0.00": {
+      "acceleration_direction_cosine_bins": 1488,
+      "acceleration_direction_cosine_total_bins": 1488,
+      "position_bins": 1500,
+      "response_r_shared_neurons": 0,
+      "response_r_total_neurons": 512,
+      "rsa_shared_edges": 11175,
+      "rsa_total_edges": 11175,
+      "velocity_direction_cosine_bins": 1494,
+      "velocity_direction_cosine_total_bins": 1494,
+      "raw_response_r_shared_neurons": 512,
+      "response_status": "numerically_degenerate"
+    },
+    "spatial_0.10": {
+      "acceleration_direction_cosine_bins": 1488,
+      "acceleration_direction_cosine_total_bins": 1488,
+      "position_bins": 1500,
+      "response_r_shared_neurons": 512,
+      "response_r_total_neurons": 512,
+      "rsa_shared_edges": 11175,
+      "rsa_total_edges": 11175,
+      "velocity_direction_cosine_bins": 1494,
+      "velocity_direction_cosine_total_bins": 1494
+    },
+    "spatial_0.35": {
+      "acceleration_direction_cosine_bins": 1488,
+      "acceleration_direction_cosine_total_bins": 1488,
+      "position_bins": 1500,
+      "response_r_shared_neurons": 512,
+      "response_r_total_neurons": 512,
+      "rsa_shared_edges": 11175,
+      "rsa_total_edges": 11175,
+      "velocity_direction_cosine_bins": 1494,
+      "velocity_direction_cosine_total_bins": 1494
+    },
+    "spatial_0.65": {
+      "acceleration_direction_cosine_bins": 1488,
+      "acceleration_direction_cosine_total_bins": 1488,
+      "position_bins": 1500,
+      "response_r_shared_neurons": 512,
+      "response_r_total_neurons": 512,
+      "rsa_shared_edges": 11175,
+      "rsa_total_edges": 11175,
+      "velocity_direction_cosine_bins": 1494,
+      "velocity_direction_cosine_total_bins": 1494
+    },
+    "spatial_1.00": {
+      "acceleration_direction_cosine_bins": 1488,
+      "acceleration_direction_cosine_total_bins": 1488,
+      "position_bins": 1500,
+      "response_r_shared_neurons": 512,
+      "response_r_total_neurons": 512,
+      "rsa_shared_edges": 11175,
+      "rsa_total_edges": 11175,
+      "velocity_direction_cosine_bins": 1494,
+      "velocity_direction_cosine_total_bins": 1494
+    },
+    "temporal_0.00": {
+      "acceleration_direction_cosine_bins": 1488,
+      "acceleration_direction_cosine_total_bins": 1488,
+      "position_bins": 1500,
+      "response_r_shared_neurons": 512,
+      "response_r_total_neurons": 512,
+      "rsa_shared_edges": 11175,
+      "rsa_total_edges": 11175,
+      "velocity_direction_cosine_bins": 1494,
+      "velocity_direction_cosine_total_bins": 1494
+    },
+    "temporal_0.25": {
+      "acceleration_direction_cosine_bins": 1488,
+      "acceleration_direction_cosine_total_bins": 1488,
+      "position_bins": 1500,
+      "response_r_shared_neurons": 512,
+      "response_r_total_neurons": 512,
+      "rsa_shared_edges": 11175,
+      "rsa_total_edges": 11175,
+      "velocity_direction_cosine_bins": 1494,
+      "velocity_direction_cosine_total_bins": 1494
+    },
+    "temporal_0.50": {
+      "acceleration_direction_cosine_bins": 1488,
+      "acceleration_direction_cosine_total_bins": 1488,
+      "position_bins": 1500,
+      "response_r_shared_neurons": 512,
+      "response_r_total_neurons": 512,
+      "rsa_shared_edges": 11175,
+      "rsa_total_edges": 11175,
+      "velocity_direction_cosine_bins": 1494,
+      "velocity_direction_cosine_total_bins": 1494
+    },
+    "temporal_0.75": {
+      "acceleration_direction_cosine_bins": 1488,
+      "acceleration_direction_cosine_total_bins": 1488,
+      "position_bins": 1500,
+      "response_r_shared_neurons": 512,
+      "response_r_total_neurons": 512,
+      "rsa_shared_edges": 11175,
+      "rsa_total_edges": 11175,
+      "velocity_direction_cosine_bins": 1494,
+      "velocity_direction_cosine_total_bins": 1494
+    },
+    "temporal_1.00": {
+      "acceleration_direction_cosine_bins": 1488,
+      "acceleration_direction_cosine_total_bins": 1488,
+      "position_bins": 1500,
+      "response_r_shared_neurons": 512,
+      "response_r_total_neurons": 512,
+      "rsa_shared_edges": 11175,
+      "rsa_total_edges": 11175,
+      "velocity_direction_cosine_bins": 1494,
+      "velocity_direction_cosine_total_bins": 1494
+    }
+  },
+  "main_artifacts_unchanged": true,
+  "main_response_matching_sigma": 0.8697490026177834,
+  "prediction_implementation_sha256": "805c5ab8af55236303834704970dc8d6d4bab135b1263b61c6c218cb1047cb88",
+  "prediction_source_snapshot": "diagnostics/encoder/source_snapshots/prediction_implementation.py",
+  "primary_sources": {
+    "analysis_protocol.json": "f07217a6ef049289e0b3af4c44952eb1360e9359488d8a4de32846dc782dddaf",
+    "data/preprocessing.json": "1c2adcef36a23d083f510cabafe7de3dea2bdfc6da505bfd718867b5669c3c1e",
+    "data/split_manifest.json": "fff7fb35794244102563225d7609e4b85c2ad6c9fcddef5d2cc4f055ec0d27c1",
+    "encoders/dynamic/best.pt": "c6eff392ec412494ef69d6e599193711f4b5428862fe57633899280144531954",
+    "encoders/static/best.pt": "3ded37a0fac494f47a8553a432e04e8be7e95a0a99ed9444b07ae61f31ff7052",
+    "evaluation/summary.json": "a74752ca287d95f9598e9222749c1501900db3538137b12477f10595ecb668a5",
+    "frozen/frozen_analysis.json": "e5492076adf723059f45e6b392617ed856aacc897d9684ee76f18ade8929f206",
+    "frozen/frozen_control.npz": "ff0e9318482ecf2ebfd0516e962e55d28be88c95f6159cb88f170d0a34e18283",
+    "gpfa/frozen_gpfa.pkl": "98de0cef99973c8a57b5b44d330763a5cd0fc5ad0cab36654c058591ae6eb52c",
+    "gpfa/frozen_gpfa_arrays.npz": "e1d5f87d29eab8f9406fc2a2ee1b9c72a509707c6583df839a888199e47a09f5"
+  },
+  "scope": "Exploratory diagnostic; failed matching conditions are retained",
+  "status": "complete",
+  "supplementary_selection_sha256": "53c3b58740d759f035bbaf55a74c1ab1828e21b345be13dddbec40ac97836135",
+  "test_conditions": [
+    "movie_00005",
+    "movie_00028",
+    "movie_00031",
+    "movie_00052",
+    "movie_00067",
+    "movie_00120"
+  ],
+  "prediction_input_records": {
+    "test/spatial_0.00.json": {
+      "metadata_sha256": "e7c546d65ca5fbf1d7dcbd45109bfecec7271edb4314ad6ad572942ea272b03e",
+      "payload_sha256": "27f3afa1ffc5bc63ec7618e4d02263224b9ec51146632ec897f0258f3937f06e"
+    },
+    "test/spatial_0.10.json": {
+      "metadata_sha256": "14186447372415815d15984f20c88a04d2fd3cbf67798056235241462ec0e69b",
+      "payload_sha256": "3d352b1cf650c2d5dc9992b75a899d63d9fe031a1f2b866ce40a90a957c4c42a"
+    },
+    "test/spatial_0.35.json": {
+      "metadata_sha256": "6b7556122c4a93770831016144f14b6dcdc63f5f378666961d73e5995cdf01ff",
+      "payload_sha256": "e83c372b69771a197c2eb035141c207f5ff30b4ff64604cc6a7c01765d4e42e9"
+    },
+    "test/spatial_0.65.json": {
+      "metadata_sha256": "535580698cfede512ea7cb73decc47d715f084be04973c849e2827d2ca3f3903",
+      "payload_sha256": "33594d695768f7246620c970be61b8465266095c0907568e6076ea4766a4a837"
+    },
+    "test/spatial_1.00.json": {
+      "metadata_sha256": "90650d212064e1ebc06fc30ed959661323b19aa83a3b0a60c93122e0f6dae2e9",
+      "payload_sha256": "322f70e0a72d3caa4f662b463acdacd1aacfcb7286335e309313d48143fe755b"
+    },
+    "test/temporal_0.00.json": {
+      "metadata_sha256": "3c12086daa11cb7dad289c8c39f778f8bb2d57a74374561f4455c6d731271cac",
+      "payload_sha256": "a3424f3391379aa69672b08fe0d9aa0d89af907096d16f792c631e9395c591f1"
+    },
+    "test/temporal_0.25.json": {
+      "metadata_sha256": "56dff9d05356a1f96eb3e3562fb1a6b66771231117d82aeaa2bcfbb0c75dfe40",
+      "payload_sha256": "930f10352fcabc642dbac1de9e0d3166b7a06a1b4cc2095b6f440b83f8e43c6b"
+    },
+    "test/temporal_0.50.json": {
+      "metadata_sha256": "faba1b3e5e058f362101b36a322916ad388cf9c1f2c3896e182affa2abb81802",
+      "payload_sha256": "f67f6c6ce2aa6367db231519ff1a9ab288876131e98727fc426c89eec5853a4e"
+    },
+    "test/temporal_0.75.json": {
+      "metadata_sha256": "c438a4b5c6dc1f7df21ee384832503d32bc97c774a0270967d6ee6b6af5d10c7",
+      "payload_sha256": "e22e4eabc70dd63b5f7622b98d3d3604d809e9b60b729cc4d996b3e9b63bbc04"
+    },
+    "test/temporal_1.00.json": {
+      "metadata_sha256": "0063103c5802364c42574c7e388e53bc2893d4539a8dbd9fb3b2006c92380dd2",
+      "payload_sha256": "322f70e0a72d3caa4f662b463acdacd1aacfcb7286335e309313d48143fe755b"
+    },
+    "validation/spatial_0.00.json": {
+      "metadata_sha256": "958ae4e3f61c0049e208e657ebc2f00249370a428ab39cbc20e702e3978112a7",
+      "payload_sha256": "309faccdeaeba01fe11cc26334f4f79d0d3c4a78c59df994ea127322b2c28252"
+    },
+    "validation/spatial_0.05.json": {
+      "metadata_sha256": "f7142c8c4e76685ae0bd20fa2cf75067ec311af56ed0126d8d25bf5f4420808d",
+      "payload_sha256": "b541c054bff0681e467f37d8fa2e4661649fb46de99db1d0a1f0c6611d766cba"
+    },
+    "validation/spatial_0.10.json": {
+      "metadata_sha256": "825203b616b50c44946481d5d9bb31eabf58fb0b1391756789423eccea030957",
+      "payload_sha256": "2adc99aae02c222bb110a4322a0377e3e222202fcdc6978f92867ef27aedae66"
+    },
+    "validation/spatial_0.15.json": {
+      "metadata_sha256": "518680737b5723ed7b22577064983b1ec5065f8e899eb1cac27205e888ae7305",
+      "payload_sha256": "2a676b275b25994f7174be948dbe6c376fd89eeee26506745675aa18874fc5e5"
+    },
+    "validation/spatial_0.20.json": {
+      "metadata_sha256": "be509e22f61b9add1448db9689bd22538deff9ac0f3690275809d50c78f1be87",
+      "payload_sha256": "82bd0d3a6a584aaadf886ce3ee69d46075ae0f134cc1d08a516329346f3b237c"
+    },
+    "validation/spatial_0.25.json": {
+      "metadata_sha256": "a7331e9fdb40754267fb3ee181dda9601f608f3a784868f74f50116ef777d331",
+      "payload_sha256": "52f52e8c66f8d3db119dc8259c1faf4421bbb8c9558fbc65650841b76c581850"
+    },
+    "validation/spatial_0.30.json": {
+      "metadata_sha256": "0548424df957df9ac8f7c9c67556944785c34c5b8c1be3fc2fbc96bee742cb76",
+      "payload_sha256": "f12627a8f5d30b40ff0148ffef21aa83f34f76c7063344db3df007a7df7d21b9"
+    },
+    "validation/spatial_0.35.json": {
+      "metadata_sha256": "11b078b03b462e40d03319118b669f282b886e9d6fb85fe5a352cb81779fa203",
+      "payload_sha256": "a1bc54ec3c7bc6eeafe66b9772b224d7a4fd233924dbc65cf786e95e3b30b2aa"
+    },
+    "validation/spatial_0.40.json": {
+      "metadata_sha256": "65e21a1412ddec7210655160203cca6b94fc3bcce462853308e95403782192d7",
+      "payload_sha256": "ca9f3183f1684e5a92a60b1ec1205529b0c263984ad2005e69059046d9c52d40"
+    },
+    "validation/spatial_0.45.json": {
+      "metadata_sha256": "923c1c5ce6907650a0998fa223a8c02c034c9794cf35fae0ddcdfd898628ad36",
+      "payload_sha256": "e7cb979466215e3061cfdec62ad2d3a1b8eb42ad844b5c1ad9099bd27f0bc822"
+    },
+    "validation/spatial_0.50.json": {
+      "metadata_sha256": "439cccb6632a77246ddd79d9641cc826c024c92118c3bf49aed8392c9fea953d",
+      "payload_sha256": "ba7aa29a94afadf730880eae76d34fe57fab7ecba67e0601bcb141204c305435"
+    },
+    "validation/spatial_0.55.json": {
+      "metadata_sha256": "26f28e3bbd3ddfc33a85bc7385f5b02a674aa0c884f4d26cd68452b34f0f0d95",
+      "payload_sha256": "02ba9331213b07d01000e5c1115dfb929e9c2a75b73d750e93e005bbbda70f99"
+    },
+    "validation/spatial_0.60.json": {
+      "metadata_sha256": "2d5d3ce8e2a68ec09f4f96bf4fd46baa182361faf0c709bc9a3ff8f6a9a2fea6",
+      "payload_sha256": "b783419a2b2fff66cdd37496a5924c65309113d0ab48f8b29843ac6a426e73b4"
+    },
+    "validation/spatial_0.65.json": {
+      "metadata_sha256": "c5df05469a4d9ace4730a902698f0a073b17b2cc513873921c9757010e4eff04",
+      "payload_sha256": "d31f69733b289478b2d1527b7fc5ba84a9d0490eb2d43e0a67eca7df566893c8"
+    },
+    "validation/spatial_0.70.json": {
+      "metadata_sha256": "a035e6e2e52e6264dd223867ba57311e37f0ecc2865ddd9ce4aa79d0ace57cc4",
+      "payload_sha256": "4ec762809e2c39b49fc5500507e81bc1630f530bbd345e430c9a3826f9847e2e"
+    },
+    "validation/spatial_0.75.json": {
+      "metadata_sha256": "ea5dac5a157e89311ffbeb1337eedd5d92f06479738896f35debb53c31a52286",
+      "payload_sha256": "a4d99f82bff1d77a2a98089ce37ebf4a4ee3c4c002c89bb578f1dd4356782f5a"
+    },
+    "validation/spatial_0.80.json": {
+      "metadata_sha256": "5a160c42a29aa5a983de91bd762b01ac37e730236d8231e4de6603fb6830d726",
+      "payload_sha256": "464b4b49823cc05ef6806658337bd3f13386c772d830cb861912c2d2c4047899"
+    },
+    "validation/spatial_0.85.json": {
+      "metadata_sha256": "c1131f5af0a91e72d9b108895f60e8b5ec5b7520f4c33b9661ec3d6b3f5aec6b",
+      "payload_sha256": "50972a20a684a24ac96029b269b7f28a0d13b48cbe75d4d46e7987ee17c7ff64"
+    },
+    "validation/spatial_0.90.json": {
+      "metadata_sha256": "13f9a4ac8be658144bb6e4ab90b0a4f436c3c70cbea1a88dc22f3d68a4689603",
+      "payload_sha256": "a09ad2159d2b4c7c09abb760a6de594236c2cef315d8229eb622d08d3484c056"
+    },
+    "validation/spatial_0.95.json": {
+      "metadata_sha256": "f79b0fa03dfe2d8311e1a8aace61c634f6364f32c1a727b687438d72c7edf90f",
+      "payload_sha256": "7f2d9942129274ce489309cac6183a7c016b3214a101d0dfcb6d651da617caec"
+    },
+    "validation/spatial_1.00.json": {
+      "metadata_sha256": "f357c6e5bd6afef597fb8d91addd857d79ca1f5af2d46d58a47e61616f67022d",
+      "payload_sha256": "e0fdafae73bf19b2cdbda31482a7ef6919b92798d3cf42c463eff4aec804fd13"
+    },
+    "validation/temporal_0.00.json": {
+      "metadata_sha256": "6576a1166d2ac1b18a96cbb8b91b4b3d1ad0dae2fe7af33852368173e53859f1",
+      "payload_sha256": "b1b6d00d727eceb1049bc389598200a5a205562b43002af9536a123107fafb9d"
+    },
+    "validation/temporal_0.25.json": {
+      "metadata_sha256": "130f21682ac934cb3784f54394bb4cff1fb2472d7dee3b27ad854f1f8694ada0",
+      "payload_sha256": "8dc1ceb03118ec5756fa0d4861abff2c37254f499bb3045ff420f10d0249beed"
+    },
+    "validation/temporal_0.50.json": {
+      "metadata_sha256": "0983724070b1df7cd2eb243f992b3d7e8d685c03c5a665318a8b279446bcd08e",
+      "payload_sha256": "2d6ff34a39f12faef23e74bc165f9b492f2ff95aeb95e72ca8c915b6b64f8616"
+    },
+    "validation/temporal_0.75.json": {
+      "metadata_sha256": "c9a22e194ace5fe5b8ee8cd17001d3136dfdce85aa3955e77581cd631394a137",
+      "payload_sha256": "3390935563ddf8981ea5325c1242059c230b74443ac281d8042fbb579eb76b1e"
+    },
+    "validation/temporal_1.00.json": {
+      "metadata_sha256": "f8a1952009e383e8dce68bb44ead87d61b7bcb774d9cd5ac6d25a42b36de6051",
+      "payload_sha256": "e0fdafae73bf19b2cdbda31482a7ef6919b92798d3cf42c463eff4aec804fd13"
+    }
+  },
+  "supplementary_source_records": {
+    "fixed_config.json": "b1009eee213df805e546165d5251565305f1f65111cca0f3a8cbb8d512e3c6ce",
+    "prediction_identity.json": "79297a3ad9d60ace7e89c78e3cc3c67034ff70762fddbc2d4779f01c61412665",
+    "spatial_selection.json": "edead90375d61010ed58edd21800cd8159e83175aeb197448b01263143c571f1",
+    "prediction_status.json": "6a900b1fb3a3189e117fb0e943e8e7de3b21d62ddb81b9b33dde1f247ae245a1",
+    "source_snapshots/prediction_implementation.py": "805c5ab8af55236303834704970dc8d6d4bab135b1263b61c6c218cb1047cb88"
+  },
+  "response_correlation_numerical_fix": {
+    "version": 2,
+    "rule": "Center and accumulate in float64; exactly constant predictions remain NA; use shared finite neurons for pairs",
+    "scope": "Supplementary response scores and their paired intervals only; no new predictions or GPFA inference",
+    "original_calibration_preserved": true,
+    "frozen_strengths_changed": false,
+    "all_fixed_choices_remain_nearest": true,
+    "spatial_selection_file_sha256": "edead90375d61010ed58edd21800cd8159e83175aeb197448b01263143c571f1",
+    "original_score_files": {
+      "condition_scores.csv": "51b03f9dcb0cca7edded9af20458f0c45ebc67fb9adc46a85e2422a69fb54d54",
+      "intervention_scores.csv": "e15e8c07ac1ed638438c545981c4a10e7d572320417d078026a4b130d09f3ec8",
+      "manifest.json": "bd98bf3fbcdf5335285c920e3025f1c061b195fca47f4898ee0034e25cf1f4f4",
+      "paired_condition_scores.csv": "0277eab92f938a22f6598333002d6d31da6f7e3b515d1a1a91f4f4bbc9f676fe",
+      "paired_intervals.csv": "507c7241f6ee62b912ff05400daeaa31e58c9e63cc9ca8c7aaf1dcba46a185c0",
+      "parameter_counts.json": "0f367586264d36d8ce72ddbe1e5be8364ad5ca08ce973d21c625700b4cb3b1f0",
+      "spatial_response_matches.csv": "e50ac788a37bc7b50476661654b0f54bb11122fdf74a49d5707200ad10fcb96c",
+      "static_frame_independence.json": "82ac7555a85a07f1303b4aef10853bde2aad324783a9178cea54ff02827f0807",
+      "temporal_support.json": "8901858999dc5245977d11b6720764edcab5f8067e067d9e8dee681f2ea70313",
+      "validation_grid.csv": "a4c1edd9264c50877b37c8cb28341918e91c4a3de574d321208ba3f8fa73ea7c",
+      "weight_attenuation.png": "71702dc19f019ada6f8e86328e4fcf1773a0d2d830387dec443c2583a481a7c3",
+      "weight_changes.json": "1c1de3ad8a571bb4403553e67a7f03fc6a3bf6fa75bed672d080560909c77a46"
+    },
+    "spatial_zero_support": [
+      {
+        "role": "validation",
+        "intervention": "spatial_0.00",
+        "exact_constant_prediction_neurons": 76,
+        "defined_response_neurons": 436,
+        "total_neurons": 512,
+        "prediction_range_min": 0.0,
+        "prediction_range_median": 5.960464477539063e-08,
+        "prediction_range_max": 9.5367431640625e-07,
+        "maximum_absolute_prediction": 2.1246557235717773,
+        "interpretation": "Numerical output floor; residual correlations are not evidence of retained signal"
+      },
+      {
+        "role": "test",
+        "intervention": "spatial_0.00",
+        "exact_constant_prediction_neurons": 76,
+        "defined_response_neurons": 436,
+        "total_neurons": 512,
+        "prediction_range_min": 0.0,
+        "prediction_range_median": 5.960464477539063e-08,
+        "prediction_range_max": 9.5367431640625e-07,
+        "maximum_absolute_prediction": 2.1246557235717773,
+        "interpretation": "Numerical output floor; residual correlations are not evidence of retained signal"
+      }
+    ],
+    "implementation_sha256": "bacc81a0219af9524f38388d2c4914c87434e658c19274ea38d0044c0ced8ac2"
+  },
+  "score_identity_check": {
+    "status": "pass",
+    "actual_test_cache_identity_checks": 10,
+    "checks": [
+      "intervention kind and retention",
+      "session and exact trial/neuron/frame support",
+      "paired neural targets and conditions",
+      "payload and primary source hashes"
+    ],
+    "primary_artifacts_unchanged": true,
+    "non_response_scores_and_intervals_reused": true,
+    "maximum_csv_roundtrip_difference_non_response_intervals": 0.0
+  },
+  "zero_spatial_endpoint_correction": {
+    "version": 1,
+    "status": "complete",
+    "scope": "Existing zero-spatial-weight endpoint only",
+    "rule": "Recorded float32 numerical-floor diagnostic plus verified zero first spatial-convolution weights; no amplitude cutoff for other predictions",
+    "response_status": "numerically_degenerate",
+    "matching_status": "not_evaluable",
+    "raw_values": "raw_* columns retain the original calculations; earlier original_* fields retain pre-float64 values",
+    "cached_endpoint_evidence": [
+      {
+        "role": "validation",
+        "payload_sha256": "309faccdeaeba01fe11cc26334f4f79d0d3c4a78c59df994ea127322b2c28252",
+        "response_r": null,
+        "response_status": "numerically_degenerate",
+        "raw_response_r": 5.0589942800534345e-05,
+        "raw_valid_neurons": 436,
+        "valid_neurons": 0,
+        "exact_constant_prediction_neurons": 76,
+        "near_constant_prediction_neurons": 436,
+        "prediction_dtype": "float32",
+        "maximum_prediction_range": 9.5367431640625e-07
+      },
+      {
+        "role": "test",
+        "payload_sha256": "27f3afa1ffc5bc63ec7618e4d02263224b9ec51146632ec897f0258f3937f06e",
+        "response_r": null,
+        "response_status": "numerically_degenerate",
+        "raw_response_r": 0.0002465044812912135,
+        "raw_valid_neurons": 436,
+        "valid_neurons": 0,
+        "exact_constant_prediction_neurons": 76,
+        "near_constant_prediction_neurons": 436,
+        "prediction_dtype": "float32",
+        "maximum_prediction_range": 9.5367431640625e-07
+      }
+    ],
+    "frozen_strengths_changed": false,
+    "spatial_selection_file_sha256": "edead90375d61010ed58edd21800cd8159e83175aeb197448b01263143c571f1",
+    "primary_artifacts_unchanged": true,
+    "prediction_or_gpfa_inference_run": false,
+    "bootstrap_or_matching_selection_run": false,
+    "original_score_files": {
+      "condition_scores.csv": "dd812c646f489504299a17a459ea7ce836d4a0eed5c13108d590e19b7f4da0ae",
+      "intervention_scores.csv": "a6489b2138538df4c5636f63bd9690faedcb92436e23b1555397f1df0fe89d66",
+      "manifest.json": "a43bef7814659fb8e0fb81fd8d5126ec22149283d34ddaf3813adab6cf37a6a3",
+      "paired_condition_scores.csv": "e288d87fb71ab383f7dd412f61109cfe7741bd8dbcfc578e03425e696bee9bec",
+      "paired_intervals.csv": "c3ddf1abf291ac923a067fc8f79d8a69e004f77f0ccc36ab4d82c61ae6364703",
+      "parameter_counts.json": "0f367586264d36d8ce72ddbe1e5be8364ad5ca08ce973d21c625700b4cb3b1f0",
+      "response_numeric_support.csv": "08d86549c53786f9d20394d2c615f93dc83deb33c535729f12fb4fcf5800e55b",
+      "spatial_response_matches.csv": "12b8546a990865fafe9ea8602bf98d2cf8f4a01e8a743e9c7a8481b1ac5a914c",
+      "static_frame_independence.json": "82ac7555a85a07f1303b4aef10853bde2aad324783a9178cea54ff02827f0807",
+      "temporal_support.json": "8901858999dc5245977d11b6720764edcab5f8067e067d9e8dee681f2ea70313",
+      "validation_grid.csv": "74b23f52eb290cb54af9f60f8f6be1005c4e6047e3ee81b982405c3c9d3be6b2",
+      "weight_attenuation.png": "0a00d781ddbc6013280b83e50d9e9d2fedf34251a414c312919ab30171311e52",
+      "weight_changes.json": "1c1de3ad8a571bb4403553e67a7f03fc6a3bf6fa75bed672d080560909c77a46"
+    },
+    "source_snapshot": "source_snapshots/scoring_implementation_zero_spatial_endpoint.py",
+    "implementation_sha256": "29e55d2922aaadc732a323f65cef6c1d2134f7e7b3508f44003a69505084ffa7"
+  }
+}

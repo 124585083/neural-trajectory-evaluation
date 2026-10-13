@@ -1,0 +1,64 @@
+{
+  "operation": "Plot saved summaries only; no model fit, inference, bootstrap, or new summary statistics",
+  "script": "code/mental_pong/make_result_figures.py",
+  "script_sha256": "f032c781b11c307166fe3a91bfc20671637dd1b0940ac1f513e5379373455a30",
+  "sources": {
+    "results/mental_pong/evidence/closeout_v1/A/self_reconstruction_main_table.csv": "b6e0bc7f89b53dae5678087a6fa061a88fd5319b7d6f89b5d845c2ee3619a9bf",
+    "results/mental_pong/evidence/closeout_v1/B/B_summary.csv": "9affe3502f0186702959f1076f5510aeb2fce5159668f3305f1cea2e341b6016"
+  },
+  "figures": {
+    "results_objective_six_phases": {
+      "rows": 24,
+      "filter": {
+        "coordinate": "y"
+      },
+      "fields": [
+        "r_obj",
+        "r_obj_sd",
+        "RMSE_obj",
+        "RMSE_obj_sd"
+      ],
+      "interval": "Saved population SD across 100 overlapping condition splits"
+    },
+    "results_objective_mismatch": {
+      "rows": 48,
+      "filter": {
+        "head": "D_obj",
+        "target": "objective",
+        "coordinate": "y",
+        "metric": [
+          "paired_r",
+          "paired_RMSE"
+        ]
+      },
+      "fields": [
+        "mean",
+        "q025",
+        "q975"
+      ],
+      "interval": "Saved 2.5th\u201397.5th percentiles of 1000 random-allocation summary statistics; changing paired support"
+    }
+  },
+  "animals": [
+    "mahler",
+    "perle"
+  ],
+  "representations": [
+    "FA50",
+    "GPFA50"
+  ],
+  "phases": [
+    "full",
+    "visible",
+    "hidden",
+    "bounce",
+    "no_bounce",
+    "post_bounce"
+  ],
+  "outputs": [
+    "results_objective_six_phases.png",
+    "results_objective_six_phases.svg",
+    "results_objective_mismatch.png",
+    "results_objective_mismatch.svg"
+  ]
+}

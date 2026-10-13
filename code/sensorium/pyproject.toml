@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trajectory-sensorium"
+version = "0.1.0"
+description = "Sensorium encoding comparison and shared neural trajectory measurement"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+  "numpy>=1.26,<3", "pandas>=2,<4", "scipy>=1.12,<2",
+  "PyYAML>=6,<7", "torch", "scikit-learn>=1.4,<2", "matplotlib>=3.8,<4",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
+# Use separate environments for current analysis and the retained encoding stack.
+analysis = ["pandas>=2.1,<4"]
+encoding = [
+  "numpy==1.26.4", "pandas==2.0.0", "pyarrow==12.0.0",
+  "PyYAML==6.0.2", "torch==2.5.1", "torchvision==0.20.1",
+  "neuralpredictors @ git+https://github.com/sinzlab/neuralpredictors.git@efdda679596517fad95d71f36d0385d7450dd207",
+  "sensorium_2023 @ git+https://github.com/ecker-lab/sensorium_2023.git@0e02656220e84a50f3be1b92d6f66c2f9ccd51ef",
+  "nnfabrik==0.2.1", "datajoint==0.14.1", "GitPython==3.1.31",
+  "setuptools==80.9.0", "wandb==0.15.4",
+]
+
+[project.scripts]
+sensorium-replay = "sensorium_runtime.replay:main"
+trajectory-evaluation = "trajectory_model_eval.retrained_cli:main"
+trajectory-official-dynamic = "trajectory_eval.official_dynamic:main"
+trajectory-static-dynamic = "trajectory_eval.static_dynamic:main"
+trajectory-parameter-matching = "trajectory_param_match.experiment:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+markers = ["data: requires external Sensorium data or trained model artifacts"]

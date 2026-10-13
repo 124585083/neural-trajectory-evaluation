@@ -1,0 +1,24 @@
+{
+  "array_order": "Same audited test-bundle trial order within each sorted condition",
+  "condition_ids": [
+    "movie_00005",
+    "movie_00028",
+    "movie_00031",
+    "movie_00052",
+    "movie_00067",
+    "movie_00120"
+  ],
+  "main_split_identity_sha256": "d30ef1c2a1285f3df20129a94af253e3e04818968fee66881f1a635f040ffb15",
+  "main_split_memberships_verified": true,
+  "repeat_counts": [
+    10,
+    10,
+    9,
+    10,
+    9,
+    10
+  ],
+  "sampling_plan_sha256": "be908a1368cad90edf4efd279d2d6399a0046c986a64efa533e285d7d84527ad",
+  "seed": 42,
+  "splits": 200
+}

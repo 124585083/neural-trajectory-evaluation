@@ -1,0 +1,32 @@
+{
+  "files": {
+    "condition_metrics.csv": "878c4137d75e5975cd00a5260f20d53d5231a64f4223dbb8165bcca06c38c5fd",
+    "fit_history.csv": "90b52ad46cdc04e44faccb920613f62a217893c09d891299af4f44bed7286834",
+    "fit_identity.json": "dd900d6550ccafc69797c4f12356dbc0e0851918118e0c0cc137030d489bc122",
+    "model_comparison.csv": "624c6e56937aa9349893906b687ebedbd87b9d5c9ff9a49632d566c71cac03f8",
+    "reconstruction.csv": "716aa6a0b798734996fa273e4f7daa9325e05d533beb656d6236140045846b1f",
+    "reconstruction_neurons.csv": "b7a77a0d4e3d5036933deb0f9622e528759720ecfd9e855430bb1f28ed7aa5c0",
+    "reliability_nulls.csv": "52a77e6dfc581c40e88bde89885decb014463041722456ac6ef15b5511717397",
+    "reliability_observed.csv": "794aef78588f64a68a2d6cd3cd3e2f6139dcfafef9cc8c7301410f65a1d48386",
+    "reliability_summary.csv": "f7cc1dfcad4f5f9e4130aac82d2178b62bdcd4b7502e00a4760e449f97639652",
+    "selection.csv": "aeeb436fb7aaa5f39573cc2f9451570e81b3f64ed5df4adce2e7aa38f379c8a1"
+  },
+  "record": {
+    "elapsed_seconds": 88.88999999995576,
+    "em_converged": true,
+    "em_iterations": 15,
+    "em_limit": 20,
+    "em_limit_reached": false,
+    "fit_seed": 42,
+    "last_improvement": 6.123087061569095,
+    "last_log_likelihood": -6398828.936395666,
+    "latent_dim": 4,
+    "neurons": 512,
+    "observation_step": 4,
+    "parameter_digest": "597bfa9ad13aa2a7fff13865277c14bd0181258ebe2af43a7472e28a8b9eeb1a",
+    "profile": "train50",
+    "status": "complete",
+    "train_fraction": 0.5
+  },
+  "stage_identity": "1bda6e26eb55288691d22ae6d10cfc2d33354f0268c552cf5bc90f9124d7a97e"
+}

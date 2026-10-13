@@ -1,0 +1,106 @@
+{
+  "schema_version": "sensorium_part3_verification_v1",
+  "date": "2026-10-10",
+  "scope": "Software tests and data inventory; no new real scientific evaluation",
+  "base_commit": "5626e177a0e23f609b06dea3526e471b8efe3dad",
+  "split_sha256": "490917e4cc9b222aefeb6f84e490bb4c4a325e94b0d932a4ebc544aff7718636",
+  "config_sha256": "d94cc9d882b78e9fca065b971f1fd6c2a0c632b48595edc087f9e218b54f78ec",
+  "suites": {
+    "part1_existing": {
+      "tests": 6,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "part2_existing": {
+      "tests": 8,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "model_comparison_existing_and_new": {
+      "tests": 55,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    }
+  },
+  "total_tests": 69,
+  "part4_breakdown": {
+    "historical": 18,
+    "new_unified": 37
+  },
+  "synthetic_run": {
+    "status": "synthetic_verified",
+    "gpfa_latent_dim": 4,
+    "test_conditions": 4,
+    "scores_are_scientific_evidence": false,
+    "gpfa_parameter_digest": "8b26b20b2bf26f38a6802b031413c35d924ad48057cec1272344107d88082908",
+    "generated_manifest_sha256": "73f5ba2361d46e4a23f5fa360719be5ea16364db80ebc6aed6e2fcf6f5ae9c1c"
+  },
+  "real_execution_gate": {
+    "exit_code": 2,
+    "output_directory_created": false,
+    "blocked_before_cache_or_fit": true,
+    "stderr_characters": 198
+  },
+  "real_gpfa_fit": "not_executed",
+  "real_prediction_export": "not_executed",
+  "real_reliability_nulls": "not_executed",
+  "real_Q1_Q2_Q3": "not_executed",
+  "preservation": {
+    "parts_1_2_implementation_configuration_and_results_unchanged": true,
+    "historical_part3_code_and_result_bytes_not_modified": true,
+    "mental_pong_not_modified": true,
+    "encoding_model_training_performed": false,
+    "source_working_copy_not_modified": true
+  },
+  "dependency_provenance": {
+    "encoding_python": "3.11.9",
+    "encoding_torch": "2.5.1+cu124",
+    "encoding_pytest": "8.3.5",
+    "analysis_python": "3.11.9",
+    "analysis_numpy": "1.26.4",
+    "analysis_torch": "2.5.1+cu124",
+    "analysis_pytest": "8.3.3",
+    "sensorium_commit": "0e02656220e84a50f3be1b92d6f66c2f9ccd51ef",
+    "neuralpredictors_commit": "efdda679596517fad95d71f36d0385d7450dd207",
+    "new_dependencies_installed": false,
+    "warnings": "Third-party deprecation/runtime warnings; no test failures or skips."
+  },
+  "reproduction_commands": {
+    "part1": "cd experiments/01_baselines; python -m pytest tests -q",
+    "part2": "cd experiments/02_gpfa_reliability; python -m pytest tests -q",
+    "part3": "cd experiments/04_model_comparison; python -m pytest tests -q",
+    "synthetic": "python experiments/04_model_comparison/run_unified.py synthetic --output-dir outputs/sensorium_part3_synthetic"
+  },
+  "environment_requirements": "Part1 uses pinned external upstream sources on PYTHONPATH and a data root matching the original configuration. Other tests use the analysis dependencies. Machine-specific logs stay in ignored outputs.",
+  "source_files": {
+    "experiments/04_model_comparison/configs/unified_v1.json": "c0005383e342c1ecc22918b1fa80ce5740d77c29c5dc7b0bb9721005504958ac",
+    "experiments/04_model_comparison/run_unified.py": "3461bc0dc05c8c7784f288851e8ec78160512fe8ca733966a22785abbc75cb0b",
+    "experiments/04_model_comparison/src/trajectory_model_eval/unified_analysis.py": "08c44d9657cdab354355fa1e6e7e3353a8842e8c4cbc60cf4ca14c5b7dd5a316",
+    "experiments/04_model_comparison/src/trajectory_model_eval/unified_audit.py": "665789474cef72bb753133498a1616e2f909e2e873e76c75be50771abdf7a7f5",
+    "experiments/04_model_comparison/src/trajectory_model_eval/unified_cli.py": "f8b30908dc55119c53171f67c74b4d76d2954ec0da9482dd9bf54aa5a0ba0add",
+    "experiments/04_model_comparison/src/trajectory_model_eval/unified_contract.py": "df3ab49bb9991b2b4f7b95795b257fceecc09724ca124ee3c2509990fbbd8719",
+    "experiments/04_model_comparison/src/trajectory_model_eval/unified_fixture.py": "0fe120843fa064e6d67889fdd2620faf1d6c1e1459e66cd103c644f9692464ec",
+    "experiments/04_model_comparison/src/trajectory_model_eval/unified_predictions.py": "404cfc368b311a0e5bf82fd741c92abd31457f3c4b40c9050b1ac6ea3de8993a",
+    "experiments/04_model_comparison/src/trajectory_model_eval/unified_reporting.py": "4bb4480032299c710c11c3cc94c313cde79a8897579ab2064b7ee49324102b38",
+    "experiments/04_model_comparison/tests/test_unified_analysis.py": "474c8b629e8fbe6243f07f80a160dd8f4291732896d301d9069a382b445277ee",
+    "experiments/04_model_comparison/tests/test_unified_audit.py": "283173cef60f6a293def11d57eccfeafce4958e0424f7605caf5f4a7a4cef0ee",
+    "experiments/04_model_comparison/tests/test_unified_contract.py": "f7c4e972cb8023bab001d38a961f353a82bf665e747ee1e22a10f98278e8baef",
+    "experiments/04_model_comparison/tests/test_unified_predictions.py": "044db19bcfe0becfc42d0af3f33a4f4ef42d7654db337f73ad2c63157afb8e6a"
+  },
+  "limitations": [
+    "The real checkpoint-to-new-test export has not been exercised end to end because eligible test labels are absent.",
+    "Stored encoder statistics have unresolved generating-trial provenance.",
+    "229 eight-second bonus clips do not support the fixed 300-frame input window.",
+    "Synthetic numerical scores are not reported as model-comparison evidence."
+  ],
+  "text_and_structure_checks": {
+    "new_and_modified_markdown_links": "all_local_targets_exist",
+    "new_python_ast": "pass",
+    "project_owned_public_text": "English",
+    "private_preparation_files_added": false,
+    "git_diff_check": "pass"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "files": {
+    "condition_metrics.csv": "a0e2fdfef944e3c7bbbfdf4ec50822e7b8b03b4533edbc439fa7bcc8b7142c97",
+    "fit_history.csv": "b26bf219add8f1515856300fdf00107ccd92cae9acacce4876f87450e5dcc31f",
+    "fit_identity.json": "836fc8d1b1df49ca4eecca0c290c030b645fc24d33233b9788cdcd9a209d0ef0",
+    "k1/reliability_nulls.csv": "a8366436cfced0e4cf17d15c35264d159a6fcf4889fb51e8d9a27fdbaf32dae6",
+    "k1/reliability_observed.csv": "2ba01c727e3f0c00afea780aa1c4e1d70215945b6dcc039e2d58354798c5b9cd",
+    "k1/reliability_summary.csv": "78ff672d9e1b0ac6f357aed86cb4878a3f9d91cd7c1eeb110e2cd851fe019217",
+    "k2/reliability_nulls.csv": "79ec3aba9e8113192091fecde3446279cd1bdae0f1650610e9176dd7f8819d3d",
+    "k2/reliability_observed.csv": "62280a92d7ba7868b194bf5fa59bad1328a703151dbba1e68129396a31e9ee96",
+    "k2/reliability_summary.csv": "e30c834a4efc039a9c813f89dcb0f04f469280932b114f5d3392cb72989e633b",
+    "model_comparison.csv": "97c9d67bd6093361407f56674e3838448d0b82533de7540ac8d338f5177b0b7b",
+    "reconstruction.csv": "2c2edc1d54bf8ae46df16bfeaa4fe11a6267940d8368f337fe29644da4866db8",
+    "reconstruction_neurons.csv": "dc96d97a9336dcdd40f8cc0472331d08bd6dd865bea9f57a207624019a08a9a0",
+    "reliability_nulls.csv": "2ec7ef6ba7c6c2f0b035581417ff8bbe88690d966d0e278b849f1af7db6e4516",
+    "reliability_observed.csv": "c7d9f4ea990511ed7fda2ccabb88310cce6cfd1c5a41eec3e7d81a8df6e59c95",
+    "reliability_summary.csv": "8324bfe1e26b4e0c7ca225d9db9089dd6e6d7e3511d61762f492ef5d9d01ca0d",
+    "selection.csv": "316e8c374e37d976a735e8e1deb89243fdcc409a98296002166706294b948556"
+  },
+  "record": {
+    "elapsed_seconds": 111.29699999996228,
+    "em_converged": true,
+    "em_iterations": 19,
+    "em_limit": 20,
+    "em_limit_reached": false,
+    "fit_seed": 42,
+    "last_improvement": 12.67228139191866,
+    "last_log_likelihood": -12799279.532411832,
+    "latent_dim": 4,
+    "neurons": 512,
+    "observation_step": 4,
+    "parameter_digest": "e9b3e792da5d0cb8d64573d6ddc13de2607db9e775527363b09e9f2170d8a562",
+    "profile": "main",
+    "status": "complete",
+    "train_fraction": 1.0
+  },
+  "stage_identity": "1627c43e7a9b4a55c222481b0dc55d71b54a555698e6db195d6f0f974b296c34"
+}

@@ -1,0 +1,594 @@
+{
+  "temporal_1.00": [
+    {
+      "tensor": "core.features.layer0.conv_temporal.weight",
+      "shape": [
+        16,
+        16,
+        11,
+        1,
+        1
+      ],
+      "eligible_parameters": 2560,
+      "actually_changed_parameters": 0,
+      "original_l2": 12.72806453704834,
+      "changed_l2": 12.72806453704834,
+      "delta_l2": 0.0
+    },
+    {
+      "tensor": "core.features.layer1.conv_temporal_1.weight",
+      "shape": [
+        32,
+        32,
+        5,
+        1,
+        1
+      ],
+      "eligible_parameters": 4096,
+      "actually_changed_parameters": 0,
+      "original_l2": 16.74187469482422,
+      "changed_l2": 16.74187469482422,
+      "delta_l2": 0.0
+    },
+    {
+      "tensor": "core.features.layer2.conv_temporal_2.weight",
+      "shape": [
+        64,
+        64,
+        5,
+        1,
+        1
+      ],
+      "eligible_parameters": 16384,
+      "actually_changed_parameters": 0,
+      "original_l2": 27.659570693969727,
+      "changed_l2": 27.659570693969727,
+      "delta_l2": 0.0
+    }
+  ],
+  "temporal_0.75": [
+    {
+      "tensor": "core.features.layer0.conv_temporal.weight",
+      "shape": [
+        16,
+        16,
+        11,
+        1,
+        1
+      ],
+      "eligible_parameters": 2560,
+      "actually_changed_parameters": 2560,
+      "original_l2": 12.72806453704834,
+      "changed_l2": 9.654862403869629,
+      "delta_l2": 3.1347646713256836
+    },
+    {
+      "tensor": "core.features.layer1.conv_temporal_1.weight",
+      "shape": [
+        32,
+        32,
+        5,
+        1,
+        1
+      ],
+      "eligible_parameters": 4096,
+      "actually_changed_parameters": 4096,
+      "original_l2": 16.74187469482422,
+      "changed_l2": 13.127511024475098,
+      "delta_l2": 3.9271726608276367
+    },
+    {
+      "tensor": "core.features.layer2.conv_temporal_2.weight",
+      "shape": [
+        64,
+        64,
+        5,
+        1,
+        1
+      ],
+      "eligible_parameters": 16384,
+      "actually_changed_parameters": 16384,
+      "original_l2": 27.659570693969727,
+      "changed_l2": 21.694215774536133,
+      "delta_l2": 6.485293388366699
+    }
+  ],
+  "temporal_0.50": [
+    {
+      "tensor": "core.features.layer0.conv_temporal.weight",
+      "shape": [
+        16,
+        16,
+        11,
+        1,
+        1
+      ],
+      "eligible_parameters": 2560,
+      "actually_changed_parameters": 2560,
+      "original_l2": 12.72806453704834,
+      "changed_l2": 6.6394758224487305,
+      "delta_l2": 6.269529342651367
+    },
+    {
+      "tensor": "core.features.layer1.conv_temporal_1.weight",
+      "shape": [
+        32,
+        32,
+        5,
+        1,
+        1
+      ],
+      "eligible_parameters": 4096,
+      "actually_changed_parameters": 4096,
+      "original_l2": 16.74187469482422,
+      "changed_l2": 9.757977485656738,
+      "delta_l2": 7.854345321655273
+    },
+    {
+      "tensor": "core.features.layer2.conv_temporal_2.weight",
+      "shape": [
+        64,
+        64,
+        5,
+        1,
+        1
+      ],
+      "eligible_parameters": 16384,
+      "actually_changed_parameters": 16384,
+      "original_l2": 27.659570693969727,
+      "changed_l2": 16.135175704956055,
+      "delta_l2": 12.970586776733398
+    }
+  ],
+  "temporal_0.25": [
+    {
+      "tensor": "core.features.layer0.conv_temporal.weight",
+      "shape": [
+        16,
+        16,
+        11,
+        1,
+        1
+      ],
+      "eligible_parameters": 2560,
+      "actually_changed_parameters": 2560,
+      "original_l2": 12.72806453704834,
+      "changed_l2": 3.821307897567749,
+      "delta_l2": 9.404292106628418
+    },
+    {
+      "tensor": "core.features.layer1.conv_temporal_1.weight",
+      "shape": [
+        32,
+        32,
+        5,
+        1,
+        1
+      ],
+      "eligible_parameters": 4096,
+      "actually_changed_parameters": 4096,
+      "original_l2": 16.74187469482422,
+      "changed_l2": 6.996432304382324,
+      "delta_l2": 11.781517028808594
+    },
+    {
+      "tensor": "core.features.layer2.conv_temporal_2.weight",
+      "shape": [
+        64,
+        64,
+        5,
+        1,
+        1
+      ],
+      "eligible_parameters": 16384,
+      "actually_changed_parameters": 16384,
+      "original_l2": 27.659570693969727,
+      "changed_l2": 11.58304214477539,
+      "delta_l2": 19.45587921142578
+    }
+  ],
+  "temporal_0.00": [
+    {
+      "tensor": "core.features.layer0.conv_temporal.weight",
+      "shape": [
+        16,
+        16,
+        11,
+        1,
+        1
+      ],
+      "eligible_parameters": 2560,
+      "actually_changed_parameters": 2560,
+      "original_l2": 12.72806453704834,
+      "changed_l2": 2.1853249073028564,
+      "delta_l2": 12.539058685302734
+    },
+    {
+      "tensor": "core.features.layer1.conv_temporal_1.weight",
+      "shape": [
+        32,
+        32,
+        5,
+        1,
+        1
+      ],
+      "eligible_parameters": 4096,
+      "actually_changed_parameters": 4096,
+      "original_l2": 16.74187469482422,
+      "changed_l2": 5.790283679962158,
+      "delta_l2": 15.708690643310547
+    },
+    {
+      "tensor": "core.features.layer2.conv_temporal_2.weight",
+      "shape": [
+        64,
+        64,
+        5,
+        1,
+        1
+      ],
+      "eligible_parameters": 16384,
+      "actually_changed_parameters": 16384,
+      "original_l2": 27.659570693969727,
+      "changed_l2": 9.59727954864502,
+      "delta_l2": 25.941173553466797
+    }
+  ],
+  "spatial_1.00": [
+    {
+      "tensor": "core.features.layer0.conv_spatial.weight",
+      "shape": [
+        16,
+        3,
+        1,
+        11,
+        11
+      ],
+      "eligible_parameters": 5808,
+      "actually_changed_parameters": 0,
+      "original_l2": 18.787240982055664,
+      "changed_l2": 18.787240982055664,
+      "delta_l2": 0.0
+    }
+  ],
+  "spatial_0.95": [
+    {
+      "tensor": "core.features.layer0.conv_spatial.weight",
+      "shape": [
+        16,
+        3,
+        1,
+        11,
+        11
+      ],
+      "eligible_parameters": 5808,
+      "actually_changed_parameters": 5808,
+      "original_l2": 18.787240982055664,
+      "changed_l2": 17.847877502441406,
+      "delta_l2": 0.9393623471260071
+    }
+  ],
+  "spatial_0.90": [
+    {
+      "tensor": "core.features.layer0.conv_spatial.weight",
+      "shape": [
+        16,
+        3,
+        1,
+        11,
+        11
+      ],
+      "eligible_parameters": 5808,
+      "actually_changed_parameters": 5808,
+      "original_l2": 18.787240982055664,
+      "changed_l2": 16.908517837524414,
+      "delta_l2": 1.878724455833435
+    }
+  ],
+  "spatial_0.85": [
+    {
+      "tensor": "core.features.layer0.conv_spatial.weight",
+      "shape": [
+        16,
+        3,
+        1,
+        11,
+        11
+      ],
+      "eligible_parameters": 5808,
+      "actually_changed_parameters": 5808,
+      "original_l2": 18.787240982055664,
+      "changed_l2": 15.969155311584473,
+      "delta_l2": 2.818085193634033
+    }
+  ],
+  "spatial_0.80": [
+    {
+      "tensor": "core.features.layer0.conv_spatial.weight",
+      "shape": [
+        16,
+        3,
+        1,
+        11,
+        11
+      ],
+      "eligible_parameters": 5808,
+      "actually_changed_parameters": 5808,
+      "original_l2": 18.787240982055664,
+      "changed_l2": 15.029792785644531,
+      "delta_l2": 3.7574479579925537
+    }
+  ],
+  "spatial_0.75": [
+    {
+      "tensor": "core.features.layer0.conv_spatial.weight",
+      "shape": [
+        16,
+        3,
+        1,
+        11,
+        11
+      ],
+      "eligible_parameters": 5808,
+      "actually_changed_parameters": 5808,
+      "original_l2": 18.787240982055664,
+      "changed_l2": 14.090432167053223,
+      "delta_l2": 4.696810245513916
+    }
+  ],
+  "spatial_0.70": [
+    {
+      "tensor": "core.features.layer0.conv_spatial.weight",
+      "shape": [
+        16,
+        3,
+        1,
+        11,
+        11
+      ],
+      "eligible_parameters": 5808,
+      "actually_changed_parameters": 5808,
+      "original_l2": 18.787240982055664,
+      "changed_l2": 13.151068687438965,
+      "delta_l2": 5.636170864105225
+    }
+  ],
+  "spatial_0.65": [
+    {
+      "tensor": "core.features.layer0.conv_spatial.weight",
+      "shape": [
+        16,
+        3,
+        1,
+        11,
+        11
+      ],
+      "eligible_parameters": 5808,
+      "actually_changed_parameters": 5808,
+      "original_l2": 18.787240982055664,
+      "changed_l2": 12.211706161499023,
+      "delta_l2": 6.575535297393799
+    }
+  ],
+  "spatial_0.60": [
+    {
+      "tensor": "core.features.layer0.conv_spatial.weight",
+      "shape": [
+        16,
+        3,
+        1,
+        11,
+        11
+      ],
+      "eligible_parameters": 5808,
+      "actually_changed_parameters": 5808,
+      "original_l2": 18.787240982055664,
+      "changed_l2": 11.272342681884766,
+      "delta_l2": 7.514895915985107
+    }
+  ],
+  "spatial_0.55": [
+    {
+      "tensor": "core.features.layer0.conv_spatial.weight",
+      "shape": [
+        16,
+        3,
+        1,
+        11,
+        11
+      ],
+      "eligible_parameters": 5808,
+      "actually_changed_parameters": 5808,
+      "original_l2": 18.787240982055664,
+      "changed_l2": 10.332983016967773,
+      "delta_l2": 8.454258918762207
+    }
+  ],
+  "spatial_0.50": [
+    {
+      "tensor": "core.features.layer0.conv_spatial.weight",
+      "shape": [
+        16,
+        3,
+        1,
+        11,
+        11
+      ],
+      "eligible_parameters": 5808,
+      "actually_changed_parameters": 5808,
+      "original_l2": 18.787240982055664,
+      "changed_l2": 9.393620491027832,
+      "delta_l2": 9.393620491027832
+    }
+  ],
+  "spatial_0.45": [
+    {
+      "tensor": "core.features.layer0.conv_spatial.weight",
+      "shape": [
+        16,
+        3,
+        1,
+        11,
+        11
+      ],
+      "eligible_parameters": 5808,
+      "actually_changed_parameters": 5808,
+      "original_l2": 18.787240982055664,
+      "changed_l2": 8.454258918762207,
+      "delta_l2": 10.332983016967773
+    }
+  ],
+  "spatial_0.40": [
+    {
+      "tensor": "core.features.layer0.conv_spatial.weight",
+      "shape": [
+        16,
+        3,
+        1,
+        11,
+        11
+      ],
+      "eligible_parameters": 5808,
+      "actually_changed_parameters": 5808,
+      "original_l2": 18.787240982055664,
+      "changed_l2": 7.514896392822266,
+      "delta_l2": 11.27234172821045
+    }
+  ],
+  "spatial_0.35": [
+    {
+      "tensor": "core.features.layer0.conv_spatial.weight",
+      "shape": [
+        16,
+        3,
+        1,
+        11,
+        11
+      ],
+      "eligible_parameters": 5808,
+      "actually_changed_parameters": 5808,
+      "original_l2": 18.787240982055664,
+      "changed_l2": 6.575534343719482,
+      "delta_l2": 12.211706161499023
+    }
+  ],
+  "spatial_0.30": [
+    {
+      "tensor": "core.features.layer0.conv_spatial.weight",
+      "shape": [
+        16,
+        3,
+        1,
+        11,
+        11
+      ],
+      "eligible_parameters": 5808,
+      "actually_changed_parameters": 5808,
+      "original_l2": 18.787240982055664,
+      "changed_l2": 5.636171340942383,
+      "delta_l2": 13.151068687438965
+    }
+  ],
+  "spatial_0.25": [
+    {
+      "tensor": "core.features.layer0.conv_spatial.weight",
+      "shape": [
+        16,
+        3,
+        1,
+        11,
+        11
+      ],
+      "eligible_parameters": 5808,
+      "actually_changed_parameters": 5808,
+      "original_l2": 18.787240982055664,
+      "changed_l2": 4.696810245513916,
+      "delta_l2": 14.090432167053223
+    }
+  ],
+  "spatial_0.20": [
+    {
+      "tensor": "core.features.layer0.conv_spatial.weight",
+      "shape": [
+        16,
+        3,
+        1,
+        11,
+        11
+      ],
+      "eligible_parameters": 5808,
+      "actually_changed_parameters": 5808,
+      "original_l2": 18.787240982055664,
+      "changed_l2": 3.757448196411133,
+      "delta_l2": 15.029791831970215
+    }
+  ],
+  "spatial_0.15": [
+    {
+      "tensor": "core.features.layer0.conv_spatial.weight",
+      "shape": [
+        16,
+        3,
+        1,
+        11,
+        11
+      ],
+      "eligible_parameters": 5808,
+      "actually_changed_parameters": 5808,
+      "original_l2": 18.787240982055664,
+      "changed_l2": 2.8180856704711914,
+      "delta_l2": 15.96915340423584
+    }
+  ],
+  "spatial_0.10": [
+    {
+      "tensor": "core.features.layer0.conv_spatial.weight",
+      "shape": [
+        16,
+        3,
+        1,
+        11,
+        11
+      ],
+      "eligible_parameters": 5808,
+      "actually_changed_parameters": 5808,
+      "original_l2": 18.787240982055664,
+      "changed_l2": 1.8787240982055664,
+      "delta_l2": 16.908517837524414
+    }
+  ],
+  "spatial_0.05": [
+    {
+      "tensor": "core.features.layer0.conv_spatial.weight",
+      "shape": [
+        16,
+        3,
+        1,
+        11,
+        11
+      ],
+      "eligible_parameters": 5808,
+      "actually_changed_parameters": 5808,
+      "original_l2": 18.787240982055664,
+      "changed_l2": 0.9393620491027832,
+      "delta_l2": 17.84787940979004
+    }
+  ],
+  "spatial_0.00": [
+    {
+      "tensor": "core.features.layer0.conv_spatial.weight",
+      "shape": [
+        16,
+        3,
+        1,
+        11,
+        11
+      ],
+      "eligible_parameters": 5808,
+      "actually_changed_parameters": 5808,
+      "original_l2": 18.787240982055664,
+      "changed_l2": 0.0,
+      "delta_l2": 18.787240982055664
+    }
+  ]
+}

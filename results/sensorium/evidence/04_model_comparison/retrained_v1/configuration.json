@@ -1,0 +1,87 @@
+{
+  "schema_version": "sensorium_part3_retrained_v1",
+  "protocol": "retrained_v1",
+  "project": {"name": "Sensorium held-out evaluation after retraining", "seed": 42},
+  "data": {
+    "session": "dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20",
+    "sessions": [
+      "dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20",
+      "dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20",
+      "dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20",
+      "dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20",
+      "dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20"
+    ],
+    "frame_start": 50, "frame_stop": 300, "frame_rate_hz": 30.0,
+    "input_frame_start": 0, "input_frame_stop": 300,
+    "neurons": 512, "neuron_seed": 42, "stimulus_similarity": 0.999,
+    "scope": "held-out evaluation after retraining",
+    "development_source_tier": "train", "test_source_tier": "oracle",
+    "validation_fraction": 0.20,
+    "excluded_source_tiers": ["live_test_main", "final_test_main", "live_test_bonus", "final_test_bonus"],
+    "grouping": "Whole trials and identifiable stimulus groups across sessions; isolate development overlap with oracle before seed-42 grouping",
+    "unresolved_source_identity": "Content matching does not establish unseen source films"
+  },
+  "preprocessing": {
+    "fit_role": "train", "frame_start": 0, "frame_stop": 300,
+    "video": "(x - train mean) / train standard deviation",
+    "behavior": "x / train standard deviation; no mean subtraction",
+    "pupil": "(x - train mean) / train standard deviation",
+    "responses": "x times train precision; no mean subtraction or clipping; retain source near-zero numerical negatives",
+    "readout_initialization": "New train loader only",
+    "source_statistics_policy": "Never read historical all or official-train statistics for learned transforms"
+  },
+  "models": {
+    "static": {
+      "configuration": "experiments/01_baselines/records/static/training_config.yaml",
+      "configuration_sha256": "6ab522cebcc262c1346f9680c76bbf1f6a25562e8678f7bd84b1046850b3362b",
+      "initialization": "from scratch", "selection_role": "validation"
+    },
+    "dynamic": {
+      "configuration": "experiments/03_parameter_matching/configs/dynamic_parameter_matched.yaml",
+      "configuration_sha256": "b81f7b149420dc09ff680bd3654522c9cce7da86a73c0a72c988a3d46e6097e8",
+      "initialization": "from scratch", "selection_role": "validation"
+    }
+  },
+  "training": {
+    "hyperparameters": "Unchanged architecture-specific source configurations",
+    "seed": 42, "selection_metric": "mean per-neuron validation correlation",
+    "trainer_validation_alias": "oracle contains only new validation trial IDs",
+    "test_during_training": false,
+    "resume": "This run's complete epoch-boundary state only, with protocol, split, preprocessing, architecture and seed guards"
+  },
+  "gpfa": {
+    "measurement_source": "experiments/04_model_comparison/configs/pilot.yaml",
+    "measurement_source_sha256": "fcaf69164f92ccd869b1397d35c57695ee0c25788c1c8d5bd6ded86cb5e57e66",
+    "latent_dim": 4, "effective_observation_step": 4,
+    "initial_lengthscales_seconds": [0.125, 0.25, 0.5, 1.0],
+    "selection_em_iterations": 12, "final_em_iterations": 20,
+    "tolerance": 1e-6, "lengthscale_bounds_seconds": [0.10, 3.0],
+    "selection_criterion": "validation neural log likelihood",
+    "final_fit_role": "train", "inference": "offline full-window posterior",
+    "refit_train_plus_validation": false
+  },
+  "reliability": {"splits": 200, "block_sizes_frames": [4, 8, 16, 32]},
+  "model_nulls": {"permutations": 200, "block_size_frames": 16},
+  "traditional": {"paired_bootstrap_samples": 2000, "temporal_rsa_stride": 10},
+  "response_matching": {
+    "tolerance": 0.005, "noise_seed": 123,
+    "selection_role": "validation", "noise_scale_role": "train",
+    "summary": "Mean per-neuron Pearson correlation across validation trial and time samples; no repeats required",
+    "sigma_grid_rule": "0 followed by numpy.geomspace(0.01, 10, 100)",
+    "clip_minimum": 1e-5,
+    "interpretation": "Fixed output perturbation; not separately trained matched models",
+    "failed_test_match": "Q1 matched-accuracy interpretation is inconclusive; retain main comparisons"
+  },
+  "reporting": {
+    "primary": ["position_correlation", "velocity_direction_cosine"],
+    "secondary": ["normalized_position_rmse", "speed_profile_correlation", "acceleration_direction_cosine"],
+    "uncertainty_unit": "Movie condition, paired within the pilot session",
+    "response_summary": "Mean per-neuron Pearson correlation on identical trial/time support",
+    "five_session_summary": "Report each session and their unweighted mean; do not pool trajectory evidence across sessions",
+    "undefined": "NA with reason and support; no zero replacement",
+    "reliability_normalized_scores": false,
+    "condition_exclusion_by_test_reliability": false,
+    "cross_session_trajectory_pooling": false,
+    "historical_oracle_exposure": "Oracle was explored in Parts 1 and 2; this is not virgin external validation"
+  }
+}

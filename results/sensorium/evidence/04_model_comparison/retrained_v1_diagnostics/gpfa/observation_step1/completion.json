@@ -1,0 +1,32 @@
+{
+  "files": {
+    "condition_metrics.csv": "f2f82c0a1d036f59c4678fd7117015e58ebdfc67d8ce4a9401a58cc559106492",
+    "fit_history.csv": "17af5028f88806e9aad75504ec4a2cbb8aee6707aa496f58ecfec5ecf482ee2a",
+    "fit_identity.json": "146ee503d8b344ab04d0dd8ff7d012de43281531f882b774c93558b74cff248b",
+    "model_comparison.csv": "24c9bce916fc3d6499cea8f7e202988ef9017be22413e4283847439beed3aca4",
+    "reconstruction.csv": "8186c115da315f9029b9f376c7f82c5b590a678ecb037a5fa6f8736ee01bd267",
+    "reconstruction_neurons.csv": "562988dcb4b724aa49ceee789ae2a43ee88a3d2b5c28b91e6d856de6e93c0731",
+    "reliability_nulls.csv": "8dd90547409c4972bbcc699fb40267240f5e4e088aa6608218b8e08e96a5476d",
+    "reliability_observed.csv": "d18a84f5639e61d168e2c0cddb3726eae86d77f4c1f8db184a486d78bb2bd4b4",
+    "reliability_summary.csv": "24d644b2611ab63d0b0aa353ca57c39053ad78ebcd27c91340c4f76c610e76e9",
+    "selection.csv": "8cb24d4b66b8d5a6b2bbc587b630f537ea63e11b6059a31c2d59baf2cb8f0a6b"
+  },
+  "record": {
+    "elapsed_seconds": 207.7029999999795,
+    "em_converged": false,
+    "em_iterations": 20,
+    "em_limit": 20,
+    "em_limit_reached": true,
+    "fit_seed": 42,
+    "last_improvement": 124.44590508192778,
+    "last_log_likelihood": -50635282.89732018,
+    "latent_dim": 4,
+    "neurons": 512,
+    "observation_step": 1,
+    "parameter_digest": "bf1f78de8798110e76ddb711b3d3a03dfe2f0192f84fadd844afc2c802449da9",
+    "profile": "observation_step1",
+    "status": "complete",
+    "train_fraction": 1.0
+  },
+  "stage_identity": "5e6e0d1e48a695dd205db287789a51aa8210a195027af662b94592276b9a71c1"
+}

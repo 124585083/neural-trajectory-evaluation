@@ -1,0 +1,6 @@
+stage,latent_dim,initial_lengthscale_seconds,calibration_nll_per_observation,calibration_standard_error,selected
+dimension,4,0.5,1.448284851497982,0.033603563667587,True
+initialization,4,0.125,1.4485021145258277,0.03360367226267877,False
+initialization,4,0.25,1.4481153480049034,0.03360533683271757,True
+initialization,4,0.5,1.448284851497982,0.033603563667587,False
+initialization,4,1.0,1.4489097575189687,0.03360525511698022,False

@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1008pt" height="720pt" viewBox="0 0 1008 720" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <title>methods_paired_trial_proposal</title>
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title>methods_paired_trial_proposal</dc:title>
+    <dc:description>Documentation schematic; not research data.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.9.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 720 
+L 1008 720 
+L 1008 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 54.432 218.16 
+L 303.408 218.16 
+Q 315.504 218.16 315.504 209.52 
+L 315.504 107.28 
+Q 315.504 98.64 303.408 98.64 
+L 54.432 98.64 
+Q 42.336 98.64 42.336 107.28 
+L 42.336 209.52 
+Q 42.336 218.16 54.432 218.16 
+z
+" clip-path="url(#pc47f1aa2c9)" style="fill: #f1f5f8; stroke: #bac7d1; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 373.968 218.16 
+L 622.944 218.16 
+Q 635.04 218.16 635.04 209.52 
+L 635.04 107.28 
+Q 635.04 98.64 622.944 98.64 
+L 373.968 98.64 
+Q 361.872 98.64 361.872 107.28 
+L 361.872 209.52 
+Q 361.872 218.16 373.968 218.16 
+z
+" clip-path="url(#pc47f1aa2c9)" style="fill: #fff4e9; stroke: #bac7d1; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 693.504 218.16 
+L 953.568 218.16 
+Q 965.664 218.16 965.664 209.52 
+L 965.664 107.28 
+Q 965.664 98.64 953.568 98.64 
+L 693.504 98.64 
+Q 681.408 98.64 681.408 107.28 
+L 681.408 209.52 
+Q 681.408 218.16 693.504 218.16 
+z
+" clip-path="url(#pc47f1aa2c9)" style="fill: #edf6f2; stroke: #bac7d1; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 315.486712 158.4 
+Q 338.183943 158.4 359.204123 158.4 
+" clip-path="url(#pc47f1aa2c9)" style="fill: none; stroke: #526476; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 353.604123 155.6 
+L 359.204123 158.4 
+L 353.604123 161.2 
+z
+" clip-path="url(#pc47f1aa2c9)" style="fill: #526476; stroke: #526476; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 635.022712 158.4 
+Q 657.719943 158.4 678.740123 158.4 
+" clip-path="url(#pc47f1aa2c9)" style="fill: none; stroke: #526476; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 673.140123 155.6 
+L 678.740123 158.4 
+L 673.140123 161.2 
+z
+" clip-path="url(#pc47f1aa2c9)" style="fill: #526476; stroke: #526476; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 50.4 686.88 
+L 957.6 686.88 
+Q 965.664 686.88 965.664 681.12 
+L 965.664 635.76 
+Q 965.664 630 957.6 630 
+L 50.4 630 
+Q 42.336 630 42.336 635.76 
+L 42.336 681.12 
+Q 42.336 686.88 50.4 686.88 
+z
+" clip-path="url(#pc47f1aa2c9)" style="fill: #fff4e9; stroke: #e7c39e; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="fill: #20364d; font: 700 21px 'DejaVu Sans'; text-anchor: start" x="50.4" y="41.876719" transform="rotate(-0 50.4 41.876719)">Proposed next study: behavior within the same physical condition</text>
+   </g>
+   <g id="text_2">
+    <text style="fill: #526476; font: 12px 'DejaVu Sans'; text-anchor: start" x="50.4" y="63.170625" transform="rotate(-0 50.4 63.170625)">NOT EXECUTED  |  Requires paired neural–behavior trials  |  All curves below are schematic</text>
+   </g>
+   <g id="text_3">
+    <text style="fill: #20364d; font: 700 12.5px 'DejaVu Sans'; text-anchor: start" x="63.504" y="129.792734" transform="rotate(-0 63.504 129.792734)">1  |  Verify paired observations</text>
+   </g>
+   <g id="text_4">
+    <text style="fill: #20364d; font: 11px 'DejaVu Sans'" transform="translate(63.504 153.798281)">Same animal, session and trial ID</text>
+    <text style="fill: #20364d; font: 11px 'DejaVu Sans'" transform="translate(63.504 167.787531)">Known stimulus + neural + action records</text>
+    <text style="fill: #20364d; font: 11px 'DejaVu Sans'" transform="translate(63.504 181.776781)">Exact event / feedback timing</text>
+   </g>
+   <g id="text_5">
+    <text style="fill: #c35d21; font: 700 12.5px 'DejaVu Sans'; text-anchor: start" x="383.04" y="129.792734" transform="rotate(-0 383.04 129.792734)">2  |  Group within condition</text>
+   </g>
+   <g id="text_6">
+    <text style="fill: #20364d; font: 11px 'DejaVu Sans'" transform="translate(383.04 153.798281)">Signed error: e = endpoint − objective</text>
+    <text style="fill: #20364d; font: 11px 'DejaVu Sans'" transform="translate(383.04 167.787531)">Positive: e &gt; δ; negative: e &lt; −δ</text>
+    <text style="fill: #20364d; font: 11px 'DejaVu Sans'" transform="translate(383.04 181.776781)">Choose δ before inspecting neural results</text>
+   </g>
+   <g id="text_7">
+    <text style="fill: #227969; font: 700 12.5px 'DejaVu Sans'; text-anchor: start" x="702.576" y="129.792734" transform="rotate(-0 702.576 129.792734)">3  |  Establish a reliable contrast</text>
+   </g>
+   <g id="text_8">
+    <text style="fill: #20364d; font: 11px 'DejaVu Sans'" transform="translate(702.576 153.798281)">Disjoint paired-trial train / test sets</text>
+    <text style="fill: #20364d; font: 11px 'DejaVu Sans'" transform="translate(702.576 167.787531)">Frozen representation + readout</text>
+    <text style="fill: #20364d; font: 11px 'DejaVu Sans'" transform="translate(702.576 181.776781)">Reliability and within-condition shuffles</text>
+   </g>
+   <g id="text_9">
+    <text style="fill: #20364d; font: 700 14px 'DejaVu Sans'; text-anchor: start" x="50.4" y="252.72" transform="rotate(-0 50.4 252.72)">Primary test: pre-feedback signed-error decoding on held-out paired trials</text>
+   </g>
+   <g id="text_10">
+    <text style="fill: #526476; font: 11.5px 'DejaVu Sans'" transform="translate(50.4 288.818203)">Compare with condition/time-only and movement-informed references. Report unsupported groups and failed reliability.</text>
+    <text style="fill: #526476; font: 11.5px 'DejaVu Sans'" transform="translate(50.4 304.754059)">Behavioral groups denote action outcomes; a positive neural result could reflect estimate, goal or motor preparation.</text>
+   </g>
+   <g id="text_11">
+    <text style="fill: #227969; font: 700 13px 'DejaVu Sans'; text-anchor: start" x="50.4" y="336.24" transform="rotate(-0 50.4 336.24)">Only after reliable behavioral correspondence: examine when the difference changes</text>
+   </g>
+   <g id="text_12">
+    <text style="fill: #526476; font: 11.5px 'DejaVu Sans'" transform="translate(50.4 609.218203)">These patterns may coexist. An event-related claim needs change from a pre-event baseline, reliable support</text>
+    <text style="fill: #526476; font: 11.5px 'DejaVu Sans'" transform="translate(50.4 624.717148)">and timing/movement controls; post-event decoding alone is insufficient. A state difference does not identify its mechanism.</text>
+   </g>
+   <g id="text_13">
+    <text style="fill: #77502b; font: 11.5px 'DejaVu Sans'" transform="translate(65.52 654.660719)">Decision gate: without trial pairing, pre-feedback timing and adequate group reliability, stop at the data limitation.</text>
+    <text style="fill: #77502b; font: 11.5px 'DejaVu Sans'" transform="translate(65.52 669.285844)">Released condition means cannot be relabeled to recover above/below neural trial groups.</text>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_8">
+    <path d="M 85.68 530.64 
+L 458.64 530.64 
+L 458.64 383.04 
+L 85.68 383.04 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 205.0272 530.64 
+L 451.1808 530.64 
+L 451.1808 383.04 
+L 205.0272 383.04 
+z
+" clip-path="url(#p5baccd8bba)" style="fill: #f1f5f8; stroke: #f1f5f8; stroke-linejoin: miter"/>
+   </g>
+   <g id="matplotlib.axis_1"/>
+   <g id="matplotlib.axis_2">
+    <g id="text_14">
+     <text style="fill: #20364d; font: 10.5px 'DejaVu Sans'" transform="translate(67.738625 512.453086) rotate(-90)">Schematic difference</text>
+     <text style="fill: #20364d; font: 10.5px 'DejaVu Sans'" transform="translate(79.496328 510.568008) rotate(-90)">(no measured scale)</text>
+    </g>
+   </g>
+   <g id="line2d_1">
+    <path d="M 205.0272 530.64 
+L 205.0272 383.04 
+" clip-path="url(#p5baccd8bba)" style="fill: none; stroke-dasharray: 1.3,2.145; stroke-dashoffset: 0; stroke: #bac7d1; stroke-width: 1.3"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 324.3744 530.64 
+L 324.3744 383.04 
+" clip-path="url(#p5baccd8bba)" style="fill: none; stroke-dasharray: 1.3,2.145; stroke-dashoffset: 0; stroke: #526476; stroke-width: 1.3"/>
+   </g>
+   <g id="line2d_3">
+    <path d="M 451.1808 530.64 
+L 451.1808 383.04 
+" clip-path="url(#p5baccd8bba)" style="fill: none; stroke-dasharray: 1.3,2.145; stroke-dashoffset: 0; stroke: #526476; stroke-width: 1.3"/>
+   </g>
+   <g id="line2d_4">
+    <path d="M 85.68 445.951475 
+L 451.1808 445.951475 
+" clip-path="url(#p5baccd8bba)" style="fill: none; stroke-dasharray: 9.99,4.32; stroke-dashoffset: 0; stroke: #227969; stroke-width: 2.7"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 85.68 530.64 
+L 85.68 383.04 
+" style="fill: none; stroke: #bac7d1; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 85.68 530.64 
+L 458.64 530.64 
+" style="fill: none; stroke: #bac7d1; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_15">
+    <text style="fill: #20364d; font: 10px 'DejaVu Sans'; text-anchor: middle" x="205.0272" y="536.68918" transform="rotate(-0 205.0272 536.68918)">Occlusion</text>
+   </g>
+   <g id="text_16">
+    <text style="fill: #20364d; font: 10px 'DejaVu Sans'; text-anchor: middle" x="324.3744" y="536.68918" transform="rotate(-0 324.3744 536.68918)">Task event</text>
+   </g>
+   <g id="text_17">
+    <text style="fill: #20364d; font: 10px 'DejaVu Sans'" transform="translate(434.834706 525.491368)">Before</text>
+    <text style="fill: #20364d; font: 10px 'DejaVu Sans'" transform="translate(428.210488 536.68918)">feedback</text>
+   </g>
+   <g id="text_18">
+    <text style="fill: #526476; font: 10.5px 'DejaVu Sans'; text-anchor: start" x="108.0576" y="396.348197" transform="rotate(-0 108.0576 396.348197)">Illustrative signed group difference</text>
+   </g>
+   <g id="text_19">
+    <text style="fill: #20364d; font: 700 12.5px 'DejaVu Sans'; text-anchor: start" x="85.68" y="374.04" transform="rotate(-0 85.68 374.04)">Persistent behavior-related offset</text>
+   </g>
+  </g>
+  <g id="axes_3">
+   <g id="patch_12">
+    <path d="M 589.68 530.64 
+L 962.64 530.64 
+L 962.64 383.04 
+L 589.68 383.04 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 709.0272 530.64 
+L 955.1808 530.64 
+L 955.1808 383.04 
+L 709.0272 383.04 
+z
+" clip-path="url(#pbce5e72443)" style="fill: #f1f5f8; stroke: #f1f5f8; stroke-linejoin: miter"/>
+   </g>
+   <g id="matplotlib.axis_3"/>
+   <g id="matplotlib.axis_4">
+    <g id="text_20">
+     <text style="fill: #20364d; font: 10.5px 'DejaVu Sans'" transform="translate(571.738625 512.453086) rotate(-90)">Schematic difference</text>
+     <text style="fill: #20364d; font: 10.5px 'DejaVu Sans'" transform="translate(583.496328 510.568008) rotate(-90)">(no measured scale)</text>
+    </g>
+   </g>
+   <g id="line2d_5">
+    <path d="M 709.0272 530.64 
+L 709.0272 383.04 
+" clip-path="url(#pbce5e72443)" style="fill: none; stroke-dasharray: 1.3,2.145; stroke-dashoffset: 0; stroke: #bac7d1; stroke-width: 1.3"/>
+   </g>
+   <g id="line2d_6">
+    <path d="M 828.3744 530.64 
+L 828.3744 383.04 
+" clip-path="url(#pbce5e72443)" style="fill: none; stroke-dasharray: 1.3,2.145; stroke-dashoffset: 0; stroke: #526476; stroke-width: 1.3"/>
+   </g>
+   <g id="line2d_7">
+    <path d="M 955.1808 530.64 
+L 955.1808 383.04 
+" clip-path="url(#pbce5e72443)" style="fill: none; stroke-dasharray: 1.3,2.145; stroke-dashoffset: 0; stroke: #526476; stroke-width: 1.3"/>
+   </g>
+   <g id="line2d_8">
+    <path d="M 589.68 483.456393 
+L 709.0272 483.456393 
+L 828.3744 483.456393 
+L 865.6704 433.853115 
+L 955.1808 433.853115 
+" clip-path="url(#pbce5e72443)" style="fill: none; stroke-dasharray: 9.99,4.32; stroke-dashoffset: 0; stroke: #227969; stroke-width: 2.7"/>
+   </g>
+   <g id="patch_14">
+    <path d="M 589.68 530.64 
+L 589.68 383.04 
+" style="fill: none; stroke: #bac7d1; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 589.68 530.64 
+L 962.64 530.64 
+" style="fill: none; stroke: #bac7d1; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_21">
+    <text style="fill: #20364d; font: 10px 'DejaVu Sans'; text-anchor: middle" x="709.0272" y="536.68918" transform="rotate(-0 709.0272 536.68918)">Occlusion</text>
+   </g>
+   <g id="text_22">
+    <text style="fill: #20364d; font: 10px 'DejaVu Sans'; text-anchor: middle" x="828.3744" y="536.68918" transform="rotate(-0 828.3744 536.68918)">Task event</text>
+   </g>
+   <g id="text_23">
+    <text style="fill: #20364d; font: 10px 'DejaVu Sans'" transform="translate(938.834706 525.491368)">Before</text>
+    <text style="fill: #20364d; font: 10px 'DejaVu Sans'" transform="translate(932.210487 536.68918)">feedback</text>
+   </g>
+   <g id="text_24">
+    <text style="fill: #526476; font: 10.5px 'DejaVu Sans'; text-anchor: start" x="612.0576" y="396.348197" transform="rotate(-0 612.0576 396.348197)">Illustrative signed group difference</text>
+   </g>
+   <g id="text_25">
+    <text style="fill: #20364d; font: 700 12.5px 'DejaVu Sans'; text-anchor: start" x="589.68" y="374.04" transform="rotate(-0 589.68 374.04)">Event-related change</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pc47f1aa2c9">
+   <rect x="0" y="0" width="1008" height="720"/>
+  </clipPath>
+  <clipPath id="p5baccd8bba">
+   <rect x="85.68" y="383.04" width="372.96" height="147.6"/>
+  </clipPath>
+  <clipPath id="pbce5e72443">
+   <rect x="589.68" y="383.04" width="372.96" height="147.6"/>
+  </clipPath>
+ </defs>
+</svg>

@@ -1,8 +1,10 @@
 * text=auto
+# CRLF is intentional in byte-preserved scientific records.
+* whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 
 *.py text eol=lf
 *.md text eol=lf
-experiments/05_mental_pong/trajectory_project/report_templates/*.md.in text eol=lf
+code/mental_pong/trajectory_project/report_templates/*.md.in text eol=lf
 *.yaml text eol=lf
 *.yml text eol=lf
 *.json text eol=lf
@@ -14,8 +16,8 @@ experiments/05_mental_pong/trajectory_project/report_templates/*.md.in text eol=
 *.svg text eol=lf
 .gitignore text eol=lf
 .gitattributes text eol=lf
-experiments/05_mental_pong/requirements.lock.txt text eol=lf
-experiments/05_mental_pong/mini_replay/requirements*.txt text eol=lf
+code/mental_pong/requirements.lock.txt text eol=lf
+code/mental_pong/mini_replay/requirements*.txt text eol=lf
 # Preserve the exact upstream license copy, including its line endings.
 third_party/licenses/MentalPong-MIT.txt -text
 models/**/*.pt filter=lfs diff=lfs merge=lfs -text
@@ -24,18 +26,26 @@ models/**/*.pkl filter=lfs diff=lfs merge=lfs -text
 models/**/*.npz filter=lfs diff=lfs merge=lfs -text
 
 # Preserve serialized Mental-Pong numerical results exactly as released here.
-experiments/05_mental_pong/trajectory_project/**/results/*.csv -text
-experiments/05_mental_pong/trajectory_project/**/results/**/*.csv -text
-experiments/05_mental_pong/trajectory_project/**/data/*.csv -text
-experiments/05_mental_pong/trajectory_project/**/configs/condition_splits_100.json -text
-experiments/05_mental_pong/**/*.json -text
+code/mental_pong/trajectory_project/**/results/*.csv -text
+code/mental_pong/trajectory_project/**/results/**/*.csv -text
+code/mental_pong/trajectory_project/**/data/*.csv -text
+code/mental_pong/trajectory_project/**/configs/condition_splits_100.json -text
+code/mental_pong/**/*.json -text
 
 # Preserve existing serialized Sensorium records independently of host EOL rules.
-experiments/01_baselines/records/** -text
+code/sensorium/configs/** -text
+code/sensorium/environments/*.toml -text
+code/sensorium/records/baselines/** -text
 # Generated model dumps retain their original indentation-only blank lines.
-experiments/01_baselines/records/**/*.txt whitespace=-blank-at-eol,cr-at-eol
-experiments/03_parameter_matching/records/** -text
-results/tables/** -text
+code/sensorium/records/baselines/**/*.txt whitespace=-blank-at-eol,cr-at-eol
+code/sensorium/records/parameter_matching/** -text
+results/sensorium/evidence/** -text
+results/mental_pong/evidence/** -text
+results/sensorium/figures/** -text
+results/mental_pong/figures/** -text
+# Generated SVG serializers retain indentation-only lines; keep figure hashes.
+results/sensorium/figures/documentation/*.svg whitespace=-blank-at-eol,cr-at-eol
+results/mental_pong/figures/documentation/*.svg whitespace=-blank-at-eol,cr-at-eol
 
 # Preserve exact legal notices and placeholder bytes across Git checkouts.
 LICENSE -text

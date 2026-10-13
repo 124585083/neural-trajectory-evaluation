@@ -1,0 +1,13 @@
+Historical source edition retained for `closeout_setup.initialize()` source collection. Scientific text is historical; only navigation links were repaired during document consolidation. Saved source hashes continue to identify the original source edition. Use the [current source briefs](../../../../results/mental_pong/MODELS_AND_DATA.md) for drafting.
+
+# Condition-mean endpoint reconstruction
+
+Read the [scientific report](REPORT.md), [own-target table](../../../../results/mental_pong/evidence/condition_endpoint_fa_gpfa_v1/self_reconstruction_main_table.csv), [2x2 table](../../../../results/mental_pong/evidence/condition_endpoint_fa_gpfa_v1/cross_2x2_summary.csv), [condition results](../../../../results/mental_pong/evidence/condition_endpoint_fa_gpfa_v1/condition_self_comparison.csv) and [coverage](../../../../results/mental_pong/evidence/condition_endpoint_fa_gpfa_v1/condition_label_coverage.csv). The [protocol comparison](../../../../results/mental_pong/01_task_motion/SETUP.md) explains the change from repeated trial-label fitting. The later [closeout report](../../../../results/mental_pong/02_behavior_relation/RESULTS.md) adds the completed randomization controls.
+
+The publication module uses a thin [entry point](../../README.md) for read-only verification and selected saved-case replay. The full historical runner remains part of the dependency closure. Full execution requires the registered external source bundle; it was not rerun during integration.
+
+The condition-label arrays and row-wise time indices are retained externally while their redistribution basis remains unresolved; they are not included in the candidate public tree. When those authorized inputs are available, each `<animal>_condition_labels.npz` has `objective_xy` and `behavior_xy` with axes `[condition,time,xy]`. The sample index has one row per valid condition and time. The existing representation files have `FA50[half,condition,time,dimension]` and `GPFA50` with the same axes; half index 0 is the primary half1 input.
+
+Each saved test prediction file has `predictions[head,condition,time,xy]`. Head 0 is the objective-trained head and head 1 is the candidate-trained head. `condition_ids`, `times_ms`, `test_condition_indices` and `test_input_support` define identities and support. Training-side predictions remain NaN. Membership, large weights, latent files, predictions and complete atlases are listed in the [artifact registry](../../integration/artifact_registry.csv).
+
+`raw_preprocessing=fail` is retained. Fit provenance and filtering checks apply only to the released neural inputs. Original scientific audits remain separate from the integration checks and the English report's new hash.

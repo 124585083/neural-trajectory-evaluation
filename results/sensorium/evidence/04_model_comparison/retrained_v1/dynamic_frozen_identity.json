@@ -1,0 +1,70 @@
+{
+  "status": "complete",
+  "initialization": "from_scratch",
+  "identity": {
+    "run_id": "retrained_v1_dynamic_seed42",
+    "protocol_sha256": "882065b68a1a9ebef1cfa387db10a75cb3f7b334037ab5eefbd6131c96057293",
+    "split_sha256": "52d021ee699ddd5d026a4deba3375838548b352f7d46ec3b878d5460b261e926",
+    "preprocessing_sha256": "52a9b81d45ffd23fdee5b2502a025d4234946f24568dee95b8eb2a8a9e88ac73",
+    "seed": 42,
+    "architecture": "dynamic",
+    "architecture_sha256": "b81f7b149420dc09ff680bd3654522c9cce7da86a73c0a72c988a3d46e6097e8",
+    "training_code_sha256": "c6b26df2c355327326173060958be0eabef6a1020fa351a274762224ac759929",
+    "training": {
+      "trainer": "sensorium.training.video_training_loop.standard_trainer",
+      "optimizer": "AdamW",
+      "learning_rate": 0.005,
+      "optimizer_defaults": {
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "weight_decay": 0.01,
+        "amsgrad": false
+      },
+      "max_epochs": 200,
+      "loss": "PoissonLoss",
+      "average_loss": false,
+      "scale_loss": true,
+      "gradient_accumulation_sessions": 5,
+      "early_stopping_metric": "get_correlations",
+      "patience": 5,
+      "interval": 1,
+      "tolerance": 1e-06,
+      "restore_best": true,
+      "scheduler": "ReduceLROnPlateau",
+      "lr_decay_steps": 4,
+      "lr_decay_factor": 0.3,
+      "min_lr": 0.0001,
+      "mixed_precision": false,
+      "activation_checkpointing": false
+    },
+    "parameter_counts": {
+      "core": 98672,
+      "readout": 2763106,
+      "shifter": 285,
+      "total": 2862063
+    },
+    "initialization": "fresh_parameters_and_batchnorm_train_batches_only",
+    "loss_scale_dataset_lengths": {
+      "dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20": 711,
+      "dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20": 682,
+      "dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20": 711,
+      "dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20": 739,
+      "dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20": 712
+    },
+    "scope": "formal_training"
+  },
+  "identity_digest": "483acefdc193c9c34f40ecb53fb03e075a6b946a4efb838a2a1f783aa926390a",
+  "checkpoint": "best.pt",
+  "checkpoint_sha256": "c6eff392ec412494ef69d6e599193711f4b5428862fe57633899280144531954",
+  "sha256": "c6eff392ec412494ef69d6e599193711f4b5428862fe57633899280144531954",
+  "split_sha256": "52d021ee699ddd5d026a4deba3375838548b352f7d46ec3b878d5460b261e926",
+  "preprocessing_sha256": "52a9b81d45ffd23fdee5b2502a025d4234946f24568dee95b8eb2a8a9e88ac73",
+  "config_sha256": "882065b68a1a9ebef1cfa387db10a75cb3f7b334037ab5eefbd6131c96057293",
+  "state_sha256": "eab215d8ac83d2910692ea4a0325f538932497eab2c2f244ca8e12ec6c1a2bda",
+  "best_epoch": 109,
+  "selection_role": "validation",
+  "test_used_for_selection": false
+}

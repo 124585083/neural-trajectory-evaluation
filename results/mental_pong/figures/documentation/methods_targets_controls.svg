@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1008pt" height="792pt" viewBox="0 0 1008 792" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <title>methods_targets_controls</title>
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title>methods_targets_controls</dc:title>
+    <dc:description>Documentation schematic; not research data.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.9.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 792 
+L 1008 792 
+L 1008 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 60.48 499.752 
+L 282.24 499.752 
+L 282.24 466.488 
+L 60.48 466.488 
+z
+" clip-path="url(#p0a53ace708)" style="fill: #f1f5f8; stroke: #ffffff; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 282.24 499.752 
+L 418.32 499.752 
+L 418.32 466.488 
+L 282.24 466.488 
+z
+" clip-path="url(#p0a53ace708)" style="fill: #f1f5f8; stroke: #ffffff; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 418.32 499.752 
+L 554.4 499.752 
+L 554.4 466.488 
+L 418.32 466.488 
+z
+" clip-path="url(#p0a53ace708)" style="fill: #f1f5f8; stroke: #ffffff; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 60.48 533.016 
+L 282.24 533.016 
+L 282.24 499.752 
+L 60.48 499.752 
+z
+" clip-path="url(#p0a53ace708)" style="fill: #f1f5f8; stroke: #ffffff; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 282.24 533.016 
+L 418.32 533.016 
+L 418.32 499.752 
+L 282.24 499.752 
+z
+" clip-path="url(#p0a53ace708)" style="fill: #eef3fa; stroke: #ffffff; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 418.32 533.016 
+L 554.4 533.016 
+L 554.4 499.752 
+L 418.32 499.752 
+z
+" clip-path="url(#p0a53ace708)" style="fill: #fff4e9; stroke: #ffffff; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 60.48 566.28 
+L 282.24 566.28 
+L 282.24 533.016 
+L 60.48 533.016 
+z
+" clip-path="url(#p0a53ace708)" style="fill: #f1f5f8; stroke: #ffffff; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 282.24 566.28 
+L 418.32 566.28 
+L 418.32 533.016 
+L 282.24 533.016 
+z
+" clip-path="url(#p0a53ace708)" style="fill: #eef3fa; stroke: #ffffff; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 418.32 566.28 
+L 554.4 566.28 
+L 554.4 533.016 
+L 418.32 533.016 
+z
+" clip-path="url(#p0a53ace708)" style="fill: #fff4e9; stroke: #ffffff; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 64.512 727.056 
+L 479.808 727.056 
+Q 491.904 727.056 491.904 717.552 
+L 491.904 610.632 
+Q 491.904 601.128 479.808 601.128 
+L 64.512 601.128 
+Q 52.416 601.128 52.416 610.632 
+L 52.416 717.552 
+Q 52.416 727.056 64.512 727.056 
+z
+" clip-path="url(#p0a53ace708)" style="fill: #eef3fa; stroke: #bac7d1; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 543.312 727.056 
+L 953.568 727.056 
+Q 965.664 727.056 965.664 717.552 
+L 965.664 610.632 
+Q 965.664 601.128 953.568 601.128 
+L 543.312 601.128 
+Q 531.216 601.128 531.216 610.632 
+L 531.216 717.552 
+Q 531.216 727.056 543.312 727.056 
+z
+" clip-path="url(#p0a53ace708)" style="fill: #fff4e9; stroke: #bac7d1; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_1">
+    <path d="M 60.48 344.52 
+L 90.72 344.52 
+" clip-path="url(#p0a53ace708)" style="fill: none; stroke: #24659b; stroke-width: 2.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 342.72 344.52 
+L 372.96 344.52 
+" clip-path="url(#p0a53ace708)" style="fill: none; stroke-dasharray: 9.25,4; stroke-dashoffset: 0; stroke: #c35d21; stroke-width: 2.5"/>
+   </g>
+   <g id="text_1">
+    <text style="fill: #20364d; font: 700 21px 'DejaVu Sans'; text-anchor: start" x="50.4" y="44.468719" transform="rotate(-0 50.4 44.468719)">Targets, fitted heads and randomized controls</text>
+   </g>
+   <g id="text_2">
+    <text style="fill: #526476; font: 12px 'DejaVu Sans'; text-anchor: start" x="50.4" y="68.570625" transform="rotate(-0 50.4 68.570625)">Completed protocol  |  Geometry sketches illustrate the rule; they are not recorded trajectories</text>
+   </g>
+   <g id="text_3">
+    <text style="fill: #20364d; font: 11.5px 'DejaVu Sans'; text-anchor: start" x="100.8" y="347.693281" transform="rotate(-0 100.8 347.693281)">Objective physical path</text>
+   </g>
+   <g id="text_4">
+    <text style="fill: #20364d; font: 11.5px 'DejaVu Sans'; text-anchor: start" x="383.04" y="347.693281" transform="rotate(-0 383.04 347.693281)">Endpoint-constrained candidate</text>
+   </g>
+   <g id="text_5">
+    <text style="fill: #526476; font: 11.5px 'DejaVu Sans'; text-anchor: start" x="740.88" y="347.693281" transform="rotate(-0 740.88 347.693281)">Shared x, arrival time and masks</text>
+   </g>
+   <g id="text_6">
+    <!-- After the anchor:  $\alpha(t) = [x_{obj}(t)-x_a]/[10-x_a]$;  $y_{cand}(t) = (1-\alpha)y_a + \alpha b$. -->
+    <g style="fill: #20364d" transform="translate(60.48 380.709)">
+     <text>
+      <tspan style="font: 13px 'DejaVu Sans'" x="0 8.893066 13.469727 18.566895 26.564941 31.909668 36.041992 41.13916 49.378418 57.376465 61.508789 69.475098 77.714355 84.861816 93.101074 101.054688 106.399414 110.779297 114.911621 127.613281 137.782227 145.386719 158.812012 185.804785 195.97373 203.578223 230.62876 235.700537 240.08042 245.152197 253.423193 264.226904 291.277441 296.349219 300.729102 304.861426 339.166064 349.33501 356.939502 370.364795 375.436572 386.240283 408.234912 429.464648 459.71123" y="-0.125">After the anchor:  ()=[()−]/[10−];  ()=(1−)+.</tspan>
+      <tspan style="font: oblique 13px 'DejaVu Sans'" x="119.043945 132.685059 163.883789 190.876563 217.003516 277.652197 308.99375 344.237842 399.665576 413.306689 442.889941 451.459277" y="-0.125">αtxtxxytαyαb</tspan>
+      <tspan style="font: oblique 9.1px 'DejaVu Sans'" x="171.577148 177.144678 182.921045 224.696875 285.345557 316.687109 321.690332 327.266748 333.034229 421.000049" y="2.0078125">objaacanda</tspan>
+     </text>
+    </g>
+   </g>
+   <g id="text_7">
+    <text style="fill: #526476; font: 11.5px 'DejaVu Sans'; text-anchor: start" x="60.48" y="407.093281" transform="rotate(-0 60.48 407.093281)">b is a retrospective condition-mean terminal paddle label; its exact pre-feedback timing is unresolved.</text>
+   </g>
+   <g id="text_8">
+    <text style="fill: #20364d; font: 700 13px 'DejaVu Sans'; text-anchor: start" x="60.48" y="442.728" transform="rotate(-0 60.48 442.728)">A  |  Same test predictions, both references</text>
+   </g>
+   <g id="text_9">
+    <text style="fill: #20364d; font: 700 10.5px 'DejaVu Sans'; text-anchor: middle" x="171.36" y="485.976328" transform="rotate(-0 171.36 485.976328)">Trained head / scored target</text>
+   </g>
+   <g id="text_10">
+    <text style="fill: #20364d; font: 700 10.5px 'DejaVu Sans'; text-anchor: middle" x="350.28" y="485.976328" transform="rotate(-0 350.28 485.976328)">Objective</text>
+   </g>
+   <g id="text_11">
+    <text style="fill: #20364d; font: 700 10.5px 'DejaVu Sans'; text-anchor: middle" x="486.36" y="486.017344" transform="rotate(-0 486.36 486.017344)">Candidate</text>
+   </g>
+   <g id="text_12">
+    <text style="fill: #20364d; font: 11.5px 'DejaVu Sans'; text-anchor: middle" x="171.36" y="519.557281" transform="rotate(-0 171.36 519.557281)">Objective head</text>
+   </g>
+   <g id="text_13">
+    <text style="fill: #20364d; font: 11.5px 'DejaVu Sans'; text-anchor: middle" x="350.28" y="519.557281" transform="rotate(-0 350.28 519.557281)">OO</text>
+   </g>
+   <g id="text_14">
+    <text style="fill: #20364d; font: 11.5px 'DejaVu Sans'; text-anchor: middle" x="486.36" y="519.557281" transform="rotate(-0 486.36 519.557281)">OB</text>
+   </g>
+   <g id="text_15">
+    <text style="fill: #20364d; font: 11.5px 'DejaVu Sans'; text-anchor: middle" x="171.36" y="552.821281" transform="rotate(-0 171.36 552.821281)">Candidate head</text>
+   </g>
+   <g id="text_16">
+    <text style="fill: #20364d; font: 11.5px 'DejaVu Sans'; text-anchor: middle" x="350.28" y="552.821281" transform="rotate(-0 350.28 552.821281)">BO</text>
+   </g>
+   <g id="text_17">
+    <text style="fill: #20364d; font: 11.5px 'DejaVu Sans'; text-anchor: middle" x="486.36" y="552.821281" transform="rotate(-0 486.36 552.821281)">BB</text>
+   </g>
+   <g id="text_18">
+    <text style="fill: #20364d; font: 11.5px 'DejaVu Sans'" transform="translate(579.6 492.650203)">OO vs BB: change both head and target</text>
+    <text style="fill: #20364d; font: 11.5px 'DejaVu Sans'" transform="translate(579.6 509.459879)">OO vs BO: keep objective reference fixed</text>
+    <text style="fill: #20364d; font: 11.5px 'DejaVu Sans'" transform="translate(579.6 526.269555)">OB vs BB: keep candidate reference fixed</text>
+   </g>
+   <g id="text_19">
+    <text style="fill: #24659b; font: 700 12.5px 'DejaVu Sans'; text-anchor: start" x="73.584" y="634.440734" transform="rotate(-0 73.584 634.440734)">B  |  Shuffle test-condition references</text>
+   </g>
+   <g id="text_20">
+    <text style="fill: #20364d; font: 11px 'DejaVu Sans'" transform="translate(73.584 660.966281)">Fitted head + predictions stay FIXED.</text>
+    <text style="fill: #20364d; font: 11px 'DejaVu Sans'" transform="translate(73.584 674.955531)">Re-score matched / shuffled labels on the same intersection.</text>
+    <text style="fill: #20364d; font: 11px 'DejaVu Sans'" transform="translate(73.584 688.944781)">Also disrupts physical condition correspondence.</text>
+   </g>
+   <g id="text_21">
+    <text style="fill: #c35d21; font: 700 12.5px 'DejaVu Sans'; text-anchor: start" x="552.384" y="634.440734" transform="rotate(-0 552.384 634.440734)">C  |  Shuffle mean endpoints, then REFIT</text>
+   </g>
+   <g id="text_22">
+    <text style="fill: #20364d; font: 11px 'DejaVu Sans'" transform="translate(552.384 660.966281)">Keep destination geometry, x/time and valid masks.</text>
+    <text style="fill: #20364d; font: 11px 'DejaVu Sans'" transform="translate(552.384 674.955531)">Rebuild the candidate; fit a new training-side OLS head.</text>
+    <text style="fill: #20364d; font: 11px 'DejaVu Sans'" transform="translate(552.384 688.944781)">Tests real assignments against fitted random targets.</text>
+   </g>
+   <g id="text_23">
+    <text style="fill: #526476; font: 10.7px 'DejaVu Sans'; text-anchor: start" x="60.48" y="756.36" transform="rotate(-0 60.48 756.36)">Both controls: 1,000 allocations × the same 100 splits; representations stay fixed.  Geometry-only baseline: a separate, unmatched-input reference.</text>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_13">
+    <path d="M 60.48 316.8 
+L 463.68 316.8 
+L 463.68 106.92 
+L 60.48 106.92 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1"/>
+   <g id="matplotlib.axis_2"/>
+   <g id="line2d_3">
+    <path d="M 437.30243 316.8 
+L 437.30243 106.92 
+" clip-path="url(#p10f162ddd8)" style="fill: none; stroke: #bac7d1; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_4">
+    <path d="M 60.48 284.00625 
+L 437.30243 284.00625 
+" clip-path="url(#p10f162ddd8)" style="fill: none; stroke-dasharray: 1,1.65; stroke-dashoffset: 0; stroke: #bac7d1"/>
+   </g>
+   <g id="line2d_5">
+    <path d="M 60.48 149.551875 
+L 248.891215 284.00625 
+L 437.30243 149.551875 
+" clip-path="url(#p10f162ddd8)" style="fill: none; stroke: #24659b; stroke-width: 2.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_6">
+    <path d="M 60.48 149.551875 
+L 248.891215 284.00625 
+L 437.30243 188.904375 
+" clip-path="url(#p10f162ddd8)" style="fill: none; stroke-dasharray: 9.25,4; stroke-dashoffset: 0; stroke: #c35d21; stroke-width: 2.5"/>
+   </g>
+   <g id="text_24">
+    <text style="fill: #20364d; font: 11px 'DejaVu Sans'; text-anchor: middle" x="248.891215" y="303.6825" transform="rotate(-0 248.891215 303.6825)">Physical collision anchor</text>
+   </g>
+   <g id="text_25">
+    <text style="fill: #526476; font: 10.5px 'DejaVu Sans'" transform="translate(75.552897 213.219797)">Same path</text>
+    <text style="fill: #526476; font: 10.5px 'DejaVu Sans'" transform="translate(75.552897 224.9775)">before anchor</text>
+   </g>
+   <g id="text_26">
+    <text style="fill: #526476; font: 10.5px 'DejaVu Sans'; text-anchor: end" x="437.30243" y="123.316875" transform="rotate(-0 437.30243 123.316875)">Paddle plane x = 10</text>
+   </g>
+   <g id="text_27">
+    <text style="fill: #c35d21; font: 12px 'DejaVu Sans'; text-anchor: start" x="444.838879" y="192.215625" transform="rotate(-0 444.838879 192.215625)">b</text>
+   </g>
+   <g id="text_28">
+    <text style="fill: #20364d; font: 700 13px 'DejaVu Sans'; text-anchor: start" x="60.48" y="102.92" transform="rotate(-0 60.48 102.92)">Collision condition</text>
+   </g>
+   <g id="PathCollection_1">
+    <defs>
+     <path id="m6678c274bd" d="M 0 2.645751 
+C 0.701661 2.645751 1.374679 2.366978 1.870829 1.870829 
+C 2.366978 1.374679 2.645751 0.701661 2.645751 0 
+C 2.645751 -0.701661 2.366978 -1.374679 1.870829 -1.870829 
+C 1.374679 -2.366978 0.701661 -2.645751 0 -2.645751 
+C -0.701661 -2.645751 -1.374679 -2.366978 -1.870829 -1.870829 
+C -2.366978 -1.374679 -2.645751 -0.701661 -2.645751 0 
+C -2.645751 0.701661 -2.366978 1.374679 -1.870829 1.870829 
+C -1.374679 2.366978 -0.701661 2.645751 0 2.645751 
+z
+" style="stroke: #20364d"/>
+    </defs>
+    <g clip-path="url(#p10f162ddd8)">
+     <use xlink:href="#m6678c274bd" x="248.891215" y="284.00625" style="fill: #20364d; stroke: #20364d"/>
+    </g>
+   </g>
+   <g id="PathCollection_2">
+    <defs>
+     <path id="mf268cef08c" d="M 0 3.082207 
+C 0.817411 3.082207 1.601453 2.757446 2.179449 2.179449 
+C 2.757446 1.601453 3.082207 0.817411 3.082207 0 
+C 3.082207 -0.817411 2.757446 -1.601453 2.179449 -2.179449 
+C 1.601453 -2.757446 0.817411 -3.082207 0 -3.082207 
+C -0.817411 -3.082207 -1.601453 -2.757446 -2.179449 -2.179449 
+C -2.757446 -1.601453 -3.082207 -0.817411 -3.082207 0 
+C -3.082207 0.817411 -2.757446 1.601453 -2.179449 2.179449 
+C -1.601453 2.757446 -0.817411 3.082207 0 3.082207 
+z
+" style="stroke: #c35d21"/>
+    </defs>
+    <g clip-path="url(#p10f162ddd8)">
+     <use xlink:href="#mf268cef08c" x="437.30243" y="188.904375" style="fill: #c35d21; stroke: #c35d21"/>
+    </g>
+   </g>
+   <g id="PathCollection_3">
+    <defs>
+     <path id="m7a3df635f3" d="M 0 2.915476 
+C 0.773193 2.915476 1.514823 2.608283 2.061553 2.061553 
+C 2.608283 1.514823 2.915476 0.773193 2.915476 0 
+C 2.915476 -0.773193 2.608283 -1.514823 2.061553 -2.061553 
+C 1.514823 -2.608283 0.773193 -2.915476 0 -2.915476 
+C -0.773193 -2.915476 -1.514823 -2.608283 -2.061553 -2.061553 
+C -2.608283 -1.514823 -2.915476 -0.773193 -2.915476 0 
+C -2.915476 0.773193 -2.608283 1.514823 -2.061553 2.061553 
+C -1.514823 2.608283 -0.773193 2.915476 0 2.915476 
+z
+" style="stroke: #24659b"/>
+    </defs>
+    <g clip-path="url(#p10f162ddd8)">
+     <use xlink:href="#m7a3df635f3" x="437.30243" y="149.551875" style="fill: #24659b; stroke: #24659b"/>
+    </g>
+   </g>
+  </g>
+  <g id="axes_3">
+   <g id="patch_14">
+    <path d="M 554.4 316.8 
+L 957.6 316.8 
+L 957.6 106.92 
+L 554.4 106.92 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_3"/>
+   <g id="matplotlib.axis_4"/>
+   <g id="line2d_7">
+    <path d="M 931.22243 316.8 
+L 931.22243 106.92 
+" clip-path="url(#p7ceaaf9506)" style="fill: none; stroke: #bac7d1; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_8">
+    <path d="M 554.4 159.39 
+L 931.22243 241.374375 
+" clip-path="url(#p7ceaaf9506)" style="fill: none; stroke: #24659b; stroke-width: 2.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_9">
+    <path d="M 554.4 159.39 
+L 931.22243 182.345625 
+" clip-path="url(#p7ceaaf9506)" style="fill: none; stroke-dasharray: 9.25,4; stroke-dashoffset: 0; stroke: #c35d21; stroke-width: 2.5"/>
+   </g>
+   <g id="text_29">
+    <text style="fill: #20364d; font: 11px 'DejaVu Sans'; text-anchor: start" x="561.936449" y="141.353437" transform="rotate(-0 561.936449 141.353437)">Metadata initial anchor</text>
+   </g>
+   <g id="text_30">
+    <text style="fill: #526476; font: 10.5px 'DejaVu Sans'" transform="translate(603.386916 226.337297)">Candidate can already differ</text>
+    <text style="fill: #526476; font: 10.5px 'DejaVu Sans'" transform="translate(603.386916 238.095)">during visible motion</text>
+   </g>
+   <g id="text_31">
+    <text style="fill: #526476; font: 10.5px 'DejaVu Sans'; text-anchor: end" x="931.22243" y="123.316875" transform="rotate(-0 931.22243 123.316875)">Paddle plane x = 10</text>
+   </g>
+   <g id="text_32">
+    <text style="fill: #c35d21; font: 12px 'DejaVu Sans'; text-anchor: start" x="938.758879" y="185.656875" transform="rotate(-0 938.758879 185.656875)">b</text>
+   </g>
+   <g id="text_33">
+    <text style="fill: #20364d; font: 700 13px 'DejaVu Sans'; text-anchor: start" x="554.4" y="102.92" transform="rotate(-0 554.4 102.92)">No-collision condition</text>
+   </g>
+   <g id="PathCollection_4">
+    <g clip-path="url(#p7ceaaf9506)">
+     <use xlink:href="#m6678c274bd" x="554.4" y="159.39" style="fill: #20364d; stroke: #20364d"/>
+    </g>
+   </g>
+   <g id="PathCollection_5">
+    <g clip-path="url(#p7ceaaf9506)">
+     <use xlink:href="#mf268cef08c" x="931.22243" y="182.345625" style="fill: #c35d21; stroke: #c35d21"/>
+    </g>
+   </g>
+   <g id="PathCollection_6">
+    <g clip-path="url(#p7ceaaf9506)">
+     <use xlink:href="#m7a3df635f3" x="931.22243" y="241.374375" style="fill: #24659b; stroke: #24659b"/>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p0a53ace708">
+   <rect x="0" y="0" width="1008" height="792"/>
+  </clipPath>
+  <clipPath id="p10f162ddd8">
+   <rect x="60.48" y="106.92" width="403.2" height="209.88"/>
+  </clipPath>
+  <clipPath id="p7ceaaf9506">
+   <rect x="554.4" y="106.92" width="403.2" height="209.88"/>
+  </clipPath>
+ </defs>
+</svg>

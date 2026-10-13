@@ -1,0 +1,79 @@
+{
+  "schema": "artifact_acquisition_v1",
+  "checked_date": "2026-10-12",
+  "purpose": "Distinguish provider data access, exact local fitted artifacts, and public payload delivery",
+  "current_fitted_payloads": {
+    "sensorium": {
+      "version": "retrained_v1",
+      "installed_root": "models/sensorium/retrained_v1",
+      "download_url": null,
+      "public_status": "not_distributed_pending_documented_basis"
+    },
+    "mental_pong": {
+      "version": "condition_endpoint_fa_gpfa_v1_and_closeout_v1",
+      "installed_root": "models/mental_pong/current",
+      "download_url": null,
+      "public_status": "not_distributed_pending_documented_basis"
+    }
+  },
+  "original_data": {
+    "mental_pong": {
+      "record_url": "https://zenodo.org/records/13952210",
+      "version": "v1",
+      "archive_url": "https://zenodo.org/records/13952210/files/MentalPong.zip?download=1",
+      "archive_bytes": 6145726435,
+      "archive_md5": "382e420c6f053d8ac2bdd4acd2fb02b2",
+      "access_check": {
+        "method": "HEAD",
+        "status": 200,
+        "whole_archive_redownloaded": false
+      },
+      "metadata_refresh_http_status": 403,
+      "license_basis": "Preserved provider JSON, version v1 revision 4",
+      "metadata_sha256": "f5e88a2f6f4a2924d9814610800ddc96318ac61cf1b609a9a9ecfcb19077846e",
+      "license": "CC BY-NC-ND 4.0",
+      "supplies_current_fitted_models": false
+    },
+    "sensorium": {
+      "record_url": "https://gin.g-node.org/pollytur/sensorium_2023_dataset",
+      "release_version": "No separate version tag recorded; original file hashes identify study inputs",
+      "license": "CC BY-NC-ND 4.0",
+      "provider_notice": "Provider asks for contact before research use and permission before publishing new analyses. No additional permission record was found. This is a record of the provider notice, not a legal classification of every derivative.",
+      "metadata_checks": [
+        {
+          "url": "https://gin.g-node.org/pollytur/sensorium_2023_dataset/raw/master/README.md",
+          "method": "GET",
+          "status": 200,
+          "sha256": "f03eaaa3ec37586a4e69bff766f6af54bd6e13687fd67659b5b501098c745e75"
+        },
+        {
+          "url": "https://gin.g-node.org/pollytur/sensorium_2023_dataset/raw/master/datacite.yml",
+          "method": "GET",
+          "status": 200,
+          "sha256": "44201abddeac264a459c362bdeaf4497fbda5a56a8ed32850cd9ea90dabe0d7f"
+        }
+      ],
+      "session_archive_pages": [
+        "https://gin.g-node.org/pollytur/sensorium_2023_dataset/src/master/dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20.zip",
+        "https://gin.g-node.org/pollytur/sensorium_2023_dataset/src/master/dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20.zip",
+        "https://gin.g-node.org/pollytur/sensorium_2023_dataset/src/master/dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20.zip",
+        "https://gin.g-node.org/pollytur/sensorium_2023_dataset/src/master/dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20.zip",
+        "https://gin.g-node.org/pollytur/sensorium_2023_dataset/src/master/dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20.zip"
+      ],
+      "archive_page_check": "Links observed on provider repository page; individual ZIP payloads were not redownloaded",
+      "supplies_current_fitted_models": false
+    }
+  },
+  "historical_remote_weights": {
+    "repository_commit": "d21c84d7a8304e3dbeb469588806b839f5c5f728",
+    "count": 8,
+    "technical_check": "HEAD requests to historical LFS media objects returned HTTP 200 and expected sizes",
+    "downloaded_or_republished": false,
+    "role": "Historical models only; not current retrained_v1 and not a new redistribution clearance"
+  },
+  "boundaries": [
+    "Original source-code licenses do not resolve data-derived artifact redistribution.",
+    "Local copying and numerical verification do not establish public accessibility.",
+    "No current fitted-artifact URL is invented or replaced by an upstream raw-data link."
+  ]
+}

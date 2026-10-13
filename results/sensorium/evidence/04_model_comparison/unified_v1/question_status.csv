@@ -1,0 +1,4 @@
+question,status,interpretation,split_sha256
+Q1,not_executed,Not evaluated: no qualified common test comparison of response summaries and trajectories.,490917e4cc9b222aefeb6f84e490bb4c4a325e94b0d932a4ebc544aff7718636
+Q2,not_executed,Not evaluated: no qualified common test scores for the two frozen encoders.,490917e4cc9b222aefeb6f84e490bb4c4a325e94b0d932a4ebc544aff7718636
+Q3,not_executed,Not evaluated: qualified frozen-model test evaluation has not been executed; consult the inventory reason codes.,490917e4cc9b222aefeb6f84e490bb4c4a325e94b0d932a4ebc544aff7718636

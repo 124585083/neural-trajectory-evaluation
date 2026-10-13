@@ -1,0 +1,5 @@
+model,metric,value,n_sessions,defined_sessions,aggregation,biological_sample_count
+dynamic,response_neuron_mean_r,0.19110716450720727,5,5,unweighted_recording_session_mean,not_estimated
+dynamic,response_nmse,0.9585004091262818,5,5,unweighted_recording_session_mean,not_estimated
+static,response_neuron_mean_r,0.15957886437640237,5,5,unweighted_recording_session_mean,not_estimated
+static,response_nmse,0.970972764492035,5,5,unweighted_recording_session_mean,not_estimated

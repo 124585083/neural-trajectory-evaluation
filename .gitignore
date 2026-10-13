@@ -38,16 +38,20 @@ artifacts/
 *.zarr/
 *.parquet.brotli
 
-# Model and data payloads are external pending redistribution clearance.
+# Model and data payloads remain unpublished pending redistribution clearance.
 *.pt
 *.pth
 *.pkl
 *.npz
 
 # Private Mental-Pong locations and local verification outputs.
-experiments/05_mental_pong/configs/paths.local.json
-experiments/05_mental_pong/local_outputs/
+code/mental_pong/configs/paths.local.json
+code/mental_pong/local_outputs/
+# Restored scientific inputs stay local until a distribution package is cleared.
+/models/sensorium/retrained_v1/
+/models/sensorium/historical_full_dynamic/
+/models/mental_pong/current/
 # Mental-Pong label payloads require a documented redistribution basis.
-experiments/05_mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/data/*_condition_time_index.csv
+code/mental_pong/trajectory_project/condition_endpoint_fa_gpfa_v1/data/*_condition_time_index.csv
 
 /docs/REVISION_REPORT.md

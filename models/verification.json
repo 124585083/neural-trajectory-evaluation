@@ -1,0 +1,181 @@
+{
+  "schema": "local_artifact_replay_verification_v1",
+  "checked_date": "2026-10-12",
+  "public_numerical_replay_available": false,
+  "verification_environment": {
+    "python": "3.11.9",
+    "platform": "Windows",
+    "numpy": "1.26.4"
+  },
+  "mental_pong": {
+    "observed_readouts": {
+      "status": "passed",
+      "animals": 2,
+      "representations": [
+        "FA50",
+        "GPFA50"
+      ],
+      "splits": 100,
+      "readout_parameter_files_used": 400,
+      "xy_heads": 800,
+      "heldout_prediction_files_verified": 400,
+      "cross_score_rows": 19200,
+      "own_score_rows": 4800,
+      "maximum_saved_prediction_difference": 0.0,
+      "maximum_same_x_prediction_difference": 0.0,
+      "maximum_cross_score_difference": 1.0658141036401503e-14,
+      "maximum_own_score_difference": 1.0706713293728853e-14,
+      "original_split_and_common_support_verified": true,
+      "training_predictions_absent": true,
+      "OLS_fit_performed": false,
+      "FA_GPFA_inference_performed": false,
+      "FA_GPFA_scope": "Cached latent inputs plus full checked parameter/preprocessing inventory; representations not reinferred from released neural inputs",
+      "network_access_permitted": false,
+      "external_data_roots_permitted": false,
+      "random_controls_scope": "Full stored payloads hash checked; functional B/C equivalence is bounded to the separately verified split0/q0 mini"
+    },
+    "bounded_mini": {
+      "status": "passed",
+      "cases": 4,
+      "score_rows": 604,
+      "split": 0,
+      "random_allocation": 0,
+      "maximum_metric_absolute_difference": 1.6370904631912708e-11,
+      "OLS_refit_heads": 12,
+      "maximum_refit_prediction_difference": 1.509903313490213e-14,
+      "external_storage_accessed": false,
+      "network_access_permitted": false,
+      "cold_copy_check": "Passed with original source/data roots and network denied",
+      "full_randomization_distributions_recomputed": false
+    },
+    "parameter_and_preprocessing_validation": "All 2237 source files and project-local copies SHA-256 checked; FA/GPFA object shapes checked; no original-neural-response inference rerun",
+    "raw_preprocessing": "fail",
+    "raw_preprocessing_note": "Inherited released-data imputation cannot be undone; local file preparation does not change the scientific preprocessing limitation"
+  },
+  "sensorium": {
+    "status": "retained_cached_scoring_complete",
+    "elapsed_seconds": 907.25,
+    "recomputed_goals": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "historical_model_validation": "Original records checked only; no new full Dynamic evaluation",
+    "freeze_sha256": "139162d5a7309f90e26990d627124ff442935ea4ce370166ede7fdc82030da90",
+    "generated_manifest": "code/sensorium/outputs/relocated_replay_20261012/replay_manifest.json",
+    "generated_files": 85,
+    "csv_files_checked": 36,
+    "csv_files_exact": 35,
+    "all_current_scientific_score_support_and_status_fields_equal": true,
+    "diagnostic_difference": {
+      "file": "temporal_weight_controls/spatial_response_matches.csv",
+      "columns": [
+        {
+          "column": "original_temporal_test_r",
+          "max_absolute_difference": 0.0005529997453815015,
+          "na_support_equal": true,
+          "infinite_support_equal": true,
+          "equal_at_4_decimals": false,
+          "equal_at_6_decimals": false,
+          "exact": false,
+          "finite_cells": 5
+        },
+        {
+          "column": "original_spatial_test_r",
+          "max_absolute_difference": 0.00023992281564775013,
+          "na_support_equal": true,
+          "infinite_support_equal": true,
+          "equal_at_4_decimals": false,
+          "equal_at_6_decimals": false,
+          "exact": false,
+          "finite_cells": 5
+        },
+        {
+          "column": "original_spatial_minus_temporal_test_r",
+          "max_absolute_difference": 0.00031307692973370216,
+          "na_support_equal": true,
+          "infinite_support_equal": true,
+          "equal_at_4_decimals": false,
+          "equal_at_6_decimals": false,
+          "exact": false,
+          "finite_cells": 5
+        }
+      ],
+      "explanation": "Fresh replay computes current float64 correlations before recording incoming original_* diagnostics. Preserved historical evidence contains the earlier pre-correction inputs. Current scientific scores, supports, matching states and frozen strengths are unchanged; original evidence is not rewritten.",
+      "changed_cells": 14,
+      "rows_in_table": 5
+    },
+    "arrays_checked": 15,
+    "all_arrays_exact": true,
+    "array_files": [
+      "evaluation/pilot/test_latents.npz",
+      "temporal_metric_tests/reversal_predictions.npz"
+    ],
+    "original_source_data_roots_denied": true,
+    "denied_source_attempts": 0,
+    "encoder_training": false,
+    "encoder_prediction_regeneration": false,
+    "GPFA_fitting": false,
+    "GPFA_posterior_from_cached_responses": true,
+    "control_recalibration": false,
+    "zero_spatial_response_status": "numerically_degenerate",
+    "zero_spatial_matching_status": "not_evaluable",
+    "temporal_zero_retains_original_valid_support": true,
+    "figures_generated": 7,
+    "retained_figures": 5,
+    "intermediate_diagnostic_figures": 2
+  },
+  "boundaries": [
+    "This record concerns local copies of exact scientific inputs, not a public-only clone.",
+    "Sensorium cached replay starts from retained predictions and observed-response caches; it does not regenerate encoder predictions from provider videos.",
+    "Mental-Pong observed-head replay starts from saved latents; mini readout refits do not refit representations.",
+    "Current fitted bundles remain Git-ignored pending an established distribution basis."
+  ],
+  "tests": {
+    "mental_pong_targeted": {
+      "passed": 46,
+      "skipped": 0
+    },
+    "sensorium_targeted": {
+      "passed": 25,
+      "scope": "Bundle copying/path containment, missing inputs, replay dispatch and endpoint rules"
+    }
+  },
+  "public_scientific_files_preserved": 338,
+  "bundles": {
+    "repository_local_run": {
+      "repository_root": "models/sensorium/retrained_v1",
+      "manifest_path": "models/sensorium/retrained_v1/bundle_manifest.json",
+      "manifest_sha256": "5dd8218dafe2f4cefe97c42d439a504e0387e4d578bb3ba74feb0f70d5a62ae6",
+      "file_count": 129,
+      "total_bytes": 9217964456,
+      "publicly_distributed": false
+    },
+    "sensorium_historical_run": {
+      "repository_root": "models/sensorium/historical_full_dynamic",
+      "manifest_path": "models/sensorium/historical_full_dynamic/bundle_manifest.json",
+      "manifest_sha256": "344def83db1dabcc43c79b7b4d2ac66dad7731c467ce98987c89c47a47d4f54f",
+      "file_count": 15,
+      "total_bytes": 23336120,
+      "publicly_distributed": false
+    },
+    "mental_pong_source_artifacts": {
+      "repository_root": "models/mental_pong/current/source_artifacts",
+      "manifest_path": "models/mental_pong/current/bundle_manifest.json",
+      "manifest_sha256": "653fdc22326bba65967dc18ec794e76f8d759c8b3501a9ba3f9d756155bdee28",
+      "file_count": 2237,
+      "total_bytes": 2729908953,
+      "publicly_distributed": false
+    }
+  },
+  "entry_and_packaging_code_sha256": {
+    "code/sensorium/run.py": "6618341968ca57e2e10f8aca662c2daeea80c543b7ece26ba19df5e12097f279",
+    "code/sensorium/src/sensorium_runtime/replay.py": "64c2d8cce013af035dca8ce5ce4f096cb78b13b06c3603db0186b7a16ba6ab2e",
+    "code/sensorium/src/sensorium_runtime/bundle.py": "3bd6626d451169e0cb431c95033807fa99ddb5baff778351d594622728d0385f",
+    "code/sensorium/scripts/prepare_local_bundle.py": "44d16dddb3920f9dd7ef6cfdcac111012885d2f30aa090010a7693afd96282d8",
+    "code/mental_pong/run.py": "85761558c1a112e1397d2fa85e42df1bd13214216e20a58162aaabc7974d058a",
+    "code/mental_pong/scripts/prepare_local_bundle.py": "8a470e29137ff7cc00f309385d8f6b03fc26f887be2e41cabe97c08dd198eb4b"
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "status": "held_out_evaluation_after_retraining_complete",
+  "pilot": {
+    "status": "held_out_evaluation_after_retraining_complete",
+    "session": "dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20",
+    "n_test_conditions": 6,
+    "n_test_trials": 58,
+    "gpfa_parameter_digest": "e9b3e792da5d0cb8d64573d6ddc13de2607db9e775527363b09e9f2170d8a562",
+    "fit_digest": "7feebcab6f3586b9b8f2ad32d90af0ef0837ed00e15961cef434012372b50583",
+    "test_content_digest": "c42df0ea198adb07dfa5260217192b193c691f8390dbd0413a4ef760df0f77ca",
+    "primary_metrics": [
+      "position_correlation",
+      "velocity_direction_cosine"
+    ],
+    "secondary_metrics": [
+      "normalized_position_rmse",
+      "speed_profile_correlation",
+      "acceleration_direction_cosine"
+    ],
+    "scores": {
+      "static": {
+        "position_correlation": 0.416545266422756,
+        "normalized_position_rmse": 0.922171797222895,
+        "velocity_direction_cosine": 0.2594177219396954,
+        "speed_profile_correlation": 0.5345642145635819,
+        "acceleration_direction_cosine": 0.13309865335318052,
+        "response_neuron_mean_r": 0.1451287066221854,
+        "response_nmse": 0.9781706806552654,
+        "cka_condition_time_aligned": 0.4560540640318903,
+        "cka_temporal_difference": 0.028073533102177962,
+        "rsa_condition_time_state_spearman": 0.4248083429729858
+      },
+      "dynamic": {
+        "position_correlation": 0.7815687562565745,
+        "normalized_position_rmse": 0.6478971968282474,
+        "velocity_direction_cosine": 0.5169951678800211,
+        "speed_profile_correlation": 0.5557086141814823,
+        "acceleration_direction_cosine": 0.4288792493799759,
+        "response_neuron_mean_r": 0.18595253589193234,
+        "response_nmse": 0.962456017860443,
+        "cka_condition_time_aligned": 0.510811223022282,
+        "cka_temporal_difference": 0.09315471476884062,
+        "rsa_condition_time_state_spearman": 0.544940828378682
+      }
+    },
+    "support": {
+      "position_bins": 1500,
+      "velocity_direction_cosine_bins": 1494,
+      "velocity_direction_cosine_total_bins": 1494,
+      "acceleration_direction_cosine_bins": 1488,
+      "acceleration_direction_cosine_total_bins": 1488,
+      "response_r_shared_neurons": 512,
+      "response_r_total_neurons": 512,
+      "rsa_shared_edges": 11175,
+      "rsa_total_edges": 11175
+    },
+    "reliability": {
+      "status": "computed",
+      "condition_ids": [
+        "movie_00005",
+        "movie_00028",
+        "movie_00031",
+        "movie_00052",
+        "movie_00067",
+        "movie_00120"
+      ],
+      "repeat_counts": [
+        10,
+        10,
+        9,
+        10,
+        9,
+        10
+      ],
+      "conditions_removed": 0,
+      "splits": 200,
+      "nulls": [
+        "condition_shuffle",
+        "circular_shift",
+        "time_reversal",
+        "independent_neuron_shift",
+        "block_shuffle_4",
+        "block_shuffle_8",
+        "block_shuffle_16",
+        "block_shuffle_32"
+      ],
+      "normalization": "none"
+    },
+    "Q1": "trajectory_difference_under_matched_response_summary",
+    "Q2": "absolute_scores_and_paired_condition_intervals_reported",
+    "Q3": {
+      "position_correlation": "dynamic_positive_interval",
+      "velocity_direction_cosine": "dynamic_positive_interval"
+    },
+    "response_matching": {
+      "clip_lower": 1e-05,
+      "kind": "dynamic_output_perturbation_not_a_separately_trained_model",
+      "noise_scale_role": "train_predictions",
+      "noise_seed": 123,
+      "selection_role": "validation",
+      "sigma": 0.8697490026177834,
+      "status": "selected",
+      "summary": "mean per-neuron r across trial and time; repeated movies not required",
+      "tolerance": 0.005,
+      "total_gpfa_neurons_unchanged": 512,
+      "validation_absolute_gap": 0.0016297737598565398,
+      "validation_matching_achieved": true,
+      "validation_shared_neurons": 512,
+      "test_absolute_gap": 0.0032860041148462804,
+      "test_matching_retained": true,
+      "test_retuned": false
+    },
+    "scope": "one_session_fixed_models_condition_resampling",
+    "inference": "offline_full_window_not_causal",
+    "undefined_metrics_are_not_zero": true,
+    "protocol": "retrained_v1",
+    "evaluation_scope": "one pilot session; historically explored oracle; retrained train/validation/test roles",
+    "freeze_sha256": "139162d5a7309f90e26990d627124ff442935ea4ce370166ede7fdc82030da90",
+    "checkpoints": {
+      "dynamic": "c6eff392ec412494ef69d6e599193711f4b5428862fe57633899280144531954",
+      "static": "3ded37a0fac494f47a8553a432e04e8be7e95a0a99ed9444b07ae61f31ff7052"
+    }
+  },
+  "response": {
+    "status": "response_evaluation_complete",
+    "sessions": [
+      "dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20",
+      "dynamic29623-4-9-Video-9b4f6a1a067fe51e15306b9628efea20",
+      "dynamic29647-19-8-Video-9b4f6a1a067fe51e15306b9628efea20",
+      "dynamic29712-5-9-Video-9b4f6a1a067fe51e15306b9628efea20",
+      "dynamic29755-2-8-Video-9b4f6a1a067fe51e15306b9628efea20"
+    ],
+    "n_sessions": 5,
+    "summary": [
+      {
+        "model": "dynamic",
+        "metric": "response_neuron_mean_r",
+        "value": 0.19110716450720727,
+        "n_sessions": 5,
+        "defined_sessions": 5,
+        "aggregation": "unweighted_recording_session_mean",
+        "biological_sample_count": "not_estimated"
+      },
+      {
+        "model": "dynamic",
+        "metric": "response_nmse",
+        "value": 0.9585004091262818,
+        "n_sessions": 5,
+        "defined_sessions": 5,
+        "aggregation": "unweighted_recording_session_mean",
+        "biological_sample_count": "not_estimated"
+      },
+      {
+        "model": "static",
+        "metric": "response_neuron_mean_r",
+        "value": 0.15957886437640237,
+        "n_sessions": 5,
+        "defined_sessions": 5,
+        "aggregation": "unweighted_recording_session_mean",
+        "biological_sample_count": "not_estimated"
+      },
+      {
+        "model": "static",
+        "metric": "response_nmse",
+        "value": 0.970972764492035,
+        "n_sessions": 5,
+        "defined_sessions": 5,
+        "aggregation": "unweighted_recording_session_mean",
+        "biological_sample_count": "not_estimated"
+      }
+    ],
+    "interval_unit": "movie_condition_within_session",
+    "trajectory_sessions": 1,
+    "scope": "recording sessions reported separately; no cross-session trajectory inference"
+  },
+  "split_sha256": "52d021ee699ddd5d026a4deba3375838548b352f7d46ec3b878d5460b261e926",
+  "freeze_sha256": "139162d5a7309f90e26990d627124ff442935ea4ce370166ede7fdc82030da90"
+}

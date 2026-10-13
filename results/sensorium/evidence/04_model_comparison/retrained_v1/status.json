@@ -1,0 +1,154 @@
+{
+  "protocol": "retrained_v1",
+  "observed_at_utc": "2026-10-10T18:35:26.369995+00:00",
+  "scope": "Held-out evaluation after retraining; oracle was explored in Parts 1 and 2",
+  "stages": {
+    "split": {
+      "status": "complete",
+      "split_sha256": "52d021ee699ddd5d026a4deba3375838548b352f7d46ec3b878d5460b261e926"
+    },
+    "normalization": {
+      "status": "complete",
+      "fit_role": "train",
+      "preprocessing_sha256": "52a9b81d45ffd23fdee5b2502a025d4234946f24568dee95b8eb2a8a9e88ac73"
+    },
+    "static": {
+      "status": "training_complete",
+      "run_id": "retrained_v1_static_seed42",
+      "identity_digest": "6138ff88ed88c3043ad83d7b4a8f486b0cd72d4680892ce339f2a59ad6239688",
+      "best_epoch": 59,
+      "validation_score": 0.17430678009986877,
+      "last_epoch": 69,
+      "stop_reason": "patience_cycles_exhausted",
+      "elapsed_seconds": 10387.25,
+      "parameter_counts": {
+        "core": 50624,
+        "readout": 2763106,
+        "shifter": 285,
+        "total": 2814015
+      },
+      "best_sha256": "3ded37a0fac494f47a8553a432e04e8be7e95a0a99ed9444b07ae61f31ff7052",
+      "last_sha256": "e623a13f8dc41b5b13a696a25d4e66e29cdd972bba8f7a00388bb681fa9c65c1",
+      "best_state_sha256": "54de7d97cdd1267dda560c6b3a1e1fbc59fcff3d11638a29dd7031d6080467d1",
+      "test_read_by_trainer": false
+    },
+    "static_real_smoke": {
+      "status": "smoke_complete_not_a_scientific_training_result"
+    },
+    "dynamic": {
+      "status": "training_complete",
+      "run_id": "retrained_v1_dynamic_seed42",
+      "identity_digest": "483acefdc193c9c34f40ecb53fb03e075a6b946a4efb838a2a1f783aa926390a",
+      "best_epoch": 109,
+      "validation_score": 0.20814694464206696,
+      "last_epoch": 119,
+      "stop_reason": "patience_cycles_exhausted",
+      "elapsed_seconds": 14853.391000000003,
+      "parameter_counts": {
+        "core": 98672,
+        "readout": 2763106,
+        "shifter": 285,
+        "total": 2862063
+      },
+      "best_sha256": "c6eff392ec412494ef69d6e599193711f4b5428862fe57633899280144531954",
+      "last_sha256": "f4abe1b489b700e47a73be9c752f141ef0f1b0f747ea91afdb31a1400246aa70",
+      "best_state_sha256": "eab215d8ac83d2910692ea4a0325f538932497eab2c2f244ca8e12ec6c1a2bda",
+      "test_read_by_trainer": false
+    },
+    "dynamic_real_smoke": {
+      "status": "smoke_complete_not_a_scientific_training_result"
+    },
+    "gpfa": {
+      "status": "complete",
+      "gpfa_sha256": "98de0cef99973c8a57b5b44d330763a5cd0fc5ad0cab36654c058591ae6eb52c",
+      "fit_role": "train",
+      "n_train_trials": 282,
+      "n_validation_trials": 66
+    },
+    "validation_control": {
+      "status": "complete",
+      "freeze_sha256": "139162d5a7309f90e26990d627124ff442935ea4ce370166ede7fdc82030da90",
+      "response_matching": {
+        "clip_lower": 1e-05,
+        "kind": "dynamic_output_perturbation_not_a_separately_trained_model",
+        "noise_scale_role": "train_predictions",
+        "noise_seed": 123,
+        "selection_role": "validation",
+        "sigma": 0.8697490026177834,
+        "status": "selected",
+        "summary": "mean per-neuron r across trial and time; repeated movies not required",
+        "tolerance": 0.005,
+        "total_gpfa_neurons_unchanged": 512,
+        "validation_absolute_gap": 0.0016297737598565398,
+        "validation_matching_achieved": true,
+        "validation_shared_neurons": 512
+      }
+    },
+    "test_evaluation": {
+      "status": "held_out_evaluation_after_retraining_complete"
+    },
+    "test_reliability_null": {
+      "status": "computed",
+      "condition_ids": [
+        "movie_00005",
+        "movie_00028",
+        "movie_00031",
+        "movie_00052",
+        "movie_00067",
+        "movie_00120"
+      ],
+      "repeat_counts": [
+        10,
+        10,
+        9,
+        10,
+        9,
+        10
+      ],
+      "conditions_removed": 0,
+      "splits": 200,
+      "nulls": [
+        "condition_shuffle",
+        "circular_shift",
+        "time_reversal",
+        "independent_neuron_shift",
+        "block_shuffle_4",
+        "block_shuffle_8",
+        "block_shuffle_16",
+        "block_shuffle_32"
+      ],
+      "normalization": "none"
+    },
+    "test_main_comparison": {
+      "status": "complete",
+      "response_sessions": 5,
+      "trajectory_sessions": 1,
+      "Q2": "absolute_scores_and_paired_condition_intervals_reported",
+      "Q3": {
+        "position_correlation": "dynamic_positive_interval",
+        "velocity_direction_cosine": "dynamic_positive_interval"
+      }
+    },
+    "test_response_matching_control": {
+      "clip_lower": 1e-05,
+      "kind": "dynamic_output_perturbation_not_a_separately_trained_model",
+      "noise_scale_role": "train_predictions",
+      "noise_seed": 123,
+      "selection_role": "validation",
+      "sigma": 0.8697490026177834,
+      "status": "computed",
+      "summary": "mean per-neuron r across trial and time; repeated movies not required",
+      "tolerance": 0.005,
+      "total_gpfa_neurons_unchanged": 512,
+      "validation_absolute_gap": 0.0016297737598565398,
+      "validation_matching_achieved": true,
+      "validation_shared_neurons": 512,
+      "test_absolute_gap": 0.0032860041148462804,
+      "test_matching_retained": true,
+      "test_retuned": false,
+      "Q1": "trajectory_difference_under_matched_response_summary"
+    }
+  },
+  "artifact_root": "experiments/04_model_comparison/outputs/retrained_v1",
+  "large_artifacts": "Local or external only; raw data, normalization arrays, predictions and weights are not published"
+}

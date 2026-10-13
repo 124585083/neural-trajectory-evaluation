@@ -1,0 +1,296 @@
+{
+  "scope": "Historical Sensorium GPFA diagnostics; not retrained_v1 results",
+  "provenance": "Unique numerical evidence extracted before redundant validation documents were consolidated into Methods and Results. Values retain their originally reported precision.",
+  "full_train_fit": "348 original training-tier trials; 512 neurons; seed42; q4; frames50-299; stride4 observations. q8/q16 coverage fits used short EM.",
+  "historical_denominator_limit": "Observation-model reconstruction is C z+d. The exact old R2 denominator implementation is unavailable, so numerical equivalence to the explicitly defined current reconstruction diagnostics is unverified.",
+  "sources": [
+    {
+      "source_document": "docs/supplementary/validation/GPFA_DIAGNOSTICS.md",
+      "source_sha256": "460a83af0e59c5a7e9f048b371e59b7fecb19fa7e2a07afad65f828423ea009e",
+      "records": [
+        {
+          "section": "GPFA Supplementary Diagnostics",
+          "tables": [],
+          "recorded_notes": [
+            "Unless otherwise noted, the diagnostics below refer to the Phase 2 full-train method-development assay on the pilot session: the deterministic 512-neuron subset, frames 50–299, and the primary seed-42 `q = 4` GPFA refitted on all 348 training trials using the approximately 7.5-Hz observation grid. The `q = 8` and `q = 16` variance-coverage entries are short-EM diagnostic fits rather than frozen primary models."
+          ]
+        },
+        {
+          "section": "1. Reliability as a function of repeat averaging",
+          "tables": [
+            {
+              "header": [
+                "Repeats / half",
+                "Position",
+                "Norm. RMSE",
+                "Velocity",
+                "Speed",
+                "Path",
+                "Acceleration"
+              ],
+              "rows": [
+                [
+                  "1",
+                  "0.5545",
+                  "0.9611",
+                  "0.3417",
+                  "0.3694",
+                  "0.8940",
+                  "0.3051"
+                ],
+                [
+                  "2",
+                  "0.7117",
+                  "0.7718",
+                  "0.4859",
+                  "0.5434",
+                  "0.9272",
+                  "0.4410"
+                ],
+                [
+                  "3",
+                  "0.7864",
+                  "0.6612",
+                  "0.5736",
+                  "0.6400",
+                  "0.9363",
+                  "0.5269"
+                ],
+                [
+                  "4",
+                  "0.8328",
+                  "0.5871",
+                  "0.6352",
+                  "0.7077",
+                  "0.9384",
+                  "0.5869"
+                ]
+              ]
+            }
+          ],
+          "recorded_notes": [
+            "The Phase 2 full-train method-development GPFA was evaluated with 200 random disjoint splits while varying the number of repeats used in each half:",
+            "The 95% split interval for single-repeat position is approximately `0.4035–0.6613`. Reliability increases with repeat averaging, and single-trial trajectories are materially less reliable than the condition-average primary assay. The main scientific interpretation is summarized in GPFA Validation."
+          ]
+        },
+        {
+          "section": "2. Strict-convergence diagnostic",
+          "tables": [
+            {
+              "header": [
+                "Diagnostic",
+                "Value"
+              ],
+              "rows": [
+                [
+                  "Base fitted timescales",
+                  "`0.25048 / 0.25087 / 0.25046 / 0.25062 s`"
+                ],
+                [
+                  "Strict fitted timescales",
+                  "`0.25403 / 0.25792 / 0.25438 / 0.25593 s`"
+                ],
+                [
+                  "NLL/observation improvement",
+                  "`2.489e-5`"
+                ],
+                [
+                  "`C`-subspace principal angles",
+                  "`6.21°, 3.99°, 0.90°, 0.37°`"
+                ]
+              ]
+            },
+            {
+              "header": [
+                "Metric",
+                "Base",
+                "Strict"
+              ],
+              "rows": [
+                [
+                  "Position",
+                  "0.85641",
+                  "0.85748"
+                ],
+                [
+                  "Normalized RMSE",
+                  "0.54262",
+                  "0.54084"
+                ],
+                [
+                  "Velocity",
+                  "0.66363",
+                  "0.66526"
+                ],
+                [
+                  "Speed",
+                  "0.74265",
+                  "0.74606"
+                ],
+                [
+                  "Acceleration",
+                  "0.61327",
+                  "0.61691"
+                ]
+              ]
+            }
+          ],
+          "recorded_notes": [
+            "A supplementary `q = 4` fit used a maximum of 20 EM iterations with tolerance `1e-8`. The detailed fit comparison is:",
+            "On the same 50 splits:",
+            "Stricter optimization modestly changes the fitted timescales and loading subspace, while all listed trajectory reliability metrics change by less than approximately `0.004`. The exact fitted timescales are therefore less strongly identified than the trajectory reliability conclusion."
+          ]
+        },
+        {
+          "section": "3. Low-dimensional response-variance coverage",
+          "tables": [
+            {
+              "header": [
+                "q",
+                "Population R²",
+                "Mean per-neuron R²",
+                "Median per-neuron R²",
+                "90th percentile"
+              ],
+              "rows": [
+                [
+                  "4",
+                  "0.0200",
+                  "0.00369",
+                  "0.01296",
+                  "0.05275"
+                ],
+                [
+                  "8",
+                  "0.04231",
+                  "0.02214",
+                  "0.03099",
+                  "0.08899"
+                ],
+                [
+                  "16",
+                  "0.07148",
+                  "0.04123",
+                  "0.04916",
+                  "0.12258"
+                ]
+              ]
+            }
+          ],
+          "recorded_notes": [
+            "At `q = 4`, approximately 69.5% of neurons have positive per-neuron R², and the population R² for trial-averaged responses is approximately `0.02824`. The `q = 8` and `q = 16` models are short-EM diagnostic fits rather than the frozen primary model."
+          ]
+        }
+      ]
+    },
+    {
+      "source_document": "docs/GPFA_VALIDATION.md",
+      "source_sha256": "59e3dc64d6da579194fc48a4e15d451e8939284c8126b93a65c73d8ad78318d8",
+      "records": [
+        {
+          "section": "7. Main reliability results",
+          "tables": [
+            {
+              "header": [
+                "Metric",
+                "Full-train method-development GPFA",
+                "Comparison-subset GPFA"
+              ],
+              "rows": [
+                [
+                  "Position correlation",
+                  "0.8566",
+                  "0.8583"
+                ],
+                [
+                  "Normalized position RMSE",
+                  "0.5428",
+                  "0.5424"
+                ],
+                [
+                  "Velocity-direction cosine",
+                  "0.6627",
+                  "0.6368"
+                ],
+                [
+                  "Speed-profile correlation",
+                  "0.7434",
+                  "0.7777"
+                ],
+                [
+                  "Acceleration-direction cosine",
+                  "0.6163",
+                  "0.5579"
+                ]
+              ]
+            }
+          ],
+          "recorded_notes": [
+            "For the full-train fit, the empirical 2.5th–97.5th percentile split intervals are `0.8184–0.8885` for position, `0.4789–0.6527` for normalized RMSE, `0.6250–0.6949` for velocity, `0.6791–0.7951` for speed, and `0.5824–0.6548` for acceleration. The corresponding comparison-subset intervals are `0.8177–0.8906`, `0.4682–0.6453`, `0.5969–0.6723`, `0.7064–0.8354`, and `0.5181–0.6002`. These are distributions across repeat splits, not confidence intervals for independent biological samples.",
+            "For both primary fits, position, normalized RMSE, velocity, speed, and acceleration outperform condition, timing, direction, block-order, and population-synchrony nulls in all `200/200` paired splits, with `0/200` split/null failures. The agreement of the two reliability gates supports using the locked comparison-subset GPFA as the common coordinate system for model evaluation.",
+            "Path-length similarity is `0.9449` for the full-train fit, but its high raw reliability has a different interpretation and does not qualify it as a primary temporal metric."
+          ]
+        },
+        {
+          "section": "8. Sensitivity and saturation",
+          "tables": [
+            {
+              "header": [
+                "Metric",
+                "Comparison-profile range"
+              ],
+              "rows": [
+                [
+                  "Position correlation",
+                  "0.8173–0.8698"
+                ],
+                [
+                  "Normalized position RMSE",
+                  "0.5209–0.6151"
+                ],
+                [
+                  "Velocity-direction cosine",
+                  "0.5365–0.6407"
+                ],
+                [
+                  "Speed-profile correlation",
+                  "0.6406–0.7958"
+                ],
+                [
+                  "Acceleration-direction cosine",
+                  "0.4460–0.5778"
+                ]
+              ]
+            }
+          ],
+          "recorded_notes": [
+            "The method-development analysis varies split count, neuron count, latent dimension, neural training fraction, GPFA seed, and observation grid. Position is particularly stable: it changes from `0.8532` at 512 neurons to `0.8594` at 1,024 neurons, spans `0.8465–0.8538` across `q = 4/8/12/16`, and spans `0.8532–0.8622` across three GPFA seeds. Correlation-like estimates are largely stable by 100–200 repeat splits.",
+            "The comparison-subset analysis independently evaluates 16 profiles spanning:",
+            "- 128, 256, and 512 neurons; - `q = 4, 8, 12, 16`; - 25%, 50%, 75%, and 100% of the locked selected-train trials; - GPFA seeds 42, 314, and 2718; - observation steps 4 and 1.",
+            "Each profile uses 100 splits and five matched null classes. Minimum paired superiority remains `100/100`, and the maximum split/null failure count remains `0/100`.",
+            "Null separation holds across all tested profiles. Exact metric values vary: position is the most stable, whereas speed and higher derivatives vary more with latent dimension, neuron count, observation grid, and fit seed. For example, the full-train 7.5 Hz and direct 30 Hz fits yield velocity cosines of `0.6634` and `0.6190`, respectively, even though the null-separation conclusion is unchanged."
+          ]
+        },
+        {
+          "section": "9. Important negative findings and measurement limits",
+          "tables": [],
+          "recorded_notes": [
+            "Path length is highly reproducible across real split halves, but circular shifting and time reversal preserve nearly the same total distance traveled. Against circular shift, path-length superiority is only `126/200`, with `74/200` failures; against time reversal it is `89/200`, with `111/200` failures.",
+            "The main reliability values average four or five repeats per condition within each split half. With one repeat per half, position correlation falls to `0.5545` (split interval approximately `0.4035–0.6613`), compared with approximately `0.8566` for the primary condition-average analysis. Velocity, speed, and acceleration also fall to `0.3417`, `0.3694`, and `0.3051`.",
+            "Reconstructing oracle responses through the GPFA observation model gives population `R²` values of approximately `0.0200` at `q = 4`, `0.04231` at `q = 8`, and `0.07148` at `q = 16`. Higher dimensionality increases response coverage, but even the larger diagnostic fits capture a limited fraction of total response variance.",
+            "Speed changes more with latent dimension, neuron count, and sampling grid than position does. Acceleration is a noisier second-derivative diagnostic, and both velocity and acceleration on the 30 Hz query grid describe the inferred posterior rather than independent neural observations. These metrics remain informative because they reliably separate the relevant nulls, but their exact magnitudes are more analysis-sensitive than position.",
+            "The one-standard-error rule justifies `q = 4` as a conservative analysis choice, not as the unique true neural dimensionality. Likewise, the selected approximately `0.25 s` timescale behaves as a smoothing/analysis parameter and is not identified as a unique cortical timescale."
+          ]
+        },
+        {
+          "section": "10. Additional validation findings",
+          "tables": [],
+          "recorded_notes": [
+            "The training trials were divided into low/middle/high behavior-state strata using training-tier behavioral covariates without neural responses. A shared-prior model obtains calibration NLL per observation `1.4031800295`, compared with `1.4031800335` for behavior-conditioned timescales with shared `C`, `d`, and `R`. The conditioned prior provides no held-out improvement, so one shared natural-video temporal prior is retained.",
+            "A stricter q=4 EM fit shifts the learned timescales slightly and changes the fitted subspace modestly, but changes the reliability metrics by less than approximately `0.004` on the same 50 splits. The trajectory conclusions are therefore more stable than the exact fitted timescale values."
+          ]
+        }
+      ]
+    }
+  ]
+}

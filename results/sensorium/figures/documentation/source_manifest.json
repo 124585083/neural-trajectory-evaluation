@@ -1,0 +1,105 @@
+{
+  "schema": "sensorium_documentation_figures_v1",
+  "protocol": "retrained_v1",
+  "script": "code/sensorium/make_documentation_figures.py",
+  "script_sha256": "a8adebe55ac58933b1c1367406325cb18adfa9a87ad0a44b281225f06ebb4d70",
+  "operations": "Rendering saved values and method schematics only; no fitting, inference, resampling, new statistics, or control selection.",
+  "software": {
+    "matplotlib": "3.9.2",
+    "numpy": "1.26.4",
+    "pandas": "2.2.3"
+  },
+  "sources": {
+    "results/sensorium/evidence/04_model_comparison/retrained_v1/configuration.json": "f07217a6ef049289e0b3af4c44952eb1360e9359488d8a4de32846dc782dddaf",
+    "results/sensorium/evidence/04_model_comparison/retrained_v1/split_summary.csv": "3e0bd9059f3488d1bfed23be09311595f7a7c11565e90dc3dfc67b92b9cd637e",
+    "results/sensorium/evidence/04_model_comparison/retrained_v1/frozen_gpfa_identity.json": "6e317aa836be8759fee1e515ef4f9df280cd03079b87e6198a83305fdfb30081",
+    "results/sensorium/evidence/04_model_comparison/retrained_v1/evaluation_summary.json": "a74752ca287d95f9598e9222749c1501900db3538137b12477f10595ecb668a5",
+    "results/sensorium/evidence/04_model_comparison/retrained_v1_diagnostics/encoder/parameter_counts.json": "0f367586264d36d8ce72ddbe1e5be8364ad5ca08ce973d21c625700b4cb3b1f0",
+    "results/sensorium/evidence/04_model_comparison/retrained_v1_diagnostics/encoder/temporal_support.json": "8901858999dc5245977d11b6720764edcab5f8067e067d9e8dee681f2ea70313",
+    "results/sensorium/evidence/04_model_comparison/retrained_v1/response/response_session_metrics.csv": "111d6fc2998eb20f45b51f562dc89120c1dc492fa6de9e15e31c6c44bf14e5c8",
+    "results/sensorium/evidence/04_model_comparison/retrained_v1_diagnostics/gpfa/repeat_averaging_summary.csv": "b7d3764845211f5087004d8e15fb7b86709cf8e950042d55c2d2e52aaed0a841",
+    "results/sensorium/evidence/04_model_comparison/retrained_v1_diagnostics/gpfa/main/reconstruction.csv": "2c2edc1d54bf8ae46df16bfeaa4fe11a6267940d8368f337fe29644da4866db8",
+    "results/sensorium/evidence/04_model_comparison/retrained_v1/response/response_session_paired_bootstrap.csv": "7ef0d7a8f6cf9843b9fc930879a7140749714a0e01895e000336285b4ea7ca65",
+    "results/sensorium/evidence/04_model_comparison/retrained_v1/pilot/paired_bootstrap.csv": "e4186fb5c19efaaf8a4c7e79ec9c0a2be3fcde0770f703cf3cd2befdb6f8e0b3",
+    "results/sensorium/evidence/04_model_comparison/retrained_v1/pilot/condition_metrics.csv": "a0e2fdfef944e3c7bbbfdf4ec50822e7b8b03b4533edbc439fa7bcc8b7142c97",
+    "results/sensorium/evidence/04_model_comparison/retrained_v1_diagnostics/reversal/metrics.csv": "f708e18a9f6e473b05ada0bcaf77d848b4150a783e8d9e4aca42a3af3fcbde0b",
+    "results/sensorium/evidence/04_model_comparison/retrained_v1_diagnostics/reversal/paired_intervals.csv": "b168507fb210801f54d362f4449c6088f5eb16eaf1b23154489e9114720da880",
+    "results/sensorium/evidence/04_model_comparison/retrained_v1_diagnostics/reversal/numerical_checks.csv": "a07b911d42be5a52c7728728b6bdd44c5141c009130a699f419c686e4a43f777",
+    "results/sensorium/evidence/04_model_comparison/retrained_v1/response_matching_selection.csv": "ab1c8da0fe2e1f5a784774731f6dbb8c88a62be73d9af4db7b36899211ea1db1",
+    "results/sensorium/evidence/04_model_comparison/retrained_v1/pilot/response_matching_metrics.csv": "7c6829a01031c751c9531b6e5914250f0899a97a8dbad4c10306bfd1eb28851d",
+    "results/sensorium/evidence/04_model_comparison/retrained_v1/pilot/response_matching_bootstrap.csv": "ea57103eb846002485a843ca3b2a93aa7e3d44a073b77363447f1d5556e806a0",
+    "results/sensorium/evidence/04_model_comparison/retrained_v1_diagnostics/encoder/spatial_response_matches.csv": "e35715d3e7904d4a96e7d9f598d8de149e89ca3a8bff7066c217a2ffa627e60b",
+    "results/sensorium/figures/04_model_comparison/retrained_v1_diagnostics/encoder/weight_attenuation.png": "973fc14b168b778f1e3aff41e25a4308c99a074baf8c7b2ddfad103e84e592fd"
+  },
+  "figures": {
+    "01_shared_pathway": {
+      "source_fields": {
+        "configuration.json": "data, gpfa, training, reporting",
+        "split_summary.csv": "role / n_trials (sum across sessions)",
+        "response_session_metrics.csv": "static response_neuron_mean_r / n_neurons",
+        "parameter_counts.json": "counts",
+        "temporal_support.json": "1.0 offsets",
+        "frozen_gpfa_identity.json": "fit_role, latent_dim",
+        "evaluation_summary.json": "pilot, response.n_sessions"
+      },
+      "interpretation": "Method schematic, not data points; original 30 Hz grid is not independent neural acquisition.",
+      "outputs": {
+        "png": "2af1659c99db8caf95ed19e6d30b40bf6f0e0977266e7a65dc9749d4896890c5",
+        "svg": "a4c7127492556386e404c5b30170109dd7ef802c00bf35e402e89205c8fe1454"
+      }
+    },
+    "02_measurement": {
+      "source_fields": {
+        "repeat_averaging_summary.csv": "condition_shuffle / observed_mean, split_interval_low, split_interval_high; all three repeat levels",
+        "main/reconstruction.csv": "profile=main, grid=full_query / population_r2_evaluation_mean"
+      },
+      "interpretation": "Repeat agreement and reconstruction are different measures; no reliability-normalised score or universal noise ceiling.",
+      "outputs": {
+        "png": "5ac7a90c69cd9d37539d370127e63d8a648d6ddf997a0e2334ccd72b62041823",
+        "svg": "a9432e58e928bd5fb22fe650ccec6cf2ecc80ae565f3cb662c2248861305cdc7"
+      }
+    },
+    "03_model_comparison": {
+      "source_fields": {
+        "response_session_paired_bootstrap.csv": "response_neuron_mean_r / pooled_static, pooled_dynamic (no interval attached)",
+        "pilot/paired_bootstrap.csv": "five trajectory metrics / static, dynamic, dynamic_minus_static, ci_low, ci_high, interval_estimand",
+        "pilot/condition_metrics.csv": "all six actual condition IDs / static,dynamic position and direction scores"
+      },
+      "interpretation": "Movie points are summary scores, not latent paths. Per-movie exception annotation is subtraction of two saved scores, not new inference.",
+      "outputs": {
+        "png": "50b8e7991076a25aee954748e22d3534d849c462db79b486219d82756b3efaef",
+        "svg": "23d21666c8fbbe052c45ecd76fd507adbfa038f6e3b9cf27dc560dcdc744f259"
+      }
+    },
+    "04_reversal": {
+      "source_fields": {
+        "reversal/metrics.csv": "original/reversed time-averaged condition-pattern RSA, CKA",
+        "reversal/paired_intervals.csv": "a, b, b_minus_a, ci_low, ci_high; pooled_condition_trajectory vs equal_weight_mean_paired_condition_score kept separate",
+        "reversal/numerical_checks.csv": "passed; numerical invariance"
+      },
+      "interpretation": "Method schematic plus saved comparisons; before-conversion reversal is not the after-conversion primary null.",
+      "outputs": {
+        "png": "01ac6983c4cc68157715cf3ef3eb76f0fbd9471e3639552439b54317cfc59dad",
+        "svg": "e91ea39596cc7f3bd27700542b205dafc90df1f4de671de55c976306e6dd44e5"
+      }
+    },
+    "05_response_matching": {
+      "source_fields": {
+        "response_matching_selection.csv": "selected row / sigma, validation_static_response_r, validation_perturbed_dynamic_response_r, absolute_gap",
+        "response_matching_metrics.csv": "static and perturbed_dynamic / response_neuron_mean_r",
+        "response_matching_bootstrap.csv": "all five metrics / perturbed_dynamic_minus_static, ci_low, ci_high",
+        "evaluation_summary.json": "pilot.response_matching / tolerance, gap, retained, retuned"
+      },
+      "interpretation": "Signed response gaps subtract saved scores; bands are fixed tolerances, not confidence intervals. No new calibration or bootstrap.",
+      "outputs": {
+        "png": "139307315c09fb050f8fdd37d1b386663f5c998953ee7e69c3aa13b30278a33f",
+        "svg": "39bbb19f89b0d568db6f4f8851c51011b38baceae131e6c76808d72a198faa3b"
+      }
+    },
+    "06_weight_attenuation_retained": {
+      "existing_figure": "results/sensorium/figures/04_model_comparison/retrained_v1_diagnostics/encoder/weight_attenuation.png",
+      "sha256": "973fc14b168b778f1e3aff41e25a4308c99a074baf8c7b2ddfad103e84e592fd",
+      "interpretation": "Existing corrected figure preserved byte for byte. Spatial zero is NA/not_evaluable; temporal 0.50 fails test matching."
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": "sensorium_part3_status_v1",
+  "split_sha256": "490917e4cc9b222aefeb6f84e490bb4c4a325e94b0d932a4ebc544aff7718636",
+  "config_sha256": "d94cc9d882b78e9fca065b971f1fd6c2a0c632b48595edc087f9e218b54f78ec",
+  "inventory": "blocked",
+  "scientific_analysis": "not_executed",
+  "new_gpfa_fit": "not_executed",
+  "test_reliability_and_nulls": "not_executed",
+  "response_and_trajectory_comparison": "not_executed",
+  "reason_codes": [
+    "preprocessing_provenance_unverified",
+    "no_eligible_labeled_test_for_gpfa_session",
+    "movie_identity_incomplete"
+  ],
+  "encoder_training": "not_performed",
+  "historical_artifacts_overwritten": false,
+  "counts": {
+    "train": 1744,
+    "validation": 293,
+    "test": 1518
+  },
+  "questions": {
+    "Q1": "Not evaluated: no qualified common test comparison of response summaries and trajectories.",
+    "Q2": "Not evaluated: no qualified common test scores for the two frozen encoders.",
+    "Q3": "Not evaluated: qualified frozen-model test evaluation has not been executed; consult the inventory reason codes."
+  }
+}

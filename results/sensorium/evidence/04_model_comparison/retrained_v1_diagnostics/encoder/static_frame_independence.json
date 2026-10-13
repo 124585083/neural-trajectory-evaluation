@@ -1,0 +1,131 @@
+{
+  "status": "pass",
+  "mode": "eval",
+  "absolute_tolerance": 2e-06,
+  "retained_input_frames": [
+    18,
+    299
+  ],
+  "checks": [
+    {
+      "pathway": "input_channel_0",
+      "input_frame": 50,
+      "output_position": 32,
+      "max_other_frame_error": 0.0,
+      "max_changed_frame_effect": 0.5417724251747131
+    },
+    {
+      "pathway": "input_channel_1",
+      "input_frame": 50,
+      "output_position": 32,
+      "max_other_frame_error": 0.0,
+      "max_changed_frame_effect": 0.5404776930809021
+    },
+    {
+      "pathway": "input_channel_2",
+      "input_frame": 50,
+      "output_position": 32,
+      "max_other_frame_error": 0.0,
+      "max_changed_frame_effect": 0.6813446283340454
+    },
+    {
+      "pathway": "pupil_center",
+      "input_frame": 50,
+      "output_position": 32,
+      "max_other_frame_error": 0.0,
+      "max_changed_frame_effect": 0.08804559707641602
+    },
+    {
+      "pathway": "behavior_argument",
+      "input_frame": 50,
+      "output_position": 32,
+      "max_other_frame_error": 0.0,
+      "max_changed_frame_effect": 0.0
+    },
+    {
+      "pathway": "input_channel_0",
+      "input_frame": 174,
+      "output_position": 156,
+      "max_other_frame_error": 0.0,
+      "max_changed_frame_effect": 0.5612212419509888
+    },
+    {
+      "pathway": "input_channel_1",
+      "input_frame": 174,
+      "output_position": 156,
+      "max_other_frame_error": 0.0,
+      "max_changed_frame_effect": 0.7048404216766357
+    },
+    {
+      "pathway": "input_channel_2",
+      "input_frame": 174,
+      "output_position": 156,
+      "max_other_frame_error": 0.0,
+      "max_changed_frame_effect": 0.8386373519897461
+    },
+    {
+      "pathway": "pupil_center",
+      "input_frame": 174,
+      "output_position": 156,
+      "max_other_frame_error": 0.0,
+      "max_changed_frame_effect": 0.09516644477844238
+    },
+    {
+      "pathway": "behavior_argument",
+      "input_frame": 174,
+      "output_position": 156,
+      "max_other_frame_error": 0.0,
+      "max_changed_frame_effect": 0.0
+    },
+    {
+      "pathway": "input_channel_0",
+      "input_frame": 299,
+      "output_position": 281,
+      "max_other_frame_error": 0.0,
+      "max_changed_frame_effect": 0.6010098457336426
+    },
+    {
+      "pathway": "input_channel_1",
+      "input_frame": 299,
+      "output_position": 281,
+      "max_other_frame_error": 0.0,
+      "max_changed_frame_effect": 0.701962411403656
+    },
+    {
+      "pathway": "input_channel_2",
+      "input_frame": 299,
+      "output_position": 281,
+      "max_other_frame_error": 0.0,
+      "max_changed_frame_effect": 0.7749558687210083
+    },
+    {
+      "pathway": "pupil_center",
+      "input_frame": 299,
+      "output_position": 281,
+      "max_other_frame_error": 0.0,
+      "max_changed_frame_effect": 0.04577261209487915
+    },
+    {
+      "pathway": "behavior_argument",
+      "input_frame": 299,
+      "output_position": 281,
+      "max_other_frame_error": 0.0,
+      "max_changed_frame_effect": 0.0
+    }
+  ],
+  "dataset_index": 45,
+  "role": "validation",
+  "checkpoint_sha256": "3ded37a0fac494f47a8553a432e04e8be7e95a0a99ed9444b07ae61f31ff7052",
+  "negative_control": {
+    "status": "coupling_detected",
+    "observed_failure": "frame independence failed for input_channel_0, input frame 18, output position 0: other-frame error 0.009258270263671875 > 2e-06"
+  },
+  "state_unchanged": true,
+  "input_shape": [
+    1,
+    3,
+    300,
+    36,
+    64
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "development_matches_main_fitted_neural_digest": true,
+  "existing_auxiliary_numeric_fit_inputs_verified": [
+    "q8",
+    "q16",
+    "neurons256",
+    "observation_step1",
+    "train50",
+    "seed43"
+  ],
+  "existing_copied_main_tables_byte_verified": [
+    "evaluation/pilot/reliability_observed.csv",
+    "evaluation/pilot/reliability_nulls.csv",
+    "evaluation/pilot/condition_metrics.csv",
+    "gpfa/gpfa_selection.csv",
+    "gpfa/gpfa_fit_history.csv"
+  ],
+  "sources": {
+    "development/dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20/aligned_predictions.json": "8a55f50b18ac3d31cdcbde5978da685676e4111f530f761778ab9e56f5926c24",
+    "development/dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20/aligned_predictions.npz": "0c7b8a7f51ade0b7dcbfe769246a601494cff91450f92f7050e5268646b5aa95",
+    "evaluation/pilot/condition_metrics.csv": "a0e2fdfef944e3c7bbbfdf4ec50822e7b8b03b4533edbc439fa7bcc8b7142c97",
+    "evaluation/pilot/reliability_nulls.csv": "2ec7ef6ba7c6c2f0b035581417ff8bbe88690d966d0e278b849f1af7db6e4516",
+    "evaluation/pilot/reliability_observed.csv": "c7d9f4ea990511ed7fda2ccabb88310cce6cfd1c5a41eec3e7d81a8df6e59c95",
+    "evaluation/pilot/reliability_split_identities.csv": "d30ef1c2a1285f3df20129a94af253e3e04818968fee66881f1a635f040ffb15",
+    "evaluation/pilot/reliability_summary.csv": "cdb610a8b25563ce71d8c5690440a03c67268bf242bfc35e465c0bd42dab40d4",
+    "gpfa/frozen_gpfa_identity.json": "6e317aa836be8759fee1e515ef4f9df280cd03079b87e6198a83305fdfb30081",
+    "gpfa/gpfa_fit_history.csv": "b26bf219add8f1515856300fdf00107ccd92cae9acacce4876f87450e5dcc31f",
+    "gpfa/gpfa_selection.csv": "316e8c374e37d976a735e8e1deb89243fdcc409a98296002166706294b948556",
+    "test/dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20/aligned_predictions.json": "f076095e05418aaae81c00c3b9a649562a13b411381d58351cc1434809ed4cb4"
+  },
+  "supplementary_config_sha256": "b1d4540e63f0c57d3faae6959a9f23dbf9f6f142be195f1a571996fe0c2c9318",
+  "verification": "Additive source binding; no stage identity rewrite, fitting, inference, or score recomputation"
+}
