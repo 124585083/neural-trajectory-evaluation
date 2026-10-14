@@ -52,10 +52,8 @@ The [Mental-Pong Questions](results/mental_pong/QUESTIONS.md) examine the eviden
 
 **Code:** [Execution and reproduction guide](code/mental_pong/README.md) · [Main entry point](code/mental_pong/run.py). The guide describes saved-latent/readout scoring, small OLS refits, and the inputs needed for a full reconstruction.
 
-## Code, sources, and attribution
+## Code and sources
 
 Both projects are independent secondary analyses of published datasets. Their code guides describe executable workflows and input requirements; the [artifact manifest](models/manifest.json) records the frozen models, numerical inputs, and their availability.
-
-Research questions, study decisions, and scientific interpretation were directed by **Xiaotian Zhu**. ChatGPT assisted with research discussion and writing; Codex assisted extensively with implementation, testing, figures, and documentation. The original research teams are credited in the study documents.
 
 The [MIT license](LICENSE) covers original repository software and documentation; [Third-Party Notices](THIRD_PARTY_NOTICES.md) records external data and code sources and their terms. [Citation](CITATION.cff) · [Contact](mailto:xiaotian_zhu@outlook.com)
