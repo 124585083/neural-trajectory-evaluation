@@ -2,7 +2,7 @@
 
 This directory contains the code used for the Sensorium analyses in **neural-trajectory-evaluation**. The current results belong to `retrained_v1`, which compares a Static encoder and a reduced Dynamic encoder in a shared, frozen neural-data-defined Gaussian Process Factor Analysis (GPFA) space.
 
-**The supported one-command workflow starts from saved, aligned neural responses and encoder predictions.** It recomputes the retained GPFA-based measurements, model comparisons and controls without retraining or selecting new settings. The complete local cache-based replay has been verified. A one-command rebuild starting from the provider's videos and neural data has **not** been verified, and the numerical bundle is **not** included in a public clone.
+**The supported one-command workflow starts from saved, aligned neural responses and encoder predictions.** It recomputes the retained GPFA-based measurements, model comparisons and controls using the frozen models and settings. The complete local cache-based replay has been verified. The numerical bundle is supplied separately from a public clone. A one-command rebuild from the provider’s videos and neural data remains unverified.
 
 For the research questions and findings, see [Sensorium results](../../results/sensorium/) and [models and data](../../results/sensorium/MODELS_AND_DATA.md).
 
@@ -18,19 +18,19 @@ python code/sensorium/run.py --check
 python code/sensorium/run.py --run --output-dir code/sensorium/outputs/replay_01
 ```
 
-Choose an output directory that does not exist or is empty. The default artifact root is `models/sensorium/retrained_v1/`. To use the same authorized bundle elsewhere, add `--artifact-root /path/to/authorized-bundle` to either command. Run `python code/sensorium/run.py --help` for the current command-line interface.
+Choose a new or empty output directory. The default artifact root is `models/sensorium/retrained_v1/`. To use the same authorized bundle elsewhere, add `--artifact-root /path/to/authorized-bundle` to either command. Run `python code/sensorium/run.py --help` for the current command-line interface.
 
-The entry point checks input files and identities before running. Missing or mismatched inputs cause an error. **Encoder weights, GPFA parameters, encoder predictions, trial splits, response-matching settings and intervention strengths remain fixed.** The withdrawn GPFA sensitivity experiments remain outside this workflow.
+The entry point checks input files and identities before running. Missing or mismatched inputs cause an error. **Encoder weights, GPFA parameters, encoder predictions, trial splits, response-matching settings and intervention strengths remain fixed.** The workflow covers the retained main GPFA analyses; the auxiliary sensitivity experiments were withdrawn.
 
 ### What can be reproduced?
 
 | Available starting material | Supported operation | Limit |
 |---|---|---|
-| Public code, configurations and published evidence | Inspect settings, run code tests and check recorded provenance | No neural arrays, fitted model weights or large prediction caches are distributed with the repository |
-| Authorized `retrained_v1` frozen bundle, including aligned and intervention caches | Recompute the retained scores, GPFA posterior trajectories, controls and five selected figures for goals **02–06** | Does not rerun encoder inference or model/GPFA fitting; goal 01 is checked from existing implementation and reproduction records |
-| Authorized provider data, frozen weights and upstream source environments | Use the existing individual preparation, prediction and evaluation stages | A fresh-clone, single-command rebuild of all six goals from provider data has not been demonstrated |
+| Public code, configurations and published evidence | Inspect settings, run code tests and check recorded provenance | Numerical execution requires separately obtained neural arrays, fitted weights and prediction caches |
+| Authorized `retrained_v1` frozen bundle, including aligned and intervention caches | Recompute the retained scores, GPFA posterior trajectories, controls and five selected figures for goals **02–06** | Starts from fixed predictions and GPFA parameters; goal 01 uses existing implementation and reproduction records |
+| Authorized provider data, frozen weights and upstream source environments | Use the existing individual preparation, prediction and evaluation stages | A complete fresh-clone rebuild of all six goals remains unverified |
 
-The historical *full Dynamic* reproduction has separate training and local evaluation records from the reduced Dynamic model used in the current comparison. The frozen replay leaves that historical experiment unchanged; its available evidence remains limited to local evaluation, with no verified official hidden-test score.
+The historical *full Dynamic* reproduction has separate training and local evaluation records from the reduced Dynamic model used in the current comparison. The frozen replay preserves the historical experiment, whose evidence consists of local evaluation; an official hidden-test score remains unverified.
 
 ## 2. Input data and frozen artifacts
 
@@ -46,7 +46,7 @@ The original session folders contain video stimuli, neural responses, behavior, 
 
 The encoder adapter builds inputs of shape `[batch, 3, time, 36, 64]`. Two behavior traces join the visual input channels; pupil coordinates also supply the shifter. The recorded inference uses the first 300 frames, with evaluation on original frames **50–299**.
 
-For *raw-data* inference stages, use an authorized provider-data location (`SENSORIUM_DATA` / `--data-root`) and the pinned Sensorium and neuralpredictors source checkouts (`SENSORIUM_SOURCE`, `NEURALPREDICTORS_SOURCE`). **These are not required for the recommended cache-based replay.** The code README does not provide a fresh-install recipe for that advanced route.
+For *raw-data* inference stages, use an authorized provider-data location (`SENSORIUM_DATA` / `--data-root`) and the pinned Sensorium and neuralpredictors source checkouts (`SENSORIUM_SOURCE`, `NEURALPREDICTORS_SOURCE`). **The recommended cache-based replay uses the frozen bundle directly.** A fresh-install recipe for that advanced route remains to be validated.
 
 ### Cached-replay interface
 
@@ -63,13 +63,13 @@ The installed bundle contains the following main artifacts, with paths relative 
 | `test/<session>/aligned_predictions.npz` and the pilot `development/<session>/aligned_predictions.npz` | Neural and model predictions from which the recommended replay starts |
 | `diagnostics/encoder/`, `diagnostics/gpfa/`, `diagnostics/reversal_predictions.npz` | Original intervention, repeat-sampling and reversal inputs for the retained controls |
 
-The exact inventory, file sizes and SHA-256 values are in the [model manifest](../../models/manifest.json); [artifact preparation](../../models/README.md) and the [acquisition record](../../models/acquisition.json) describe access. The manifest records **129 files (8.58 GiB)** in the current local bundle, plus a separate 15-file historical full-Dynamic bundle. Both bundles are Git-ignored. There is currently **no confirmed public download route for the fitted numerical payload**, and provider-data access alone does not supply the frozen caches.
+The exact inventory, file sizes and SHA-256 values are in the [model manifest](../../models/manifest.json); [artifact preparation](../../models/README.md) and the [acquisition record](../../models/acquisition.json) describe access. The manifest records **129 files (8.58 GiB)** in the current local bundle, plus a separate 15-file historical full-Dynamic bundle. Both bundles are Git-ignored. A public download route for the fitted numerical payload remains unconfirmed; the frozen caches are separate inputs from the provider data.
 
-Keep the original relative paths and matching identity records when restoring a bundle. Encoder weights by themselves are insufficient for cached replay. Load serialized GPFA pickle objects only from a trusted, hash-verified source.
+Keep the original relative paths and matching identity records when restoring a bundle. Cached replay requires the aligned predictions, preprocessing and control files in addition to encoder weights. Load serialized GPFA pickle objects only from a trusted, hash-verified source.
 
 ## 3. Python environments
 
-Two recorded environments serve different purposes. Their versions describe the original working systems; a clean installation on other machines has not been verified.
+Separate recorded environments support analysis and encoder execution. The listed versions describe the original working systems; portability to a clean installation remains to be verified.
 
 | Component | Analysis and cached replay | Encoder training / prediction |
 |---|---|---|
@@ -80,13 +80,13 @@ Two recorded environments serve different purposes. Their versions describe the 
 | PyTorch | 2.5.1+cu124 | 2.5.1+cu124 |
 | Additional requirements | scikit-learn 1.5.2; CPU GPFA calculations | CUDA 12.4; nnfabrik 0.2.1; neuralpredictors 0.3.0 |
 
-The encoder environment was recorded with an RTX 4090 Laptop GPU. CPU-only encoder inference has not been checked. The package defines separate `analysis` and `encoding` extras; their recorded pandas requirements conflict, so **do not combine them into one untested environment**. Consult [pyproject.toml](pyproject.toml) and the [environment records](environments/) for dependency details. The pinned source commits are Sensorium 2023 `0e02656220e84a50f3be1b92d6f66c2f9ccd51ef` and neuralpredictors `efdda679596517fad95d71f36d0385d7450dd207`.
+The encoder environment was recorded with an RTX 4090 Laptop GPU. CPU-only encoder inference remains an unverified execution option. The package defines separate `analysis` and `encoding` extras with conflicting recorded pandas requirements; **install them in separate environments**. Consult [pyproject.toml](pyproject.toml) and the [environment records](environments/) for dependency details. The pinned source commits are Sensorium 2023 `0e02656220e84a50f3be1b92d6f66c2f9ccd51ef` and neuralpredictors `efdda679596517fad95d71f36d0385d7450dd207`.
 
 The original `trajectory_reliability.gpfa.GaussianProcessFactorAnalysis` import path is retained for GPFA pickle compatibility.
 
 ## 4. Outputs
 
-The frozen command writes its results and input/output manifests to the chosen new directory, principally under `evaluation/`, `measurement/`, `temporal_metric_tests/` and `temporal_weight_controls/`. It regenerates five retained figures, including repeat averaging and weight attenuation. Historical training figures and legacy atlases are outside this replay.
+The frozen command writes its results and input/output manifests to the chosen new directory, principally under `evaluation/`, `measurement/`, `temporal_metric_tests/` and `temporal_weight_controls/`. It regenerates five retained figures, including repeat averaging and weight attenuation. Historical training figures and legacy atlases remain separate saved outputs.
 
 | Goal | Results and methods |
 |---|---|
@@ -97,7 +97,7 @@ The frozen command writes its results and input/output manifests to the chosen n
 | 05 — Response matching | [Setup](../../results/sensorium/05_response_matching/SETUP.md) · [Results](../../results/sensorium/05_response_matching/RESULTS.md) |
 | 06 — Temporal/Spatial weight controls | [Setup](../../results/sensorium/06_temporal_weight_controls/SETUP.md) · [Results](../../results/sensorium/06_temporal_weight_controls/RESULTS.md) |
 
-Published scientific records remain under [Sensorium evidence](../../results/sensorium/evidence/) and [figures](../../results/sensorium/figures/). **New output is written separately, preserving published reference data.** The older `scripts/make_core_figures.js` uses an external `sharp` dependency to render compact tables as figures. It operates on saved results and performs no neural-data inference.
+Published scientific records remain under [Sensorium evidence](../../results/sensorium/evidence/) and [figures](../../results/sensorium/figures/). **New output is written separately, preserving published reference data.** The older `scripts/make_core_figures.js` uses an external `sharp` dependency to render compact tables as figures. It renders the saved results directly.
 
 ### Redraw the documentation figures
 
@@ -111,21 +111,21 @@ This draws the current method diagrams and result panels from retained evidence 
 
 ## 5. Other code entry points
 
-Use `run.py` for the default frozen replay. The original stage scripts support individual analysis steps, including stages that **train, fit or select parameters**. Those stages change the inputs and therefore require a separate workflow from replaying the frozen results.
+Use `run.py` for the default frozen replay. The original stage scripts support individual analysis steps, including stages that **train, fit or select parameters**. Those stages produce new fitted or selected inputs and should run in a workflow separate from frozen replay.
 
 | Script | Purpose |
 |---|---|
 | `run_retrained.py` | Stage-specific pipeline. `predict-test` uses frozen encoder weights and `evaluate` scores saved predictions. Explicit `train`, `prepare`, `fit-gpfa` and `calibrate` stages change fitted or selected artifacts. |
-| `run_supplementary.py` | Diagnostic-stage analysis. Some incomplete encoder prediction stages may select spatial intervention strengths; do not use them for frozen replay. |
-| `run_unified.py` | Historical `unified_v1` workflow, which can refit GPFA and recalibrate matching. Not the current recommended entry. |
+| `run_supplementary.py` | Diagnostic-stage analysis, including stages that may select spatial intervention strengths; use `run.py` for frozen replay. |
+| `run_unified.py` | Historical `unified_v1` workflow with GPFA fitting and matching calibration; the current entry is `run.py`. |
 | `scripts/prepare_local_bundle.py` | Checks and prepares an authorized project-local frozen bundle without publishing its numerical payload. |
 
-Core model, preprocessing, GPFA and evaluation functions remain in `src/`, with configurations in `configs/` and checks in `tests/`. The full history of experimental training runs is not required for the recommended replay.
+Core model, preprocessing, GPFA and evaluation functions remain in `src/`, with configurations in `configs/` and checks in `tests/`. The recommended replay uses the selected frozen artifacts rather than the complete training history.
 
 ## 6. Verified scope and remaining limits
 
-The recorded local replay on **12 October 2026** used only the installed project-local bundle; the original training run, baseline workspace and old repository were denied as fallback input roots. Goals **02–06** were recomputed and **five figures** produced. Goal **01** was checked against saved records rather than re-executed. No encoder inference, GPFA refitting or control recalibration occurred.
+The recorded local replay on **12 October 2026** used only the installed project-local bundle; the original training run, baseline workspace and old repository were denied as fallback input roots. Goals **02–06** were recomputed and **five figures** produced. Goal **01** was checked against saved records rather than re-executed. The replay used saved encoder predictions, fixed GPFA parameters and frozen control settings.
 
-Of **36 regenerated CSV files, 35** matched the saved tables exactly. In the remaining `spatial_response_matches.csv`, scientific scores, support and matching states agreed; three historical `original_*` diagnostic fields differed because the newer scoring path records float64 correlations. The largest recorded difference was **0.000553**. All **15 checked main-latent and reversal arrays** matched exactly. The spatial-zero-weight endpoint remains `NA / numerically_degenerate`, with response matching `not_evaluable`; other matched-control outcomes remain unchanged. These are results of the **recorded verification**, not tests rerun while editing this README. See [verification details](../../models/verification.json).
+Of **36 regenerated CSV files, 35** matched the saved tables exactly. In the remaining `spatial_response_matches.csv`, scientific scores, support and matching states agreed; three historical `original_*` diagnostic fields differed because the newer scoring path records float64 correlations. The largest recorded difference was **0.000553**. All **15 checked main-latent and reversal arrays** matched exactly. The spatial-zero-weight endpoint remains `NA / numerically_degenerate`, with response matching `not_evaluable`; other matched-control outcomes remain unchanged. These results describe the **recorded verification**. See [verification details](../../models/verification.json).
 
 Public reproduction still requires an available fitted bundle, a verified rebuild from provider video and neural arrays, and installation checks on other systems. The historical full-Dynamic work also lacks a verified official hidden-server score. The demonstrated scope is local replay from frozen caches.

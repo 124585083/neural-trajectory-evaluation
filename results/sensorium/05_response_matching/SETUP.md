@@ -4,15 +4,15 @@
 
 **When one response-correlation summary is brought within a fixed tolerance, do Static and perturbed Dynamic outputs still differ in their agreement with the recorded neural trajectory?**
 
-The [main model comparison](../03_model_comparison/RESULTS.md) reports better response prediction and stronger primary trajectory agreement for reduced Dynamic. This control asks whether a large difference in the specified scalar response score is necessary for those trajectory differences to remain. Static predictions are unchanged. Additive noise and a fixed lower clipping bound modify reduced Dynamic predictions, with the noise amplitude selected using validation data alone.
+The [main model comparison](../03_model_comparison/RESULTS.md) reports better response prediction and stronger primary trajectory agreement for reduced Dynamic. This control tests whether the trajectory differences persist when the specified scalar response scores are brought close together. Static predictions are unchanged. Additive noise and a fixed lower clipping bound modify reduced Dynamic predictions, with the noise amplitude selected using validation data alone.
 
-The selected operation is then applied unchanged to test predictions. Its response-score gap is checked before interpreting the trajectory comparison. The diagnostic changes frozen model outputs while keeping the trained encoders fixed. Matching targets **one mean per-neuron response correlation**; predictions, individual-neuron accuracy and statistical equivalence remain unconstrained.
+The selected operation is then applied unchanged to test predictions. Its response-score gap is checked before interpreting the trajectory comparison. The diagnostic modifies the saved outputs while the trained encoders remain fixed. Matching targets **mean per-neuron response correlation**. Individual-neuron accuracy and other output properties may still differ; statistical equivalence is a separate question.
 
 The [trajectory measurement analysis](../02_trajectory_measurement/RESULTS.md) supplies the reliability and response-coverage context. The separate [temporal metric tests](../04_temporal_metric_tests/SETUP.md) ask what a fixed reversal changes or preserves. Their distinct operation addresses a complementary question.
 
 ## 2. Data roles and evaluation support
 
-The control uses pilot session `dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20`. Its current split contains 282 training trials, 66 validation trials and 58 repeated test trials from six movie conditions. The sorted test repeat counts are 9, 9, 10, 10, 10 and 10. The 512 neurons are fixed by seed-42 hashing of stable neuron IDs, without selection by response accuracy or reliability.
+The control uses pilot session `dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20`. Its current split contains 282 training trials, 66 validation trials and 58 repeated test trials from six movie conditions. The sorted test repeat counts are 9, 9, 10, 10, 10 and 10. Seed-42 hashing of stable neuron IDs fixes the 512-neuron subset independently of response accuracy and reliability.
 
 | Data role | Trials | Use in this control |
 |---|---:|---|
@@ -30,7 +30,7 @@ All roles use the same pilot neurons and original scoring frames 50–299. Ampli
 | Test repeat means | Movie × time × neuron | `[6, 250, 512]` |
 | GPFA posterior trajectories | Movie × time × latent dimension | `[6, 250, 4]` |
 
-Inputs are released preprocessed mouse visual-cortex responses with aligned video, behavioural and pupil fields, not raw electrical recordings. Full encoder inference consumes 300 frames. Both models' 18-frame output reduction is aligned to original timestamps, after which frames 50–299 are retained. The 30 Hz array grid is not an independent neural acquisition at every bin. Earlier project notes describe approximately 8 Hz calcium acquisition before resampling; that rate is documented in narrative sources rather than independently checked acquisition metadata here.
+Inputs are released preprocessed mouse visual-cortex responses with aligned video, behavioural and pupil fields. Full encoder inference consumes 300 frames. Both models' 18-frame output reduction is aligned to original timestamps, after which frames 50–299 are retained. The 30 Hz array grid contains resampled neural responses. Earlier project notes describe approximately 8 Hz calcium acquisition before resampling; that rate is documented in narrative sources rather than independently checked acquisition metadata here.
 
 The bundles contain `neural`, `static`, `dynamic`, `conditions`, `dataset_indices`, `neuron_ids`, `frame_indices` and `encoder_precision`. The control uses the existing trial arrays directly, preserving their original trial support. Hidden-tier zero-response placeholders are excluded. The upstream labelled repeated-movie tier, called `oracle`, is test data for this retrained run. Historical exploration of these movies limits external-validation claims; the current result provides held-out evaluation after retraining. The wider data dependencies are in [Models and Data](../MODELS_AND_DATA.md#3-training-validation-and-test-data).
 
@@ -45,9 +45,9 @@ Here, **Dynamic** means the reduced Dynamic encoder from `retrained_v1`; the his
 
 Both models started from seed 42. They share readout and pupil-shifter families, but their cores and learned weights differ. This control changes Dynamic outputs with both selected encoders held fixed. The training design and parameter comparison remain in the [main comparison setup](../03_model_comparison/SETUP.md#3-models-and-fitting).
 
-The shared four-dimensional Gaussian-process factor analysis (GPFA) has a linear observation model, diagonal neuron noise and a learned radial basis function (RBF) timescale per latent dimension. Training neural responses alone fit its parameters. Validation neural likelihood selected the 0.25-second initial timescale. The final fit used 19 expectation-maximisation (EM) iterations on the 282 training trials, without adding validation trials.
+The shared four-dimensional Gaussian-process factor analysis (GPFA) has a linear observation model, diagonal neuron noise and a learned radial basis function (RBF) timescale per latent dimension. Training neural responses alone fit its parameters. Validation neural likelihood selected the 0.25-second initial timescale. The final fit used 19 expectation-maximisation (EM) iterations on the 282 training trials alone.
 
-The posterior observes 63 scoring-window indices, `0, 4, …, 248`, and is queried at all 250 timestamps. It conditions on the full window, so later observations can influence an earlier inferred state. Neural responses, Static predictions and perturbed Dynamic predictions use the same fixed GPFA and preprocessing. No auxiliary GPFA sensitivity result supports this objective.
+The posterior observes 63 scoring-window indices, `0, 4, …, 248`, and is queried at all 250 timestamps. It conditions on the full window, so later observations can influence an earlier inferred state. Neural responses, Static predictions and perturbed Dynamic predictions use the same fixed GPFA and preprocessing. The objective uses the retained main GPFA, with auxiliary sensitivity analyses withdrawn.
 
 The selected output-noise amplitude is `sigma=0.8697490026177834`. The saved `frozen_control.npz` contains the training-derived `noise_scale`. The [frozen analysis record](../evidence/04_model_comparison/retrained_v1/frozen_analysis.json) binds that control to the amplitude, noise seed, clipping floor, selected checkpoints and GPFA. These choices are unchanged by test scoring.
 
@@ -66,7 +66,7 @@ These values identify local artifacts whose parameters reside in separate model 
 
 ![Training predictions set the noise scale; validation selects one amplitude, then test applies it unchanged](../figures/documentation/05_response_matching.png)
 
-*Training predictions set the noise scale; validation selects one amplitude, then test applies it unchanged. The response tolerance band is a fixed acceptance rule, not a confidence interval or equivalence test. The trajectory panel uses stored pooled-score intervals with fixed noise; speed remains unresolved.*
+*Training predictions set the noise scale; validation selects one amplitude, then test applies it unchanged. The response tolerance band shows the fixed acceptance rule; statistical equivalence was not tested. The trajectory panel uses stored pooled-score intervals with fixed noise; speed remains unresolved.*
 
 ## 4. Output perturbation and amplitude selection
 
@@ -79,7 +79,7 @@ s_n=\operatorname{std}_{i\in\mathrm{train},\,u}
        \left(P^D_{i,u,n};\ \mathrm{ddof}=0\right).
 $$
 
-This per-neuron standard deviation measures variation across training Dynamic predictions. Neural trial variability, residual noise and the neural-derived GPFA scale are separate quantities.
+This per-neuron standard deviation measures variation across training Dynamic predictions. This prediction-derived scale is distinct from neural trial variability, residual noise and the neural-derived GPFA scale.
 
 For a candidate amplitude $\sigma$, the perturbed prediction is
 
@@ -103,7 +103,7 @@ rng = np.random.default_rng(int(identity[:16], 16))
 epsilon = rng.normal(size=(250, 512))
 ```
 
-The saved trial identity and seed 123 fix one noise realisation per trial. Each validation amplitude reuses that realisation; no test target enters noise generation. Seed 123 differs from model/bootstrap seed 42.
+The saved trial identity and seed 123 fix one noise realisation per trial. Each validation amplitude reuses the trial-specific realisation generated independently of test targets. Seed 123 differs from model/bootstrap seed 42.
 
 ### Only one response summary determines selection
 
@@ -119,7 +119,7 @@ r_{\mathrm{resp}}(Y,P)
 \right).
 $$
 
-Trial and time are flattened within each neuron before calculating Pearson correlation. $\mathcal N$ contains neurons for which both Static and the candidate output have defined correlations against the same reference. Their mean correlations are compared on that shared support; undefined scores are not replaced by zero.
+Trial and time are flattened within each neuron before calculating Pearson correlation. $\mathcal N$ contains neurons for which both Static and the candidate output have defined correlations against the same reference. Their mean correlations are compared on shared finite support, with undefined scores retained as undefined.
 
 The candidate grid is zero followed by 100 geometrically spaced values:
 
@@ -138,7 +138,7 @@ a_{\mathrm{val}}(\sigma)
 \right|.
 $$
 
-Choose the smallest validation gap, breaking ties by first grid occurrence; **selection does not stop at the first candidate inside tolerance**. The [selection table](../evidence/04_model_comparison/retrained_v1/response_matching_selection.csv) retains all 101 rows.
+Evaluate the full grid and choose the smallest validation gap, breaking ties by first grid occurrence. The [selection table](../evidence/04_model_comparison/retrained_v1/response_matching_selection.csv) retains all 101 rows.
 
 The selected amplitude is then frozen. On test, calculate the same absolute gap and record whether
 
@@ -183,7 +183,7 @@ $$
 
 The prediction-derived noise scale $s_n$ and neural-derived GPFA scale $g_n$ serve different purposes. Both stay frozen after training.
 
-Static predictions and recorded responses use the same conversion and posterior without the output perturbation. There is no model-specific rotation, latent-axis choice, scale fit or GPFA refit. The common measurement is described in the [trajectory measurement setup](../02_trajectory_measurement/SETUP.md#4-shared-scaling-and-posterior-inference).
+Static predictions and recorded responses use the same conversion and posterior without the output perturbation. All comparisons retain the original scales, GPFA parameters and latent axes. The common measurement is described in the [trajectory measurement setup](../02_trajectory_measurement/SETUP.md#4-shared-scaling-and-posterior-inference).
 
 ## 6. Metrics and paired uncertainty
 
@@ -221,9 +221,9 @@ Let $Z$ be the neural trajectory and $\widehat Z$ the Static or perturbed Dynami
 | Speed-profile correlation | Pearson r between the flattened norms of the within-movie velocity vectors. | Secondary; higher is better |
 | Acceleration-direction cosine | Use within-movie second differences divided by $\Delta t^2$; average corresponding direction cosines. | Secondary; higher is better |
 
-The normalised RMSE centre and denominator depend on the compared pair. Position denotes latent state. Derivatives describe changes in the smoothed offline posterior; physical object position, independently measured neural velocity and causal latency remain outside these definitions. All reported correlations, cosines, CKA scores and normalised errors are dimensionless. The [main comparison definitions](../03_model_comparison/SETUP.md#5-metrics) use the same conventions.
+The normalised RMSE centre and denominator depend on the compared pair. Position denotes latent state. Derivatives describe changes in the smoothed offline posterior; relating them to physical motion or causal neural timing requires corresponding measurements. All reported correlations, cosines, CKA scores and normalised errors are dimensionless. The [main comparison definitions](../03_model_comparison/SETUP.md#5-metrics) use the same conventions.
 
-Full common support comprises 1,500 condition/time states, 1,494 first differences, 1,488 second differences and 512 response neurons. Time-state RSA uses 150 sampled states and 11,175 edges. Undefined values remain `NA` and are not replaced by zero.
+Full common support comprises 1,500 condition/time states, 1,494 first differences, 1,488 second differences and 512 response neurons. Time-state RSA uses 150 sampled states and 11,175 edges. Undefined values retain the `NA` designation.
 
 ### Paired intervals concern the fixed control
 
@@ -236,11 +236,11 @@ $$
 
 Positive differences favour perturbed Dynamic for correlations and direction cosines; negative differences favour it for normalised position RMSE.
 
-The paired bootstrap uses seed 42 and 2,000 draws of six whole movie conditions with replacement. Each draw retains the neural reference and both outputs for the same sampled movies. The pooled condition-average trajectory score is recomputed for each output; their difference is then recorded. Point estimates and reported 95% intervals concern this same pooled-trajectory target, not an average of separately computed movie scores.
+The paired bootstrap uses seed 42 and 2,000 draws of six whole movie conditions with replacement. Each draw retains the neural reference and both outputs for the same sampled movies. The pooled condition-average trajectory score is recomputed for each output; their difference is then recorded. Point estimates and reported 95% intervals concern the same pooled-trajectory target.
 
-The amplitude and trial-keyed noise stay fixed during resampling. The intervals describe movie resampling conditional on these choices, leaving variability across noise realisations, calibrations and encoder training seeds unmeasured. Frames, repeats, bootstrap draws and RSA edges are not independent animals.
+The amplitude and trial-keyed noise stay fixed during resampling. The intervals describe movie resampling conditional on the fixed noise and calibration; further repetitions would be needed to quantify noise-, calibration- or training-seed variability. Movies are the resampling units; frames, repeats and RSA comparisons remain grouped within them.
 
-Only five trajectory contrasts have control-specific intervals. Response and representation scores remain point estimates; main-model intervals do not transfer to this control. A response-r tolerance is not statistical equivalence.
+Only five trajectory contrasts have control-specific intervals. Response and representation scores are reported as point estimates; control-specific intervals would require their own paired analysis. The response-r tolerance defines scalar closeness; statistical equivalence remains untested.
 
 ## 7. Source records and interpretation scope
 
@@ -254,15 +254,15 @@ Only five trajectory contrasts have control-specific intervals. Response and rep
 | [Evaluation summary](../evidence/04_model_comparison/retrained_v1/evaluation_summary.json) | `pilot.response_matching`, including `test_absolute_gap`, `test_matching_retained` and `test_retuned` |
 | [Traditional kernels](../../../code/sensorium/src/trajectory_model_eval/traditional.py) and [trajectory definitions](../../../code/sensorium/src/trajectory_reliability/metrics.py) | Implemented response, representation and trajectory metric definitions |
 
-[Results](RESULTS.md#6-result-records-and-available-presentation) links the control scores and paired intervals. The comparison tests whether similar values of the named scalar response summary coexist with different trajectory agreement under this fixed output operation. Equal per-neuron accuracy, equality of other response statistics, statistical equivalence and independence from response information require separate evidence.
+[Results](RESULTS.md#6-result-records-and-available-presentation) links the control scores and paired intervals. The comparison tests whether similar values of the named scalar response summary coexist with different trajectory agreement under this fixed output operation. The conclusion concerns the matched scalar; neuron-level accuracy, other response statistics and statistical equivalence would require additional matching criteria or tests.
 
-Response r uses individual trial/time samples, whereas trajectory scoring uses repeat means and the smoothed posterior. Added noise can affect these two levels differently. Averaging and smoothing therefore remain possible contributors to a surviving trajectory contrast. With one noise setting, one encoder training seed and one pilot session, robustness across perturbations or animal populations remains untested.
+Response r uses individual trial/time samples, whereas trajectory scoring uses repeat means and the smoothed posterior. Added noise can affect these two levels differently. Averaging and smoothing therefore remain possible contributors to a surviving trajectory contrast. The evidence covers one noise setting, one encoder training seed and one pilot session; broader robustness requires additional perturbations and recordings.
 
 <details>
 <summary>Historical response-matching controls: provenance only</summary>
 
-The earlier [epoch-65 control](../evidence/04_model_comparison/extended_prediction_summary.json), under `validation_matched_checkpoint`, records Dynamic validation r `0.16388525068759918` and Static r `0.16395580768585205`. It is a different checkpoint from the current epoch-109 Dynamic model and does not supply the present perturbed outputs.
+The earlier [epoch-65 control](../evidence/04_model_comparison/extended_prediction_summary.json), under `validation_matched_checkpoint`, records Dynamic validation r `0.16388525068759918` and Static r `0.16395580768585205`. It belongs to a different checkpoint from the current epoch-109 Dynamic model that supplies the present perturbed outputs.
 
-The earlier [Q4 record](../evidence/04_model_comparison/q1_q6_answers.json), field `Q4`, uses `sigma=0.7054802310718645`, with 28 pooled oracle trials for amplitude selection and 28 for scoring. That oracle tier also informed historical encoder selection. The historical coverage description reports that individual half-membership indices were not saved; the retained Q4 JSON provides pooled counts. These limitations belong to that earlier run. Its scores and splits are not combined with the current 282/66/58 data roles, frozen amplitude or paired intervals.
+The earlier [Q4 record](../evidence/04_model_comparison/q1_q6_answers.json), field `Q4`, uses `sigma=0.7054802310718645`, with 28 pooled oracle trials for amplitude selection and 28 for scoring. That oracle tier also informed historical encoder selection. The historical coverage description reports that individual half-membership indices were not saved; the retained Q4 JSON provides pooled counts. These limitations belong to that earlier run. Its historical scores and splits retain their own provenance, separately from the current 282/66/58 data roles, amplitude and paired intervals.
 
 </details>

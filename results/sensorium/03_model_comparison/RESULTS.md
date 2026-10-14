@@ -1,8 +1,8 @@
 # Static and Reduced Dynamic Comparison: Results
 
-**Reduced Dynamic has higher response correlation and lower response error in all five sessions. In the pilot, it also agrees more closely with the neural trajectories on the two primary measures: latent position correlation and velocity-direction cosine. Speed-profile differences remain unresolved, and the advantage is not uniform across every movie and secondary metric.**
+**Reduced Dynamic has higher response correlation and lower response error in all five sessions. In the pilot, it also agrees more closely with the neural trajectories on the two primary measures: latent position correlation and velocity-direction cosine. Speed-profile differences remain unresolved; movie-level and secondary-metric results show where the advantage varies.**
 
-These are the completed `retrained_v1` results from newly trained, frozen encoders and the current GPFA. They provide held-out evaluation after retraining. Historical exposure to the test movies limits their status as external validation; the historical full Dynamic reproduction remains a separate analysis. [Setup](SETUP.md) defines the models, data roles, metrics and uncertainty; [Models and Data](../MODELS_AND_DATA.md) provides the project-wide context.
+These are the completed `retrained_v1` results from newly trained, frozen encoders and the current GPFA. They provide held-out evaluation after retraining. The test movies retain their history of earlier exploration; the historical full Dynamic reproduction has its own analysis and model identity. [Setup](SETUP.md) defines the models, data roles, metrics and uncertainty; [Models and Data](../MODELS_AND_DATA.md) provides the project-wide context.
 
 ## 1. Completed training and comparison scope
 
@@ -17,17 +17,17 @@ Checkpoint selection uses random-snippet validation correlations; full-sequence 
 
 ![Current Static and reduced Dynamic training and validation histories](../figures/04_model_comparison/retrained_v1/training_curves.png)
 
-*Training and checkpoint selection for the current retrained encoders. These histories are not test replications and do not describe historical full Dynamic.*
+*Training objectives, validation correlations and checkpoint updates for the current retrained encoders. Historical full Dynamic has a separate training history.*
 
-Static has 2,814,015 trainable parameters and reduced Dynamic has 2,862,063, a difference of 48,048 or approximately 1.707%. Readout and shifter counts match; core counts differ. The [actual-instance record](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/parameter_counts.json) meets the 2% total-count check without implying identical architecture or computation.
+Static has 2,814,015 trainable parameters and reduced Dynamic has 2,862,063, a difference of 48,048 or approximately 1.707%. Readout and shifter counts match; core counts differ. The [actual-instance record](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/parameter_counts.json) meets the 2% total-count check; architecture and computation remain distinct.
 
-The five-session response analysis includes 293 test trials and 40,034 recorded neurons. Detailed conventional and GPFA results use pilot session `29515-10-12`: 58 trials, six movies, 512 fixed neurons and original frames 50–299. The current four-dimensional GPFA is fitted on training neural responses, with its initialisation chosen by validation neural likelihood, then frozen. Its [reliability and reconstruction results](../02_trajectory_measurement/RESULTS.md) define the measurement's scope; they do not constitute five-session trajectory validation.
+The five-session response analysis includes 293 test trials and 40,034 recorded neurons. Detailed conventional and GPFA results use pilot session `29515-10-12`: 58 trials, six movies, 512 fixed neurons and original frames 50–299. The current four-dimensional GPFA is fitted on training neural responses, with its initialisation chosen by validation neural likelihood, then frozen. Its [reliability and reconstruction results](../02_trajectory_measurement/RESULTS.md) define the measurement's scope; trajectory validation concerns the single pilot session.
 
-Scores below are rounded to four decimal places unless otherwise stated. Differences use the full stored values or difference fields, not subtraction of rounded displays. All differences are **Dynamic minus Static**. Positive differences favour Dynamic for correlation, CKA and cosine; negative differences favour Dynamic for error metrics.
+Scores below are rounded to four decimal places unless otherwise stated. Differences are calculated from full-precision stored values or taken from the saved contrast fields before display rounding. All differences are **Dynamic minus Static**. Positive differences favour Dynamic for correlation, CKA and cosine; negative differences favour Dynamic for error metrics.
 
 ![A: pooled response points across five sessions, without mean-movie intervals attached](../figures/documentation/03_model_comparison.png)
 
-*A: pooled response points across five sessions, without mean-movie intervals attached. B–C: all five pilot trajectory metrics and stored paired intervals for the same pooled estimand; speed crosses zero and nRMSE is lower-is-better. D–E: actual six movie IDs, with the small movie_00005 direction exception retained. These are movie-level scores, not latent paths. Intervals resample six whole movies, not animals.*
+*A: pooled response scores across five sessions. B–C: all five pilot trajectory scores and paired intervals for the same pooled estimand; the speed contrast crosses zero, and lower nRMSE indicates better agreement. D–E: scores for all six movies, including the small movie_00005 direction exception. The intervals describe resampling of the six whole movies.*
 
 ## 2. Response prediction across five sessions
 
@@ -57,7 +57,7 @@ Response NMSE uses the pooled scalar neural-response variance as its denominator
 | 29755-2-8 | 0.9702 | 0.9575 | -0.0127 |
 | **Unweighted session mean** | **0.9710** | **0.9585** | **-0.0125** |
 
-The last row of each table gives equal weight to the five session scores. It is not an all-neuron-weighted score across sessions, and no population-level interval is attached. The [session paired table](../evidence/04_model_comparison/retrained_v1/response/response_session_paired_bootstrap.csv) supplies the pooled scores and differences; the [session summary](../evidence/04_model_comparison/retrained_v1/response/response_session_summary.csv) supplies the two unweighted means. The mean NMSE difference is the subtraction of those full stored means.
+The last row of each table gives equal weight to the five session scores. This summary gives sessions equal weight; an animal-population interval is not available. The [session paired table](../evidence/04_model_comparison/retrained_v1/response/response_session_paired_bootstrap.csv) supplies the pooled scores and differences; the [session summary](../evidence/04_model_comparison/retrained_v1/response/response_session_summary.csv) supplies the two unweighted means. The mean NMSE difference is the subtraction of those full stored means.
 
 ### Movie-level differences within each session
 
@@ -71,13 +71,13 @@ The following points and intervals answer a different question. Correlation is c
 | 29712-5-9 | 0.1179 | 0.1293 | +0.0114 | [+0.0079, +0.0149] |
 | 29755-2-8 | 0.1064 | 0.1291 | +0.0227 | [+0.0181, +0.0287] |
 
-Each session has six defined paired movie scores, 2,000 valid whole-condition bootstrap draws and zero undefined draws. All five response-correlation intervals are above zero. This supports the direction of the difference within the observed movie sets; it is not an animal-population or pooled five-session confidence interval.
+Each session has six defined paired movie scores, 2,000 valid whole-condition bootstrap draws and zero undefined draws. All five response-correlation intervals are above zero. This supports the direction of the response difference within each observed movie set, with uncertainty defined by within-session movie resampling.
 
 Pooled response correlation includes cross-movie variation when trials are combined. Averaging correlations already calculated within movies is a different operation, which explains why the two sets of point estimates need not agree. The [complete session paired table](../evidence/04_model_comparison/retrained_v1/response/response_session_paired_bootstrap.csv) also retains the NMSE intervals; their endpoints are not reproduced here. [All session-condition scores](../evidence/04_model_comparison/retrained_v1/response/response_condition_metrics.csv) preserve the individual movie results.
 
 ## 3. Pilot trajectory comparison
 
-Recorded and predicted responses are averaged within each of the six pilot movies, converted to the same training-defined scale, and passed separately through the same frozen GPFA. The scores describe correspondence in that latent space. Position refers to latent state, not physical object position.
+Recorded and predicted responses are averaged within each of the six pilot movies, converted to the same training-defined scale, and passed separately through the same frozen GPFA. The scores describe correspondence in that latent space. Position refers to state in the GPFA latent coordinates.
 
 | Metric | Role | Static | Dynamic | Dynamic − Static | 95% paired interval |
 | --- | --- | ---: | ---: | ---: | --- |
@@ -87,15 +87,15 @@ Recorded and predicted responses are averaged within each of the six pilot movie
 | Speed-profile correlation | Secondary | 0.5346 | 0.5557 | +0.0211 | [-0.0403, +0.0795] |
 | Acceleration-direction cosine | Secondary | 0.1331 | 0.4289 | +0.2958 | [+0.1294, +0.4599] |
 
-The paired trajectory panel and table agree: both primary intervals favour Dynamic; secondary error and acceleration results also favour it. Acceleration direction is not pure curvature.
+The paired trajectory panel and table agree: both primary intervals favour Dynamic; secondary error and acceleration results also favour it. Acceleration direction reflects the second-difference vector, which includes more than geometric curvature alone.
 
-The speed interval includes zero, leaving its advantage unresolved; it does not establish equivalence.
+The speed interval includes zero, leaving its advantage unresolved; equivalence would require a separate test.
 
-Each point and its interval concern the same pooled condition-average trajectory score. In every bootstrap draw, six whole movie conditions are sampled with replacement, paired between the models, and the pooled scores are recomputed. All 2,000 draws are defined. The [paired record](../evidence/04_model_comparison/retrained_v1/pilot/paired_bootstrap.csv) retains the unrounded values, intervals and `interval_estimand` labels. These intervals are not the repeat-partition ranges reported for neural–neural reliability in Goal 2, and the model scores are not reliability-normalised.
+Each point and its interval concern the same pooled condition-average trajectory score. In every bootstrap draw, six whole movie conditions are sampled with replacement, paired between the models, and the pooled scores are recomputed. All 2,000 draws are defined. The [paired record](../evidence/04_model_comparison/retrained_v1/pilot/paired_bootstrap.csv) retains the unrounded values, intervals and `interval_estimand` labels. These intervals describe movie resampling; Goal 2 reports repeat-partition variability separately. Model scores remain in their original metric units.
 
 ## 4. Time-aware conventional metrics also distinguish the models
 
-The pilot conventional analysis uses the same 512 neurons and time interval as the trajectory comparison. It compares aligned neural responses and predicted responses without GPFA. These are output-space comparisons, not comparisons between the encoders' internal feature layers.
+The pilot conventional analysis uses the same 512 neurons and time interval as the trajectory comparison. It directly compares the aligned recorded and predicted response arrays. These comparisons characterize population-response outputs; internal feature layers would require a separate analysis.
 
 ### Pooled point estimates
 
@@ -107,9 +107,9 @@ The pilot conventional analysis uses the same 512 neurons and time interval as t
 | Temporal-difference CKA | 0.0281 | 0.0932 | +0.0651 |
 | Condition/time-state RSA | 0.4248 | 0.5449 | +0.1201 |
 
-The pilot response values differ slightly from the all-neuron values for session `29515-10-12` in Section 2 because this analysis uses the fixed 512-neuron subset rather than all 7,863 neurons. The two scopes are not interchangeable.
+The pilot response values differ slightly from the all-neuron values for session `29515-10-12` in Section 2 because this analysis uses the fixed 512-neuron subset rather than all 7,863 neurons. Each score retains its stated neuron scope.
 
-No interval from the equal-weight movie analysis below is attached to these pooled points. Response r and NMSE pool trial/time data; the pooled CKA and RSA summaries use within-movie repeat means and combine their condition/time states as defined in [Setup](SETUP.md#5-metrics).
+The pooled points are reported separately from the equal-weight movie intervals below. Response r and NMSE pool trial/time data; the pooled CKA and RSA summaries use within-movie repeat means and combine their condition/time states as defined in [Setup](SETUP.md#5-metrics).
 
 ### Equal-weight movie means and matching intervals
 
@@ -121,7 +121,7 @@ No interval from the equal-weight movie analysis below is attached to these pool
 | Temporal-difference CKA | 0.0948 | 0.2005 | +0.1057 | [+0.0773, +0.1315] |
 | Condition/time-state RSA | 0.5206 | 0.6296 | +0.1090 | [+0.0238, +0.2303] |
 
-All five rows use 2,000 defined paired movie-score draws. Their intervals favour Dynamic in the required direction: higher correlations and CKA, and lower NMSE. The means and intervals here are on the same equal-weight movie-score target. They are not intervals on the preceding pooled values.
+All five rows use 2,000 defined paired movie-score draws. Their intervals favour Dynamic in the required direction: higher correlations and CKA, and lower NMSE. The means and intervals here are on the same equal-weight movie-score target. Their interval target is the equal-weight movie mean.
 
 **Time-aware CKA and RSA already detect the model difference.** Trajectory metrics describe it through latent position and local-direction correspondence, complementing these other measures of temporal structure. Dynamic's concurrent improvement in response prediction leaves open how much the trajectory comparison adds beyond response correlation. [Temporal metric tests](../04_temporal_metric_tests/RESULTS.md) and [response matching](../05_response_matching/RESULTS.md) address those more specific questions separately.
 
@@ -155,7 +155,7 @@ The pooled advantage coexists with movie-specific exceptions. The following tabl
 
 Position improves in all six movies; direction improves in five. **movie_00005 has direction difference −0.000326**, retained in the figure and table. movie_00031 contributes the largest position gain.
 
-Among the secondary metrics, normalised position error is lower in all six movies, acceleration-direction correspondence is higher in five, and speed-profile correlation is higher in three. Speed is lower for `movie_00005`, `movie_00052` and `movie_00067`; acceleration is lower for `movie_00005`. These are descriptive counts, not separate movie-level significance tests.
+Among the secondary metrics, normalised position error is lower in all six movies, acceleration-direction correspondence is higher in five, and speed-profile correlation is higher in three. Speed is lower for `movie_00005`, `movie_00052` and `movie_00067`; acceleration is lower for `movie_00005`. These counts describe the direction of the movie-level point differences; significance was assessed for the pooled contrasts.
 
 <details>
 <summary>All secondary movie-level scores</summary>
@@ -185,7 +185,7 @@ Normalised position RMSE is lower-is-better; speed and acceleration corresponden
 
 </details>
 
-The [condition table](../evidence/04_model_comparison/retrained_v1/pilot/condition_metrics.csv) retains model, metric, movie, repeat count and support. Both nine-repeat and ten-repeat movies remain in the comparison; none was excluded to make the pooled advantage more uniform.
+The [condition table](../evidence/04_model_comparison/retrained_v1/pilot/condition_metrics.csv) retains model, metric, movie, repeat count and support. Both nine-repeat and ten-repeat movies remain in the comparison, preserving the full observed heterogeneity.
 
 ## 6. Both models retain correspondence relative to prediction nulls
 
@@ -193,19 +193,19 @@ The saved prediction-null results contain 50 model × null × metric groups: two
 
 The nulls alter movie correspondence, timing, direction or coordinated population changes in the GPFA-scaled condition-average predictions, while leaving the neural reference fixed. Higher unperturbed scores are superior for correlation and cosine; lower unperturbed normalised RMSE is superior for error. Both Static and Dynamic retain correspondence that the specified output perturbations reduce. Static's lower main-comparison score therefore coexists with relevant structure in its predictions.
 
-These nulls answer whether an original prediction retains more of the tested correspondence than its altered versions. The specific contribution of temporal convolution to the Static–Dynamic difference remains unresolved, and these controls supply no independent biological replications. The [full null record](../evidence/04_model_comparison/retrained_v1/pilot/model_nulls.csv) preserves `observed`, `value`, `null`, `permutation` and support. This perturbation analysis is distinct from Goal 2's neural repeat-half reliability and its eight null configurations.
+These nulls answer whether an original prediction retains more of the tested correspondence than its altered versions. The controls assess output correspondence in this dataset; isolating the contribution of temporal convolution requires additional comparisons. The [full null record](../evidence/04_model_comparison/retrained_v1/pilot/model_nulls.csv) preserves `observed`, `value`, `null`, `permutation` and support. This perturbation analysis is distinct from Goal 2's neural repeat-half reliability and its eight null configurations.
 
 ## 7. Interpretation and scope
 
 The completed comparison supports three conclusions within this fixed run. Reduced Dynamic predicts responses better across the five evaluated sessions. In the one trajectory pilot, its pooled position and local-direction correspondence are higher, with supporting secondary differences in position error and acceleration. The movie-level pattern is uneven, and speed remains unresolved.
 
-The designated test data do not enter the current encoder fitting, checkpoint selection or GPFA fitting and calibration. This addresses those specific data-reuse paths in the new run. Historical exploration of the movies remains, and the approximate content check does not establish upstream source-film independence. The result supports held-out evaluation after retraining within this history of test-movie exposure.
+Current encoder fitting and GPFA fitting use training data, and model selection and calibration use validation data; the designated test data are reserved for evaluation. These roles separate fitting and selection from current test scoring. Historical exploration of the movies remains, and the approximate content check does not establish upstream source-film independence. The result supports held-out evaluation after retraining within this history of test-movie exposure.
 
-A common neural space, scaling rule and evaluation support avoid giving either encoder a separately optimised latent alignment. Nevertheless, total parameter matching leaves different cores, regularisation, initialisation and optimisation behaviour. Those differences remain possible contributors to the observed advantage. Stronger response prediction can also contribute to stronger trajectory agreement. The separate [response-matching analysis](../05_response_matching/RESULTS.md) examines one specified scalar response summary without making the two models statistically or computationally equivalent.
+Both encoders use the same neural space, scaling rule and evaluation support. Total parameter matching controls overall size while preserving differences in cores, regularisation, initialisation and optimisation. Those differences remain possible contributors to the observed advantage. Stronger response prediction can also contribute to stronger trajectory agreement. The separate [response-matching analysis](../05_response_matching/RESULTS.md) examines matching of one specified scalar response summary; statistical and computational equivalence are separate questions.
 
-The advantage varies across movies and metrics, and its consistency across training seeds remains untested. Only one encoder seed and one trajectory session are available; the five response sessions provide broader response evaluation, with trajectory evaluation confined to the pilot session. Condition-average trajectories leave single-trial correspondence unresolved. The GPFA's limited response coverage, documented in [Goal 2](../02_trajectory_measurement/RESULTS.md#4-response-reconstruction-is-limited), also prevents treating this four-dimensional comparison as complete neural-response fidelity.
+The advantage varies across movies and metrics, and its consistency across training seeds remains untested. Only one encoder seed and one trajectory session are available; the five response sessions provide broader response evaluation, with trajectory evaluation confined to the pilot session. Condition-average trajectories characterize repeat-averaged activity; single-trial correspondence requires a separate assessment. The GPFA's limited response coverage, documented in [Goal 2](../02_trajectory_measurement/RESULTS.md#4-response-reconstruction-is-limited), defines the fraction of neural-response variation covered by this four-dimensional comparison.
 
-Finally, the posterior is offline and its derivatives do not identify causal neural latency. No withdrawn auxiliary GPFA sensitivity result is used to claim robustness across dimensions or observation grids. These findings characterise two frozen models under the specified measurement. A unique biological algorithm or isolated temporal computation remains beyond the evidence.
+The offline posterior supports descriptive temporal comparisons; causal latency requires time-restricted inference. Robustness across dimensions or observation grids remains unassessed after withdrawal of auxiliary GPFA fits. These findings characterise two frozen models under the specified measurement. Identifying a biological algorithm or isolating temporal computation would require discriminating manipulations beyond this model comparison.
 
 ## 8. Result records
 
@@ -221,4 +221,4 @@ Finally, the posterior is offline and its derivatives do not identify causal neu
 | [Model nulls](../evidence/04_model_comparison/retrained_v1/pilot/model_nulls.csv) | Observed and altered-prediction scores, null identities, draws and support |
 | [Evaluation summary](../evidence/04_model_comparison/retrained_v1/evaluation_summary.json), [status](../evidence/04_model_comparison/retrained_v1/status.json) and [generated manifest](../evidence/04_model_comparison/retrained_v1/generated_manifest.json) | Completed run and output identities |
 
-[Setup](SETUP.md#7-evidence-and-interpretation-scope) supplies the corresponding configuration, formula and source-function references. Historical model/data records remain separate and are not merged into these tables.
+[Setup](SETUP.md#7-evidence-and-interpretation-scope) supplies the corresponding configuration, formula and source-function references. Historical model/data records retain their separate identities; these tables describe the current comparison.

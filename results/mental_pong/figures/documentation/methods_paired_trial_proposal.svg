@@ -107,7 +107,7 @@ z
     <text style="fill: #20364d; font: 700 21px 'DejaVu Sans'; text-anchor: start" x="50.4" y="41.876719" transform="rotate(-0 50.4 41.876719)">Proposed next study: behavior within the same physical condition</text>
    </g>
    <g id="text_2">
-    <text style="fill: #526476; font: 12px 'DejaVu Sans'; text-anchor: start" x="50.4" y="63.170625" transform="rotate(-0 50.4 63.170625)">NOT EXECUTED  |  Requires paired neural–behavior trials  |  All curves below are schematic</text>
+    <text style="fill: #526476; font: 12px 'DejaVu Sans'; text-anchor: start" x="50.4" y="63.170625" transform="rotate(-0 50.4 63.170625)">Proposed protocol  |  Paired neural–behavior trials required  |  Schematic expected patterns</text>
    </g>
    <g id="text_3">
     <text style="fill: #20364d; font: 700 12.5px 'DejaVu Sans'; text-anchor: start" x="63.504" y="129.792734" transform="rotate(-0 63.504 129.792734)">1  |  Verify paired observations</text>
@@ -137,19 +137,19 @@ z
     <text style="fill: #20364d; font: 700 14px 'DejaVu Sans'; text-anchor: start" x="50.4" y="252.72" transform="rotate(-0 50.4 252.72)">Primary test: pre-feedback signed-error decoding on held-out paired trials</text>
    </g>
    <g id="text_10">
-    <text style="fill: #526476; font: 11.5px 'DejaVu Sans'" transform="translate(50.4 288.818203)">Compare with condition/time-only and movement-informed references. Report unsupported groups and failed reliability.</text>
+    <text style="fill: #526476; font: 11.5px 'DejaVu Sans'" transform="translate(50.4 288.818203)">Compare with condition/time-only and movement-informed references. Report group coverage and reliability results.</text>
     <text style="fill: #526476; font: 11.5px 'DejaVu Sans'" transform="translate(50.4 304.754059)">Behavioral groups denote action outcomes; a positive neural result could reflect estimate, goal or motor preparation.</text>
    </g>
    <g id="text_11">
-    <text style="fill: #227969; font: 700 13px 'DejaVu Sans'; text-anchor: start" x="50.4" y="336.24" transform="rotate(-0 50.4 336.24)">Only after reliable behavioral correspondence: examine when the difference changes</text>
+    <text style="fill: #227969; font: 700 13px 'DejaVu Sans'; text-anchor: start" x="50.4" y="336.24" transform="rotate(-0 50.4 336.24)">After establishing reliable behavioral correspondence, examine its time course</text>
    </g>
    <g id="text_12">
-    <text style="fill: #526476; font: 11.5px 'DejaVu Sans'" transform="translate(50.4 609.218203)">These patterns may coexist. An event-related claim needs change from a pre-event baseline, reliable support</text>
-    <text style="fill: #526476; font: 11.5px 'DejaVu Sans'" transform="translate(50.4 624.717148)">and timing/movement controls; post-event decoding alone is insufficient. A state difference does not identify its mechanism.</text>
+    <text style="fill: #526476; font: 11.5px 'DejaVu Sans'" transform="translate(50.4 609.218203)">These patterns may coexist. Evaluate event-linked change relative to a pre-event baseline, with reliable support</text>
+    <text style="fill: #526476; font: 11.5px 'DejaVu Sans'" transform="translate(50.4 624.717148)">and timing/movement controls. A discriminating follow-up would test the computation producing the difference.</text>
    </g>
    <g id="text_13">
-    <text style="fill: #77502b; font: 11.5px 'DejaVu Sans'" transform="translate(65.52 654.660719)">Decision gate: without trial pairing, pre-feedback timing and adequate group reliability, stop at the data limitation.</text>
-    <text style="fill: #77502b; font: 11.5px 'DejaVu Sans'" transform="translate(65.52 669.285844)">Released condition means cannot be relabeled to recover above/below neural trial groups.</text>
+    <text style="fill: #77502b; font: 11.5px 'DejaVu Sans'" transform="translate(65.52 654.660719)">Decision gate: proceed with verified trial pairing, pre-feedback timing and adequate group reliability.</text>
+    <text style="fill: #77502b; font: 11.5px 'DejaVu Sans'" transform="translate(65.52 669.285844)">Group-specific neural responses require paired trial records beyond the released condition means.</text>
    </g>
   </g>
   <g id="axes_2">

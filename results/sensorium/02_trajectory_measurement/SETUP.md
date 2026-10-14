@@ -4,7 +4,7 @@
 
 **Can one frozen Gaussian-process factor analysis (GPFA) model provide a useful common measurement for the current neural-trajectory comparison?** This goal examines how repeatable the inferred trajectories are, whether their agreement depends on the correct movie and temporal organisation, and how much response variance the observation model reconstructs.
 
-Repeatability, null sensitivity and reconstructed response variance are distinct properties. These checks establish where this measurement is useful; optimality across representations remains untested.
+Repeatability, null sensitivity and reconstructed response variance are distinct properties. These checks evaluate the measurement’s repeatability, perturbation sensitivity and response coverage; comparing alternative representations is a separate task.
 
 | Check | Question addressed | What remains fixed |
 |---|---|---|
@@ -15,11 +15,11 @@ Repeatability, null sensitivity and reconstructed response variance are distinct
 
 Training neural responses fit the four-dimensional GPFA shared by neural and model arrays. Here the checks concern neural responses; [Goal 3](../03_model_comparison/RESULTS.md) compares encoders. [Results](RESULTS.md) reports the measurement findings.
 
-Auxiliary GPFA sensitivity was withdrawn from the current conclusions. No auxiliary fit or cross-profile robustness claim forms part of this goal.
+The current goal retains the main GPFA measurement; auxiliary sensitivity fits were withdrawn. Its conclusions therefore concern the retained main fit.
 
 ![Shared current measurement and data roles](../figures/documentation/01_shared_pathway.png)
 
-*Shared current measurement and data roles. This goal checks neural-response repeatability and reconstruction in the pilot; it does not compare encoder accuracy. The same fixed scales and offline GPFA later measure neural and predicted responses.*
+*Shared current measurement and data roles. This goal checks neural-response repeatability and reconstruction in the pilot; encoder accuracy is evaluated in Goal 3. The same fixed scales and offline GPFA later measure neural and predicted responses.*
 
 ## 2. Data and evaluation support
 
@@ -37,7 +37,7 @@ dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20
 
 The test data contain six repeated movie conditions. Their repeat counts, sorted by count, are `9, 9, 10, 10, 10, 10`; this ordering does not identify individual movies. Condition identities and trial membership are retained in the [split manifest](../evidence/04_model_comparison/retrained_v1/split_manifest.json).
 
-Of the session's 7,863 recorded neurons, 512 are selected by sorting stable unit IDs by the SHA-256 digest of `42:<unit_id>` and retaining the first 512. Neither neural reliability nor model accuracy determines this selection. No test condition is excluded on the basis of its reliability.
+Of the session's 7,863 recorded neurons, 512 are selected by sorting stable unit IDs by the SHA-256 digest of `42:<unit_id>` and retaining the first 512. The fixed identity-based rule selects neurons independently of neural reliability and model accuracy. All test conditions enter the measurement, with reliability reported for the retained support.
 
 | Array | Axes and shape |
 |---|---|
@@ -46,9 +46,9 @@ Of the session's 7,863 recorded neurons, 512 are selected by sorting stable unit
 | Test condition means | Condition × time × neuron: `[6, 250, 512]` |
 | Condition-mean latent trajectories | Condition × time × latent: `[6, 250, 4]` |
 
-The 250 timestamps correspond to original frames 50–299. All compared arrays must have the same finite trial, time and neuron support. The responses are processed calcium signals on the released 30 Hz grid, not independent 30 Hz neural acquisitions.
+The 250 timestamps correspond to original frames 50–299. All compared arrays must have the same finite trial, time and neuron support. The responses are processed calcium signals sampled on the released 30 Hz resampled grid.
 
-The upstream tier named **`oracle`** supplies labelled repeated-movie responses for the current test. Hidden tiers containing zero-response placeholders are excluded. These test movies were explored in earlier work; the present fit uses separate train and validation roles, but the evaluation is not untouched external validation. Upstream source-film identity remains unresolved.
+The upstream tier named **`oracle`** supplies labelled repeated-movie responses for the current test. Hidden tiers containing zero-response placeholders are excluded. The present fit uses separate training and validation roles; the test movies retain their history of earlier exploration, defining this as held-out evaluation after retraining. Upstream source-film identity remains unresolved.
 
 ## 3. GPFA model and fixed identity
 
@@ -69,7 +69,7 @@ k_q(t,t')=\exp\left[-\frac{1}{2}\left(\frac{t-t'}{\tau_q}\right)^2\right],
 \qquad q=1,\ldots,4.
 $$
 
-**This Sensorium model learns one timescale per latent dimension.** The 0.25-second value selected during calibration is an initialisation, not a constraint that all final timescales must equal 0.25 seconds. The fitted values recorded in `frozen_gpfa_arrays.npz` are:
+**This Sensorium model learns one timescale per latent dimension.** Calibration selects a 0.25-second initialisation; the final timescales are learned individually rather than fixed at 0.25 seconds. The fitted values recorded in `frozen_gpfa_arrays.npz` are:
 
 | Latent dimension | Learned timescale (seconds) |
 |---|---:|
@@ -108,7 +108,7 @@ The latent dimension is fixed at four before calibration. Factor analysis initia
 | Numerical jitter | `1e-5` |
 | Minimum observation noise | `1e-5` |
 
-Encoder predictions and test response scores do not enter this selection. The [selection table](../evidence/04_model_comparison/retrained_v1/gpfa_selection.csv) and [fit history](../evidence/04_model_comparison/retrained_v1/gpfa_fit_history.csv) identify the candidate and final fits. The additional `stage=dimension` row is a four-dimensional bookkeeping fit at a 0.5-second initialisation; it is not evidence of a new dimension search.
+Selection uses validation neural likelihood independently of encoder predictions and test response scores. The [selection table](../evidence/04_model_comparison/retrained_v1/gpfa_selection.csv) and [fit history](../evidence/04_model_comparison/retrained_v1/gpfa_fit_history.csv) identify the candidate and final fits. The additional `stage=dimension` row records a bookkeeping fit at the fixed four-dimensional setting and a 0.5-second initialisation.
 
 ### Artifact identity
 
@@ -139,7 +139,7 @@ $$
 f=0.01\,\operatorname{mean}_n(s_n)=0.17263539191444882.
 $$
 
-The GPFA multiplicative scaling factor is $1/\max(s_n,f)$. No additional centring or clipping is applied. The stored variables named `precision` denote these multiplicative scaling factors.
+The GPFA multiplicative scaling factor is $1/\max(s_n,f)$. This scaling preserves the response mean and retains the source values without clipping. The stored variables named `precision` denote these multiplicative scaling factors.
 
 For recorded responses and both encoder predictions, the conversion is identical:
 
@@ -149,7 +149,7 @@ GPFA_input[t, n] = encoder_scaled[t, n]
                    * GPFA_train_precision[n]
 ```
 
-Dividing by the encoder factor recovers the raw response scale; multiplying by the GPFA factor applies the fixed neural-training scale. Both factors are fixed from training data. Every input uses the same scales and latent axes, with model-specific fitting, Procrustes alignment and rotation excluded from the protocol.
+Dividing by the encoder factor recovers the raw response scale; multiplying by the GPFA factor applies the fixed neural-training scale. Both factors are fixed from training data. Every input uses the same fixed scales and original latent axes.
 
 ### Observation and query grids
 
@@ -165,7 +165,7 @@ Query points provide inferred states on the full evaluation grid without adding 
 
 Each of 200 seed-42 partitions permutes repeats within movie, then assigns disjoint halves of `floor(repeats / 2)`: four per side for nine-repeat movies, five for ten-repeat movies. Each balanced side has 28 trials; two are unused.
 
-Responses are averaged within each side and condition before frozen inference. Corresponding left and right trajectories are then compared without fitting or aligning a new representation.
+Responses are averaged within each side and condition before frozen inference. Corresponding left and right trajectories are compared in the existing frozen representation.
 
 One- and two-repeat diagnostics use nested prefixes of the same unsorted permutations, sorted only for averaging. They replay the saved membership/null random stream and reuse balanced scores; GPFA is unchanged.
 
@@ -173,7 +173,7 @@ The [sampling implementation](../../../code/sensorium/src/trajectory_model_eval/
 
 ### Where the nulls act
 
-Each null transforms the right-half condition means **after conversion to the GPFA scale and before the same frozen posterior**. The left-half reference remains unchanged. These are response-level perturbations, not changes to the input videos.
+Each null transforms the right-half condition means **after conversion to the GPFA scale and before the same frozen posterior**. The left-half reference remains unchanged. The perturbations act on response arrays while the input videos remain fixed.
 
 | Null | Operation on the right-half response array | Preserved structure and changed correspondence |
 |---|---|---|
@@ -183,7 +183,7 @@ Each null transforms the right-half condition means **after conversion to the GP
 | Independent-neuron shift | Give each neuron in each condition an independent integer shift in `[1, 250)` | Preserves each neuron's circular sequence; changes coordinated population timing |
 | Block shuffle, lengths 4, 8, 16 or 32 | Divide the 250-frame interval into blocks, retaining the short final block; apply one block permutation across conditions; replace the identity permutation with a cyclic roll | Preserves order within blocks; changes order between blocks |
 
-The four block lengths make this **eight null configurations** in total. The optional legacy full-frame-shuffle null is not part of the current reliability run. Integer ranges above include the lower bound and exclude the upper bound.
+The four block lengths make this **eight null configurations** in total. The legacy full-frame-shuffle null remains a separate historical option. Integer ranges above include the lower bound and exclude the upper bound.
 
 Reversal is deterministic for a particular right-half mean. Across 200 repeat partitions, the same deterministic operation acts on 200 different repeat means. Posterior inference can change path length even when the response-space operation preserves it.
 
@@ -191,13 +191,13 @@ Reversal is deterministic for a particular right-half mean. Across 200 repeat pa
 
 Observed and null derivative scores use the same effective support. A partition is superior to its matched null when the observed score is higher for correlation or cosine metrics, or lower for normalised RMSE. Ties and non-superior comparisons count as failures; undefined scores are counted separately.
 
-Means, standard deviations and 2.5th/97.5th percentile summaries describe variation across repeat assignments within the same six movies. They are not animal-population confidence intervals or p-values. The resulting reliability scores are not themselves reliability-normalised, and repeat-average agreement is not a universal noise ceiling.
+Means, standard deviations and 2.5th/97.5th percentile summaries describe variation across repeat assignments within the same six movies. Their inferential scope is the repeat-assignment variability of this movie set, rather than an animal population. Reliability is reported in its original metric units as a repeat-average reference, rather than a universal noise ceiling.
 
 ## 6. Metrics and response reconstruction
 
 ### Trajectory agreement
 
-Trajectory metrics take arrays with axes `[condition, time, latent]`. Differences are computed within each condition, not across movie boundaries.
+Trajectory metrics take arrays with axes `[condition, time, latent]`. Differences are computed within each condition, preserving movie boundaries.
 
 | Metric | Role and calculation | Preferred direction |
 |---|---|---|
@@ -207,9 +207,9 @@ Trajectory metrics take arrays with axes `[condition, time, latent]`. Difference
 | Speed-profile correlation | Secondary. Correlate the norms of the first-difference vectors | Higher |
 | Acceleration-direction cosine | Secondary. Average cosines between second-difference vectors on shared nonzero support | Higher |
 
-First and second differences use `dt = 1/30` second. The implementation uses `EPS = 1e-12` and common nonzero support across the compared arrays, so a perturbation cannot silently change which derivative samples enter the comparison. See [`trajectory_metrics`](../../../code/sensorium/src/trajectory_reliability/metrics.py) for the recorded implementation.
+First and second differences use `dt = 1/30` second. The implementation uses `EPS = 1e-12` and common nonzero support, so the same derivative samples enter each comparison. See [`trajectory_metrics`](../../../code/sensorium/src/trajectory_reliability/metrics.py) for the recorded implementation.
 
-Path-length similarity is outside the current five-metric battery. The historical descriptive formula is:
+Path-length similarity is a historical descriptive measure, separate from the current five-metric battery. The historical descriptive formula is:
 
 ```text
 exp(-abs(log(mean_c(length_right_c / max(length_left_c, 1e-12)))))
@@ -225,7 +225,7 @@ $$
 \widehat y(t)=Cz(t)+d.
 $$
 
-In array form, this is `y_hat = z @ C.T + d`. It is applied to individual test trials and, separately, to the six condition means. Both the full 250-point query grid and the 63-point observation grid are scored. No decoder, scale or GPFA parameter is refitted for this check.
+In array form, this is `y_hat = z @ C.T + d`. It is applied to individual test trials and, separately, to the six condition means. Both the full 250-point query grid and the 63-point observation grid are scored. The reconstruction check retains the fitted decoder, scale and GPFA parameters.
 
 Let $u$ index the evaluated trial-or-condition/time samples for one response level and one grid. With a separate evaluation mean $\bar y_n$ for each neuron,
 
@@ -252,7 +252,7 @@ $$
 
 Per-neuron centred scores are $R_n^2=1-\mathrm{SSE}_n/\mathrm{SST}_n$. The population score pools sums of squares, giving a different weighting from the unweighted mean of per-neuron scores. Consequently, positive pooled reconstruction and a negative mean per-neuron score can coexist.
 
-Response levels and grids have separate denominators. Evaluation means define scoring baselines without refitting GPFA. Denominators ≤ `1e-12` stay undefined; negative R² is retained. RMSE uses GPFA training-standard-deviation units.
+Response levels and grids have separate denominators. Evaluation means define the scoring baselines; GPFA remains fixed. Denominators ≤ `1e-12` stay undefined; negative R² is retained. RMSE uses GPFA training-standard-deviation units.
 
 This is reconstruction of responses used for frozen posterior inference. It is separate from the encoders' stimulus-to-response prediction and from agreement between independent repeat halves.
 
@@ -270,4 +270,4 @@ The main configuration is [retrained_v1.json](../../../code/sensorium/configs/re
 
 GPFA is attributed to Yu et al. (2009), *Gaussian-process factor analysis for low-dimensional single-trial analysis of neural population activity*, **Journal of Neurophysiology**, 102, 614–635 ([DOI](https://doi.org/10.1152/jn.90941.2008)). The source method provides context; this project's numerical choices are defined by its recorded configuration and implementation.
 
-Earlier 348- and 174-trial GPFA fits are separate historical objects. An executable definition sufficient to verify exact equivalence with their reconstruction denominator is not available in the checked sources. Their reconstruction values are therefore not substituted for, or treated as numerically interchangeable with, the current 282-trial fit. The present results concern one session and six repeated movies, with offline inference and no retained claim of robustness across latent dimensions or observation grids.
+Earlier 348- and 174-trial GPFA fits are separate historical objects. Exact equivalence with the historical reconstruction denominator remains unverified in the checked executable sources. Their reconstruction values retain their historical definitions, separately from the current 282-trial fit. The present results concern one session and six repeated movies under offline inference; robustness across latent dimensions and observation grids remains unassessed.

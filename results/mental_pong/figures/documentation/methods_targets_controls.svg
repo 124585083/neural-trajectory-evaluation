@@ -143,7 +143,7 @@ L 372.96 344.52
     <text style="fill: #20364d; font: 700 21px 'DejaVu Sans'; text-anchor: start" x="50.4" y="44.468719" transform="rotate(-0 50.4 44.468719)">Targets, fitted heads and randomized controls</text>
    </g>
    <g id="text_2">
-    <text style="fill: #526476; font: 12px 'DejaVu Sans'; text-anchor: start" x="50.4" y="68.570625" transform="rotate(-0 50.4 68.570625)">Completed protocol  |  Geometry sketches illustrate the rule; they are not recorded trajectories</text>
+    <text style="fill: #526476; font: 12px 'DejaVu Sans'; text-anchor: start" x="50.4" y="68.570625" transform="rotate(-0 50.4 68.570625)">Completed protocol  |  Schematic construction of the two trajectory targets</text>
    </g>
    <g id="text_3">
     <text style="fill: #20364d; font: 11.5px 'DejaVu Sans'; text-anchor: start" x="100.8" y="347.693281" transform="rotate(-0 100.8 347.693281)">Objective physical path</text>
@@ -206,12 +206,12 @@ L 372.96 344.52
     <text style="fill: #24659b; font: 700 12.5px 'DejaVu Sans'; text-anchor: start" x="73.584" y="634.440734" transform="rotate(-0 73.584 634.440734)">B  |  Shuffle test-condition references</text>
    </g>
    <g id="text_20">
-    <text style="fill: #20364d; font: 11px 'DejaVu Sans'" transform="translate(73.584 660.966281)">Fitted head + predictions stay FIXED.</text>
-    <text style="fill: #20364d; font: 11px 'DejaVu Sans'" transform="translate(73.584 674.955531)">Re-score matched / shuffled labels on the same intersection.</text>
-    <text style="fill: #20364d; font: 11px 'DejaVu Sans'" transform="translate(73.584 688.944781)">Also disrupts physical condition correspondence.</text>
+    <text style="fill: #20364d; font: 11px 'DejaVu Sans'" transform="translate(73.584 660.966281)">Keep the fitted head and predictions fixed.</text>
+    <text style="fill: #20364d; font: 11px 'DejaVu Sans'" transform="translate(73.584 674.955531)">Score matched / shuffled labels on shared valid rows.</text>
+    <text style="fill: #20364d; font: 11px 'DejaVu Sans'" transform="translate(73.584 688.944781)">The remapping changes physical condition correspondence.</text>
    </g>
    <g id="text_21">
-    <text style="fill: #c35d21; font: 700 12.5px 'DejaVu Sans'; text-anchor: start" x="552.384" y="634.440734" transform="rotate(-0 552.384 634.440734)">C  |  Shuffle mean endpoints, then REFIT</text>
+    <text style="fill: #c35d21; font: 700 12.5px 'DejaVu Sans'; text-anchor: start" x="552.384" y="634.440734" transform="rotate(-0 552.384 634.440734)">C  |  Shuffle mean endpoints, then refit</text>
    </g>
    <g id="text_22">
     <text style="fill: #20364d; font: 11px 'DejaVu Sans'" transform="translate(552.384 660.966281)">Keep destination geometry, x/time and valid masks.</text>

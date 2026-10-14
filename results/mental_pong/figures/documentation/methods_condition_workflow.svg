@@ -245,8 +245,8 @@ z
     <text style="fill: #526476; font: 12px 'DejaVu Sans'; text-anchor: start" x="50.4" y="60.470625" transform="rotate(-0 50.4 60.470625)">Completed protocol  |  Mahler and Perle analyzed separately  |  half1 readouts</text>
    </g>
    <g id="text_3">
-    <text style="fill: #77502b; font: 11.5px 'DejaVu Sans'" transform="translate(65.52 94.196797)">Upstream limitation: released missing responses were filled across conditions and times.</text>
-    <text style="fill: #77502b; font: 11.5px 'DejaVu Sans'" transform="translate(65.52 108.821922)">Training-only fitting and GPFA prefix inference cannot undo this: raw_preprocessing = fail.</text>
+    <text style="fill: #77502b; font: 11.5px 'DejaVu Sans'" transform="translate(65.52 94.196797)">Source preprocessing: missing responses were filled across conditions and times.</text>
+    <text style="fill: #77502b; font: 11.5px 'DejaVu Sans'" transform="translate(65.52 108.821922)">Training-side fitting and prefix inference use these processed inputs: raw_preprocessing = fail.</text>
    </g>
    <g id="text_4">
     <text style="fill: #20364d; font: 700 12.5px 'DejaVu Sans'; text-anchor: start" x="63.504" y="178.446047" transform="rotate(-0 63.504 178.446047)">Released neural means</text>
@@ -254,7 +254,7 @@ z
    <g id="text_5">
     <text style="fill: #20364d; font: 11.5px 'DejaVu Sans'" transform="translate(63.504 201.626203)">79 conditions × 100 bins</text>
     <text style="fill: #20364d; font: 11.5px 'DejaVu Sans'" transform="translate(63.504 216.251328)">50 ms/bin; N aligned units</text>
-    <text style="fill: #20364d; font: 11.5px 'DejaVu Sans'" transform="translate(63.504 230.876453)">No paired neural–behavior trials</text>
+    <text style="fill: #20364d; font: 11.5px 'DejaVu Sans'" transform="translate(63.504 230.876453)">Individual trial pairing unavailable</text>
    </g>
    <g id="text_6">
     <text style="fill: #20364d; font: 700 12.5px 'DejaVu Sans'; text-anchor: start" x="381.024" y="178.446047" transform="rotate(-0 381.024 178.446047)">100 fixed condition splits</text>
@@ -270,7 +270,7 @@ z
    <g id="text_9">
     <text style="fill: #20364d; font: 11.5px 'DejaVu Sans'" transform="translate(708.624 201.626203)">Neuron eligibility + mean / SD</text>
     <text style="fill: #20364d; font: 11.5px 'DejaVu Sans'" transform="translate(708.624 216.251328)">FA50 or shared-timescale GPFA50</text>
-    <text style="fill: #20364d; font: 11.5px 'DejaVu Sans'" transform="translate(708.624 230.876453)">No task labels in latent fitting</text>
+    <text style="fill: #20364d; font: 11.5px 'DejaVu Sans'" transform="translate(708.624 230.876453)">Neural responses define the latent space</text>
    </g>
    <g id="text_10">
     <text style="fill: #227969; font: 700 12.5px 'DejaVu Sans'; text-anchor: start" x="381.024" y="332.346047" transform="rotate(-0 381.024 332.346047)">Infer held-out features</text>
@@ -357,8 +357,8 @@ z
     <text style="fill: #20364d; font: 11px 'DejaVu Sans'" transform="translate(63.504 481.049531)">and control operation change.</text>
    </g>
    <g id="text_27">
-    <text style="fill: #526476; font: 11.5px 'DejaVu Sans'" transform="translate(50.4 627.758203)">78 geometry-valid conditions; 59920 stays in the 79-ID split file but has no scored labels.</text>
-    <text style="fill: #526476; font: 11.5px 'DejaVu Sans'" transform="translate(50.4 643.257148)">100 overlapping splits measure partition sensitivity, not 100 independent neural experiments.</text>
+    <text style="fill: #526476; font: 11.5px 'DejaVu Sans'" transform="translate(50.4 627.758203)">78 geometry-valid conditions; 59920 remains in the 79-ID split file with labels unscored.</text>
+    <text style="fill: #526476; font: 11.5px 'DejaVu Sans'" transform="translate(50.4 643.257148)">100 overlapping splits provide 100 resamplings of the same neural datasets.</text>
    </g>
   </g>
  </g>

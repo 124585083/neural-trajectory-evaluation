@@ -93,16 +93,15 @@ def workflow(output_dir: Path):
         boxstyle="round,pad=0.008,rounding_size=0.008", facecolor=WARM,
         edgecolor="#E7C39E", linewidth=1))
     ax.text(.065, .856,
-        "Upstream limitation: released missing responses were filled across conditions and times.\n"
-        "Training-only fitting and GPFA prefix inference cannot undo this: raw_preprocessing = fail.",
+        'Source preprocessing: missing responses were filled across conditions and times.\nTraining-side fitting and prefix inference use these processed inputs: raw_preprocessing = fail.',
         fontsize=11.5, va="center", color="#77502B", linespacing=1.4)
 
     box(ax, .05, .64, .24, .135, "Released neural means",
-        "79 conditions × 100 bins\n50 ms/bin; N aligned units\nNo paired neural–behavior trials")
+        '79 conditions × 100 bins\n50 ms/bin; N aligned units\nIndividual trial pairing unavailable')
     box(ax, .365, .64, .25, .135, "100 fixed condition splits",
         "39 train / 40 test identities\nWhole conditions held out\nSame splits for all comparisons")
     box(ax, .69, .64, .26, .135, "Fit on training half1 only",
-        "Neuron eligibility + mean / SD\nFA50 or shared-timescale GPFA50\nNo task labels in latent fitting",
+        'Neuron eligibility + mean / SD\nFA50 or shared-timescale GPFA50\nNeural responses define the latent space',
         face=GREEN, title_color=TEAL)
     arrow(ax, (.295, .707), (.358, .707))
     arrow(ax, (.622, .707), (.683, .707))
@@ -145,8 +144,7 @@ def workflow(output_dir: Path):
         "Only the downstream target\nand control operation change.",
         face="white", body_size=11)
     ax.text(.05, .095,
-        "78 geometry-valid conditions; 59920 stays in the 79-ID split file but has no scored labels.\n"
-        "100 overlapping splits measure partition sensitivity, not 100 independent neural experiments.",
+        '78 geometry-valid conditions; 59920 remains in the 79-ID split file with labels unscored.\n100 overlapping splits provide 100 resamplings of the same neural datasets.',
         fontsize=11.5, color=MUTED, va="top", linespacing=1.5)
     save(fig, output_dir, "methods_condition_workflow")
 
@@ -182,7 +180,7 @@ def target_panel(fig, rect, collision: bool):
 def targets_controls(output_dir: Path):
     fig, ax = canvas(
         "Targets, fitted heads and randomized controls",
-        "Completed protocol  |  Geometry sketches illustrate the rule; they are not recorded trajectories",
+        'Completed protocol  |  Schematic construction of the two trajectory targets',
         size=(14, 11),
     )
     target_panel(fig, [.06, .60, .40, .265], collision=True)
@@ -225,11 +223,9 @@ def targets_controls(output_dir: Path):
         fontsize=11.5, va="top", linespacing=1.65)
 
     box(ax, .06, .09, .42, .143, "B  |  Shuffle test-condition references",
-        "Fitted head + predictions stay FIXED.\n"
-        "Re-score matched / shuffled labels on the same intersection.\n"
-        "Also disrupts physical condition correspondence.",
+        'Keep the fitted head and predictions fixed.\nScore matched / shuffled labels on shared valid rows.\nThe remapping changes physical condition correspondence.',
         face="#EEF3FA", title_color=BLUE, body_size=11)
-    box(ax, .535, .09, .415, .143, "C  |  Shuffle mean endpoints, then REFIT",
+    box(ax, .535, .09, .415, .143, 'C  |  Shuffle mean endpoints, then refit',
         "Keep destination geometry, x/time and valid masks.\n"
         "Rebuild the candidate; fit a new training-side OLS head.\n"
         "Tests real assignments against fitted random targets.",
@@ -267,7 +263,7 @@ def proposal_panel(fig, rect, event_change: bool):
 def paired_trial_proposal(output_dir: Path):
     fig, ax = canvas(
         "Proposed next study: behavior within the same physical condition",
-        "NOT EXECUTED  |  Requires paired neural–behavior trials  |  All curves below are schematic",
+        'Proposed protocol  |  Paired neural–behavior trials required  |  Schematic expected patterns',
         size=(14, 10),
     )
     box(ax, .05, .705, .255, .15, "1  |  Verify paired observations",
@@ -291,23 +287,20 @@ def paired_trial_proposal(output_dir: Path):
     ax.text(.05, .649, "Primary test: pre-feedback signed-error decoding on held-out paired trials",
         fontsize=14, weight="bold")
     ax.text(.05, .611,
-        "Compare with condition/time-only and movement-informed references. Report unsupported groups and failed reliability.\n"
-        "Behavioral groups denote action outcomes; a positive neural result could reflect estimate, goal or motor preparation.",
+        'Compare with condition/time-only and movement-informed references. Report group coverage and reliability results.\nBehavioral groups denote action outcomes; a positive neural result could reflect estimate, goal or motor preparation.',
         fontsize=11.5, color=MUTED, va="top", linespacing=1.55)
-    ax.text(.05, .533, "Only after reliable behavioral correspondence: examine when the difference changes",
+    ax.text(.05, .533, 'After establishing reliable behavioral correspondence, examine its time course',
         fontsize=13, weight="bold", color=TEAL)
     proposal_panel(fig, [.085, .263, .37, .205], event_change=False)
     proposal_panel(fig, [.585, .263, .37, .205], event_change=True)
     ax.text(.05, .166,
-        "These patterns may coexist. An event-related claim needs change from a pre-event baseline, reliable support\n"
-        "and timing/movement controls; post-event decoding alone is insufficient. A state difference does not identify its mechanism.",
+        'These patterns may coexist. Evaluate event-linked change relative to a pre-event baseline, with reliable support\nand timing/movement controls. A discriminating follow-up would test the computation producing the difference.',
         fontsize=11.5, color=MUTED, va="top", linespacing=1.5)
     ax.add_patch(FancyBboxPatch((.05, .054), .9, .063,
         boxstyle="round,pad=0.008,rounding_size=0.008", facecolor=WARM,
         edgecolor="#E7C39E", linewidth=1))
     ax.text(.065, .085,
-        "Decision gate: without trial pairing, pre-feedback timing and adequate group reliability, stop at the data limitation.\n"
-        "Released condition means cannot be relabeled to recover above/below neural trial groups.",
+        'Decision gate: proceed with verified trial pairing, pre-feedback timing and adequate group reliability.\nGroup-specific neural responses require paired trial records beyond the released condition means.',
         fontsize=11.5, va="center", color="#77502B", linespacing=1.4)
     save(fig, output_dir, "methods_paired_trial_proposal")
 

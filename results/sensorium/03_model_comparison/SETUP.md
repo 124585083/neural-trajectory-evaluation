@@ -6,19 +6,19 @@
 
 These questions are addressed by one comparison of two frozen encoders from `retrained_v1`. Response evaluation covers five sessions. The detailed population-summary and Gaussian-process factor analysis (GPFA) comparison covers one pilot session. In this document, **Dynamic** means the current reduced Dynamic model; the historical full-width baseline is a separate model.
 
-Both encoders start from scratch under the same data roles and train-only normalisation. The diagram shows their shared response support and frozen neural-defined GPFA. Similar parameter totals leave distinct core architectures and training settings.
+Both encoders start from scratch under the same data roles and train-only normalisation. The diagram shows their shared response support and frozen neural-defined GPFA. Similar parameter totals control overall model size while retaining the distinct cores and training settings.
 
-[Goal 1](../01_model_validation/RESULTS.md) establishes implementation checks and the scope of historical reproduction. [Goal 2](../02_trajectory_measurement/RESULTS.md) establishes the measurement's reliability and response coverage. The model comparison itself is reported in [Results](RESULTS.md). [Response matching](../05_response_matching/SETUP.md) and [temporal-weight controls](../06_temporal_weight_controls/SETUP.md) are separate analyses; their perturbed outputs do not enter this main comparison.
+[Goal 1](../01_model_validation/RESULTS.md) establishes implementation checks and the scope of historical reproduction. [Goal 2](../02_trajectory_measurement/RESULTS.md) establishes the measurement's reliability and response coverage. The model comparison itself is reported in [Results](RESULTS.md). [Response matching](../05_response_matching/SETUP.md) and [temporal-weight controls](../06_temporal_weight_controls/SETUP.md) are separate analyses; this main comparison uses the original frozen predictions.
 
 ![Current Static and reduced Dynamic share recorded-neuron targets, trial identities, timestamps and one neural-defined GPFA](../figures/documentation/01_shared_pathway.png)
 
-*Current Static and reduced Dynamic share recorded-neuron targets, trial identities, timestamps and one neural-defined GPFA. Similar total parameter counts do not equate their cores or isolate visual history from behaviour history. Test movies were explored historically.*
+*Current Static and reduced Dynamic share recorded-neuron targets, trial identities, timestamps and one neural-defined GPFA. Total parameter counts are similar; the cores retain different computations and access to video and behaviour history. Test movies were explored historically.*
 
 ## 2. Data and evaluation support
 
 ### Sessions and data roles
 
-The inputs are released processed calcium responses to natural movies, not recorded spike-count trials. Each session has its own neuron identities. Full session keys have the form `dynamic<identifier>-Video-9b4f6a1a067fe51e15306b9628efea20`.
+The inputs are released processed calcium responses to natural movies. Each session has its own neuron identities. Full session keys have the form `dynamic<identifier>-Video-9b4f6a1a067fe51e15306b9628efea20`.
 
 | Session identifier | Train trials | Validation trials | Test trials | Neurons | Repeats per test movie |
 | --- | ---: | ---: | ---: | ---: | --- |
@@ -29,17 +29,17 @@ The inputs are released processed calcium responses to natural movies, not recor
 | 29755-2-8 | 293 | 61 | 59 | 8,122 | 9, 10, 10, 10, 10, 10 |
 | **Total** | **1,395** | **349** | **293** | **40,034** | Six movies per session |
 
-Repeat counts are sorted by count, not by movie identity. Six movie conditions are evaluated within each session; the table does not assert that the five sessions contain 30 different source films. A session is a recording unit, not an independent animal-level trajectory replication.
+Repeat counts are sorted by count, not by movie identity. Six movie conditions are evaluated within each session; source-film identities are needed to determine whether these correspond to 30 distinct films. Session counts describe recording units; animal replication and trajectory replication are assessed separately.
 
-The original training tier is divided into new train and validation roles using seed 42 and whole identifiable stimulus groups, with a target validation fraction of 0.20. Group roles are coordinated across sessions. The upstream labelled repeated-movie tier, called `oracle`, supplies this run's test data. Hidden tiers contain zero-placeholder response arrays; all 1,518 such trials are excluded rather than treated as measured zero activity.
+The original training tier is divided into new train and validation roles using seed 42 and whole identifiable stimulus groups, with a target validation fraction of 0.20. Group roles are coordinated across sessions. The upstream labelled repeated-movie tier, called `oracle`, supplies this run's test data. The evaluation excludes all 1,518 hidden-tier trials with placeholder response arrays and scores observed responses.
 
-The [split manifest](../evidence/04_model_comparison/retrained_v1/split_manifest.json) retains source indices, unit IDs, original tiers, assigned roles and checksums. An approximate shifted-content check examined 7,725 proposed development/test pairs without finding verified overlap. Source-film identities remain unavailable, and the test movies were explored in earlier work. The evaluation is therefore described as **held-out evaluation after retraining**, not untouched external validation or demonstrated generalisation to unseen source films.
+The [split manifest](../evidence/04_model_comparison/retrained_v1/split_manifest.json) retains source indices, unit IDs, original tiers, assigned roles and checksums. An approximate shifted-content check examined 7,725 proposed development/test pairs without finding verified overlap. Source-film identities remain unavailable, and the test movies were explored in earlier work. The evaluation therefore describes **held-out evaluation after retraining** within the documented history of test-movie exposure; unseen-source-film generalisation remains unverified.
 
 ### Inputs, timestamps and pilot subset
 
 Source videos are 36 × 64 grayscale arrays. Two supplied behavioural traces are broadcast over the image and appended as input channels; two pupil-centre coordinates enter a separate shifter. The current loader takes the first 300 source frames on the released 30 Hz grid and requires complete, finite modalities. All final scores use original frames 50–299.
 
-The pilot is session `29515-10-12`. Its 512 neurons are fixed by sorting stable unit IDs by the SHA-256 digest of `42:<unit_id>` and retaining the first 512. Selection does not use test reliability or model accuracy. The five-session response analysis instead uses all recorded neurons in each session.
+The pilot is session `29515-10-12`. Its 512 neurons are fixed by sorting stable unit IDs by the SHA-256 digest of `42:<unit_id>` and retaining the first 512. The hash-based rule selects neurons independently of test reliability and model accuracy. The five-session response analysis instead uses all recorded neurons in each session.
 
 | Pilot stage | Axes | Shape |
 |---|---|---|
@@ -76,9 +76,9 @@ $$
 =0.01707453585002212\approx1.707\%.
 $$
 
-The actual-instance check uses a 2% acceptance bound. The reduced model preserves the original 1:2:4 channel progression with a uniform half-width rule and a final width of 64. Its width was not selected from trajectory scores. Older design notes used different preferred and maximum count tolerances; those are historical design thresholds, not this run's acceptance bound or a different parameter count.
+The actual-instance check uses a 2% acceptance bound. The reduced model preserves the original 1:2:4 channel progression with a uniform half-width rule and a final width of 64. The fixed half-width rule determines model width independently of trajectory scores. Older design notes used different preferred and maximum count tolerances; those are historical design thresholds, not this run's acceptance bound or a different parameter count.
 
-**Total-count matching leaves differences in core parameters, receptive fields, computation and optimisation behaviour.** The matched readout and shifter totals therefore coexist with distinct cores. The [actual parameter record](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/parameter_counts.json) and [model overview](../MODELS_AND_DATA.md#4-models-and-training) retain the construction details.
+**Total-count matching controls overall size; core parameters, receptive fields, computation and optimisation behaviour remain distinct.** The matched readout and shifter totals therefore coexist with distinct cores. The [actual parameter record](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/parameter_counts.json) and [model overview](../MODELS_AND_DATA.md#4-models-and-training) retain the construction details.
 
 ### Train-only preprocessing
 
@@ -90,11 +90,11 @@ For each session, preprocessing moments are estimated from the new training tria
 | Behaviour | `value / std` |
 | Neural response | `value / max(std, 0.01 × mean(std))` |
 
-Non-response standard deviations below float32 machine epsilon are replaced by one. Responses are not centred or clipped; small negative values in the released arrays remain. Readout activity initialisation uses new training batches only. Supplied historical all-data moments are not used for these learned transforms. Validation and test apply the fixed arrays without estimating new moments. Exact array shapes and formulas are retained in [normalisation provenance](../evidence/04_model_comparison/retrained_v1/normalization_provenance.json).
+Non-response standard deviations below float32 machine epsilon are replaced by one. Response scaling preserves the mean and retains small negative values from the released arrays. Readout activity initialisation uses new training batches only. These transforms use the new training moments in place of the historical all-data statistics. Validation and test apply the fixed arrays without estimating new moments. Exact array shapes and formulas are retained in [normalisation provenance](../evidence/04_model_comparison/retrained_v1/normalization_provenance.json).
 
 ### Encoder training and checkpoint selection
 
-Both encoders start at seed 42 with new weights, optimiser state and BatchNorm state. A local resumable implementation follows the pinned upstream objective, cycling and scheduling behaviour; it does not directly call the original trainer used for the historical full Dynamic run.
+Both encoders start at seed 42 with new weights, optimiser state and BatchNorm state. A local resumable implementation follows the pinned upstream objective, cycling and scheduling behaviour; the historical full Dynamic run used the original trainer directly.
 
 | Setting | Current comparison protocol |
 |---|---|
@@ -107,9 +107,9 @@ Both encoders start at seed 42 with new weights, optimiser state and BatchNorm s
 | Training limits | Up to four learning-rate cycles and 200 epochs |
 | Checkpoint and stopping input | New validation trials, evaluated with the retained random-snippet rule |
 
-The dataset-length multiplier is retained metadata, not estimated from test responses. Loader key `oracle` contains **new validation trials only**. Separate random-snippet calls supply checkpoint and scheduler events; the trainer never reads test data.
+The dataset-length multiplier is retained metadata, not estimated from test responses. Loader key `oracle` contains **new validation trials only**. Separate random-snippet validation calls supply checkpoint and scheduler events, with test data reserved for scoring.
 
-The comparison uses the models’ existing architecture-specific settings, with no additional trajectory-driven tuning search:
+The comparison retains the models’ existing architecture-specific settings:
 
 | Setting | Static | Reduced Dynamic |
 |---|---:|---:|
@@ -126,9 +126,9 @@ These differences remain part of the model comparison. The retained checkpoints 
 
 ### Complete-trial prediction
 
-Complete-trial inference and the two scoring branches are shown above. Dynamic produces frames 18–299; Static crops its first 18 framewise outputs. Both score original frames 50–299 in evaluation mode, without snippet stitching.
+Complete-trial inference and the two scoring branches are shown above. Dynamic produces frames 18–299; Static crops its first 18 framewise outputs. Both use complete-trial evaluation-mode predictions to score original frames 50–299.
 
-Neural targets and predictions share identities, neuron order and timestamps. Direct response/population metrics use encoder-scale arrays, without GPFA.
+Neural targets and predictions share identities, neuron order and timestamps. Direct response/population metrics compare the encoder-scale arrays.
 
 ### Condition means in one fixed neural space
 
@@ -140,11 +140,11 @@ GPFA_input[t, n] = encoder_scaled[t, n]
                    * GPFA_train_precision[n]
 ```
 
-`precision` denotes a multiplicative scale: encoder precision varies by time and neuron, GPFA precision by neuron. Division undoes the first scale; multiplication applies the neural-training scale. Neither uses test data or a prediction-specific fit.
+`precision` denotes a multiplicative scale: encoder precision varies by time and neuron, GPFA precision by neuron. Division undoes the first scale; multiplication applies the neural-training scale. Both use fixed training-derived scales shared across recorded and predicted responses.
 
-The main four-dimensional GPFA is fitted on the pilot's 282 training trials. Validation neural likelihood selects its 0.25-second timescale initialisation; the final fit uses train alone. It observes every fourth scored frame, indices `0, 4, …, 248`, and queries all 250 timestamps. The same loadings, offsets, observation noise and temporal priors are applied separately to neural, Static and Dynamic condition means. There is no prediction-driven refit, Procrustes alignment, rotation or axis selection.
+The main four-dimensional GPFA is fitted on the pilot's 282 training trials. Validation neural likelihood selects its 0.25-second timescale initialisation; the final fit uses train alone. It observes every fourth scored frame, indices `0, 4, …, 248`, and queries all 250 timestamps. The same loadings, offsets, observation noise and temporal priors are applied separately to neural, Static and Dynamic condition means. The predictions are evaluated in those original, fixed GPFA axes.
 
-Inference is offline: later observations affect earlier states. Scores are not reliability-normalised, and repeat-half agreement is not a hard noise ceiling. [Goal 2](../02_trajectory_measurement/SETUP.md#4-shared-scaling-and-posterior-inference) defines measurement fitting and reliability.
+Offline posterior inference uses the full observation window, including later observations when estimating earlier states. Scores retain their original units, with repeat-half agreement reported separately as a measurement-specific reference. [Goal 2](../02_trajectory_measurement/SETUP.md#4-shared-scaling-and-posterior-inference) defines measurement fitting and reliability.
 
 The [frozen-analysis record](../evidence/04_model_comparison/retrained_v1/frozen_analysis.json) binds the selected models and transforms to this comparison.
 
@@ -160,7 +160,7 @@ The [frozen-analysis record](../evidence/04_model_comparison/retrained_v1/frozen
 | Split semantic identity | `52d021ee699ddd5d026a4deba3375838548b352f7d46ec3b878d5460b261e926` |
 | Preprocessing semantic identity | `52a9b81d45ffd23fdee5b2502a025d4234946f24568dee95b8eb2a8a9e88ac73` |
 
-The original ignored run stores the encoders at `encoders/static/best.pt` and `encoders/dynamic/best.pt`, with the GPFA under `gpfa/`. These are run-relative locations. The [model manifest](../../../models/manifest.json) and [artifact guide](../../../models/README.md) identify current copies and access requirements. Public identity records do not supply the model payloads. Historical full Dynamic scores and weights are not substituted for either encoder here.
+The original ignored run stores the encoders at `encoders/static/best.pt` and `encoders/dynamic/best.pt`, with the GPFA under `gpfa/`. These are run-relative locations. The [model manifest](../../../models/manifest.json) and [artifact guide](../../../models/README.md) identify current copies and access requirements. Execution requires the fitted payloads identified by the public records. Historical full Dynamic scores and weights retain their separate run identity.
 
 </details>
 
@@ -168,7 +168,7 @@ The original ignored run stores the encoders at `encoders/static/best.pt` and `e
 
 ### Response and population-pattern measures
 
-**Response correlation** is Pearson correlation for each neuron over flattened aligned trial × time samples, followed by averaging over neurons finite for both compared predictions. For an individual movie score, only that movie's repeats and timestamps are pooled. This is different from correlating a grand mean response or averaging correlations across frames.
+**Response correlation** is Pearson correlation for each neuron over flattened aligned trial × time samples, followed by averaging over neurons finite for both compared predictions. For an individual movie score, only that movie's repeats and timestamps are pooled. The averaging unit is the neuron after its trial/time correlation has been calculated.
 
 **Response normalised mean squared error (NMSE)** is mean squared prediction error divided by the pooled scalar variance of the corresponding neural-response tensor. If `Y` is the neural tensor and `P` its aligned prediction,
 
@@ -202,7 +202,7 @@ m_q=\frac{1}{2CT}\sum_{c=1}^{C}\sum_{t=1}^{T}
 \qquad C=6,\ T=250.
 $$
 
-This scoring operation uses the fixed GPFA without refitting or alignment. The same rule is applied separately to the neural–Static and neural–Dynamic pairs.
+This scoring operation uses the original fixed GPFA coordinates. The same rule is applied separately to the neural–Static and neural–Dynamic pairs.
 
 | Metric | Definition and interpretation | Role |
 |---|---|---|
@@ -216,7 +216,7 @@ This scoring operation uses the fixed GPFA without refitting or alignment. The s
 
 Direction comparisons use common nonzero-norm support across the neural reference and every compared output. The current `_trajectory_scores` wrapper uses `EPS=1e-12`, records retained support, and reports undefined scores as `NA`; legacy helpers with zero fallbacks do not define the current reporting behaviour.
 
-All reported correlations, cosines, CKA, NMSE and normalised RMSE are dimensionless. Before normalisation, derivatives have latent units per second or per second squared. They describe the smoothed GPFA posterior, not independently observed neural activity at 30 Hz or exact neural latency.
+All reported correlations, cosines, CKA, NMSE and normalised RMSE are dimensionless. Before normalisation, derivatives have latent units per second or per second squared. They describe the smoothed GPFA posterior on the 30 Hz query grid; interpreting exact neural latency requires a time-restricted measurement.
 
 | Shared pilot support | Count |
 |---|---:|
@@ -232,7 +232,7 @@ Every movie is retained. Detailed measurement definitions are also in [Goal 2](.
 
 ### Keep the score and its interval on the same target
 
-A **pooled score** is calculated after combining the relevant data. An **equal-weight mean movie score** is calculated by scoring each movie first and averaging the six resulting numbers. These operations need not produce the same value. In particular, averaging already calculated correlations is not equivalent to correlating pooled data.
+A **pooled score** is calculated after combining the relevant data. An **equal-weight mean movie score** is calculated by scoring each movie first and averaging the six resulting numbers. The order of pooling and scoring determines the resulting value. In particular, averaging already calculated correlations is not equivalent to correlating pooled data.
 
 The bootstrap uses a seed-42 generator and 2,000 draws of six whole movie conditions with replacement. The same condition indices are drawn for Static and Dynamic. Repeatedly drawn conditions remain whole blocks; time differences are not introduced across their boundaries.
 
@@ -244,7 +244,7 @@ The bootstrap uses a seed-42 generator and 2,000 draws of six whole movie condit
 | Pooled conventional scores | Direct pooled trial/time or condition/time score | Separate point estimate; the mean-movie interval is not attached to it |
 | Five-session summary | Unweighted mean of the five pooled session scores | No animal-population or five-session population interval is supplied |
 
-For the interval-bearing conventional results, the displayed Static and Dynamic points are also equal-weight movie means. This prevents a pooled point from being paired with an interval on a different quantity. Whole movies are the resampling units, not frames, neurons or repeat-half partitions. Percentile endpoints are the 2.5th and 97.5th percentiles of the paired draws. The [pilot paired table](../evidence/04_model_comparison/retrained_v1/pilot/paired_bootstrap.csv) labels the target in `interval_estimand`; the [session paired table](../evidence/04_model_comparison/retrained_v1/response/response_session_paired_bootstrap.csv) retains pooled and condition-mean fields separately.
+For the interval-bearing conventional results, the displayed Static and Dynamic points are also equal-weight movie means. Each point estimate is therefore paired with an interval for the same quantity. Whole movies are the resampling units; each movie retains its frames, neurons and repeats together. Percentile endpoints are the 2.5th and 97.5th percentiles of the paired draws. The [pilot paired table](../evidence/04_model_comparison/retrained_v1/pilot/paired_bootstrap.csv) labels the target in `interval_estimand`; the [session paired table](../evidence/04_model_comparison/retrained_v1/response/response_session_paired_bootstrap.csv) retains pooled and condition-mean fields separately.
 
 ### Model-prediction nulls
 
@@ -258,15 +258,15 @@ Prediction nulls ask whether an encoder's unperturbed trajectory correspondence 
 | Independent-neuron shifts | Change each neuron's timing independently |
 | 16-frame block permutation | Reorder temporal blocks while preserving order within each block |
 
-The four random nulls each use 200 draws per model. Reversal is one transformation per model. Operator details are given in [Goal 2 Setup](../02_trajectory_measurement/SETUP.md#5-repeat-reliability-and-matched-nulls); this model comparison uses five null types, not the eight configurations used for repeat-half reliability.
+The four random nulls each use 200 draws per model. Reversal is one transformation per model. Operator details are given in [Goal 2 Setup](../02_trajectory_measurement/SETUP.md#5-repeat-reliability-and-matched-nulls); this model comparison uses five null types, while repeat-half reliability uses eight configurations.
 
-The random-number stream follows the existing score/reliability/bootstrap execution order seeded at 42. Outcomes and finite support are retained in [model_nulls.csv](../evidence/04_model_comparison/retrained_v1/pilot/model_nulls.csv). Superiority means a higher original score for correlation or cosine, or a lower original normalised RMSE. These are descriptive perturbation comparisons, not new independent experiments or population p-values.
+The random-number stream follows the existing score/reliability/bootstrap execution order seeded at 42. Outcomes and finite support are retained in [model_nulls.csv](../evidence/04_model_comparison/retrained_v1/pilot/model_nulls.csv). Superiority means a higher original score for correlation or cosine, or a lower original normalised RMSE. These descriptive comparisons measure sensitivity to the specified output perturbations within the observed dataset.
 
 ## 7. Evidence and interpretation scope
 
-The comparison identifies how these two frozen models perform under one split, one encoder seed and one shared GPFA measurement. Common inputs, scales and coordinate axes allow comparison without separately optimised latent alignment. Temporal history remains coupled to differences in architecture, regularisation and optimisation. Additional encoder seeds, additional current trajectory sessions and exact source-film identities are not available for this comparison.
+The comparison identifies how these two frozen models perform under one split, one encoder seed and one shared GPFA measurement. Common inputs, scales and fixed coordinate axes give both encoders the same neural-defined measurement. Temporal history remains coupled to differences in architecture, regularisation and optimisation. The present evidence covers one encoder seed and one trajectory session; further seeds, sessions and source-film identities would extend its generalisation scope.
 
-Earlier full Dynamic reproduction and oracle-selected models have separate identities. Their scores are not merged into the present tables. No withdrawn GPFA sensitivity result supports a cross-dimension or sampling-grid robustness claim. These limits define the interpretation of the frozen comparison.
+Earlier full Dynamic reproduction and oracle-selected models have separate identities. The present tables retain the identities and scores of the current models. Cross-dimension and sampling-grid robustness remain unassessed following withdrawal of the auxiliary GPFA fits. These limits define the interpretation of the frozen comparison.
 
 | Evidence | Record and relevant content |
 |---|---|

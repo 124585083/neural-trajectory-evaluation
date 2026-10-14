@@ -1,20 +1,20 @@
 # Recovering Task-Motion Information: Results
 
-**Condition-mean DMFC activity supports held-out-condition reconstruction of objective ball position, including during occlusion. Correct condition correspondence improves the scores, but a physical-geometry baseline has lower full-interval squared error than every neural readout.** These results establish task-position decodability within the recorded conditions, without identifying internal simulation or behavior-specific neural updating.
+**Condition-mean DMFC activity supports held-out-condition reconstruction of objective ball position, including during occlusion. Correct condition correspondence improves the scores, and the physical-geometry baseline gives lower full-interval squared error than every neural readout.** These findings establish task-position decodability within the recorded conditions and provide the reference for the behavioral-target comparison.
 
-The retained `condition_endpoint_fa_gpfa_v1` and `closeout_v1` analyses have status `CLOSED_EXPLORATORY_WITH_LIMITATIONS`. Mahler and Perle are evaluated separately using **half1**, per-split training-side FA50/GPFA50 and 100 overlapping nominal 39/40 condition splits. No representation, readout or control was fitted for this document. Released-input filtering and fit provenance pass; `raw_preprocessing=fail` remains. [Setup](SETUP.md) defines the targets, support, scores and controls.
+The retained `condition_endpoint_fa_gpfa_v1` and `closeout_v1` analyses have status `CLOSED_EXPLORATORY_WITH_LIMITATIONS`. Mahler and Perle are evaluated separately using **half1**, per-split training-side FA50/GPFA50 and 100 overlapping nominal 39/40 condition splits. The document reports the completed representation, readout and control analyses. Released-input filtering and fit provenance pass; the upstream preprocessing issue is recorded as `raw_preprocessing=fail`. [Setup](SETUP.md) defines the targets, support, scores and controls.
 
 ## 1. Objective-position reconstruction
 
 ### Vertical position across all six task phases
 
-The same objective-trained OLS head is used in every phase. GPFA50 has higher correlation and lower RMSE than FA50 in every recorded animal/phase point estimate; this describes these fits, without an independent paired-uncertainty claim or a universal method ranking. Temporal smoothing and derived coordinates differ between the representations.
+The same objective-trained OLS head is used in every phase. GPFA50 has higher correlation and lower RMSE than FA50 in every recorded animal/phase point estimate. This is a descriptive comparison of the fitted representations; paired uncertainty for the method difference remains unestimated. Temporal smoothing and derived coordinates differ between the representations.
 
 ![Objective-only y reconstruction for Mahler and Perle, FA50 and GPFA50, across all six phases](../figures/documentation/results_objective_six_phases.png)
 
-*The objective path remains decodable in the hidden period. Points and bars are saved means ± population SD across 100 overlapping condition splits, not independent-animal intervals. Correlation measures covariation; RMSE retains amplitude and offset error in centered MWorks position units. High post-collision correlation therefore coexists with substantial error.*
+*The objective path remains decodable in the hidden period. Points and bars show means ± population SD across 100 overlapping condition splits within each animal. Correlation measures covariation; RMSE retains amplitude and offset error in centered MWorks position units. High post-collision correlation therefore coexists with substantial error.*
 
-Full-interval `y` correlation spans **0.4928–0.7204**, and hidden-period correlation **0.5644–0.7705**. The hidden-period result uses the same fitted mapping as the full interval. Shared time, condition identity and physical geometry remain possible contributors. Phase-specific RMSE also reflects differences in target variation, so it measures error on each phase's support rather than normalized difficulty.
+Full-interval `y` correlation spans **0.4928–0.7204**, and hidden-period correlation **0.5644–0.7705**. The hidden-period result uses the same fitted mapping as the full interval. Shared time, condition identity and physical geometry remain possible contributors. Phase-specific RMSE measures absolute error on each phase's support and depends on the target variation in that phase.
 
 | Phase | Unique conditions / bins | Mean test bins per split |
 |---|---:|---:|
@@ -25,7 +25,7 @@ Full-interval `y` correlation spans **0.4928–0.7204**, and hidden-period corre
 | No-collision conditions | 52 / 2,162 | 1,100.16 |
 | Post-collision | 26 / 631 | 318.60 |
 
-Union support counts each condition/bin once. A split averages **39.57 scored test conditions**; conditions are held out whole, and their bins are not independent test conditions. The full interval includes 78 mixed/boundary bins classified as neither visible nor hidden. The [saved table](../evidence/closeout_v1/A/self_reconstruction_main_table.csv) retains all 24 objective-`y` means, SDs and supports.
+The combined support counts each condition/bin once. Each split contains an average of **39.57 scored test conditions**, with all eligible bins from a condition held out together. The full interval also retains 78 mixed/boundary bins outside the separate visible and hidden masks. The [saved table](../evidence/closeout_v1/A/self_reconstruction_main_table.csv) retains all 24 objective-`y` means, SDs and supports.
 
 <details>
 <summary>Time-resolved examples: the same two post hoc conditions in both animals</summary>
@@ -34,7 +34,7 @@ Union support counts each condition/bin once. A split averages **39.57 scored te
 
 ![Perle objective and candidate targets and readouts for conditions 55062 and 241919](../figures/closeout_v1/descriptive/perle_fixed_posthoc_four_curves.png)
 
-*Each animal's sheet contains condition 55062 above and 241919 below, with FA50 and GPFA50 columns. The black objective target and blue prediction illustrate the present position-reconstruction question; the candidate curves are assessed in Goal 2. Both examples were selected post hoc. Bands show readout-split SD, not neural trial variability, and do not establish typical performance across conditions.*
+*Each animal's sheet contains condition 55062 above and 241919 below, with FA50 and GPFA50 columns. The black objective target and blue prediction illustrate the present position-reconstruction question; the candidate curves are assessed in Goal 2. Both examples were selected post hoc. Bands show readout-split SD for these selected examples; aggregate scores describe performance across the full condition set.*
 
 </details>
 
@@ -57,11 +57,11 @@ The **B fixed-head mismatch control** keeps the objective readout and prediction
 
 ![Objective-head B mismatch effects with saved random-allocation quantiles in all six phases](../figures/documentation/results_objective_mismatch.png)
 
-*The correct physical-condition references give better objective-position scores. Points are saved means; bars are the saved 2.5th–97.5th percentiles across 1,000 allocation summaries, each combining the original 100 splits. These are random-allocation quantiles, not split SDs or independent-animal confidence intervals. Paired support can change between allocations.*
+*The correct physical-condition references give better objective-position scores. Points are saved means; bars are the saved 2.5th–97.5th percentiles across 1,000 allocation summaries, each combining the original 100 splits. These intervals summarize variation under the sampled condition-label allocations. Paired support can change between allocations.*
 
-For the reported full, hidden and post-collision comparisons, none of the 1,000 allocation summaries reverses either effect's sign in any animal/representation pair. This supports **condition-related objective-position correspondence**. Because the mismatch disrupts physical initial conditions, branch geometry and time-position relationships together, behavior-specific information conditional on task physics remains unresolved.
+Both effects favor correct correspondence in all 1,000 allocation summaries for the reported full, hidden and post-collision comparisons in every animal/representation pair. This supports **condition-related objective-position correspondence**. The mismatch jointly changes physical initial conditions, branch geometry and time-position relationships. Isolating behavioral correspondence requires a comparison that holds task physics fixed.
 
-Phase-time intersections shrink under remapping and can be empty for collision phases. Large effects on surviving post-collision rows are not all-condition effect estimates. The [common-support record](../evidence/closeout_v1/B/B_coverage_summary.csv) retains this variation and zero-support cases. Changing support and possible fixed-point assignments prevent interpreting the empirical nonpositive fractions as exact fixed-support permutation p-values.
+Phase-time intersections shrink under remapping and can be empty for collision phases. Post-collision effect sizes describe the rows retained in each shared-support comparison. The [common-support record](../evidence/closeout_v1/B/B_coverage_summary.csv) retains this variation and zero-support cases. Changing support and possible fixed-point assignments prevent interpreting the empirical nonpositive fractions as exact fixed-support permutation p-values.
 
 ## 3. Does the neural readout improve on physical task geometry?
 
@@ -74,9 +74,9 @@ The geometry baseline uses each test condition's known physical anchor, horizont
 | Perle | FA50 | **−0.9487 ± 0.4150** |
 | Perle | GPFA50 | **−0.8923 ± 0.4176** |
 
-Skill is `1 − SSE_neural / SSE_geometry`, scored per split and then averaged. **All four full-interval means are negative:** the geometry reference has lower squared error than the neural readout. Thus, condition correspondence and decodability coexist with weaker accuracy than the physical benchmark. This comparison evaluates the saved linear readout, target and information set; additional information in neural activity remains possible. Phase-specific baselines, skill and split SDs remain in the [C summary](../evidence/closeout_v1/C/random_endpoint_summary.csv).
+Skill is `1 − SSE_neural / SSE_geometry`, scored per split and then averaged. **All four full-interval means are negative:** the geometry reference has lower squared error than the neural readout. The readout recovers condition-related position information, while the task-informed benchmark achieves lower error. This comparison measures the saved features and linear readout against the specified target and information set; recovering other neural information would require a separate analysis. Phase-specific baselines, skill and split SDs remain in the [C summary](../evidence/closeout_v1/C/random_endpoint_summary.csv).
 
-## 4. Historical author-factor reproduction is a separate check
+## 4. Historical reproduction using the authors' factors
 
 An earlier calculation reproduced OLS decoding from the authors' released FA50 factors, fitted across all conditions **before** readout cross-validation. That preprocessing and held-out definition differ from the current split-specific fits.
 
@@ -95,17 +95,17 @@ An earlier calculation reproduced OLS decoding from the authors' released FA50 f
 | Pooled author reference (`all`) | Visible | 0.8967 | 0.8033 | 1.1277 | 3.1168 |
 | Pooled author reference (`all`) | Occluded | 0.9089 | 0.8491 | 0.6930 | 2.8024 |
 
-This used released full means, 79 conditions and 3,502 eligible rows with 100 condition splits (seed 0). Current half1 results use split-specific representations and 3,369 conservative rows, so differences cannot be attributed solely to FA versus GPFA or readout improvement.
+This used released full means, 79 conditions and 3,502 eligible rows with 100 condition splits (seed 0). Current half1 results use split-specific representations and 3,369 conservative rows, so the historical/current comparison includes changes in preprocessing, representation and scoring support.
 
-Maximum absolute saved-author prediction discrepancies were **1.9451 × 10⁻¹³** (Mahler), **1.6476 × 10⁻¹³** (Perle) and **7.2831 × 10⁻¹⁴** (pooled), with identical eligible-row and missingness handling. This checks the saved-factor decoding calculation, not a fresh raw-spike fit or an internal-estimate interpretation.
+Maximum absolute saved-author prediction discrepancies were **1.9451 × 10⁻¹³** (Mahler), **1.6476 × 10⁻¹³** (Perle) and **7.2831 × 10⁻¹⁴** (pooled), with identical eligible-row and missingness handling. This verifies the decoding calculation using the authors' saved factors.
 
 </details>
 
-## 5. Interpretation, scope and records
+## 5. Interpretation and evidence
 
-The results support **objective position reconstruction over time** from condition-mean activity, with geometry providing the stronger full-interval error benchmark. Physical geometry, elapsed time, condition identity and action preparation remain possible contributors. Local trajectory direction, prospective prediction and state updating require tests that distinguish those contributors.
+The results support **objective position reconstruction over time** from condition-mean activity, with the geometry baseline giving lower full-interval squared error. Physical geometry, elapsed time, condition identity and action preparation remain possible contributors. Local trajectory direction, prospective prediction and state updating require tests that distinguish those contributors.
 
-The data are two animals' processed condition means, without original neural–behavior trial matches, neuron-by-trial/half membership or unfilled responses. Upstream global condition/time imputation leaves `raw_preprocessing=fail`; prefix-only GPFA inference cannot repair it. No event-window neural-half reliability result is supplied for the final FA50/GPFA50 fits. Neither the 100 overlapping partitions nor 1,000 mismatches creates independent animal samples.
+The observations are processed condition means from two animals. Original neural–behavior trial matches, neuron-by-trial/half membership and unfilled responses remain unavailable. The prefix-only GPFA operates on globally imputed condition/time arrays, whose source audit retains `raw_preprocessing=fail`. Event-window neural-half reliability remains unmeasured for the final FA50/GPFA50 fits. The 100 overlapping partitions and 1,000 mismatches resample the existing animal datasets.
 
 | Retained evidence | Content and filter |
 |---|---|
@@ -114,6 +114,6 @@ The data are two animals' processed condition means, without original neural–b
 | [B common-support record](../evidence/closeout_v1/B/B_coverage_summary.csv) | Changing support and zero-support cases |
 | [Geometry and C-control summary](../evidence/closeout_v1/C/random_endpoint_summary.csv) | Objective `baseline_r`, `baseline_RMSE`, `skill`, split SD and phase support |
 | [Historical Mahler](../evidence/historical/official_mahler_official_summary.json), [Perle](../evidence/historical/official_perle_official_summary.json) and [pooled](../evidence/historical/official_all_official_summary.json) | Source-faithful decoding and `author_result_check` |
-| [Figure renderer](../../../code/mental_pong/make_result_figures.py) and [source hashes](../figures/documentation/results_source_manifest.json) | Saved-table plotting, explicit objective-head filters and six-phase coverage assertions; no inference or new statistics |
+| [Figure renderer](../../../code/mental_pong/make_result_figures.py) and [source hashes](../figures/documentation/results_source_manifest.json) | Saved-table plotting with objective-head filters and six-phase coverage checks |
 
-The [behavior-relation results](../02_behavior_relation/RESULTS.md) assess the endpoint-constrained candidate with cross-scoring and randomized-endpoint refits. The scientific source is Rajalingham, Sohn and Jazayeri (2025), *Dynamic tracking of objects in the macaque dorsomedial frontal cortex* ([DOI](https://doi.org/10.1038/s41467-024-54688-y)); the [official protocol audit](../../../code/mental_pong/integration/official_protocol_audit.json) records implementation distinctions. The [code README](../../../code/mental_pong/README.md) specifies which numerical reruns are possible without inaccessible payloads. The figures display saved summaries; the underlying data-to-results analysis was not rerun.
+The [behavior-relation results](../02_behavior_relation/RESULTS.md) assess the endpoint-constrained candidate with cross-scoring and randomized-endpoint refits. The scientific source is Rajalingham, Sohn and Jazayeri (2025), *Dynamic tracking of objects in the macaque dorsomedial frontal cortex* ([DOI](https://doi.org/10.1038/s41467-024-54688-y)); the [official protocol audit](../../../code/mental_pong/integration/official_protocol_audit.json) records implementation distinctions. The [code README](../../../code/mental_pong/README.md) describes the supported numerical reruns and their required inputs. The figures render summaries from the completed analysis.

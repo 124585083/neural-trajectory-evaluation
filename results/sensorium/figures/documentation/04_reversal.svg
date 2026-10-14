@@ -73,10 +73,12 @@ z
     <text style="fill: #24313c; font: 12px 'DejaVu Sans'" transform="translate(232.255575 126.334578)">Same time average</text>
    </g>
    <g id="text_2">
-    <text style="fill: #24313c; font: 12px 'DejaVu Sans'; text-anchor: middle" x="669.1248" y="98.628681" transform="rotate(-0 669.1248 98.628681)">This diagnostic:  P → reverse R → scale G → frozen GPFA</text>
+    <text style="fill: #24313c; font: 12px 'DejaVu Sans'" transform="translate(557.006362 90.770228)">This diagnostic: prediction → reversal</text>
+    <text style="fill: #24313c; font: 12px 'DejaVu Sans'" transform="translate(567.292612 106.487134)">→ scale conversion → frozen GPFA</text>
    </g>
    <g id="text_3">
-    <text style="fill: #24313c; font: 12px 'DejaVu Sans'; text-anchor: middle" x="669.1248" y="153.124094" transform="rotate(-0 669.1248 153.124094)">Primary null:  P → scale G → reverse R → frozen GPFA</text>
+    <text style="fill: #24313c; font: 12px 'DejaVu Sans'" transform="translate(540.107925 145.265641)">Primary null: prediction → scale conversion</text>
+    <text style="fill: #24313c; font: 12px 'DejaVu Sans'" transform="translate(593.20605 160.982547)">→ reversal → frozen GPFA</text>
    </g>
    <g id="text_4">
     <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'" transform="translate(231.170887 148.954223)">Encoder-scale outputs;</text>
@@ -793,7 +795,7 @@ L 458.618049 482.961468
      </g>
     </g>
     <g id="text_41">
-     <text style="font: 10.5px 'DejaVu Sans'; text-anchor: middle" x="329.265" y="647.856484" transform="rotate(-0 329.265 647.856484)">Mean-movie reversed − original · stored 95% intervals</text>
+     <text style="font: 10.5px 'DejaVu Sans'; text-anchor: middle" x="329.265" y="647.856484" transform="rotate(-0 329.265 647.856484)">Equal-weight mean movie difference; 95% paired intervals</text>
     </g>
    </g>
    <g id="matplotlib.axis_6">
@@ -1056,7 +1058,7 @@ L 917.888049 482.961468
      </g>
     </g>
     <g id="text_53">
-     <text style="font: 10.5px 'DejaVu Sans'; text-anchor: middle" x="788.535" y="647.856484" transform="rotate(-0 788.535 647.856484)">Mean-movie reversed − original · stored 95% intervals</text>
+     <text style="font: 10.5px 'DejaVu Sans'; text-anchor: middle" x="788.535" y="647.856484" transform="rotate(-0 788.535 647.856484)">Equal-weight mean movie difference; 95% paired intervals</text>
     </g>
    </g>
    <g id="matplotlib.axis_8">
@@ -1201,10 +1203,10 @@ L 952.56 619.2
    </g>
   </g>
   <g id="text_59">
-   <text style="fill: #24313c; font: 700 16px 'DejaVu Sans'; text-anchor: middle" x="486" y="22.9575" transform="rotate(-0 486 22.9575)">Prediction reversal · time averaging discards sequence order</text>
+   <text style="fill: #24313c; font: 700 16px 'DejaVu Sans'; text-anchor: middle" x="486" y="22.9575" transform="rotate(-0 486 22.9575)">Prediction reversal: temporal sensitivity of response summaries</text>
   </g>
   <g id="text_60">
-   <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'" transform="translate(150.109922 690.242297)">A: deterministic invariance, not a nonsignificance test. B: pooled trajectory contrasts. C–D: equal-weight movie-score contrasts.</text>
+   <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'" transform="translate(142.009336 690.242297)">A: invariance verified by a deterministic numerical check. B: pooled trajectory contrasts. C–D: equal-weight movie-score contrasts.</text>
    <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'" transform="translate(180.39668 702)">Response alignment also deteriorates; Static temporal-difference CKA remains unresolved. Six movies; offline GPFA.</text>
   </g>
  </g>

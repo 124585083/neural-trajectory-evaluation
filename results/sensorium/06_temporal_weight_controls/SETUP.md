@@ -4,19 +4,19 @@
 
 **Which response and trajectory scores change when the reduced Dynamic model's off-centre temporal weights are attenuated? When a fixed spatial-weight intervention produces a similar response score, do the trajectory changes agree?**
 
-The [main model comparison](../03_model_comparison/RESULTS.md) evaluates frozen Static and reduced Dynamic models. This diagnostic instead changes copies of the current reduced Dynamic weights. A five-level temporal intervention tests dependence on the selected temporal weights. A separate spatial-weight intervention tests whether similar losses in one response summary accompany similar trajectory changes.
+The [main model comparison](../03_model_comparison/RESULTS.md) evaluates frozen Static and reduced Dynamic models. This diagnostic probes copies of the current reduced Dynamic model through specified weight changes. A five-level temporal intervention tests dependence on the selected temporal weights. A separate spatial-weight intervention tests whether similar losses in one response summary accompany similar trajectory changes.
 
-The first comparison is **temporal attenuation versus unchanged Dynamic**. The second is **spatial damage versus temporal attenuation at a similar mean per-neuron response correlation**. Only numerically evaluable pairs whose test gap remains within the fixed tolerance support the second interpretation. A decline after temporal attenuation is compatible with both a temporal-specific effect and general disruption of the trained network.
+The first comparison is **temporal attenuation versus unchanged Dynamic**. The second is **spatial damage versus temporal attenuation at a similar mean per-neuron response correlation**. The matched comparison uses numerically evaluable pairs whose test gap remains within the fixed tolerance. A decline after temporal attenuation is compatible with both a temporal-specific effect and general disruption of the trained network.
 
-This is a completed exploratory diagnostic. Its settings were fixed after the main outcomes were known and before its own scoring. It supplements the primary comparison with an exploratory test of weight dependence. The [output-noise response-matching control](../05_response_matching/SETUP.md) is a separate objective: its perturbation and selected amplitude remain unchanged. No withdrawn GPFA sensitivity finding is used here.
+This is a completed exploratory diagnostic. Its settings were fixed after the main outcomes were known and before its own scoring. It supplements the primary comparison by measuring sensitivity to the selected weights. The [output-noise response-matching control](../05_response_matching/SETUP.md) is a separate objective: its perturbation and selected amplitude remain unchanged. The analysis uses the retained main GPFA; auxiliary sensitivity fits were withdrawn.
 
 ## 2. Data roles and evaluation support
 
-The pilot is `dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20`. Its current split has 282 training trials, 66 validation trials and 58 repeated test trials from six movies. Test repeat counts, sorted by count, are 9, 9, 10, 10, 10 and 10. The 512 neurons were fixed by seed-42 hashing of stable neuron IDs, without response-accuracy or reliability selection.
+The pilot is `dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20`. Its current split has 282 training trials, 66 validation trials and 58 repeated test trials from six movies. Test repeat counts, sorted by count, are 9, 9, 10, 10, 10 and 10. Seed-42 hashing of stable neuron IDs fixed the 512-neuron subset independently of response accuracy and reliability.
 
 | Data role | Trials | Role in this diagnostic |
 |---|---:|---|
-| Train | 282 | Previously supplied the pilot's learned preprocessing and neural GPFA fit. Neither is re-estimated for the interventions. |
+| Train | 282 | Supplied the pilot’s preprocessing and neural GPFA fit, both held fixed for the interventions. |
 | Validation | 66 | Score a fixed spatial-retention grid and select one spatial level for each temporal target. |
 | Test | 58 | Score the fixed temporal curve, check transfer of spatial matching, and compare the valid pairs. |
 
@@ -29,17 +29,17 @@ Validation matching pools trial and time samples within each neuron, allowing va
 | Test repeat means | Movie × time × neuron | `[6, 250, 512]` |
 | GPFA posterior trajectories | Movie × time × latent dimension | `[6, 250, 4]` |
 
-Inputs are released preprocessed mouse visual-cortex responses with aligned video, behavioural and pupil fields, not raw electrical recordings. Full encoder inference consumes 300 frames. The 18-frame temporal reduction is aligned to original timestamps, and frames 50–299 are retained for scoring on the 30 Hz array grid. Earlier project notes describe approximately 8 Hz calcium acquisition before resampling; that rate is documented in narrative sources rather than independently checked acquisition metadata here. The array and posterior-query grids do not supply independent neural observations at every bin.
+Inputs are released preprocessed mouse visual-cortex responses with aligned video, behavioural and pupil fields. Full encoder inference consumes 300 frames. The 18-frame temporal reduction is aligned to original timestamps, and frames 50–299 are retained for scoring on the 30 Hz array grid. Earlier project notes describe approximately 8 Hz calcium acquisition before resampling; that rate is documented in narrative sources rather than independently checked acquisition metadata here. The array grid contains resampled responses, and the posterior-query grid contains inferred states.
 
 Existing bundles contain `neural`, `static`, `dynamic`, `conditions`, `dataset_indices`, `neuron_ids`, `frame_indices` and `encoder_precision`. The diagnostic uses the available trial arrays directly, preserving their original trial support. Hidden challenge-tier zero-response placeholders are excluded. The upstream labelled repeated-movie tier, called `oracle`, is test data for the retrained run, although these movies were explored historically. The wider data dependencies are in [Models and Data](../MODELS_AND_DATA.md#3-training-validation-and-test-data).
 
 ## 3. Fixed model, measurement and intervention copies
 
-Here, **Dynamic** means the seed-42 reduced Dynamic encoder from `retrained_v1`, selected at epoch 109, with 2,862,063 trainable parameters. It has three factorised spatiotemporal stages of widths 16/32/64. The historical full Dynamic model is a different artifact. The current Static model, selected at epoch 59 with 2,814,015 parameters, is the reference architecture from the main comparison; none of the interventions in this objective reconstructs Static.
+Here, **Dynamic** means the seed-42 reduced Dynamic encoder from `retrained_v1`, selected at epoch 109, with 2,862,063 trainable parameters. It has three factorised spatiotemporal stages of widths 16/32/64. The historical full Dynamic model is a different artifact. The current Static model, selected at epoch 59 with 2,814,015 parameters, is the reference architecture from the main comparison; the interventions here modify Dynamic rather than reconstructing Static.
 
-Each intervention starts from a copy of the reduced Dynamic weights. Biases, BatchNorm buffers and every unspecified parameter remain fixed during evaluation-mode inference. Spatial processing, readout or temporal kernels are changed only where the operation below explicitly specifies a weight tensor. The original checkpoint remains unchanged, and the interventions use the existing selected encoder without retraining. [Main comparison setup](../03_model_comparison/SETUP.md#3-models-and-fitting) documents the original architecture and training choices.
+Each intervention starts from a copy of the reduced Dynamic weights. Biases, BatchNorm buffers and every unspecified parameter remain fixed during evaluation-mode inference. Each intervention changes only the temporal or spatial-convolution weight tensor specified below; readout parameters remain fixed. The original checkpoint remains unchanged; each intervention operates on a copy of the selected encoder. [Main comparison setup](../03_model_comparison/SETUP.md#3-models-and-fitting) documents the original architecture and training choices.
 
-The shared four-dimensional Gaussian-process factor analysis (GPFA) uses a linear observation model, diagonal neuron noise and one learned radial basis function (RBF) timescale per latent dimension. Only the 282 training neural trials fit its parameters. Validation neural likelihood selected the 0.25-second initial timescale; the final fit used 19 expectation-maximisation (EM) iterations on train alone, without adding validation trials.
+The shared four-dimensional Gaussian-process factor analysis (GPFA) uses a linear observation model, diagonal neuron noise and one learned radial basis function (RBF) timescale per latent dimension. The 282 training neural trials determine its fitted parameters. Validation neural likelihood selected the 0.25-second initial timescale; the final fit used 19 expectation-maximisation (EM) iterations on training data alone.
 
 The posterior observes 63 indices, `0, 4, …, 248`, within the scoring window and is queried at all 250 timestamps. Full-window inference is offline: later observations can affect an earlier state estimate. This same main GPFA, its input scales and its neuron mapping remain fixed for every intervention. Its reliability and response coverage are described in [the measurement results](../02_trajectory_measurement/RESULTS.md).
 
@@ -81,13 +81,14 @@ The five fixed temporal retentions are $\rho\in\{1,0.75,0.50,0.25,0\}$. Lower re
 
 The three tensors contain **23,040 eligible off-centre entries**. All 23,040 entries are eligible for scaling and remain unchanged at retention one. Exact shapes, changed-entry counts and norms are recorded in [the weight-change record](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/weight_changes.json).
 
-At $\rho=1$, no weights change. Agreement with the existing Dynamic prediction cache must satisfy `rtol=atol=3e-6`, identifying the unmodified baseline.
+At $\rho=1$, the weights retain their original values. Agreement with the existing Dynamic prediction cache must satisfy `rtol=atol=3e-6`, identifying the unmodified baseline.
 
-### Zero retention is not the Static model
+<a id="zero-retention-is-not-the-static-model"></a>
+### Input history retained at zero temporal retention
 
 The unmodified temporal receptive field spans 19 input frames, with offsets $-18$ through $0$ relative to the aligned output time $t$. At $\rho=0$, only the centre slice of each temporal kernel remains. The 11/5/5 kernels then retain visual and appended-behaviour input at **$t-9$**, while the pupil shifter still uses the current time **$t$**.
 
-Spatial processing, central temporal slices, readout and shifting remain. **Zero temporal retention is not Static** and does not align retained visual input to the current frame. The [time-support record](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/temporal_support.json) retains offsets and `is_static_model=false`.
+Spatial processing, central temporal slices, readout and shifting remain. **Zero temporal retention produces a centre-only Dynamic model** with delayed visual input, distinct from the separately trained current-frame Static model. The [time-support record](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/temporal_support.json) retains offsets and `is_static_model=false`.
 
 ## 5. Spatial damage and validation matching
 
@@ -101,11 +102,11 @@ $$
 
 The only target is `core.features.layer0.conv_spatial.weight`, with shape `[16, 3, 1, 11, 11]`, or **5,808 weights**. The three input channels are video and two spatially appended behavioural traces. The operation jointly attenuates weights acting on visual and behavioural input across all three channels.
 
-The spatial grid contains 21 fixed values: $1,0.95,0.90,\ldots,0.05,0$. There is no random mask. Temporal kernels, later spatial layers, biases, readout, pupil shifter and BatchNorm state remain unchanged. The comparison is limited to this specified spatial-weight intervention; alternative non-temporal lesions remain untested.
+The spatial grid contains 21 fixed values: $1,0.95,0.90,\ldots,0.05,0$. The intervention scales the full specified tensor deterministically. Temporal kernels, later spatial layers, biases, readout, pupil shifter and BatchNorm state remain unchanged. The comparison characterizes this spatial-weight intervention; alternative non-temporal interventions would test the breadth of the result.
 
 ### Match the validation response summary, then keep the choice fixed
 
-Let $P^{T,\rho}$ be the temporally attenuated prediction and $P^{S,\eta}$ the spatially attenuated prediction. Superscripts $T$ and $S$ denote **temporal and spatial interventions**, not the independently trained Static model.
+Let $P^{T,\rho}$ be the temporally attenuated prediction and $P^{S,\eta}$ the spatially attenuated prediction. Superscripts $T$ and $S$ identify **temporal and spatial interventions** within Dynamic; the independently trained Static model is a separate reference.
 
 For neural responses $Y$ and predictions $P$, the matching score is the mean per-neuron response correlation:
 
@@ -142,7 +143,7 @@ g_{\mathrm{test}}(\rho)
 -r_{\mathrm{resp}}(Y_{\mathrm{test}},P^{T,\rho}_{\mathrm{test}}).
 $$
 
-A numerically evaluable pair retains matching when $|g_{\mathrm{test}}|\le0.005$. This criterion constrains one pooled scalar summary. Statistical equivalence, neuron-wise accuracy and other response statistics remain unconstrained. Pairs outside tolerance stay in the result record with failed-match status.
+A numerically evaluable pair retains matching when $|g_{\mathrm{test}}|\le0.005$. This criterion constrains one pooled scalar summary. Neuron-wise accuracy and other response statistics may still differ; statistical equivalence is not tested. Pairs outside tolerance stay in the result record with failed-match status.
 
 The [validation grid](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/validation_grid.csv) and [matching records](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/spatial_response_matches.csv) retain the original choices. Current display columns incorporate the numerical endpoint correction below. The correction retains the original spatial strengths and the separate output-noise calibration.
 
@@ -150,9 +151,9 @@ The [validation grid](../evidence/04_model_comparison/retrained_v1_diagnostics/e
 
 At $\eta=0$, the first spatial tensor has zero norm. Saved output diagnostics identify 76 exactly constant neurons and 436 neurons varying only at the float32 output floor. The endpoint is therefore marked `numerically_degenerate` for scientific response correlation. Its response-r value and correlation-matching gaps are **`NA`**, and the pair status is **`not_evaluable`** in validation and test.
 
-This correction was made after the original calibration. The record retains the originally selected zero endpoint and its strength. Raw correlations remain in diagnostic fields, but a mean over tiny residual fluctuations is not treated as an ordinary response score. The pair does not become valid by dropping the 76 exact constants and retaining the other 436 neurons.
+This correction was made after the original calibration. The record retains the originally selected zero endpoint and its strength. Raw correlations remain in diagnostic fields; the scientific score is marked undefined because the residual fluctuations are at the numerical floor. The validity assessment covers both the 76 exact constants and the 436 numerical-floor outputs.
 
-The endpoint rule follows its exact weight intervention and saved numerical evidence, without imposing a general cutoff on small-amplitude predictions. Other strengths and temporal zero keep their original support. Finite error or trajectory values at spatial zero can still be listed, but they do not establish a response-correlation match. [Numerical support](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/response_numeric_support.csv) and [the correction manifest](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/manifest.json) identify the affected endpoint and retained records.
+The endpoint rule follows its exact weight intervention and saved numerical evidence, without imposing a general cutoff on small-amplitude predictions. Other strengths and temporal zero keep their original support. Finite error or trajectory values at spatial zero remain descriptive endpoint values, with response-correlation matching marked unevaluable. [Numerical support](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/response_numeric_support.csv) and [the correction manifest](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/manifest.json) identify the affected endpoint and retained records.
 
 ## 6. Fixed inference and metric definitions
 
@@ -168,13 +169,13 @@ G(P)_{u,n}
 \frac{P_{u,n}}{e_{u,n}}\,g_n,
 $$
 
-where $e_{u,n}$ is the training-derived encoder precision and $g_n$ is the training-derived GPFA precision. Encoder precision depends on time and neuron; GPFA precision depends on neuron. Recorded responses and all intervention predictions use the same conversion, neuron order and full-window GPFA posterior. No scale fit, latent alignment, GPFA refit or checkpoint selection occurs. [Shared scaling and inference](../02_trajectory_measurement/SETUP.md#4-shared-scaling-and-posterior-inference) provides the common measurement details.
+where $e_{u,n}$ is the training-derived encoder precision and $g_n$ is the training-derived GPFA precision. Encoder precision depends on time and neuron; GPFA precision depends on neuron. Recorded responses and all intervention predictions use the same conversion, neuron order and full-window GPFA posterior. Scales, latent axes, GPFA parameters and checkpoint selections remain fixed. [Shared scaling and inference](../02_trajectory_measurement/SETUP.md#4-shared-scaling-and-posterior-inference) provides the common measurement details.
 
 Each intervention follows the same path: complete-trial inference → fixed scored frames → trial/time response matching or repeat means → fixed GPFA conversion and trajectory scores. The neural reference, normalisation and posterior remain unchanged.
 
 ### Response and time-aware representation scores
 
-Supplementary response calculations centre and accumulate in float64, leaving exact constants undefined. Individual curves use their own defined response neurons; pairs use common finite support. The additional zero-spatial validity rule prevents finite numerical residuals from being treated as signal-bearing response variation.
+Supplementary response calculations centre and accumulate in float64, leaving exact constants undefined. Individual curves use their own defined response neurons; pairs use common finite support. The zero-spatial validity rule identifies numerical-floor residuals separately from evaluable response variation.
 
 | Measure | Input and calculation | Direction |
 |---|---|---|
@@ -212,7 +213,7 @@ $$
 | Speed-profile correlation | Pearson r between flattened norms of the within-movie velocity vectors. | Secondary; higher is better |
 | Acceleration-direction cosine | Use within-movie second differences divided by $\Delta t^2$ and average corresponding direction cosines. | Secondary; higher is better |
 
-The normalised RMSE centre and denominator depend on the compared pair. Position means a GPFA latent state, not physical object position. Derivatives describe the smoothed offline posterior. All reported correlations, cosines, CKA scores and normalised errors are dimensionless.
+The normalised RMSE centre and denominator depend on the compared pair. Position denotes a GPFA latent state. Derivatives describe the smoothed offline posterior. All reported correlations, cosines, CKA scores and normalised errors are dimensionless.
 
 Full support is 1,500 condition/time states, 1,494 velocity comparisons and 1,488 acceleration comparisons. Normal response support is 512 neurons; time-state RSA has 11,175 edges. Undefined values stay `NA`. The [main metric definitions](../03_model_comparison/SETUP.md#5-metrics) use these same state and time conventions.
 
@@ -240,9 +241,9 @@ The bootstrap resamples six whole movie conditions with replacement, paired acro
 | Trajectory metrics | Recompute the pooled score from the sampled condition-average trajectories for each intervention, then take the paired difference. |
 | Conventional response and representation metrics | Compute each movie's score, then resample the equal-weight mean paired movie difference. These points differ from the pooled conventional curves and matching scores. |
 
-The 95% intervals describe paired whole-movie resampling conditional on the recorded spatial choices. Validation strength selection remains fixed during resampling, and the damage uses no random mask. Variability across animals, encoder training seeds or damage replicates remains unmeasured.
+The 95% intervals describe paired whole-movie resampling conditional on the recorded spatial choices. Validation strength selection remains fixed during resampling, and the damage uses no random mask. Animal-, training-seed- and intervention-replicate variability would require additional runs or recordings.
 
-The results retain the full temporal curve, failed matching and the unevaluable endpoint. Spatial comparisons that fail the test tolerance do not become matched evidence because some scores remain finite. Differences from baseline do not provide separate uncertainty estimates for every pair of adjacent attenuation levels.
+The results retain the full temporal curve, failed matching and the unevaluable endpoint. The failed-tolerance comparisons retain their unmatched status, even where individual scores are finite. The intervals quantify contrasts against baseline; adjacent-level contrasts would require separate estimates.
 
 ## 8. Source records and interpretation scope
 
@@ -258,6 +259,6 @@ The results retain the full temporal curve, failed matching and the unevaluable 
 | [Numerical support](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/response_numeric_support.csv) | Constant-output counts, residual ranges and scientific response validity |
 | [Diagnostic manifest](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/manifest.json) | `baseline_test_max_absolute_error`, `primary_sources`, `supplementary_selection_sha256`, `zero_spatial_endpoint_correction` |
 
-[Results](RESULTS.md#8-result-records) links the score and interval tables. The experiment tests dependence on specified weight tensors in one trained network, alongside one particular spatial-damage comparison. The interventions retain different weight counts, pathways, perturbation geometry and response statistics. These differences leave a unique temporal computation or causal neural mechanism unresolved despite the shared response target and GPFA.
+[Results](RESULTS.md#8-result-records) links the score and interval tables. The experiment tests dependence on specified weight tensors in one trained network, alongside one particular spatial-damage comparison. The interventions retain different weight counts, pathways, perturbation geometry and response statistics. These differences define a within-model sensitivity test; isolating temporal computation or a causal neural mechanism would require further controls.
 
-No replication across checkpoints, neuron selections or alternative damage families is supplied for this objective. The main model and GPFA remain unchanged; withdrawn sensitivity results are not evidence for broader robustness. The supported interpretation is restricted to the retained interventions, valid matching levels and named metrics.
+Replication across checkpoints, neuron selections and alternative damage families remains a future extension. The main model and GPFA remain unchanged; broader robustness remains unassessed after withdrawal of the auxiliary sensitivity fits. The supported interpretation is restricted to the retained interventions, valid matching levels and named metrics.

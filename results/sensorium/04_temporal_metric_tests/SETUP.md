@@ -4,15 +4,15 @@
 
 **Can reversing a model's prediction sequence leave a specified representation summary unchanged while changing its agreement with the recorded neural trajectory?**
 
-This analysis tests what a particular summary discards. Each current encoder is compared with its own time-reversed output while the recorded responses remain unchanged. The same operation is evaluated with response metrics, time-averaged and time-aware forms of representational similarity analysis (RSA) and centred kernel alignment (CKA), and five trajectory metrics. The analysis identifies what time averaging removes and tests which other summaries register the resulting change.
+This analysis tests how temporal aggregation changes the information retained by a summary. Each current encoder is compared with its own time-reversed output while the recorded responses remain unchanged. The same operation is evaluated with response metrics, time-averaged and time-aware forms of representational similarity analysis (RSA) and centred kernel alignment (CKA), and five trajectory metrics. It compares the temporal sensitivity of these summaries under the same output-order manipulation.
 
-The [main model comparison](../03_model_comparison/RESULTS.md) asks how Static and reduced Dynamic differ. Here, the contrast is **reversed minus original within each model**. Reversal does not match response accuracy; the separate [response-matching analysis](../05_response_matching/SETUP.md) addresses that question. The [measurement analysis](../02_trajectory_measurement/RESULTS.md) supplies the reliability and response-coverage context for the shared Gaussian-process factor analysis (GPFA).
+The [main model comparison](../03_model_comparison/RESULTS.md) asks how Static and reduced Dynamic differ. Here, the contrast is **reversed minus original within each model**. Reversal changes response accuracy as well as temporal order; the separate [response-matching analysis](../05_response_matching/SETUP.md) addresses matching of the selected response summary. The [measurement analysis](../02_trajectory_measurement/RESULTS.md) supplies the reliability and response-coverage context for the shared Gaussian-process factor analysis (GPFA).
 
-This is a completed supplementary diagnostic configured after the main results were known. Its operation and checks are specified in the [supplementary configuration](../../../code/sensorium/configs/supplementary_reversal_v1.json). The encoder and GPFA remain fixed throughout this supplementary analysis. Its timing makes it exploratory rather than preregistered.
+This is a completed supplementary diagnostic configured after the main results were known. Its operation and checks are specified in the [supplementary configuration](../../../code/sensorium/configs/supplementary_reversal_v1.json). The encoder and GPFA remain fixed throughout this supplementary analysis. It is therefore interpreted as an exploratory analysis.
 
 ## 2. Data and evaluation support
 
-The diagnostic uses pilot session `dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20`. Its current data roles are 282 training trials, 66 validation trials and 58 repeated test trials from six movie conditions. The sorted repeat counts are 9, 9, 10, 10, 10 and 10. The 512 neurons are fixed by seed-42 hashing of stable neuron IDs; they were not selected using response quality, reliability or model scores.
+The diagnostic uses pilot session `dynamic29515-10-12-Video-9b4f6a1a067fe51e15306b9628efea20`. Its current data roles are 282 training trials, 66 validation trials and 58 repeated test trials from six movie conditions. The sorted repeat counts are 9, 9, 10, 10, 10 and 10. The 512 neurons are fixed by seed-42 hashing of stable neuron IDs; this selection is independent of response quality, reliability and model scores.
 
 | Array or stage | Axes | Shape or support |
 |---|---|---|
@@ -23,11 +23,11 @@ The diagnostic uses pilot session `dynamic29515-10-12-Video-9b4f6a1a067fe51e1530
 | GPFA observation indices | Scoring-window index | 63 indices: `0, 4, …, 248` |
 | GPFA query indices | Scoring-window index | All 250 indices: `0, 1, …, 249` |
 
-The inputs are released preprocessed mouse visual-cortex calcium responses and aligned video, behavioural and pupil fields, not raw electrical recordings. Full encoder inference uses 300 frames. The 18-frame output reduction is aligned to original timestamps before retaining frames 50–299. Reversal acts on these **250 scored predictions**, not on the full input video.
+The inputs are released preprocessed mouse visual-cortex calcium responses with aligned video, behavioural and pupil fields. Full encoder inference uses 300 frames. The 18-frame output reduction is aligned to original timestamps before retaining frames 50–299. Reversal acts on these **250 scored predictions**, with the input video unchanged.
 
-The array grid is 30 Hz. Earlier project documentation describes approximately 8 Hz calcium acquisition before resampling; that acquisition rate is documented in narrative sources rather than independently checked acquisition metadata here. Neither the 250-bin array nor the GPFA query grid represents 250 independent neural observations.
+The array grid is 30 Hz. Earlier project documentation describes approximately 8 Hz calcium acquisition before resampling; that acquisition rate is documented in narrative sources rather than independently checked acquisition metadata here. The 250-bin array and the 250-point GPFA query grid represent resampled responses and inferred states, respectively.
 
-The cached bundle contains `neural`, `static`, `dynamic`, `conditions`, `dataset_indices`, `neuron_ids`, `frame_indices` and `encoder_precision`. The diagnostic uses the existing trial arrays directly, preserving their original trial support. The upstream labelled repeated-movie tier, called `oracle`, is test data for this retrained run. Hidden-tier zero-response placeholders are excluded. These movies were explored in historical work, so this diagnostic is not an untouched external validation.
+The cached bundle contains `neural`, `static`, `dynamic`, `conditions`, `dataset_indices`, `neuron_ids`, `frame_indices` and `encoder_precision`. The diagnostic uses the existing trial arrays directly, preserving their original trial support. The upstream labelled repeated-movie tier, called `oracle`, is test data for this retrained run. Hidden-tier zero-response placeholders are excluded. These historically explored movies provide a held-out-after-retraining diagnostic, with prior exposure retained in its interpretation.
 
 Dataset fields and the wider data dependencies are described in [Models and Data](../MODELS_AND_DATA.md#2-observations-array-shapes-and-time-alignment).
 
@@ -42,9 +42,9 @@ In this document, **Dynamic** means the newly trained reduced Dynamic model in `
 
 Both models started from seed 42. They share readout and pupil-shifter families, with distinct core computations and separately learned weights. Reversal changes an existing prediction array; the encoders themselves remain fixed.
 
-The main GPFA has four latent dimensions, a linear observation model, diagonal neuron noise and a learned radial basis function (RBF) timescale for each latent dimension. Only training neural responses fit its parameters. Validation neural likelihood selected the 0.25-second initial timescale. The final fit used 19 expectation-maximisation (EM) iterations on the 282 training trials, without adding validation trials. The diagnostic reuses this existing fit.
+The main GPFA has four latent dimensions, a linear observation model, diagonal neuron noise and a learned radial basis function (RBF) timescale for each latent dimension. Training neural responses determine its fitted parameters. Validation neural likelihood selected the 0.25-second initial timescale. The final fit used 19 expectation-maximisation (EM) iterations on the 282 training trials alone. The diagnostic reuses this existing fit.
 
-The posterior observes every fourth scored frame and is queried at all 250 times. It conditions on the full window, so later observations can influence an earlier inferred state. Neural, original-prediction and reversed-prediction trajectories use the same loadings, offsets, noise, temporal priors, scaling and neuron order. There is no model-specific refit, rotation or latent-axis selection. No withdrawn auxiliary GPFA sensitivity result supports this goal.
+The posterior observes every fourth scored frame and is queried at all 250 times. It conditions on the full window, so later observations can influence an earlier inferred state. Neural, original-prediction and reversed-prediction trajectories use the same loadings, offsets, noise, temporal priors, scaling and neuron order. All comparisons retain the original shared latent axes and fitted parameters. This goal uses the retained main GPFA; auxiliary sensitivity fits were withdrawn.
 
 <details>
 <summary>Frozen artifact identities</summary>
@@ -56,7 +56,7 @@ The posterior observes every fourth scored frame and is queried at all 250 times
 | Main GPFA pickle | `98de0cef99973c8a57b5b44d330763a5cd0fc5ad0cab36654c058591ae6eb52c` |
 | Original analysis freeze referenced by the supplementary configuration | `139162d5a7309f90e26990d627124ff442935ea4ce370166ede7fdc82030da90` |
 
-The [freeze record](../evidence/04_model_comparison/retrained_v1/frozen_analysis.json) and [GPFA identity](../evidence/04_model_comparison/retrained_v1/frozen_gpfa_identity.json) identify the fixed objects. The reversal records index original and reversed caches and their source checksums. Identity JSON files identify the artifacts; they contain no weight payloads, and the [model access guide](../../../models/README.md) describes artifact availability.
+The [freeze record](../evidence/04_model_comparison/retrained_v1/frozen_analysis.json) and [GPFA identity](../evidence/04_model_comparison/retrained_v1/frozen_gpfa_identity.json) identify the fixed objects. The reversal records index original and reversed caches and their source checksums. Identity JSON files specify the separately stored fitted artifacts; the [model access guide](../../../models/README.md) describes their access status.
 
 </details>
 
@@ -80,7 +80,7 @@ The implemented operation is:
 P_rev = P[:, ::-1, :].copy()
 ```
 
-Source frames 299 and 50 exchange predicted values; trial/movie identities, neuron order, timestamps and neural responses stay fixed. **Neither input videos nor inferred latent coordinates are reversed.**
+Source frames 299 and 50 exchange predicted values; trial/movie identities, neuron order, timestamps and neural responses stay fixed. **The manipulation changes response predictions; input videos stay fixed, and latent trajectories are inferred anew on the original time grid.**
 
 Original and reversed outputs enter the same metric families. Response metrics use trial arrays; representation metrics use their prescribed aggregation; GPFA compares converted repeat means with the unchanged neural trajectory.
 
@@ -104,7 +104,8 @@ $$
 
 where $s_n$ is the standard deviation of raw-scale training responses pooled over training trials and scoring-window times, with `ddof=1`. Multiplication by $g_n$ applies the common neural-training scale. Recorded and predicted arrays use the same conversion. The [measurement setup](../02_trajectory_measurement/SETUP.md#4-shared-scaling-and-posterior-inference) gives its fitting and inference details.
 
-### Why this is not the primary model-null reversal
+<a id="why-this-is-not-the-primary-model-null-reversal"></a>
+### How the two reversal controls differ
 
 This counterexample reverses encoder-scale predictions **before** conversion. At a fixed scoring-window index $u$, its converted value is
 
@@ -120,7 +121,7 @@ $$
 =\frac{\bar P_{c,249-u,n}}{e_{249-u,n}}\,g_n.
 $$
 
-The time-dependent scale stays at its original timestamps, giving the two different denominators shown above. Thus **reversal and scaling do not commute**, defining two distinct controls.
+The time-dependent scale stays at its original timestamps, giving the two different denominators shown above. The different denominators make **reversal before scaling and reversal after scaling distinct controls**.
 
 ## 5. Metrics and what time averaging preserves
 
@@ -140,7 +141,7 @@ $$
 A_{c,n}(\mathcal R P)=A_{c,n}(P)
 $$
 
-These patterns are formed **in encoder-target scale, before GPFA conversion**, using float64 accumulation. The invariance statement concerns these patterns; it does not assert preservation of the time average after a time-dependent scale conversion.
+These patterns are formed **in encoder-target scale, before GPFA conversion**, using float64 accumulation. The invariance applies to these encoder-scale patterns; the time-dependent scale conversion defines a different aggregation.
 
 Time-averaged condition-pattern CKA compares the six neural patterns with the six predicted patterns using centred linear CKA. Time-averaged condition-pattern RSA compares their correlation-distance matrices using Spearman correlation over the 15 unique movie-pair distances. The neural patterns remain fixed. Identical prediction patterns therefore give identical values for these two summaries, up to the checked numerical tolerance.
 
@@ -179,9 +180,9 @@ Let $Z$ be the neural trajectory and $\widehat Z$ the original or reversed predi
 | Speed-profile correlation | Pearson r between the flattened norms of the within-movie velocity vectors. | Secondary; higher is better |
 | Acceleration-direction cosine | Use within-movie second differences divided by $\Delta t^2$; average corresponding direction cosines. | Secondary; higher is better |
 
-The normalised RMSE denominator is specific to each neural/prediction pair. Position denotes latent state, and derivatives describe changes in the offline GPFA posterior. Physical object positions, independently observed neural velocities and causal latencies remain outside these definitions. All reported correlations, cosines, CKA scores and normalised errors are dimensionless.
+The normalised RMSE denominator is specific to each neural/prediction pair. Position denotes latent state, and derivatives describe changes in the offline GPFA posterior. Relating these quantities to physical object position or causal neural timing requires corresponding task and timing measurements. All reported correlations, cosines, CKA scores and normalised errors are dimensionless.
 
-The recorded full support is 1,500 condition/time states, 1,494 first differences, 1,488 second differences and 512 response neurons. Time-state RSA uses 150 sampled states and 11,175 pairwise edges. Undefined scores remain `NA`; they are not replaced by zero. Full metric definitions are also recorded in the [main comparison setup](../03_model_comparison/SETUP.md#5-metrics).
+The recorded full support is 1,500 condition/time states, 1,494 first differences, 1,488 second differences and 512 response neurons. Time-state RSA uses 150 sampled states and 11,175 pairwise edges. Undefined scores are retained as `NA`. Full metric definitions are also recorded in the [main comparison setup](../03_model_comparison/SETUP.md#5-metrics).
 
 ## 6. Numerical checks, paired intervals and related nulls
 
@@ -195,7 +196,7 @@ The operation is performed once per model. Two types of checks are kept separate
 | Original versus reversed time-averaged pattern RSA/CKA | `1e-10` | Check preservation of the corresponding metric values |
 | Original scores replayed here versus the main score table | `3e-6` | Check consistency with the frozen baseline within the declared tolerance |
 
-Pattern invariance is a deterministic property checked numerically; it is separate from nonsignificance or randomisation p-values. Baseline replay checks agreement within tolerance rather than bitwise identity.
+Pattern invariance is a deterministic property verified by direct numerical comparison. Baseline replay checks numerical agreement within the declared tolerance.
 
 ### Keep points and intervals on the same statistical target
 
@@ -213,17 +214,17 @@ The paired bootstrap uses seed 42 and 2,000 draws of six whole movie conditions 
 |---|---|
 | Trajectory metrics | Recompute the pooled condition-average trajectory score for the sampled movies. Both points and the interval concern this pooled score and its reversal contrast. |
 | Response and time-aware conventional metrics | Score each movie separately, then average the six movie scores equally. The paired interval concerns the mean within-movie reversal contrast. |
-| Time-averaged condition-pattern RSA/CKA | Evaluate the deterministic preservation check on the six patterns. No random-sampling interval or p-value is assigned to invariance. |
+| Time-averaged condition-pattern RSA/CKA | Evaluate the deterministic preservation check on the six patterns. Invariance is assessed by the deterministic numerical check. |
 
-Pooled conventional scores are also reported as separate point estimates. The condition-mean intervals belong to their corresponding movie-mean points. Saved `a`, `b` and `b_minus_a` fields retain each matched point and difference; displayed rounded values are not used to reconstruct the differences.
+Pooled conventional scores are also reported as separate point estimates. The condition-mean intervals belong to their corresponding movie-mean points. Saved `a`, `b` and `b_minus_a` fields retain the full-precision points and differences before display rounding.
 
-Movie resampling describes variation within this six-movie pilot. Frames, repeats, RSA edges and bootstrap draws are not independent animals. These intervals are also distinct from the repeat-partition ranges used for neural reliability in Goal 2.
+Movie resampling describes variation within this six-movie pilot. Each draw retains the frames, repeats and RSA comparisons belonging to the sampled movies; the resampling scope is within this pilot. These intervals are also distinct from the repeat-partition ranges used for neural reliability in Goal 2.
 
 ### Related primary model-prediction nulls
 
 The primary comparison already includes condition derangement, a joint per-movie circular shift, independent-neuron shifts, 16-frame block permutation and time reversal. They alter converted condition-average predictions before the frozen posterior. Their respective targets are movie identity, absolute temporal alignment, population timing, inter-block order and temporal order.
 
-Each random null uses 200 draws; reversal is one deterministic operation per model. Paired transformations are shared across Static and Dynamic. In `score_frozen`, transformation seeds come from the seed-42 generator after the 2,000 main bootstrap draws. These records provide related measurement controls, not additional independent reversal experiments. The current counterexample supplies its own before-conversion operation and cross-metric comparison.
+Each random null uses 200 draws; reversal is one deterministic operation per model. Paired transformations are shared across Static and Dynamic. In `score_frozen`, transformation seeds come from the seed-42 generator after the 2,000 main bootstrap draws. These records document related controls at a different processing stage. The current counterexample supplies its own before-conversion operation and cross-metric comparison.
 
 ## 7. Source records and interpretation scope
 
@@ -237,4 +238,4 @@ Each random null uses 200 draws; reversal is one deterministic operation per mod
 | [Main configuration](../evidence/04_model_comparison/retrained_v1/configuration.json) | `data`, `gpfa`, `model_nulls`, `traditional` |
 | [Frozen analysis](../evidence/04_model_comparison/retrained_v1/frozen_analysis.json) and [GPFA identity](../evidence/04_model_comparison/retrained_v1/frozen_gpfa_identity.json) | Checkpoint, preprocessing, GPFA and analysis identities; fitting and selection roles |
 
-[Results](RESULTS.md#7-result-records) links the operation scores, paired intervals and numerical checks. The inference concerns the within-movie order information removed by time averaging: the unchanged pattern is insensitive to that alteration. Score reductions in other measures leave independence from response information, universal superiority over conventional metrics and a neural algorithm unresolved. Exact biological meanings of the latent axes are not identified. Historical regression residuals and withdrawn GPFA sensitivity results are not evidence for this goal.
+[Results](RESULTS.md#7-result-records) links the operation scores, paired intervals and numerical checks. The comparison identifies within-movie order information that time-aware summaries retain and time averaging discards. Score changes characterize the sensitivity of each specified measurement; independence from response information or a neural algorithm would require additional evidence. The latent axes serve as measurement coordinates; their biological meanings remain unassigned. This goal is supported by its own reversal records, separately from historical residual analyses and withdrawn sensitivity fits.

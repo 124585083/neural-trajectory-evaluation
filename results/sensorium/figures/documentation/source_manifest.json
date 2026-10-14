@@ -2,7 +2,7 @@
   "schema": "sensorium_documentation_figures_v1",
   "protocol": "retrained_v1",
   "script": "code/sensorium/make_documentation_figures.py",
-  "script_sha256": "a8adebe55ac58933b1c1367406325cb18adfa9a87ad0a44b281225f06ebb4d70",
+  "script_sha256": "e4daf69bb381c6439163e650c9fe0de418c8247c67191e020300b44464089e9a",
   "operations": "Rendering saved values and method schematics only; no fitting, inference, resampling, new statistics, or control selection.",
   "software": {
     "matplotlib": "3.9.2",
@@ -29,7 +29,7 @@
     "results/sensorium/evidence/04_model_comparison/retrained_v1/pilot/response_matching_metrics.csv": "7c6829a01031c751c9531b6e5914250f0899a97a8dbad4c10306bfd1eb28851d",
     "results/sensorium/evidence/04_model_comparison/retrained_v1/pilot/response_matching_bootstrap.csv": "ea57103eb846002485a843ca3b2a93aa7e3d44a073b77363447f1d5556e806a0",
     "results/sensorium/evidence/04_model_comparison/retrained_v1_diagnostics/encoder/spatial_response_matches.csv": "e35715d3e7904d4a96e7d9f598d8de149e89ca3a8bff7066c217a2ffa627e60b",
-    "results/sensorium/figures/04_model_comparison/retrained_v1_diagnostics/encoder/weight_attenuation.png": "973fc14b168b778f1e3aff41e25a4308c99a074baf8c7b2ddfad103e84e592fd"
+    "results/sensorium/figures/04_model_comparison/retrained_v1_diagnostics/encoder/weight_attenuation.png": "5835e3a8f5281b356b1a2c2cb4d9f804308b64d4988ae564beecbd4cc90aae2f"
   },
   "figures": {
     "01_shared_pathway": {
@@ -44,8 +44,8 @@
       },
       "interpretation": "Method schematic, not data points; original 30 Hz grid is not independent neural acquisition.",
       "outputs": {
-        "png": "2af1659c99db8caf95ed19e6d30b40bf6f0e0977266e7a65dc9749d4896890c5",
-        "svg": "a4c7127492556386e404c5b30170109dd7ef802c00bf35e402e89205c8fe1454"
+        "png": "a3ef6505868eb5b6c224460c46a438cf2e5d941691b0d139ed679d94d85870ac",
+        "svg": "44b760a2913599f684909a05279bcc0f7e8b2b7d41302ee3e12aab8dba878bdb"
       }
     },
     "02_measurement": {
@@ -55,8 +55,8 @@
       },
       "interpretation": "Repeat agreement and reconstruction are different measures; no reliability-normalised score or universal noise ceiling.",
       "outputs": {
-        "png": "5ac7a90c69cd9d37539d370127e63d8a648d6ddf997a0e2334ccd72b62041823",
-        "svg": "a9432e58e928bd5fb22fe650ccec6cf2ecc80ae565f3cb662c2248861305cdc7"
+        "png": "e4159ccc2694c6aeabce7aba3d8c153794d9c00a4cafde0bc4d8e04f14be9bd5",
+        "svg": "cc2f835fd0d8a11cf53a6de7c0afe99bc0d0607d84375f4441df18054d1f80bf"
       }
     },
     "03_model_comparison": {
@@ -67,8 +67,8 @@
       },
       "interpretation": "Movie points are summary scores, not latent paths. Per-movie exception annotation is subtraction of two saved scores, not new inference.",
       "outputs": {
-        "png": "50b8e7991076a25aee954748e22d3534d849c462db79b486219d82756b3efaef",
-        "svg": "23d21666c8fbbe052c45ecd76fd507adbfa038f6e3b9cf27dc560dcdc744f259"
+        "png": "324ce010dd2327bfff7376990bf79bf0154ca4554a4e0f545a13f49f6b83d1b5",
+        "svg": "abd893e6f484c23d2bb6a60fe46861710163d9781f72fe6c77747ed7eeda6235"
       }
     },
     "04_reversal": {
@@ -79,8 +79,8 @@
       },
       "interpretation": "Method schematic plus saved comparisons; before-conversion reversal is not the after-conversion primary null.",
       "outputs": {
-        "png": "01ac6983c4cc68157715cf3ef3eb76f0fbd9471e3639552439b54317cfc59dad",
-        "svg": "e91ea39596cc7f3bd27700542b205dafc90df1f4de671de55c976306e6dd44e5"
+        "png": "978fc2bf132bcb8269b9691d7859ebca70ed4e1f4705a506f928960c69e6d6ef",
+        "svg": "3874436d6f74020aa3ab9eed3452b4f0e93af0aade4b668bb141d85dd53abb1f"
       }
     },
     "05_response_matching": {
@@ -92,14 +92,14 @@
       },
       "interpretation": "Signed response gaps subtract saved scores; bands are fixed tolerances, not confidence intervals. No new calibration or bootstrap.",
       "outputs": {
-        "png": "139307315c09fb050f8fdd37d1b386663f5c998953ee7e69c3aa13b30278a33f",
-        "svg": "39bbb19f89b0d568db6f4f8851c51011b38baceae131e6c76808d72a198faa3b"
+        "png": "66fc9063f93d2753e6b075d393b21cad1f2479021b446032f15ed18d1279f5fa",
+        "svg": "9ec96389290095fe1b5dd6acba093e7977dd620b04ebd48ca9cea8320a3fe69a"
       }
     },
     "06_weight_attenuation_retained": {
       "existing_figure": "results/sensorium/figures/04_model_comparison/retrained_v1_diagnostics/encoder/weight_attenuation.png",
-      "sha256": "973fc14b168b778f1e3aff41e25a4308c99a074baf8c7b2ddfad103e84e592fd",
-      "interpretation": "Existing corrected figure preserved byte for byte. Spatial zero is NA/not_evaluable; temporal 0.50 fails test matching."
+      "sha256": "5835e3a8f5281b356b1a2c2cb4d9f804308b64d4988ae564beecbd4cc90aae2f",
+      "interpretation": "Recorded weight-control scores and match status. Spatial zero is NA/not_evaluable; temporal 0.50 fails test matching."
     }
   }
 }

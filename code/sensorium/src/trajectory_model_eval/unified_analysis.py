@@ -664,20 +664,31 @@ def _figures(out: Path, scores: dict, bootstrap: pd.DataFrame, condition_table: 
         axis.set_ylabel("Paired condition bootstrap interval")
     fig.savefig(out / "02_paired_differences.png", dpi=150)
     plt.close(fig)
-    fig, axes = plt.subplots(1, 2, figsize=(10, 4), constrained_layout=True)
+    fig, axes = plt.subplots(1, 2, figsize=(12, 4.7), constrained_layout=True)
     axes[0].bar(np.arange(len(reliability["repeat_counts"])), reliability["repeat_counts"])
-    axes[0].set_xlabel("Test movie condition (sorted ID)")
+    axes[0].set_xticks(np.arange(len(reliability["condition_ids"])), reliability["condition_ids"], rotation=40, ha="right")
+    axes[0].set_xlabel('Test movie ID')
     axes[0].set_ylabel("Available repeats")
-    axes[0].set_title("All test conditions retained")
+    axes[0].set_title('Repeat counts for all six test movies')
     if reliability["status"] == "computed":
         table = pd.read_csv(out / "reliability_summary.csv")
+        labels = sorted(table["null"].unique(), key=lambda name:
+                        (0, int(name.rsplit("_", 1)[1])) if name.startswith("block_shuffle_") else (1, name))
+        names = {"position_correlation": "Latent-position correlation",
+                 "velocity_direction_cosine": "Velocity-direction cosine"}
         for i, metric in enumerate(PRIMARY):
-            rows = table[table.metric == metric]
-            axes[1].plot(np.arange(len(rows)), rows.paired_superiority, "o-", label=metric.replace("_", " "))
-        labels = sorted(table["null"].unique())
+            rows = table[table.metric == metric].set_index("null").loc[labels]
+            axes[1].plot(np.arange(len(rows)), rows.paired_superiority, linestyle="-",
+                         marker="o" if i == 0 else "s", markersize=9 if i == 0 else 4,
+                         markerfacecolor="none" if i == 0 else None, label=names[metric], clip_on=False)
         axes[1].set_xticks(np.arange(len(labels)), [s.replace("_", " ") for s in labels], rotation=40, ha="right")
-        axes[1].set_ylabel("Paired repeat splits above null")
-        axes[1].legend(fontsize=7)
+        axes[1].set(ylim=(0, 1), yticks=[0, .25, .5, .75, 1],
+                    ylabel='Fraction of repeat partitions\noutperforming the null')
+        primary = table[table.metric.isin(PRIMARY)]
+        if (primary.paired_superiority == 1).all() and primary.splits.nunique() == 1:
+            count = int(primary.splits.iloc[0])
+            axes[1].text(.5, .88, f"Both metrics: {count}/{count} for every null", ha="center", transform=axes[1].transAxes)
+        axes[1].legend(fontsize=8, loc="lower left")
     else:
         axes[1].text(.5, .5, "Reliability unavailable:\ninsufficient test repeats", ha="center", va="center", transform=axes[1].transAxes)
     fig.savefig(out / "03_reliability_coverage.png", dpi=150)

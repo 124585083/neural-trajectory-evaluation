@@ -509,7 +509,7 @@ L 867.716471 108.864
      </g>
     </g>
     <g id="text_25">
-     <text style="font: 10px 'DejaVu Sans'; text-anchor: middle" x="738.9" y="329.694409" transform="rotate(-0 738.9 329.694409)">RMSE, position units (lower is better)</text>
+     <text style="font: 10px 'DejaVu Sans'; text-anchor: middle" x="738.9" y="329.694409" transform="rotate(-0 738.9 329.694409)">RMSE, MWorks position units (lower is better)</text>
     </g>
    </g>
    <g id="matplotlib.axis_4">
@@ -1129,7 +1129,7 @@ L 867.716471 366.886154
      </g>
     </g>
     <g id="text_57">
-     <text style="font: 10px 'DejaVu Sans'; text-anchor: middle" x="738.9" y="587.716563" transform="rotate(-0 738.9 587.716563)">RMSE, position units (lower is better)</text>
+     <text style="font: 10px 'DejaVu Sans'; text-anchor: middle" x="738.9" y="587.716563" transform="rotate(-0 738.9 587.716563)">RMSE, MWorks position units (lower is better)</text>
     </g>
    </g>
    <g id="matplotlib.axis_8">

@@ -1,7 +1,7 @@
 {
   "operation": "Plot saved summaries only; no model fit, inference, bootstrap, or new summary statistics",
   "script": "code/mental_pong/make_result_figures.py",
-  "script_sha256": "f032c781b11c307166fe3a91bfc20671637dd1b0940ac1f513e5379373455a30",
+  "script_sha256": "274c7fec473903bd6c432c0ec4737abf1cc3c1060d643eb52d2607f8cc5603f5",
   "sources": {
     "results/mental_pong/evidence/closeout_v1/A/self_reconstruction_main_table.csv": "b6e0bc7f89b53dae5678087a6fa061a88fd5319b7d6f89b5d845c2ee3619a9bf",
     "results/mental_pong/evidence/closeout_v1/B/B_summary.csv": "9affe3502f0186702959f1076f5510aeb2fce5159668f3305f1cea2e341b6016"

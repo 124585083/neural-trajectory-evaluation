@@ -2,21 +2,21 @@
 
 ## 1. Research question
 
-Before interpreting neural-trajectory differences, this analysis asks two questions: **does the encoder implementation perform the intended computation, and what level of reproduction has the official full Dynamic baseline reached?**
+This analysis establishes the implementation basis for trajectory comparisons: **does the encoder perform the intended computation, and which training and evaluation steps have been reproduced for the official full Dynamic baseline?**
 
 The historical check recovers and evaluates official full-width Dynamic on complete trials. The current check tests cross-frame dependence of the newly trained Static checkpoint.
 
 | Check | Evidence sought | Role in the study |
 |---|---|---|
 | Historical full Dynamic reproduction | Recorded architecture, training, checkpoint recovery, reloading and local response scores | Establish what was implemented and which benchmark comparisons are justified |
-| Current Static frame independence | Changes at the perturbed frame, absence of changes elsewhere, and a deliberately coupled negative control | Check the intended framewise computation during frozen evaluation |
-| Parameter and time-alignment checks | Model size, output shape and correspondence to original response frames | Identify the models and evaluation support; these are not performance tests |
+| Current Static frame independence | Effects at the perturbed frame, unchanged predictions elsewhere, and detection of a deliberately coupled control | Check the intended framewise computation during frozen evaluation |
+| Parameter and time-alignment checks | Model size, output shape and correspondence to original response frames | Identify model size and the shared evaluation support |
 
 Each check has its own checkpoint, preprocessing and data roles, so they address complementary implementation questions. [Results](RESULTS.md) reports their findings; [Goal 3](../03_model_comparison/SETUP.md) defines the current comparison.
 
 ![Current retrained comparison pathway and timestamp alignment](../figures/documentation/01_shared_pathway.png)
 
-*Current retrained comparison pathway and timestamp alignment. The historical full Dynamic reproduction below is a separate run, with its own preprocessing and oracle selection; this diagram does not describe that historical data split.*
+*Data roles and timestamp alignment for the current retrained comparison. The historical full Dynamic run described below uses its own preprocessing and oracle-based selection protocol.*
 
 ## 2. Data and preprocessing
 
@@ -33,7 +33,7 @@ The historical run used five competition sessions. The upstream tier named **`or
 | 29755-2-8 | 354 | 59 | 8,122 |
 | **Total** | **1,744** | **293** | **40,034** |
 
-Full session keys use `dynamic<identifier>-Video-9b4f6a1a067fe51e15306b9628efea20`. Local hidden final-test arrays are zero placeholders. A hidden-benchmark score therefore requires the unavailable observed responses.
+Full session keys use `dynamic<identifier>-Video-9b4f6a1a067fe51e15306b9628efea20`. Local hidden final-test arrays are zero placeholders. Hidden-benchmark scoring requires the observed responses held by the benchmark provider.
 
 The source arrays contain grayscale movies, neural responses, two behavioural channels and pupil coordinates. A documented trial from the first session has the following shapes:
 
@@ -44,7 +44,7 @@ The source arrays contain grayscale movies, neural responses, two behavioural ch
 | `behavior` | Channel × time | 2 × 324 |
 | `pupil_center` | Coordinate × time | 2 × 324 |
 
-Cropping to the common finite interval produces 300 aligned frames on the released 30 Hz grid. The responses are processed calcium signals; the available records do not establish an absolute spike-rate unit. The historical description reports approximately 8 Hz acquisition before resampling. This does not make the released 30 Hz samples independent neural observations. Calibrated physical units for all supplied behavioural channels are also unavailable in these records.
+Cropping to the common finite interval produces 300 aligned frames on the released 30 Hz grid. The responses are processed calcium signals whose scale is defined by the recorded preprocessing; absolute spike-rate units are unspecified. The historical description reports approximately 8 Hz acquisition before resampling. The released 30 Hz grid represents resampled calcium signals rather than independent acquisitions at that rate. The records leave the behavioural channels’ calibrated physical units unspecified.
 
 Historical normalisation used the supplied arrays selected by `stats_source="all"`. This setting defines the historical protocol; the new run uses its own train-only preprocessing. Data and scoring details are recorded in the [full Dynamic evaluation](../evidence/01_baselines/official_dynamic_oracle.json) and [training record](../../../code/sensorium/records/baselines/dynamic/training_summary.json).
 
@@ -60,7 +60,7 @@ The repository also contains a small CPU regression using synthetic 27-frame inp
 
 ### Architectures
 
-Full Dynamic applies spatial then temporal convolutions in three Factorized3D stages. Static applies one shared 2D core framewise. It is a project-built video control, without an identical official video benchmark.
+Full Dynamic applies spatial then temporal convolutions in three Factorized3D stages. Static applies one shared 2D core framewise. It serves as a project-built framewise video control; an identical official video benchmark is not provided.
 
 | Component | Official full Dynamic | Project Static |
 |---|---|---|
@@ -108,7 +108,7 @@ The current Static checkpoint used for the perturbation check has SHA-256:
 3ded37a0fac494f47a8553a432e04e8be7e95a0a99ed9444b07ae61f31ff7052
 ```
 
-The historical restore path records artifact identity; the weights must be obtained separately from a public clone. Current locations and access requirements belong to the [model manifest](../../../models/manifest.json) and [artifact guide](../../../models/README.md). A loadable model requires the parameter payload as well as its manifest.
+The historical restore path identifies the artifact; execution requires its separately obtained weights. Current locations and access requirements belong to the [model manifest](../../../models/manifest.json) and [artifact guide](../../../models/README.md). Loading the model requires both the parameter payload and its matching manifest.
 
 ## 4. Historical training, recovery and full-sequence evaluation
 
@@ -129,7 +129,7 @@ The historical full Dynamic run used `sensorium.training.video_training_loop.sta
 | Numerical precision | FP32; no mixed precision or activation checkpointing |
 | File caching | Disabled for local memory use; source arrays and transformations retained |
 
-Oracle correlation supplied scheduling, stopping and checkpoint selection. The run was stopped by project decision after validation at epoch 103. Epoch 104 did not produce a complete checkpoint. Recovery retained epoch 97 from the complete epoch states. **This was not natural completion of the official early-stopping schedule.** The [training summary](../../../code/sensorium/records/baselines/dynamic/training_summary.json) and [validation-event log](../../../code/sensorium/records/baselines/dynamic/validation_events.jsonl) retain the execution history.
+Oracle correlation supplied scheduling, stopping and checkpoint selection. The run was stopped by project decision after validation at epoch 103. Epoch 104 did not produce a complete checkpoint. Recovery retained epoch 97 from the complete epoch states. **Training was stopped by project decision before the official early-stopping schedule completed.** The [training summary](../../../code/sensorium/records/baselines/dynamic/training_summary.json) and [validation-event log](../../../code/sensorium/records/baselines/dynamic/validation_events.jsonl) retain the execution history.
 
 ### Time support
 
@@ -156,11 +156,11 @@ changed_frame_effect = max(abs(perturbed_output[j, n] - baseline_output[j, n]))
                        over all neurons n
 ```
 
-Other-frame tolerance is absolute `2e-6`, relative zero. Changed-frame effects identify active inputs. Parameters and BatchNorm buffers are checked for unintended evaluation-time updates.
+Other-frame tolerance is absolute `2e-6`, relative zero. Changed-frame effects identify active inputs. Parameter and BatchNorm-buffer checks verify that the model remains fixed during evaluation.
 
-The negative control adds a sequence mean to each output. It can preserve permutation equivariance while coupling frames, so a one-frame perturbation must fail independence. Its [implementation](../../../code/sensorium/src/trajectory_model_eval/supplementary_encoder.py) is `supplementary_encoder._negative_control`.
+The negative control adds a sequence mean to each output. Its sequence-mean term couples frames while preserving permutation equivariance, giving the perturbation test a known cross-frame effect to detect. Its [implementation](../../../code/sensorium/src/trajectory_model_eval/supplementary_encoder.py) is `supplementary_encoder._negative_control`.
 
-The [execution record](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/static_frame_independence.json) identifies `checks`, `negative_control`, `state_unchanged` and `checkpoint_sha256`. The available protocol summary does not state perturbation amplitudes; exact reproduction requires the linked implementation and execution record rather than an assumed amplitude.
+The [execution record](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/static_frame_independence.json) identifies `checks`, `negative_control`, `state_unchanged` and `checkpoint_sha256`. Exact perturbation amplitudes must be read from the linked implementation and execution record; the protocol summary leaves them unspecified.
 
 ## 6. Scoring and interpretation
 
@@ -174,9 +174,9 @@ $$
 
 The historical scalar is therefore **neuron-weighted**; each of the five sessions contributes in proportion to its neuron count. The pinned helper uses standard deviations with `ddof=0` and epsilon `1e-8`; the historical wrapper replaces NaN neuron correlations with zero. These implementation details define the recorded historical score, which retains its own convention alongside the current pilot metric.
 
-The stopping-closure and post-epoch validation scores come from separate random-snippet calls. Neither is the full-sequence local score. The retained evaluation also lists a seed-42 hidden `final_test_main` reference of 0.1887, but that reference concerns a different stimulus split. Subtracting it from the local oracle score would not measure same-protocol reproduction error.
+The stopping-closure and post-epoch validation scores come from separate random-snippet calls. Both describe snippet-level validation; the complete-sequence local score is reported separately. The retained evaluation also lists a seed-42 hidden `final_test_main` reference of 0.1887, but that reference concerns a different stimulus split. A same-protocol reproduction error would require scores from the same stimulus split and evaluation procedure.
 
-Only one historical training seed is represented. There is no historical paired interval or independently server-scored hidden result. Frame errors and parameter counts are deterministic execution diagnostics, not estimates supported by a bootstrap or null-distribution p-value.
+The historical record covers one training seed. Historical paired uncertainty and an independently server-scored hidden result remain unverified. Frame errors and parameter counts are deterministic execution diagnostics; their role is to verify implementation and model identity.
 
 ## 7. Evidence, attribution and remaining limits
 
@@ -190,6 +190,6 @@ The main project records for this goal are:
 | Model construction and evaluation | [Full Dynamic source](../../../code/sensorium/src/trajectory_eval/official_dynamic.py): `make_official_loaders`, `build_official_model`, `recover_user_stopped_training`, `evaluate_best`; [Static source](../../../code/sensorium/src/trajectory_eval/static_dynamic.py): `build_model`, `audit_frame_independence` |
 | Current Static checks and model sizes | [Frame-check record](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/static_frame_independence.json); [parameter record](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/parameter_counts.json): `actual_instances`, `shared_parameters_counted_once` |
 
-Turishcheva et al. (2024), *Retrospective for the Dynamic Sensorium Competition for predicting large-scale mouse primary visual cortex activity from videos*, provides the [Dynamic benchmark context](https://proceedings.neurips.cc/paper_files/paper/2024/hash/d758d7c0a88d741c8ca4637579c9df87-Abstract-Datasets_and_Benchmarks_Track.html). Willeke et al., *Retrospective on the SENSORIUM 2022 competition*, provides the [static-architecture context](https://proceedings.mlr.press/v220/willeke23a.html), retained in the project reference guide as 2022, PMLR 220:314–333. Neither attribution establishes an official Static-on-Dynamic numerical target.
+Turishcheva et al. (2024), *Retrospective for the Dynamic Sensorium Competition for predicting large-scale mouse primary visual cortex activity from videos*, provides the [Dynamic benchmark context](https://proceedings.neurips.cc/paper_files/paper/2024/hash/d758d7c0a88d741c8ca4637579c9df87-Abstract-Datasets_and_Benchmarks_Track.html). Willeke et al., *Retrospective on the SENSORIUM 2022 competition*, provides the [static-architecture context](https://proceedings.mlr.press/v220/willeke23a.html), retained in the project reference guide as 2022, PMLR 220:314–333. These sources identify the architecture background; the Static-on-Dynamic evaluation is project-specific.
 
-The retained records do not contain hidden-server scoring for the full Dynamic checkpoint or natural completion of its official stopping schedule. The Static perturbation test concerns the specified evaluation-mode inputs and positions; it does not test training-mode BatchNorm coupling or establish upstream normalisation provenance. These boundaries define the implementation evidence carried forward to the model comparison. The associated numerical findings and their interpretation are in [Results](RESULTS.md).
+The retained evidence covers local full Dynamic scoring after a project-directed training stop; hidden-server evaluation remains unverified. The Static perturbation test covers the specified inputs and positions in evaluation mode. Training-mode BatchNorm coupling and upstream normalisation provenance require separate checks. These boundaries define the implementation evidence carried forward to the model comparison. The associated numerical findings and their interpretation are in [Results](RESULTS.md).

@@ -161,7 +161,7 @@ z
    <g id="text_1">
     <text style="fill: #24313c; font: 11px 'DejaVu Sans'" transform="translate(123.095981 87.037748)">Train · 1,395 trials</text>
     <text style="fill: #24313c; font: 11px 'DejaVu Sans'" transform="translate(80.3352 101.444912)">Encoder weights + preprocessing</text>
-    <text style="fill: #24313c; font: 11px 'DejaVu Sans'" transform="translate(104.447544 115.852077)">Pilot neural data fit GPFA</text>
+    <text style="fill: #24313c; font: 11px 'DejaVu Sans'" transform="translate(85.200981 115.852077)">Pilot training responses fit GPFA</text>
    </g>
    <g id="text_2">
     <text style="fill: #24313c; font: 11px 'DejaVu Sans'" transform="translate(416.841563 87.037748)">Validation · 349 trials</text>
@@ -171,10 +171,10 @@ z
    <g id="text_3">
     <text style="fill: #24313c; font: 11px 'DejaVu Sans'" transform="translate(735.636206 87.037748)">Test · 293 trials</text>
     <text style="fill: #24313c; font: 11px 'DejaVu Sans'" transform="translate(694.969722 101.444912)">Frozen scores, repeats + nulls</text>
-    <text style="fill: #24313c; font: 11px 'DejaVu Sans'" transform="translate(683.766909 115.852077)">Previously explored oracle movies</text>
+    <text style="fill: #24313c; font: 11px 'DejaVu Sans'" transform="translate(651.469019 115.852077)">Repeated test movies; earlier exploratory use</text>
    </g>
    <g id="text_4">
-    <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'; text-anchor: middle" x="475.2" y="163.18368" transform="rotate(-0 475.2 163.18368)">Whole movie groups share roles across sessions; test does not fit or select the current models.</text>
+    <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'; text-anchor: middle" x="475.2" y="163.18368" transform="rotate(-0 475.2 163.18368)">Movie groups keep the same role across sessions; training fits models and validation selects settings.</text>
    </g>
    <g id="text_5">
     <text style="fill: #24313c; font: 11px 'DejaVu Sans'" transform="translate(74.096481 255.649526)">Movie + 2 behaviour traces</text>
@@ -255,13 +255,14 @@ z
     <text style="fill: #24313c; font: 11px 'DejaVu Sans'" transform="translate(168.048959 515.780468)">5 sessions · 40,034 neurons</text>
     <text style="fill: #24313c; font: 11px 'DejaVu Sans'" transform="translate(244.9656 530.187633)"/>
     <text style="fill: #24313c; font: 11px 'DejaVu Sans'" transform="translate(170.888334 544.594797)">Pilot time-aware RSA / CKA</text>
-    <text style="fill: #24313c; font: 11px 'DejaVu Sans'" transform="translate(168.500991 559.001961)">Aligned responses; no GPFA</text>
+    <text style="fill: #24313c; font: 11px 'DejaVu Sans'" transform="translate(135.970209 559.001961)">Direct comparison of aligned responses</text>
    </g>
    <g id="text_11">
-    <text style="fill: #24313c; font: 11px 'DejaVu Sans'" transform="translate(629.782759 508.576886)">Pilot trajectories · 1 session</text>
-    <text style="fill: #24313c; font: 11px 'DejaVu Sans'" transform="translate(640.732916 522.98405)">6 movies · 512 neurons</text>
-    <text style="fill: #24313c; font: 11px 'DejaVu Sans'" transform="translate(590.191353 537.391215)">Fixed scale → repeat means → same GPFA</text>
-    <text style="fill: #24313c; font: 11px 'DejaVu Sans'" transform="translate(576.659634 551.798379)">63 observations → 250 queries × 4 latent axes</text>
+    <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'" transform="translate(581.434322 502.545078)">Pilot trajectories · 1 session · 282 training trials</text>
+    <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'" transform="translate(631.923736 516.297371)">6 test movies · 512 neurons</text>
+    <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'" transform="translate(595.429673 530.049664)">Fixed scale → repeat means → same GPFA</text>
+    <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'" transform="translate(583.761548 543.801957)">63 observed time points → 250 inferred states</text>
+    <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'" transform="translate(647.408775 557.55425)">× 4 latent dimensions</text>
    </g>
    <g id="patch_17">
     <path d="M 244.9656 450.807524 
@@ -285,7 +286,7 @@ z
    </g>
    <g id="text_12">
     <text style="fill: #24313c; font: 10px 'DejaVu Sans'" transform="translate(578.073463 612.528917)">Encoder scale: time × neuron; GPFA scale: neuron.</text>
-    <text style="fill: #24313c; font: 10px 'DejaVu Sans'" transform="translate(553.519556 623.726729)">Full-window posterior is offline; no model-specific alignment.</text>
+    <text style="fill: #24313c; font: 10px 'DejaVu Sans'" transform="translate(563.850806 623.726729)">Offline full-window posterior in shared fixed coordinates.</text>
    </g>
    <g id="text_13">
     <text style="fill: #24313c; font: 10px 'DejaVu Sans'" transform="translate(106.726537 612.528917)">Processed calcium responses; held-out after retraining.</text>
@@ -354,7 +355,7 @@ L 850.883923 699.3216
    </g>
   </g>
   <g id="text_21">
-   <text style="fill: #24313c; font: 700 17px 'DejaVu Sans'; text-anchor: middle" x="475.2" y="23.933344" transform="rotate(-0 475.2 23.933344)">Sensorium retrained_v1 · one frozen evaluation pathway</text>
+   <text style="fill: #24313c; font: 700 17px 'DejaVu Sans'; text-anchor: middle" x="475.2" y="23.933344" transform="rotate(-0 475.2 23.933344)">Sensorium: data roles and shared evaluation</text>
   </g>
  </g>
  <defs>

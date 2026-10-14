@@ -89,7 +89,7 @@ L 230.634521 62.208
      </g>
     </g>
     <g id="text_4">
-     <text style="font: 10.5px 'DejaVu Sans'; text-anchor: middle" x="168.361182" y="302.510297" transform="rotate(-0 168.361182 302.510297)">Repeats per disjoint side</text>
+     <text style="font: 10.5px 'DejaVu Sans'; text-anchor: middle" x="168.361182" y="302.510297" transform="rotate(-0 168.361182 302.510297)">Repeats in each disjoint group</text>
     </g>
    </g>
    <g id="matplotlib.axis_2">
@@ -254,16 +254,16 @@ L 279.698363 262.656
 " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="text_11">
-    <text style="fill: #24313c; font: 10px 'DejaVu Sans'; text-anchor: start" x="86.668851" y="151.71574" transform="rotate(-0 86.668851 151.71574)">0.538</text>
+    <text style="fill: #24313c; font: 10px 'DejaVu Sans'; text-anchor: middle" x="79.668851" y="121.6795" transform="rotate(-0 79.668851 121.6795)">0.538</text>
    </g>
    <g id="text_12">
-    <text style="fill: #24313c; font: 10px 'DejaVu Sans'; text-anchor: start" x="162.151686" y="118.665819" transform="rotate(-0 162.151686 118.665819)">0.703</text>
+    <text style="fill: #24313c; font: 10px 'DejaVu Sans'; text-anchor: middle" x="155.151686" y="100.665293" transform="rotate(-0 155.151686 100.665293)">0.703</text>
    </g>
    <g id="text_13">
-    <text style="fill: #24313c; font: 10px 'DejaVu Sans'; text-anchor: start" x="237.634521" y="88.751318" transform="rotate(-0 237.634521 88.751318)">0.853</text>
+    <text style="fill: #24313c; font: 10px 'DejaVu Sans'; text-anchor: middle" x="230.634521" y="78.277362" transform="rotate(-0 230.634521 78.277362)">0.853</text>
    </g>
    <g id="text_14">
-    <text style="fill: #24313c; font: 700 12px 'DejaVu Sans'; text-anchor: start" x="57.024" y="50.208" transform="rotate(-0 57.024 50.208)">A  Position repeat agreement</text>
+    <text style="fill: #24313c; font: 700 12px 'DejaVu Sans'; text-anchor: start" x="57.024" y="50.208" transform="rotate(-0 57.024 50.208)">A  Latent-position repeat agreement</text>
    </g>
   </g>
   <g id="axes_2">
@@ -323,7 +323,7 @@ L 545.347621 62.208
      </g>
     </g>
     <g id="text_18">
-     <text style="font: 10.5px 'DejaVu Sans'; text-anchor: middle" x="483.074282" y="302.510297" transform="rotate(-0 483.074282 302.510297)">Repeats per disjoint side</text>
+     <text style="font: 10.5px 'DejaVu Sans'; text-anchor: middle" x="483.074282" y="302.510297" transform="rotate(-0 483.074282 302.510297)">Repeats in each disjoint group</text>
     </g>
    </g>
    <g id="matplotlib.axis_4">
@@ -465,16 +465,16 @@ L 594.411463 262.656
 " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="text_25">
-    <text style="fill: #24313c; font: 10px 'DejaVu Sans'; text-anchor: start" x="401.381951" y="193.594912" transform="rotate(-0 401.381951 193.594912)">0.330</text>
+    <text style="fill: #24313c; font: 10px 'DejaVu Sans'; text-anchor: middle" x="394.381951" y="174.690232" transform="rotate(-0 394.381951 174.690232)">0.330</text>
    </g>
    <g id="text_26">
-    <text style="fill: #24313c; font: 10px 'DejaVu Sans'; text-anchor: start" x="476.864786" y="165.689741" transform="rotate(-0 476.864786 165.689741)">0.469</text>
+    <text style="fill: #24313c; font: 10px 'DejaVu Sans'; text-anchor: middle" x="469.864786" y="150.641021" transform="rotate(-0 469.864786 150.641021)">0.469</text>
    </g>
    <g id="text_27">
-    <text style="fill: #24313c; font: 10px 'DejaVu Sans'; text-anchor: start" x="552.347621" y="131.098303" transform="rotate(-0 552.347621 131.098303)">0.641</text>
+    <text style="fill: #24313c; font: 10px 'DejaVu Sans'; text-anchor: middle" x="545.347621" y="119.627663" transform="rotate(-0 545.347621 119.627663)">0.641</text>
    </g>
    <g id="text_28">
-    <text style="fill: #24313c; font: 700 12px 'DejaVu Sans'; text-anchor: start" x="371.7371" y="50.208" transform="rotate(-0 371.7371 50.208)">B  Direction repeat agreement</text>
+    <text style="fill: #24313c; font: 700 12px 'DejaVu Sans'; text-anchor: start" x="371.7371" y="50.208" transform="rotate(-0 371.7371 50.208)">B  Local-direction repeat agreement</text>
    </g>
   </g>
   <g id="axes_3">
@@ -627,15 +627,15 @@ L 931.392 262.656
     <text style="fill: #24313c; font: 700 12px 'DejaVu Sans'; text-anchor: middle" x="880.75154" y="109.283019" transform="rotate(-0 880.75154 109.283019)">2.56%</text>
    </g>
    <g id="text_42">
-    <text style="fill: #24313c; font: 700 12px 'DejaVu Sans'; text-anchor: start" x="686.4502" y="50.208" transform="rotate(-0 686.4502 50.208)">C  Limited response reconstruction</text>
+    <text style="fill: #24313c; font: 700 12px 'DejaVu Sans'; text-anchor: start" x="686.4502" y="50.208" transform="rotate(-0 686.4502 50.208)">C  Response variance reconstructed</text>
    </g>
   </g>
   <g id="text_43">
-   <text style="fill: #24313c; font: 700 15px 'DejaVu Sans'; text-anchor: middle" x="475.2" y="18.309656" transform="rotate(-0 475.2 18.309656)">A repeatable four-dimensional component covers little response variance</text>
+   <text style="fill: #24313c; font: 700 15px 'DejaVu Sans'; text-anchor: middle" x="475.2" y="18.309656" transform="rotate(-0 475.2 18.309656)">Repeatability and response-variance coverage of the four-dimensional measurement</text>
   </g>
   <g id="text_44">
-   <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'" transform="translate(213.915703 321.746297)">A–B: 2.5–97.5% repeat-assignment ranges, same six movies; not animal-level confidence intervals.</text>
-   <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'" transform="translate(249.257227 333.504)">C: 250-point query grid, frozen reconstruction; different response-level denominators.</text>
+   <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'" transform="translate(249.810937 321.746297)">A–B: 2.5th–97.5th percentiles across 200 repeat assignments of the same six movies.</text>
+   <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'" transform="translate(208.450781 333.504)">C: frozen reconstruction on 250 query times; each response level uses its own variance denominator.</text>
   </g>
  </g>
  <defs>

@@ -600,9 +600,11 @@ def _plot_scores(scores, matches, out):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    fig, axes = plt.subplots(1, 3, figsize=(11, 3.3), constrained_layout=True)
+    from matplotlib.lines import Line2D
+    fig, axes = plt.subplots(1, 3, figsize=(13, 4.4))
+    fig.subplots_adjust(left=.06, right=.99, bottom=.34, top=.87, wspace=.32)
     for ax, metric, label in zip(axes, ["response_neuron_mean_r", "position_correlation", "velocity_direction_cosine"],
-                                 ["Response correlation", "Latent position correlation", "Velocity-direction cosine"]):
+                                 ["Response correlation", "Latent-position correlation", "Velocity-direction cosine"]):
         temporal = scores[(scores.kind == "temporal") & (scores.metric == metric)].sort_values("retention")
         ax.plot(temporal.retention, temporal.value, "o-", label="Temporal attenuation")
         control = []
@@ -613,22 +615,28 @@ def _plot_scores(scores, matches, out):
                 control.append((row["temporal_retention"], selected.iloc[0].value, status))
         if control:
             control.sort()
-            ax.plot([r[0] for r in control], [r[1] for r in control], "s--", label="Validation-selected spatial control")
+            ax.plot([r[0] for r in control], [r[1] for r in control], "s--", label='Spatial control selected on validation')
             for x, y, status in control:
                 if status == "not_evaluable":
                     if metric == "response_neuron_mean_r":
-                        ax.annotate("Spatial weights = 0: NA", xy=(x, .02),
-                            xycoords=("data", "axes fraction"), fontsize=7,
-                            color="darkred", rotation=90, va="bottom", ha="center")
+                        ax.text(.30, .09, 'Spatial η = 0: response r = NA',
+                            transform=ax.transAxes, fontsize=8,
+                            color="darkred", va="bottom", ha="left")
                     elif np.isfinite(y):
                         ax.scatter([x], [y], marker="D", s=55, facecolors="none",
                                    edgecolors="darkred", zorder=6)
                 elif status != "matched":
                     ax.scatter([x], [y], marker="x", s=70, color="black", zorder=5)
-        ax.set(xlabel="Temporal off-center weight retention", ylabel=label)
+        ax.set(xlabel='Temporal off-centre retention ρ\n(spatial controls paired by ρ)', ylabel=label,
+               xticks=[0, .25, .5, .75, 1], xticklabels=["0", "0.25", "0.50", "0.75", "1.00"])
         ax.grid(alpha=.2)
-    axes[0].legend(fontsize=7)
-    fig.suptitle("Frozen Dynamic diagnostics: black x = failed match; red diamond = correlation not evaluable", fontsize=9)
+    handles, labels = axes[0].get_legend_handles_labels()
+    handles.extend([Line2D([], [], color="black", marker="x", linestyle="none"),
+                    Line2D([], [], color="darkred", marker="D", markerfacecolor="none", linestyle="none")])
+    labels.extend(["×: test gap exceeds 0.005", "◇: spatial-zero response match is unevaluable"])
+    fig.legend(handles, labels, loc="lower center", ncol=2, frameon=False, fontsize=9,
+               bbox_to_anchor=(.5, .015))
+    fig.suptitle('Effects of temporal and spatial weight attenuation', fontsize=12)
     fig.savefig(out / "weight_attenuation.png", dpi=180)
     plt.close(fig)
 

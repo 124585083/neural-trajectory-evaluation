@@ -41,20 +41,20 @@ def _plot_training(run_root, public_root):
             rows = histories[kind]
             epochs = [row["epoch"] for row in rows]
             top.plot(epochs, [row["train_objective_mean"] for row in rows], color="#315f94")
-            bottom.plot(epochs, [row["validation_logged_r"] for row in rows], color="#999999", label="Logging draw")
-            bottom.plot(epochs, [row["validation_selection_r"] for row in rows], color="#315f94", label="Selection draw")
+            bottom.plot(epochs, [row["validation_logged_r"] for row in rows], color="#999999", label='Validation: logging sample')
+            bottom.plot(epochs, [row["validation_selection_r"] for row in rows], color="#315f94", label='Validation: checkpoint sample')
             selected = [row for row in rows if row["selected"]]
             bottom.scatter([row["epoch"] for row in selected], [row["validation_selection_r"] for row in selected],
-                           marker="o", s=18, color="#a6492a", label="Checkpoint update", zorder=3)
+                           marker="o", s=18, color="#a6492a", label='Selected-checkpoint update', zorder=3)
             bottom.legend(frameon=False, fontsize=8)
         complete = (run_root / "encoders" / kind / "frozen_identity.json").is_file()
         top.set_title(f"{title} — {'completed' if complete else 'incomplete'}")
-        top.set_ylabel("Mean training objective")
+        top.set_ylabel('Mean training objective\n(including regularisation)')
         bottom.set_ylabel("Validation correlation")
         for axis in (top, bottom):
             axis.set_xlabel("Completed epoch")
             axis.spines[["top", "right"]].set_visible(False)
-    figure.suptitle("New train / validation split; no test scores enter training", fontsize=12)
+    figure.suptitle('Training and validation histories of the retrained encoders', fontsize=12)
     figure.savefig(public_root / "training_curves.png", dpi=160)
     plt.close(figure)
 

@@ -101,7 +101,7 @@ def objective_reconstruction(frame: pd.DataFrame, output: Path) -> list[str]:
                 d = data[(data.animal == animal) & (data.representation == rep)].set_index("epoch").loc[list(PHASES)]
                 ax.errorbar(d[metric], np.arange(6) + shift, xerr=d[f"{metric}_sd"],
                             fmt=marker, color=color, capsize=3, markersize=5, linewidth=1.4)
-            ax.set_xlabel("Pearson r (higher is better)" if col == 0 else "RMSE, position units (lower is better)")
+            ax.set_xlabel("Pearson r (higher is better)" if col == 0 else 'RMSE, MWorks position units (lower is better)')
             ax.set_xlim((.30, .96) if col == 0 else (2.4, 6.65))
     return save(fig, "results_objective_six_phases", output)
 
@@ -134,7 +134,7 @@ def objective_mismatch(frame: pd.DataFrame, output: Path) -> list[str]:
                 ax.errorbar(d["mean"], np.arange(6) + shift, xerr=xerr,
                             fmt=marker, color=color, capsize=3, markersize=5, linewidth=1.4)
             ax.axvline(0, color="#555555", linewidth=.9, linestyle="--")
-            ax.set_xlabel("Matched − mismatched r" if col == 0 else "Mismatched − matched RMSE (position units)")
+            ax.set_xlabel("Matched − mismatched r" if col == 0 else 'Mismatched − matched RMSE (MWorks position units)')
             ax.set_xlim((-.035, .97) if col == 0 else (-.15, 3.55))
     return save(fig, "results_objective_mismatch", output)
 

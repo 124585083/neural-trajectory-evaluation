@@ -1,18 +1,18 @@
 # Temporal Metric Tests: Results
 
-**Time-averaged condition-pattern scores from representational similarity analysis (RSA) and centred kernel alignment (CKA) remain unchanged when predictions are reversed. Both primary trajectory scores decrease for Static and reduced Dynamic.** Response correlation and several time-aware representation scores also fall. The contrast identifies a limitation of the chosen time-averaged summaries and shows that several measures detect the alteration.
+**Time-averaged condition-pattern scores from representational similarity analysis (RSA) and centred kernel alignment (CKA) remain unchanged when predictions are reversed. Both primary trajectory scores decrease for Static and reduced Dynamic.** Response correlation and several time-aware representation scores also fall. The contrast shows which temporal relationships the chosen summaries retain: averaged patterns stay fixed, while several time-sensitive measures register the alteration.
 
 ## 1. Completed diagnostic and comparison scope
 
-The supplementary diagnostic uses the frozen `retrained_v1` Static and reduced Dynamic encoders, the same main Gaussian-process factor analysis (GPFA), one pilot session, six movies, 58 test trials, 512 neurons and original frames 50–299. Each encoder's original output is compared with one complete reversal of its 250-frame prediction window. Recorded responses, movie labels, neuron order and reference timestamps are unchanged. No model is retrained or selected by this outcome.
+The supplementary diagnostic uses the frozen `retrained_v1` Static and reduced Dynamic encoders, the same main Gaussian-process factor analysis (GPFA), one pilot session, six movies, 58 test trials, 512 neurons and original frames 50–299. Each encoder's original output is compared with one complete reversal of its 250-frame prediction window. Recorded responses, movie labels, neuron order and reference timestamps are unchanged. Model parameters and selections remain fixed throughout the comparison.
 
-The operation reverses **encoder-target-scaled predictions before the fixed response conversion and GPFA inference**. Video input and already inferred latent vectors remain in their original order. Because the conversion depends on time, it differs from the primary model-null reversal applied after conversion. The exact operations and their distinct scaling factors are given in [Setup](SETUP.md#4-reversal-and-the-order-of-scale-conversion).
+The operation reverses **encoder-target-scaled predictions before the fixed response conversion and GPFA inference**. Video inputs remain fixed, and trajectories are inferred from the reordered response predictions on the original query-time grid. Because the conversion depends on time, it differs from the primary model-null reversal applied after conversion. The exact operations and their distinct scaling factors are given in [Setup](SETUP.md#4-reversal-and-the-order-of-scale-conversion).
 
-This diagnostic was configured after the main results were known. It therefore supplies exploratory supplementary evidence. Withdrawn auxiliary GPFA sensitivity findings are not used. In the tables below, **Dynamic** denotes reduced Dynamic; the historical full-width baseline is a separate model.
+This diagnostic was configured after the main results were known. It therefore supplies exploratory supplementary evidence. The analysis uses the retained main GPFA; the auxiliary sensitivity fits were withdrawn. In the tables below, **Dynamic** denotes reduced Dynamic; the historical full-width baseline is a separate model.
 
 ![The same output-order operation leaves encoder-scale time-averaged patterns unchanged but changes trajectory and several time-aware response scores](../figures/documentation/04_reversal.png)
 
-*The same output-order operation leaves encoder-scale time-averaged patterns unchanged but changes trajectory and several time-aware response scores. A has no sampling interval; B uses pooled trajectories; C–D use equal-weight movie means. All paired intervals come from 2,000 saved draws of the same six whole movies. Static temporal-difference CKA crosses zero; unchanged response accuracy is not a condition of this diagnostic.*
+*The same output-order operation leaves encoder-scale time-averaged patterns unchanged but changes trajectory and several time-aware response scores. A shows the deterministic invariance check; B uses pooled trajectories; C–D use equal-weight movie means. All paired intervals come from 2,000 saved draws of the same six whole movies. The Static temporal-difference CKA interval crosses zero; response accuracy changes under the diagnostic.*
 
 ## 2. Time-averaged condition patterns remain unchanged
 
@@ -35,7 +35,7 @@ Direct numerical checks establish invariance beyond the displayed decimal precis
 
 The largest baseline replay difference occurs in response normalised mean squared error (NMSE). It satisfies the configured tolerance, with small differences from the main score table. The original scores below are the diagnostic's replayed values.
 
-Pattern RSA has six movie patterns and **15 unique movie-pair edges**. The 11,175-edge support belongs to the separate time-state RSA. Pattern invariance is a deterministic numerical identity check; it carries no population confidence interval or randomisation p-value. Its evidence is recorded in [numerical checks](../evidence/04_model_comparison/retrained_v1_diagnostics/reversal/numerical_checks.csv).
+Pattern RSA has six movie patterns and **15 unique movie-pair edges**. The 11,175-edge support belongs to the separate time-state RSA. Pattern invariance is established by the deterministic numerical identity check. Its evidence is recorded in [numerical checks](../evidence/04_model_comparison/retrained_v1_diagnostics/reversal/numerical_checks.csv).
 
 ## 3. Both primary trajectory scores decrease after reversal
 
@@ -58,7 +58,7 @@ Both primary trajectory intervals are below zero for each model (panel B). The r
 
 All secondary intervals also indicate poorer agreement. This reversal contrast differs from the unresolved unperturbed-model speed comparison in [Goal 3](../03_model_comparison/RESULTS.md#3-pilot-trajectory-comparison).
 
-Dynamic's reversed position score remains positive at 0.220325. Some trajectory correspondence therefore remains after reversal. These scores quantify latent states and their derivatives under the fixed offline posterior; physical object positions and neural velocities were not directly measured.
+Dynamic's reversed position score remains positive at 0.220325. Some trajectory correspondence therefore remains after reversal. These scores quantify latent states and their derivatives under the fixed offline posterior.
 
 The intervals resample six whole movie conditions, paired between original and reversed outputs, 2,000 times with seed 42. For these trajectory metrics, pooled scores are recomputed on each sampled set. Points and intervals consequently share the same statistical target. The [paired record](../evidence/04_model_comparison/retrained_v1_diagnostics/reversal/paired_intervals.csv) provides the stored `b_minus_a` differences; one-unit discrepancies in the last displayed decimal can arise when subtracting the rounded points.
 
@@ -66,7 +66,7 @@ The intervals resample six whole movie conditions, paired between original and r
 
 ### Pooled point estimates
 
-These scores compare the original and reversed outputs with the same recorded response arrays, without passing through GPFA. Response r and NMSE pool trial/time data. The representation measures use their prescribed within-movie repeat means and temporal aggregation. No condition-mean bootstrap interval is attached to these pooled points.
+These scores directly compare the original and reversed outputs with the same recorded response arrays. Response r and NMSE pool trial/time data. The representation measures use their prescribed within-movie repeat means and temporal aggregation. The pooled points are reported separately from the movie-mean bootstrap intervals.
 
 | Model | Metric | Pooled original | Pooled reversed |
 | --- | --- | ---: | ---: |
@@ -81,7 +81,7 @@ These scores compare the original and reversed outputs with the same recorded re
 | Reduced Dynamic | Temporal-difference CKA | 0.093155 | 0.064301 |
 | Reduced Dynamic | Condition/time-state RSA | 0.544941 | 0.242231 |
 
-Both models lose response correlation and increase response NMSE; condition/time CKA and time-state RSA also fall. Response accuracy is therefore not held constant.
+Both models lose response correlation and increase response NMSE; condition/time CKA and time-state RSA also fall. The reversal changes response accuracy as well as temporal agreement.
 
 Static pooled temporal-difference CKA is nearly unchanged. The within-movie interval below evaluates the direction of its corresponding movie-mean contrast.
 
@@ -104,9 +104,9 @@ For conventional metrics, the saved paired analysis first scores each movie and 
 
 Panels C–D show resolved losses in response r, condition/time CKA and time-state RSA for both models. Response-NMSE intervals indicate increased error.
 
-**Static temporal-difference CKA remains unresolved:** its interval [−0.030433, +0.030278] spans zero. This does not prove invariance. Dynamic’s corresponding interval is below zero; retaining time information does not guarantee resolution of every alteration.
+**Static temporal-difference CKA remains unresolved:** its interval [−0.030433, +0.030278] spans zero. Its effect direction remains uncertain, in contrast to the exact pattern-invariance result. Dynamic’s corresponding interval is below zero, showing a resolved change for this model and metric.
 
-Across the ten trajectory rows and ten conventional rows in the paired table, every row has **2,000 valid and zero undefined bootstrap draws**. These are repeated draws of the same six movie conditions, not new sessions or animals. The pooled scores come from [operation metrics](../evidence/04_model_comparison/retrained_v1_diagnostics/reversal/metrics.csv); the movie-mean estimates and intervals come from [paired intervals](../evidence/04_model_comparison/retrained_v1_diagnostics/reversal/paired_intervals.csv). The [per-condition conventional records](../evidence/04_model_comparison/retrained_v1_diagnostics/reversal/condition_metrics.csv) retain all six movie identities.
+Across the ten trajectory rows and ten conventional rows in the paired table, every row has **2,000 valid and zero undefined bootstrap draws**. The draws quantify resampling variability of the same six movie conditions. The pooled scores come from [operation metrics](../evidence/04_model_comparison/retrained_v1_diagnostics/reversal/metrics.csv); the movie-mean estimates and intervals come from [paired intervals](../evidence/04_model_comparison/retrained_v1_diagnostics/reversal/paired_intervals.csv). The [per-condition conventional records](../evidence/04_model_comparison/retrained_v1_diagnostics/reversal/condition_metrics.csv) retain all six movie identities.
 
 ## 5. Evaluation support and relation to the primary nulls
 
@@ -122,21 +122,21 @@ The recorded common support contains:
 | Time-state RSA edges | 11,175 |
 | Time-averaged condition-pattern RSA edges | 15 |
 
-The time-state and time-averaged RSA supports are kept separate because they use different summaries. Undefined values remain `NA`, rather than being replaced by zero. The numerical checks and baseline replay support interpretation of the reported operation; they are not additional biological replications.
+The time-state and time-averaged RSA supports are kept separate because they use different summaries. Undefined values retain the `NA` designation. The numerical checks and baseline replay verify the implementation of the reported operation.
 
-The main comparison also has [model-prediction null records](../evidence/04_model_comparison/retrained_v1/pilot/model_nulls.csv). Its four random null families use 200 draws per model and metric, while `time_reversal` uses one. Those nulls act in converted response space before posterior inference. This supplementary counterexample reverses predictions before the time-dependent conversion. Their results are related but **cannot be pooled as repeated executions of the same reversal experiment**.
+The main comparison also has [model-prediction null records](../evidence/04_model_comparison/retrained_v1/pilot/model_nulls.csv). Its four random null families use 200 draws per model and metric, while `time_reversal` uses one. Those nulls act in converted response space before posterior inference. This supplementary counterexample reverses predictions before the time-dependent conversion. Their results describe **two distinct controls defined by the order of reversal and scale conversion**.
 
 ## 6. Interpretation and scope
 
-The evidence supports a specific answer to the research question. The tested time-averaged condition patterns preserve their values under prediction reversal, so their RSA and CKA summaries cannot distinguish the two prediction orders. Under the same defined output operation, the primary trajectory measures register lower agreement in latent state and local direction for both encoders. They describe aspects of temporal correspondence that these particular averaged patterns discard.
+The evidence supports a specific answer to the research question. The tested time-averaged condition patterns preserve their values under reversal, giving the same RSA and CKA scores for both prediction orders. Under the same defined output operation, the primary trajectory measures register lower agreement in latent state and local direction for both encoders. They describe aspects of temporal correspondence that these particular averaged patterns discard.
 
-That conclusion is narrower than saying that response metrics or RSA/CKA are time blind. Response correlation falls, and the time-aware CKA and RSA variants detect several changes. Static temporal-difference CKA has an unresolved interval, distinct from the exact pattern invariance. **The choice of inputs and temporal aggregation, not the method name alone, determines which comparison is being made.**
+Temporal sensitivity depends on the inputs and aggregation used for each response, RSA or CKA comparison. Response correlation falls, and the time-aware CKA and RSA variants detect several changes. Static temporal-difference CKA has an unresolved interval, distinct from the exact pattern invariance. **The choice of inputs and temporal aggregation, not the method name alone, determines which comparison is being made.**
 
-The concurrent loss of response alignment can explain several score changes, leaving independence from the original response information unresolved. The separate [response-matching goal](../05_response_matching/RESULTS.md) addresses one specified scalar response summary under a different control; its conclusion should not be imported into this reversal table.
+The concurrent loss of response alignment remains a possible contributor to the changes across metrics. The separate [response-matching goal](../05_response_matching/RESULTS.md) addresses one specified scalar response summary under a different control; its conclusion concerns that separate fixed-output control.
 
-The order of processing is also part of the result. Reversal and the time-dependent scale conversion do not commute, so the changed trajectory scores concern the complete stated measurement pathway. The exact invariance concerns encoder-scale time-averaged patterns. Both claims concern output reversal at the specified processing stage; latent-vector order and the input stimulus remain fixed.
+The order of processing is also part of the result. Reversal and the time-dependent scale conversion do not commute, so the changed trajectory scores concern the complete stated measurement pathway. The exact invariance concerns encoder-scale time-averaged patterns. Both claims concern output reversal at the specified processing stage, with a fixed input stimulus and trajectories inferred on the original query-time grid.
 
-Finally, the GPFA is an offline measurement with no identified biological meaning for individual axes. This supplementary analysis uses one session, six historically explored movies and the frozen models from one training seed. It does not establish independent animal-level effects, a neural algorithm, an optimal latent representation or cross-setting robustness. Within that scope, the result supports retaining both response/time-aware summaries and explicit trajectory measures, with each operation stated clearly.
+The GPFA provides an offline population measurement; individual axes remain biologically unassigned. This supplementary analysis uses one session, six historically explored movies and the frozen models from one training seed. Its inferential scope is this within-session model comparison; animal-level generalisation, mechanism and cross-setting robustness require further evidence. Within that scope, the result supports retaining both response/time-aware summaries and explicit trajectory measures, with each operation stated clearly.
 
 ## 7. Result records
 
@@ -149,4 +149,4 @@ Finally, the GPFA is an offline measurement with no identified biological meanin
 | [Diagnostic provenance](../evidence/04_model_comparison/retrained_v1_diagnostics/reversal/summary.json) | Deterministic operation, freeze/source/cache identities and `main_artifacts_unchanged` |
 | [Primary model-null records](../evidence/04_model_comparison/retrained_v1/pilot/model_nulls.csv) | The separate after-conversion controls, their observed/null values and transformation counts |
 
-[Setup](SETUP.md#7-source-records-and-interpretation-scope) links the configuration and source functions. The inline figure renders these saved operation scores and intervals; it adds no independently sampled animal/session effect.
+[Setup](SETUP.md#7-source-records-and-interpretation-scope) links the configuration and source functions. The inline figure displays the saved operation scores and their movie-resampling intervals.

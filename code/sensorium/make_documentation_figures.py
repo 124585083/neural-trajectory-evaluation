@@ -120,18 +120,19 @@ def shared_path(output: Path):
     frames = cfg["data"]["frame_stop"] - cfg["data"]["frame_start"]
     obs = len(range(0, frames, cfg["gpfa"]["effective_observation_step"]))
     pilot = summary["pilot"]
+    pilot_train_trials = int(one(splits, session=pilot["session"], role="train").n_trials)
     history = support["1.0"]["visual_and_appended_behavior_frame_offsets"]
     crop = -min(history)
 
     fig = plt.figure(figsize=(13.2, 10.2))
     ax = fig.add_axes([.025, .11, .95, .84]); ax.set(xlim=(0, 1), ylim=(0, 1)); ax.axis("off")
-    fig.suptitle("Sensorium retrained_v1 · one frozen evaluation pathway", y=.985, fontsize=17, weight="bold")
-    roles = [("Train", "train", "Encoder weights + preprocessing\nPilot neural data fit GPFA"),
+    fig.suptitle('Sensorium: data roles and shared evaluation', y=.985, fontsize=17, weight="bold")
+    roles = [("Train", "train", 'Encoder weights + preprocessing\nPilot training responses fit GPFA'),
              ("Validation", "validation", "Checkpoints + GPFA initialisation\nControl strengths"),
-             ("Test", "test", "Frozen scores, repeats + nulls\nPreviously explored oracle movies")]
+             ("Test", "test", 'Frozen scores, repeats + nulls\nRepeated test movies; earlier exploratory use')]
     for x, (title, role, detail) in zip([.165, .5, .835], roles):
         box(ax, x, .9, .30, .145, f"{title} · {totals[role]:,} trials\n{detail}", size=11)
-    ax.text(.5, .795, "Whole movie groups share roles across sessions; test does not fit or select the current models.", ha="center", fontsize=10.5)
+    ax.text(.5, .795, 'Movie groups keep the same role across sessions; training fits models and validation selects settings.', ha="center", fontsize=10.5)
     box(ax, .14, .615, .23, .20, "Movie + 2 behaviour traces\n3 input channels\n\nPupil: separate pathway", size=11)
     box(ax, .465, .70, .30, .11,
         f"Static · frame t only\n{counts['counts']['static']['total']:,} parameters", fc="#E8F0F7")
@@ -143,11 +144,11 @@ def shared_path(output: Path):
     box(ax, .5, .385, .93, .09, "Recorded responses + both prediction arrays → identical trial, neuron and scoring-time support", size=11.5)
     arrow(ax, (.83,.505), (.83,.44))
     box(ax, .245, .205, .435, .185,
-        f"Response prediction\n{summary['response']['n_sessions']} sessions · {int(n_neurons):,} neurons\n\nPilot time-aware RSA / CKA\nAligned responses; no GPFA", size=11)
+        f"Response prediction\n{summary['response']['n_sessions']} sessions · {int(n_neurons):,} neurons\n\nPilot time-aware RSA / CKA\nDirect comparison of aligned responses", size=11)
     box(ax, .755, .205, .435, .185,
-        f"Pilot trajectories · 1 session\n{pilot['n_test_conditions']} movies · {cfg['data']['neurons']} neurons\nFixed scale → repeat means → same GPFA\n{obs} observations → {frames} queries × {dims} latent axes", size=11)
+        f"Pilot trajectories · 1 session · {pilot_train_trials} training trials\n{pilot['n_test_conditions']} test movies · {cfg['data']['neurons']} neurons\nFixed scale → repeat means → same GPFA\n{obs} observed time points → {frames} inferred states\n× {dims} latent dimensions", size=10.5)
     arrow(ax, (.245,.332), (.245,.306)); arrow(ax, (.755,.332), (.755,.306))
-    ax.text(.755,.062,"Encoder scale: time × neuron; GPFA scale: neuron.\nFull-window posterior is offline; no model-specific alignment.",ha="center",va="center",fontsize=10)
+    ax.text(.755,.062,'Encoder scale: time × neuron; GPFA scale: neuron.\nOffline full-window posterior in shared fixed coordinates.',ha="center",va="center",fontsize=10)
     ax.text(.245,.062,"Processed calcium responses; held-out after retraining.\nHistorical full Dynamic is a separate run.",ha="center",va="center",fontsize=10)
     timeline = fig.add_axes([.15,.035,.76,.062])
     for y,start,stop,label,color in [(2,0,299,"Input: 0–299",GRAY),(1,crop,299,f"Aligned: {crop}–299",BLUE),(0,cfg['data']['frame_start'],299,"Scored: 50–299",TEAL)]:
@@ -171,23 +172,23 @@ def measurement(output: Path):
     actual = repeats.repeat_level.astype(str).unique().tolist()
     levels[-1] = next(x for x in actual if x not in ["1", "2"])
     fig, axes = plt.subplots(1,3,figsize=(13.2,4.8),gridspec_kw={"width_ratios":[1,1,1.1]})
-    for ax,metric,label in zip(axes[:2],METRICS[:2],["A  Position repeat agreement","B  Direction repeat agreement"]):
+    for ax,metric,label in zip(axes[:2],METRICS[:2],['A  Latent-position repeat agreement','B  Local-direction repeat agreement']):
         rows=[one(repeats,metric=metric,null="condition_shuffle",repeat_level=level) for level in levels]
         means=np.array([r.observed_mean for r in rows]); low=np.array([r.split_interval_low for r in rows]); high=np.array([r.split_interval_high for r in rows])
         require(all(r.splits == 200 for r in rows),"Unexpected repeat partition count")
         ax.errorbar(range(3),means,yerr=[means-low,high-means],fmt="o-",color=BLUE,capsize=4,lw=1.8)
-        for x,v in enumerate(means): ax.annotate(f"{v:.3f}",(x,v),xytext=(7,3),textcoords="offset points",fontsize=10)
+        for x,v in enumerate(means): ax.annotate(f"{v:.3f}",(x,high[x]),xytext=(0,7),textcoords="offset points",fontsize=10,ha="center")
         ax.set(xticks=range(3),xticklabels=["1","2","Balanced\n4 / 5"],ylim=(0,1),xlim=(-.3,2.65))
-        tidy(ax,label,"Repeats per disjoint side"); ax.grid(axis="y",color="#E3E9ED",lw=.6)
+        tidy(ax,label,'Repeats in each disjoint group'); ax.grid(axis="y",color="#E3E9ED",lw=.6)
     ax=axes[2]
     rows=[one(recon,profile="main",level=level,grid="full_query") for level in ["single_trial","condition_average"]]
     vals=np.array([r.population_r2_evaluation_mean for r in rows])*100
     ax.bar([0,1],vals,color=[GRAY,TEAL],width=.55)
     for x,v in enumerate(vals): ax.text(x,v+.12,f"{v:.2f}%",ha="center",fontsize=12,weight="bold")
     ax.set(xticks=[0,1],xticklabels=["Single trial","Condition\naverage"],ylim=(0,3.5),ylabel="Centred population R² (%)")
-    tidy(ax,"C  Limited response reconstruction"); ax.grid(axis="x",visible=False)
-    fig.suptitle("A repeatable four-dimensional component covers little response variance",fontsize=15,weight="bold",y=.98)
-    fig.text(.5,.035,"A–B: 2.5–97.5% repeat-assignment ranges, same six movies; not animal-level confidence intervals.\nC: 250-point query grid, frozen reconstruction; different response-level denominators.",ha="center",fontsize=10.5)
+    tidy(ax,'C  Response variance reconstructed'); ax.grid(axis="x",visible=False)
+    fig.suptitle('Repeatability and response-variance coverage of the four-dimensional measurement',fontsize=15,weight="bold",y=.98)
+    fig.text(.5,.035,'A–B: 2.5th–97.5th percentiles across 200 repeat assignments of the same six movies.\nC: frozen reconstruction on 250 query times; each response level uses its own variance denominator.',ha="center",fontsize=10.5)
     fig.subplots_adjust(left=.06,right=.98,bottom=.24,top=.82,wspace=.4)
     save(fig,output,"02_measurement",{"repeat_averaging_summary.csv":"condition_shuffle / observed_mean, split_interval_low, split_interval_high; all three repeat levels",
         "main/reconstruction.csv":"profile=main, grid=full_query / population_r2_evaluation_mean"},
@@ -210,7 +211,7 @@ def main_comparison(output: Path):
     ax.scatter(s.pooled_static,range(len(s)),color=BLUE,label="Static",zorder=3)
     ax.scatter(s.pooled_dynamic,range(len(s)),color=ORANGE,label="Reduced Dynamic",marker="s",zorder=3)
     ax.set(yticks=range(len(s)),yticklabels=ids,xlim=(.135,.212)); ax.invert_yaxis()
-    tidy(ax,"A  Response r · five sessions","Pooled trial/time score; no pooled CI")
+    tidy(ax,"A  Response r · five sessions",'Response r pooled across\ntest trials and time')
     ax.legend(loc="lower left",bbox_to_anchor=(-.08,-.38),frameon=False,ncol=1,fontsize=10)
     ax=fig.add_subplot(gs[0,1]); y=np.arange(5)
     ax.scatter(p.static,y,color=BLUE,zorder=3);ax.scatter(p.dynamic,y,color=ORANGE,marker="s",zorder=3)
@@ -219,11 +220,11 @@ def main_comparison(output: Path):
     tidy(ax,"B  Pilot trajectory scores","Absolute score (nRMSE: lower is better)")
     ax=fig.add_subplot(gs[0,2])
     for i,(_,r) in enumerate(p.iterrows()):
-        color=ORANGE if r.name=="speed_profile_correlation" else TEAL
+        color=GRAY if r.name=="speed_profile_correlation" else TEAL
         ax.errorbar(r.dynamic_minus_static,i,xerr=[[r.dynamic_minus_static-r.ci_low],[r.ci_high-r.dynamic_minus_static]],fmt="o",color=color,capsize=4,lw=1.7)
     ax.axvline(0,color=GRAY,lw=1); ax.set(yticks=y,yticklabels=LABELS,xlim=(-.57,.63));ax.invert_yaxis()
-    tidy(ax,"C  Paired trajectory differences","Dynamic − Static · stored 95% intervals")
-    ax.text(.5,-.25,"Speed interval crosses zero",transform=ax.transAxes,color=ORANGE,fontsize=10,ha="center")
+    tidy(ax,'C  Dynamic − Static\ntrajectory differences','Dynamic − Static; 95% paired\nmovie-bootstrap intervals')
+    ax.text(.5,-.29,"Speed interval crosses zero",transform=ax.transAxes,color=GRAY,fontsize=10,ha="center")
     sub=gs[1,:].subgridspec(1,2,wspace=.5)
     movie_ids=sorted(conditions.condition.unique()); require(len(movie_ids)==6,"All six movies required")
     for j,metric in enumerate(METRICS[:2]):
@@ -239,9 +240,11 @@ def main_comparison(output: Path):
         else:
             ax.set_xlim(-.04,.78)
             delta=z[0]-x[0];require(delta<0,"Preserve movie_00005 direction exception")
-            ax.text(.5,-.22,f"movie_00005 direction exception: Δ = {delta:+.6f}",transform=ax.transAxes,ha="center",fontsize=10,color=ORANGE)
-    fig.suptitle("Current Static–Dynamic comparison · gains vary by metric and movie",fontsize=16,weight="bold",y=.975)
-    fig.text(.5,.025,"A: all recorded neurons in five sessions. B–E: one pilot, 512 neurons, six movies.\nC: pooled trajectory scores; 2,000 saved paired whole-movie draws. Separate metrics do not form an overall ranking.",ha="center",fontsize=10.5)
+            ax.annotate(f"movie_00005: Δ = {delta:+.6f}", xy=(z[0], 0), xytext=(.68, .88),
+                        textcoords="axes fraction", ha="center", fontsize=10, color=ORANGE,
+                        arrowprops={"arrowstyle":"-", "color":ORANGE, "lw":.8})
+    fig.suptitle('Static and reduced Dynamic: response and trajectory comparisons',fontsize=16,weight="bold",y=.975)
+    fig.text(.5,.025,'A: all recorded neurons in five sessions. B–E: one pilot, 512 neurons, six movies.\nC: pooled trajectory scores; 2,000 saved paired whole-movie draws.\nEach row reports a separate metric; lower nRMSE indicates better agreement.',ha="center",fontsize=10.5)
     fig.subplots_adjust(left=.10,right=.97,bottom=.14,top=.89)
     save(fig,output,"03_model_comparison",{"response_session_paired_bootstrap.csv":"response_neuron_mean_r / pooled_static, pooled_dynamic (no interval attached)",
         "pilot/paired_bootstrap.csv":"five trajectory metrics / static, dynamic, dynamic_minus_static, ci_low, ci_high, interval_estimand",
@@ -261,8 +264,8 @@ def reversal(output: Path):
     fig=plt.figure(figsize=(13.5,10.0));gs=fig.add_gridspec(3,2,height_ratios=[.8,1,1],hspace=.68,wspace=.4)
     ax=fig.add_subplot(gs[0,:]);ax.set(xlim=(0,1),ylim=(0,1));ax.axis("off")
     box(ax,.16,.61,.27,.57,"A → B → C\nC → B → A\nSame time average",fc="#EEF6F4",size=12)
-    box(ax,.64,.72,.59,.35,"This diagnostic:  P → reverse R → scale G → frozen GPFA",size=12)
-    box(ax,.64,.22,.59,.35,"Primary null:  P → scale G → reverse R → frozen GPFA",size=12)
+    box(ax,.64,.72,.59,.35,'This diagnostic: prediction → reversal\n→ scale conversion → frozen GPFA',size=12)
+    box(ax,.64,.22,.59,.35,'Primary null: prediction → scale conversion\n→ reversal → frozen GPFA',size=12)
     ax.text(.16,.12,"Encoder-scale outputs;\nneural reference stays fixed",ha="center",fontsize=10.5)
     ax.text(.64,-.10,"G(RP) ≠ R(GP): the scale depends on time",ha="center",va="center",fontsize=11,color=ORANGE)
     ax=fig.add_subplot(gs[1,0]); labs=[]
@@ -292,9 +295,9 @@ def reversal(output: Path):
             color=GRAY if r.ci_low<=0<=r.ci_high else (BLUE if model=="static" else ORANGE)
             ax.errorbar(r.b_minus_a,i,xerr=[[r.b_minus_a-r.ci_low],[r.ci_high-r.b_minus_a]],fmt="o",color=color,capsize=4)
         ax.axvline(0,color=GRAY,lw=1);ax.set(yticks=range(4),yticklabels=clabels,xlim=(-.55,.065));ax.invert_yaxis()
-        tidy(ax,f"{'C' if j==0 else 'D'}  {'Static' if model=='static' else 'Dynamic'} · time-aware summaries","Mean-movie reversed − original · stored 95% intervals")
-    fig.suptitle("Prediction reversal · time averaging discards sequence order",fontsize=16,weight="bold",y=.985)
-    fig.text(.5,.025,"A: deterministic invariance, not a nonsignificance test. B: pooled trajectory contrasts. C–D: equal-weight movie-score contrasts.\nResponse alignment also deteriorates; Static temporal-difference CKA remains unresolved. Six movies; offline GPFA.",ha="center",fontsize=10.5)
+        tidy(ax,f"{'C' if j==0 else 'D'}  {'Static' if model=='static' else 'Dynamic'} · time-aware summaries",'Equal-weight mean movie difference; 95% paired intervals')
+    fig.suptitle('Prediction reversal: temporal sensitivity of response summaries',fontsize=16,weight="bold",y=.985)
+    fig.text(.5,.025,'A: invariance verified by a deterministic numerical check. B: pooled trajectory contrasts. C–D: equal-weight movie-score contrasts.\nResponse alignment also deteriorates; Static temporal-difference CKA remains unresolved. Six movies; offline GPFA.',ha="center",fontsize=10.5)
     fig.subplots_adjust(left=.17,right=.98,bottom=.14,top=.91)
     save(fig,output,"04_reversal",{"reversal/metrics.csv":"original/reversed time-averaged condition-pattern RSA, CKA",
         "reversal/paired_intervals.csv":"a, b, b_minus_a, ci_low, ci_high; pooled_condition_trajectory vs equal_weight_mean_paired_condition_score kept separate",
@@ -329,16 +332,16 @@ def matching(output: Path):
     ax.scatter(vals,[1,0],color=[BLUE,TEAL],s=70,zorder=3)
     for v,y in zip(vals,[1,0]):ax.annotate(f"{v:+.6f}",(v,y),xytext=(0,14),textcoords="offset points",ha="center",weight="bold",fontsize=11)
     ax.set(yticks=[1,0],yticklabels=["Validation","Test"],ylim=(-.5,1.6),xlim=(-.007,.007))
-    tidy(ax,"A  One response score is within tolerance","Perturbed Dynamic − Static response r")
+    tidy(ax,'A  Mean response-correlation gap within tolerance',"Perturbed Dynamic − Static response r")
     ax.legend(loc="lower center",bbox_to_anchor=(.5,-.33),frameon=False,fontsize=10)
     ax=fig.add_subplot(gs[1,1])
     for i,(_,r) in enumerate(p.iterrows()):
         v=r.perturbed_dynamic_minus_static
         ax.errorbar(v,i,xerr=[[v-r.ci_low],[r.ci_high-v]],fmt="o",color=ORANGE if r.name=="speed_profile_correlation" else TEAL,capsize=4,lw=1.7)
     ax.axvline(0,color=GRAY,lw=1);ax.set(yticks=range(5),yticklabels=LABELS,xlim=(-.54,.65));ax.invert_yaxis()
-    tidy(ax,"B  Trajectory differences remain","Perturbed Dynamic − Static · stored 95% intervals")
-    fig.suptitle("Response matching · close scalar correlation, different trajectory agreement",fontsize=16,weight="bold",y=.975)
-    fig.text(.5,.028,"Tolerance is not statistical equivalence; per-neuron accuracy, NMSE and time-aware RSA/CKA were not matched.\nTrajectory intervals: six whole movies, fixed noise; no across-noise-seed uncertainty. Speed remains unresolved.",ha="center",fontsize=10.5)
+    tidy(ax,'B  Trajectory differences after response matching','Perturbed Dynamic − Static; 95% paired\nmovie-bootstrap intervals')
+    fig.suptitle('Trajectory comparisons after matching mean response correlation',fontsize=16,weight="bold",y=.975)
+    fig.text(.5,.028,'The tolerance constrains mean response r; per-neuron scores, NMSE and time-aware RSA/CKA remain separate outcomes.\nTrajectory intervals resample six whole movies with noise fixed; the speed difference remains unresolved.',ha="center",fontsize=10.5)
     fig.subplots_adjust(left=.10,right=.98,bottom=.23,top=.88)
     save(fig,output,"05_response_matching",{"response_matching_selection.csv":"selected row / sigma, validation_static_response_r, validation_perturbed_dynamic_response_r, absolute_gap",
         "response_matching_metrics.csv":"static and perturbed_dynamic / response_neuron_mean_r",
@@ -357,7 +360,7 @@ def retained_weight_figure():
     original=ROOT/"results/sensorium/figures/04_model_comparison/retrained_v1_diagnostics/encoder/weight_attenuation.png"
     SOURCES[original.relative_to(ROOT).as_posix()]=sha(original)
     FIGURES["06_weight_attenuation_retained"]={"existing_figure":original.relative_to(ROOT).as_posix(),
-        "sha256":sha(original),"interpretation":"Existing corrected figure preserved byte for byte. Spatial zero is NA/not_evaluable; temporal 0.50 fails test matching."}
+        "sha256":sha(original),"interpretation":"Recorded weight-control scores and match status. Spatial zero is NA/not_evaluable; temporal 0.50 fails test matching."}
 
 
 def main():

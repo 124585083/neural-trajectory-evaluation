@@ -305,7 +305,7 @@ z
     <text style="fill: #24313c; font: 700 11px 'DejaVu Sans'; text-anchor: middle" x="336.012552" y="346.116135" transform="rotate(-0 336.012552 346.116135)">+0.003286</text>
    </g>
    <g id="text_17">
-    <text style="fill: #24313c; font: 700 12px 'DejaVu Sans'; text-anchor: start" x="95.04" y="205.409368" transform="rotate(-0 95.04 205.409368)">A  One response score is within tolerance</text>
+    <text style="fill: #24313c; font: 700 12px 'DejaVu Sans'; text-anchor: start" x="95.04" y="205.409368" transform="rotate(-0 95.04 205.409368)">A  Mean response-correlation gap within tolerance</text>
    </g>
    <g id="legend_1">
     <g id="patch_11">
@@ -422,7 +422,8 @@ L 917.611278 217.409368
      </g>
     </g>
     <g id="text_25">
-     <text style="font: 10.5px 'DejaVu Sans'; text-anchor: middle" x="767.401412" y="433.368484" transform="rotate(-0 767.401412 433.368484)">Perturbed Dynamic − Static · stored 95% intervals</text>
+     <text style="font: 10.5px 'DejaVu Sans'" transform="translate(660.641021 433.368484)">Perturbed Dynamic − Static; 95% paired</text>
+     <text style="font: 10.5px 'DejaVu Sans'" transform="translate(699.648521 445.126188)">movie-bootstrap intervals</text>
     </g>
    </g>
    <g id="matplotlib.axis_4">
@@ -629,15 +630,15 @@ L 931.392 404.712
 " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="text_31">
-    <text style="fill: #24313c; font: 700 12px 'DejaVu Sans'; text-anchor: start" x="603.410824" y="205.409368" transform="rotate(-0 603.410824 205.409368)">B  Trajectory differences remain</text>
+    <text style="fill: #24313c; font: 700 12px 'DejaVu Sans'; text-anchor: start" x="603.410824" y="205.409368" transform="rotate(-0 603.410824 205.409368)">B  Trajectory differences after response matching</text>
    </g>
   </g>
   <g id="text_32">
-   <text style="fill: #24313c; font: 700 16px 'DejaVu Sans'; text-anchor: middle" x="475.2" y="25.2975" transform="rotate(-0 475.2 25.2975)">Response matching · close scalar correlation, different trajectory agreement</text>
+   <text style="fill: #24313c; font: 700 16px 'DejaVu Sans'; text-anchor: middle" x="475.2" y="25.2975" transform="rotate(-0 475.2 25.2975)">Trajectory comparisons after matching mean response correlation</text>
   </g>
   <g id="text_33">
-   <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'" transform="translate(178.652109 499.125497)">Tolerance is not statistical equivalence; per-neuron accuracy, NMSE and time-aware RSA/CKA were not matched.</text>
-   <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'" transform="translate(179.871094 510.8832)">Trajectory intervals: six whole movies, fixed noise; no across-noise-seed uncertainty. Speed remains unresolved.</text>
+   <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'" transform="translate(153.472617 499.125497)">The tolerance constrains mean response r; per-neuron scores, NMSE and time-aware RSA/CKA remain separate outcomes.</text>
+   <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'" transform="translate(196.415977 510.8832)">Trajectory intervals resample six whole movies with noise fixed; the speed difference remains unresolved.</text>
   </g>
  </g>
  <defs>

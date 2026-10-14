@@ -103,7 +103,8 @@ L 263.620581 79.992
      </g>
     </g>
     <g id="text_5">
-     <text style="font: 10.5px 'DejaVu Sans'; text-anchor: middle" x="197.239883" y="314.887849" transform="rotate(-0 197.239883 314.887849)">Pooled trial/time score; no pooled CI</text>
+     <text style="font: 10.5px 'DejaVu Sans'" transform="translate(130.255625 314.887849)">Response r pooled across</text>
+     <text style="font: 10.5px 'DejaVu Sans'" transform="translate(147.328789 326.645552)">test trials and time</text>
     </g>
    </g>
    <g id="matplotlib.axis_2">
@@ -573,7 +574,8 @@ L 972.696906 79.992
      </g>
     </g>
     <g id="text_33">
-     <text style="font: 10.5px 'DejaVu Sans'; text-anchor: middle" x="876.498123" y="314.887849" transform="rotate(-0 876.498123 314.887849)">Dynamic − Static · stored 95% intervals</text>
+     <text style="font: 10.5px 'DejaVu Sans'" transform="translate(797.209998 314.887849)">Dynamic − Static; 95% paired</text>
+     <text style="font: 10.5px 'DejaVu Sans'" transform="translate(808.745233 326.645552)">movie-bootstrap intervals</text>
     </g>
    </g>
    <g id="matplotlib.axis_6">
@@ -681,21 +683,21 @@ L 842.802202 183.111682
    <g id="LineCollection_4">
     <path d="M 864.632355 229.984265 
 L 884.848085 229.984265 
-" clip-path="url(#pc9514d13bc)" style="fill: none; stroke: #c66b21; stroke-width: 1.7"/>
+" clip-path="url(#pc9514d13bc)" style="fill: none; stroke: #66717d; stroke-width: 1.7"/>
    </g>
    <g id="line2d_64">
     <defs>
-     <path id="m4ca244e5b5" d="M 0 4 
+     <path id="m6a6eb50fe1" d="M 0 4 
 L 0 -4 
-" style="stroke: #c66b21"/>
+" style="stroke: #66717d"/>
     </defs>
     <g clip-path="url(#pc9514d13bc)">
-     <use xlink:href="#m4ca244e5b5" x="864.632355" y="229.984265" style="fill: #c66b21; stroke: #c66b21"/>
+     <use xlink:href="#m6a6eb50fe1" x="864.632355" y="229.984265" style="fill: #66717d; stroke: #66717d"/>
     </g>
    </g>
    <g id="line2d_65">
     <g clip-path="url(#pc9514d13bc)">
-     <use xlink:href="#m4ca244e5b5" x="884.848085" y="229.984265" style="fill: #c66b21; stroke: #c66b21"/>
+     <use xlink:href="#m6a6eb50fe1" x="884.848085" y="229.984265" style="fill: #66717d; stroke: #66717d"/>
     </g>
    </g>
    <g id="LineCollection_5">
@@ -748,7 +750,7 @@ z
    </g>
    <g id="line2d_72">
     <defs>
-     <path id="m1334199902" d="M 0 3 
+     <path id="m5f5aa1ec83" d="M 0 3 
 C 0.795609 3 1.55874 2.683901 2.12132 2.12132 
 C 2.683901 1.55874 3 0.795609 3 0 
 C 3 -0.795609 2.683901 -1.55874 2.12132 -2.12132 
@@ -758,10 +760,10 @@ C -2.683901 -1.55874 -3 -0.795609 -3 0
 C -3 0.795609 -2.683901 1.55874 -2.12132 2.12132 
 C -1.55874 2.683901 -0.795609 3 0 3 
 z
-" style="stroke: #c66b21"/>
+" style="stroke: #66717d"/>
     </defs>
     <g clip-path="url(#pc9514d13bc)">
-     <use xlink:href="#m1334199902" x="875.003565" y="229.984265" style="fill: #c66b21; stroke: #c66b21"/>
+     <use xlink:href="#m5f5aa1ec83" x="875.003565" y="229.984265" style="fill: #66717d; stroke: #66717d"/>
     </g>
    </g>
    <g id="line2d_73">
@@ -780,10 +782,11 @@ L 977.76 286.231365
 " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="text_39">
-    <text style="fill: #c66b21; font: 10px 'DejaVu Sans'; text-anchor: middle" x="876.498123" y="337.791206" transform="rotate(-0 876.498123 337.791206)">Speed interval crosses zero</text>
+    <text style="fill: #66717d; font: 10px 'DejaVu Sans'; text-anchor: middle" x="876.498123" y="346.04078" transform="rotate(-0 876.498123 346.04078)">Speed interval crosses zero</text>
    </g>
    <g id="text_40">
-    <text style="fill: #24313c; font: 700 12px 'DejaVu Sans'; text-anchor: start" x="775.236246" y="67.992" transform="rotate(-0 775.236246 67.992)">C  Paired trajectory differences</text>
+    <text style="fill: #24313c; font: 700 12px 'DejaVu Sans'" transform="translate(775.236246 54.460875)">C  Dynamic − Static</text>
+    <text style="fill: #24313c; font: 700 12px 'DejaVu Sans'" transform="translate(775.236246 67.992)">trajectory differences</text>
    </g>
   </g>
   <g id="axes_4">
@@ -1308,19 +1311,25 @@ L 977.76 625.392
      <use xlink:href="#m2e069134db" x="923.866537" y="615.548758" style="fill: #c66b21; stroke: #c66b21"/>
     </g>
    </g>
+   <g id="patch_17">
+    <path d="M 818.843826 424.919779 
+Q 799.8633 421.95599 780.882774 418.992201 
+" style="fill: none; stroke: #c66b21; stroke-width: 0.8; stroke-linecap: round"/>
+   </g>
    <g id="text_71">
-    <text style="fill: #c66b21; font: 10px 'DejaVu Sans'; text-anchor: middle" x="802.368" y="673.033293" transform="rotate(-0 802.368 673.033293)">movie_00005 direction exception: Δ = -0.000326</text>
+    <text style="fill: #c66b21; font: 10px 'DejaVu Sans'; text-anchor: middle" x="865.50912" y="434.826827" transform="rotate(-0 865.50912 434.826827)">movie_00005: Δ = -0.000326</text>
    </g>
    <g id="text_72">
     <text style="fill: #24313c; font: 700 12px 'DejaVu Sans'; text-anchor: start" x="626.976" y="396.840667" transform="rotate(-0 626.976 396.840667)">E  Direction cosine · each test movie</text>
    </g>
   </g>
   <g id="text_73">
-   <text style="fill: #24313c; font: 700 16px 'DejaVu Sans'; text-anchor: middle" x="504" y="30.3375" transform="rotate(-0 504 30.3375)">Current Static–Dynamic comparison · gains vary by metric and movie</text>
+   <text style="fill: #24313c; font: 700 16px 'DejaVu Sans'; text-anchor: middle" x="504" y="30.3375" transform="rotate(-0 504 30.3375)">Static and reduced Dynamic: response and trajectory comparisons</text>
   </g>
   <g id="text_74">
-   <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'" transform="translate(293.121445 697.262297)">A: all recorded neurons in five sessions. B–E: one pilot, 512 neurons, six movies.</text>
-   <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'" transform="translate(195.008789 709.02)">C: pooled trajectory scores; 2,000 saved paired whole-movie draws. Separate metrics do not form an overall ranking.</text>
+   <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'" transform="translate(293.121445 685.504594)">A: all recorded neurons in five sessions. B–E: one pilot, 512 neurons, six movies.</text>
+   <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'" transform="translate(325.075898 697.262297)">C: pooled trajectory scores; 2,000 saved paired whole-movie draws.</text>
+   <text style="fill: #24313c; font: 10.5px 'DejaVu Sans'" transform="translate(298.451836 709.02)">Each row reports a separate metric; lower nRMSE indicates better agreement.</text>
   </g>
  </g>
  <defs>
