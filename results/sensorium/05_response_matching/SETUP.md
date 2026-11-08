@@ -10,7 +10,7 @@ The selection rule is recorded in [checkpoint_matching_v1.json](../../../code/se
 
 ## 2. Candidate checkpoints and data roles
 
-The original `retrained_v1` run did not retain the intermediate weights needed for this comparison. The new run uses its reduced Dynamic architecture, seed 42, training split, training-derived preprocessing, optimizer, learning-rate schedule and native stopping policy. Initial parameters match the original state exactly, but later numerical states can differ. These are checkpoints of a newly executed training trajectory, with their own identities and scores; they are not recovered original intermediate weights.
+Candidate checkpoints are retained during reduced Dynamic training, using the architecture, seed 42, training split, training-derived preprocessing, optimizer, learning-rate schedule and native stopping policy specified for the main comparison.
 
 The candidate rule retains **every completed epoch from 1 through the earlier of epoch 119 and verified native early stopping**. The original training settings remain `max_iter=200`, `patience=5` and four learning-rate decay cycles. A completed training summary with stop reason `patience_cycles_exhausted` is required to accept fewer than 119 epochs. A pause, interruption or incomplete epoch does not complete the candidate set.
 

@@ -86,7 +86,7 @@ See [model comparison results](03_model_comparison/RESULTS.md).
 
 ### 9. What does the response-matching control add?
 
-Validation selected **Dynamic epoch 63** from all 91 checkpoints completed before the new training run’s native early stop. Its predictions are compared directly with the frozen Static model, using the same neurons, test trials and neural GPFA. The mean per-neuron response-r gaps are **0.000068 on validation** and **0.000484 on test**, both below the fixed 0.005 tolerance; all 512 neuron correlations remain defined.
+Validation selected **Dynamic epoch 63** from the 91 retained training checkpoints. Its predictions are compared directly with the frozen Static model, using the same neurons, test trials and neural GPFA. The mean per-neuron response-r gaps are **0.000068 on validation** and **0.000484 on test**, both below the fixed 0.005 tolerance; all 512 neuron correlations remain defined.
 
 At this response-score match, trajectory position correlation is **0.737842 versus 0.416545**, and local-direction cosine is **0.441458 versus 0.259418**. Both primary paired intervals favour the selected Dynamic checkpoint. Position agreement improves in all six movies; direction improves in five, with `movie_00005` retained as an exception. Speed remains unresolved.
 

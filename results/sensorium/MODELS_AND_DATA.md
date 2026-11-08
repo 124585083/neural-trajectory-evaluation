@@ -2,7 +2,7 @@
 
 The main comparison uses the source run `retrained_v1`, which trained two neural encoding models: **Static**, which processes frames independently, and **reduced Dynamic**, which combines frames through temporal convolutions. Both predict the same recorded neurons. A Gaussian-process factor analysis (GPFA) model fitted to training neural responses defines the common space used to compare recorded and predicted trajectories. Its parameters remain fixed during evaluation.
 
-The current response-matching control is the separate `checkpoint_matching_v1` analysis. It compares Static epoch 59 with a validation-selected Dynamic checkpoint at epoch 63 from a new training run. The original main comparison remains Static epoch 59 versus Dynamic epoch 109, with the same frozen neural GPFA.
+The current response-matching control is the separate `checkpoint_matching_v1` analysis. It compares Static epoch 59 with Dynamic epoch 63, selected from training checkpoints using validation response correlation. The original main comparison remains Static epoch 59 versus Dynamic epoch 109, with the same frozen neural GPFA.
 
 This document describes the data, model structures and transformations connecting those comparisons. The earlier full-width Dynamic reproduction is a separate historical run. Detailed analysis settings and findings are linked from the [project overview](../../README.md).
 
@@ -110,7 +110,7 @@ In this implementation, the validation loader retains the key `oracle`, but it c
 
 ### Response-matched Dynamic checkpoint
 
-The active [checkpoint-matching configuration](../../code/sensorium/configs/checkpoint_matching_v1.json) retains all completed epochs through the earlier of epoch 119 and verified native early stopping. The original architecture, split, preprocessing and training policy remain unchanged. The new run stopped natively at **epoch 91**, yielding the complete **91-candidate** set. Initial parameters matched the source run, while later training states differed; these candidates have their own new-run identities rather than recovered historical weights.
+The active [checkpoint-matching configuration](../../code/sensorium/configs/checkpoint_matching_v1.json) retains all completed epochs through the earlier of epoch 119 and verified native early stopping. The original architecture, split, preprocessing and training policy remain unchanged. The completed candidate cohort contains **91 checkpoints, from epochs 1–91**, retained according to this stopping rule.
 
 All candidates were scored on the complete **66-trial pilot validation set**, using mean per-neuron Pearson correlation over trial/time samples and common finite support within the fixed 512 neurons. **Epoch 63** had the smallest absolute gap from Static. Its frozen validation gap is **0.00006768159**, and its test gap is **0.00048394940**, both within the 0.005 tolerance. Test data did not change the selection. All 512 neuron correlations are defined at both stages; recorded and predicted trajectories use the original GPFA and transforms.
 

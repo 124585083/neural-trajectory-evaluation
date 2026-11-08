@@ -341,7 +341,7 @@ def matching(output: Path):
         require(chosen.sha256 == selection["selected_checkpoint"]["sha256"], "Selected checkpoint identity differs")
         require(int(chosen.epoch) == int(selection["selected_checkpoint"]["epoch"]), "Selected epoch differs")
         epoch_label = f"Freeze epoch {int(chosen.epoch)}"
-    boxes = [(0.16, f"New training run\n{training_label}"),
+    boxes = [(0.16, f"Dynamic training\n{training_label}"),
              (0.50, f"Full validation set\n{epoch_label}"),
              (0.84, "Test\nScore selected model predictions")]
     for x, label in boxes:

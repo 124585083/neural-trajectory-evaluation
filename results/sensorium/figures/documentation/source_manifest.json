@@ -2,7 +2,7 @@
   "schema": "sensorium_documentation_figures_v1",
   "protocol": "retrained_v1_with_checkpoint_matching_v1",
   "script": "code/sensorium/make_documentation_figures.py",
-  "script_sha256": "005c849829987e72fdc9ffc93549da3d0cbda2550d8964f92a0d955a8600e918",
+  "script_sha256": "8420053f4a49c37d27982d8e234d7f3891f706c014d31730912c6d4b25007db3",
   "operations": "Rendering saved values and method schematics only; no fitting, inference, resampling, new statistics, or control selection.",
   "software": {
     "matplotlib": "3.9.2",
@@ -96,8 +96,8 @@
       },
       "interpretation": "Saved checkpoint results only. Signed response gaps subtract saved scores; bands are fixed tolerances. Trajectory intervals retain their recorded pooled-score estimand and any unresolved outcomes.",
       "outputs": {
-        "png": "22a34bded98787b795e1d580d2f7f186e9dff981c7a8623faee55130b8d8ebe6",
-        "svg": "de15be2920108b6211deac13ac298ce83d9c9c1f905b62d4cea69c05808a2144"
+        "png": "3660fb86355376683fbd089ed2d043a0eb5497402fe79cea383d119e90ed5e21",
+        "svg": "ba44bfe496f724065e454ce925cd9f522c74d544a7811e3c26f5defdd6ec2a2a"
       }
     },
     "06_weight_attenuation_retained": {

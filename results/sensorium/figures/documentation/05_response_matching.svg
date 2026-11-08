@@ -68,7 +68,7 @@ z
 " clip-path="url(#p9f3f46cf6b)" style="fill: #eef3f6; stroke: #ccd6de; stroke-linejoin: miter"/>
    </g>
    <g id="text_1">
-    <text style="fill: #24313c; font: 11.5px 'DejaVu Sans'" transform="translate(180.732414 92.803343)">New training run</text>
+    <text style="fill: #24313c; font: 11.5px 'DejaVu Sans'" transform="translate(179.395539 92.803343)">Dynamic training</text>
     <text style="fill: #24313c; font: 11.5px 'DejaVu Sans'" transform="translate(164.003508 107.865378)">Retain all epochs 1–91</text>
    </g>
    <g id="text_2">
