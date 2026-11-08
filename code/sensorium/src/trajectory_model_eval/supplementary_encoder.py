@@ -284,10 +284,12 @@ def run_predictions(args):
     source_paths = ["analysis_protocol.json", "data/split_manifest.json", "data/preprocessing.json",
         "encoders/static/best.pt", "encoders/dynamic/best.pt", "gpfa/frozen_gpfa.pkl", "gpfa/frozen_gpfa_arrays.npz",
         "frozen/frozen_analysis.json", "frozen/frozen_control.npz", "evaluation/summary.json"]
+    if "control_sha256" not in lock:
+        source_paths.remove("frozen/frozen_control.npz")
     sources = {name: file_sha256(root / name) for name in source_paths}
     identity = {"supplementary_config_sha256": canonical_digest(supplemental),
         "primary_freeze_sha256": lock["freeze_sha256"], "primary_sources": sources,
-        "prediction_implementation_sha256": file_sha256(__file__), "primary_response_matching_sigma": lock["response_matching"]["sigma"]}
+        "prediction_implementation_sha256": file_sha256(__file__), "primary_source_control_digest": lock["control_digest"]}
     out.mkdir(parents=True, exist_ok=True)
     if (out / "fixed_config.json").exists():
         if read_json(out / "fixed_config.json") != supplemental:
@@ -422,7 +424,7 @@ def run_predictions(args):
     write_json(out / "weight_changes.json", weights)
     write_json(out / "temporal_support.json", {str(r): temporal_support(r, supplemental["temporal"]["kernel_sizes"]) for r in temporal})
     write_json(out / "prediction_status.json", {"status": "complete", "test_rows": test_rows,
-        "main_artifacts_unchanged": True, "main_response_matching_sigma_unchanged": True,
+        "main_artifacts_unchanged": True, "main_source_control_unchanged": True,
         "primary_sources": sources, "spatial_selection_sha256": freeze_sha})
     print(json.dumps({"encoder_supplementary_predictions": "complete"}), flush=True)
 
@@ -587,7 +589,7 @@ def run_scores(args):
     write_manifest(public, {"status": "complete", "config_sha256": canonical_digest(supplemental),
         "primary_sources": identity["primary_sources"], "supplementary_selection_sha256": selection["selection_sha256"],
         "implementation_sha256": file_sha256(__file__), "baseline_test_max_absolute_error": baseline_error,
-        "main_artifacts_unchanged": True, "main_response_matching_sigma": identity["primary_response_matching_sigma"],
+        "main_artifacts_unchanged": True, "primary_source_control_digest": context.lock["control_digest"],
         "test_conditions": unique.tolist(), "individual_curve_support": supports,
         "prediction_implementation_sha256": identity["prediction_implementation_sha256"],
         "prediction_source_snapshot": "diagnostics/encoder/source_snapshots/prediction_implementation.py",

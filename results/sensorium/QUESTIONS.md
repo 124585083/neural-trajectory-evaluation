@@ -86,13 +86,11 @@ See [model comparison results](03_model_comparison/RESULTS.md).
 
 ### 9. What does the response-matching control add?
 
-![Validation-selected scalar response matching and trajectory contrasts](figures/documentation/05_response_matching.png)
+Validation selected **Dynamic epoch 63** from all 91 checkpoints completed before the new training run’s native early stop. Its predictions are compared directly with the frozen Static model, using the same neurons, test trials and neural GPFA. The mean per-neuron response-r gaps are **0.000068 on validation** and **0.000484 on test**, both below the fixed 0.005 tolerance; all 512 neuron correlations remain defined.
 
-*The ±0.005 band marks the fixed matching tolerance; statistical equivalence was not tested. Trajectory intervals use fixed calibration and one trial-keyed noise realisation; speed remains unresolved.*
+At this response-score match, trajectory position correlation is **0.737842 versus 0.416545**, and local-direction cosine is **0.441458 versus 0.259418**. Both primary paired intervals favour the selected Dynamic checkpoint. Position agreement improves in all six movies; direction improves in five, with `movie_00005` retained as an exception. Speed remains unresolved.
 
-Training predictions determine a per-neuron noise scale; validation selects additive-noise amplitude **σ ≈ 0.869749**. Test applies the same noise rule and clipping without retuning. The scalar response-r gap stays within tolerance, yet both primary trajectory contrasts remain positive.
-
-The control shows that similar **mean per-neuron correlation** can coexist with different trajectory scores. It matches that scalar alone: neuron-level accuracy, NMSE, time-aware RSA/CKA and error structure can still differ. The comparison tests a fixed output perturbation; a comparison of independently retrained accuracy-matched models would address a different question. Noise may affect trial-level correlation more than repeat-averaged, smoothed trajectories. Quantifying that contribution would require controls that separately examine averaging and smoothing.
+The trajectory measures describe differences in latent-path geometry within the same response data. Other summaries remain separate outcomes: NMSE is nearly equal, condition/time CKA favours Static, and temporal-difference CKA and time-state RSA favour the selected Dynamic checkpoint. Only mean response correlation determined the matching choice.
 
 See [response-matching setup](05_response_matching/SETUP.md) and [results](05_response_matching/RESULTS.md).
 

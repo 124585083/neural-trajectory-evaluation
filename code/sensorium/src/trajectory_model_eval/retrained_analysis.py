@@ -16,7 +16,7 @@ import pandas as pd
 
 from .traditional import column_correlation
 from .unified_analysis import (FrozenAnalysis, _digest, _imports, _input_identity,
-    _json, _mean, _noise, score_frozen)
+    _json, _mean, score_frozen, score_checkpoint_control)
 from .unified_contract import canonical_digest, file_sha256, manifest_digest
 
 PROTOCOL = "retrained_v1"
@@ -268,7 +268,11 @@ def _check_checkpoints(checkpoints: dict, manifest: dict, preprocessing_sha256: 
 
 def freeze_analysis(bundle: dict, manifest: dict, config: dict, preprocessing_sha256: str,
                     gpfa_dir: Path, checkpoint_identities: dict, output_dir: Path) -> dict:
-    """Select the inherited output perturbation on validation before loading test."""
+    """Freeze main models and neural coordinates before main test inference.
+
+    Response matching has its own checkpoint selection sidecar, created by
+    run_checkpoint_matching.py before the selected model exports test predictions.
+    """
     validate_development_bundle(bundle, manifest, config, predictions=True)
     _check_checkpoints(checkpoint_identities, manifest, preprocessing_sha256)
     gpfa = load_gpfa(gpfa_dir, manifest, config, preprocessing_sha256)
@@ -280,52 +284,15 @@ def freeze_analysis(bundle: dict, manifest: dict, config: dict, preprocessing_sh
     if not np.array_equal(bundle["encoder_precision"], gpfa.arrays["encoder_precision"]):
         raise ValueError("GPFA and encoder response scales differ")
     out = _new_output(output_dir)
-    cfg = config["response_matching"]
-    if float(cfg["tolerance"]) != .005 or float(cfg.get("clip_minimum", 1e-5)) != 1e-5:
-        raise ValueError("The inherited response-matching tolerance and clipping floor are fixed")
     roles = np.asarray(bundle["roles"]).astype(str)
     train, validation = np.flatnonzero(roles == "train"), np.flatnonzero(roles == "validation")
-    noise_scale = np.asarray(bundle["dynamic"])[train].std(axis=(0, 1), keepdims=True)
-    noise = _noise(bundle, validation, int(cfg["noise_seed"]))
-    neural = np.asarray(bundle["neural"])[validation]
-    flat = neural.reshape(-1, neural.shape[-1])
-    static_r = column_correlation(flat, np.asarray(bundle["static"])[validation].reshape(flat.shape))
-    candidates = list(map(float, cfg.get("sigma_grid", [0., *np.geomspace(.01, 10., 100)])))
-    if not candidates or not np.isfinite(candidates).all() or min(candidates) < 0:
-        raise ValueError("The fixed perturbation grid must be nonnegative and finite")
-    rows = []
-    for sigma in candidates:
-        prediction = np.clip(np.asarray(bundle["dynamic"])[validation] + sigma * noise_scale * noise, 1e-5, None)
-        candidate_r = column_correlation(flat, prediction.reshape(flat.shape))
-        common = np.isfinite(static_r) & np.isfinite(candidate_r)
-        a, b = _mean(static_r[common]), _mean(candidate_r[common])
-        rows.append({"sigma": sigma, "validation_static_response_r": a,
-            "validation_perturbed_dynamic_response_r": b, "absolute_gap": abs(a-b),
-            "n_shared_neurons": int(common.sum()), "n_total_neurons": neural.shape[-1]})
-    table = pd.DataFrame(rows)
-    valid = np.isfinite(table.absolute_gap)
-    selected = table.loc[table.loc[valid, "absolute_gap"].idxmin()] if valid.any() else None
-    sigma = float(selected.sigma) if selected is not None else 0.
-    table["selected"] = False
-    if selected is not None:
-        table.loc[selected.name, "selected"] = True
-    table.to_csv(out / "response_matching_selection.csv", index=False)
-    matching = {"sigma": sigma, "selection_role": "validation", "noise_scale_role": "train_predictions",
-        "validation_absolute_gap": float(selected.absolute_gap) if selected is not None else None,
-        "validation_matching_achieved": bool(selected is not None and selected.absolute_gap <= .005),
-        "validation_shared_neurons": int(selected.n_shared_neurons) if selected is not None else 0,
-        "total_gpfa_neurons_unchanged": neural.shape[-1], "tolerance": .005,
-        "status": "selected" if selected is not None else "undefined_validation_response_r",
-        "noise_seed": int(cfg["noise_seed"]), "clip_lower": 1e-5,
-        "kind": "dynamic_output_perturbation_not_a_separately_trained_model",
-        "summary": "mean per-neuron r across trial and time; repeated movies not required"}
-    np.savez_compressed(out / "frozen_control.npz", noise_scale=noise_scale)
+    matching = {"kind": "checkpoint_control_pending", "selection_role": "validation",
+                "validation_matching_achieved": False, "tolerance": .005}
     identity = {"protocol": PROTOCOL, "status": "all_choices_frozen", "test_loaded": False,
         "split_sha256": manifest["split_sha256"], "config_sha256": canonical_digest(config),
         "preprocessing_sha256": preprocessing_sha256, "gpfa_identity": gpfa.identity,
         "checkpoint_identities": checkpoint_identities, "response_matching": matching,
-        "control_sha256": file_sha256(out / "frozen_control.npz"),
-        "control_digest": _digest(sigma, noise_scale, matching),
+        "control_digest": _digest(matching),
         "development_identity": _row_identity(bundle),
         "development_fit_digest": _digest(bundle["neural"], bundle["static"], bundle["dynamic"]),
         "fit_digest": _digest(gpfa.identity["fit_digest"], bundle["dynamic"][train],
@@ -351,13 +318,18 @@ def require_frozen(manifest: dict, config: dict, freeze_dir: Path) -> dict:
             or identity["split_sha256"] != manifest["split_sha256"]):
         raise ValueError("The final analysis lock belongs to a different run")
     _check_checkpoints(identity["checkpoint_identities"], manifest, identity["preprocessing_sha256"])
-    if file_sha256(path / "frozen_control.npz") != identity["control_sha256"]:
-        raise ValueError("Frozen output perturbation changed")
+    # Old source locks are immutable provenance. Verify their archived payload,
+    # but never execute that superseded control in the current scoring path.
+    if "control_sha256" in identity:
+        if file_sha256(path / "frozen_control.npz") != identity["control_sha256"]:
+            raise ValueError("Archived source-control payload changed")
+    elif identity["control_digest"] != _digest(identity["response_matching"]):
+        raise ValueError("Frozen main-analysis settings changed")
     return identity
 
 
 def evaluate_pilot(bundle: dict, manifest: dict, config: dict, gpfa_dir: Path,
-                   freeze_dir: Path, output_dir: Path) -> dict:
+                   freeze_dir: Path, output_dir: Path, *, matching_root: Path | None = None) -> dict:
     """Reuse existing metric/null mathematics on newly trained, frozen artifacts."""
     identity = require_frozen(manifest, config, freeze_dir)
     _validate_bundle(bundle, manifest, (*DEVELOPMENT, "test"), predictions=True)
@@ -367,9 +339,14 @@ def evaluate_pilot(bundle: dict, manifest: dict, config: dict, gpfa_dir: Path,
     if gpfa.identity != identity["gpfa_identity"]:
         raise ValueError("The GPFA differs from the final analysis lock")
     arrays, model = gpfa.arrays, gpfa.model
-    with np.load(Path(freeze_dir) / "frozen_control.npz", allow_pickle=False) as source:
-        noise_scale = source["noise_scale"]
-    matching = identity["response_matching"]
+    matching = {"kind": "checkpoint_control_pending", "selection_role": "validation",
+                "validation_matching_achieved": False, "tolerance": .005}
+    if matching_root is not None:
+        from .checkpoint_matching import load_selection
+        matching = load_selection(matching_root, source_identity=matching_source_identity(config, identity),
+                                  verify_checkpoint=True)
+        if "matched_dynamic" not in bundle:
+            raise ValueError("Attach the verified selected-checkpoint predictions before scoring")
     transform_digest = _digest(arrays["precision"], arrays["encoder_precision"], arrays["observations"],
         arrays["query_times"], arrays["neuron_ids"], arrays["frame_indices"], model.times_seconds, model.jitter, model.min_noise)
     cache_identity = {"schema_version": "sensorium_part3_retrained_cache_v1", "protocol": PROTOCOL,
@@ -379,8 +356,8 @@ def evaluate_pilot(bundle: dict, manifest: dict, config: dict, gpfa_dir: Path,
         "freeze_sha256": identity["freeze_sha256"]}
     frozen = FrozenAnalysis(model, arrays["precision"], arrays["encoder_precision"], arrays["observations"],
         arrays["query_times"], arrays["neuron_ids"], arrays["frame_indices"], model.parameter_digest(),
-        identity["fit_digest"], matching["sigma"], noise_scale, matching, _digest(config),
-        _input_identity(bundle), transform_digest, identity["control_digest"], cache_identity)
+        identity["fit_digest"], matching, _digest(config),
+        _input_identity(bundle), transform_digest, _digest(matching), cache_identity)
     out = _new_output(output_dir)
     result = score_frozen(bundle, frozen, config, out)
     result.update(protocol=PROTOCOL, status="held_out_evaluation_after_retraining_complete",
@@ -389,6 +366,72 @@ def evaluate_pilot(bundle: dict, manifest: dict, config: dict, gpfa_dir: Path,
     _json(out / "summary.json", result)
     _json(out / "generated_manifest.json", {"protocol": PROTOCOL, "status": result["status"],
         "cache_identity": cache_identity, "files": {p.name: file_sha256(p) for p in out.iterdir() if p.is_file()}})
+    return result
+
+
+def matching_source_identity(config: dict, lock: dict) -> dict:
+    """Name unchanged source artifacts without rewriting their original hashes."""
+    return {"source_config_sha256": canonical_digest(config),
+        "source_freeze_sha256": lock["freeze_sha256"], "split_sha256": lock["split_sha256"],
+        "preprocessing_sha256": lock["preprocessing_sha256"],
+        "gpfa_identity": lock["gpfa_identity"], "checkpoint_identities": lock["checkpoint_identities"]}
+
+
+def evaluate_checkpoint_control(source_root: Path, matching_root: Path, output_dir: Path) -> dict:
+    """Evaluate a new checkpoint control using the immutable original main run.
+
+    Only this control is recomputed; the original best Static/Dynamic comparison,
+    reliability estimates and GPFA fit are not replaced by another training run.
+    """
+    from .checkpoint_matching import load_selection
+    from .retrained_predictions import (bundle_identity, load_bundle, select_neurons, verify_test_lock,
+                                        load_matched_bundle, attach_matched_prediction)
+    source_root, matching_root = Path(source_root), Path(matching_root)
+    read = lambda path: json.loads(Path(path).read_text(encoding="utf-8"))
+    config = read(source_root / "analysis_protocol.json")
+    manifest = read(source_root / "data/split_manifest.json")
+    prep = read(source_root / "data/preprocessing.json")
+    lock = verify_test_lock(config, manifest, prep, source_root / "encoders", source_root / "frozen", source_root / "gpfa")
+    selection = load_selection(matching_root, source_identity=matching_source_identity(config, lock), verify_checkpoint=True)
+    pilot = manifest["session"]
+    expected = bundle_identity(config, manifest, prep, lock["checkpoint_identities"], pilot, ("test",),
+        manifest["session_neurons"][pilot]["all_indices"], frozen_analysis=lock)
+    test = select_neurons(load_bundle(source_root / "test" / pilot / "aligned_predictions.npz", expected),
+                          manifest["neurons"]["indices"])
+    matched_path = matching_root / "predictions/test" / pilot / "matched_predictions.npz"
+    matched = load_matched_bundle(matched_path, selection, reference_bundle=test)
+    prediction_record = read(matched_path.with_suffix(".json"))
+    prediction_metadata_sha256 = file_sha256(matched_path.with_suffix(".json"))
+    bundle = attach_matched_prediction(test, matched)
+    gpfa = load_gpfa(source_root / "gpfa", manifest, config, prep["preprocessing_sha256"])
+    if gpfa.identity != lock["gpfa_identity"]:
+        raise ValueError("The selected control must use the original frozen GPFA")
+    arrays, model = gpfa.arrays, gpfa.model
+    transform = _digest(arrays["precision"], arrays["encoder_precision"], arrays["observations"],
+        arrays["query_times"], arrays["neuron_ids"], arrays["frame_indices"], model.times_seconds, model.jitter, model.min_noise)
+    frozen = FrozenAnalysis(model, arrays["precision"], arrays["encoder_precision"], arrays["observations"],
+        arrays["query_times"], arrays["neuron_ids"], arrays["frame_indices"], model.parameter_digest(),
+        lock["fit_digest"], selection, _digest(config), _input_identity(bundle), transform, _digest(selection),
+        {"source_freeze_sha256": lock["freeze_sha256"], "selection_sha256": selection["selection_sha256"]})
+    out = _new_output(output_dir)
+    result = score_checkpoint_control(bundle, frozen, config, out)
+    if (file_sha256(matched_path) != prediction_record["payload_sha256"]
+            or file_sha256(matched_path.with_suffix(".json")) != prediction_metadata_sha256
+            or load_selection(matching_root, source_identity=matching_source_identity(config, lock),
+                              verify_checkpoint=True) != selection
+            or verify_test_lock(config, manifest, prep, source_root / "encoders", source_root / "frozen",
+                                source_root / "gpfa") != lock):
+        raise ValueError("Checkpoint control inputs changed during evaluation")
+    result.update(status="held_out_checkpoint_control_complete", source_identity=selection["source_identity"],
+                  prediction_cache={"payload_sha256": prediction_record["payload_sha256"],
+                                    "metadata_sha256": prediction_metadata_sha256,
+                                    "identity_sha256": prediction_record["identity_sha256"]},
+                  n_test_trials=len(test["roles"]), n_test_conditions=len(np.unique(test["conditions"])))
+    _json(out / "summary.json", result)
+    _json(out / "generated_manifest.json", {"schema_version": "sensorium_checkpoint_matching_evaluation_v1",
+        "status": result["status"], "source_identity": selection["source_identity"],
+        "selection_sha256": selection["selection_sha256"],
+        "files": {p.name: file_sha256(p) for p in out.iterdir() if p.is_file()}})
     return result
 
 

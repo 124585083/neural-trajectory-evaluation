@@ -47,9 +47,8 @@ def frozen_from_gpfa(gpfa, lock, config):
                         model.times_seconds, model.jitter, model.min_noise)
     return FrozenAnalysis(model, a["precision"], a["encoder_precision"], a["observations"],
         a["query_times"], a["neuron_ids"], a["frame_indices"], model.parameter_digest(),
-        lock["fit_digest"], lock["response_matching"]["sigma"], np.empty(0),
-        lock["response_matching"], _digest(config), "supplementary_read_only",
-        transform, lock["control_digest"], {"freeze_sha256": lock["freeze_sha256"]})
+        lock["fit_digest"], {}, _digest(config), "supplementary_read_only",
+        transform, _digest({}), {"freeze_sha256": lock["freeze_sha256"]})
 
 
 def load_context(run_root, include_development=False):
@@ -85,6 +84,8 @@ def load_context(run_root, include_development=False):
              "gpfa/frozen_gpfa.pkl", "gpfa/frozen_gpfa_arrays.npz", "frozen/frozen_analysis.json",
              "frozen/frozen_control.npz", "encoders/static/best.pt", "encoders/dynamic/best.pt",
              "evaluation/summary.json", "evaluation/pilot/paired_bootstrap.csv"]
+    if "control_sha256" not in lock:
+        files.remove("frozen/frozen_control.npz")
     sources = {name: file_sha256(root / name) for name in files}
     sources[str(test_path.relative_to(root)).replace("\\", "/")] = file_sha256(test_path)
     return SupplementContext(root, config, manifest, preprocessing, lock, gpfa, frozen, test,

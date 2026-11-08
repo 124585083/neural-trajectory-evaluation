@@ -1,0 +1,681 @@
+{
+  "schema_version": "sensorium_checkpoint_matching_source_audit_v1",
+  "audit_date": "2026-11-08",
+  "repository": "https://github.com/124585083/neural-trajectory-evaluation",
+  "source_commit": "f738eec69e30a58d5310814b220a9b6156b4fa60",
+  "source_ref": "origin/main at audit start",
+  "scope": "Git-tracked published files only; line numbers refer to the source commit before this change.",
+  "tracked_files_examined": 653,
+  "inventory_file_count": 70,
+  "category_counts": {
+    "active_documentation": 10,
+    "active_figure_or_generator": 4,
+    "active_protocol_or_diagnostic_binding": 5,
+    "active_runtime_or_contract": 12,
+    "current_noise_control_evidence_to_supersede": 9,
+    "diagnostic_provenance_binding": 4,
+    "historical_scientific_artifact_or_legacy_generator": 12,
+    "model_inventory_and_replay_provenance": 4,
+    "test_contract": 6,
+    "unrelated_observation_noise_or_numeric_substring": 4
+  },
+  "notes": [
+    "The active response-matching control is replaced by validation-selected Dynamic checkpoints; old numerical results are not renamed or copied into the new control.",
+    "Historical completed scientific artifacts and dated verification records retain their original provenance. Current documentation points to the new method.",
+    "GPFA observation covariance, neural-repeat variability, structured temporal nulls and separate temporal/spatial weight-matching controls are not the additive-output-noise matching method.",
+    "The immutable retrained_v1 source protocol, original Static/Dynamic checkpoints and neural GPFA remain the source identities. New matching has a separate configuration and selection identity.",
+    "No PDF, DOCX, TEX or HTML manuscript was tracked in the audited repository."
+  ],
+  "files": [
+    {
+      "path": "README.md",
+      "category": "active_documentation",
+      "source_line_numbers": [
+        25
+      ]
+    },
+    {
+      "path": "code/mental_pong/integration/revision_20261003/scientific_preservation.json",
+      "category": "historical_scientific_artifact_or_legacy_generator",
+      "source_line_numbers": []
+    },
+    {
+      "path": "code/mental_pong/integration/sensorium_editorial_verification.json",
+      "category": "historical_scientific_artifact_or_legacy_generator",
+      "source_line_numbers": []
+    },
+    {
+      "path": "code/sensorium/README.md",
+      "category": "active_runtime_or_contract",
+      "source_line_numbers": [
+        23,
+        62,
+        97,
+        129
+      ]
+    },
+    {
+      "path": "code/sensorium/configs/retrained_v1.json",
+      "category": "active_protocol_or_diagnostic_binding",
+      "source_line_numbers": [
+        66,
+        67,
+        68,
+        70,
+        72
+      ]
+    },
+    {
+      "path": "code/sensorium/configs/supplementary_encoder_v1.json",
+      "category": "active_protocol_or_diagnostic_binding",
+      "source_line_numbers": [
+        45
+      ]
+    },
+    {
+      "path": "code/sensorium/configs/supplementary_gpfa_v1.json",
+      "category": "active_protocol_or_diagnostic_binding",
+      "source_line_numbers": [
+        27,
+        49
+      ]
+    },
+    {
+      "path": "code/sensorium/configs/supplementary_reversal_v1.json",
+      "category": "active_protocol_or_diagnostic_binding",
+      "source_line_numbers": []
+    },
+    {
+      "path": "code/sensorium/configs/unified_v1.json",
+      "category": "active_protocol_or_diagnostic_binding",
+      "source_line_numbers": [
+        45,
+        46,
+        47,
+        48,
+        50
+      ]
+    },
+    {
+      "path": "code/sensorium/make_documentation_figures.py",
+      "category": "active_figure_or_generator",
+      "source_line_numbers": [
+        309,
+        310,
+        311,
+        312,
+        317,
+        318,
+        325,
+        339,
+        342,
+        346,
+        347,
+        348,
+        349
+      ]
+    },
+    {
+      "path": "code/sensorium/scripts/make_core_figures.js",
+      "category": "historical_scientific_artifact_or_legacy_generator",
+      "source_line_numbers": [
+        110
+      ]
+    },
+    {
+      "path": "code/sensorium/src/sensorium_runtime/bundle.py",
+      "category": "active_runtime_or_contract",
+      "source_line_numbers": [
+        23
+      ]
+    },
+    {
+      "path": "code/sensorium/src/sensorium_runtime/replay.py",
+      "category": "active_runtime_or_contract",
+      "source_line_numbers": []
+    },
+    {
+      "path": "code/sensorium/src/trajectory_model_eval/cli.py",
+      "category": "active_runtime_or_contract",
+      "source_line_numbers": []
+    },
+    {
+      "path": "code/sensorium/src/trajectory_model_eval/question_analysis.py",
+      "category": "historical_scientific_artifact_or_legacy_generator",
+      "source_line_numbers": [
+        257,
+        268,
+        269,
+        278,
+        280,
+        293,
+        315,
+        319,
+        326,
+        613,
+        616,
+        639
+      ]
+    },
+    {
+      "path": "code/sensorium/src/trajectory_model_eval/retrained_analysis.py",
+      "category": "active_runtime_or_contract",
+      "source_line_numbers": [
+        271,
+        283,
+        285,
+        288,
+        289,
+        293,
+        298,
+        303,
+        312,
+        313,
+        319,
+        320,
+        322,
+        326,
+        328,
+        355,
+        371,
+        372,
+        382
+      ]
+    },
+    {
+      "path": "code/sensorium/src/trajectory_model_eval/retrained_predictions.py",
+      "category": "active_runtime_or_contract",
+      "source_line_numbers": []
+    },
+    {
+      "path": "code/sensorium/src/trajectory_model_eval/retrained_reporting.py",
+      "category": "active_runtime_or_contract",
+      "source_line_numbers": [
+        136,
+        138,
+        151,
+        152,
+        158
+      ]
+    },
+    {
+      "path": "code/sensorium/src/trajectory_model_eval/supplementary_common.py",
+      "category": "active_runtime_or_contract",
+      "source_line_numbers": [
+        50,
+        51
+      ]
+    },
+    {
+      "path": "code/sensorium/src/trajectory_model_eval/supplementary_encoder.py",
+      "category": "active_runtime_or_contract",
+      "source_line_numbers": [
+        290,
+        425,
+        590
+      ]
+    },
+    {
+      "path": "code/sensorium/src/trajectory_model_eval/unified_analysis.py",
+      "category": "active_runtime_or_contract",
+      "source_line_numbers": [
+        4,
+        172,
+        248,
+        251,
+        254,
+        255,
+        256,
+        260,
+        262,
+        265,
+        271,
+        280,
+        281,
+        287,
+        288,
+        297,
+        300,
+        304,
+        318,
+        478,
+        479,
+        578,
+        579,
+        580,
+        581,
+        584,
+        585,
+        589,
+        597,
+        603,
+        607,
+        616,
+        631
+      ]
+    },
+    {
+      "path": "code/sensorium/src/trajectory_model_eval/unified_fixture.py",
+      "category": "active_runtime_or_contract",
+      "source_line_numbers": [
+        27
+      ]
+    },
+    {
+      "path": "code/sensorium/src/trajectory_model_eval/unified_reporting.py",
+      "category": "active_runtime_or_contract",
+      "source_line_numbers": []
+    },
+    {
+      "path": "code/sensorium/tests/test_cached_replay.py",
+      "category": "test_contract",
+      "source_line_numbers": []
+    },
+    {
+      "path": "code/sensorium/tests/test_frozen_bundle.py",
+      "category": "test_contract",
+      "source_line_numbers": []
+    },
+    {
+      "path": "code/sensorium/tests/test_project_layout.py",
+      "category": "test_contract",
+      "source_line_numbers": []
+    },
+    {
+      "path": "code/sensorium/tests/test_question_analysis.py",
+      "category": "historical_scientific_artifact_or_legacy_generator",
+      "source_line_numbers": []
+    },
+    {
+      "path": "code/sensorium/tests/test_retrained_analysis.py",
+      "category": "test_contract",
+      "source_line_numbers": [
+        87
+      ]
+    },
+    {
+      "path": "code/sensorium/tests/test_retrained_reporting.py",
+      "category": "test_contract",
+      "source_line_numbers": []
+    },
+    {
+      "path": "code/sensorium/tests/test_unified_analysis.py",
+      "category": "test_contract",
+      "source_line_numbers": [
+        39,
+        185,
+        195
+      ]
+    },
+    {
+      "path": "models/README.md",
+      "category": "model_inventory_and_replay_provenance",
+      "source_line_numbers": []
+    },
+    {
+      "path": "models/acquisition.json",
+      "category": "model_inventory_and_replay_provenance",
+      "source_line_numbers": []
+    },
+    {
+      "path": "models/manifest.json",
+      "category": "model_inventory_and_replay_provenance",
+      "source_line_numbers": [
+        138,
+        695,
+        698,
+        699,
+        716
+      ]
+    },
+    {
+      "path": "models/verification.json",
+      "category": "model_inventory_and_replay_provenance",
+      "source_line_numbers": []
+    },
+    {
+      "path": "results/sensorium/02_trajectory_measurement/SETUP.md",
+      "category": "unrelated_observation_noise_or_numeric_substring",
+      "source_line_numbers": [
+        92
+      ]
+    },
+    {
+      "path": "results/sensorium/03_model_comparison/RESULTS.md",
+      "category": "active_documentation",
+      "source_line_numbers": [
+        126,
+        194,
+        204
+      ]
+    },
+    {
+      "path": "results/sensorium/03_model_comparison/SETUP.md",
+      "category": "active_documentation",
+      "source_line_numbers": [
+        11,
+        263
+      ]
+    },
+    {
+      "path": "results/sensorium/04_temporal_metric_tests/RESULTS.md",
+      "category": "active_documentation",
+      "source_line_numbers": [
+        135
+      ]
+    },
+    {
+      "path": "results/sensorium/04_temporal_metric_tests/SETUP.md",
+      "category": "active_documentation",
+      "source_line_numbers": [
+        9
+      ]
+    },
+    {
+      "path": "results/sensorium/05_response_matching/RESULTS.md",
+      "category": "active_documentation",
+      "source_line_numbers": [
+        3,
+        11,
+        15,
+        17,
+        21,
+        26,
+        32,
+        38,
+        40,
+        42,
+        43,
+        50,
+        60,
+        64,
+        73,
+        89,
+        91,
+        103,
+        104,
+        105,
+        106,
+        108
+      ]
+    },
+    {
+      "path": "results/sensorium/05_response_matching/SETUP.md",
+      "category": "active_documentation",
+      "source_line_numbers": [
+        5,
+        19,
+        50,
+        52,
+        67,
+        69,
+        73,
+        127,
+        141,
+        149,
+        184,
+        186,
+        214,
+        237,
+        251,
+        252,
+        253,
+        254,
+        262
+      ]
+    },
+    {
+      "path": "results/sensorium/06_temporal_weight_controls/RESULTS.md",
+      "category": "active_documentation",
+      "source_line_numbers": [
+        9,
+        193,
+        211
+      ]
+    },
+    {
+      "path": "results/sensorium/06_temporal_weight_controls/SETUP.md",
+      "category": "active_documentation",
+      "source_line_numbers": [
+        11,
+        135,
+        148,
+        174
+      ]
+    },
+    {
+      "path": "results/sensorium/QUESTIONS.md",
+      "category": "active_documentation",
+      "source_line_numbers": [
+        87,
+        89,
+        93,
+        95,
+        97,
+        117,
+        129
+      ]
+    },
+    {
+      "path": "results/sensorium/evidence/02_gpfa_reliability/saturation/split_count_nulls_500.csv",
+      "category": "unrelated_observation_noise_or_numeric_substring",
+      "source_line_numbers": [
+        4102,
+        20215
+      ]
+    },
+    {
+      "path": "results/sensorium/evidence/04_model_comparison/q1_q6_answers.json",
+      "category": "historical_scientific_artifact_or_legacy_generator",
+      "source_line_numbers": [
+        158,
+        162,
+        410,
+        576,
+        677
+      ]
+    },
+    {
+      "path": "results/sensorium/evidence/04_model_comparison/q4_response_score_matched_output_gpfa_bootstrap.csv",
+      "category": "historical_scientific_artifact_or_legacy_generator",
+      "source_line_numbers": []
+    },
+    {
+      "path": "results/sensorium/evidence/04_model_comparison/q6_candidate_metrics.csv",
+      "category": "historical_scientific_artifact_or_legacy_generator",
+      "source_line_numbers": []
+    },
+    {
+      "path": "results/sensorium/evidence/04_model_comparison/q6_leave_family_out_errors.csv",
+      "category": "historical_scientific_artifact_or_legacy_generator",
+      "source_line_numbers": []
+    },
+    {
+      "path": "results/sensorium/evidence/04_model_comparison/retrained_v1/configuration.json",
+      "category": "current_noise_control_evidence_to_supersede",
+      "source_line_numbers": [
+        66,
+        67,
+        68,
+        70,
+        72
+      ]
+    },
+    {
+      "path": "results/sensorium/evidence/04_model_comparison/retrained_v1/evaluation_summary.json",
+      "category": "current_noise_control_evidence_to_supersede",
+      "source_line_numbers": [
+        95,
+        97,
+        98,
+        99,
+        101,
+        109
+      ]
+    },
+    {
+      "path": "results/sensorium/evidence/04_model_comparison/retrained_v1/frozen_analysis.json",
+      "category": "current_noise_control_evidence_to_supersede",
+      "source_line_numbers": [
+        181,
+        183,
+        184,
+        185,
+        187
+      ]
+    },
+    {
+      "path": "results/sensorium/evidence/04_model_comparison/retrained_v1/generated_manifest.json",
+      "category": "current_noise_control_evidence_to_supersede",
+      "source_line_numbers": [
+        27,
+        28,
+        34
+      ]
+    },
+    {
+      "path": "results/sensorium/evidence/04_model_comparison/retrained_v1/pilot/model_nulls.csv",
+      "category": "unrelated_observation_noise_or_numeric_substring",
+      "source_line_numbers": [
+        3182
+      ]
+    },
+    {
+      "path": "results/sensorium/evidence/04_model_comparison/retrained_v1/pilot/response_matching_bootstrap.csv",
+      "category": "current_noise_control_evidence_to_supersede",
+      "source_line_numbers": [
+        1
+      ]
+    },
+    {
+      "path": "results/sensorium/evidence/04_model_comparison/retrained_v1/pilot/response_matching_metrics.csv",
+      "category": "current_noise_control_evidence_to_supersede",
+      "source_line_numbers": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ]
+    },
+    {
+      "path": "results/sensorium/evidence/04_model_comparison/retrained_v1/response_matching_selection.csv",
+      "category": "current_noise_control_evidence_to_supersede",
+      "source_line_numbers": [
+        1,
+        67
+      ]
+    },
+    {
+      "path": "results/sensorium/evidence/04_model_comparison/retrained_v1/status.json",
+      "category": "current_noise_control_evidence_to_supersede",
+      "source_line_numbers": [
+        71,
+        73,
+        74,
+        75,
+        77,
+        132,
+        134,
+        135,
+        136,
+        138,
+        146
+      ]
+    },
+    {
+      "path": "results/sensorium/evidence/04_model_comparison/retrained_v1/verification.json",
+      "category": "current_noise_control_evidence_to_supersede",
+      "source_line_numbers": [
+        934,
+        969
+      ]
+    },
+    {
+      "path": "results/sensorium/evidence/04_model_comparison/retrained_v1_diagnostics/encoder/manifest.json",
+      "category": "diagnostic_provenance_binding",
+      "source_line_numbers": [
+        134
+      ]
+    },
+    {
+      "path": "results/sensorium/evidence/04_model_comparison/retrained_v1_diagnostics/gpfa/manifest.json",
+      "category": "diagnostic_provenance_binding",
+      "source_line_numbers": []
+    },
+    {
+      "path": "results/sensorium/evidence/04_model_comparison/retrained_v1_diagnostics/gpfa/protocol.json",
+      "category": "diagnostic_provenance_binding",
+      "source_line_numbers": [
+        21,
+        48
+      ]
+    },
+    {
+      "path": "results/sensorium/evidence/04_model_comparison/retrained_v1_diagnostics/gpfa/train50/reliability_nulls.csv",
+      "category": "unrelated_observation_noise_or_numeric_substring",
+      "source_line_numbers": [
+        7019
+      ]
+    },
+    {
+      "path": "results/sensorium/evidence/04_model_comparison/retrained_v1_diagnostics/reversal/manifest.json",
+      "category": "diagnostic_provenance_binding",
+      "source_line_numbers": []
+    },
+    {
+      "path": "results/sensorium/evidence/historical_integration/study_evidence_index.csv",
+      "category": "historical_scientific_artifact_or_legacy_generator",
+      "source_line_numbers": [
+        9,
+        36
+      ]
+    },
+    {
+      "path": "results/sensorium/figures/documentation/05_response_matching.png",
+      "category": "active_figure_or_generator",
+      "source_line_numbers": []
+    },
+    {
+      "path": "results/sensorium/figures/documentation/05_response_matching.svg",
+      "category": "active_figure_or_generator",
+      "source_line_numbers": [
+        72,
+        76,
+        305,
+        633
+      ]
+    },
+    {
+      "path": "results/sensorium/figures/documentation/source_manifest.json",
+      "category": "active_figure_or_generator",
+      "source_line_numbers": [
+        28,
+        29,
+        30,
+        86,
+        88,
+        89,
+        90,
+        91
+      ]
+    },
+    {
+      "path": "results/sensorium/figures/historical/figure-1-experimental-workflow.png",
+      "category": "historical_scientific_artifact_or_legacy_generator",
+      "source_line_numbers": []
+    },
+    {
+      "path": "results/sensorium/figures/historical/figure-1-experimental-workflow.svg",
+      "category": "historical_scientific_artifact_or_legacy_generator",
+      "source_line_numbers": [
+        15
+      ]
+    }
+  ]
+}

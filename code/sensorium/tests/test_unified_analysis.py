@@ -36,7 +36,7 @@ def synthetic_fixture():
               "gpfa": {"latent_dim": 4, "effective_observation_step": 2,
                        "initial_lengthscales_seconds": [.125, .25], "selection_em_iterations": 2,
                        "final_em_iterations": 2, "tolerance": 1e-6, "lengthscale_bounds_seconds": [.1, 3.]},
-              "response_matching": {"tolerance": .005, "noise_seed": 123, "sigma_grid": [0., .1, .5, 1.]},
+              "response_matching": {"kind": "checkpoint_control_pending", "tolerance": .005},
               "reliability": {"splits": 2, "block_sizes_frames": [4]},
               "model_nulls": {"permutations": 2, "block_size_frames": 4},
               "traditional": {"paired_bootstrap_samples": 4, "temporal_rsa_stride": 2}}
@@ -82,7 +82,7 @@ def test_test_mutation_changes_scores_but_not_fit_or_selection(tmp_path):
     assert first.parameter_digest == second.parameter_digest
     assert first.fit_digest == second.fit_digest
     assert first.cache_identity["gpfa_sha256"] == second.cache_identity["gpfa_sha256"]
-    assert first.sigma == second.sigma
+    assert first.matching == second.matching
     np.testing.assert_array_equal(first.precision, second.precision)
     before = score_frozen(bundle, first, config, tmp_path / "scores_first")
     after = score_frozen(modified, first, config, tmp_path / "scores_changed")
@@ -179,20 +179,21 @@ def test_time_resolved_encoder_scale_does_not_change_gpfa_or_nulls(tmp_path):
         np.testing.assert_allclose(a.value, b.value, rtol=1e-10, atol=1e-10, equal_nan=True)
 
 
-def test_output_control_parameters_cannot_change_after_freeze(tmp_path):
+def test_checkpoint_control_settings_cannot_change_after_freeze(tmp_path):
     bundle, manifest, config = synthetic_fixture()
     frozen = fit_frozen(bundle, manifest, config, tmp_path / "fit")
-    frozen.noise_scale *= 2
-    with pytest.raises(AssertionError, match="perturbation settings changed"):
+    frozen.matching["tolerance"] *= 2
+    with pytest.raises(AssertionError, match="checkpoint selection changed"):
         score_frozen(bundle, frozen, config, tmp_path / "scores")
 
 
-def test_matching_uses_shared_neurons_without_changing_gpfa_neurons(tmp_path):
+def test_main_fit_never_synthesizes_a_response_matched_prediction(tmp_path):
     bundle, manifest, config = synthetic_fixture()
     bundle["static"][:, :, 0] = 5.
     bundle["dynamic"][:, :, 1] = 5.
     frozen = fit_frozen(bundle, manifest, config, tmp_path / "fit")
-    selection = pd.read_csv(tmp_path / "fit/response_matching_selection.csv")
-    assert (selection.n_shared_neurons == len(bundle["neuron_ids"]) - 2).all()
+    assert frozen.matching["kind"] == "checkpoint_control_pending"
+    assert not (tmp_path / "fit/response_matching_selection.csv").exists()
+    assert not (tmp_path / "fit/frozen_control.npz").exists()
     np.testing.assert_array_equal(frozen.neuron_ids, bundle["neuron_ids"])
     assert frozen.model.C.shape[0] == len(bundle["neuron_ids"])

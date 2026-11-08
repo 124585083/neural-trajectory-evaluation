@@ -1,0 +1,33 @@
+{
+  "schema_version": "sensorium_checkpoint_cohort_revision_v1",
+  "revision": 1,
+  "created_at_utc": "2026-11-07T18:05:57.673053+00:00",
+  "observed_completed_epoch": 2,
+  "observed_recovery_status": {
+    "status": "running",
+    "pid": 2008,
+    "run_id": "checkpoint_matching_v1_dynamic_seed42_replay",
+    "last_completed_epoch": 2,
+    "best_epoch": 2,
+    "best_validation_r": 0.01945868879556656,
+    "unix_time": 1794074684.6971707,
+    "resume_checkpoint": "last.pt"
+  },
+  "previous_cohort_rule": "fixed_complete_epochs_1_through_119",
+  "previous_matching_config_sha256": "eebf96afee516321342453133aa53c77b99d4a3bebbb7c1e883b1a90fb3eb40a",
+  "candidate_cohort_rule": "all_completed_epochs_through_min_119_or_native_early_stop",
+  "maximum_candidate_epoch": 119,
+  "native_early_stop_reason": "patience_cycles_exhausted",
+  "cohort_rule_detail": "Use every complete epoch from 1 through min(119, the unchanged training policy native early-stop epoch). A shorter cohort requires a completed native training summary and exact checkpoint/identity evidence; interruptions and pauses do not qualify.",
+  "unchanged_training": {
+    "max_epochs": 200,
+    "patience": 5,
+    "lr_decay_steps": 4
+  },
+  "reason": "The separately identified training replay is not bitwise identical to the original run; retain its native stopping policy instead of extending training to force 119 epochs.",
+  "candidate_validation_scores_read": false,
+  "checkpoint_selection_started": false,
+  "test_loaded": false,
+  "recovery_protocol_sha256": "b11a7fda34bec334844c665a13b29120372c96bfe3f050678eed39cbd5a3f61f",
+  "revision_sha256": "f8a35a00b3ba822945f3ea595bba450f42e2c1d4a47c5d1430176a26c784daae"
+}

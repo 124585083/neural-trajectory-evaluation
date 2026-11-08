@@ -1,0 +1,30 @@
+{
+  "initial_state_exact": true,
+  "initial_state_sha256": "362c551a6ea595ef2935b9d99eeb4a125857f72be8d9ff1f4967b84365954780",
+  "replay_last_epoch": 91,
+  "replay_best_epoch": 76,
+  "native_stop_reason": "patience_cycles_exhausted",
+  "replay_last_state_sha256": "c72cbbf439155e2f1006f2a2d629290638dfc981823a9440d7faf13147f58026",
+  "replay_best_state_sha256": "c72cbbf439155e2f1006f2a2d629290638dfc981823a9440d7faf13147f58026",
+  "replay_last_equals_replay_best": true,
+  "candidate_76_equals_selected_best": true,
+  "candidate_91_state_sha256": "405225a86e5e718199f0b0115a557d50008a83287a77229c551edfb2184994af",
+  "candidate_snapshot_position": "After both selection evaluations, before scheduler and cycle restoration",
+  "last_checkpoint_position": "After scheduler and cycle restoration; native final cycle restores replay best epoch 76",
+  "historical_late_anchors": [
+    {
+      "epoch": 109,
+      "original_checkpoint": "best.pt",
+      "comparison": "not_available",
+      "reason": "Native same-protocol replay stopped at epoch 91; epoch 109 was never trained"
+    },
+    {
+      "epoch": 119,
+      "original_checkpoint": "last.pt",
+      "comparison": "not_available",
+      "reason": "Native same-protocol replay stopped at epoch 91; epoch 119 was never trained"
+    }
+  ],
+  "conclusion": "Only initialization was verified equal to the historical run. Subsequent curves differ; no equality of historical intermediate weights is claimed.",
+  "test_loaded": false
+}

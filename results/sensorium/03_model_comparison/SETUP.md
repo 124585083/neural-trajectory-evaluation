@@ -8,7 +8,7 @@ These questions are addressed by one comparison of two frozen encoders from `ret
 
 Both encoders start from scratch under the same data roles and train-only normalisation. The diagram shows their shared response support and frozen neural-defined GPFA. Similar parameter totals control overall model size while retaining the distinct cores and training settings.
 
-[Goal 1](../01_model_validation/RESULTS.md) establishes implementation checks and the scope of historical reproduction. [Goal 2](../02_trajectory_measurement/RESULTS.md) establishes the measurement's reliability and response coverage. The model comparison itself is reported in [Results](RESULTS.md). [Response matching](../05_response_matching/SETUP.md) and [temporal-weight controls](../06_temporal_weight_controls/SETUP.md) are separate analyses; this main comparison uses the original frozen predictions.
+[Goal 1](../01_model_validation/RESULTS.md) establishes implementation checks and the scope of historical reproduction. [Goal 2](../02_trajectory_measurement/RESULTS.md) establishes the measurement's reliability and response coverage. The model comparison itself is reported in [Results](RESULTS.md). [Checkpoint response matching](../05_response_matching/SETUP.md) and [temporal-weight controls](../06_temporal_weight_controls/SETUP.md) are separate analyses; this main comparison uses the original frozen predictions.
 
 ![Current Static and reduced Dynamic share recorded-neuron targets, trial identities, timestamps and one neural-defined GPFA](../figures/documentation/01_shared_pathway.png)
 

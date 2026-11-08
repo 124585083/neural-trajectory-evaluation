@@ -1,8 +1,8 @@
 {
   "schema": "sensorium_documentation_figures_v1",
-  "protocol": "retrained_v1",
+  "protocol": "retrained_v1_with_checkpoint_matching_v1",
   "script": "code/sensorium/make_documentation_figures.py",
-  "script_sha256": "e4daf69bb381c6439163e650c9fe0de418c8247c67191e020300b44464089e9a",
+  "script_sha256": "005c849829987e72fdc9ffc93549da3d0cbda2550d8964f92a0d955a8600e918",
   "operations": "Rendering saved values and method schematics only; no fitting, inference, resampling, new statistics, or control selection.",
   "software": {
     "matplotlib": "3.9.2",
@@ -25,9 +25,12 @@
     "results/sensorium/evidence/04_model_comparison/retrained_v1_diagnostics/reversal/metrics.csv": "f708e18a9f6e473b05ada0bcaf77d848b4150a783e8d9e4aca42a3af3fcbde0b",
     "results/sensorium/evidence/04_model_comparison/retrained_v1_diagnostics/reversal/paired_intervals.csv": "b168507fb210801f54d362f4449c6088f5eb16eaf1b23154489e9114720da880",
     "results/sensorium/evidence/04_model_comparison/retrained_v1_diagnostics/reversal/numerical_checks.csv": "a07b911d42be5a52c7728728b6bdd44c5141c009130a699f419c686e4a43f777",
-    "results/sensorium/evidence/04_model_comparison/retrained_v1/response_matching_selection.csv": "ab1c8da0fe2e1f5a784774731f6dbb8c88a62be73d9af4db7b36899211ea1db1",
-    "results/sensorium/evidence/04_model_comparison/retrained_v1/pilot/response_matching_metrics.csv": "7c6829a01031c751c9531b6e5914250f0899a97a8dbad4c10306bfd1eb28851d",
-    "results/sensorium/evidence/04_model_comparison/retrained_v1/pilot/response_matching_bootstrap.csv": "ea57103eb846002485a843ca3b2a93aa7e3d44a073b77363447f1d5556e806a0",
+    "code/sensorium/configs/checkpoint_matching_v1.json": "a03aa2efb34df91597c343dcf87ad727c9edcc788ffc3913b6d4e91b67506b39",
+    "results/sensorium/evidence/04_model_comparison/checkpoint_matching_v1/checkpoint_selection.json": "872158762bca324fb291d06175d98d78e481179d03c09a48321b7ddd85267beb",
+    "results/sensorium/evidence/04_model_comparison/checkpoint_matching_v1/checkpoint_candidates.csv": "e6d9f2e97aca31c1bb3972a2225197a66badd6646904f5e1959fa2b74c9dda5d",
+    "results/sensorium/evidence/04_model_comparison/checkpoint_matching_v1/response_matching_metrics.csv": "555e59e0808953b9bc80ec4e449953a95075c1054e9a958a6978e14138d4ccb7",
+    "results/sensorium/evidence/04_model_comparison/checkpoint_matching_v1/response_matching_bootstrap.csv": "b81c8f13125a086291a3c85b5d07dab9a8470a430cb0792e33c5f78bb4148b02",
+    "results/sensorium/evidence/04_model_comparison/checkpoint_matching_v1/summary.json": "f239b1f577f99d9e6ea4ca22a1e3f091cff6ee22b497a7b1683ebca026218d88",
     "results/sensorium/evidence/04_model_comparison/retrained_v1_diagnostics/encoder/spatial_response_matches.csv": "e35715d3e7904d4a96e7d9f598d8de149e89ca3a8bff7066c217a2ffa627e60b",
     "results/sensorium/figures/04_model_comparison/retrained_v1_diagnostics/encoder/weight_attenuation.png": "5835e3a8f5281b356b1a2c2cb4d9f804308b64d4988ae564beecbd4cc90aae2f"
   },
@@ -85,15 +88,16 @@
     },
     "05_response_matching": {
       "source_fields": {
-        "response_matching_selection.csv": "selected row / sigma, validation_static_response_r, validation_perturbed_dynamic_response_r, absolute_gap",
-        "response_matching_metrics.csv": "static and perturbed_dynamic / response_neuron_mean_r",
-        "response_matching_bootstrap.csv": "all five metrics / perturbed_dynamic_minus_static, ci_low, ci_high",
-        "evaluation_summary.json": "pilot.response_matching / tolerance, gap, retained, retuned"
+        "checkpoint_candidates.csv": "all completed epochs in the frozen contiguous cohort; selected, validation_static_response_r, validation_matched_dynamic_response_r, absolute_gap",
+        "checkpoint_selection.json": "selected_checkpoint, selection_sha256, validation_matching_achieved, validation_absolute_gap",
+        "response_matching_metrics.csv": "static and matched_dynamic / response_neuron_mean_r",
+        "response_matching_bootstrap.csv": "all five metrics / matched_dynamic_minus_static, ci_low, ci_high, valid/undefined_bootstraps",
+        "summary.json": "kind, selected checkpoint, test_absolute_gap, test_matching_retained, test_retuned"
       },
-      "interpretation": "Signed response gaps subtract saved scores; bands are fixed tolerances, not confidence intervals. No new calibration or bootstrap.",
+      "interpretation": "Saved checkpoint results only. Signed response gaps subtract saved scores; bands are fixed tolerances. Trajectory intervals retain their recorded pooled-score estimand and any unresolved outcomes.",
       "outputs": {
-        "png": "66fc9063f93d2753e6b075d393b21cad1f2479021b446032f15ed18d1279f5fa",
-        "svg": "9ec96389290095fe1b5dd6acba093e7977dd620b04ebd48ca9cea8320a3fe69a"
+        "png": "22a34bded98787b795e1d580d2f7f186e9dff981c7a8623faee55130b8d8ebe6",
+        "svg": "de15be2920108b6211deac13ac298ce83d9c9c1f905b62d4cea69c05808a2144"
       }
     },
     "06_weight_attenuation_retained": {

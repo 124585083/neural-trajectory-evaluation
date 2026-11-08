@@ -11,7 +11,7 @@ import json
 from pathlib import Path
 import shutil
 
-from .replay import preflight, verify_files, write
+from .replay import preflight, verify_checkpoint_inputs, verify_files, write
 from trajectory_model_eval.unified_contract import file_sha256
 
 
@@ -44,8 +44,23 @@ def inventory(source):
         "files": files}
 
 
-def copy_bundle(source, destination, record):
+def checkpoint_inventory(source, matching_source):
+    """Keep the selected model and both caches, with the original sidecar bytes."""
+    plan = preflight(source)
+    hashes = verify_checkpoint_inputs(plan, matching_source)
+    root = Path(matching_source).resolve()
+    return {"schema": "sensorium_checkpoint_control_bundle_v1",
+        "selection_sha256": plan["checkpoint_selection"]["selection_sha256"],
+        "source_freeze_sha256": plan["lock"]["freeze_sha256"],
+        "scope": "Frozen checkpoint control replay; all candidate scores, selected weights, development and test caches",
+        "file_count": len(hashes), "total_bytes": sum((root / name).stat().st_size for name in hashes),
+        "files": {name: {"sha256": digest, "bytes": (root / name).stat().st_size} for name, digest in hashes.items()}}
+
+
+def copy_bundle(source, destination, record, *, checkpoint_source=None):
     source, destination = Path(source).resolve(), Path(destination).resolve()
+    if record.get("schema") == "sensorium_checkpoint_control_bundle_v1" and checkpoint_source is None:
+        raise ValueError("Checkpoint bundle relocation requires the original main source root")
     if destination == source or destination.is_relative_to(source) or source.is_relative_to(destination):
         raise ValueError("Bundle destination must be separate from its source")
     if destination.exists():
@@ -68,7 +83,12 @@ def copy_bundle(source, destination, record):
         shutil.copy2(source / name, target)
         verify_files(destination, {name: item["sha256"]})
     # Relocation is accepted only if the public entry point verifies the copy.
-    preflight(destination)
+    if record.get("schema") == "sensorium_checkpoint_control_bundle_v1":
+        relocated = checkpoint_inventory(checkpoint_source, destination)
+        if relocated["files"] != record["files"]:
+            raise ValueError("Relocated checkpoint control differs from its source")
+    else:
+        preflight(destination)
     write(destination / "bundle_manifest.json", record)
     return record
 
@@ -78,14 +98,24 @@ def main(argv=None):
     parser.add_argument("--source", type=Path, required=True)
     parser.add_argument("--destination", type=Path)
     parser.add_argument("--copy", action="store_true", help="Copy after verification; otherwise inventory only")
+    parser.add_argument("--matching-source", type=Path, help="Package this checkpoint-control root separately")
+    parser.add_argument("--matching-destination", type=Path, help="Destination for the separate checkpoint-control bundle")
     args = parser.parse_args(argv)
     if args.copy and args.destination is None:
         parser.error("--copy requires --destination")
+    if args.copy and args.matching_source is not None and args.matching_destination is None:
+        parser.error("--matching-source with --copy requires --matching-destination")
     record = inventory(args.source)
+    matching = checkpoint_inventory(args.source, args.matching_source) if args.matching_source is not None else None
     print(json.dumps({key: value for key, value in record.items() if key != "files"}, indent=2), flush=True)
     if args.copy:
         copy_bundle(args.source, args.destination, record)
         print(json.dumps({"status": "verified_bundle_copied", "destination": str(args.destination.resolve())}), flush=True)
+        if matching is not None:
+            copy_bundle(args.matching_source, args.matching_destination, matching, checkpoint_source=args.destination)
+            print(json.dumps({"status": "verified_checkpoint_bundle_copied", "destination": str(args.matching_destination.resolve())}), flush=True)
+    elif matching is not None:
+        print(json.dumps({key: value for key, value in matching.items() if key != "files"}, indent=2))
 
 
 if __name__ == "__main__":

@@ -54,9 +54,7 @@ def main() -> None:
 
         print(generate_extended_predictions(config))
     if args.command == "questions":
-        from .question_analysis import run_question_analysis
-
-        print(run_question_analysis(config))
+        parser.error("The historical question analysis is archived; use run_checkpoint_matching.py for the current checkpoint control")
 
 
 if __name__ == "__main__":

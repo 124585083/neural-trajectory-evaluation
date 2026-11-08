@@ -59,7 +59,7 @@ def _plot_training(run_root, public_root):
     plt.close(figure)
 
 
-def publish_status(run_root, public_root):
+def publish_status(run_root, public_root, *, matching_root=None):
     """Export tables and hashes, excluding raw arrays, checkpoints and private paths."""
     run_root, public_root = Path(run_root), Path(public_root)
     public_root.mkdir(parents=True, exist_ok=True)
@@ -132,10 +132,9 @@ def publish_status(run_root, public_root):
     frozen = run_root / "frozen/frozen_analysis.json"
     if frozen.is_file():
         record = _read(frozen)
-        status["stages"]["validation_control"] = {"status": "complete", "freeze_sha256": record["freeze_sha256"],
-                                                   "response_matching": record["response_matching"]}
-        copy("frozen/frozen_analysis.json")
-        copy("frozen/response_matching_selection.csv")
+        status["stages"]["main_analysis_freeze"] = {"status": "complete", "freeze_sha256": record["freeze_sha256"]}
+        status["stages"]["validation_control"] = {"status": "checkpoint_selection_pending"}
+        copy("frozen/frozen_analysis.json", "source_run/frozen_analysis.json")
     else:
         status["stages"]["validation_control"] = {"status": "pending_completed_encoders_and_gpfa"}
     evaluation = run_root / "evaluation/summary.json"
@@ -148,15 +147,25 @@ def publish_status(run_root, public_root):
         status["stages"]["test_main_comparison"] = {
             "status": "complete", "response_sessions": evaluated["response"]["n_sessions"],
             "trajectory_sessions": 1, "Q2": pilot["Q2"], "Q3": pilot["Q3"]}
-        status["stages"]["test_response_matching_control"] = {
-            **pilot["response_matching"], "status": "computed", "Q1": pilot["Q1"]}
-        copy("evaluation/summary.json", "evaluation_summary.json")
+        status["stages"]["test_response_matching_control"] = {"status": "checkpoint_control_pending"}
+        # Preserve source history without presenting its retired control as current.
+        copy("evaluation/summary.json", "source_run/evaluation_summary.json")
+        current = {**evaluated, "pilot": {**pilot, "response_matching": {"kind": "checkpoint_control_pending"},
+                                          "Q1": "checkpoint_control_not_evaluated"}}
+        _write(public_root / "evaluation_summary.json", current)
         for source in sorted((run_root / "evaluation").rglob("*")):
-            if source.is_file() and source.suffix in (".csv", ".png"):
+            if source.is_file() and source.suffix in (".csv", ".png") and not source.name.startswith("response_matching"):
                 copy(source.relative_to(run_root), source.relative_to(run_root / "evaluation"))
     else:
         for name in ("test_reliability_null", "test_main_comparison", "test_response_matching_control"):
             status["stages"][name] = {"status": "not_completed"}
+    if matching_root is not None:
+        checkpoint = publish_checkpoint_status(matching_root, public_root / "checkpoint_matching_v1")
+        status["stages"]["validation_control"] = checkpoint["selection"]
+        status["stages"]["test_response_matching_control"] = checkpoint["evaluation"]
+        if evaluation.is_file():
+            current["pilot"].update(response_matching=checkpoint["evaluation"], Q1=checkpoint["evaluation"]["Q1"])
+            _write(public_root / "evaluation_summary.json", current)
     _plot_training(run_root, public_root)
     _write(public_root / "status.json", status)
     files = {str(path.relative_to(public_root)).replace("\\", "/"): file_sha256(path)
@@ -164,4 +173,54 @@ def publish_status(run_root, public_root):
              if path.is_file() and path.name != "generated_manifest.json"}
     _write(public_root / "generated_manifest.json", {"protocol": "retrained_v1",
                                                      "observed_at_utc": status["observed_at_utc"], "files": files})
+    return status
+
+
+def publish_checkpoint_status(matching_root, public_root):
+    """Publish actual frozen selection/results while keeping their hashes intact."""
+    from .checkpoint_matching import load_selection
+    matching_root, public_root = Path(matching_root), Path(public_root)
+    if (public_root.resolve() == matching_root.resolve()
+            or public_root.resolve().is_relative_to(matching_root.resolve())
+            or matching_root.resolve().is_relative_to(public_root.resolve())):
+        raise ValueError("Public checkpoint report must be separate from run artifacts")
+    selection = load_selection(matching_root, verify_checkpoint=True)
+    evaluation = _read(matching_root / "evaluation/summary.json")
+    manifest = _read(matching_root / "evaluation/generated_manifest.json")
+    if evaluation.get("selection_sha256") != selection["selection_sha256"] or manifest.get("selection_sha256") != selection["selection_sha256"]:
+        raise ValueError("Evaluation and selection belong to different checkpoint controls")
+    for name, digest in manifest["files"].items():
+        if file_sha256(matching_root / "evaluation" / name) != digest:
+            raise ValueError(f"Checkpoint evaluation artifact changed: {name}")
+    public_root.mkdir(parents=True, exist_ok=True)
+    for name in ("checkpoint_selection.json", "checkpoint_candidates.csv"):
+        shutil.copyfile(matching_root / name, public_root / name)
+    for name in ("protocol_revision.json", "cohort_completion.json", "checkpoint_matching_config.json",
+                 "export_verification.json", "verification.json", "nmse_layout_verification.json"):
+        if (matching_root / name).exists():
+            shutil.copyfile(matching_root / name, public_root / name)
+    for source in sorted((matching_root / "evaluation").iterdir()):
+        if source.is_file() and source.suffix in (".json", ".csv", ".png") and source.name != "generated_manifest.json":
+            shutil.copyfile(source, public_root / source.name)
+    recovery = matching_root / "recovery"
+    for name in ("initial_state_check.json", "curve_comparison.json", "historical_weight_anchor_checks.json", "replay_difference_note.json"):
+        if (recovery / name).exists():
+            shutil.copyfile(recovery / name, public_root / name)
+    if (recovery / "source_snapshots").exists():
+        snapshots = public_root / "source_snapshots"
+        snapshots.mkdir(exist_ok=True)
+        for source in (recovery / "source_snapshots").iterdir():
+            if source.is_file() and source.suffix in (".py", ".json"):
+                shutil.copyfile(source, snapshots / source.name)
+    status = {"status": "held_out_checkpoint_control_complete", "selection": {
+        "status": "selected", "selected_epoch": selection["selected_checkpoint"]["epoch"],
+        "validation_absolute_gap": selection["validation_absolute_gap"],
+        "validation_matching_achieved": selection["validation_matching_achieved"],
+        "selection_sha256": selection["selection_sha256"]}, "evaluation": evaluation}
+    _write(public_root / "status.json", status)
+    _write(public_root / "generated_manifest.json", {"schema_version": "sensorium_checkpoint_matching_public_v1",
+        "source_selection_sha256": selection["selection_sha256"],
+        "source_evaluation_manifest_sha256": file_sha256(matching_root / "evaluation/generated_manifest.json"),
+        "files": {p.relative_to(public_root).as_posix(): file_sha256(p) for p in sorted(public_root.rglob("*"))
+                  if p.is_file() and p != public_root / "generated_manifest.json"}})
     return status

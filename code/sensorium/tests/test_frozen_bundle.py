@@ -63,3 +63,25 @@ def test_copy_rejects_absolute_record_path(tmp_path):
     with pytest.raises(ValueError, match="within source and destination"):
         bundle.copy_bundle(source, tmp_path / "bundle", record)
     assert not (tmp_path / "bundle").exists()
+
+
+def test_checkpoint_bundle_relocates_bytes_without_rewriting_signed_paths(tmp_path, monkeypatch):
+    source, record = source_record(tmp_path)
+    record["schema"] = "sensorium_checkpoint_control_bundle_v1"
+    destination, main = tmp_path / "relocated", tmp_path / "main"
+    seen = []
+    def check(main_root, target):
+        seen.append((main_root, target))
+        assert (target / "frozen.bin").read_bytes() == (source / "frozen.bin").read_bytes()
+        return record
+    monkeypatch.setattr(bundle, "checkpoint_inventory", check)
+    bundle.copy_bundle(source, destination, record, checkpoint_source=main)
+    assert seen == [(main, destination)]
+
+
+def test_checkpoint_copy_requires_main_identity_before_writes(tmp_path):
+    source, record = source_record(tmp_path)
+    record["schema"] = "sensorium_checkpoint_control_bundle_v1"
+    with pytest.raises(ValueError, match="original main"):
+        bundle.copy_bundle(source, tmp_path / "destination", record)
+    assert not (tmp_path / "destination").exists()

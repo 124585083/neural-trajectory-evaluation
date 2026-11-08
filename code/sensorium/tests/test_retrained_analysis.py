@@ -84,7 +84,7 @@ def test_gpfa_scale_uses_train_and_frozen_artifacts_reject_mismatch(tmp_path):
     freeze_analysis(dev, manifest, config, "c" * 64, tmp_path / "gpfa", identities, tmp_path / "lock")
     record = tmp_path / "lock/frozen_analysis.json"
     identity = json.loads(record.read_text())
-    identity["response_matching"]["sigma"] = 900
+    identity["response_matching"]["tolerance"] = 900
     record.write_text(json.dumps(identity))
     with pytest.raises(ValueError, match="lock changed"):
         require_frozen(manifest, config, tmp_path / "lock")

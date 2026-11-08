@@ -109,6 +109,10 @@ def load_bundle(path, expected_identity=None):
 def combine_pilot(development, test, manifest):
     """Order disjoint development/test exports by the frozen manifest."""
     per_trial = ("neural", "static", "dynamic", "roles", "conditions", "movie_ids", "dataset_indices", "trial_ids")
+    if ("matched_dynamic" in development) != ("matched_dynamic" in test):
+        raise ValueError("Matched checkpoint prediction is missing from one export")
+    if "matched_dynamic" in development:
+        per_trial += ("matched_dynamic",)
     fixed = ("session", "encoder_precision", "neuron_indices", "neuron_ids", "frame_indices")
     for key in fixed:
         if not np.array_equal(development[key], test[key]):
@@ -136,8 +140,9 @@ def select_neurons(bundle, indices):
     available = list(map(int, bundle["neuron_indices"]))
     positions = np.asarray([available.index(int(index)) for index in indices])
     result = dict(bundle)
-    for key in ("neural", "static", "dynamic"):
-        result[key] = bundle[key][..., positions]
+    for key in ("neural", "static", "dynamic", "matched_dynamic"):
+        if key in bundle:
+            result[key] = bundle[key][..., positions]
     result["encoder_precision"] = bundle["encoder_precision"][..., positions]
     result["neuron_indices"] = bundle["neuron_indices"][positions]
     result["neuron_ids"] = bundle["neuron_ids"][positions]
@@ -215,3 +220,153 @@ def export_predictions(config, manifest, preprocessing_path, data_root, encoder_
     if device == "cuda":
         torch.cuda.empty_cache()
     return summaries
+
+
+def attach_matched_prediction(reference, matched):
+    """Attach a sidecar only when all target, trial and measurement axes agree."""
+    from .checkpoint_matching import IDENTITY_KEYS
+    for key in (*IDENTITY_KEYS, "neural"):
+        if key not in matched or not np.array_equal(reference[key], matched[key]):
+            raise ValueError(f"Matched checkpoint {key} differs from the reference bundle")
+    prediction = np.asarray(matched["matched_dynamic"])
+    if prediction.shape != np.asarray(reference["neural"]).shape or not np.isfinite(prediction).all():
+        raise ValueError("Matched checkpoint prediction lacks complete finite support")
+    if "matched_dynamic" in reference and not np.array_equal(reference["matched_dynamic"], prediction):
+        raise ValueError("An existing matched checkpoint prediction cannot be replaced")
+    return {**reference, "matched_dynamic": prediction}
+
+
+def matched_bundle_identity(selection, bundle):
+    """Keep the checkpoint-control identity separate from original main caches."""
+    from .checkpoint_matching import IDENTITY_KEYS, array_digest, validate_selection
+    validate_selection(selection)
+    roles = tuple(dict.fromkeys(np.asarray(bundle["roles"]).astype(str)))
+    if set(roles) not in ({"train", "validation"}, {"validation"}, {"test"}):
+        raise ValueError("Matched exports must separate development from test")
+    return {"schema_version": "sensorium_matched_checkpoint_predictions_v1",
+            "selection_sha256": selection["selection_sha256"],
+            "selected_checkpoint": selection["selected_checkpoint"],
+            "source_identity": selection["source_identity"],
+            "roles": list(roles), "session": str(np.asarray(bundle["session"]).item()),
+            "support_sha256": canonical_digest({key: array_digest(bundle[key]) for key in (*IDENTITY_KEYS, "neural")})}
+
+
+def save_matched_bundle(path, bundle, selection):
+    """Archive untouched model output together with the frozen control identity."""
+    attach_matched_prediction(bundle, bundle)
+    return save_bundle(path, bundle, matched_bundle_identity(selection, bundle))
+
+
+def load_matched_bundle(path, selection, reference_bundle=None):
+    bundle = load_bundle(path)
+    record = _load(Path(path).with_suffix(".json"))
+    if record["identity"] != matched_bundle_identity(selection, bundle):
+        raise ValueError("Matched prediction cache belongs to a different selection or support")
+    attach_matched_prediction(bundle if reference_bundle is None else reference_bundle, bundle)
+    return bundle
+
+
+def load_candidate_encoder(checkpoint_identity, train_loaders, *, config, manifest,
+                           preprocessing, device="cuda", model=None, checkpoint_root=None):
+    """Load a recovered complete-epoch state without changing the best encoder."""
+    import torch
+    from .checkpoint_matching import _checkpoint_identity, checkpoint_path
+    from .retrained_training import build_encoder, load_architecture_config, state_digest
+    identity = _checkpoint_identity(checkpoint_identity)
+    path = checkpoint_path(identity, checkpoint_root)
+    if file_sha256(path) != identity["sha256"]:
+        raise ValueError("Candidate checkpoint payload changed")
+    payload = torch.load(path, map_location="cpu", weights_only=False)
+    training = payload.get("identity", {})
+    expected = {"protocol_sha256": canonical_digest(config), "split_sha256": manifest["split_sha256"],
+                "preprocessing_sha256": preprocessing["preprocessing_sha256"], "architecture": "dynamic",
+                "seed": 42}
+    if (payload.get("checkpoint_kind") != "part3_epoch_candidate" or payload.get("epoch") != identity["epoch"]
+            or any(training.get(key) != value for key, value in expected.items())
+            or training.get("scope") not in {"formal_training", "checkpoint_candidate_replay"}
+            or payload.get("identity_digest") != canonical_digest(training)
+            or payload.get("identity_digest") != identity["training_identity_digest"]):
+        raise ValueError("Candidate is not the declared complete-epoch Dynamic training state")
+    if identity.get("identity") is not None and identity["identity"] != training:
+        raise ValueError("Candidate manifest training identity differs from the checkpoint payload")
+    if training.get("scope") == "checkpoint_candidate_replay" and not training.get("source_training_identity_digest"):
+        raise ValueError("Replay checkpoint must identify its original source training run")
+    architecture = load_architecture_config("dynamic")
+    if training.get("architecture_sha256") != architecture["_architecture_sha256"]:
+        raise ValueError("Candidate architecture differs from the frozen Dynamic architecture")
+    if state_digest(payload["state_dict"]) != identity["state_sha256"]:
+        raise ValueError("Candidate state differs from the archived state identity")
+    if model is None:
+        model, _, _ = build_encoder("dynamic", train_loaders)
+    model.load_state_dict(payload["state_dict"], strict=True)
+    model.to(device).eval()
+    for parameter in model.parameters():
+        parameter.requires_grad_(False)
+    if state_digest(model.state_dict()) != identity["state_sha256"]:
+        raise ValueError("Loaded candidate state differs from its archived identity")
+    return model
+
+
+def predict_checkpoint_bundle(config, manifest, preprocessing_path, data_root, checkpoint_identity,
+                              *, roles, device="cuda", selection=None, train_loaders=None, model=None,
+                              verify_sources=True, checkpoint_root=None):
+    """Predict fixed pilot neurons; test is gated by the validation-only selection.
+
+    Returns ``(bundle, model)`` so candidate scans can reuse one architecture.
+    Validation-only calls require no selection; train/test exports require the
+    completed selection and the exact selected checkpoint.
+    """
+    from .checkpoint_matching import validate_selection
+    from .retrained_data import create_dataloaders, create_role_loader, load_preprocessing, validate_split
+    roles = tuple(roles)
+    if roles not in (("validation",), ("train", "validation"), ("test",)):
+        raise ValueError("Export validation candidates, selected development and test separately")
+    manifest, preprocessing = _load(manifest), _load(preprocessing_path)
+    validate_split(manifest)
+    if roles != ("validation",) and selection is None:
+        raise ValueError("Selected checkpoint must be frozen before development/test export")
+    if selection is not None:
+        validate_selection(selection, verify_checkpoint=True, checkpoint_root=checkpoint_root)
+        if checkpoint_identity != selection["selected_checkpoint"]:
+            raise ValueError("Export checkpoint differs from the frozen selection")
+        source = selection["source_identity"]
+        if (source["source_config_sha256"] != canonical_digest(config)
+                or source["split_sha256"] != manifest["split_sha256"]
+                or source["preprocessing_sha256"] != preprocessing["preprocessing_sha256"]):
+            raise ValueError("Selected export sources differ from the frozen selection")
+    session = manifest["session"]
+    if verify_sources:
+        verify_source_files(manifest, data_root, roles=roles, sessions=[session])
+    if train_loaders is None:
+        train_loaders = create_dataloaders(data_root, manifest, preprocessing_path)["train"]
+    model = load_candidate_encoder(checkpoint_identity, train_loaders, config=config, manifest=manifest,
+                                   preprocessing=preprocessing, device=device, model=model, checkpoint_root=checkpoint_root)
+    neurons = np.asarray(manifest["neurons"]["indices"], dtype=int)
+    start, stop = config["data"]["frame_start"], config["data"]["frame_stop"]
+    precision = load_preprocessing(preprocessing_path, session)["response_precision"][neurons, start:stop].T.astype(np.float64)
+    rows = [row for row in manifest["trials"] if row["session"] == session and row["role"] in roles]
+    seen_rows, predictions, targets = [], [], []
+    for role in roles:
+        loader = create_role_loader(data_root, manifest, preprocessing_path, session, role, batch_size=1)
+        prediction, target = predict_loader(model, loader, session, neurons, start, stop, device)
+        seen_rows.extend(loader.dataset.rows)
+        predictions.append(prediction)
+        targets.append(target)
+    seen = [row["dataset_index"] for row in seen_rows]
+    if len(seen) != len(set(seen)) or set(seen) != {row["dataset_index"] for row in rows}:
+        raise ValueError("Candidate loader did not cover the exact manifest trials")
+    order = np.asarray([seen.index(row["dataset_index"]) for row in rows])
+    bundle = {"matched_dynamic": np.concatenate(predictions)[order], "neural": np.concatenate(targets)[order],
+              "session": np.asarray(session), "encoder_precision": precision,
+              "dataset_indices": np.asarray([row["dataset_index"] for row in rows]),
+              "trial_ids": np.asarray([row["trial_id"] for row in rows]),
+              "conditions": np.asarray([row["movie_id"] for row in rows]),
+              "movie_ids": np.asarray([row["movie_id"] for row in rows]),
+              "roles": np.asarray([row["role"] for row in rows]), "neuron_indices": neurons,
+              "neuron_ids": np.asarray(manifest["session_neurons"][session]["all_ids"])[neurons],
+              "frame_indices": np.arange(start, stop)}
+    for index, row in enumerate(rows):
+        raw = np.load(Path(data_root) / row["source_files"]["responses"], mmap_mode="r")[neurons, start:stop].T
+        if not np.allclose(bundle["neural"][index], raw * precision, rtol=3e-6, atol=3e-6):
+            raise ValueError("Candidate targets differ from source responses and training precision")
+    return bundle, model

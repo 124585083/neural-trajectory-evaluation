@@ -1,6 +1,8 @@
 # Sensorium: Models and Data
 
-The current study, `retrained_v1`, compares two newly trained neural encoding models: **Static**, which processes frames independently, and **reduced Dynamic**, which combines frames through temporal convolutions. Both predict the same recorded neurons. A Gaussian-process factor analysis (GPFA) model fitted to training neural responses defines the common space used to compare recorded and predicted trajectories. Its parameters remain fixed during evaluation.
+The main comparison uses the source run `retrained_v1`, which trained two neural encoding models: **Static**, which processes frames independently, and **reduced Dynamic**, which combines frames through temporal convolutions. Both predict the same recorded neurons. A Gaussian-process factor analysis (GPFA) model fitted to training neural responses defines the common space used to compare recorded and predicted trajectories. Its parameters remain fixed during evaluation.
+
+The current response-matching control is the separate `checkpoint_matching_v1` analysis. It compares Static epoch 59 with a validation-selected Dynamic checkpoint at epoch 63 from a new training run. The original main comparison remains Static epoch 59 versus Dynamic epoch 109, with the same frozen neural GPFA.
 
 This document describes the data, model structures and transformations connecting those comparisons. The earlier full-width Dynamic reproduction is a separate historical run. Detailed analysis settings and findings are linked from the [project overview](../../README.md).
 
@@ -58,8 +60,8 @@ Full session keys use `dynamic<identifier>-Video-9b4f6a1a067fe51e15306b9628efea2
 | Data role | Use in the current study |
 |---|---|
 | **Train** | Encoder parameter fitting, input and response moments, readout activity initialisation, and pilot GPFA fitting |
-| **Validation** | Encoder scheduling and checkpoint selection, GPFA initialisation selection, and control-strength calibration |
-| **Test** | Frozen model comparison, repeat reliability and null comparisons |
+| **Validation** | Main encoder scheduling and checkpoint selection, GPFA initialisation selection, response-matched Dynamic checkpoint selection, and separate weight-control calibration |
+| **Test** | Frozen main and matched-checkpoint comparisons, repeat reliability and null comparisons |
 
 The pilot's six test conditions contain 9, 9, 10, 10, 10 and 10 repeats. Its 512 neurons are selected by sorting stable unit identities by the SHA-256 hash of `42:<unit_id>`. The identity-based selection fixes the neuron subset independently of model scores and neural reliability. All test conditions are retained, with their reliability reported. Counts and identities are retained in the [split summary](evidence/04_model_comparison/retrained_v1/split_summary.csv) and [split manifest](evidence/04_model_comparison/retrained_v1/split_manifest.json).
 
@@ -93,7 +95,7 @@ The models use the same readout and shifter families with separately learned par
 
 The totals differ by 48,048 parameters, or 1.707% relative to Static. Readout parameters dominate both totals. Similar total counts control overall model size; the different cores and computations remain potential contributors to performance differences.
 
-Construction is defined by `retrained_training.build_encoder` and the retained [model source](../../code/sensorium/src). The [Static construction configuration](../../code/sensorium/records/baselines/static/training_config.yaml), [reduced Dynamic configuration](../../code/sensorium/configs/dynamic_parameter_matched.yaml), [current protocol](../../code/sensorium/configs/retrained_v1.json) and [parameter-count record](evidence/04_model_comparison/retrained_v1_diagnostics/encoder/parameter_counts.json) specify the actual models. Some configuration references retain historical names; the selected checkpoints belong to the new run.
+Construction is defined by `retrained_training.build_encoder` and the retained [model source](../../code/sensorium/src). The [Static construction configuration](../../code/sensorium/records/baselines/static/training_config.yaml), [reduced Dynamic configuration](../../code/sensorium/configs/dynamic_parameter_matched.yaml), [source/main protocol](../../code/sensorium/configs/retrained_v1.json) and [parameter-count record](evidence/04_model_comparison/retrained_v1_diagnostics/encoder/parameter_counts.json) specify the actual models. Some configuration references retain historical names; the main checkpoints belong to the source run. `retrained_v1.json` remains its immutable protocol record. Its old output-noise matching settings are superseded by the separate [checkpoint-matching configuration](../../code/sensorium/configs/checkpoint_matching_v1.json).
 
 ### Encoder fitting and selection
 
@@ -105,6 +107,14 @@ Both encoders were initialised from scratch with seed 42. Training used AdamW, l
 | Reduced Dynamic | 109 | 119 | Exhausted patience cycles |
 
 In this implementation, the validation loader retains the key `oracle`, but it contains only the **new validation trial IDs**. The original oracle trials retain their separate test role. Full training and comparison settings are given in [model-comparison setup](03_model_comparison/SETUP.md).
+
+### Response-matched Dynamic checkpoint
+
+The active [checkpoint-matching configuration](../../code/sensorium/configs/checkpoint_matching_v1.json) retains all completed epochs through the earlier of epoch 119 and verified native early stopping. The original architecture, split, preprocessing and training policy remain unchanged. The new run stopped natively at **epoch 91**, yielding the complete **91-candidate** set. Initial parameters matched the source run, while later training states differed; these candidates have their own new-run identities rather than recovered historical weights.
+
+All candidates were scored on the complete **66-trial pilot validation set**, using mean per-neuron Pearson correlation over trial/time samples and common finite support within the fixed 512 neurons. **Epoch 63** had the smallest absolute gap from Static. Its frozen validation gap is **0.00006768159**, and its test gap is **0.00048394940**, both within the 0.005 tolerance. Test data did not change the selection. All 512 neuron correlations are defined at both stages; recorded and predicted trajectories use the original GPFA and transforms.
+
+The [candidate table](evidence/04_model_comparison/checkpoint_matching_v1/checkpoint_candidates.csv), [frozen checkpoint selection](evidence/04_model_comparison/checkpoint_matching_v1/checkpoint_selection.json) and [evaluation summary](evidence/04_model_comparison/checkpoint_matching_v1/summary.json) record the actual candidate identities, selected weights and test outcome. [Response-matching setup](05_response_matching/SETUP.md) gives the selection and support rules; [results](05_response_matching/RESULTS.md) reports the geometric and conventional comparisons. The earlier output-noise method and its values are retained only as [historical evidence](05_response_matching/HISTORICAL_OUTPUT_NOISE_RESULTS.md).
 
 ### Shared GPFA model
 
@@ -140,7 +150,7 @@ For non-response fields, standard deviations at or below float32 machine epsilon
 
 GPFA uses a separate, time-independent scale for each selected neuron. It is estimated from raw pilot training responses over frames 50–299 using `ddof=1`, with a floor of 1% of the mean standard deviation.
 
-Observed responses and both encoder predictions are converted from the encoder response scale to this common GPFA scale:
+Observed responses and encoder predictions, including the selected epoch-63 control, are converted from the encoder response scale to this common GPFA scale:
 
 ```text
 GPFA_input[t, n] = encoder_scaled[t, n]
@@ -178,25 +188,28 @@ Earlier oracle-selected Static and reduced Dynamic checkpoints, and two historic
 
 ## 7. Model files, access and reproduction status
 
-The [model manifest](../../models/manifest.json) identifies the checkpoints, GPFA arrays, five session normalisation files, split and neuron mappings, and fixed controls. The current local copies are under `models/sensorium/retrained_v1/`. The historical full Dynamic checkpoint wrapper and 14 associated source records are under `models/sensorium/historical_full_dynamic/`; the wrapper and its state dictionary have separate identities.
+The [model manifest](../../models/manifest.json) identifies the checkpoints, GPFA arrays, five session normalisation files, split and neuron mappings, and fixed controls. The source-run local copies are under `models/sensorium/retrained_v1/`. The completed checkpoint control is stored separately under `code/sensorium/outputs/checkpoint_matching_v1/`, with selected weights at `recovery/candidates/epoch_063.pt` relative to that root. Its [published evidence](evidence/04_model_comparison/checkpoint_matching_v1/) provides selection, prediction-cache and result identities; the numerical payload remains a separate local input. The historical full Dynamic checkpoint wrapper and 14 associated source records are under `models/sensorium/historical_full_dynamic/`; the wrapper and its state dictionary have separate identities.
 
 | Current artifact | Recorded SHA-256 prefix |
 |---|---|
-| Static checkpoint | `3ded37a0fac494f4…` |
-| Reduced Dynamic checkpoint | `c6eff392ec412494…` |
+| Main/source Static checkpoint, epoch 59 | `3ded37a0fac494f4…` |
+| Main/source reduced Dynamic checkpoint, epoch 109 | `c6eff392ec412494…` |
+| Response-matched Dynamic checkpoint, epoch 63 | `f8730fc47796c7d6…` |
 | Main GPFA | `98de0cef99973c8a…` |
 
-Full digests and sizes are in the manifest. Scale, neuron order and split identities must also match. The manifest includes main and intervention cache metadata, the frozen spatial-control selection, the sampling plan and source diagnostics.
+The manifest records source-run digests and sizes; the separate [selection identity](evidence/04_model_comparison/checkpoint_matching_v1/checkpoint_selection.json) records the matched checkpoint’s full digest and relative path. Scale, neuron order and split identities must also match. The manifest includes main and intervention cache metadata, the frozen spatial-control selection, the sampling plan and source diagnostics.
 
 The fitted payloads reside in the Git-ignored local model directories and must be obtained separately for a public clone. An authorised public download for the fitted payloads remains to be established. The manifest identifies the files needed to run the models, including their weight payloads. Locations and access information are documented in the [artifact guide](../../models/README.md) and [acquisition record](../../models/acquisition.json); redistribution conditions are recorded in [Third-Party Notices](../../THIRD_PARTY_NOTICES.md).
 
 ### What has been verified
 
-The recorded preflight checked all 43 main, intervention and reversal cache payload hashes. The recommended `run.py` entry checks the required frozen files and stops on missing inputs; it preserves the fitted models and calibrated controls.
+The **12 October 2026 source-run verification** checked all 43 main, intervention and reversal cache payload hashes. This is the historical verification of the original `retrained_v1` workflow, including its now-superseded response-matching control.
 
-The [verification record](../../models/verification.json) reports a complete cached replay with access to the original source directories denied. Of 36 regenerated CSVs, 35 matched exactly. The remaining table matched all current scientific scores, support and status fields, differing only in three prior-calculation diagnostic columns. Fifteen latent and reversal arrays matched exactly. Original evidence files were left unchanged.
+The [historical source-run verification record](../../models/verification.json) reports a complete cached replay with access to the original source directories denied. Of **36 regenerated CSVs, 35** matched exactly; the remaining table differed only in three prior-calculation diagnostic columns. **Fifteen latent and reversal arrays** matched exactly. These counts describe that source-run replay, not verification of the new checkpoint control.
 
-This verification covers the retained **cached replay**. A full rebuild from provider data is a separate, unverified reproduction route. The next reproduction milestone is a tested command that starts from provider data and restored frozen models and generates all six research goals. The [code README](../../code/sensorium/README.md) states the supported inputs, commands and outputs.
+The [current checkpoint-control verification](evidence/04_model_comparison/checkpoint_matching_v1/verification.json) separately records a passed full frozen-input preflight with the new matching bundle, **218 passed tests** across the analysis and encoding environments, byte-identical neural and Static latent arrays, and exact agreement of nine Static metrics. The remaining Static NMSE difference from the old main CSV is `9.826e-7`; an independent [memory-layout check](evidence/04_model_comparison/checkpoint_matching_v1/nmse_layout_verification.json) reproduces the original value exactly with C-contiguous storage of the same input elements. The data and model parameters are unchanged.
+
+The supported `run.py` entry checks frozen inputs and uses `--matching-root` to include the separate completed checkpoint control; without it, Goal 05 is explicitly not recomputed. It preserves fitted models, selection identities and preprocessing. The historical replay and current checkpoint checks cover the stated **frozen-input and cached-evaluation** scope. A full rebuild from provider data is a separate, unverified reproduction route. The next reproduction milestone is a tested command that starts from provider data and restored frozen models and generates all six research goals. The [code README](../../code/sensorium/README.md) states the supported inputs, commands and outputs.
 
 Other unresolved items are upstream source-film identities, calibrated physical units in the checked records, and public delivery of the fitted payloads. The saved numerical results remain intact; these gaps concern source interpretation and independent reproduction.
 

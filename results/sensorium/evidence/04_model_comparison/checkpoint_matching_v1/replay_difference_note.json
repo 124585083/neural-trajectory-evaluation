@@ -1,0 +1,24 @@
+{
+  "status": "new_same_protocol_replay_not_bitwise_historical_recovery",
+  "checked_at": "2026-11-07T18:06:11.6414736Z",
+  "initialization_state_exact": true,
+  "initialization_state_sha256": "362c551a6ea595ef2935b9d99eeb4a125857f72be8d9ff1f4967b84365954780",
+  "initial_validation_score_exact": true,
+  "initial_validation_score": -0.011297104880213737,
+  "first_epoch_selection_difference": 0.00012575648725032806,
+  "first_epoch_train_objective_difference": 664.6162162199616,
+  "original_native_stop_reason": "patience_cycles_exhausted",
+  "original_final_epoch": 119,
+  "training_rng_restored": [
+    "python",
+    "numpy",
+    "torch_cpu",
+    "torch_cuda",
+    "explicit_loader_generators_if_present"
+  ],
+  "loader_workers": 0,
+  "rng_resume_issue_found": false,
+  "difference_cause": "Unresolved. Original training did not enable deterministic algorithms; this alone does not establish the cause.",
+  "source_code_changed_after_resume": false,
+  "source_and_original_outputs_modified": false
+}

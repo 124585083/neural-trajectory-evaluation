@@ -1,8 +1,8 @@
 """Part 3 evaluation on an explicit, independently qualified test split.
 
-Historical entry points are deliberately unchanged. This module fits only the
-new neural GPFA and a validation-selected output perturbation; it never trains
-an encoder. All posterior inference is offline and uses the complete window.
+This module fits the neural GPFA and scores frozen encoder predictions. A
+response-matched control uses a separately validation-selected Dynamic model
+checkpoint. All posterior inference is offline and uses the complete window.
 """
 from __future__ import annotations
 
@@ -83,7 +83,7 @@ def _corr(left: np.ndarray, right: np.ndarray) -> float:
     return float(column_correlation(left.reshape(-1, 1), right.reshape(-1, 1))[0])
 
 
-def _bundle_checks(bundle: dict[str, np.ndarray]) -> None:
+def _bundle_checks(bundle: dict[str, np.ndarray], required_roles=("train", "validation", "test")) -> None:
     neural = np.asarray(bundle["neural"])
     if neural.ndim != 3 or min(neural.shape) < 2:
         raise ValueError("Expected trial x time x neuron arrays with nonempty axes")
@@ -94,7 +94,7 @@ def _bundle_checks(bundle: dict[str, np.ndarray]) -> None:
     for name in ("roles", "conditions", "dataset_indices", "trial_ids"):
         if np.asarray(bundle[name]).shape != (len(neural),):
             raise ValueError(f"{name} does not identify every trial")
-    for role in ("train", "validation", "test"):
+    for role in required_roles:
         role_mask = np.asarray(bundle["roles"]).astype(str) == role
         if not np.any(role_mask):
             raise ValueError(f"No {role} trials")
@@ -117,18 +117,6 @@ def _bundle_checks(bundle: dict[str, np.ndarray]) -> None:
         raise ValueError("Encoder precision must be finite and positive")
     if "movie_ids" in bundle and not np.array_equal(np.asarray(bundle["conditions"]).astype(str), np.asarray(bundle["movie_ids"]).astype(str)):
         raise ValueError("Condition groups must equal the audited movie identities")
-
-
-def _noise(bundle: dict[str, np.ndarray], indices: np.ndarray, seed: int) -> np.ndarray:
-    """Trial-identity noise is reproducible without consulting neural targets."""
-    shape = np.asarray(bundle["dynamic"]).shape[1:]
-    session = str(np.asarray(bundle["session"]).item())
-    values = []
-    for index in indices:
-        identity = _digest(session, str(bundle["dataset_indices"][index]), int(seed))
-        rng = np.random.default_rng(int(identity[:16], 16))
-        values.append(rng.normal(size=shape))
-    return np.stack(values)
 
 
 def _response_r(neural: np.ndarray, prediction: np.ndarray) -> float:
@@ -168,8 +156,6 @@ class FrozenAnalysis:
     frame_indices: np.ndarray
     parameter_digest: str
     fit_digest: str
-    sigma: float
-    noise_scale: np.ndarray
     matching: dict[str, Any]
     config_digest: str
     input_identity: str
@@ -245,47 +231,10 @@ def fit_frozen(bundle: dict[str, np.ndarray], manifest: dict, config: dict, outp
         initial_lengthscale_seconds=selection.initial_lengthscale_seconds,
         lengthscale_bounds_seconds=bounds, random_seed=seed).fit(fit_values, split_name="train")
     model.save(output_dir / "frozen_gpfa.pkl")
-    matching_cfg = config["response_matching"]
-    tolerance = float(matching_cfg["tolerance"])
-    if tolerance != 0.005:
-        raise ValueError("The prespecified response-matching tolerance is 0.005")
-    clip_minimum = float(matching_cfg.get("clip_minimum", 1e-5))
-    if clip_minimum != 1e-5:
-        raise ValueError("The inherited output-perturbation clipping floor is 1e-5")
-    noise_scale = np.asarray(bundle["dynamic"])[train].std(axis=(0, 1), keepdims=True)
-    noise = _noise(bundle, validation, int(matching_cfg["noise_seed"]))
-    validation_neural_flat = neural[validation].reshape(-1, neural.shape[-1])
-    static_correlations = column_correlation(validation_neural_flat,
-        np.asarray(bundle["static"])[validation].reshape(validation_neural_flat.shape))
-    candidates = list(map(float, matching_cfg.get("sigma_grid", [0., *np.geomspace(.01, 10., 100)])))
-    if not candidates or min(candidates) < 0 or not np.isfinite(candidates).all():
-        raise ValueError("sigma_grid must contain finite nonnegative fixed values")
-    rows = []
-    for sigma in candidates:
-        candidate = np.clip(np.asarray(bundle["dynamic"])[validation] + sigma * noise_scale * noise, 1e-5, None)
-        candidate_correlations = column_correlation(validation_neural_flat, candidate.reshape(validation_neural_flat.shape))
-        shared_neurons = np.isfinite(static_correlations) & np.isfinite(candidate_correlations)
-        target = _mean(static_correlations[shared_neurons])
-        score = _mean(candidate_correlations[shared_neurons])
-        rows.append({"sigma": sigma, "validation_static_response_r": target,
-                     "validation_perturbed_dynamic_response_r": score, "absolute_gap": abs(score - target),
-                     "n_shared_neurons": int(shared_neurons.sum()), "n_total_neurons": neural.shape[-1]})
-    table = pd.DataFrame(rows)
-    valid = np.isfinite(table.absolute_gap)
-    selected = table.loc[table.loc[valid, "absolute_gap"].idxmin()] if valid.any() else None
-    sigma = float(selected.sigma) if selected is not None else 0.0
-    table["selected"] = False
-    if selected is not None:
-        table.loc[selected.name, "selected"] = True
-    table.to_csv(output_dir / "response_matching_selection.csv", index=False)
-    matching = {"sigma": sigma, "selection_role": "validation", "noise_scale_role": "train_predictions",
-                "validation_absolute_gap": float(selected.absolute_gap) if selected is not None else None,
-                "validation_matching_achieved": bool(selected is not None and selected.absolute_gap <= tolerance),
-                "validation_shared_neurons": int(selected.n_shared_neurons) if selected is not None else 0,
-                "total_gpfa_neurons_unchanged": neural.shape[-1],
-                "status": "selected" if selected is not None else "undefined_validation_response_r",
-                "tolerance": tolerance, "noise_seed": int(matching_cfg["noise_seed"]),
-                "clip_lower": 1e-5, "kind": "dynamic_output_perturbation_not_a_separately_trained_model"}
+    # Checkpoint matching is selected and frozen by checkpoint_matching.py.
+    # Fitting a neural coordinate model never creates a synthetic prediction.
+    matching = {"kind": "checkpoint_control_pending", "selection_role": "validation",
+                "validation_matching_achieved": False, "tolerance": .005}
     config_digest = _digest(config)
     fit_digest = _digest(neural[train], neural[validation], encoder_precision,
                         np.asarray(bundle["dynamic"])[train], np.asarray(bundle["static"])[validation],
@@ -294,14 +243,14 @@ def fit_frozen(bundle: dict[str, np.ndarray], manifest: dict, config: dict, outp
                         np.asarray(bundle["frame_indices"]), config_digest)
     frozen = FrozenAnalysis(model, precision, encoder_precision, observations, query_times,
         np.asarray(bundle["neuron_ids"]).copy(), np.asarray(bundle["frame_indices"]).copy(),
-        model.parameter_digest(), fit_digest, sigma, noise_scale, matching, config_digest,
+        model.parameter_digest(), fit_digest, matching, config_digest,
         _input_identity(bundle), _digest(precision, encoder_precision, observations, query_times,
             np.asarray(bundle["neuron_ids"]), np.asarray(bundle["frame_indices"]), model.times_seconds, model.jitter, model.min_noise),
-        _digest(sigma, noise_scale, matching), cache_identity(manifest, file_sha256(output_dir / "frozen_gpfa.pkl")))
+        _digest(matching), cache_identity(manifest, file_sha256(output_dir / "frozen_gpfa.pkl")))
     np.savez_compressed(output_dir / "frozen_gpfa_arrays.npz", C=model.C, d=model.d, R=model.R,
         precision=precision, encoder_precision=encoder_precision, neuron_ids=frozen.neuron_ids,
         frame_indices=frozen.frame_indices, observation_indices=observations,
-        observation_times=times, query_times=query_times, noise_scale=noise_scale,
+        observation_times=times, query_times=query_times,
         train_dataset_indices=np.asarray(bundle["dataset_indices"])[train],
         validation_dataset_indices=np.asarray(bundle["dataset_indices"])[validation],
         lengthscales=np.stack([model.lengthscales[k] for k in sorted(model.lengthscales)]))
@@ -353,10 +302,16 @@ def _trajectory_scores(left: np.ndarray, rights: dict[str, np.ndarray], dt: floa
 
 
 def _conventional(neural: np.ndarray, predictions: dict[str, np.ndarray], conditions: np.ndarray,
-                  stride: int) -> tuple[dict, dict]:
+                  stride: int, response_neuron_positions=None) -> tuple[dict, dict]:
     flat = neural.reshape(-1, neural.shape[-1])
     columns = {name: column_correlation(flat, value.reshape(flat.shape)) for name, value in predictions.items()}
     shared_neurons = np.isfinite(np.stack(list(columns.values()))).all(axis=0)
+    if response_neuron_positions is not None:
+        declared = np.zeros(neural.shape[-1], dtype=bool)
+        declared[np.asarray(response_neuron_positions, dtype=int)] = True
+        shared_neurons &= declared
+    response_summary_defined = (shared_neurons.any() and (response_neuron_positions is None
+                                or shared_neurons.sum() == len(response_neuron_positions)))
     means = condition_means(neural, conditions)
     variance = float(np.mean((neural - neural.mean()) ** 2))
     left_state = means[:, ::stride].reshape(-1, means.shape[-1])
@@ -378,7 +333,7 @@ def _conventional(neural: np.ndarray, predictions: dict[str, np.ndarray], condit
         delta_cka = linear_cka(dx, dy) if np.linalg.norm(dx - dx.mean(0)) > EPS and np.linalg.norm(dy - dy.mean(0)) > EPS else float("nan")
         a, b = left_rdm[rdm_support], right_rdms[name][rdm_support]
         rsa = float(spearmanr(a, b).statistic) if len(a) >= 3 and np.std(a) > EPS and np.std(b) > EPS else float("nan")
-        result[name] = {"response_neuron_mean_r": float(np.mean(columns[name][shared_neurons])) if shared_neurons.any() else float("nan"),
+        result[name] = {"response_neuron_mean_r": float(np.mean(columns[name][shared_neurons])) if response_summary_defined else float("nan"),
                         "response_nmse": float(np.mean((neural - prediction)**2) / variance) if variance > EPS else float("nan"),
                         "cka_condition_time_aligned": cka, "cka_temporal_difference": delta_cka,
                         "rsa_condition_time_state_spearman": rsa}
@@ -387,9 +342,10 @@ def _conventional(neural: np.ndarray, predictions: dict[str, np.ndarray], condit
 
 
 def _all_scores(neural: np.ndarray, predictions: dict[str, np.ndarray], conditions: np.ndarray,
-                left: np.ndarray, rights: dict[str, np.ndarray], dt: float, stride: int) -> tuple[dict, dict]:
+                left: np.ndarray, rights: dict[str, np.ndarray], dt: float, stride: int,
+                response_neuron_positions=None) -> tuple[dict, dict]:
     trajectory, support = _trajectory_scores(left, rights, dt)
-    conventional, other_support = _conventional(neural, predictions, conditions, stride)
+    conventional, other_support = _conventional(neural, predictions, conditions, stride, response_neuron_positions)
     return {name: {**trajectory[name], **conventional[name]} for name in predictions}, {**support, **other_support}
 
 
@@ -475,8 +431,8 @@ def score_frozen(bundle: dict[str, np.ndarray], frozen: FrozenAnalysis, config: 
             raise ValueError(f"Frozen {name} differs from the scoring input")
     if frozen.model.parameter_digest() != frozen.parameter_digest:
         raise AssertionError("Frozen GPFA changed")
-    if frozen.control_digest != _digest(frozen.sigma, frozen.noise_scale, frozen.matching):
-        raise AssertionError("Frozen output perturbation settings changed")
+    if frozen.control_digest != _digest(frozen.matching):
+        raise AssertionError("Frozen checkpoint selection changed")
     out = Path(output_dir)
     out.mkdir(parents=True, exist_ok=True)
     indices = np.flatnonzero(np.asarray(bundle["roles"]).astype(str) == "test")
@@ -575,36 +531,12 @@ def score_frozen(bundle: dict[str, np.ndarray], frozen: FrozenAnalysis, config: 
                     null_rows.append({**identity, "model": model, "null": name, "permutation": permutation,
                                      "metric": metric, "observed": values[model][metric], "value": values[model + "_null"][metric], **null_support})
     pd.DataFrame(null_rows).to_csv(out / "model_nulls.csv", index=False)
-    matching_prediction = np.clip(predictions["dynamic"] + frozen.sigma * frozen.noise_scale *
-        _noise(bundle, indices, int(config["response_matching"]["noise_seed"])), 1e-5, None)
-    control_predictions = {"static": predictions["static"], "perturbed_dynamic": matching_prediction}
-    control_latents = {"static": rights["static"], "perturbed_dynamic": frozen.latent(condition_means(matching_prediction, conditions))}
-    control, control_support = _all_scores(neural, control_predictions, conditions, left, control_latents, dt, stride)
-    pd.DataFrame([{**identity, "model": name, "metric": metric, "value": value, **control_support}
-                  for name, metrics in control.items() for metric, value in metrics.items()]).to_csv(out / "response_matching_metrics.csv", index=False)
-    gap = abs(control["static"]["response_neuron_mean_r"] - control["perturbed_dynamic"]["response_neuron_mean_r"])
-    matching = {**frozen.matching, "test_absolute_gap": gap,
-                "test_matching_retained": bool(np.isfinite(gap) and gap <= 0.005),
-                "test_retuned": False}
-    _json(out / "response_matching.json", matching)
-    control_bootstrap = []
-    control_draws = {metric: [] for metric in TRAJECTORY}
-    control_rng = np.random.default_rng(int(config["project"]["seed"]))
-    for draw in range(sample_count):
-        chosen = control_rng.integers(0, len(unique), size=len(unique))
-        values, _ = _trajectory_scores(left[chosen], {k: v[chosen] for k, v in control_latents.items()}, dt)
-        for metric in TRAJECTORY:
-            control_draws[metric].append(values["perturbed_dynamic"][metric] - values["static"][metric])
-    for metric, values in control_draws.items():
-        values = np.asarray(values)
-        finite = np.isfinite(values)
-        interval = np.quantile(values[finite], [.025, .975]) if finite.any() and len(unique) >= 2 else [np.nan, np.nan]
-        control_bootstrap.append({**identity, "metric": metric,
-            "perturbed_dynamic_minus_static": control["perturbed_dynamic"][metric] - control["static"][metric],
-            "ci_low": interval[0], "ci_high": interval[1], "valid_bootstraps": int(finite.sum()),
-            "undefined_bootstraps": int((~finite).sum()), "resampling_unit": "movie_condition"})
-    control_bootstrap_table = pd.DataFrame(control_bootstrap)
-    control_bootstrap_table.to_csv(out / "response_matching_bootstrap.csv", index=False)
+    if frozen.matching.get("kind") == "validation_selected_dynamic_checkpoint":
+        matching = score_checkpoint_control(bundle, frozen, config, out)
+        q1 = matching["Q1"]
+    else:
+        matching = {"kind": "checkpoint_control_pending", "test_retuned": False}
+        q1 = "checkpoint_control_not_evaluated"
     from .unified_contract import save_cache
     save_cache(out / "test_latents.npz", {"neural": left, "static": rights["static"], "dynamic": rights["dynamic"],
         "conditions": unique, "frame_indices": frozen.frame_indices,
@@ -612,12 +544,6 @@ def score_frozen(bundle: dict[str, np.ndarray], frozen: FrozenAnalysis, config: 
         "trial_ids": np.asarray(bundle["trial_ids"])[indices], "trial_conditions": conditions,
         "gpfa_parameter_digest": np.asarray(frozen.parameter_digest)}, frozen.cache_identity)
     primary = bootstrap[bootstrap.metric.isin(PRIMARY)]
-    if not frozen.matching["validation_matching_achieved"] or not matching["test_matching_retained"]:
-        q1 = "response_matching_not_achieved_or_not_retained"
-    else:
-        control_primary = control_bootstrap_table[control_bootstrap_table.metric.isin(PRIMARY)]
-        separated = ((control_primary.ci_low > 0) | (control_primary.ci_high < 0)).any()
-        q1 = "trajectory_difference_under_matched_response_summary" if separated else "no_resolved_primary_trajectory_difference_under_matched_response_summary"
     q3 = {row.metric: ("dynamic_positive_interval" if row.ci_low > 0 else
                        "static_positive_interval" if row.ci_high < 0 else
                        "undefined" if not np.isfinite(row.ci_low) else "interval_includes_zero")
@@ -635,6 +561,112 @@ def score_frozen(bundle: dict[str, np.ndarray], frozen: FrozenAnalysis, config: 
     _json(out / "summary.json", summary)
     _figures(out, scores, bootstrap, condition_table, reliability)
     return summary
+
+
+def score_checkpoint_control(bundle: dict, frozen: FrozenAnalysis, config: dict, output_dir: Path) -> dict:
+    """Score the actual selected checkpoint without changing the main models.
+
+    Selection is already frozen on validation. Held-out tolerance is a reported
+    result, never a trigger for selecting another checkpoint.
+    """
+    from .checkpoint_matching import validate_selection
+    selection = frozen.matching
+    validate_selection(selection)
+    if frozen.control_digest != _digest(selection):
+        raise AssertionError("Frozen checkpoint selection changed")
+    _bundle_checks(bundle, required_roles=("test",))
+    if frozen.config_digest != _digest(config):
+        raise ValueError("Analysis configuration differs from the source run")
+    for name, saved in (("neuron_ids", frozen.neuron_ids), ("frame_indices", frozen.frame_indices),
+                        ("encoder_precision", frozen.encoder_precision)):
+        if not np.array_equal(np.asarray(bundle[name]), saved):
+            raise ValueError(f"Checkpoint-control {name} differs from the frozen GPFA")
+    prediction = np.asarray(bundle.get("matched_dynamic", []))
+    if prediction.shape != np.asarray(bundle["neural"]).shape or not np.isfinite(prediction).all():
+        raise ValueError("Complete finite predictions from the selected checkpoint are required")
+    indices = np.flatnonzero(np.asarray(bundle["roles"]).astype(str) == "test")
+    if not len(indices):
+        raise ValueError("Checkpoint evaluation requires held-out test trials")
+    out = Path(output_dir)
+    out.mkdir(parents=True, exist_ok=True)
+    conditions = np.asarray(bundle["conditions"])[indices]
+    unique = np.unique(conditions)
+    neural = np.asarray(bundle["neural"])[indices]
+    predictions = {"static": np.asarray(bundle["static"])[indices], "matched_dynamic": prediction[indices]}
+    left = frozen.latent(condition_means(neural, conditions))
+    rights = {name: frozen.latent(condition_means(value, conditions)) for name, value in predictions.items()}
+    dt = 1. / float(config["data"]["frame_rate_hz"])
+    stride = int(config["traditional"]["temporal_rsa_stride"])
+    positions = selection["shared_neuron_positions"]
+    scores, support = _all_scores(neural, predictions, conditions, left, rights, dt, stride, positions)
+    support["response_r_frozen_neurons"] = len(positions)
+    identity = {"session": str(np.asarray(bundle["session"]).item()), "role": "test",
+                "seed": int(config["project"]["seed"]),
+                "selection_sha256": selection["selection_sha256"],
+                "selected_epoch": selection["selected_checkpoint"]["epoch"]}
+    pd.DataFrame([{**identity, "model": name, "metric": metric, "value": value, **support}
+                  for name, metrics in scores.items() for metric, value in metrics.items()]).to_csv(
+                      out / "response_matching_metrics.csv", index=False)
+    condition_rows, neuron_rows = [], []
+    for model, value in predictions.items():
+        correlations = column_correlation(neural.reshape(-1, neural.shape[-1]), value.reshape(-1, value.shape[-1]))
+        neuron_rows.extend({**identity, "model": model, "neuron_id": str(neuron), "response_r": r}
+                           for neuron, r in zip(frozen.neuron_ids, correlations))
+    pd.DataFrame(neuron_rows).to_csv(out / "response_matching_per_neuron.csv", index=False)
+    for i, condition in enumerate(unique):
+        mask = conditions == condition
+        local, local_support = _all_scores(neural[mask], {k: v[mask] for k, v in predictions.items()},
+            conditions[mask], left[i:i+1], {k: v[i:i+1] for k, v in rights.items()}, dt, stride, positions)
+        condition_rows.extend({**identity, "condition": str(condition), "model": name,
+                               "metric": metric, "value": value, **local_support}
+                              for name, metrics in local.items() for metric, value in metrics.items())
+    pd.DataFrame(condition_rows).to_csv(out / "response_matching_condition_metrics.csv", index=False)
+    rng = np.random.default_rng(int(config["project"]["seed"]))
+    draws = {metric: [] for metric in TRAJECTORY}
+    for _ in range(int(config["traditional"]["paired_bootstrap_samples"])):
+        chosen = rng.integers(0, len(unique), size=len(unique))
+        values, _ = _trajectory_scores(left[chosen], {k: v[chosen] for k, v in rights.items()}, dt)
+        for metric in TRAJECTORY:
+            draws[metric].append(values["matched_dynamic"][metric] - values["static"][metric])
+    rows = []
+    for metric, values in draws.items():
+        values = np.asarray(values)
+        finite = np.isfinite(values)
+        interval = np.quantile(values[finite], [.025, .975]) if finite.any() and len(unique) >= 2 else [np.nan, np.nan]
+        rows.append({**identity, "metric": metric,
+            "matched_dynamic_minus_static": scores["matched_dynamic"][metric] - scores["static"][metric],
+            "ci_low": interval[0], "ci_high": interval[1], "valid_bootstraps": int(finite.sum()),
+            "undefined_bootstraps": int((~finite).sum()), "resampling_unit": "movie_condition",
+            "interval_estimand": "pooled_condition_trajectory", "n_conditions": len(unique)})
+    intervals = pd.DataFrame(rows)
+    intervals.to_csv(out / "response_matching_bootstrap.csv", index=False)
+    gap = abs(scores["static"]["response_neuron_mean_r"] - scores["matched_dynamic"]["response_neuron_mean_r"])
+    evaluable = support["response_r_shared_neurons"] == len(positions)
+    retained = bool(evaluable and np.isfinite(gap) and gap <= float(selection["tolerance"]))
+    if not selection["validation_matching_achieved"] or not retained:
+        q1 = "response_matching_not_achieved_or_not_retained"
+    else:
+        primary = intervals[intervals.metric.isin(PRIMARY)]
+        separated = ((primary.ci_low > 0) | (primary.ci_high < 0)).any()
+        q1 = ("trajectory_difference_under_matched_response_summary" if separated else
+              "no_resolved_primary_trajectory_difference_under_matched_response_summary")
+    result = {"kind": selection["kind"], "selection_sha256": selection["selection_sha256"],
+        "selected_checkpoint": selection["selected_checkpoint"], "selection_role": "validation",
+        "validation_absolute_gap": selection["validation_absolute_gap"],
+        "validation_matching_achieved": selection["validation_matching_achieved"],
+        "tolerance": selection["tolerance"], "test_absolute_gap": gap,
+        "test_matching_retained": retained, "test_matching_evaluable": evaluable,
+        "test_matching_status": ("undefined_response_r_on_frozen_neurons" if not evaluable else
+                                 "within_tolerance" if retained else "outside_tolerance"),
+        "test_retuned": False, "response_neuron_positions": positions, "scores": scores,
+        "support": support, "Q1": q1, "prediction_transform": "none",
+        "gpfa_parameter_digest": frozen.parameter_digest,
+        "test_content_digest": _digest(neural, predictions, np.asarray(bundle["dataset_indices"])[indices])}
+    _json(out / "response_matching.json", result)
+    np.savez_compressed(out / "response_matching_latents.npz", neural=left, **rights,
+                        conditions=unique, frame_indices=frozen.frame_indices,
+                        selection_sha256=np.asarray(selection["selection_sha256"]))
+    return result
 
 
 def _figures(out: Path, scores: dict, bootstrap: pd.DataFrame, condition_table: pd.DataFrame, reliability: dict) -> None:

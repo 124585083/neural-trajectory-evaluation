@@ -132,7 +132,7 @@ The evidence supports a specific answer to the research question. The tested tim
 
 Temporal sensitivity depends on the inputs and aggregation used for each response, RSA or CKA comparison. Response correlation falls, and the time-aware CKA and RSA variants detect several changes. Static temporal-difference CKA has an unresolved interval, distinct from the exact pattern invariance. **The choice of inputs and temporal aggregation, not the method name alone, determines which comparison is being made.**
 
-The concurrent loss of response alignment remains a possible contributor to the changes across metrics. The separate [response-matching goal](../05_response_matching/RESULTS.md) addresses one specified scalar response summary under a different control; its conclusion concerns that separate fixed-output control.
+The concurrent loss of response alignment remains a possible contributor to the changes across metrics. The separate [response-matching goal](../05_response_matching/RESULTS.md) selects a Dynamic checkpoint using validation mean response correlation. That checkpoint comparison has its own test-match check and trajectory outcomes.
 
 The order of processing is also part of the result. Reversal and the time-dependent scale conversion do not commute, so the changed trajectory scores concern the complete stated measurement pathway. The exact invariance concerns encoder-scale time-averaged patterns. Both claims concern output reversal at the specified processing stage, with a fixed input stimulus and trajectories inferred on the original query-time grid.
 

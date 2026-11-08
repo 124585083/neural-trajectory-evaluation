@@ -6,7 +6,7 @@ These findings describe the current reduced Dynamic network under specified weig
 
 ## 1. Completed diagnostic and unchanged baseline
 
-This exploratory diagnostic uses the epoch-109 reduced Dynamic checkpoint and unchanged main four-dimensional GPFA from `retrained_v1`. Calibration uses the existing 66 pilot validation trials; test uses 58 trials from six movies, 512 fixed neurons and original frames 50–299. Settings were fixed after the main outcomes were known and before the diagnostic's own scoring. Encoder parameters, main GPFA parameters and the original output-noise matching amplitude remained fixed. The analysis retains the main GPFA measurement after withdrawal of the auxiliary sensitivity fits.
+This exploratory diagnostic uses the epoch-109 reduced Dynamic checkpoint and unchanged main four-dimensional GPFA from `retrained_v1`. Calibration uses the existing 66 pilot validation trials; test uses 58 trials from six movies, 512 fixed neurons and original frames 50–299. Settings were fixed after the main outcomes were known and before the diagnostic's own scoring. The original encoder and main GPFA identities remained fixed; only the declared temporal or spatial weights were changed in each intervention copy. The analysis retains the main GPFA measurement after withdrawal of the auxiliary sensitivity fits.
 
 Temporal retention one reproduces the original Dynamic prediction cache with **maximum absolute error 0.000000**, within the required `rtol=atol=3e-6`. The prediction-identity check establishes the unattenuated point as the current Dynamic baseline. The [manifest](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/manifest.json) records that check and the unchanged source identities.
 
@@ -208,7 +208,7 @@ The interventions are structurally different. Temporal attenuation acts on 23,04
 
 The evidence is limited to one reduced Dynamic checkpoint, one fixed neuron selection, six test movies in one session and one spatial-damage design. A temporal algorithm, neural causal mechanism or generalisation across intervention families would require additional targeted tests. The GPFA is a fixed offline measurement; its [repeat reliability and limited response coverage](../02_trajectory_measurement/RESULTS.md) remain part of the interpretation. These supplementary settings were specified after the primary outcomes were known, making this an exploratory model diagnostic.
 
-The two primary scores depend on the temporal weights, and valid response-matched controls reveal metric-dependent differences. One transfer fails, and one endpoint is unevaluable. These distinct outcomes define the evidence from the tested interventions. This diagnostic complements the [main model comparison](../03_model_comparison/RESULTS.md) and the separate [output-noise matching result](../05_response_matching/RESULTS.md).
+The two primary scores depend on the temporal weights, and valid response-matched controls reveal metric-dependent differences. One transfer fails, and one endpoint is unevaluable. These distinct outcomes define the evidence from the tested interventions. This diagnostic complements the [main model comparison](../03_model_comparison/RESULTS.md) and the separate [Dynamic checkpoint-matching analysis](../05_response_matching/RESULTS.md).
 
 ## 8. Result records
 

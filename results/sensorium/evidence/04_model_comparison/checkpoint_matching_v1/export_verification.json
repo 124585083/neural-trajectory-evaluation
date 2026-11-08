@@ -1,0 +1,20 @@
+{
+  "status": "selected_checkpoint_exports_verified",
+  "selected_epoch": 63,
+  "selection_sha256": "ba12eddfce7ccb8d65762f64a0db4315e711f743a62573b478a964950680b592",
+  "validation_predictions_bitwise_identical": true,
+  "validation_per_neuron_scores_exact": true,
+  "development_shape": [
+    348,
+    250,
+    512
+  ],
+  "test_shape": [
+    58,
+    250,
+    512
+  ],
+  "export_roles_separate": true,
+  "prediction_transform": "none",
+  "neural_only_gpfa_refitted": false
+}

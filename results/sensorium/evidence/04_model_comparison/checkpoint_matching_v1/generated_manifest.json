@@ -1,0 +1,31 @@
+{
+  "schema_version": "sensorium_checkpoint_matching_public_v1",
+  "source_selection_sha256": "ba12eddfce7ccb8d65762f64a0db4315e711f743a62573b478a964950680b592",
+  "source_evaluation_manifest_sha256": "3370235d0fd39013425fd8ed9112eb747d4661ec00943e01a7268115285e624e",
+  "files": {
+    "checkpoint_candidates.csv": "e6d9f2e97aca31c1bb3972a2225197a66badd6646904f5e1959fa2b74c9dda5d",
+    "checkpoint_matching_config.json": "a03aa2efb34df91597c343dcf87ad727c9edcc788ffc3913b6d4e91b67506b39",
+    "checkpoint_selection.json": "872158762bca324fb291d06175d98d78e481179d03c09a48321b7ddd85267beb",
+    "cohort_completion.json": "64184e98fb72a2444cf0fb14c2960f88d714573c15bb7ee5f5ed3eafaa5c522f",
+    "curve_comparison.json": "171d23c43fc8e9ac52e4c5d14596974606d8eb42b65520e4d69a6208bc013b94",
+    "export_verification.json": "8119360cc5a0a5130e4f073988c094cfddd1ea1ec3d4d216ec3d85093351d245",
+    "historical_weight_anchor_checks.json": "2e2484c6c67e148d9843a9a324244df1e0782193ac7eb737561ea2fa03a62470",
+    "initial_state_check.json": "b8692b344b4fccba95809c496aaa88bf83862d3bc9f0e500f62db1c014b46325",
+    "nmse_layout_verification.json": "b309d3af36ef4fa679634bbfa1d6268476a951ec2358afa3668a506e8aa7594e",
+    "protocol_revision.json": "aed761309c2d20cbbdf64160a014b774277ff659f2e1e54a3f72f1f1afeb99a2",
+    "README.md": "d0e1c13786bd589401210e030a41c6734efbb4cf625e0299c4e6dba361164030",
+    "replay_difference_note.json": "e4e52ac5aaba6431ed848ec50646d2788a5ec2e0935e1ab8e1ac3d70fe6d8c89",
+    "response_matching.json": "ef545d333d3759cbcef240356a0d39e2919b83e9981264c64c7ccb673ade5d93",
+    "response_matching_bootstrap.csv": "b81c8f13125a086291a3c85b5d07dab9a8470a430cb0792e33c5f78bb4148b02",
+    "response_matching_condition_metrics.csv": "70a45dffc076896cb48eafe8452fdbcab2eb9a006f966b951d1baa242b9b5a93",
+    "response_matching_metrics.csv": "555e59e0808953b9bc80ec4e449953a95075c1054e9a958a6978e14138d4ccb7",
+    "response_matching_per_neuron.csv": "8434fb81cc88a4eda70e52cc5a4aabe69ebea693f2a8babd0feeb476b0b454a9",
+    "source_audit.json": "0af98fdcfbedad0a426b09c74faa5afcf4f9ceea8d9fd12b0e69b9a06cb63d40",
+    "source_snapshots/checkpoint_recovery_implementation.py": "7f928601f44a6e2b37d561ab18682a34dc7988e4424108f48855b3aa34eabda1",
+    "source_snapshots/manifest.json": "e5d1956553dd877179881db84b7791e485e303f0dcce3714c1f7b151f6f99f60",
+    "source_snapshots/retrained_training_implementation.py": "050e998f35912fe0fb3e0c69493240f93d2a770aa1c8d7a88a6b60fa60e162fa",
+    "status.json": "4cff790a7ee8346127c65c1f3891390b5997c9970174171f1ad9ecdd5d524be8",
+    "summary.json": "f239b1f577f99d9e6ea4ca22a1e3f091cff6ee22b497a7b1683ebca026218d88",
+    "verification.json": "45a789732ac2bbfb9a033a3c145db254cf5b69604c85b51a12f2f6e96e635c57"
+  }
+}

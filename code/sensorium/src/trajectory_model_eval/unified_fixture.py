@@ -24,7 +24,7 @@ def synthetic_fixture(config: dict[str, Any]) -> tuple[dict, dict, dict]:
     config["reliability"].update(splits=4, block_sizes_frames=[2, 4])
     config["model_nulls"].update(permutations=4, block_size_frames=4)
     config["traditional"].update(paired_bootstrap_samples=20, temporal_rsa_stride=2)
-    config["response_matching"]["sigma_grid"] = [0.0, 0.1, 0.3, 1.0]
+    config["response_matching"] = {"kind": "checkpoint_control_pending", "tolerance": .005}
     config["project"]["synthetic"] = True
     rng = np.random.default_rng(9182)
     t = np.arange(20) / 30

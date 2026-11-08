@@ -12,7 +12,7 @@
     "static_frame_independence.json": "82ac7555a85a07f1303b4aef10853bde2aad324783a9178cea54ff02827f0807",
     "temporal_support.json": "8901858999dc5245977d11b6720764edcab5f8067e067d9e8dee681f2ea70313",
     "validation_grid.csv": "4ac24d6305ab5826a8fa188d86a08adb1ae49b17e63f00b0f6f578033747b7f8",
-    "weight_attenuation.png": "973fc14b168b778f1e3aff41e25a4308c99a074baf8c7b2ddfad103e84e592fd",
+    "weight_attenuation.png": "5835e3a8f5281b356b1a2c2cb4d9f804308b64d4988ae564beecbd4cc90aae2f",
     "weight_changes.json": "1c1de3ad8a571bb4403553e67a7f03fc6a3bf6fa75bed672d080560909c77a46"
   },
   "implementation_sha256": "29e55d2922aaadc732a323f65cef6c1d2134f7e7b3508f44003a69505084ffa7",
@@ -431,5 +431,13 @@
     },
     "source_snapshot": "source_snapshots/scoring_implementation_zero_spatial_endpoint.py",
     "implementation_sha256": "29e55d2922aaadc732a323f65cef6c1d2134f7e7b3508f44003a69505084ffa7"
+  },
+  "publication_figure_checksum_correction": {
+    "file": "weight_attenuation.png",
+    "figure_label_revision_commit": "9f94dfa",
+    "previous_recorded_sha256": "973fc14b168b778f1e3aff41e25a4308c99a074baf8c7b2ddfad103e84e592fd",
+    "published_figure_sha256": "5835e3a8f5281b356b1a2c2cb4d9f804308b64d4988ae564beecbd4cc90aae2f",
+    "figure_modified_by_this_correction": false,
+    "scope": "Synchronize the manifest with the previously published label revision; numerical tables and primary source artifacts are unchanged."
   }
 }

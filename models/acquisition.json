@@ -1,19 +1,42 @@
 {
   "schema": "artifact_acquisition_v1",
   "checked_date": "2026-10-12",
+  "directory_updated_date": "2026-11-08",
   "purpose": "Distinguish provider data access, exact local fitted artifacts, and public payload delivery",
   "current_fitted_payloads": {
     "sensorium": {
       "version": "retrained_v1",
       "installed_root": "models/sensorium/retrained_v1",
       "download_url": null,
-      "public_status": "not_distributed_pending_documented_basis"
+      "public_status": "not_distributed_pending_documented_basis",
+      "role": "Unchanged main-comparison source bundle; its output-noise Goal 05 is superseded by checkpoint_matching_v1"
     },
     "mental_pong": {
       "version": "condition_endpoint_fa_gpfa_v1_and_closeout_v1",
       "installed_root": "models/mental_pong/current",
       "download_url": null,
       "public_status": "not_distributed_pending_documented_basis"
+    },
+    "sensorium_checkpoint_matching": {
+      "version": "checkpoint_matching_v1",
+      "role": "Current Goal 05 response-matched Dynamic checkpoint and frozen replay inputs",
+      "directory_checked_date": "2026-11-08",
+      "local_run_root": "code/sensorium/outputs/checkpoint_matching_v1",
+      "installed_root": null,
+      "optional_restore_destination": "models/sensorium/checkpoint_matching_v1",
+      "optional_restore_destination_installed": false,
+      "source_bundle": "models/sensorium/retrained_v1",
+      "selected_epoch": 63,
+      "selected_checkpoint": "code/sensorium/outputs/checkpoint_matching_v1/recovery/candidates/epoch_063.pt",
+      "selected_checkpoint_sha256": "f8730fc47796c7d6cf7d383f1b0e8ccb9255d5613dba9bd8acd9c3c2b38b310f",
+      "selection_sha256": "ba12eddfce7ccb8d65762f64a0db4315e711f743a62573b478a964950680b592",
+      "portable_replay_input_files": 13,
+      "identity_inventory": "models/manifest.json",
+      "public_evidence_root": "results/sensorium/evidence/04_model_comparison/checkpoint_matching_v1",
+      "public_evidence_manifest": "results/sensorium/evidence/04_model_comparison/checkpoint_matching_v1/generated_manifest.json",
+      "download_url": null,
+      "public_status": "not_distributed_pending_documented_basis",
+      "supersedes": "retrained_v1 output-noise response-matching control; retained source records are historical"
     }
   },
   "original_data": {
@@ -75,5 +98,6 @@
     "Original source-code licenses do not resolve data-derived artifact redistribution.",
     "Local copying and numerical verification do not establish public accessibility.",
     "No current fitted-artifact URL is invented or replaced by an upstream raw-data link."
-  ]
+  ],
+  "checked_date_scope": "The 2026-10-12 checked_date and upstream acquisition checks are retained source records; the directory update separately records the completed checkpoint control"
 }

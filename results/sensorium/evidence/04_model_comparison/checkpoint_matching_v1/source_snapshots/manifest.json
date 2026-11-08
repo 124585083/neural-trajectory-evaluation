@@ -1,0 +1,21 @@
+{
+  "saved_at": "2026-11-07T21:36:36.3796294Z",
+  "training_identity_digest": "fa3153176c9688e7c6f3b635b1e315a3ce688cc51a8ff2c9b6b9307f87f234fb",
+  "training_process_exited": true,
+  "records": [
+    {
+      "source_path": "D:\\zhu-neural encoding\\neural-trajectory-evaluation-publication-20261013\\code\\sensorium\\src\\trajectory_model_eval\\checkpoint_recovery.py",
+      "snapshot_path": "D:\\zhu-neural encoding\\neural-trajectory-evaluation-publication-20261013\\code\\sensorium\\outputs\\checkpoint_matching_v1\\recovery\\source_snapshots\\checkpoint_recovery_implementation.py",
+      "identity_field": "recovery_code_sha256",
+      "sha256": "7f928601f44a6e2b37d561ab18682a34dc7988e4424108f48855b3aa34eabda1",
+      "exact_match": true
+    },
+    {
+      "source_path": "D:\\zhu-neural encoding\\neural-trajectory-evaluation-publication-20261013\\code\\sensorium\\src\\trajectory_model_eval\\retrained_training.py",
+      "snapshot_path": "D:\\zhu-neural encoding\\neural-trajectory-evaluation-publication-20261013\\code\\sensorium\\outputs\\checkpoint_matching_v1\\recovery\\source_snapshots\\retrained_training_implementation.py",
+      "identity_field": "training_code_sha256",
+      "sha256": "050e998f35912fe0fb3e0c69493240f93d2a770aa1c8d7a88a6b60fa60e162fa",
+      "exact_match": true
+    }
+  ]
+}

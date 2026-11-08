@@ -176,8 +176,19 @@ def replay_primary(plan, output):
         gc.collect()
     response = summarize_session_responses(pd.concat(pooled), pd.concat(conditions), config, output / "response")
     development = load_bundle(root / "development" / manifest["session"] / "aligned_predictions.npz")
+    if plan.get("matching_root") is not None:
+        from trajectory_model_eval.retrained_predictions import load_matched_bundle, attach_matched_prediction
+        selection = plan["checkpoint_selection"]
+        for role, original in (("development", development), ("test", pilot_test)):
+            path = plan["matching_root"] / "predictions" / role / manifest["session"] / "matched_predictions.npz"
+            matched = load_matched_bundle(path, selection, reference_bundle=original)
+            if role == "development":
+                development = attach_matched_prediction(original, matched)
+            else:
+                pilot_test = attach_matched_prediction(original, matched)
     combined = combine_pilot(development, pilot_test, manifest)
-    pilot = evaluate_pilot(combined, manifest, config, root / "gpfa", root / "frozen", output / "pilot")
+    pilot = evaluate_pilot(combined, manifest, config, root / "gpfa", root / "frozen", output / "pilot",
+                           matching_root=plan.get("matching_root"))
     write(output / "summary.json", {"status": "frozen_cache_replay_complete", "response": response, "pilot": pilot})
 
 
@@ -227,14 +238,56 @@ def replay_encoder(plan, output):
     mark_zero_spatial_endpoint(args)
 
 
-def execute(artifact_root, output_dir=None, *, evidence_root=EVIDENCE, run=False):
+def verify_checkpoint_inputs(plan, matching_root):
+    from trajectory_model_eval.checkpoint_matching import load_selection
+    from trajectory_model_eval.retrained_analysis import matching_source_identity
+    from trajectory_model_eval.retrained_predictions import load_matched_bundle, load_bundle, select_neurons, bundle_identity
+    root = Path(matching_root).resolve()
+    selection = load_selection(root, matching_source_identity(plan["config"], plan["lock"]), verify_checkpoint=True)
+    files = {name: file_sha256(root / name) for name in ("checkpoint_selection.json", "checkpoint_candidates.csv")}
+    files[selection["selected_checkpoint"]["checkpoint_path"]] = selection["selected_checkpoint"]["sha256"]
+    if "cohort_completion" in selection:
+        for evidence in selection["cohort_completion"]["evidence_files"]:
+            files[evidence["path"]] = evidence["sha256"]
+        for name in ("cohort_completion.json", "checkpoint_matching_config.json"):
+            files[name] = file_sha256(root / name)
+    for role in ("development", "test"):
+        path = root / "predictions" / role / plan["manifest"]["session"] / "matched_predictions.npz"
+        manifest, pilot = plan["manifest"], plan["manifest"]["session"]
+        roles = ("train", "validation") if role == "development" else ("test",)
+        neurons = manifest["neurons"]["indices"] if role == "development" else manifest["session_neurons"][pilot]["all_indices"]
+        expected_identity = bundle_identity(plan["config"], manifest, plan["preprocessing"],
+            plan["lock"]["checkpoint_identities"], pilot, roles, neurons,
+            frozen_analysis=plan["lock"] if role == "test" else None)
+        original = load_bundle(plan["root"] / role / pilot / "aligned_predictions.npz", expected_identity)
+        if role == "test":
+            original = select_neurons(original, manifest["neurons"]["indices"])
+        bundle = load_matched_bundle(path, selection, reference_bundle=original)
+        expected = {"train", "validation"} if role == "development" else {"test"}
+        if set(bundle["roles"].astype(str)) != expected:
+            raise ValueError("Checkpoint cache roles differ from the declared stage")
+        del bundle, original
+        files[path.relative_to(root).as_posix()] = file_sha256(path)
+        files[path.with_suffix(".json").relative_to(root).as_posix()] = file_sha256(path.with_suffix(".json"))
+    plan.update(matching_root=root, checkpoint_selection=selection)
+    return files
+
+
+def execute(artifact_root, output_dir=None, *, evidence_root=EVIDENCE, run=False, matching_root=None):
     output = validate_destination(output_dir, artifact_root, evidence_root) if output_dir is not None else None
     if run and output is None:
         raise ValueError("--run requires an explicit --output-dir")
     plan = preflight(artifact_root, evidence_root)
+    checkpoint_files = verify_checkpoint_inputs(plan, matching_root) if matching_root is not None else {}
+    if output is not None and matching_root is not None:
+        target = Path(matching_root).resolve()
+        if output == target or output.is_relative_to(target) or target.is_relative_to(output):
+            raise ValueError("Replay output overlaps checkpoint-control inputs")
     result = {"status": plan["status"], "scope": plan["scope"], "freeze_sha256": plan["lock"]["freeze_sha256"],
         "mode": "run" if run else "check", "historical_evidence": plan["historical_evidence"],
-        "cache_checksums": plan["cache_checksums"], "gpfa_sensitivity": "excluded"}
+        "cache_checksums": plan["cache_checksums"], "gpfa_sensitivity": "excluded",
+        "checkpoint_control_files": checkpoint_files,
+        "checkpoint_control": "included" if checkpoint_files else "not_supplied_not_recomputed"}
     if not run:
         return result
     output.mkdir(parents=True, exist_ok=True)
@@ -248,8 +301,10 @@ def execute(artifact_root, output_dir=None, *, evidence_root=EVIDENCE, run=False
     checked = preflight(artifact_root, evidence_root)
     if checked["cache_checksums"] != plan["cache_checksums"]:
         raise AssertionError("Frozen source caches changed during replay")
+    if matching_root is not None and verify_checkpoint_inputs(checked, matching_root) != checkpoint_files:
+        raise AssertionError("Frozen checkpoint-control inputs changed during replay")
     result.update(status="retained_cached_scoring_complete", historical_checks="verified_existing_records_only",
-        recomputed_goals=[2, 3, 4, 5, 6], files={str(p.relative_to(output)).replace("\\", "/"): file_sha256(p)
+        recomputed_goals=[2, 3, 4, 5, 6] if checkpoint_files else [2, 3, 4, 6], files={str(p.relative_to(output)).replace("\\", "/"): file_sha256(p)
             for p in output.rglob("*") if p.is_file()})
     write(output / "replay_manifest.json", result)
     return result
@@ -264,9 +319,11 @@ def main(argv=None):
                         help="Read-only frozen bundle (default: models/sensorium/retrained_v1; no external fallback)")
     parser.add_argument("--output-dir", type=Path, help="New or empty destination, separate from all inputs")
     parser.add_argument("--evidence-root", type=Path, default=EVIDENCE, help="Original completed diagnostic evidence")
+    parser.add_argument("--matching-root", type=Path, help="Include the independently frozen checkpoint control (Goal 5)")
     args = parser.parse_args(argv)
     try:
-        result = execute(args.artifact_root, args.output_dir, evidence_root=args.evidence_root, run=args.run)
+        result = execute(args.artifact_root, args.output_dir, evidence_root=args.evidence_root, run=args.run,
+                         matching_root=args.matching_root)
     except (FileNotFoundError, FileExistsError, ValueError, KeyError) as error:
         parser.exit(2, f"Frozen replay unavailable: {error}\nNo fitting or prediction fallback was attempted.\n")
     print(json.dumps(result, indent=2))

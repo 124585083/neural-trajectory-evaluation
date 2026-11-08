@@ -1,6 +1,16 @@
 {
   "schema": "local_artifact_replay_verification_v1",
   "checked_date": "2026-10-12",
+  "catalog_updated_date": "2026-11-08",
+  "scope_note": "The dated verification below records the original source-run replay. Its Sensorium Goal 05 and entry-code hashes refer to the historical output-noise implementation. The replacement checkpoint control has the separate verification linked here; the original measurements and hashes are preserved.",
+  "current_sensorium_goal_05": {
+    "method": "validation_selected_dynamic_checkpoint",
+    "version": "checkpoint_matching_v1",
+    "selected_epoch": 63,
+    "verification_path": "results/sensorium/evidence/04_model_comparison/checkpoint_matching_v1/verification.json",
+    "export_verification_path": "results/sensorium/evidence/04_model_comparison/checkpoint_matching_v1/export_verification.json",
+    "evidence_manifest_path": "results/sensorium/evidence/04_model_comparison/checkpoint_matching_v1/generated_manifest.json"
+  },
   "public_numerical_replay_available": false,
   "verification_environment": {
     "python": "3.11.9",

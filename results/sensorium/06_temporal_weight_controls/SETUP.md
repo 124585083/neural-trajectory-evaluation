@@ -8,7 +8,7 @@ The [main model comparison](../03_model_comparison/RESULTS.md) evaluates frozen 
 
 The first comparison is **temporal attenuation versus unchanged Dynamic**. The second is **spatial damage versus temporal attenuation at a similar mean per-neuron response correlation**. The matched comparison uses numerically evaluable pairs whose test gap remains within the fixed tolerance. A decline after temporal attenuation is compatible with both a temporal-specific effect and general disruption of the trained network.
 
-This is a completed exploratory diagnostic. Its settings were fixed after the main outcomes were known and before its own scoring. It supplements the primary comparison by measuring sensitivity to the selected weights. The [output-noise response-matching control](../05_response_matching/SETUP.md) is a separate objective: its perturbation and selected amplitude remain unchanged. The analysis uses the retained main GPFA; auxiliary sensitivity fits were withdrawn.
+This is a completed exploratory diagnostic. Its settings were fixed after the main outcomes were known and before its own scoring. It supplements the primary comparison by measuring sensitivity to the selected weights. The [Dynamic checkpoint-matching control](../05_response_matching/SETUP.md) is a separate objective. The present weight interventions retain their originally selected strengths and completed results. The analysis uses the retained main GPFA; auxiliary sensitivity fits were withdrawn.
 
 ## 2. Data roles and evaluation support
 
@@ -145,7 +145,7 @@ $$
 
 A numerically evaluable pair retains matching when $|g_{\mathrm{test}}|\le0.005$. This criterion constrains one pooled scalar summary. Neuron-wise accuracy and other response statistics may still differ; statistical equivalence is not tested. Pairs outside tolerance stay in the result record with failed-match status.
 
-The [validation grid](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/validation_grid.csv) and [matching records](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/spatial_response_matches.csv) retain the original choices. Current display columns incorporate the numerical endpoint correction below. The correction retains the original spatial strengths and the separate output-noise calibration.
+The [validation grid](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/validation_grid.csv) and [matching records](../evidence/04_model_comparison/retrained_v1_diagnostics/encoder/spatial_response_matches.csv) retain the original choices. Current display columns incorporate the numerical endpoint correction below. The correction retains the original spatial strengths. It does not perform the separate Dynamic checkpoint selection.
 
 ### The zero-spatial endpoint is unevaluable for correlation matching
 

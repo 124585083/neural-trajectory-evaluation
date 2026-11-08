@@ -62,7 +62,7 @@ def test_cli_defaults_to_project_local_bundle_without_external_fallback(monkeypa
     monkeypatch.setattr(replay, "execute", lambda root, output, **kwargs: seen.append((root, output, kwargs)))
     replay.main(["--check"])
     assert seen == [(replay.REPOSITORY_ROOT / "models/sensorium/retrained_v1", None,
-                     {"evidence_root": replay.EVIDENCE, "run": False})]
+                     {"evidence_root": replay.EVIDENCE, "run": False, "matching_root": None})]
 
 
 def test_failed_preflight_never_mutates_output(tmp_path, monkeypatch):
@@ -102,7 +102,8 @@ def test_run_dispatches_only_retained_cached_stages(tmp_path, monkeypatch):
         monkeypatch.setattr(replay, name, stage)
     result = replay.execute(tmp_path / "artifacts", tmp_path / "out", evidence_root=tmp_path / "evidence", run=True)
     assert calls == ["check", "replay_primary", "replay_measurement", "replay_reversal", "replay_encoder", "check"]
-    assert result["recomputed_goals"] == [2, 3, 4, 5, 6]
+    assert result["recomputed_goals"] == [2, 3, 4, 6]
+    assert result["checkpoint_control"] == "not_supplied_not_recomputed"
     assert result["historical_checks"] == "verified_existing_records_only"
 
 
@@ -138,3 +139,27 @@ def test_missing_inputs_fail_without_output(tmp_path):
     with pytest.raises(FileNotFoundError):
         replay.execute(tmp_path / "absent", tmp_path / "new", evidence_root=tmp_path / "evidence", run=True)
     assert not (tmp_path / "new").exists()
+
+
+def test_checkpoint_cache_with_self_consistent_wrong_support_fails_before_output(tmp_path, monkeypatch):
+    from copy import deepcopy
+    from test_checkpoint_matching import selection, candidate
+    from trajectory_model_eval import retrained_analysis, retrained_predictions
+    from trajectory_model_eval.checkpoint_matching import save_selection
+    reference, _, source, _, _, selected = selection(tmp_path)
+    save_selection(tmp_path, selected)
+    source_root = tmp_path / "source"
+    retrained_predictions.save_bundle(source_root / "development/pilot/aligned_predictions.npz", reference, {})
+    wrong = deepcopy(candidate(reference, reference["static"]))
+    wrong["trial_ids"][-1] = "wrong"
+    retrained_predictions.save_matched_bundle(tmp_path / "predictions/development/pilot/matched_predictions.npz", wrong, selected)
+    context = {"root": source_root, "config": {}, "preprocessing": {}, "lock": {"checkpoint_identities": {}},
+        "manifest": {"session": "pilot", "neurons": {"indices": reference["neuron_indices"].tolist()}},
+        "status": "verified_frozen_inputs", "scope": "synthetic", "historical_evidence": {}, "cache_checksums": {}}
+    monkeypatch.setattr(replay, "preflight", lambda *args: context)
+    monkeypatch.setattr(retrained_analysis, "matching_source_identity", lambda *args: source)
+    monkeypatch.setattr(retrained_predictions, "bundle_identity", lambda *args, **kwargs: {})
+    output = tmp_path.parent / (tmp_path.name + "_replay")
+    with pytest.raises(ValueError, match="trial_ids"):
+        replay.execute(source_root, output, evidence_root=tmp_path / "evidence", run=True, matching_root=tmp_path)
+    assert not output.exists()

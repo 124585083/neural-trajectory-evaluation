@@ -52,6 +52,8 @@ def main():
     parser.add_argument("--config", type=Path, default=PROJECT / "configs/retrained_v1.json")
     parser.add_argument("--output-dir", type=Path, default=PROJECT / "outputs/retrained_v1")
     parser.add_argument("--public-dir", type=Path, help="Explicit compact-report destination for a separate reproduction")
+    parser.add_argument("--matching-root", type=Path,
+                        help="Frozen checkpoint_matching_v1 sidecar and selected prediction caches")
     parser.add_argument("--data-root", type=Path)
     parser.add_argument("--source-inventory", type=Path,
                         default=REPOSITORY / "results/sensorium/evidence/04_model_comparison/unified_v1/split_manifest.json")
@@ -74,7 +76,7 @@ def main():
         public = args.public_dir.resolve() if args.public_dir else canonical_public
         if root != primary and public == canonical_public:
             parser.error("A separate reproduction requires --public-dir outside the canonical primary records")
-        result = publish_status(root, public)
+        result = publish_status(root, public, matching_root=args.matching_root)
         print(json.dumps(_clean(result), indent=2, allow_nan=False))
         return
     if args.data_root is None:
@@ -187,8 +189,23 @@ def _analysis_command(args, config, manifest, preprocessing_path, root):
     expected = bundle_identity(config, manifest, preprocessing, checkpoints, pilot,
                                ("train", "validation"), manifest["neurons"]["indices"])
     development = load_bundle(root / "development" / pilot / "aligned_predictions.npz", expected)
+    if args.matching_root is not None:
+        from .checkpoint_matching import load_selection
+        from .retrained_analysis import matching_source_identity
+        from .retrained_predictions import load_matched_bundle, attach_matched_prediction
+        selected = load_selection(args.matching_root, source_identity=matching_source_identity(config, frozen),
+                                  verify_checkpoint=True)
+        for role, original in (("development", development), ("test", pilot_test)):
+            matched = load_matched_bundle(args.matching_root / "predictions" / role / pilot / "matched_predictions.npz",
+                                          selected, reference_bundle=original)
+            attached = attach_matched_prediction(original, matched)
+            if role == "development":
+                development = attached
+            else:
+                pilot_test = attached
     combined = combine_pilot(development, pilot_test, manifest)
-    result = evaluate_pilot(combined, manifest, config, root / "gpfa", root / "frozen", root / "evaluation/pilot")
+    result = evaluate_pilot(combined, manifest, config, root / "gpfa", root / "frozen", root / "evaluation/pilot",
+                            matching_root=args.matching_root)
     summary = {"status": "held_out_evaluation_after_retraining_complete", "pilot": result,
                "response": response, "split_sha256": manifest["split_sha256"],
                "freeze_sha256": frozen["freeze_sha256"]}

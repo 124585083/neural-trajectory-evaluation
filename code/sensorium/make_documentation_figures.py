@@ -306,48 +306,99 @@ def reversal(output: Path):
 
 
 def matching(output: Path):
-    selection=csv("retrained_v1/response_matching_selection.csv")
-    scores=csv("retrained_v1/pilot/response_matching_metrics.csv")
-    paired=csv("retrained_v1/pilot/response_matching_bootstrap.csv")
-    summary=js("retrained_v1/evaluation_summary.json")["pilot"]["response_matching"]
-    chosen=one(selection,selected=True)
-    require(len(selection)==101 and summary["test_matching_retained"] and not summary["test_retuned"],"Frozen matching contract changed")
-    require(chosen.absolute_gap==selection.absolute_gap.min(),"Selected amplitude must minimise validation gap")
-    require(np.isclose(chosen.sigma,summary["sigma"]),"Frozen amplitude mismatch")
-    vals=[chosen.validation_perturbed_dynamic_response_r-chosen.validation_static_response_r,
-          one(scores,model="perturbed_dynamic",metric="response_neuron_mean_r").value-one(scores,model="static",metric="response_neuron_mean_r").value]
-    require(np.allclose(np.abs(vals),[summary["validation_absolute_gap"],summary["test_absolute_gap"]]),"Response gap sources disagree")
-    p=paired.set_index("metric").loc[METRICS]
-    require((p.valid_bootstraps==2000).all() and (p.undefined_bootstraps==0).all(),"Undefined matching intervals")
-    require(p.loc["speed_profile_correlation","ci_low"]<0<p.loc["speed_profile_correlation","ci_high"],"Preserve speed uncertainty")
-    fig=plt.figure(figsize=(13.2,7.3));gs=fig.add_gridspec(2,2,height_ratios=[.52,1],hspace=.4,wspace=.55)
-    ax=fig.add_subplot(gs[0,:]);ax.set(xlim=(0,1),ylim=(0,1));ax.axis("off")
-    for x,text in [(.16,"Train predictions\nSet one noise scale per neuron"),(.50,f"Validation\nSelect σ = {chosen.sigma:.6f}"),(.84,"Test\nApply fixed noise + clipping")]:
-        box(ax,x,.65,.29,.45,text,size=11.5)
-    arrow(ax,(.31,.65),(.35,.65));arrow(ax,(.655,.65),(.69,.65))
-    ax.text(.5,.13,"Trial/time response r checks the match; repeat means + the frozen GPFA supply the trajectory scores.",ha="center",fontsize=11)
-    ax=fig.add_subplot(gs[1,0]);tol=summary["tolerance"]
-    ax.axvspan(-tol,tol,color="#E4F1E9",label=f"Fixed ±{tol:g} tolerance")
-    ax.axvline(0,color=GRAY,lw=1)
-    ax.scatter(vals,[1,0],color=[BLUE,TEAL],s=70,zorder=3)
-    for v,y in zip(vals,[1,0]):ax.annotate(f"{v:+.6f}",(v,y),xytext=(0,14),textcoords="offset points",ha="center",weight="bold",fontsize=11)
-    ax.set(yticks=[1,0],yticklabels=["Validation","Test"],ylim=(-.5,1.6),xlim=(-.007,.007))
-    tidy(ax,'A  Mean response-correlation gap within tolerance',"Perturbed Dynamic − Static response r")
-    ax.legend(loc="lower center",bbox_to_anchor=(.5,-.33),frameon=False,fontsize=10)
-    ax=fig.add_subplot(gs[1,1])
-    for i,(_,r) in enumerate(p.iterrows()):
-        v=r.perturbed_dynamic_minus_static
-        ax.errorbar(v,i,xerr=[[v-r.ci_low],[r.ci_high-v]],fmt="o",color=ORANGE if r.name=="speed_profile_correlation" else TEAL,capsize=4,lw=1.7)
-    ax.axvline(0,color=GRAY,lw=1);ax.set(yticks=range(5),yticklabels=LABELS,xlim=(-.54,.65));ax.invert_yaxis()
-    tidy(ax,'B  Trajectory differences after response matching','Perturbed Dynamic − Static; 95% paired\nmovie-bootstrap intervals')
-    fig.suptitle('Trajectory comparisons after matching mean response correlation',fontsize=16,weight="bold",y=.975)
-    fig.text(.5,.028,'The tolerance constrains mean response r; per-neuron scores, NMSE and time-aware RSA/CKA remain separate outcomes.\nTrajectory intervals resample six whole movies with noise fixed; the speed difference remains unresolved.',ha="center",fontsize=10.5)
-    fig.subplots_adjust(left=.10,right=.98,bottom=.23,top=.88)
-    save(fig,output,"05_response_matching",{"response_matching_selection.csv":"selected row / sigma, validation_static_response_r, validation_perturbed_dynamic_response_r, absolute_gap",
-        "response_matching_metrics.csv":"static and perturbed_dynamic / response_neuron_mean_r",
-        "response_matching_bootstrap.csv":"all five metrics / perturbed_dynamic_minus_static, ci_low, ci_high",
-        "evaluation_summary.json":"pilot.response_matching / tolerance, gap, retained, retuned"},
-        "Signed response gaps subtract saved scores; bands are fixed tolerances, not confidence intervals. No new calibration or bootstrap.")
+    """Render only the active checkpoint control; never reuse archived scores."""
+    protocol_path = ROOT / "code/sensorium/configs/checkpoint_matching_v1.json"
+    protocol = json.loads(protocol_path.read_text(encoding="utf-8"))
+    SOURCES[protocol_path.relative_to(ROOT).as_posix()] = sha(protocol_path)
+    prefix = "checkpoint_matching_v1/"
+    summary_path = EVIDENCE / prefix / "summary.json"
+    complete = summary_path.is_file()
+    fig = plt.figure(figsize=(13.2, 7.3))
+    gs = fig.add_gridspec(2, 2, height_ratios=[.52, 1], hspace=.4, wspace=.55)
+    ax = fig.add_subplot(gs[0, :]); ax.set(xlim=(0, 1), ylim=(0, 1)); ax.axis("off")
+    epoch_label = "Freeze one checkpoint"
+    training_label = "All epochs through native stop\n(cap: epoch 119)"
+    if complete:
+        selection = js(prefix + "checkpoint_selection.json")
+        candidates = csv(prefix + "checkpoint_candidates.csv")
+        scores = csv(prefix + "response_matching_metrics.csv")
+        paired = csv(prefix + "response_matching_bootstrap.csv")
+        summary = js(prefix + "summary.json")
+        require(summary["status"] == "held_out_checkpoint_control_complete", "Incomplete checkpoint evaluation")
+        require(summary["kind"] == protocol["kind"] and not summary["test_retuned"], "Checkpoint control contract changed")
+        require(summary["selection_sha256"] == selection["selection_sha256"], "Selection and evaluation identities differ")
+        actual_epochs = sorted(candidates.epoch.astype(int).tolist())
+        require(actual_epochs == selection["candidate_epochs"], "Candidate table differs from the frozen cohort")
+        require(actual_epochs == list(range(1, actual_epochs[-1] + 1)) and actual_epochs[-1] <= protocol["maximum_candidate_epoch"], "Candidate cohort is not a contiguous prefix within the declared cap")
+        require(selection["candidate_final_epoch"] == actual_epochs[-1], "Frozen candidate endpoint differs")
+        require(selection["matching_config"] == protocol, "Current config differs from the frozen matching method")
+        if actual_epochs[-1] < protocol["maximum_candidate_epoch"]:
+            require(selection["cohort_completion"]["completion_kind"] == "native_early_stop", "A shorter candidate set requires verified native early stopping")
+        training_label = f"Retain all epochs 1–{actual_epochs[-1]}"
+        chosen = one(candidates, selected=True)
+        best = candidates.sort_values(["absolute_gap", "epoch", "sha256"], kind="stable").iloc[0]
+        require(chosen.sha256 == best.sha256 and chosen.epoch == best.epoch, "Selected checkpoint does not follow validation ranking")
+        require(chosen.sha256 == selection["selected_checkpoint"]["sha256"], "Selected checkpoint identity differs")
+        require(int(chosen.epoch) == int(selection["selected_checkpoint"]["epoch"]), "Selected epoch differs")
+        epoch_label = f"Freeze epoch {int(chosen.epoch)}"
+    boxes = [(0.16, f"New training run\n{training_label}"),
+             (0.50, f"Full validation set\n{epoch_label}"),
+             (0.84, "Test\nScore selected model predictions")]
+    for x, label in boxes:
+        box(ax, x, .65, .29, .45, label, size=11.5)
+    arrow(ax, (.31, .65), (.35, .65)); arrow(ax, (.655, .65), (.69, .65))
+    ax.text(.5, .13, "Match trial/time response r; compare repeat-mean trajectories in the unchanged neural GPFA.", ha="center", fontsize=11)
+    if not complete:
+        ax = fig.add_subplot(gs[1, :]); ax.set(xlim=(0, 1), ylim=(0, 1)); ax.axis("off")
+        box(ax, .5, .62, .88, .40,
+            f"Checkpoint analysis in progress\n\nSelect the smallest validation response-r gap from Static.\nFixed tolerance: {protocol['tolerance']:g}; ties choose the earlier epoch, then checkpoint hash.",
+            size=13)
+        ax.text(.5, .19, "New test response gaps, position and local-direction scores will be shown after evaluation.\nThe previous control's numerical results are archived separately.", ha="center", va="center", fontsize=11.5)
+        fig.suptitle("Trajectory comparison using a validation-selected Dynamic checkpoint", fontsize=16, weight="bold", y=.975)
+        fig.subplots_adjust(left=.06, right=.98, bottom=.08, top=.88)
+        save(fig, output, "05_response_matching",
+             {"checkpoint_matching_v1.json": "candidate_cohort_rule, maximum_candidate_epoch, unchanged native stopping policy, validation selection, tie_break and tolerance"},
+             "Method schematic only. New checkpoint selection and test evaluation are incomplete; no numerical result is inferred from the archived control.")
+        return
+    vals = [float(chosen.validation_matched_dynamic_response_r - chosen.validation_static_response_r),
+            float(one(scores, model="matched_dynamic", metric="response_neuron_mean_r").value
+                  - one(scores, model="static", metric="response_neuron_mean_r").value)]
+    require(np.allclose(np.abs(vals), [selection["validation_absolute_gap"], summary["test_absolute_gap"]]), "Response gap sources disagree")
+    p = paired.set_index("metric").loc[METRICS]
+    require((p.valid_bootstraps + p.undefined_bootstraps == protocol["uncertainty"]["bootstrap_samples"]).all(), "Checkpoint interval draw count differs")
+    ax = fig.add_subplot(gs[1, 0]); tol = summary["tolerance"]
+    ax.axvspan(-tol, tol, color="#E4F1E9", label=f"Fixed ±{tol:g} tolerance")
+    ax.axvline(0, color=GRAY, lw=1)
+    ax.scatter(vals, [1, 0], color=[BLUE, TEAL], s=70, zorder=3)
+    for v, y in zip(vals, [1, 0]):
+        ax.annotate(f"{v:+.6f}", (v, y), xytext=(0, 14), textcoords="offset points", ha="center", weight="bold", fontsize=11)
+    width = max(tol * 1.5, max(abs(v) for v in vals) * 1.5)
+    ax.set(yticks=[1, 0], yticklabels=["Validation", "Test"], ylim=(-.5, 1.6), xlim=(-width, width))
+    tidy(ax, "A  Check the response-correlation match", "Matched Dynamic − Static response r")
+    ax.legend(loc="lower center", bbox_to_anchor=(.5, -.33), frameon=False, fontsize=10)
+    ax = fig.add_subplot(gs[1, 1])
+    for i, (_, row) in enumerate(p.iterrows()):
+        value = row.matched_dynamic_minus_static
+        color = TEAL if row.name in METRICS[:2] else GRAY
+        if np.isfinite([value, row.ci_low, row.ci_high]).all():
+            ax.plot([row.ci_low, row.ci_high], [i, i], color=color, lw=1.7)
+            ax.plot(value, i, "o", color=color)
+        else:
+            ax.text(0, i, "NA", color=GRAY, va="center")
+    ax.axvline(0, color=GRAY, lw=1); ax.set(yticks=range(5), yticklabels=LABELS); ax.invert_yaxis()
+    tidy(ax, "B  Trajectory geometry", "Matched Dynamic − Static; 95% paired\nmovie-bootstrap intervals")
+    matched = bool(selection["validation_matching_achieved"] and summary["test_matching_retained"])
+    outcome = "Both response gaps satisfy the fixed tolerance." if matched else "At least one response gap exceeds the fixed tolerance; retain the failed match."
+    fig.suptitle("Trajectory comparison using a validation-selected Dynamic checkpoint", fontsize=16, weight="bold", y=.975)
+    fig.text(.5, .028, outcome + "\nThe checkpoint stays fixed during movie resampling; only mean response correlation determines selection.", ha="center", fontsize=10.5)
+    fig.subplots_adjust(left=.10, right=.98, bottom=.23, top=.88)
+    save(fig, output, "05_response_matching", {
+        "checkpoint_candidates.csv": "all completed epochs in the frozen contiguous cohort; selected, validation_static_response_r, validation_matched_dynamic_response_r, absolute_gap",
+        "checkpoint_selection.json": "selected_checkpoint, selection_sha256, validation_matching_achieved, validation_absolute_gap",
+        "response_matching_metrics.csv": "static and matched_dynamic / response_neuron_mean_r",
+        "response_matching_bootstrap.csv": "all five metrics / matched_dynamic_minus_static, ci_low, ci_high, valid/undefined_bootstraps",
+        "summary.json": "kind, selected checkpoint, test_absolute_gap, test_matching_retained, test_retuned"},
+        "Saved checkpoint results only. Signed response gaps subtract saved scores; bands are fixed tolerances. Trajectory intervals retain their recorded pooled-score estimand and any unresolved outcomes.")
 
 
 def retained_weight_figure():
@@ -372,7 +423,7 @@ def main():
                          "svg.fonttype":"none","svg.hashsalt":"sensorium-documentation-v1","axes.titlecolor":INK,"text.color":INK})
     for render in [shared_path,measurement,main_comparison,reversal,matching]:render(out)
     retained_weight_figure()
-    manifest={"schema":"sensorium_documentation_figures_v1","protocol":"retrained_v1","script":Path(__file__).relative_to(ROOT).as_posix(),
+    manifest={"schema":"sensorium_documentation_figures_v1","protocol":"retrained_v1_with_checkpoint_matching_v1","script":Path(__file__).relative_to(ROOT).as_posix(),
               "script_sha256":sha(Path(__file__)),"operations":"Rendering saved values and method schematics only; no fitting, inference, resampling, new statistics, or control selection.",
               "software":{"matplotlib":matplotlib.__version__,"numpy":np.__version__,"pandas":pd.__version__},"sources":SOURCES,"figures":FIGURES}
     (out/"source_manifest.json").write_text(json.dumps(manifest,indent=2)+"\n",encoding="utf-8")

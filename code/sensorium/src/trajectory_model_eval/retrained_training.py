@@ -255,7 +255,7 @@ def sensorium_score(model, validation_loaders, device):
 
 def run_training(model, loaders, training, output_dir, identity, *, device="cuda",
                  objective=sensorium_objective, score=sensorium_score, resume=False,
-                 stop_after_epoch=None):
+                 stop_after_epoch=None, state_observer=None):
     """Run the checked trainer with checkpointed patience-cycle and RNG state.
 
     A bounded invocation leaves a resumable state and is never marked complete.
@@ -292,6 +292,17 @@ def run_training(model, loaders, training, output_dir, identity, *, device="cuda
             handle.write(json.dumps({"event": event, "epoch": epoch, "score": value}) + "\n")
         return value
 
+    def observe_state(epoch, metrics):
+        if state_observer is None:
+            return
+        # Observers receive a detached copy and cannot consume training RNG.
+        # Epoch snapshots precede any patience-cycle restoration of best_state.
+        rng = _rng_state(loaders)
+        try:
+            state_observer(epoch, _cpu_state(model), metrics, identity)
+        finally:
+            _restore_rng(rng, loaders)
+
     if resume:
         payload = torch.load(last_path, map_location="cpu", weights_only=False)
         if payload.get("identity_digest") != identity_digest or payload.get("identity") != identity:
@@ -319,6 +330,7 @@ def run_training(model, loaders, training, output_dir, identity, *, device="cuda
         _write_json(output_dir / "training_identity.json", identity)
         _save(output_dir / "initial.pt", {"identity": identity, "state_dict": best_state,
                                           "checkpoint_kind": "new_initialization"})
+        observe_state(0, {"validation_selection_r": progress["best_score"]})
 
     def checkpoint():
         _save(last_path, {"checkpoint_kind": "part3_complete_epoch", "identity": identity,
@@ -365,6 +377,11 @@ def run_training(model, loaders, training, output_dir, identity, *, device="cuda
             # early stopping. Keep both calls and their random snippet draws.
             logged_score = evaluate("epoch_log", epoch)
             selection_score = evaluate("selection", epoch)
+            observe_state(epoch, {
+                "train_objective_mean": float(np.mean(epoch_losses)),
+                "validation_logged_r": logged_score,
+                "validation_selection_r": selection_score,
+            })
             scheduler.step(selection_score)
             selected = selection_score > progress["best_score"] + float(training["tolerance"])
             if selected:
